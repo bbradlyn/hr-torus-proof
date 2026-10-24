@@ -64,6 +64,22 @@ operators into the even local algebra, and the bound ‖A − 𝔼_Y A‖ ≤ 2 
 sentence. The two modules are a measurement pilot for the choice of representation in which Sections 3.2–5 will be
 formalized; that choice is pending, and the chosen module will be renamed out of `Pilot` when it is made.
 
+**The physical side, Sections 2.1–2.5 and 3.1–3.2** — `HRTorus.LLL.Space`, `HRTorus.LLL.Frame`, `HRTorus.Fock.Physical`,
+`HRTorus.Fock.Hamiltonian` (250 theorems, of which 98 are the paper's statements and 152 proof devices): the lowest Landau
+level 𝔥_N as an N_φ-dimensional inner product space with the orbitals ψ_j as its orthonormal basis, bridged to the paper's
+function space (smoothness, the boundary conditions and the LLL equation of the ψ_j; their orthonormality in L²); the evaluation
+vectors of Lemma 2.3 with (i)–(ii); the magnetic translations of Lemma 2.4; the frame vectors (3.1), the analysis map and
+Proposition 3.3 (Parseval) with the bridges to Lemma 3.5; the physical Fock space with the annihilators c(f) and their
+anticommutation relations, the sectors and their projections, the second quantization 𝔉(u) with its characterization, and the
+many-body translation Θ with Lemma 2.6 in full; the hollow-core Hamiltonian H_N with its coefficients V_abcd defined by the
+integrals of Definition 2.7, self-adjoint, sector-preserving, even, invariant under spin rotations and commuting with Θ.
+**Seven of the 98 statements are stated but not yet proved — they are `sorry` in the sources and the axiom check below shows
+exactly which:** `HRTorus.LLL.isLLL_iff` (every function with the LLL properties is a combination of the ψ_j — the
+completeness half of the bridge), `HRTorus.LLL.norm_ev_sq`, `norm_evD_sq`, `norm_ev_sq_bound`, `norm_evD_sq_bound` (Lemma
+2.3(iii)–(iv), the lattice sums and numerical bounds for the evaluation vectors' norms), `HRTorus.Fock.HN_posSemidef` (H_N ≥ 0,
+whose proof in the paper is Theorem 4.2(a)) and `HRTorus.Fock.Vcoef_latticeSum` (the lattice-sum form (2.7′) of the
+coefficients). Nothing proved depends on them.
+
 ## Building
 
 Install [elan](https://github.com/leanprover/elan), which reads `lean-toolchain` and installs Lean 4.34.1. Then, in
@@ -87,6 +103,9 @@ exactly `[propext, Classical.choice, Quot.sound]`, the three standard axioms of 
 (`HRTorus.IndexCore.OrbitalRing.neZero_two_mul`) on `[propext, Quot.sound]`; none depends on `sorryAx`.
 The pilot modules have their own check, `lake env lean HRTorus/Fermion/Pilot/Axioms.lean`: 455 declarations, 408 on the
 three standard axioms, 3 on `[Quot.sound]`, 44 on none, none on `sorryAx`.
+The physical side has its own check, `lake env lean HRTorus/AxiomsBlockA.lean`: 373 declarations, 361 on the three standard
+axioms, 5 on none, and **7 on the three plus `sorryAx` — exactly the seven unproved statements named above, and nothing else
+depends on them.**
 
 ## The kernel replay
 

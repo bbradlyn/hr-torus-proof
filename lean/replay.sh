@@ -25,6 +25,10 @@ HRTorus.SlotFrame.SlotFrame
 HRTorus.Laughlin.GramPoisson
 HRTorus.Fermion.Pilot.JW
 HRTorus.Fermion.Pilot.CAR
+HRTorus.LLL.Space
+HRTorus.LLL.Frame
+HRTorus.Fock.Physical
+HRTorus.Fock.Hamiltonian
 "
 fail=0
 for m in $MODULES; do

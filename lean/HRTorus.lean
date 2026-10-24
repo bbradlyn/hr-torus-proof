@@ -21,6 +21,9 @@ import HRTorus.LLL.Space
 import HRTorus.LLL.Frame
 import HRTorus.Fock.Physical
 import HRTorus.Fock.Hamiltonian
+import HRTorus.Fock.Slot
+import HRTorus.Fock.Embedding
+import HRTorus.Locality.Basic
 
 /-!
 # HRTorus
@@ -40,6 +43,10 @@ The Lean 4 formalization accompanying the papers in `papers/` of this repository
   as a space with the orbitals as its basis, the evaluation and frame vectors, the analysis map with Proposition 3.3, the
   physical Fock space with its sectors and the magnetic translation Θ (Lemma 2.6), and the hollow-core Hamiltonian H_N with
   its coefficients as the integrals of Definition 2.7. **Seven of its 98 statements remain `sorry`** (listed in `lean/README.md`).
+* `HRTorus.Fock.Slot`, `HRTorus.Fock.Embedding`, `HRTorus.Locality.Basic` — the slot Fock space with its local algebras and
+  fattenings (Definition 3.7), **the embedding ι of the physical Fock space into it as a definition, with Lemma 3.8 in full**,
+  and the slot lattice's geometry and locality vocabulary (Proposition 3.4, Lemma 3.6, Definitions 3.9 and 3.11, Lemma
+  3.10): 99 statements, all proved.
 
 `HRTorus/Axioms.lean` (not imported here) prints the axioms of every declaration.
 -/

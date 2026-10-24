@@ -29,6 +29,9 @@ HRTorus.LLL.Space
 HRTorus.LLL.Frame
 HRTorus.Fock.Physical
 HRTorus.Fock.Hamiltonian
+HRTorus.Fock.Slot
+HRTorus.Fock.Embedding
+HRTorus.Locality.Basic
 "
 fail=0
 for m in $MODULES; do

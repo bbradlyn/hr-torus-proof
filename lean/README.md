@@ -80,6 +80,20 @@ completeness half of the bridge), `HRTorus.LLL.norm_ev_sq`, `norm_evD_sq`, `norm
 whose proof in the paper is Theorem 4.2(a)) and `HRTorus.Fock.Vcoef_latticeSum` (the lattice-sum form (2.7′) of the
 coefficients). Nothing proved depends on them.
 
+**The slot Fock space, the embedding and the locality vocabulary, Sections 3.2–3.3 with Proposition 3.4 and Lemma 3.6** —
+`HRTorus.Fock.Slot`, `HRTorus.Fock.Embedding`, `HRTorus.Locality.Basic` (210 theorems, of which 99 are the paper's statements
+and 111 proof devices; **all proved, no `sorry`**): the slot Fock space 𝔉_𝒮 as the Jordan–Wigner space over the slot lattice
+with ĉ(g), the local algebras CAR(X) and their even parts Alg(X), the r-fattenings and their basic facts, the commutation
+of disjoint local algebras and the gauge invariance of Definition 3.7; **the embedding ι as a definition** — the physical
+modes placed on an initial segment of the Jordan–Wigner order so that the paper's signs are exact, a unitary completing the
+columns 𝒜δ_μ, and ι(A) = 𝔉(U)(A ⊠ 1)𝔉(U)* — with Lemma 3.8 complete: ι(c(f)) = ĉ(𝒜f), a unital injective isometric
+*-homomorphism, unique with that property, even to even, 𝔉(𝒜) an isometry onto the subspace where the modes orthogonal to
+ran 𝒜 are empty, ι(A)𝔉(𝒜) = 𝔉(𝒜)A, the spectrum and the functional calculus preserved, the gauge covariance and the
+sector-preserving and self-adjoint approximants (proved by a finite average over gauge phases, a recorded departure from the
+paper's integral); and the geometry: Lemma 3.2(iii), Proposition 3.4 with the paper's constants, strips, columns and bands,
+Lemma 3.6 (exact column support), Lemma 3.10, and Definition 3.11 (almost-supported sequences with explicit prefactor
+exponents and constants, the uniform version, the set norm) with its consequence that such sequences are even.
+
 ## Building
 
 Install [elan](https://github.com/leanprover/elan), which reads `lean-toolchain` and installs Lean 4.34.1. Then, in
@@ -106,6 +120,8 @@ three standard axioms, 3 on `[Quot.sound]`, 44 on none, none on `sorryAx`.
 The physical side has its own check, `lake env lean HRTorus/AxiomsBlockA.lean`: 373 declarations, 361 on the three standard
 axioms, 5 on none, and **7 on the three plus `sorryAx` — exactly the seven unproved statements named above, and nothing else
 depends on them.**
+Block B's check, `lake env lean HRTorus/AxiomsBlockB.lean`: 326 declarations, every one on the three standard axioms or
+fewer, none on `sorryAx` — nothing in these three modules rests on the seven open statements.
 
 ## The kernel replay
 

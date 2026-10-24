@@ -54,6 +54,16 @@ that `index_core` takes as hypotheses; the orbital properties of the actual mode
 the kernel of Appendix C, the spin-twist bound of Appendix D, and the assembly of the main theorems of Section 8; and
 the Laughlin paper apart from the pilot.
 
+**Lemma 5.1, the conditional expectations onto the local algebras, under two representations of the fermion
+algebra** — `HRTorus.Fermion.Pilot.JW` (96 theorems: the slot Fock space as a Jordan–Wigner matrix algebra on occupation
+configurations, the expectation as the Hilbert–Schmidt projection — the paper's definition) and `HRTorus.Fermion.Pilot.CAR`
+(234 theorems: an abstract C*-algebra carrying the anticommutation relations as fields, the expectation as a twirl over the
+modes outside the region, with the paper's defining properties and its uniqueness as theorems). Both prove every clause of
+Lemma 5.1 — linear, unital, positive, contractive, idempotent, *-preserving, commuting with parity and gauge, mapping even
+operators into the even local algebra, and the bound ‖A − 𝔼_Y A‖ ≤ 2 inf_{A' ∈ Alg(Y)} ‖A − A'‖ — except its measurability
+sentence. The two modules are a measurement pilot for the choice of representation in which Sections 3.2–5 will be
+formalized; that choice is pending, and the chosen module will be renamed out of `Pilot` when it is made.
+
 ## Building
 
 Install [elan](https://github.com/leanprover/elan), which reads `lean-toolchain` and installs Lean 4.34.1. Then, in
@@ -75,6 +85,8 @@ unused-variable warnings from the linter.
 prints, for each of the 651 named declarations, the axioms it depends on. In the build of this tree: 650 depend on
 exactly `[propext, Classical.choice, Quot.sound]`, the three standard axioms of Lean's logic, and one
 (`HRTorus.IndexCore.OrbitalRing.neZero_two_mul`) on `[propext, Quot.sound]`; none depends on `sorryAx`.
+The pilot modules have their own check, `lake env lean HRTorus/Fermion/Pilot/Axioms.lean`: 455 declarations, 408 on the
+three standard axioms, 3 on `[Quot.sound]`, 44 on none, none on `sorryAx`.
 
 ## The kernel replay
 

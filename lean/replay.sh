@@ -23,6 +23,8 @@ HRTorus.IndexCore.Ring
 HRTorus.SlotFrame.Analysis
 HRTorus.SlotFrame.SlotFrame
 HRTorus.Laughlin.GramPoisson
+HRTorus.Fermion.Pilot.JW
+HRTorus.Fermion.Pilot.CAR
 "
 fail=0
 for m in $MODULES; do

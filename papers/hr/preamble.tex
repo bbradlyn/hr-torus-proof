@@ -1,0 +1,125 @@
+% preamble.tex -- packages, theorem environments, and the macros of the paper. The notation is collected in
+% notation.tex; a symbol listed there is used for one object only.
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[margin=1.05in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs,longtable,array}
+\usepackage[shortlabels]{enumitem}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{microtype}
+\usepackage[colorlinks=true,linkcolor=blue!50!black,citecolor=green!35!black,urlcolor=blue!50!black]{hyperref}
+
+% ---------------------------------------------------------------------------
+% Theorem environments: one shared counter, numbered within sections
+% (Theorem 6.17, Lemma 6.5, Remark 6.8, ...); equations likewise.
+% ---------------------------------------------------------------------------
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem*{theorem*}{Theorem}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{assumption}[theorem]{Assumption}
+\newtheorem{setting}[theorem]{Setting}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\numberwithin{equation}{section}
+
+% ---------------------------------------------------------------------------
+% General
+% ---------------------------------------------------------------------------
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\one}{\mathbf{1}}
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\iu}{\mathrm{i}}
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\ad}{ad}
+\DeclareMathOperator{\dist}{dist}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\ran}{ran}
+\DeclareMathOperator{\diam}{diam}
+\DeclareMathOperator*{\PV}{PV\!\!\int}
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclarePairedDelimiterX{\ip}[2]{\langle}{\rangle}{#1,#2}
+\newcommand{\Onf}{O(N^{-\infty})}      % a sequence bounded by C_k N^{-k} for every k
+\newcommand{\eqN}{\doteq}              % equality up to O(N^{-infty}) in operator norm
+\newcommand{\pos}[1]{(#1)_{+}}         % positive part
+
+% ---------------------------------------------------------------------------
+% The torus and its lowest Landau level (Section 2)
+% ---------------------------------------------------------------------------
+\newcommand{\Tor}{\mathbb{T}}          % \Tor_N: the torus; \Tor_N^{\pm}: the half-tori
+\newcommand{\Nphi}{N_{\phi}}           % number of flux quanta, = 2N
+\newcommand{\ex}{\hat{e}_x}            % unit vector along x
+\newcommand{\hN}{\mathfrak{h}_N}       % one-particle lowest Landau level
+\newcommand{\kN}{\mathfrak{k}_N}       % \hN \otimes \C^2
+\newcommand{\ev}[1]{e_{#1}}            % evaluation vector: <e_R, f> = f(R)
+\newcommand{\evD}[1]{e^{D}_{#1}}       % derivative evaluation vector: <e^D_R, f> = (Df)(R)
+\newcommand{\thx}{\theta_x}            % one-particle magnetic translation psi_j -> psi_{j+1}
+\newcommand{\thy}{\theta_y}            % one-particle magnetic translation psi_j -> e^{2 pi i j/N_phi} psi_j
+\newcommand{\up}{{\uparrow}}
+\newcommand{\dn}{{\downarrow}}
+\newcommand{\Nup}{N_{\uparrow}}
+\newcommand{\Ndn}{N_{\downarrow}}
+\newcommand{\Fock}{\mathcal{H}_N}      % physical Fock space F(k_N)
+\newcommand{\Ff}{\mathcal{F}}          % Fock space F(.) and second quantization F(u)
+\newcommand{\nn}{\mathbf{n}}           % a sector label n = (n_up, n_dn)
+\newcommand{\sect}[1]{\mathcal{H}_N^{#1}}   % the sector H_N^{n}
+\newcommand{\Psec}[1]{\Pi^{#1}}        % orthogonal projection onto the sector
+\newcommand{\Vint}{V_{\Tor}}           % periodized pair interaction 4 pi (delta + nabla^2 delta)
+
+% pairs and the hollow-core Hamiltonian (Sections 2 and 4)
+\newcommand{\cpair}[1]{c^{#1}}         % c^nu(f,g): triplet pair annihilator
+\newcommand{\cpairhat}[1]{\hat{c}^{#1}}% slot version
+\newcommand{\bcen}[2]{b^{#1}_{#2}}     % b^nu_n: pair operator with centre n/2 (orbital form)
+
+% ---------------------------------------------------------------------------
+% The slot frame (Section 3)
+% ---------------------------------------------------------------------------
+\newcommand{\Slots}{\Lambda_N}         % slot lattice Z_{n_x} x Z_{n_y}
+\newcommand{\Sa}{\mathcal{S}}          % analysis map f -> (<z_s, f>)_s (also S (x) 1)
+\newcommand{\nx}{n_x}
+\newcommand{\ny}{n_y}
+\newcommand{\cen}[1]{r_{#1}}           % centre of slot s
+\newcommand{\Ball}[2]{\Lambda_{#1}(#2)}% slots within distance #1 of the point #2
+\newcommand{\fat}[2]{#1_{(#2)}}        % r-fattening of a set of slots
+\newcommand{\Col}{\mathrm{Col}}        % column of slots of an orbital (or a band)
+\newcommand{\Str}{\mathrm{Str}}        % strip of slots over a transverse interval
+\newcommand{\Cvol}{C_{\mathrm{vol}}}   % ball-count constant
+\newcommand{\FockS}{\widehat{\mathcal{H}}_N}  % slot Fock space
+\newcommand{\chat}{\hat{c}}            % slot annihilators
+\newcommand{\Nhat}[1]{\widehat{N}_{#1}}% slot number operator of spin #1
+\newcommand{\CAR}{\mathrm{CAR}}        % CAR(X): algebra generated by the slot modes of X
+\newcommand{\Alg}{\mathfrak{A}}        % \Alg(X): even part of CAR(X)
+\newcommand{\AS}{\mathcal{A}}          % \AS_Z: sequences almost supported in Z
+\newcommand{\CE}{\mathbb{E}}           % conditional expectation onto CAR(Y)
+\newcommand{\Hhat}{\widehat{H}}        % iota(H)
+
+% ---------------------------------------------------------------------------
+% Charges, cuts, filters, index theorem (Sections 4--7)
+% ---------------------------------------------------------------------------
+\newcommand{\Gam}{\Gamma}              % half band {0,...,N-1}
+\newcommand{\Gm}{\Gamma_{-}}           % quarter band next to the cut d_-
+\newcommand{\Gp}{\Gamma_{+}}           % quarter band next to the cut d_+
+\newcommand{\Gmid}{\Gamma_{m}}         % middle half of the half band
+\newcommand{\cutm}{\partial_{-}}       % Col(0)
+\newcommand{\cutp}{\partial_{+}}       % Col(N)
+\newcommand{\Qb}{\overline{Q}}         % dressed charge
+\newcommand{\Wg}{W_{\gamma}}           % generator filter
+\newcommand{\Qf}{\mathcal{Q}}          % clustering filter Q(A) = g(ad_H)(A)
+\newcommand{\Tt}{\widetilde{T}_{-}}    % dressed transport Qb^U_- - Qb_- = T_- - K^U_- + K_-
+\newcommand{\Zc}{\mathcal{Z}_{-}}      % P M_-(phi) P, the compressed flux insertion
+\newcommand{\Gc}{\mathcal{G}}          % generator of the comparison ODE
+\newcommand{\Yc}{\mathcal{Y}}          % comparison solution
+\newcommand{\Ec}{\mathcal{E}}          % error term of the ODE
+\newcommand{\detP}{\det\nolimits_{P}}  % determinant of P A P on ran P
+\newcommand{\expP}[1]{\langle #1\rangle_{P}}  % p^{-1} Tr(P #1)

@@ -1,0 +1,209 @@
+% sections/09-theorem.tex
+\section{The theorem}\label{sec:theorem}
+
+This section proves Theorems~\ref{thm:transferintro} and~\ref{thm:openai}. Theorem~\ref{thm:main} and Corollary~\ref{cor:uniform}, with
+the rate of Remark~\ref{rem:rate} and the thresholds of Section~\ref{ssec:constants}, are the proof of Theorem~\ref{thm:openai};
+Section~\ref{ssec:transferproof} proves Theorem~\ref{thm:transferintro} by the same argument with the data of the certificate left
+general.
+
+\subsection{The budget}
+
+Recall $\gs=1-\etas-\frac{61}{4096}-1222\,\eps=4616733319001/10^{14}$, where the last equality is exact arithmetic with
+$\etas=93527408868499/10^{14}$ and $\eps=3/10^6$, and $\Cth=72\sum_\nu\norm{\alpha^\nu}^2$ (Appendix~\ref{app:certificate}).
+
+\begin{theorem}[uniform gap on rectangular tori]\label{thm:main}
+For every rectangular torus $\Tor$, on the whole Fock space $\Fock$,
+\[
+\HT^2\ge\KT+\gT\,\HT\ge\gT\,\HT,
+\]
+where, with $\Ec_m=\Ec_m(\Tor)$, $\lambda_{\min}$ the smallest eigenvalue of the pair Gram matrix and $\dtail=\dtail(\Tor)$,
+\begin{equation}\label{eq:gT}
+\begin{aligned}
+\gT&:=\lambda_{\min}-\etas-\dtail-\Cth\,\Ec_8(1+\Ec_8)-(1+\Ec_{23})^2\bigl(1222\,\eps+2444\,\Ec_{22}\bigr)\\
+&\phantom:=\gs-(1-\lambda_{\min})-\Bigl(\dtail-\frac{61}{4096}\Bigr)-\Cth\,\Ec_8(1+\Ec_8)\\
+&\phantom{:=\gs}-1222\,\eps\bigl((1+\Ec_{23})^2-1\bigr)-2444\,\Ec_{22}(1+\Ec_{23})^2 .
+\end{aligned}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+By Theorem~\ref{thm:square} and Proposition~\ref{prop:parts},
+\[
+\HT^2-\KT=\bigl[\LL_2(h^2)-\etas\HT\bigr]+\bigl[\LL_3(X_3(h))-\KT^{(3)}\bigr]+\bigl[\LL_4(W_4(h\otimes h)W_4^*)-\KT^{(4)}\bigr].
+\]
+By Proposition~\ref{prop:projector}, $h^2\ge\lambda_{\min}h$, and $\LL_2$ preserves order with $\LL_2(h)=\HT$; so the first bracket is at
+least $(\lambda_{\min}-\etas)\HT$. The second is bounded by Proposition~\ref{prop:three} and the third by Proposition~\ref{prop:four}.
+Finally $\KT\ge0$ and $\HT\ge0$.
+\end{proof}
+
+All the constants in \eqref{eq:gT} depend on the torus only through its lattice of periods, and none depends on the
+particle number. They are small when the shorter period is large:
+
+\begin{corollary}[uniform bound]\label{cor:uniform}
+For $L\ge16$ let
+\begin{multline*}
+\gl(L):=\gs-\bigl[2\Dlev(L)+\Ups(L,L)\bigr]-\frac32\sum_{\substack{z\ge17\\ z\ \mathrm{odd}}}\frac{(3z-1)(z+1)}{2^z}\,\Xi_z(L)
+-\Cth\,\Ec_8(L)(1+\Ec_8(L))\\
+-1222\,\eps\bigl((1+\Ec_{23}(L))^2-1\bigr)-2444\,\Ec_{22}(L)(1+\Ec_{23}(L))^2,
+\end{multline*}
+with $\Ec_m(L)$ and $\Xi_z(L)$ as in Lemma~\ref{lem:Ebounds}. Then $\gT\ge\gl(L)$ for every rectangular torus whose shorter period
+is at least $L$, the function $\gl$ is nondecreasing on $[16,\infty)$, and $\gl(L)\to\gs$ as $L\to\infty$.
+\end{corollary}
+
+\begin{proof}
+By Lemma~\ref{lem:levels}, $1-\lambda_{\min}\le\dG\le\Dlev(L_x)+\Dlev(L_y)+\Ups(L_x,L_y)$. The function $\Dlev$ is decreasing on
+$(\sqrt{12},\infty)$, and every term $\abs{\mathfrak f(s_{jk})}=(s_{jk}-1)e^{-s_{jk}/2}$ of $\Ups$ is decreasing in $L_x$ and $L_y$, since off
+$\mathcal X$ it has $s_{jk}\ge9/2>3$; so the bound is at most $2\Dlev(L)+\Ups(L,L)$ and is nonincreasing in $L$. The tail term is
+bounded by Proposition~\ref{prop:three}, and $\Ec_m(\Tor)\le\Ec_m(L)$ for $m\in\{8,22,23\}$ by Lemma~\ref{lem:Ebounds}(a); all
+subtracted terms are nonincreasing in $L$. As $L\to\infty$, $\Dlev(L)\to0$ and $\Ups(L,L)\to0$ (Lemma~\ref{lem:levels}(c)), the tail
+excess tends to zero (Proposition~\ref{prop:three}), and $\Ec_m(L)\to0$ (Lemma~\ref{lem:Ebounds}(b)).
+\end{proof}
+
+\begin{remark}[the rate of convergence]\label{rem:rate}
+As $L\to\infty$,
+\[
+0\le\gs-\gl(L)=O\bigl(L^4\,2^{-L^2/20}\bigr).
+\]
+The rate is that of the majorant $\Omega$ of Proposition~\ref{prop:three} for the tail term, and it is not claimed to be sharp.
+The same rate holds for the transfer principle, Theorem~\ref{thm:transferintro}: for every planar certificate of the same form,
+the bound $\etr(L)$ on $\etr(\Tor)$ obtained in the proof of Theorem~\ref{thm:transfer} is $O(L^4\,2^{-L^2/20})$, with a
+constant that depends on the certificate.
+\end{remark}
+
+\begin{proof}
+$\gs-\gl(L)$ is the sum of the five nonnegative terms subtracted in the definition of $\gl$. By the definition of $\Dlev$ and
+Lemma~\ref{lem:levels}(c), $2\Dlev(L)+\Ups(L,L)=O(L^2e^{-L^2/8})$. By Lemma~\ref{lem:Ebounds}(b),
+$\Ec_m(L)\le\widehat\Ec_m(L)=O(L^{2m}e^{-L^2/4})$, so the three terms containing $\Ec_8$, $\Ec_{22}$ and $\Ec_{23}$ are
+$O(L^{46}e^{-L^2/4})$. By Proposition~\ref{prop:three}, the tail term
+$\frac32\sum_{z\ge17,\,z\ \mathrm{odd}}(3z-1)(z+1)2^{-z}\,\Xi_z(L)$ is at most $\sum_{(j,k)\neq0}\Omega(L\sqrt{j^2+k^2})$, which is
+$O(L^4\,2^{-L^2/20})$. Since $2^{-L^2/20}=e^{-(\log2)L^2/20}$ and $(\log2)/20<1/8<1/4$, the other four terms are
+$o(L^4\,2^{-L^2/20})$. The proof of Theorem~\ref{thm:transfer} bounds the terms of $\etr(\Tor)$ by the same three results, with
+$\Ec_{M_c}$, $\Ec_{D_c-1}$ and $\Ec_{D_c}$ in place of $\Ec_8$, $\Ec_{22}$ and $\Ec_{23}$, and the tail by the same majorant (whose
+derivation bounds the sum over all $z\ge1$); this gives the second statement.
+\end{proof}
+
+\subsection{The constants}\label{ssec:constants}
+
+Table~\ref{tab:constants} lists the terms of $\gl(L)$. The first column after $L$ is the bound $2\Dlev(L)+\Ups(L,L)$ on
+$1-\lambda_{\min}$; the binding term is the four-body Bessel term, followed by the tail excess, while the pair-level and
+non-orthonormality terms are negligible.
+
+\begin{table}[ht]
+\centering\small
+\begin{tabular}{@{}rccccc@{}}
+\toprule
+$L$ & $2\Dlev(L)+\Ups(L,L)$ & $\Ec_8(L)$ & $\Ec_{22}(L)$ & $\Ec_{23}(L)$ & tail excess\\
+\midrule
+16.5 & $4.5\cdot10^{-13}$ & $2.1\cdot10^{-17}$ & $1.50\cdot10^{-5}$ & $5.73\cdot10^{-5}$ & $5.42\cdot10^{-4}$\\
+17   & $5.8\cdot10^{-14}$ & $5.3\cdot10^{-19}$ & $1.13\cdot10^{-6}$ & $4.73\cdot10^{-6}$ & $1.93\cdot10^{-4}$\\
+17.5 & $7.2\cdot10^{-15}$ & $1.2\cdot10^{-20}$ & $6.95\cdot10^{-8}$ & $3.19\cdot10^{-7}$ & $8.38\cdot10^{-5}$\\
+18   & $8.2\cdot10^{-16}$ & $2.2\cdot10^{-22}$ & $3.56\cdot10^{-9}$ & $1.77\cdot10^{-8}$ & $4.22\cdot10^{-5}$\\
+19   & $9.0\cdot10^{-18}$ & $5.2\cdot10^{-26}$ & $5.45\cdot10^{-12}$ & $3.16\cdot10^{-11}$ & $4.05\cdot10^{-6}$\\
+20   & $7.6\cdot10^{-20}$ & $7.1\cdot10^{-30}$ & $4.18\cdot10^{-15}$ & $2.79\cdot10^{-14}$ & $4.95\cdot10^{-7}$\\
+\bottomrule
+\end{tabular}
+
+\medskip
+\begin{tabular}{@{}rcccc@{}}
+\toprule
+$L$ & $\Cth\Ec_8(1+\Ec_8)$ & $1222\,\eps\bigl((1+\Ec_{23})^2-1\bigr)$ & $2444\,\Ec_{22}(1+\Ec_{23})^2$ & $\gl(L)$\\
+\midrule
+16.5 & $6.0\cdot10^{-15}$ & $4.2\cdot10^{-7}$ & $3.67\cdot10^{-2}$ & $0.0089238941$\\
+17   & $1.5\cdot10^{-16}$ & $3.5\cdot10^{-8}$ & $2.75\cdot10^{-3}$ & $0.0432229058$\\
+17.5 & $3.3\cdot10^{-18}$ & $2.3\cdot10^{-9}$ & $1.70\cdot10^{-4}$ & $0.0459136282$\\
+18   & $6.2\cdot10^{-20}$ & $1.3\cdot10^{-10}$ & $8.70\cdot10^{-6}$ & $0.0461164613$\\
+19   & $1.5\cdot10^{-23}$ & $2.3\cdot10^{-13}$ & $1.33\cdot10^{-8}$ & $0.0461632655$\\
+20   & $2.0\cdot10^{-27}$ & $2.0\cdot10^{-16}$ & $1.02\cdot10^{-11}$ & $0.0461668382$\\
+\bottomrule
+\end{tabular}
+\caption{The terms of the uniform bound $\gl(L)$ of Corollary~\ref{cor:uniform}. The tail excess is
+$\frac32\sum_{z\ge17\ \mathrm{odd}}(3z-1)(z+1)2^{-z}\,\Xi_z(L)$, and $\gs=0.04616733319001$.}
+\label{tab:constants}
+\end{table}
+
+\paragraph{Thresholds.} The computed function $\gl$ crosses $0$ at $L=16.4562$, $1/25$ at $L=16.8566$, and $\gs-10^{-5}$ at
+$L=18.6843$ (magnetic lengths, to the precision shown). Hence $\gl(L)>0$ for $L\ge16.457$, $\gl(L)>1/25$ for $L\ge16.857$, and
+$\gl(L)\ge\gs-10^{-5}$ for $L\ge18.685$; by Corollary~\ref{cor:uniform} the same holds for $\gT$ on every rectangular torus whose
+shorter period is at least these values.
+
+\begin{remark}[on the evaluation of the constants]\label{rem:evaluation}
+Every quantity in $\gl(L)$ is given by an explicit expression: $\Dlev$ is elementary, $\Ups(L,L)$ and $\Xi_z(L)$ are lattice sums of
+elementary functions with Gaussian decay, the sum over odd $z$ converges geometrically (Proposition~\ref{prop:three}), and
+$\mu_m(r)$ is the spectral norm of an explicit $(m+1)\times(m+1)$ matrix whose entries are Laguerre polynomials times Gaussians
+(Lemma~\ref{lem:bargmann}(iii)). The reduction from the supremum over all rectangular tori to the evaluation at the radii $L\sqrt{j^2+k^2}$ is
+rigorous by Lemma~\ref{lem:Ebounds}(a), whose proof shows that for $r\ge16$ every entry of $\Dis^{(m)}(r/\sqrt2)$, $m\le23$, has a fixed
+sign and a modulus decreasing in $r$, so that the spectral norm is a monotone function of the entries. What remains is a
+numerical evaluation. The entries of Table~\ref{tab:constants} were computed in $60$-digit floating-point arithmetic from these
+expressions, with $\gs$, $61/4096$ and $\etas$ as exact rationals, the displacement entries from the Laguerre representation, and
+the spectral norms in double precision cross-checked against $60$-digit eigenvalue computations (relative agreement
+$3\cdot10^{-16}$); the lattice sums and the series over $z$ were truncated where the omitted terms are far below the displayed
+digits. A second, independent implementation with different truncations reproduces every entry to the digits it reports (four
+to seven significant figures for $\gl$). The values are therefore
+floating-point evaluations of rigorous closed-form bounds, not interval-arithmetic certificates, and the thresholds were located
+by bisection of the computed function.
+\end{remark}
+
+\subsection{Consequences}
+
+\begin{corollary}[spectrum and kernel]\label{cor:spectrum}
+Let $\Tor$ be a rectangular torus with $\gT>0$; by Corollary~\ref{cor:uniform} this holds whenever the shorter period is at least
+$16.457$.
+\begin{enumerate}[(a)]
+\item For every $N$, $\spec\bigl(\HT|_{\bigwedge^N\h}\bigr)\subset\{0\}\cup[\gT,\infty)$.
+\item At $\Nphi=3N$, $\HT|_{\bigwedge^N\h}\ge\gT(\one-P_N)$, where $P_N$ is the orthogonal projection onto the three-dimensional span of the
+Laughlin states $\Psi_0,\Psi_1,\Psi_2$ of Theorem~\ref{thm:kernel}, and $\HT|_{\bigwedge^{N'}\h}\ge\gT$ for every $N'>N$.
+\item If $\dG<1$, the projector form satisfies $H'^2\ge(\gT/\lambda_{\max})H'$.
+\end{enumerate}
+In particular, on every rectangular torus whose shorter period is at least $16.857$, the gap above the three-dimensional kernel at
+$\Nphi=3N$ is larger than $1/25$, uniformly in $N$ and in the aspect ratio.
+\end{corollary}
+
+\begin{proof}
+(a) $\HT\ge0$ preserves the particle number, and an eigenvalue $\lambda$ satisfies $\lambda^2\ge\gT\lambda$ by Theorem~\ref{thm:main}.
+(b) By (a) and the spectral theorem, $\HT\ge\gT(\one-P_{\ker})$ on each sector; Theorem~\ref{thm:kernel} identifies the kernel at
+$N$ particles and Proposition~\ref{prop:overfill} shows that it is zero for $N'>N$. (c) By Proposition~\ref{prop:projector},
+$H'\ge\lambda_{\max}^{-1}\HT\ge(\gT/\lambda_{\max})(\one-P_{\ker})$ with $\ker H'=\ker\HT$.
+\end{proof}
+
+At the square aspect ratio the shorter period is $L=\sqrt{2\pi\Nphi}$, so $\gl>0$ for $\Nphi\ge44$ and $\gl>1/25$ for $\Nphi\ge46$.
+At filling one third, $\Nphi=3N$: for $N=15$ ($L=16.815$) the bound is $\gl\ge0.0385$, and for $N=16$ ($L=17.366$) it is
+$\gl\ge0.0456>1/25$. On elongated tori the shorter period is smaller at the same $N$, and correspondingly larger systems are
+needed.
+
+\subsection{The transfer principle}\label{ssec:transferproof}
+
+It remains to prove Theorem~\ref{thm:transferintro}, for a planar certificate of the same form, with the inequalities
+\eqref{eq:certgeneral} and the constant $\gamma$ of the definition in Section~\ref{ssec:transfer}. For the certificate
+of~\cite{OAI:A-Fock-space-inequality-and-the-Laughlin-spectral-gap-September-24-2026}, $P_c=7$, $M_c=8$, $Z_c=15$, $D_c=23$,
+$\delta_\infty(15)=61/4096$, $N_4=1222$ and $\gamma=\gs$. We restate the theorem in its full form.
+
+\begin{theorem}[the transfer principle; Theorem~\ref{thm:transferintro} restated]\label{thm:transfer}
+Given a planar certificate of the same form with constant $\gamma$, for every rectangular torus, on $\Fock$,
+\[
+\HT^2\ge(\gamma-\etr(\Tor))\,\HT,
+\]
+where, with $\Ec_m=\Ec_m(\Tor)$ and $\sigma_z=\sigma_z(\Tor)$,
+\begin{multline*}
+\etr(\Tor):=(1-\lambda_{\min})+\frac32\sum_{\substack{z>Z_c\\ z\ \mathrm{odd}}}\frac{(3z-1)(z+1)}{2^z}\sigma_z
++(M_c+1)(P_c+1)\sum_\nu\norm{\alpha^\nu}^2\,\Ec_{M_c}(1+\Ec_{M_c})\\
++\eps N_4\bigl((1+\Ec_{D_c})^2-1\bigr)+2N_4\,\Ec_{D_c-1}(1+\Ec_{D_c})^2 .
+\end{multline*}
+For every rectangular torus whose shorter period is at least $L$, $\etr(\Tor)\le\etr(L)$ with $\etr(L)\to0$ as $L\to\infty$.
+In particular, if $\gamma>0$, then for every $\gamma'<\gamma$ there is $L_0$ such that $\HT^2\ge\gamma'\HT$ on the whole Fock space of every
+rectangular torus whose shorter period is at least $L_0$, uniformly in the particle number and the aspect ratio.
+\end{theorem}
+
+\begin{proof}
+The proofs of Proposition~\ref{prop:parts}, Proposition~\ref{prop:three}, Lemma~\ref{lem:bessel}, Proposition~\ref{prop:four} and
+Theorem~\ref{thm:main} use the specific certificate only through the data of the definition in Section~\ref{ssec:transfer}, and go
+through verbatim with the following changes. In Proposition~\ref{prop:parts}, the modes in $(i,k)$ and $j$ are at most $M_c$, each pair label $p\le P_c$
+occurs with at most $M_c+1$ values of $j$, and $\frac1\pi\int\sum_{p\le P_c}\norm{B(\ut_p)\Psi}^2=(P_c+1)\ip\Psi{\HT\Psi}$, which gives the
+constant $(M_c+1)(P_c+1)\sum_\nu\norm{\alpha^\nu}^2$ with $\Ec_{M_c}$; the three-body blocks are $z\le Z_c$, the four-body blocks
+$D\le D_c$, with mode indices at most $D_c$ (whence $\Ec_{D_c}$) and $\sum_{D\le D_c}n_D=N_4$. In Proposition~\ref{prop:three} the near
+part uses the first family in \eqref{eq:certgeneral} (non-strict inequalities suffice, and the blocks $z\in\{0,1,3\}$ vanish), the
+even blocks $z>Z_c$ are positive and the odd ones are bounded as before. In Lemma~\ref{lem:bessel} the pair-centre channels are
+$d\le D_c-1$, whence $\Ec_{D_c-1}$, and Proposition~\ref{prop:four} gives $-(1+\Ec_{D_c})^2(\eps N_4+2N_4\Ec_{D_c-1})\HT$. Collecting the
+terms as in \eqref{eq:gT} gives the first claim. For the second, $1-\lambda_{\min}\le2\Dlev(L)+\Ups(L,L)$ (proof of
+Corollary~\ref{cor:uniform}), the tail is bounded by Proposition~\ref{prop:three}, and $\Ec_m(\Tor)\le\widehat\Ec_m(L)$ for
+$L^2\ge2m$ by Lemma~\ref{lem:Ebounds}(b); each bound tends to zero.
+\end{proof}

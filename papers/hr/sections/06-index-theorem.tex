@@ -1,0 +1,923 @@
+\section{The index theorem}\label{sec:index}
+
+\subsection{Setting and assumptions}
+
+\begin{setting}\label{set:index}
+$\mathcal N\subset\N$ is infinite, $(\Tor_N)_{N\in\mathcal N}$ are admissible tori (Definition~\ref{def:frame}) with
+$L_x\ge c_*\sqrt N$ for a constant $c_*>0$, and $H=(H_N)_{N\in\mathcal N}$ satisfies (H1). On each torus let
+\begin{gather*}
+\Gam:=\{0,1,\dots,N-1\}\subset\Z_{\Nphi},\qquad\Gm:=\{0,\dots,\lfloor N/4\rfloor-1\},\\
+\Gp:=\{\lceil3N/4\rceil,\dots,N-1\},\qquad\Gmid:=\Gam\setminus(\Gm\cup\Gp),\\
+\cutm:=\Col(0),\qquad\cutp:=\Col(N),\qquad Q:=Q_\Gam,\qquad Q_\pm:=Q_{\Gamma_\pm},\qquad Q_m:=Q_{\Gmid},
+\end{gather*}
+and let $\Tor_N^-:=\{R\in\Tor_N:R_x\in(-L_x/4,L_x/4]\bmod L_x\}$ and $\Tor_N^+:=\Tor_N\setminus\Tor_N^-$ be the
+half-tori centred on the lines of the two cuts $\cutm$ and $\cutp$. For a Borel set $\mathcal D\subset\Tor_N$ write
+$H_{\mathcal D}:=\int_{\mathcal D}h_R\,\dd R$.
+\end{setting}
+
+Thus $Q=Q_-+Q_m+Q_+$ is the up-spin charge of the half band $\Gam$ of $N$ consecutive orbitals, whose two
+boundaries lie in the columns $\cutm$ and $\cutp$; $Q_\pm$ are the charges of the quarters of $\Gam$ adjacent to
+$\partial_\pm$, and $Q_m$ that of its middle half.
+
+\begin{lemma}[separations]\label{lem:separations}
+In Setting~\ref{set:index}, for every $N\in\mathcal N$,
+\begin{gather*}
+d(\cutm,\cutp)\ge\tfrac12L_x-2\delta_x,\qquad d(\Col\Gm,\Col\Gp)\ge\tfrac14L_x-2\delta_x,\\
+d(\partial_\pm,\Col\Gmid)\ge\tfrac18L_x-\kappa-2\delta_x,\qquad d(\partial_\mp,\Col\Gamma_\pm)\ge\tfrac38L_x-2\delta_x .
+\end{gather*}
+All four right-hand sides are at least $\frac{c_*}{16}\sqrt N$ for $N\ge N_*$, with $N_*$ depending only on $c_*$
+and $\delta_0$. Moreover $\abs{\partial_\pm}\le2\ny\le CL_y\le C'\sqrt N$.
+\end{lemma}
+
+\begin{proof}
+Write $\abs{u}_{L_x}$ for the distance from $u\in\R$ to $L_x\Z$, so that $\abs{u-u'}_{L_x}$ is the distance of two
+points of the circle $\R/L_x\Z$ of transverse coordinates. The orbital $j$ has transverse position $\kappa j$, and
+$L_x=\kappa\Nphi=2\kappa N$; for representatives $0\le j,j'\le2N-1$,
+\[
+\abs{\kappa j-\kappa j'}_{L_x}=\kappa\min\bigl\{\abs{j-j'},\,2N-\abs{j-j'}\bigr\}.
+\]
+The flat distance of two points of $\Tor_N$ is at least the distance of their transverse coordinates, so
+$d(s,s')\ge\abs{x_s-x_{s'}}_{L_x}$. If $s\in\Col(j)$ and $s'\in\Col(j')$, then $\abs{x_s-\kappa j}_{L_x}<\delta_x$ and
+$\abs{x_{s'}-\kappa j'}_{L_x}<\delta_x$ (Lemma~\ref{lem:columns}), and the triangle inequality on the circle gives
+\begin{equation}\label{eq:ix-coldist}
+d(s,s')>\abs{\kappa j-\kappa j'}_{L_x}-2\delta_x .
+\end{equation}
+Hence $d(\Col\mathcal B,\Col\mathcal B')\ge\min\{\abs{\kappa j-\kappa j'}_{L_x}:j\in\mathcal B,\ j'\in\mathcal B'\}-2\delta_x$ for
+any two bands, and it remains to bound the circular distances of the orbital positions. (For $N\le3$ the band
+$\Gm$ is empty; distances to the empty set are $+\infty$, and the statements involving $\Gm$ are void.)
+
+\emph{The two cuts.} For $j=0$ and $j'=N$ the minimum above is $N$, so the distance is $\kappa N=\frac12L_x$.
+
+\emph{The two quarters.} For $0\le j\le\lfloor N/4\rfloor-1$ and $\lceil3N/4\rceil\le j'\le N-1$ we have
+$\frac N2+1\le j'-j\le N-1$, so both $j'-j$ and $2N-(j'-j)$ exceed $\frac N2$, and the distance is at least
+$\frac12\kappa N=\frac14L_x$.
+
+\emph{A cut and the middle band.} Let $\lfloor N/4\rfloor\le j'\le\lceil3N/4\rceil-1$, so that $j'\le\frac34N$. For the
+cut $\cutm=\Col(0)$, $\min\{j',2N-j'\}\ge\lfloor N/4\rfloor\ge\frac{N-3}4$, and the distance is at least
+$\frac{\kappa(N-3)}4=\frac18L_x-\frac34\kappa\ge\frac18L_x-\kappa$. For the cut $\cutp=\Col(N)$,
+$N-j'\ge N-\lceil3N/4\rceil+1\ge\frac{N+1}4$ and $2N-(N-j')=N+j'\ge N$, so the distance is at least
+$\frac{\kappa(N+1)}4\ge\frac18L_x$.
+
+\emph{A cut and the opposite quarter.} For $\lceil3N/4\rceil\le j'\le N-1$, $\min\{j',2N-j'\}\ge\frac34N$, so the
+distance from the position $0$ of $\cutm$ is at least $\frac34\kappa N=\frac38L_x$. For $0\le j\le\lfloor N/4\rfloor-1$,
+$N-j\ge\frac34N+1$ and $2N-(N-j)\ge N$, so the distance from the position $\kappa N$ of $\cutp$ is at least $\frac38L_x$.
+
+Together with \eqref{eq:ix-coldist} this proves the four inequalities. By Lemma~\ref{lem:frame-consistency}(ii),
+$\kappa\le\delta_x\le\delta_+=2\delta_0$, so every right-hand side is at least
+$\frac18L_x-3\delta_x\ge\frac18c_*\sqrt N-6\delta_0$, which is at least $\frac1{16}c_*\sqrt N$ for
+$N\ge N_*:=\lceil(96\delta_0/c_*)^2\rceil$.
+
+Finally, $\partial_\pm$ is a column, which contains the slots of at most two windows (Lemma~\ref{lem:columns}), so
+$\abs{\partial_\pm}\le2\ny$. Since $\ny=\lceil2\delta_x/\kappa\rceil\le2\delta_x/\kappa+1=\delta_xL_y/\pi+1$,
+$\delta_x\le2\delta_0$ and $L_y\ge L_0\ge4$, we get $2\ny\le CL_y$ with $C:=4\delta_0/\pi+\frac12$; and
+$L_y=4\pi N/L_x\le(4\pi/c_*)\sqrt N$.
+\end{proof}
+
+\begin{assumption}[gap in a sector]\label{ass:gap}
+There are sectors $\nn_N=(n_{\up,N},n_{\dn,N})$, $N\in\mathcal N$, and $p\in\N$, $\Delta\ge0$ and $\gamma>2\Delta$,
+independent of $N$, such that the eigenvalues $E_1\le E_2\le\cdots$ of $H_N|_{\sect{\nn_N}}$, repeated according to
+multiplicity, satisfy
+\[
+E_p-E_1\le\Delta\qquad\text{and}\qquad E_{p+1}-E_p\ge\gamma\qquad\text{for every }N\in\mathcal N .
+\]
+$P=P_N$ denotes the spectral projection of $H_N|_{\sect{\nn_N}}$ onto $[E_1,E_p]$, extended by zero to $\Fock$; it
+has rank $p$, and $P=P\Psec{\nn_N}=\Psec{\nn_N}P$.
+\end{assumption}
+
+Nothing is assumed about the spectrum of $H_N$ outside the sector $\sect{\nn_N}$. This is the only spectral
+assumption of the paper; it is weaker than \cite[Assumption~1]{BBDF21}, which concerns the whole Hilbert space
+(and in which $\Delta>0$; the case $\Delta=0$ is included here).
+
+The generator that dresses $Q$, and its two halves, are defined in Definition~\ref{def:dressing}; they enter
+the next assumption.
+
+\begin{assumption}[charge transport]\label{ass:U}
+$U=U_N$, $N\in\mathcal N$, are unitaries on $\Fock$ such that
+\begin{description}
+\item[(U1)] $[U,\Nup]=[U,\Ndn]=0$;
+\item[(U2)] $\norm{[U,P]}=\Onf$;
+\item[(U3)] $U^*K_\pm U\in\AS_{\partial_\pm}$, with $K_\pm$ as in Definition~\ref{def:dressing};
+\item[(U4)] there are self-adjoint, sector-preserving $T_\pm\in\AS_{\partial_\pm}$ with $\norm{T_\pm}\le CN^{m_T}$ such that
+$U^*QU-Q=T_-+T_+$ and $e^{2\pi\iu(Q+T_\pm)}=\one+\Onf$.
+\end{description}
+\end{assumption}
+
+Condition (U3) is the only use of locality preservation by $U$; a locality preservation of the classes $\AS_Z$
+of Definition~\ref{def:almostsupported}, restricted to strips, implies it. Condition (U4) is what \cite{BBDF21} derive from
+locality preservation; here it is assumed, because for the magnetic translation it holds exactly
+(Lemma~\ref{lem:theta}), and we do not need the general derivation.
+
+\subsection{The dressed charge}
+
+\begin{definition}[current, generator, dressed charge]\label{def:dressing}
+In Setting~\ref{set:index}, with $\gamma$ from Assumption~\ref{ass:gap} and $\Wg$ from Definition~\ref{def:filters}, let
+\begin{gather*}
+J_\pm:=\iu\bigl[H_{\Tor_N^\pm},Q\bigr],\qquad K:=\int\Wg(t)\,\tau_t\bigl(\iu[H_N,Q]\bigr)\,\dd t,\\
+K_\pm:=\int\Wg(t)\,\tau_t(J_\pm)\,\dd t,\qquad\Qb:=Q-K_--K_+ .
+\end{gather*}
+\end{definition}
+
+\begin{lemma}[the split of the current]\label{lem:split}
+In Setting~\ref{set:index}:
+\begin{enumerate}[(i)]
+\item $J_-+J_+=\iu[H_N,Q]$, hence $K=K_-+K_+$ and $\Qb=Q-K$; $J_\pm$ and $K_\pm$ are self-adjoint and
+sector-preserving, and $\norm{J_\pm}\le4\pi C_hN^2$.
+\item $J_\pm\in\AS_{\partial_\pm}$ with prefactor exponent $2$.
+\item For $j_0\in\Z$, the same holds, with the same constants, for the band $\Gam+j_0$, the half-tori
+$\Tor_N^\pm+\kappa j_0\ex$ and the columns $\Col(j_0)$, $\Col(j_0+N)$ in place of $\Gam$, $\Tor_N^\pm$ and $\partial_\pm$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(i) The half-tori $\Tor_N^-$ and $\Tor_N^+$ partition $\Tor_N$, so $H_{\Tor_N^-}+H_{\Tor_N^+}=H_N$ and
+$J_-+J_+=\iu[H_N,Q]$; integrating against $\Wg$ gives $K=K_-+K_+$, and hence $\Qb=Q-K$. Each $H_{\mathcal D}$ is the
+integral of a bounded Borel function with values in the finite-dimensional space of operators on $\Fock$ whose
+values are self-adjoint and sector-preserving; so $H_{\mathcal D}$ is self-adjoint and sector-preserving, with
+$\norm{H_{\mathcal D}}\le C_h\abs{\mathcal D}$. The charge $Q$ is self-adjoint and sector-preserving, with
+$\norm Q\le N$ (Lemma~\ref{lem:charges-elementary}). Hence $J_\pm=\iu[H_{\Tor_N^\pm},Q]$ is self-adjoint, and it is
+sector-preserving because the sector-preserving operators form an algebra (Lemma~\ref{lem:sectors}(ii)). The unitaries
+$e^{\pm\iu tH_N}$ are sector-preserving (Lemma~\ref{lem:sectors}(ii)), so every $\tau_t(J_\pm)$ is self-adjoint and
+sector-preserving, and so is $K_\pm$, because $\Wg$ is real (Lemma~\ref{lem:Wexists}). Finally
+$\abs{\Tor_N^\pm}=\frac12\abs{\Tor_N}=2\pi N$, so $\norm{J_\pm}\le2\norm{H_{\Tor_N^\pm}}\norm Q\le4\pi C_hN^2$.
+
+(ii) For $R\in\Tor_N$ let $\xi_-(R):=\abs{R_x}_{L_x}$ and $\xi_+(R):=\abs{R_x-\frac12L_x}_{L_x}$ be the transverse distances
+from $R$ to the centre lines $x=0$ and $x=\frac12L_x=\kappa N$ of the cuts $\cutm=\Col(0)$ and $\cutp=\Col(N)$. By the
+definition of the half-tori, $\xi_\pm(R)\le\frac14L_x$ and $\xi_\pm(R)\le\xi_\mp(R)$ for $R\in\Tor_N^\pm$.
+
+\emph{Step 1: the far side of the cut.} The orbitals of $\Gam$ have transverse positions in the arc
+$[0,\frac12L_x-\kappa]$, those of $\Gam^c:=\Z_{\Nphi}\setminus\Gam$ in the arc $[\frac12L_x,L_x-\kappa]$. For $R\in\Tor_N$
+let $\mathcal B_R:=\Gam^c$ if $R_x\in[0,\frac12L_x)\bmod L_x$, and $\mathcal B_R:=\Gam$ otherwise. In the first case
+$R_x$ lies in the arc $(-\kappa,\frac12L_x)$ complementary to the positions of $\mathcal B_R$, at distances
+$R_x+\kappa\ge\xi_-(R)$ and $\frac12L_x-R_x=\xi_+(R)$ from its endpoints; in the second case $R_x$ lies in the arc
+$(\frac12L_x-\kappa,L_x)$, at distances $R_x-\frac12L_x+\kappa\ge\xi_+(R)$ and $L_x-R_x=\xi_-(R)$ from its endpoints. In
+both cases, for $R\in\Tor_N^\pm$,
+\begin{equation}\label{eq:ix-far}
+\abs{\kappa j-R_x}_{L_x}\ge\min\{\xi_-(R),\xi_+(R)\}=\xi_\pm(R)\qquad\text{for every }j\in\mathcal B_R .
+\end{equation}
+Since $[h_R,\Nup]=0$ and $\Nup=Q+Q_{\Gam^c}$ (Lemma~\ref{lem:charges-elementary}), $[h_R,Q]=-[h_R,Q_{\Gam^c}]$, so in both
+cases $[h_R,Q]=\pm[h_R,Q_{\mathcal B_R}]$. Every slot $s\in\Col(\mathcal B_R)$ has $\abs{x_s-\kappa j}_{L_x}<\delta_x$ for
+some $j\in\mathcal B_R$, hence $d(s,R)\ge\abs{x_s-R_x}_{L_x}>\xi_\pm(R)-\delta_x$ by \eqref{eq:ix-far}. Let $R\in\Tor_N^\pm$
+with $\xi_\pm(R)\ge\delta_x$, put $r_R:=\xi_\pm(R)-\delta_x$, and let $h_{R,r_R}\in\Alg(\Ball{r_R}R)$ be the approximant of
+(H1). Then $\Ball{r_R}R\cap\Col(\mathcal B_R)=\emptyset$, so $h_{R,r_R}$ commutes with
+$\iota(Q_{\mathcal B_R})\in\Alg(\Col(\mathcal B_R))$ (Lemma~\ref{lem:bandcharges}(i)), and, $\iota$ being an isometric
+homomorphism (Lemma~\ref{lem:embedding}),
+\[
+\norm{[h_R,Q]}=\norm{[\iota(h_R)-h_{R,r_R},\iota(Q_{\mathcal B_R})]}\le2C^H_k\bigl(1+\xi_\pm(R)-\delta_x\bigr)^{-k}N .
+\]
+If $\xi_\pm(R)<\delta_x$ we use $\norm{[h_R,Q]}\le2C_hN$ instead. Since $1+\xi\le(1+\xi-\delta_x)(1+\delta_x)$ for
+$\xi\ge\delta_x$, and $1+\xi<1+\delta_x$ for $\xi<\delta_x$, both cases give, for every $k$,
+\begin{equation}\label{eq:ix-step1}
+\norm{[h_R,Q]}\le2N\max\{C_h,C^H_k\}(1+\delta_x)^k\bigl(1+\xi_\pm(R)\bigr)^{-k},\qquad R\in\Tor_N^\pm .
+\end{equation}
+
+\emph{Step 2: near the cut.} Fix $\rho\ge0$. The operators $h_R$ are sector-preserving, hence even
+(Lemma~\ref{lem:sectors}(ii)), and so is $\iota(h_R)$ (Lemma~\ref{lem:embedding}(i)). By Lemma~\ref{lem:condexp},
+$h'_{R,\rho}:=\CE_{\Ball\rho R}(\iota(h_R))$ is a self-adjoint element of $\Alg(\Ball\rho R)$ with
+$\norm{\iota(h_R)-h'_{R,\rho}}\le2C^H_k(1+\rho)^{-k}$ for every $k$, and $R\mapsto h'_{R,\rho}$ is Borel, because
+$R\mapsto\iota(h_R)$ is Borel and $R\mapsto\Ball\rho R$ takes finitely many values, each on a Borel set (the sets
+$\{R:d(s,R)\le\rho\}$ are closed). Let $\mathcal B'_R:=\{j\in\Gam:\Col(j)\cap\Ball\rho R\ne\emptyset\}$. Then
+$\iota(Q_{\Gam\setminus\mathcal B'_R})\in\Alg(\Col(\Gam\setminus\mathcal B'_R))$ commutes with $h'_{R,\rho}$, and
+\[
+[h'_{R,\rho},\iota(Q)]=[h'_{R,\rho},\iota(Q_{\mathcal B'_R})]\in\Alg\bigl(\Ball\rho R\cup\Col(\mathcal B'_R)\bigr).
+\]
+Every $s\in\Ball\rho R$ has $\abs{x_s-R_x}_{L_x}\le\rho$; every $j\in\mathcal B'_R$ has $\abs{\kappa j-R_x}_{L_x}<\rho+\delta_x$,
+so every $s\in\Col(\mathcal B'_R)$ has $\abs{x_s-R_x}_{L_x}<\rho+2\delta_x$. Hence
+$[h'_{R,\rho},\iota(Q)]\in\Alg\bigl(\Str((R_x-\rho-2\delta_x,R_x+\rho+2\delta_x))\bigr)$.
+
+\emph{Step 3: integration.} Let $I_-:=(-\delta_x,\delta_x)$ and $I_+:=(\frac12L_x-\delta_x,\frac12L_x+\delta_x)$, so that
+$\partial_\pm=\Str(I_\pm)$ (Lemma~\ref{lem:columns}). For $R\in\Tor_N^\pm$ with $\xi_\pm(R)\le\rho$ the interval
+$(R_x-\rho-2\delta_x,R_x+\rho+2\delta_x)$ lies in the closed $(2\rho+\delta_x)$-neighbourhood of $I_\pm$, and
+$\Str((I_\pm)_{2\rho+\delta_x})\subset\fat{(\partial_\pm)}{2\rho+2\delta_x}$ by Lemma~\ref{lem:strips}. Hence
+\[
+J_{\pm,\rho}:=\int_{\{R\in\Tor_N^\pm:\ \xi_\pm(R)\le\rho\}}\iu[h'_{R,\rho},\iota(Q)]\,\dd R\ \in\ \Alg\bigl(\fat{(\partial_\pm)}{2\rho+2\delta_x}\bigr),
+\]
+the integrand being a bounded Borel function with values in this finite-dimensional space; $J_{\pm,\rho}$ is
+self-adjoint. Since $\iota$ is linear, $\iota(J_\pm)=\int_{\Tor_N^\pm}\iota(\iu[h_R,Q])\,\dd R$, and
+\[
+\iota(J_\pm)-J_{\pm,\rho}=\int_{\{\xi_\pm\le\rho\}}\iu[\iota(h_R)-h'_{R,\rho},\iota(Q)]\,\dd R
++\int_{\{\xi_\pm>\rho\}}\iota(\iu[h_R,Q])\,\dd R .
+\]
+The first integral has norm at most $\abs{\Tor_N}\cdot2\cdot2C^H_k(1+\rho)^{-k}N=16\pi C^H_kN^2(1+\rho)^{-k}$. Up to a
+translation, $\Tor_N^\pm$ is the rectangle $\{\abs{R_x}\le\frac14L_x\}\times[0,L_y)$, on which $\xi_\pm(R)=\abs{R_x}$; so by
+\eqref{eq:ix-step1}, for $k\ge2$, the second integral has norm at most
+\[
+2N\max\{C_h,C^H_k\}(1+\delta_x)^k\,L_y\cdot2\int_\rho^\infty(1+u)^{-k}\,\dd u
+\le4\pi\max\{C_h,C^H_k\}(1+2\delta_0)^kN^2(1+\rho)^{1-k},
+\]
+where we used $L_y=4\pi N/L_x\le\pi N$ (admissibility gives $L_x\ge4$) and $\delta_x\le2\delta_0$. Thus
+$\norm{\iota(J_\pm)-J_{\pm,\rho}}\le C'_kN^2(1+\rho)^{1-k}$ with $C'_k:=16\pi C^H_k+4\pi\max\{C_h,C^H_k\}(1+2\delta_0)^k$.
+
+Now let $r\ge0$. If $r\ge2\delta_x$, put $\rho:=\frac12(r-2\delta_x)$; then $J_{\pm,\rho}\in\Alg(\fat{(\partial_\pm)}r)$, and
+since $1+r\le2(1+\delta_x)(1+\rho)$, applying the bound with $k+1$ in place of $k$ gives
+$\norm{\iota(J_\pm)-J_{\pm,\rho}}\le(2+4\delta_0)^kC'_{k+1}N^2(1+r)^{-k}$. If $r<2\delta_x$, the approximant $0$ has error
+$\norm{J_\pm}\le4\pi C_hN^2\le4\pi C_h(1+4\delta_0)^kN^2(1+r)^{-k}$. So $J_\pm\in\AS_{\partial_\pm}$ with prefactor exponent
+$2$, with constants depending only on $k$, $C_h$, $C^H_{k+1}$ and $\delta_0$.
+
+(iii) Replace $\Gam$ by $\Gam+j_0$, the half-tori by their translates by $\kappa j_0\ex$, and the centre lines $x=0$,
+$x=\frac12L_x$ by $x=\kappa j_0$, $x=\kappa j_0+\frac12L_x$, which are the centre lines of $\Col(j_0)$ and $\Col(j_0+N)$.
+The proof above uses the slot lattice only through Lemmas~\ref{lem:columns}, \ref{lem:strips} and
+\ref{lem:bandcharges}(i) and (H1), which hold for every orbital, every interval and every point $R$, and otherwise
+only transverse distances measured from the two centre lines; it therefore applies verbatim, with the same
+constants.
+\end{proof}
+
+\begin{lemma}[the in-sector identity]\label{lem:KP}
+In Setting~\ref{set:index}, under Assumption~\ref{ass:gap}, $[K,P]=[Q,P]$. Hence $[\Qb,P]=0$ exactly.
+\end{lemma}
+
+\begin{proof}
+Write $\Pi:=\Psec{\nn_N}$, and $P_E:=\one_{\{E\}}(H_N)$ for $E\in\sigma(H_N)$. Since $H_N$ is sector-preserving,
+$P_E\Pi=\Pi P_E$ is the eigenprojection of $H_N|_{\sect{\nn_N}}$ for $E$, extended by zero, and it vanishes unless $E$
+is an eigenvalue of that restriction (Lemma~\ref{lem:sectors}(ii)); and $P=\sum_{E\in[E_1,E_p]}P_E\Pi$. By
+Assumption~\ref{ass:gap} the eigenvalues $E_1\le\dots\le E_p$ of the restriction lie in $[E_1,E_p]$, and all others are
+at least $E_{p+1}\ge E_p+\gamma$. Consequently:
+\begin{equation}\label{eq:ix-gapsplit}
+\text{if $P_E\Pi\ne0$, $P_{E'}\Pi\ne0$, and exactly one of $E,E'$ lies in $[E_1,E_p]$, then $\abs{E-E'}\ge\gamma$.}
+\end{equation}
+Since $P_E\,\iu[H_N,Q]\,P_{E'}=\iu(E-E')P_EQP_{E'}$, Lemma~\ref{lem:Wexists} gives
+\[
+K=\sum_{E,E'\in\sigma(H_N)}f(E,E')\,P_EQP_{E'},\qquad f(E,E'):=\iu\,\widehat W_\gamma(E'-E)\,(E-E'),
+\]
+and $f(E,E')=\iu\cdot\iu(E-E')/(E'-E)=1$ whenever $\abs{E-E'}\ge\gamma$, because $\widehat W_\gamma(\omega)=\iu/\omega$ for
+$\abs\omega\ge\gamma$. With $Q=\sum_{E,E'}P_EQP_{E'}$ this gives $A:=K-Q=\sum_{E,E'}(f(E,E')-1)P_EQP_{E'}$. The operator $A$
+is sector-preserving (Lemma~\ref{lem:split}(i) and Lemma~\ref{lem:charges-elementary}), so $AP=\Pi A\Pi P$ and
+$PA=P\Pi A\Pi$; since $\Pi$ commutes with $Q$ and with every $P_E$, and $P_{E'}P=\one_{[E_1,E_p]}(E')P_{E'}\Pi$,
+\[
+[A,P]=\sum_{E,E'\in\sigma(H_N)}\bigl(f(E,E')-1\bigr)\bigl(\one_{[E_1,E_p]}(E')-\one_{[E_1,E_p]}(E)\bigr)\,P_E\Pi\,Q\,\Pi P_{E'} .
+\]
+In a nonzero term $P_E\Pi\ne0$, $\Pi P_{E'}\ne0$, and exactly one of $E,E'$ lies in $[E_1,E_p]$; then
+$\abs{E-E'}\ge\gamma$ by \eqref{eq:ix-gapsplit}, and $f(E,E')-1=0$. Hence $[K-Q,P]=0$, which is $[K,P]=[Q,P]$, and
+$[\Qb,P]=[Q-K,P]=0$ by Lemma~\ref{lem:split}(i).
+\end{proof}
+
+The proof uses only $E_{p+1}-E_p\ge\gamma$ and the sector preservation of $H_N$ and $Q$; neither $\Delta$, nor
+$\gamma>2\Delta$, nor any property of the spectrum of $H_N$ outside the sector enters.
+
+\begin{lemma}[strip localization of the dressing]\label{lem:Klocal}
+In Setting~\ref{set:index}, $K_\pm\in\AS_{\partial_\pm}$ with prefactor exponent $5/2$, and
+$\norm{K_\pm}\le\norm{\Wg}_1\norm{J_\pm}$. The same holds for the dressings of the translated currents of
+Lemma~\ref{lem:split}(iii), with $\Col(j_0)$, $\Col(j_0+N)$ in place of $\partial_\pm$.
+\end{lemma}
+
+\begin{proof}
+The norm bound is $\norm{K_\pm}\le\int\abs{\Wg(t)}\norm{\tau_t(J_\pm)}\,\dd t=\norm{\Wg}_1\norm{J_\pm}$, with
+$\norm{\Wg}_1=M_0(\Wg)<\infty$ (Lemma~\ref{lem:Wexists}). We prove the locality of $K_-$; that of $K_+$ is the same.
+Write $Z:=\cutm=\Str(I_-)$ with $I_-=(-\delta_x,\delta_x)$, and $C^J_k$ for the constants of $J_-$ in
+Lemma~\ref{lem:split}(ii). For $\rho\ge0$ let $J_\rho$ be a best approximant of $\iota(J_-)$ in the finite-dimensional space
+$\Alg(\fat Z\rho)$; it satisfies $\norm{\iota(J_-)-J_\rho}\le C^J_kN^2(1+\rho)^{-k}$ for every $k$ at once, and we may take
+$J_\rho=\iota(J_-)$ when $\rho\ge\diam\Slots$, since then $\fat Z\rho=\Slots$ and $\Alg(\Slots)$ contains every even operator.
+
+\emph{Telescoping.} With the dyadic radii $r_j=2^j$, put $J^{(0)}:=J_{r_0}$ and $J^{(j)}:=J_{r_j}-J_{r_{j-1}}$ for $j\ge1$.
+Then $J^{(j)}\in\Alg(\fat Z{r_j})$ is even, $J^{(j)}=0$ once $r_{j-1}\ge\diam\Slots$, $\iota(J_-)=\sum_{j\ge0}J^{(j)}$ (a finite
+sum), and
+\[
+\norm{J^{(0)}}\le\norm{J_-}+C^J_0N^2,\qquad
+\norm{J^{(j)}}\le2C^J_kN^2(1+r_{j-1})^{-k}\le2^{k+1}C^J_kN^2(1+r_j)^{-k}\quad(j\ge1).
+\]
+With $k=1$ and $\norm{J_-}\le4\pi C_hN^2$ this gives $\sum_j\norm{J^{(j)}}\le C_JN^2$, $C_J:=4\pi C_h+C^J_0+4C^J_1$. By
+Lemma~\ref{lem:strips}, $\fat Z\rho\subset\Str((I_-)_\rho)$, a strip over an interval of length at most $2\delta_x+2\rho$, so
+by Proposition~\ref{prop:geometry}(iii) and Lemma~\ref{lem:separations},
+\begin{equation}\label{eq:ix-stripcount}
+\abs{\fat Z\rho}\le2C_{\rm str}(1+2\delta_x)L_y(1+\rho)\le C_ZN^{1/2}(1+\rho),\qquad C_Z:=8\pi C_{\rm str}(1+4\delta_0)/c_* .
+\end{equation}
+
+\emph{The approximant.} Let $C_{\rm lc}$ and $C_{k'}$ be the constants of Theorem~\ref{thm:propagation}(c) for the light-cone
+exponent $\alpha=4$, let $r\ge r_*:=\max\{2,32C_{\rm lc}\}$, and let $t_r:=(r/2C_{\rm lc})^{1/4}-1$; then $(r/2C_{\rm lc})^{1/4}\ge2$, so
+$t_r\ge\frac12(r/2C_{\rm lc})^{1/4}\ge1$. Put $Y:=\fat Zr$ and
+\[
+K_{-,r}:=\int_{-t_r}^{t_r}\Wg(t)\sum_{j:\ r_j\le r/2}\CE_Y\bigl(\tau_t(J^{(j)})\bigr)\,\dd t .
+\]
+Each $\tau_t(J^{(j)})$ is even, because $\Hhat_N$ is; so $\CE_Y(\tau_t(J^{(j)}))$ lies in $\Alg(Y)$ and depends
+continuously on $t$ (Lemma~\ref{lem:condexp}), and $K_{-,r}\in\Alg(Y)$. By Lemma~\ref{lem:embedding}(ii),
+$\iota(K_-)=\int\Wg(t)\tau_t(\iota(J_-))\,\dd t$, so $\iota(K_-)-K_{-,r}=\mathrm{(a)}+\mathrm{(b)}+\mathrm{(c)}$ with
+\begin{gather*}
+\mathrm{(a)}:=\int_{-t_r}^{t_r}\Wg(t)\sum_{r_j\le r/2}\Bigl(\tau_t(J^{(j)})-\CE_Y\bigl(\tau_t(J^{(j)})\bigr)\Bigr)\dd t,\qquad
+\mathrm{(b)}:=\int_{-t_r}^{t_r}\Wg(t)\sum_{r_j>r/2}\tau_t(J^{(j)})\,\dd t,\\
+\mathrm{(c)}:=\int_{\abs t>t_r}\Wg(t)\,\tau_t\bigl(\iota(J_-)\bigr)\,\dd t .
+\end{gather*}
+
+\emph{The term} (a). For $\abs t\le t_r$ we have $C_{\rm lc}(1+\abs t)^4\le C_{\rm lc}(1+t_r)^4=\frac r2$. For $r_j\le\frac r2$,
+Theorem~\ref{thm:propagation}(c) with $X=\fat Z{r_j}$ and $\rho=\frac r2$ therefore gives an element of
+$\Alg(\fat{(\fat Z{r_j})}{r/2})\subset\Alg(Y)$ within $C_{k'}\norm{J^{(j)}}\abs{\fat Z{r_j}}(r/2)^{-k'}$ of $\tau_t(J^{(j)})$
+(note $\fat{(\fat Z a)}b\subset\fat Z{a+b}$ by the triangle inequality, and $r_j+\frac r2\le r$). By
+Lemma~\ref{lem:condexp}, \eqref{eq:ix-stripcount}, and $\frac r2\ge\frac13(1+r)$ for $r\ge2$,
+\[
+\norm{\mathrm{(a)}}\le\norm{\Wg}_1\cdot2C_{k'}\,C_JN^2\cdot C_ZN^{1/2}(1+r)\cdot3^{k'}(1+r)^{-k'} ,
+\]
+which, with $k'=k+1$, is at most a constant times $N^{5/2}(1+r)^{-k}$.
+
+\emph{The term} (b). Since $r\ge2$, only indices $j\ge1$ occur, and the radii $r_j>\frac r2$ are at least $\frac r2$ and
+double from one to the next; so $\sum_{r_j>r/2}(1+r_j)^{-k}\le2(r/2)^{-k}\le2\cdot3^k(1+r)^{-k}$ and
+$\norm{\mathrm{(b)}}\le\norm{\Wg}_1\,2^{k+2}3^kC^J_kN^2(1+r)^{-k}$.
+
+\emph{The term} (c). Let $C^W_n$ denote the constant $C_n$ of the tail bound in Lemma~\ref{lem:Wexists}. With $n=4k$
+and $t_r\ge\frac12(r/2C_{\rm lc})^{1/4}$,
+\[
+\norm{\mathrm{(c)}}\le\norm{J_-}\int_{\abs t>t_r}\abs{\Wg(t)}\,\dd t\le4\pi C_hN^2\cdot C^W_{4k}\gamma^{-1}(2/\gamma)^{4k}(2C_{\rm lc})^kr^{-k},
+\]
+and $r^{-k}\le2^k(1+r)^{-k}$.
+
+\emph{Small radii.} For $0\le r<r_*$ the approximant $0$ has error
+$\norm{K_-}\le4\pi C_h\norm{\Wg}_1(1+r_*)^kN^2(1+r)^{-k}$.
+
+Altogether $K_-\in\AS_{\cutm}$ with prefactor exponent $\frac52$, with constants depending only on $k$, on $\gamma$
+(through $\Wg$), on $C_h$ and the constants of $J_-$, on the constants $C_{\rm lc}$, $C_{k+1}$ of
+Theorem~\ref{thm:propagation}(c), on $\delta_0$ and on $c_*$. The exponent consists of the $N^2$ of $J_-$ and one power of
+$L_y\le(4\pi/c_*)\sqrt N$, from the size of a strip of bounded width.
+
+For the translated currents of Lemma~\ref{lem:split}(iii) the same argument applies verbatim with $\Col(j_0)$ or
+$\Col(j_0+N)$ in place of $\cutm$: these are strips over open intervals of length $2\delta_x$, and the argument used
+$\cutm$ only through Lemma~\ref{lem:strips} and Proposition~\ref{prop:geometry}(iii).
+\end{proof}
+
+\begin{remark}[the crossing time]\label{rem:crossing}
+In the proof of Lemma~\ref{lem:Klocal} the dynamics is followed up to the time $t_r=(r/2C_{\rm lc})^{1/4}-1$ at
+approximation radius $r$, a function of $r$ alone, because the constants of Theorem~\ref{thm:propagation} do not
+depend on $N$. The localization of $K_\pm$ is used only at distances $r\ge\frac1{24}L_x-O(1)$, of order $\sqrt N$
+magnetic lengths (a third of the separations of Lemma~\ref{lem:separations}, by the proof of
+Lemma~\ref{lem:calculus}(a)), so the dynamics is controlled up to times of order $N^{1/8}$, and
+the tails of the filter $\Wg$ beyond these times are $\Onf$ (Lemma~\ref{lem:Wexists}). This is the step for which
+the standard Lieb--Robinson bound in the orbital basis does not suffice: its constants grow with $L_y$, and the
+time up to which it controls the dynamics between the two cuts does not grow with $N$
+(Section~\ref{sec:intro}). With the light cone $\rho\ge C_{\rm lc}(1+\abs t)^\alpha$ the controlled
+time is of order $N^{1/(2\alpha)}$. Since $C_{\rm lc}$ is very large (Remark~\ref{rem:propagation}), $t_r$ is positive only
+for very large $r$.
+\end{remark}
+
+\subsection{Clustering in the sector}
+
+\begin{proposition}[in-sector clustering]\label{prop:clustering}
+In Setting~\ref{set:index}, under Assumption~\ref{ass:gap}, let $\Qf$ be the clustering filter of
+Definition~\ref{def:filters} for the $\Delta$ and $\gamma$ of the assumption.
+\begin{enumerate}[(i)]
+\item If $A$ is sector-preserving, then $\Qf(A)P=0$ and $P\Qf(A)=PA(\one-P)$.
+\item If $A$ is sector-preserving and $B$ is any operator, then $PA(\one-P)BP=P[\Qf(A),B]P$; in particular, for
+every unit vector $\Omega\in\ran P$,
+\[
+\abs{\ip\Omega{AB\Omega}-\ip\Omega{APB\Omega}}\le\norm{[\Qf(A),B]},\qquad\norm{PAB\Omega-PAPB\Omega}\le\norm{[\Qf(A),B]}.
+\]
+\item If moreover $A\in\AS_X$ and $B\in\AS_Y$ are even, with $\norm{A_N},\norm{B_N}\le CN^{m}$, $\abs{X_N}\le CN^{m}$ and
+$d(X_N,Y_N)\ge c\sqrt N-C$, then the right-hand sides in (ii) are $\Onf$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Write $\Pi:=\Psec{\nn_N}$ and $P_E:=\one_{\{E\}}(H_N)$ for $E\in\sigma(H_N)$, and let $\sigma_\Pi\subset\sigma(H_N)$ be the set of
+eigenvalues of $H_N|_{\sect{\nn_N}}$, so that $P_E\Pi\ne0$ if and only if $E\in\sigma_\Pi$. As in the proof of
+Lemma~\ref{lem:KP}, $P=\sum_{E\in\sigma_\Pi,\,E\le E_p}P_E\Pi$; every $E\in\sigma_\Pi$ satisfies $E\ge E_1$, and every $E\in\sigma_\Pi$ with $E>E_p$
+satisfies $E\ge E_{p+1}\ge E_p+\gamma$. Recall that $g(\omega)=0$ for $\omega\ge-\Delta$ and $g(\omega)=1$ for
+$\omega\le-\gamma$.
+
+(i) Let $A$ be sector-preserving. Since $A$ and the $P_E$ commute with $\Pi$,
+\begin{equation}\label{eq:ix-blocks}
+P_EAP_{E'}\Pi=P_E\Pi A\Pi P_{E'}\quad\text{and}\quad\Pi P_EAP_{E'}=P_E\Pi A\Pi P_{E'},\qquad E,E'\in\sigma(H_N),
+\end{equation}
+and these vanish unless $E,E'\in\sigma_\Pi$. Hence $\Qf(A)P=\sum_{E\in\sigma_\Pi}\sum_{E'\in\sigma_\Pi,\,E'\le E_p}g(E-E')P_E\Pi A\Pi P_{E'}$. In
+every term $E\ge E_1$ and $E'\le E_p\le E_1+\Delta$, so $E-E'\ge-\Delta$ and $g(E-E')=0$. Thus $\Qf(A)P=0$. Likewise
+$P\Qf(A)=\sum_{E\in\sigma_\Pi,\,E\le E_p}\sum_{E'\in\sigma_\Pi}g(E-E')P_E\Pi A\Pi P_{E'}$. If $E'\le E_p$, then $\abs{E-E'}\le E_p-E_1\le\Delta$
+and $g(E-E')=0$; if $E'>E_p$, then $E'\ge E_p+\gamma\ge E+\gamma$, so $E-E'\le-\gamma\le-\gamma+\Delta$ and $g(E-E')=1$.
+Since $\sum_{E'\in\sigma_\Pi,\,E'>E_p}\Pi P_{E'}=\Pi-P$, this gives $P\Qf(A)=PA(\Pi-P)$. Finally $PA(\one-\Pi)=PA\Pi(\one-\Pi)=0$,
+because $P=P\Pi$ and $\Pi A=A\Pi$; so $P\Qf(A)=PA(\one-P)$.
+
+(ii) By (i), $PA(\one-P)BP=P\Qf(A)BP=P[\Qf(A),B]P+PB\,\Qf(A)P=P[\Qf(A),B]P$. For a unit vector $\Omega\in\ran P$,
+$\ip\Omega{AB\Omega}-\ip\Omega{APB\Omega}=\ip\Omega{PA(\one-P)BP\Omega}$ and $PAB\Omega-PAPB\Omega=PA(\one-P)BP\Omega$; both are
+therefore bounded by $\norm{P[\Qf(A),B]P}\le\norm{[\Qf(A),B]}$.
+
+(iii) Let $m_A$, $m_B$ be prefactor exponents of $A$ and $B$. The operator $H_N$ is even (its local terms are), so its
+spectral projections are even and $\Qf(A_N)$ is even. By Proposition~\ref{prop:Qlocal}, $\Qf(A)\in\AS_X$ with prefactor
+exponent $1+\max\{m_A,m\}+m$ and $\norm{\Qf(A_N)}\le CN^{1+m}$. Lemma~\ref{lem:bookkeeping}, applied to the two sequences
+$\Qf(A)$ and $B$, gives $[\Qf(A_N),B_N]=\Onf$.
+\end{proof}
+
+Statement (ii) is the clustering property of \cite[Proposition~3.1]{BBDF21} and of the display used in the proof
+of their Lemma~4.2, here with the gap assumed only in the sector and with no condition on $B$. The
+sector preservation of $A$ cannot be dropped: it is what removes the contributions of eigenvalues of $H_N$
+outside the sector, where nothing is assumed.
+
+\subsection{The localized unitaries and their commutation relations}
+
+\begin{definition}[the objects of the argument]\label{def:bbdfobjects}
+Under Assumptions~\ref{ass:gap} and \ref{ass:U}, for $\varphi\in[0,2\pi]$ let
+\begin{gather*}
+K^U_\pm:=U^*K_\pm U,\qquad\Qb_\pm:=Q_\pm-K_\pm,\qquad\Qb^U_\pm:=Q_\pm+T_\pm-K^U_\pm,\qquad\Qb^U:=U^*\Qb U,\\
+\mathcal M(\varphi):=U^*e^{\iu\varphi\Qb}Ue^{-\iu\varphi\Qb}=e^{\iu\varphi\Qb^U}e^{-\iu\varphi\Qb},\qquad
+\mathcal M_\pm(\varphi):=e^{\iu\varphi\Qb^U_\pm}e^{-\iu\varphi\Qb_\pm},\\
+\Tt:=\Qb^U_--\Qb_-=T_--K^U_-+K_- .
+\end{gather*}
+\end{definition}
+
+These are the objects of \cite[Section~4.2]{BBDF21}; note that $\Qb^U_\pm\ne U^*\Qb_\pm U$ in general.
+
+\begin{lemma}[localization and size]\label{lem:objects}
+Under Assumptions~\ref{ass:gap} and \ref{ass:U} there is $m_*$, depending only on $m_T$ and on the prefactor
+exponents in (U3) and (U4), such that each operator in the table below is even and sector-preserving, has
+norm at most $CN^{m_*}$, and is almost supported in the indicated set with prefactor exponent at most $m_*$,
+uniformly in $\varphi\in[0,2\pi]$. For $U=\Theta$ (Section~\ref{sec:translation}) the norms and exponents of the
+table hold, and one may take $m_*=9/2$; for a general $U$ the rows of $T_\pm$, $K^U_\pm$, $\Qb^U_\pm$, $\Tt$ and the last
+two rows depend on the exponents in (U3) and (U4).
+\begin{center}\small
+\begin{tabular}{@{}llll@{}}
+\toprule
+operators & norm & almost supported in & exponent\\
+\midrule
+$Q$, $Q_\pm$, $Q_m$ & $\le N$ & $\Col\Gam$, $\Col\Gamma_\pm$, $\Col\Gmid$ (exactly) & $0$\\
+$T_-=-n_{0\up}$, $T_+=n_{N\up}$ & $1$ & $\partial_\pm$ (exactly) & $0$\\
+$J_\pm$ & $\le CN^2$ & $\partial_\pm$ & $2$\\
+$K_\pm$, $K^U_\pm$ & $\le CN^2$ & $\partial_\pm$ & $5/2$\\
+$\Qb_\pm$, $\Qb^U_\pm$ & $\le CN^2$ & $\Col\Gamma_\pm\cup\partial_\pm$ & $5/2$\\
+$\Tt$ & $\le CN^2$ & $\cutm$ & $5/2$\\
+$\mathcal M_\pm(\varphi)$, $e^{\pm2\pi\iu\Qb_\pm}$ (unitary) & $1$ & $\partial_\pm$ & $5/2$\\
+$\Qf(V)$, $\Qf(V^*)$, $V\in\{\mathcal M_\pm(\varphi),e^{2\pi\iu\Qb_\pm}\}$ & $\le CN$ & $\partial_\pm$ & $\le9/2$\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{lemma}
+
+\begin{proof}
+Two elementary facts about the classes $\AS_Z$ are used.
+
+(F1) If $A\in\AS_X$ and $B\in\AS_Y$ have prefactor exponents $m_A$ and $m_B$, then $A+B\in\AS_{X\cup Y}$ with prefactor
+exponent $\max\{m_A,m_B\}$: since $\Alg(\fat Xr)$ and $\Alg(\fat Yr)$ are contained in $\Alg(\fat{(X\cup Y)}r)$, both
+sequences lie in $\AS_{X\cup Y}$ with their constants, and Lemma~\ref{lem:calculus}(b) applies there.
+
+(F2) If $A,B\in\AS_X$ have prefactor exponents $m_A$ and $m_B$ and $\norm{A_N},\norm{B_N}\le1$, then $AB\in\AS_X$ with
+prefactor exponent $\max\{m_A,m_B\}$, with constants depending only on those of $A$ and $B$. Indeed, let
+$A_{N,r},B_{N,r}\in\Alg(\fat{(X_N)}r)$ be approximants with errors at most $C^A_kN^{m_A}(1+r)^{-k}$ and
+$C^B_kN^{m_B}(1+r)^{-k}$, and replace $A_{N,r}$ by $0$ whenever $\norm{\iota(A_N)-A_{N,r}}>1$; this does not increase the
+error, which becomes $\norm{A_N}\le1$, and it ensures $\norm{A_{N,r}}\le2$. Then
+\begin{align*}
+\norm{\iota(A_NB_N)-A_{N,r}B_{N,r}}&\le\norm{\iota(A_N)-A_{N,r}}\norm{B_N}+\norm{A_{N,r}}\norm{\iota(B_N)-B_{N,r}}\\
+&\le(C^A_k+2C^B_k)N^{\max\{m_A,m_B\}}(1+r)^{-k}.
+\end{align*}
+
+Let $m_U$ be the prefactor exponent of $U^*K_\pm U$ in (U3) and $m'_U$ that of $T_\pm$ in (U4), and put
+$m_\diamond:=\max\{\frac52,m_T,m_U,m'_U\}$ and $m_*:=m_\diamond+2$. A prefactor exponent may always be replaced by a larger one,
+and we do so freely. We go through the table.
+
+\emph{Band charges.} By Lemma~\ref{lem:bandcharges}(i), $\iota(Q_{\mathcal B})\in\Alg(\Col\mathcal B)$ for every band, so
+$\iota(Q_{\mathcal B})$ itself is an approximant with error $0$ for every $r$: the prefactor exponent is $0$. The norms
+are at most $N$, and band charges are self-adjoint and sector-preserving (Lemma~\ref{lem:charges-elementary}).
+
+\emph{$T_\pm$.} For $U=\Theta$, $T_-=-Q_{\{0\}}$ and $T_+=Q_{\{N\}}$ (Lemma~\ref{lem:theta}(b)) are, up to sign, band
+charges, with $\iota(T_\pm)\in\Alg(\partial_\pm)$ and $\norm{T_\pm}=1$. For a general $U$, (U4) gives
+$T_\pm\in\AS_{\partial_\pm}$ with prefactor exponent $m'_U$, self-adjoint and sector-preserving, with
+$\norm{T_\pm}\le CN^{m_T}$.
+
+\emph{$J_\pm$, $K_\pm$, $K^U_\pm$.} Lemmas~\ref{lem:split} and \ref{lem:Klocal} give the rows of $J_\pm$ and $K_\pm$, with
+$\norm{J_\pm}\le4\pi C_hN^2$ and $\norm{K_\pm}\le4\pi C_h\norm{\Wg}_1N^2$. The operator $K^U_\pm=U^*K_\pm U$ has the norm of
+$K_\pm$, is self-adjoint, is sector-preserving by (U1), and lies in $\AS_{\partial_\pm}$ with prefactor exponent $m_U$ by
+(U3); for $U=\Theta$, $m_U=\frac52$ by Lemma~\ref{lem:theta}(e).
+
+\emph{$\Qb_\pm$, $\Qb^U_\pm$, $\Tt$.} These are sums of the previous operators: $\Qb_\pm=Q_\pm-K_\pm$,
+$\Qb^U_\pm=Q_\pm+T_\pm-K^U_\pm$ and $\Tt=T_--K^U_-+K_-$. By (F1) they lie in $\AS_{\Col\Gamma_\pm\cup\partial_\pm}$,
+$\AS_{\Col\Gamma_\pm\cup\partial_\pm}$ and $\AS_{\cutm}$, with prefactor exponents $\frac52$, $\max\{m'_U,m_U\}$ and
+$\max\{m'_U,m_U,\frac52\}$, all at most $m_\diamond$, and norms at most $N+CN^{m_T}+CN^2\le CN^{m_\diamond}$. For $U=\Theta$ the
+exponents are $\frac52$ and the norms at most $CN^2$. They are self-adjoint and sector-preserving.
+
+\emph{$\mathcal M_\pm(\varphi)$ and $e^{\pm2\pi\iu\Qb_\pm}$.} Put $\Xi^U_-:=T_--K^U_-$ and $\Xi_-:=-K_-$, so that $\Qb^U_-=Q_-+\Xi^U_-$ and
+$\Qb_-=Q_-+\Xi_-$, and
+\[
+\mathcal M_-(\varphi)=\Bigl[e^{\iu\varphi(Q_-+\Xi^U_-)}e^{-\iu\varphi Q_-}\Bigr]\Bigl[e^{\iu\varphi(Q_-+\Xi_-)}e^{-\iu\varphi Q_-}\Bigr]^* .
+\]
+The operators $\Xi^U_-$ and $\Xi_-$ are self-adjoint and lie in $\AS_{\cutm}$ with prefactor exponent $m_\diamond$, and
+$\norm{\Xi^U_-},\norm{\Xi_-}\le CN^{m_\diamond}$; and $\cutm=\Str(I_-)$ with $I_-=(-\delta_x,\delta_x)$ an open interval of length
+$2\delta_x$. By Lemma~\ref{lem:calculus}(d), with the band $\Gm$, both brackets lie in $\AS_{\cutm}$ with prefactor exponent
+$m_\diamond$, uniformly in $\varphi\in[0,2\pi]$, and so does the adjoint of the second (Lemma~\ref{lem:calculus}(b)). Both
+are unitary, so by (F2) $\mathcal M_-(\varphi)\in\AS_{\cutm}$ with prefactor exponent $m_\diamond$, uniformly in $\varphi$. Since
+$e^{2\pi\iu Q_-}=\one$ (Lemma~\ref{lem:charges-elementary}),
+$e^{2\pi\iu\Qb_-}=e^{2\pi\iu(Q_-+\Xi_-)}e^{-2\pi\iu Q_-}$ is the operator of Lemma~\ref{lem:calculus}(d) at $\varphi=2\pi$, and it
+lies in $\AS_{\cutm}$ with prefactor exponent $\frac52$, as does its adjoint $e^{-2\pi\iu\Qb_-}$. The operators with index
+$+$ are treated in the same way, with the band $\Gp$ and $\cutp=\Str(I_+)$, $I_+=(\frac12L_x-\delta_x,\frac12L_x+\delta_x)$.
+All these operators are unitary, and they are products of functions of self-adjoint sector-preserving operators,
+hence sector-preserving (Lemma~\ref{lem:sectors}(ii)) and even.
+
+\emph{$\Qf(V)$ and $\Qf(V^*)$.} Let $V\in\{\mathcal M_\pm(\varphi),e^{2\pi\iu\Qb_\pm}\}$. Then $V$ and $V^*$ are even, lie in
+$\AS_{\partial_\pm}$ with prefactor exponent $m_\diamond$, have norm $1$, and $\abs{\partial_\pm}\le C\sqrt N$
+(Lemma~\ref{lem:separations}). By Proposition~\ref{prop:Qlocal} with $m=m_\diamond$, $m'=0$, $m''=\frac12$, $\Qf(V)$ and
+$\Qf(V^*)$ lie in $\AS_{\partial_\pm}$ with prefactor exponent $m_\diamond+\frac32\le m_*$ and have norm at most $CN$; the
+constants of Proposition~\ref{prop:Qlocal} depend only on those of its input, so these statements hold uniformly in
+$\varphi$. Since the spectral projections of $H_N$ are even and sector-preserving, so are $\Qf(V)$ and $\Qf(V^*)$.
+
+Every norm in the table is at most $CN^{m_\diamond}$ and every prefactor exponent at most $m_\diamond+\frac32$, which proves
+the lemma with $m_*=m_\diamond+2$. For $U=\Theta$, $m_T=m'_U=0$ and $m_U=\frac52$, so $m_\diamond=\frac52$, the exponent of
+$\Qf(V)$ is $4$, and $m_*=\frac92$.
+\end{proof}
+
+\begin{lemma}[commutation relations]\label{lem:commutation}
+Under Assumptions~\ref{ass:gap} and \ref{ass:U}, uniformly in $\varphi\in[0,2\pi]$:
+\begin{enumerate}[(i)]
+\item (\emph{exact relations}) $\Qb=\Qb_-+Q_m+\Qb_+$ and $\Qb^U=\Qb^U_-+Q_m+\Qb^U_+$; $[Q_-,Q_m]=[Q_m,Q_+]=[Q_-,Q_+]=0$; and for
+$U=\Theta$ also $[Q_m,T_\pm]=[Q_\mp,T_\pm]=[T_-,T_+]=0$.
+\item (\emph{separated pairs}) The commutators $[A,Q_m]$ with $A\in\{K_-,K^U_-,K_+,K^U_+\}$, and $[A_-,B_+]$ with
+$A_-\in\{Q_-,T_-,K_-,K^U_-\}$ and $B_+\in\{Q_+,T_+,K_+,K^U_+\}$ not covered by (i), are $\Onf$; so are, for a
+general $U$, the commutators of $T_\pm$ with $Q_m$ and with $Q_\mp$. Each of these is a commutator of operators
+almost supported in sets at distance at least $\frac18L_x-\kappa-2\delta_x$.
+\item (\emph{consequences}) $[Q_m,A]\eqN0$ for $A\in\{\Qb_\pm,\Qb^U_\pm,\Tt\}$; $[A_-,B_+]\eqN0$ for
+$A_-\in\{\Qb_-,\Qb^U_-,\Tt\}$ and $B_+\in\{\Qb_+,\Qb^U_+\}$; $\mathcal M(\varphi)\eqN \mathcal M_-(\varphi)\mathcal M_+(\varphi)$;
+$e^{2\pi\iu\Qb}\eqN e^{2\pi\iu\Qb_-}e^{2\pi\iu\Qb_+}$; $[P,e^{2\pi\iu\Qb}]=0$; and $[P,\mathcal M(\varphi)]\eqN0$, with equality if
+$[U,P]=0$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+All statements $\eqN$ below are uniform in $\varphi\in[0,2\pi]$. Besides the second bound of Lemma~\ref{lem:expbounds},
+$\norm{e^{\iu(A+B)}-e^{\iu A}e^{\iu B}}\le\frac12\norm{[A,B]}$ for bounded self-adjoint $A$ and $B$, we use the following
+identity: for bounded self-adjoint $A$ and any bounded $C$,
+\begin{equation}\label{eq:ix-duhamel}
+[e^{\iu\varphi A},C]=\iu\int_0^\varphi e^{\iu uA}[A,C]e^{\iu(\varphi-u)A}\,\dd u,\qquad\text{so}\qquad
+\norm{[e^{\iu\varphi A},C]}\le\abs\varphi\,\norm{[A,C]},
+\end{equation}
+which follows by integrating $\frac{\dd}{\dd u}\bigl(e^{\iu uA}Ce^{\iu(\varphi-u)A}\bigr)=\iu e^{\iu uA}[A,C]e^{\iu(\varphi-u)A}$
+from $0$ to $\varphi$. Applied twice, it gives $\norm{[e^{\iu\varphi A},e^{\iu\psi B}]}\le\abs{\varphi\psi}\,\norm{[A,B]}$ for
+bounded self-adjoint $A$, $B$.
+
+(i) Since $\Gam$ is the disjoint union of $\Gm$, $\Gmid$ and $\Gp$, $Q=Q_-+Q_m+Q_+$ (Lemma~\ref{lem:charges-elementary}),
+and so $\Qb=Q-K_--K_+=\Qb_-+Q_m+\Qb_+$. By (U4),
+$\Qb^U=U^*QU-U^*K_-U-U^*K_+U=Q+T_-+T_+-K^U_--K^U_+=\Qb^U_-+Q_m+\Qb^U_+$. Band charges commute with one another
+(Lemma~\ref{lem:charges-elementary}); this gives $[Q_-,Q_m]=[Q_m,Q_+]=[Q_-,Q_+]=0$, and for $U=\Theta$, where
+$T_-=-Q_{\{0\}}$ and $T_+=Q_{\{N\}}$ are, up to sign, band charges (Lemma~\ref{lem:theta}(b)), also
+$[Q_m,T_\pm]=[Q_\mp,T_\pm]=[T_-,T_+]=0$.
+
+(ii) By Lemma~\ref{lem:objects}, every operator below is even, has norm at most $CN^{m_*}$, and is almost supported,
+with prefactor exponent at most $m_*$ and uniformly in $\varphi$, in the following set: $Q_m$ in $\Col\Gmid$; $Q_\pm$ in
+$\Col\Gamma_\pm$; $T_\pm$, $K_\pm$ and $K^U_\pm$ in $\partial_\pm$. By Lemma~\ref{lem:separations} the pairs fall into three
+classes:
+\begin{itemize}
+\item $(A,Q_m)$ with $A\in\{K_-,K^U_-,K_+,K^U_+\}$, and for a general $U$ also $(T_\pm,Q_m)$: sets $\partial_\pm$ and
+$\Col\Gmid$, at distance at least $\frac18L_x-\kappa-2\delta_x$;
+\item $(Q_-,B_+)$ with $B_+\in\{K_+,K^U_+\}$ and $(A_-,Q_+)$ with $A_-\in\{K_-,K^U_-\}$, and for a general $U$ also
+$(Q_-,T_+)$ and $(T_-,Q_+)$: sets $\Col\Gm$ and $\cutp$, or $\cutm$ and $\Col\Gp$, at distance at least
+$\frac38L_x-2\delta_x$;
+\item $(A_-,B_+)$ with $A_-\in\{T_-,K_-,K^U_-\}$ and $B_+\in\{T_+,K_+,K^U_+\}$, except $(T_-,T_+)$ when $U=\Theta$:
+sets $\cutm$ and $\cutp$, at distance at least $\frac12L_x-2\delta_x$.
+\end{itemize}
+For $U=\Theta$ these are sixteen pairs. All distances are at least $\frac{c_*}{16}\sqrt N$ for $N\ge N_*$
+(Lemma~\ref{lem:separations}), hence at least $\frac{c_*}{16}\sqrt N-\frac{c_*}{16}\sqrt{N_*}$ for every $N$, and
+Lemma~\ref{lem:bookkeeping}, applied to the finite set of sequences of Lemma~\ref{lem:objects}, shows that each of these
+commutators is $\Onf$, uniformly in $\varphi$.
+
+(iii) The operators $\Qb_\pm$ and $\Qb^U_\pm$ are almost supported in $\Col\Gamma_\pm\cup\partial_\pm$, a set adjacent to
+$\Col\Gmid$, so Lemma~\ref{lem:bookkeeping} cannot be applied to their commutators with $Q_m$ directly. We therefore
+expand every commutator in (iii) bilinearly into the pairs of (i) and (ii) (for those involving $\Tt$, which is almost
+supported in $\cutm$, this is not necessary, but it is equally valid). Thus
+\begin{gather*}
+[Q_m,\Qb_\pm]=-[Q_m,K_\pm],\qquad[Q_m,\Qb^U_\pm]=[Q_m,T_\pm]-[Q_m,K^U_\pm],\\
+[Q_m,\Tt]=[Q_m,T_-]-[Q_m,K^U_-]+[Q_m,K_-],
+\end{gather*}
+and each term on the right is $0$ by (i) or $\Onf$ by (ii). Likewise, for $A_-\in\{\Qb_-,\Qb^U_-,\Tt\}$ and
+$B_+\in\{\Qb_+,\Qb^U_+\}$, $[A_-,B_+]$ is a sum of at most nine commutators $\pm[a_-,b_+]$ with
+$a_-\in\{Q_-,T_-,K_-,K^U_-\}$ and $b_+\in\{Q_+,T_+,K_+,K^U_+\}$, each $0$ by (i) or $\Onf$ by (ii). This proves the first two
+statements of (iii).
+
+For the factorization of $\mathcal M(\varphi)=e^{\iu\varphi\Qb^U}e^{-\iu\varphi\Qb}$, insert (i) and use Lemma~\ref{lem:expbounds}:
+\begin{align*}
+\norm{e^{\iu\varphi\Qb^U}-e^{\iu\varphi\Qb^U_-}e^{\iu\varphi(Q_m+\Qb^U_+)}}&\le\tfrac12\varphi^2\norm{[\Qb^U_-,Q_m+\Qb^U_+]},\\
+\norm{e^{\iu\varphi(Q_m+\Qb^U_+)}-e^{\iu\varphi Q_m}e^{\iu\varphi\Qb^U_+}}&\le\tfrac12\varphi^2\norm{[Q_m,\Qb^U_+]},\\
+\norm{e^{-\iu\varphi\Qb}-e^{-\iu\varphi\Qb_+}e^{-\iu\varphi(Q_m+\Qb_-)}}&\le\tfrac12\varphi^2\norm{[\Qb_+,Q_m+\Qb_-]},\\
+\norm{e^{-\iu\varphi(Q_m+\Qb_-)}-e^{-\iu\varphi Q_m}e^{-\iu\varphi\Qb_-}}&\le\tfrac12\varphi^2\norm{[Q_m,\Qb_-]} .
+\end{align*}
+All four right-hand sides are $\Onf$ by what was just proved. Since a product of unitaries changes by at most the
+sum of the changes of its factors,
+$\mathcal M(\varphi)\eqN e^{\iu\varphi\Qb^U_-}\,e^{\iu\varphi Q_m}\mathcal M_+(\varphi)e^{-\iu\varphi Q_m}\,e^{-\iu\varphi\Qb_-}$. By
+\eqref{eq:ix-duhamel},
+\begin{align*}
+\norm{[e^{\iu\varphi Q_m},\mathcal M_+(\varphi)]}&\le\varphi^2\bigl(\norm{[Q_m,\Qb^U_+]}+\norm{[Q_m,\Qb_+]}\bigr),\\
+\norm{[\mathcal M_+(\varphi),e^{-\iu\varphi\Qb_-}]}&\le\varphi^2\bigl(\norm{[\Qb^U_+,\Qb_-]}+\norm{[\Qb_+,\Qb_-]}\bigr),
+\end{align*}
+both $\Onf$. Hence $\mathcal M(\varphi)\eqN e^{\iu\varphi\Qb^U_-}\mathcal M_+(\varphi)e^{-\iu\varphi\Qb_-}\eqN e^{\iu\varphi\Qb^U_-}e^{-\iu\varphi\Qb_-}\mathcal M_+(\varphi)
+=\mathcal M_-(\varphi)\mathcal M_+(\varphi)$. In the same way, with $\varphi=2\pi$ and $\Qb$ in place of $\Qb^U$,
+$e^{2\pi\iu\Qb}\eqN e^{2\pi\iu\Qb_-}e^{2\pi\iu Q_m}e^{2\pi\iu\Qb_+}=e^{2\pi\iu\Qb_-}e^{2\pi\iu\Qb_+}$, because $e^{2\pi\iu Q_m}=\one$
+(Lemma~\ref{lem:charges-elementary}). Since $[\Qb,P]=0$ (Lemma~\ref{lem:KP}), $P$ commutes with every function of $\Qb$; in
+particular $[P,e^{2\pi\iu\Qb}]=0$ and $[P,e^{\pm\iu\varphi\Qb}]=0$. Hence, from $\mathcal M(\varphi)=U^*e^{\iu\varphi\Qb}Ue^{-\iu\varphi\Qb}$
+and $\norm{[P,U^*]}=\norm{[P,U]^*}=\norm{[U,P]}$,
+\[
+\norm{[P,\mathcal M(\varphi)]}\le\norm{[P,U^*]}+\norm{[P,U]}=2\norm{[U,P]},
+\]
+which is $\Onf$ by (U2) and vanishes if $[U,P]=0$.
+\end{proof}
+
+\begin{lemma}[Lemma~4.2 of \cite{BBDF21} in the sector]\label{lem:bbdf42}
+Under Assumption~\ref{ass:gap}, let $V_-$, $V_+$ be unitaries on $\Fock$, even and sector-preserving, with
+$V_\pm\in\AS_{\partial_\pm}$ uniformly in a parameter, and $\norm{[V_-V_+,P]}=\Onf$ uniformly in the
+parameter. Then $\norm{[V_\pm,P]}=\Onf$ uniformly in the parameter. Quantitatively, with
+\[
+\varepsilon_0:=\norm{[V_-V_+,P]},\quad\varepsilon_c:=\norm{[V_-,V_+]},\quad \varepsilon_1:=\norm{PV_+(\one-P)V_-P},\quad
+\varepsilon_2:=\norm{PV_+^*(\one-P)V_-^*P},
+\]
+and $a:=\min\bigl\{\sqrt{1-\varepsilon_0-2\varepsilon_c}-\varepsilon_1,\ \sqrt{1-\varepsilon_0}-\varepsilon_2\bigr\}$ (defined when
+$\varepsilon_0+2\varepsilon_c\le1$): if $a>0$, then $\norm{[V_-,P]}\le\sqrt{1-a^2}$; and the same holds for $V_+$ with the
+roles of $V_-$ and $V_+$ exchanged in the definitions of $\varepsilon_1$, $\varepsilon_2$ and of the products.
+\end{lemma}
+
+\begin{proof}
+\emph{The quantitative statement.} Put $V:=V_-V_+$ and fix a unit vector $\Omega\in\ran P$. Since
+$V_+V_-=V+[V_+,V_-]$ and $\norm{[[V_+,V_-],P]}\le2\varepsilon_c$, we have $\norm{[V_+V_-,P]}\le\varepsilon_0+2\varepsilon_c$, and
+Lemma~\ref{lem:bbdf41}(i), applied to the unitary $V_+V_-$, gives $\norm{PV_+V_-\Omega}^2\ge1-\varepsilon_0-2\varepsilon_c$. As
+$P\Omega=\Omega$, $PV_+V_-\Omega-PV_+PV_-\Omega=PV_+(\one-P)V_-P\Omega$, of norm at most $\varepsilon_1$. Since $\norm{PV_+P}\le1$,
+\[
+\norm{PV_-\Omega}\ge\norm{PV_+P\,PV_-\Omega}\ge\norm{PV_+V_-\Omega}-\varepsilon_1\ge\sqrt{1-\varepsilon_0-2\varepsilon_c}-\varepsilon_1\ge a .
+\]
+Similarly $V^*=V_+^*V_-^*$ is unitary with $\norm{[V^*,P]}=\norm{[V,P]}=\varepsilon_0$, so $\norm{PV_+^*V_-^*\Omega}^2\ge1-\varepsilon_0$ by
+Lemma~\ref{lem:bbdf41}(i); and $\norm{PV_+^*V_-^*\Omega-PV_+^*PV_-^*\Omega}=\norm{PV_+^*(\one-P)V_-^*P\Omega}\le \varepsilon_2$, whence
+$\norm{PV_-^*\Omega}\ge\sqrt{1-\varepsilon_0}-\varepsilon_2\ge a$. Let $a>0$. By homogeneity, $\norm{PV_-\psi}^2\ge a^2\norm\psi^2$ and
+$\norm{PV_-^*\psi}^2\ge a^2\norm\psi^2$ for every $\psi\in\ran P$; since $a\le\sqrt{1-\varepsilon_0}\le1$,
+Lemma~\ref{lem:bbdf41}(ii) with $\varepsilon:=\sqrt{1-a^2}\in[0,1)$ gives $\norm{[V_-,P]}\le\sqrt{1-a^2}$. The statement for
+$V_+$ is the statement just proved for the ordered pair $(V_+,V_-)$ in place of $(V_-,V_+)$, that is, with $\varepsilon_0$,
+$\varepsilon_1$, $\varepsilon_2$ replaced by $\varepsilon_0':=\norm{[V_+V_-,P]}\le\varepsilon_0+2\varepsilon_c$, $\varepsilon_1':=\norm{PV_-(\one-P)V_+P}$ and
+$\varepsilon_2':=\norm{PV_-^*(\one-P)V_+^*P}$; the hypotheses are symmetric in $V_-$ and $V_+$.
+
+\emph{The asymptotic statement.} Since $V_+$ and $V_+^*$ are sector-preserving, Proposition~\ref{prop:clustering}(ii) gives
+$PV_+(\one-P)V_-P=P[\Qf(V_+),V_-]P$ and $PV_+^*(\one-P)V_-^*P=P[\Qf(V_+^*),V_-^*]P$, so $\varepsilon_1\le\norm{[\Qf(V_+),V_-]}$ and
+$\varepsilon_2\le\norm{[\Qf(V_+^*),V_-^*]}$; likewise $\varepsilon_1'\le\norm{[\Qf(V_-),V_+]}$ and $\varepsilon_2'\le\norm{[\Qf(V_-^*),V_+^*]}$. Let $m_V$ be a
+prefactor exponent of $V_\pm$ (and hence of $V_\pm^*$, by Lemma~\ref{lem:calculus}(b)), valid uniformly in the parameter.
+By Proposition~\ref{prop:Qlocal}, with $\norm{V_\pm}=1$ and $\abs{\partial_\pm}\le C\sqrt N$ (Lemma~\ref{lem:separations}),
+$\Qf(V_\pm)$ and $\Qf(V_\pm^*)$ lie in $\AS_{\partial_\pm}$ with prefactor exponent $m_V+\frac32$ and have norm at most $CN$,
+uniformly in the parameter. The sets $\cutm$ and $\cutp$ are at distance at least $\frac12L_x-2\delta_x$, which is at
+least $\frac{c_*}{16}\sqrt N-\frac{c_*}{16}\sqrt{N_*}$ for every $N$ (Lemma~\ref{lem:separations}). Lemma~\ref{lem:bookkeeping},
+applied to the sequences $V_\pm$, $V_\pm^*$, $\Qf(V_\pm)$, $\Qf(V_\pm^*)$, shows that $\varepsilon_c$, $\varepsilon_1$, $\varepsilon_2$, $\varepsilon_1'$, $\varepsilon_2'$
+are $\Onf$ uniformly in the parameter; so is $\varepsilon_0$, by hypothesis. Put $\bar\varepsilon:=\varepsilon_0+2\varepsilon_c+\varepsilon_1+\varepsilon_2$, and
+suppose $\bar\varepsilon\le\frac12$. Since $\sqrt{1-x}\ge1-x$ for $x\in[0,1]$, $a\ge1-\bar\varepsilon>0$, and
+$\norm{[V_-,P]}\le\sqrt{1-a^2}\le\sqrt{2(1-a)}\le\sqrt{2\bar\varepsilon}$. Given $k$, choose $C_{2k}$ with $\bar\varepsilon\le C_{2k}N^{-2k}$; then
+$\norm{[V_-,P]}\le\sqrt{2C_{2k}}\,N^{-k}$ whenever $C_{2k}N^{-2k}\le\frac12$, and $\norm{[V_-,P]}\le2\le2\sqrt{2C_{2k}}\,N^{-k}$
+otherwise. Hence $\norm{[V_-,P]}=\Onf$, uniformly in the parameter, and the same argument with the primed quantities
+gives $\norm{[V_+,P]}=\Onf$. The square root halves the decay exponent, which is harmless for $\Onf$.
+\end{proof}
+
+\begin{corollary}[the localized unitaries commute with $P$]\label{cor:Zcommute}
+Under Assumptions~\ref{ass:gap} and \ref{ass:U}, $[P,\mathcal M_\pm(\varphi)]\eqN0$ uniformly in $\varphi\in[0,2\pi]$, and
+$[P,e^{2\pi\iu\Qb_\pm}]\eqN0$.
+\end{corollary}
+
+\begin{proof}
+By Lemma~\ref{lem:objects}, $\mathcal M_-(\varphi)$ and $\mathcal M_+(\varphi)$ are unitary, even and sector-preserving, and lie in
+$\AS_{\cutm}$ and $\AS_{\cutp}$ uniformly in $\varphi\in[0,2\pi]$. By Lemma~\ref{lem:commutation}(iii),
+\[
+\norm{[\mathcal M_-(\varphi)\mathcal M_+(\varphi),P]}\le2\norm{\mathcal M_-(\varphi)\mathcal M_+(\varphi)-\mathcal M(\varphi)}+\norm{[P,\mathcal M(\varphi)]}=\Onf
+\]
+uniformly in $\varphi$. Lemma~\ref{lem:bbdf42} with $V_\pm:=\mathcal M_\pm(\varphi)$ gives $[P,\mathcal M_\pm(\varphi)]\eqN0$ uniformly in
+$\varphi$. In the same way $e^{2\pi\iu\Qb_-}$ and $e^{2\pi\iu\Qb_+}$ are unitary, even, sector-preserving and lie in $\AS_{\cutm}$
+and $\AS_{\cutp}$, and
+$\norm{[e^{2\pi\iu\Qb_-}e^{2\pi\iu\Qb_+},P]}\le2\norm{e^{2\pi\iu\Qb_-}e^{2\pi\iu\Qb_+}-e^{2\pi\iu\Qb}}+\norm{[e^{2\pi\iu\Qb},P]}=\Onf$, the
+last term being zero (Lemma~\ref{lem:commutation}(iii)); Lemma~\ref{lem:bbdf42} with $V_\pm:=e^{2\pi\iu\Qb_\pm}$ gives
+$[P,e^{2\pi\iu\Qb_\pm}]\eqN0$.
+
+In these two applications, the commutators which the proof of Lemma~\ref{lem:bbdf42} shows to be $\Onf$ are those of
+the six pairs
+\begin{gather*}
+\bigl(\mathcal M_-(\varphi),\mathcal M_+(\varphi)\bigr),\qquad\bigl(\Qf(\mathcal M_+(\varphi)),\mathcal M_-(\varphi)\bigr),\qquad\bigl(\Qf(\mathcal M_-(\varphi)),\mathcal M_+(\varphi)\bigr),\\
+\bigl(e^{2\pi\iu\Qb_-},e^{2\pi\iu\Qb_+}\bigr),\qquad\bigl(\Qf(e^{2\pi\iu\Qb_+}),e^{2\pi\iu\Qb_-}\bigr),\qquad
+\bigl(\Qf(e^{2\pi\iu\Qb_-}),e^{2\pi\iu\Qb_+}\bigr),
+\end{gather*}
+and of the corresponding pairs of adjoints, such as $(\Qf(\mathcal M_+(\varphi)^*),\mathcal M_-(\varphi)^*)$. In each of them one operator is
+almost supported in $\cutm$ and the other in $\cutp$ (Lemma~\ref{lem:objects}), at distance at least $\frac12L_x-2\delta_x$
+(Lemma~\ref{lem:separations}), with norms at most $CN$ and prefactor exponents at most $m_*$, uniformly in $\varphi$.
+\end{proof}
+
+\subsection{The flux insertion and the determinant}
+
+For an operator $A$ with $[A,P]=0$ let $\detP A:=\det(PAP|_{\ran P})$.
+
+\begin{lemma}[the differential equation and its stability]\label{lem:ode}
+Under Assumptions~\ref{ass:gap} and \ref{ass:U}, for $\varphi\in[0,2\pi]$ let
+\[
+\Zc(\varphi):=P\mathcal M_-(\varphi)P,\qquad\Gc(\varphi):=e^{\iu\varphi\Qb}P\Tt Pe^{-\iu\varphi\Qb},\qquad
+\Yc(\varphi):=Pe^{\iu\varphi(P\Tt P+\Qb)}e^{-\iu\varphi\Qb}P .
+\]
+Then $\Gc(\varphi)=P\Gc(\varphi)P$ is self-adjoint; $-\iu\Zc'(\varphi)=\Zc(\varphi)\Gc(\varphi)+\Ec(\varphi)$ with
+$\sup_{\varphi\in[0,2\pi]}\norm{\Ec(\varphi)}=\Onf$; $-\iu\Yc'(\varphi)=\Yc(\varphi)\Gc(\varphi)$ exactly;
+$\Zc(0)=\Yc(0)=P$; and $\norm{\Zc(\varphi)-\Yc(\varphi)}\le\int_0^\varphi\norm{\Ec(u)}\,\dd u=\Onf$ uniformly in
+$\varphi\in[0,2\pi]$.
+\end{lemma}
+
+\begin{proof}
+\emph{The generator.} Since $[\Qb,P]=0$ (Lemma~\ref{lem:KP}), $e^{\pm\iu\varphi\Qb}$ commute with $P$, so
+$\Gc(\varphi)=Pe^{\iu\varphi\Qb}\Tt e^{-\iu\varphi\Qb}P=P\Gc(\varphi)P$. The operator $\Tt=T_--K^U_-+K_-$ is self-adjoint ($T_-$
+by (U4), $K_-$ by Lemma~\ref{lem:split}(i), and hence $K^U_-=U^*K_-U$), so $\Gc(\varphi)$ is self-adjoint; it depends
+continuously on $\varphi$.
+
+\emph{The equation for $\Zc$.} For bounded self-adjoint $A$ and $B$,
+$\frac{\dd}{\dd\varphi}(e^{\iu\varphi A}e^{-\iu\varphi B})=\iu e^{\iu\varphi A}(A-B)e^{-\iu\varphi B}$. With $A=\Qb^U_-$, $B=\Qb_-$ and
+$A-B=\Tt$, and since $e^{\iu\varphi\Qb^U_-}=\mathcal M_-(\varphi)e^{\iu\varphi\Qb_-}$,
+\[
+-\iu\Zc'(\varphi)=P\mathcal M_-(\varphi)\,e^{\iu\varphi\Qb_-}\Tt e^{-\iu\varphi\Qb_-}P .
+\]
+We write the right-hand side as $\Zc(\varphi)\Gc(\varphi)+\Ec_1(\varphi)+\Ec_2(\varphi)$, where, inserting $P=\one-(\one-P)$ after
+$\mathcal M_-(\varphi)$ and using $P\mathcal M_-(\one-P)=-P[\mathcal M_-,P]$,
+\begin{align*}
+\Ec_1(\varphi)&:=-P[\mathcal M_-(\varphi),P]\,e^{\iu\varphi\Qb_-}\Tt e^{-\iu\varphi\Qb_-}P,\\
+\Ec_2(\varphi)&:=\Zc(\varphi)P\bigl(e^{\iu\varphi\Qb_-}\Tt e^{-\iu\varphi\Qb_-}-e^{\iu\varphi\Qb}\Tt e^{-\iu\varphi\Qb}\bigr)P ,
+\end{align*}
+and where we used $Pe^{\iu\varphi\Qb}\Tt e^{-\iu\varphi\Qb}P=\Gc(\varphi)$, which holds because $e^{\pm\iu\varphi\Qb}$ commute with $P$.
+Thus $-\iu\Zc'=\Zc\Gc+\Ec$ with $\Ec:=\Ec_1+\Ec_2$. First, $\norm{\Ec_1(\varphi)}\le\norm{[\mathcal M_-(\varphi),P]}\norm{\Tt}$. Second, put
+$B:=Q_m+\Qb_+$, so that $\Qb=\Qb_-+B$ (Lemma~\ref{lem:commutation}(i)), and compare the unitaries $O_1:=e^{\iu\varphi\Qb}$ and
+$O_2:=e^{\iu\varphi\Qb_-}e^{\iu\varphi B}$: by Lemma~\ref{lem:expbounds}, $\norm{O_1-O_2}\le\frac12\varphi^2\norm{[\Qb_-,B]}$, so
+$\norm{O_1\Tt O_1^*-O_2\Tt O_2^*}\le2\norm{O_1-O_2}\norm{\Tt}\le\varphi^2\norm{[\Qb_-,B]}\norm{\Tt}$; and
+$\norm{O_2\Tt O_2^*-e^{\iu\varphi\Qb_-}\Tt e^{-\iu\varphi\Qb_-}}=\norm{[e^{\iu\varphi B},\Tt]}\le\varphi\norm{[B,\Tt]}$ by
+\eqref{eq:ix-duhamel}. Since $\norm{\Zc}\le1$,
+\[
+\norm{\Ec_2(\varphi)}\le\varphi^2\norm{[\Qb_-,Q_m+\Qb_+]}\norm{\Tt}+\varphi\norm{[Q_m+\Qb_+,\Tt]} .
+\]
+By Corollary~\ref{cor:Zcommute}, $\sup_\varphi\norm{[\mathcal M_-(\varphi),P]}=\Onf$; by Lemma~\ref{lem:commutation}(iii), the
+commutators $[\Qb_-,Q_m]$, $[\Qb_-,\Qb_+]$, $[Q_m,\Tt]$ and $[\Tt,\Qb_+]$ are $\Onf$; and $\norm{\Tt}\le CN^{m_*}$
+(Lemma~\ref{lem:objects}). Hence $\sup_{\varphi\in[0,2\pi]}\norm{\Ec(\varphi)}=\Onf$. Note that $\Ec=P\Ec P$, since $\Zc'=P\Zc'P$
+and $\Gc=P\Gc P$; and $\Ec$ is continuous in $\varphi$.
+
+\emph{The equation for $\Yc$.} Let $A:=P\Tt P+\Qb$ and $B:=\Qb$. Both commute with $P$, hence so does
+$e^{\iu\varphi A}e^{-\iu\varphi B}$, and $\Yc(\varphi)=Pe^{\iu\varphi A}e^{-\iu\varphi B}$. Then
+\[
+-\iu\Yc'(\varphi)=Pe^{\iu\varphi A}(A-B)e^{-\iu\varphi B}=Pe^{\iu\varphi A}e^{-\iu\varphi B}\,e^{\iu\varphi B}P\Tt Pe^{-\iu\varphi B}
+=\Yc(\varphi)\Gc(\varphi)
+\]
+exactly. Clearly $\Zc(0)=\Yc(0)=P$.
+
+\emph{Stability.} Let $\mathcal U(u,\varphi)$, $0\le u\le\varphi\le2\pi$, be the solution of
+$\partial_\varphi\mathcal U(u,\varphi)=\iu\,\mathcal U(u,\varphi)\Gc(\varphi)$ with $\mathcal U(u,u)=P$, a linear equation with continuous
+coefficients on the finite-dimensional space of operators on $\Fock$. Since $\Gc=P\Gc P$ is self-adjoint,
+$\partial_\varphi(\mathcal U\mathcal U^*)=\iu\,\mathcal U\Gc\mathcal U^*-\iu\,\mathcal U\Gc\mathcal U^*=0$, so $\mathcal U(u,\varphi)\mathcal U(u,\varphi)^*=P$
+and $\norm{\mathcal U(u,\varphi)}\le1$. The difference $\Zc-\Yc$ vanishes at $\varphi=0$ and satisfies
+$(\Zc-\Yc)'=\iu(\Zc-\Yc)\Gc+\iu\Ec$. The function $\varphi\mapsto\iu\int_0^\varphi\Ec(u)\,\mathcal U(u,\varphi)\,\dd u$ satisfies the
+same equation: it vanishes at $\varphi=0$, and its derivative
+$\iu\,\Ec(\varphi)P+\iu\int_0^\varphi\Ec(u)\,\iu\,\mathcal U(u,\varphi)\Gc(\varphi)\,\dd u$ is $\iu\Ec(\varphi)$ plus $\iu$ times the
+function itself times $\Gc(\varphi)$, because $\Ec=\Ec P$. By uniqueness of solutions of linear equations,
+$\Zc(\varphi)-\Yc(\varphi)=\iu\int_0^\varphi\Ec(u)\,\mathcal U(u,\varphi)\,\dd u$, and
+\[
+\norm{\Zc(\varphi)-\Yc(\varphi)}\le\int_0^\varphi\norm{\Ec(u)}\norm{\mathcal U(u,\varphi)}\,\dd u\le\int_0^\varphi\norm{\Ec(u)}\,\dd u
+\le2\pi\sup_{u\in[0,2\pi]}\norm{\Ec(u)}=\Onf .
+\]
+The size of $\Gc$, which is of order $\norm{\Tt}$, does not enter this bound.
+\end{proof}
+
+\begin{lemma}[the determinant at $2\pi$]\label{lem:determinant}
+Under Assumptions~\ref{ass:gap} and \ref{ass:U}:
+\begin{enumerate}[(i)]
+\item $\Zc(2\pi)\eqN PU^*e^{2\pi\iu\Qb_-}Ue^{-2\pi\iu\Qb_-}P$, and $\detP\Zc(2\pi)\eqN1$;
+\item $\detP\Yc(2\pi)=e^{2\pi\iu\Tr(P\Tt)}$ exactly;
+\item consequently $\Tr(P\Tt)\in\Z+\Onf$;
+\item $\Tr(P\Tt)-\Tr(PT_-)=-\Tr\bigl((UPU^*-P)K_-\bigr)$, and
+\[
+\bigl\lvert\Tr\bigl((UPU^*-P)K_-\bigr)\bigr\rvert\le2p\norm{[U,P]}\norm{K_-}=\Onf ;
+\]
+this vanishes if $[U,P]=0$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(i) \emph{Step 1: $e^{2\pi\iu\Qb_-}\eqN e^{2\pi\iu(Q-K_-)}$.} We have $Q-K_-=\Qb_-+(Q_m+Q_+)$, and $Q_m+Q_+=Q_{\Gmid\cup\Gp}$ has
+integer spectrum, so $e^{2\pi\iu(Q_m+Q_+)}=\one$ (Lemma~\ref{lem:charges-elementary}). By Lemma~\ref{lem:expbounds},
+\[
+\norm{e^{2\pi\iu(Q-K_-)}-e^{2\pi\iu\Qb_-}e^{2\pi\iu(Q_m+Q_+)}}\le2\pi^2\norm{[\Qb_-,Q_m+Q_+]}
+=2\pi^2\norm{[K_-,Q_m]+[K_-,Q_+]},
+\]
+because band charges commute; both commutators are $\Onf$ by Lemma~\ref{lem:commutation}(ii). (The corresponding
+step of \cite[Section~4.2]{BBDF21} is discussed in Remark~\ref{rem:bbdf-misprints}(a).)
+
+\emph{Step 2: $U^*e^{2\pi\iu(Q-K_-)}U\eqN e^{2\pi\iu\Qb^U_-}$.} By (U4),
+$U^*(Q-K_-)U=Q+T_-+T_+-K^U_-=\Qb^U_-+Q_m+(Q_++T_+)$. By Lemma~\ref{lem:expbounds}, applied twice,
+\begin{align*}
+&\norm{e^{2\pi\iu(\Qb^U_-+Q_m+(Q_++T_+))}-e^{2\pi\iu\Qb^U_-}e^{2\pi\iu Q_m}e^{2\pi\iu(Q_++T_+)}}\\
+&\qquad\le2\pi^2\bigl(\norm{[\Qb^U_-,Q_m+Q_++T_+]}+\norm{[Q_m,Q_++T_+]}\bigr).
+\end{align*}
+Expanding $\Qb^U_-=Q_-+T_--K^U_-$, the first commutator is a sum of commutators of $a\in\{Q_-,T_-,K^U_-\}$ with
+$b\in\{Q_m,Q_+,T_+\}$, and the second equals $[Q_m,T_+]$; each of these is $0$ or $\Onf$ by Lemma~\ref{lem:commutation}(i)
+and (ii). Moreover $e^{2\pi\iu Q_m}=\one$, and $e^{2\pi\iu(Q_++T_+)}\eqN\one$: for $U=\Theta$ this is exact
+(Lemma~\ref{lem:theta}(c)); in general $Q+T_+=(Q_-+Q_m)+(Q_++T_+)$, so by Lemma~\ref{lem:expbounds}
+$\norm{e^{2\pi\iu(Q+T_+)}-e^{2\pi\iu(Q_-+Q_m)}e^{2\pi\iu(Q_++T_+)}}\le2\pi^2\norm{[Q_-+Q_m,T_+]}=\Onf$, while
+$e^{2\pi\iu(Q_-+Q_m)}=\one$ and $e^{2\pi\iu(Q+T_+)}=\one+\Onf$ by (U4).
+
+Since conjugation by $U$ is isometric, Steps 1 and 2 give $U^*e^{2\pi\iu\Qb_-}U\eqN e^{2\pi\iu\Qb^U_-}$, hence
+$\mathcal M_-(2\pi)=e^{2\pi\iu\Qb^U_-}e^{-2\pi\iu\Qb_-}\eqN U^*e^{2\pi\iu\Qb_-}Ue^{-2\pi\iu\Qb_-}$; compressing with $P$ gives the first
+claim.
+
+\emph{Step 3: the determinant.} Put $O_1:=U^*$, $O_2:=e^{2\pi\iu\Qb_-}$, $O_3:=U$, $O_4:=O_2^*$, $\varepsilon_U:=\norm{[U,P]}$
+and $\varepsilon_-:=\norm{[O_2,P]}$; then $\norm{[O_1,P]}=\norm{[O_3,P]}=\varepsilon_U$ and $\norm{[O_4,P]}=\varepsilon_-$. Since
+$PV_i(\one-P)=[P,V_i](\one-P)$, inserting $P$ between consecutive factors gives
+\[
+\norm{PO_1O_2O_3O_4P-(PO_1P)(PO_2P)(PO_3P)(PO_4P)}\le2\varepsilon_U+\varepsilon_- .
+\]
+All operators here map $\ran P$ into itself, vanish on its orthogonal complement and have norm at most one. Let
+$d_i:=\det(PV_iP|_{\ran P})$, so $\abs{d_i}\le1$. By Lemma~\ref{lem:det}(i) and the multiplicativity of the determinant on
+$\ran P$, $\abs{\detP(PO_1O_2O_3O_4P)-d_1d_2d_3d_4}\le p(2\varepsilon_U+\varepsilon_-)$. By Lemma~\ref{lem:det}(iii), applied to $U$
+and to $O_2$, $\abs{d_1d_3-1}\le p\varepsilon_U$ and $\abs{d_4d_2-1}\le p\varepsilon_-$, so
+$\abs{d_1d_2d_3d_4-1}\le\abs{d_1d_3-1}\abs{d_2d_4}+\abs{d_2d_4-1}\le p(\varepsilon_U+\varepsilon_-)$. Finally
+$\abs{\detP\Zc(2\pi)-\detP(PO_1O_2O_3O_4P)}\le p\norm{\mathcal M_-(2\pi)-O_1O_2O_3O_4}$ by Lemma~\ref{lem:det}(i). Altogether
+\[
+\abs{\detP\Zc(2\pi)-1}\le p\Bigl(\norm{\mathcal M_-(2\pi)-U^*e^{2\pi\iu\Qb_-}Ue^{-2\pi\iu\Qb_-}}+3\varepsilon_U+2\varepsilon_-\Bigr)=\Onf,
+\]
+by Steps 1--2, (U2) and Corollary~\ref{cor:Zcommute}.
+
+(ii) The operators $A:=2\pi\iu(P\Tt P+\Qb)$ and $B:=-2\pi\iu\Qb$ commute with $P$, and $\Yc(2\pi)=Pe^Ae^BP$. By
+Lemma~\ref{lem:det}(ii),
+\[
+\detP\Yc(2\pi)=\detP(e^A)\detP(e^B)=e^{\Tr(PA)}e^{\Tr(PB)}=e^{2\pi\iu(\Tr(P\Tt P)+\Tr(P\Qb)-\Tr(P\Qb))}=e^{2\pi\iu\Tr(P\Tt)} .
+\]
+(Compare Remark~\ref{rem:bbdf-misprints}(b).)
+
+(iii) The operators $\Yc(2\pi)$ and $\Zc(2\pi)$ map $\ran P$ into itself, vanish on its complement and have norm at most
+one, so by Lemma~\ref{lem:det}(i) and Lemma~\ref{lem:ode}, $\abs{\detP\Yc(2\pi)-\detP\Zc(2\pi)}\le p\norm{\Yc(2\pi)-\Zc(2\pi)}=\Onf$.
+With (i) and (ii), $\abs{e^{2\pi\iu\Tr(P\Tt)}-1}=\Onf$. The number $\Tr(P\Tt)=\Tr(P\Tt P)$ is real, and by
+Lemma~\ref{lem:det}(iv) its distance from $\Z$ is at most $\frac14\abs{e^{2\pi\iu\Tr(P\Tt)}-1}=\Onf$.
+
+(iv) Since $\Tt=T_--U^*K_-U+K_-$, the cyclicity of the trace gives
+$\Tr(P\Tt)-\Tr(PT_-)=-\Tr(UPU^*K_-)+\Tr(PK_-)=-\Tr((UPU^*-P)K_-)$. The operator $UPU^*-P=[U,P]U^*$ has norm
+$\norm{[U,P]}$ and, as a difference of two projections of rank $p$, rank at most $2p$; its trace norm is therefore at
+most $2p\norm{[U,P]}$, and $\abs{\Tr((UPU^*-P)K_-)}\le2p\norm{[U,P]}\norm{K_-}$. By (U2) and $\norm{K_-}\le CN^2$
+(Lemma~\ref{lem:objects}) this is $\Onf$, and it vanishes if $[U,P]=0$.
+\end{proof}
+
+\subsection{The theorem}
+
+\begin{theorem}[index theorem for lowest-Landau-level Hamiltonians on the torus]\label{thm:index}
+In Setting~\ref{set:index}, let Assumptions~\ref{ass:gap} and \ref{ass:U} hold. Then there are integers $n_N$ such
+that for every $k$ there is $C_k$ with
+\[
+\bigl\lvert\Tr(P_NT_{-,N})-n_N\bigr\rvert\le C_kN^{-k}\qquad\text{for all }N\in\mathcal N .
+\]
+Equivalently, the transported charge $\expP{T_-}=p^{-1}\Tr(PT_-)$ lies in $p^{-1}\Z+\Onf$.
+\end{theorem}
+
+\begin{proof}
+For each $N\in\mathcal N$ let $n_N$ be an integer nearest to $\Tr(P_N\Tt)$. By Lemma~\ref{lem:determinant}(iii) and (iv),
+\[
+\abs{\Tr(PT_-)-n_N}\le\abs{\Tr(P\Tt)-n_N}+\abs{\Tr\bigl((UPU^*-P)K_-\bigr)}=\Onf ,
+\]
+which is the claim; dividing by $p$ gives the second formulation.
+
+The proof of Lemma~\ref{lem:determinant} rests on the chain of the preceding statements: the dressed charge commutes
+with $P$ exactly (Lemma~\ref{lem:KP}); the dressing is localized at the two cuts (Lemmas~\ref{lem:split} and
+\ref{lem:Klocal}, and (U3) for its transport by $U$); all operators of the argument have polynomially bounded norms and
+are almost supported near the cuts or in the three parts of the band (Lemma~\ref{lem:objects}); operators attached to
+different cuts, or to a cut and the middle of the band, almost commute (Lemma~\ref{lem:commutation}); the localized
+unitaries almost commute with $P$, by the clustering in the sector (Proposition~\ref{prop:clustering}) through
+Lemma~\ref{lem:bbdf42} (Corollary~\ref{cor:Zcommute}); and the flux insertion is compared with an exactly solvable
+equation on $\ran P$ (Lemma~\ref{lem:ode}). Every estimate $\Onf$ in this chain comes from finitely many commutators,
+their number independent of $N$, of operators almost supported in sets at distance at least $\frac{c_*}{16}\sqrt N$
+for $N\ge N_*$, multiplied by factors of polynomial size (Lemma~\ref{lem:bookkeeping}).
+
+\emph{The constants.} Every bound in Lemmas~\ref{lem:separations}--\ref{lem:determinant} is built from the following
+data: the constants $C_h$ and $C^H_k$ of (H1); the constants of Sections~\ref{sec:frame}--\ref{sec:locality} that these
+lemmas use, which by their statements depend only on $\eta$, $\delta_0$, $C_h$ and finitely many $C^H_k$, and, for the
+filters, on $\gamma$, $\Delta$ and the choices of $\vartheta$, $\delta$ and $\zeta$ in Definition~\ref{def:filters}; the rank $p$;
+the constants in Assumption~\ref{ass:U}; and the following quantities depending on the torus, each controlled by
+admissibility and $c_*$ alone: $\abs{\Tor_N}=4\pi N$; $L_y=4\pi N/L_x\le\min\{\pi N,(4\pi/c_*)\sqrt N\}$, because $L_x\ge4$ by
+admissibility and $L_x\ge c_*\sqrt N$; $\kappa\le\delta_x\le2\delta_0$ (Lemma~\ref{lem:frame-consistency}(ii)); $\ny\le CL_y$ with
+$C$ depending on $\delta_0$; and the separations of Lemma~\ref{lem:separations}, which are at least $\frac{c_*}{16}\sqrt N$
+for $N\ge N_*$, with $N_*$ depending only on $c_*$ and $\delta_0$. No other property of the torus enters. The rank $p$
+enters only through Lemma~\ref{lem:det}(i) and (iii) and through the trace bound of Lemma~\ref{lem:determinant}(iv), each
+time as a factor $p$. This proves the dependence stated in Remark~\ref{rem:constants}, given the dependence stated in
+Sections~\ref{sec:frame}--\ref{sec:locality}.
+\end{proof}
+
+\begin{remark}[the constants, and the asymptotic nature of the statement]\label{rem:constants}
+The proof shows that $C_k$ depends only on $k$, on $p$ (linearly), on $\gamma$ and $\Delta$, on $\eta$ and $\delta_0$, on
+$C_h$ and finitely many $C^H_{k'}$, on $c_*$, and on the constants in Assumption~\ref{ass:U}, which for $U=\Theta$ are
+absent. In particular $C_k$ depends on the torus only through admissibility and $c_*$. We expect $C_k$ to depend
+polynomially on $1/\gamma$ and on $1/(\gamma-2\Delta)$ for each $k$, by the scaling of the filters
+($W_\gamma(t)=W_1(\gamma t)$), but we have not tracked this dependence. The constants are not explicit, and through
+the constant $C_{\rm lc}$ of Theorem~\ref{thm:propagation} they are very large. Theorem~\ref{thm:index} is therefore a
+statement about the limit $N\to\infty$ only: the proof yields neither a rate nor a value of $N$ beyond which
+the conclusion has quantitative force.
+\end{remark}
+
+\begin{remark}[the hypothesis $\gamma>2\Delta$ can be weakened]\label{rem:weaker-gap}
+Every result of Sections~\ref{sec:index}--\ref{sec:hollowcore} that is stated under Assumption~\ref{ass:gap}, or under
+the hypothesis $\gamma>2\Delta$, holds with $\gamma>\Delta$ in place of $\gamma>2\Delta$; in particular this applies to
+Theorem~\ref{thm:index}, Corollaries~\ref{cor:translation}--\ref{cor:classwide-odd} and Theorem~\ref{thm:main}(i). We keep
+$\gamma>2\Delta$ in the statements to match \cite[Assumption~1]{BBDF21}. The hypothesis enters the proofs only through the
+clustering step $g$ of Definition~\ref{def:filters}. Of $g$ the proofs use that $g=0$ on $[-\Delta,\infty)$ and $g=1$ on
+$(-\infty,-\gamma]$, both in the proof of Proposition~\ref{prop:clustering}(i), where the second is applied only at
+$E-E'\le-\gamma$; and they use the representation and the locality of $\Qf$ (Lemma~\ref{lem:timerep} and
+Proposition~\ref{prop:Qlocal}), whose proofs use only that $g$ is the convolution of $\zeta$ with the indicator of a
+half-line. The other place where the gap enters, Lemma~\ref{lem:KP}, uses only $E_{p+1}-E_p\ge\gamma$. Now let
+$\gamma>\Delta$, fix $\delta\in(0,(\gamma-\Delta)/2)$ and $\zeta$ as in Definition~\ref{def:filters}, and put
+$g(\omega):=\int_\R\zeta(\omega-\omega')\,\one_{\{\omega'<-(\gamma+\Delta)/2\}}\,\dd\omega'$. Then $g(\omega)=0$ for
+$\omega\ge-(\gamma+\Delta)/2+\delta$, a half-line that contains $[-\Delta,\infty)$, and $g(\omega)=1$ for
+$\omega\le-(\gamma+\Delta)/2-\delta$, which contains $(-\infty,-\gamma]$; Lemma~\ref{lem:timerep} and
+Proposition~\ref{prop:Qlocal} hold verbatim with $\gamma':=-(\gamma+\Delta)/2$, their constants depending on $\zeta$,
+$\gamma$ and $\Delta$; and with this $g$ the proofs of Sections~\ref{sec:index}--\ref{sec:hollowcore} go through
+unchanged (the proof of Proposition~\ref{prop:clustering} recalls of $g$ only the two properties above). Through $\delta$, the constants then depend on $\gamma-\Delta$ where they depended on $\gamma-2\Delta$
+(compare Remark~\ref{rem:constants}). In the language of Section~\ref{sec:intro}: the results hold for patches whose
+width is less than their gap.
+\end{remark}
+
+\begin{remark}[the finite-dimensional part of the proof, machine-checked]\label{rem:lean}
+The proof of Theorem~\ref{thm:index} splits into an analytic part --- the locality estimates of
+Sections~\ref{sec:frame}--\ref{sec:locality}, which supply the inputs (U2), (U4), Lemma~\ref{lem:commutation}(ii) and
+the clustering commutators of Corollary~\ref{cor:Zcommute} as $\Onf$ quantities and the polynomial bounds on
+$\norm{T_-}$ and $\norm{K_-}$ --- and a finite-dimensional part, Lemma~\ref{lem:KP}, Proposition~\ref{prop:clustering}(i)--(ii),
+Lemmas~\ref{lem:commutation}--\ref{lem:determinant} and Lemmas~\ref{lem:bbdf41}, \ref{lem:expbounds} and~\ref{lem:det},
+which turns those inputs into the conclusion. The finite-dimensional part has been formalized and verified in the
+Lean~4 proof assistant against the Mathlib library,\footnote{Lean 4.34.1 and Mathlib at commit d13f23b7; the
+formalization is a separate artifact, not part of this paper.} in the following quantitative form: for every
+finite-dimensional complex inner product space and every choice of the data of Setting~\ref{set:index},
+Assumptions~\ref{ass:gap}--\ref{ass:U} (with $\gamma>\Delta$, Remark~\ref{rem:weaker-gap}) and
+Definitions~\ref{def:dressing} and~\ref{def:bbdfobjects} satisfying the exact relations stated there, if each of the
+twenty-seven quantities above is at most $\varepsilon$ and $\norm{T_-},\norm{K_-}\le M$, then there is an integer $n$
+with $\abs{\Tr(PT_-)-n}\le 400\,p\,(M+1)\sqrt{\varepsilon}$. Theorem~\ref{thm:index} follows from this statement and
+the analytic part. The formalization (366 theorems in twelve modules) depends only on the three standard axioms of
+Lean's logic (propositional extensionality, choice and quotient soundness), and every module has been replayed through
+Lean's independent kernel checker. The Lean statement was compared with this section by two readers, one of them
+reading blind; the proofs themselves were written by AI agents and checked by the kernel, not read by a human. The code
+is available at \url{https://github.com/bbradlyn/hr-torus-proof}.
+\end{remark}
+
+

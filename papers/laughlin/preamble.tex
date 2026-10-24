@@ -1,0 +1,93 @@
+% preamble.tex -- packages, theorem environments, and every macro of the paper.
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[margin=1.05in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs,array,longtable}
+\usepackage[shortlabels]{enumitem}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{microtype}
+\usepackage[colorlinks=true,linkcolor=blue!50!black,citecolor=green!35!black,urlcolor=blue!50!black]{hyperref}
+
+% ---------------------------------------------------------------------------
+% Theorem environments: one shared counter, numbered within sections.
+% ---------------------------------------------------------------------------
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem*{theorem*}{Theorem}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem*{definition*}{Definition}
+\newtheorem{assumption}[theorem]{Assumption}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\numberwithin{equation}{section}
+
+% ---------------------------------------------------------------------------
+% General
+% ---------------------------------------------------------------------------
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\one}{\mathbf{1}}
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\iu}{\mathrm{i}}
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\ran}{ran}
+\DeclareMathOperator{\spec}{spec}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclarePairedDelimiterX{\ip}[2]{\langle}{\rangle}{#1,#2}
+\newcommand{\ket}[1]{\lvert #1\rangle}
+\newcommand{\bra}[1]{\langle #1\rvert}
+\newcommand{\kb}[2]{\lvert #1\rangle\langle #2\rvert}
+
+% ---------------------------------------------------------------------------
+% The torus and its lowest Landau level (Section 2)
+% ---------------------------------------------------------------------------
+\newcommand{\Tor}{\mathbb{T}}          % the torus R^2 / Lambda
+\newcommand{\Nphi}{N_{\phi}}           % number of flux quanta
+\newcommand{\h}{\mathfrak{h}}          % one-particle lowest Landau level of the torus
+\newcommand{\hpl}{\mathfrak{h}_{\mathrm{pl}}} % planar lowest Landau level
+\newcommand{\Fock}{\mathcal{F}}        % spinless Fock space over \h
+\newcommand{\Ff}{\mathcal{F}}          % second quantization F(u)
+\newcommand{\thx}{\theta_x}            % psi_j -> psi_{j+1}
+\newcommand{\thy}{\theta_y}            % psi_j -> e^{2 pi i j/N_phi} psi_j
+\newcommand{\Lam}{\Lambda}             % lattice of periods
+\newcommand{\cell}{\mathsf{C}}         % a period cell of Lambda
+\newcommand{\LL}{\mathcal{L}}          % lifts L_k
+\newcommand{\Pp}{\mathfrak{P}}         % periodized image P_k
+\newcommand{\Hb}{\mathcal{B}}          % Bargmann space
+\newcommand{\Dis}{\mathcal{D}}         % displacement operator D(beta)
+\newcommand{\Ec}{\mathcal{E}}          % lattice sums E_m
+\newcommand{\U}{\mathfrak{u}}          % centre-of-mass torus lowest Landau level u_k
+\newcommand{\Pk}{\Pi}                  % periodization of planar functions
+\newcommand{\Fib}{\mathcal{I}}         % fibering maps I_a (Lemma 2.9(c))
+\newcommand{\Ppl}{P_{\mathrm{pl}}}     % kernel of the orthogonal projection onto the planar LLL
+\newcommand{\tl}{\tilde t}             % lattice magnetic translations, a representation of Lambda
+
+% the Hamiltonian, pairs, constants
+\newcommand{\HT}{H_{\Tor}}             % the torus V_1 Hamiltonian
+\newcommand{\KT}{K_{\Tor}}             % the comparison operator
+\newcommand{\gT}{\gamma_{\Tor}}        % the torus constant
+\newcommand{\gs}{\gamma_{*}}           % the planar constant
+\newcommand{\gl}{\underline{\gamma}}   % the uniform lower bound
+\newcommand{\etas}{\eta_{*}}           % the certificate constant sum_nu lambda_nu^2
+\newcommand{\VT}{V_{\Tor}}             % range of h
+\newcommand{\bcen}[1]{b_{#1}}          % centre pair operators (orbital form)
+\newcommand{\Dlev}{\Delta}             % 2(L^2/4-1)e^{-L^2/8}
+\newcommand{\Ups}{\Upsilon}            % remainder of the pair Gram levels
+\newcommand{\dG}{\delta_G}             % deviation of the pair Gram matrix G from the identity
+\newcommand{\dtail}{\delta_{\mathrm{tail}}}
+\newcommand{\Cth}{C_{3}}               % 72 sum ||alpha||^2
+\newcommand{\ut}{\tilde u}             % periodized pair states
+\newcommand{\eps}{\varepsilon}         % the allowance of the certificate, 3/10^6
+\newcommand{\etr}{\epsilon_{\mathrm{tr}}} % the error of the transfer principle

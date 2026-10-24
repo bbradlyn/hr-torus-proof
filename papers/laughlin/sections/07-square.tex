@@ -1,0 +1,177 @@
+% sections/07-square.tex
+\section{The square of \texorpdfstring{$\HT$}{H\_T}}\label{sec:square}
+
+By Lemma~\ref{lem:square}, $\HT^2=\LL_2(h^2)+\LL_3(X_3(h))+\LL_4(W_4(h\otimes h)W_4^*)$. In this section we show that the
+three-body coefficient $X_3(h)$ is \emph{exactly} the periodized image of the planar three-body coefficient. The reason is
+structural: $X_3(h)$ is a sum of products of two pair operators sharing exactly one particle, and periodization is
+multiplicative on such products. Consequently the three-body target transfers to the torus without error, and besides the
+non-orthonormality term of Proposition~\ref{prop:parts}(b) only the planar tail has to be controlled.
+
+\subsection{The image-sum calculus}
+
+For a set $I$ of particles, $\Pp_I(Y)$ denotes the periodized image of an operator $Y$ admissible in the variables of $I$, and
+$\Pp_I(Y)\otimes\one$ its action on $\h^{\otimes n}$, $I\subset\{1,\dots,n\}$; on functions, $Y$ acts in the variables of $I$ with the
+other variables as parameters.
+
+\begin{lemma}[image-sum representation]\label{lem:imagesum}
+Let $Y$ be admissible on $I\subset\{1,\dots,n\}$, $s\in I$ and $\Psi\in\h^{\otimes n}$. Then
+\[
+\bigl((\Pp_I(Y)\otimes\one)\Psi\bigr)(r)=\sum_{\gamma\in\Lam^{I\setminus\{s\}}}\Bigl(\prod_{i\in I\setminus\{s\}}\tl^{(i)}_{\gamma_i}\Bigr)(Y\Psi)(r),
+\]
+the series converging absolutely and locally uniformly.
+\end{lemma}
+
+\begin{proof}
+Expanding $\Psi$ in a product basis of $\h^{\otimes I}\otimes\h^{\otimes I^c}$ reduces the claim to $n=\abs I=k$; relabel so that $s=1$.
+By Lemma~\ref{lem:Pk}(a), $Y\Psi$ is an LLL function of each variable decaying like a Gaussian in $r_i-r_1$, so the series $S$
+converges absolutely and locally uniformly, and $S$ is an LLL function of each variable. Reindexing shows
+$\tl^{(i)}_\gamma S=S$ for $i\ge2$. For $i=1$ write $\tl^{(1)}_\gamma=\tl^{\otimes k}_\gamma\prod_{i\ge2}(\tl^{(i)}_\gamma)^{-1}$ with $\tl^{\otimes k}_\gamma=\prod_i\tl^{(i)}_\gamma$; all
+these operators commute, $\tl^{\otimes k}_\gamma$ commutes with $Y$ by (Y2) and fixes $\Psi$, so $\tl^{(1)}_\gamma S=S$ by reindexing. Thus
+$S\in\h^{\otimes k}$, and for $\Phi\in\h^{\otimes k}$, unfolding the variables $r_2,\dots,r_k$ as in Lemma~\ref{lem:unfold} gives
+$\ip\Phi S=\int_{\{r_1\in\cell\}}\overline\Phi\,Y\Psi=\ip\Phi{\Pp_k(Y)\Psi}$.
+\end{proof}
+
+\begin{lemma}[products sharing one particle]\label{lem:product}
+Let $I_1=\{s\}\cup I'_1$ and $I_2=\{s\}\cup I'_2$ with $I'_1\cap I'_2=\emptyset$, let $Y_1$ be admissible on $I_1$ and $Y_2$ on $I_2$, and
+$I:=I_1\cup I_2$. Then $Y_1Y_2$ is admissible on $I$, and on $\h^{\otimes n}$
+\[
+\bigl(\Pp_{I_1}(Y_1)\otimes\one\bigr)\bigl(\Pp_{I_2}(Y_2)\otimes\one\bigr)=\Pp_I(Y_1Y_2)\otimes\one .
+\]
+\end{lemma}
+
+\begin{proof}
+On LLL functions the identity in a variable is the integral operator with the kernel $\Ppl$ (Lemma~\ref{lem:bargmann}(iv)), so the
+kernel of $Y_1Y_2$ is $\int Y_1(r_s,r_{I'_1};u,r'_{I'_1})\,Y_2(u,r_{I'_2};r'_s,r'_{I'_2})\,\dd u$. It satisfies (Y1) and (Y2), and the Gaussian
+bounds (Y3) of the two factors, centred at $r_s$ and at $u$, combine under the integral over $u$ into a Gaussian bound in all
+$r_i-r_s$ and $r'_i-r_s$, $i\in I$. By Lemma~\ref{lem:imagesum} with the anchor $s$,
+$(\Pp_{I_2}(Y_2)\otimes\one)\Psi=\sum_{\gamma\in\Lam^{I'_2}}\tl_\gamma(Y_2\Psi)$, and applying Lemma~\ref{lem:imagesum} again,
+\[
+(\Pp_{I_1}(Y_1)\otimes\one)(\Pp_{I_2}(Y_2)\otimes\one)\Psi=\sum_{\gamma_1\in\Lam^{I'_1}}\tl_{\gamma_1}Y_1\sum_{\gamma_2\in\Lam^{I'_2}}\tl_{\gamma_2}Y_2\Psi
+=\sum_{\gamma_1,\gamma_2}\tl_{\gamma_1}\tl_{\gamma_2}\,Y_1Y_2\Psi,
+\]
+because $Y_1$ acts on the variables of $I_1$, which are disjoint from $I'_2$, and therefore commutes with $\tl_{\gamma_2}$; the
+interchange of $Y_1$ with the sum is justified by dominated convergence, the partial sums being bounded uniformly. The right
+side is $(\Pp_I(Y_1Y_2)\otimes\one)\Psi$ by Lemma~\ref{lem:imagesum} with the anchor $s$ and the images of $I'_1\cup I'_2=I\setminus\{s\}$.
+\end{proof}
+
+The lemma fails for products sharing two particles: then the image sums of the second factor do not commute with the first,
+and cross-image terms appear. This is why $h^2\neq h$: by Lemma~\ref{lem:gram}, $h$ is not a projection.
+
+\subsection{The planar three-body Gram operator}
+
+Let $Q_{12}:=(P_1)_{12}$ on planar three-particle functions; its range consists of the functions $\xi_z(\rho)\,g(\zeta)$, $z\ge0$,
+and their closed span (Section~\ref{sec:moyal}). On this range $W_3=\sqrt3A_3$.
+
+\begin{lemma}[the planar coefficients]\label{lem:qz}
+On $\ran Q_{12}$, $W_3^*W_3-\one=\sum_{z\ge0}q_z\,\kb{\xi_z}{\xi_z}\otimes\one$ with
+\[
+q_z=(3z-1)\bigl(-\tfrac12\bigr)^z .
+\]
+In particular $\norm{W_3\xi_z}^2=1+q_z$, so $W_3\xi_z=0$ for $z\in\{0,1,3\}$ and $W_3\xi_z\neq0$ otherwise.
+\end{lemma}
+
+\begin{proof}
+$W_3^*W_3=3Q_{12}A_3Q_{12}$. Since $P_{12}Q_{12}=Q_{12}P_{12}=-Q_{12}$, grouping the permutations in pairs $\sigma$, $\sigma P_{12}$ gives
+$3Q_{12}A_3Q_{12}=Q_{12}(\one-P_{13}-P_{23})Q_{12}$, and $P_{12}P_{13}P_{12}=P_{23}$ gives $Q_{12}P_{13}Q_{12}=Q_{12}P_{23}Q_{12}$; so
+$W_3^*W_3-\one=-2\,Q_{12}P_{23}Q_{12}$. In the Bargmann form with $w_1=(z_1-z_2)/\sqrt2$ and $w_2=(z_1+z_2-2z_3)/\sqrt6$ (the forms of $\rho_1$,
+$\rho_2$), the exchange $z_2\leftrightarrow z_3$ acts by the substitution
+\[
+w_1\mapsto\tfrac12w_1+\tfrac{\sqrt3}2w_2,\qquad w_2\mapsto\tfrac{\sqrt3}2w_1-\tfrac12w_2,
+\]
+and fixes $(z_1+z_2+z_3)/\sqrt3$. It preserves the degree, and $\ran Q_{12}$ contains one relative state of each degree $1+z$, so
+$Q_{12}P_{23}Q_{12}=\sum_zb_z\kb{\xi_z}{\xi_z}\otimes\one$, where $b_z$ is the coefficient of $w_1w_2^z$ in
+$(\frac12w_1+\frac{\sqrt3}2w_2)(\frac{\sqrt3}2w_1-\frac12w_2)^z$, the normalizations $\sqrt{z!}$ being equal on both sides. The two
+contributions are $\frac12(-\frac12)^z$ and $\frac{\sqrt3}2\cdot z\frac{\sqrt3}2(-\frac12)^{z-1}$, so $b_z=-\frac12(3z-1)(-\frac12)^z$ and $q_z=-2b_z$.
+\end{proof}
+
+\subsection{The three-body coefficient}
+
+Recall $Y_z=\kb{W_3\xi_z}{W_3\xi_z}\otimes\one$, $s_{z,T,p}=s^{(1/\sqrt3)}_{z,T,p}$, and $\abs{q_z}\le3z2^{-z}$ for $z\ge1$.
+
+\begin{theorem}[the square of $\HT$]\label{thm:square}
+On $\Fock$, for every rectangular torus,
+\begin{equation}\label{eq:squareHT}
+\HT^2=\LL_2(h^2)+\sum_{z\ge0}q_z\,\LL_3\Pp_3(Y_z)+\LL_4\bigl(W_4(h\otimes h)W_4^*\bigr),
+\end{equation}
+the series converging absolutely in norm. Moreover, for every $z\ge0$,
+\begin{equation}\label{eq:yz}
+\LL_3\Pp_3(Y_z)=\frac3{2\pi}\int_\cell B(y_z(R))^*B(y_z(R))\,\dd R,\qquad y_z(R):=\sum_{p=0}^zs_{z,z,p}\,\ut_p(R)\wedge\chi_{z-p}^R .
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+By Lemma~\ref{lem:square} it suffices to show $X_3(h)=\sum_zq_z\Pp_3(Y_z)$ on $\bigwedge^3\h$. The operator $P_1$ vanishes on functions that
+are even in the relative coordinate, so $h=\Pp_2(P_1)$ vanishes on symmetric tensors and $h_{ij}=\Pp_{\{i,j\}}(P_1)\otimes\one$. Each term
+$h_{ij}h_{kl}$ of $X_3(h)$ has $\abs{\{i,j\}\cap\{k,l\}}=1$, so by Lemma~\ref{lem:product}
+\[
+X_3(h)=\Pp_3(Y_{\mathrm{pl}}),\qquad Y_{\mathrm{pl}}:=\sum_{(ij)\neq(kl)}(P_1)_{ij}(P_1)_{kl},
+\]
+and by Lemma~\ref{lem:Pk}(b), on $\bigwedge^3\h$ we may replace $Y_{\mathrm{pl}}$ by $A_3Y_{\mathrm{pl}}A_3$. On planar antisymmetric
+three-particle functions the computation in the proof of Lemma~\ref{lem:square}, with $P_1^2=P_1$, gives
+$A_3Y_{\mathrm{pl}}A_3=W_3(W_3^*W_3-\one)W_3^*$ with $W_3$ restricted to $\ran Q_{12}$, and Lemma~\ref{lem:qz} turns this into
+$\sum_zq_zY_z$, because $W_3$ acts on the relative variables only. The kernels of the $Y_z$ are
+$(W_3\xi_z)(\rho)\overline{(W_3\xi_z)(\rho')}\Ppl(\zeta,\zeta')$. Since $\abs{\eta_z(x)}=\abs x^ze^{-\abs x^2/4}/\sqrt{2\pi2^zz!}$ and permutations
+preserve $\abs\rho$, $\abs{(W_3\xi_z)(\rho)}\le C\abs\rho^{z+1}e^{-\abs\rho^2/4}/\sqrt{2^zz!}$; with $\abs{q_z}\le3z2^{-z}$ for $z\ge1$
+(and $Y_0=0$) and
+$\sum_zz\,x^z/z!=xe^x$, the series $\sum_z\abs{q_z}\abs{Y_z(r;r')}$ is bounded by
+$C(1+\abs\rho\abs{\rho'})^2e^{-(\abs\rho^2+\abs{\rho'}^2)/4+\abs\rho\abs{\rho'}/4}\abs{\Ppl(\zeta,\zeta')}\le C'e^{-(\abs\rho^2+\abs{\rho'}^2)/9}\abs{\Ppl(\zeta,\zeta')}$. So the kernel series
+converges locally uniformly to the (continuous) kernel of $A_3Y_{\mathrm{pl}}A_3$, under an admissible Gaussian bound, and dominated
+convergence in \eqref{eq:Pk} gives $\Pp_3(\sum_zq_zY_z)=\sum_zq_z\Pp_3(Y_z)$, absolutely convergent on the finite-dimensional space
+$\bigwedge^3\h$. For \eqref{eq:yz}, apply Theorem~\ref{thm:moyal} with $k=3$, $a=b=W_3\xi_z$ and $p=q=0$:
+$\Pk^{(3)}(W_3\xi_z\otimes\varphi_0^R)=\Pk^{(3)}W_3\ket{z,z}^R=\sum_ps_{z,z,p}\,\ut_p(R)\wedge\chi^R_{z-p}$ by \eqref{eq:coupling} and
+Lemma~\ref{lem:localmodes}(b), and then lift with $\LL_3$.
+\end{proof}
+
+In words: the three-body coefficient of $\HT^2$ is the periodized planar three-body target on \emph{every} block $z$, with
+the planar coefficients $q_z$ and no correction depending on the torus.
+
+\subsection{The three-body comparison and the tail}
+
+\begin{proposition}[three-body comparison]\label{prop:three}
+On $\Fock$, for every rectangular torus,
+\[
+\LL_3\bigl(X_3(h)\bigr)-\KT^{(3)}\ge-\bigl(\dtail(\Tor)+\Cth\,\Ec_8(\Tor)(1+\Ec_8(\Tor))\bigr)\HT,
+\]
+where
+\[
+\dtail(\Tor):=\frac32\sum_{\substack{z\ge17\\ z\ \mathrm{odd}}}(3z-1)(z+1)2^{-z}\bigl(1+\sigma_z(\Tor)\bigr).
+\]
+Moreover $\frac32\sum_{z\ge17,\,z\ \mathrm{odd}}(3z-1)(z+1)2^{-z}=\frac{61}{4096}$, and for every rectangular torus whose shorter period
+is at least $L>0$,
+\[
+\dtail(\Tor)-\frac{61}{4096}\le\frac32\sum_{\substack{z\ge17\\ z\ \mathrm{odd}}}(3z-1)(z+1)2^{-z}\,\Xi_z(L)
+\le\sum_{(j,k)\in\Z^2\setminus0}\Omega\bigl(L\sqrt{j^2+k^2}\bigr),
+\]
+where $\Omega(r):=36\,e^{-r^2/16}+9\,(y^2+5y+8)\,2^{-y}$ with $y:=r^2/20$. The middle term is nonincreasing in $L$, and the right
+side is $O(L^4\,2^{-L^2/20})$ as $L\to\infty$.
+\end{proposition}
+
+\begin{proof}
+By Theorem~\ref{thm:square} and Proposition~\ref{prop:parts}(b), with $e_z=0$ for $z\ge16$,
+\[
+\LL_3(X_3(h))-\KT^{(3)}=\sum_{z\le15}\bigl(q_z-\tfrac23e_z\bigr)\LL_3\Pp_3(Y_z)+\sum_{z\ge16}q_z\,\LL_3\Pp_3(Y_z)-\mathcal C_3 .
+\]
+\emph{Near part.} $Y_z=0$ for $z\in\{0,1,3\}$ (Lemma~\ref{lem:qz}), and $q_z-\frac23e_z>0$ for $z\in\{2,4,5,\dots,15\}$ by \eqref{eq:C3}; so
+the first sum is $\LL_3\Pp_3$ of a positive finite-rank relative operator tensored with $\one$, which is positive by
+Lemmas~\ref{lem:Pk}(c) and~\ref{lem:lift}(iii). \emph{Tail.} For even $z\ge16$, $q_z>0$ and the term is positive. For odd $z\ge17$,
+$q_z=-(3z-1)2^{-z}$, and by \eqref{eq:yz}, $B(y_z(R))=\sum_ps_{z,z,p}\,c(\chi^R_{z-p})B(\ut_p(R))$ (by \eqref{eq:Bwedge}; $s$ is real); by
+Cauchy--Schwarz with $\sum_ps_{z,z,p}^2=1$ and $\norm{c(\chi_m^R)}^2=\Gamma(R)_{mm}\le1+\sigma_z(\Tor)$ for $m\le z$,
+\[
+0\le\ip\Psi{\LL_3\Pp_3(Y_z)\Psi}\le\frac3{2\pi}\int_\cell(1+\sigma_z)\sum_{p\le z}\norm{B(\ut_p(R))\Psi}^2\dd R=\frac32(1+\sigma_z)(z+1)\ip\Psi{\HT\Psi},
+\]
+the last step by Corollary~\ref{cor:pairmoyal}. Summing over odd $z\ge17$ gives $-\dtail\HT$, and $\mathcal C_3$ is bounded in
+Proposition~\ref{prop:parts}(b). \emph{The sum.} With $z=17+2m$, $(3z-1)(z+1)=900+208m+12m^2$, and $\sum_m4^{-m}=\frac43$,
+$\sum_mm4^{-m}=\frac49$, $\sum_mm^24^{-m}=\frac{20}{27}$ give $\frac32\cdot2^{-17}\cdot\frac{3904}3=\frac{61}{4096}$. \emph{The excess.}
+$\sigma_z(\Tor)\le\Xi_z(L)$ by Lemma~\ref{lem:Ebounds}(c), and $\Xi_z(L)$ is nonincreasing in $L$. For $z\ge1$ and $r^2\ge20z$,
+$\mathfrak g_z(r)\le e^{-r^2/16}$: with $r^2=2zt$, $t\ge10$, and $z!\ge(z/e)^z$, $\log\mathfrak g_z(r)\le z(1+\log(t+1)-t/2)\le-zt/8$, since
+$1+\log(t+1)\le3t/8$ for $t\ge10$. Exchange the sums over $z$ and over the lattice points, bound the odd $z\ge17$ by all $z\ge1$
+and $\frac32(3z-1)(z+1)$ by $\frac92z(z+1)$, and fix a lattice point with $r=L\sqrt{j^2+k^2}$. The terms with $z<r^2/20$ have
+$\min\{1,\mathfrak g_z(r)\}\le e^{-r^2/16}$ and contribute at most $\frac92\sum_{z\ge1}z(z+1)2^{-z}e^{-r^2/16}=36e^{-r^2/16}$. The terms
+with $z\ge z_0:=\lceil r^2/20\rceil$ have $\min\{1,\mathfrak g_z\}\le1$ and contribute at most
+$\frac92\sum_{z\ge z_0}z(z+1)2^{-z}=9(z_0^2+3z_0+4)2^{-z_0}\le9(y^2+5y+8)2^{-y}$, using $y\le z_0\le y+1$. This is the bound by
+$\sum\Omega$. For the asymptotics, $\Omega$ is decreasing for $r^2\ge20$, at most $4(n+1)$ lattice points have $j^2+k^2=n\ge2$, and
+$\Omega(L\sqrt n)\le n^2e^{-(n-1)(\log2)L^2/20}\,\Omega(L)$ for $L^2\ge20$, so the sum is at most a constant times $\Omega(L)=O(L^42^{-L^2/20})$.
+\end{proof}
+
+The near part is the planar three-body inequality \eqref{eq:C3} transported to the torus by the order-preserving map
+$\LL_3\Pp_3$; there is no error term between the torus and the plane on any block, frustrated or not.

@@ -1,0 +1,264 @@
+% sections/03-kernel.tex
+\section{The kernel}\label{sec:kernel}
+
+The kernel of $\HT$ is the joint kernel of the pair operators $\bcen n$ (Remark~\ref{rem:normalization}). We determine
+it for a family of operators that contains the $\bcen n$ and is defined for every modular parameter. The argument is
+elementary: a zero mode vanishes to third order at every coincidence of two particles, so it is divisible by the cube
+of the theta-function Jastrow factor; at $\Nphi=3N$ the quotient depends on the centre of mass only, and the space
+of possible quotients is three-dimensional.
+
+\subsection{Pair operators for every modular parameter}
+
+Let $\tau\in\C$ with $\operatorname{Im}\tau>0$ and $\Nphi\in\N$. For $a\in\R$, $b\in\R$ and $t$ with $\operatorname{Im}t>0$ let
+\[
+\vartheta\!\begin{bmatrix}a\\b\end{bmatrix}\!(z\,|\,t):=\sum_{n\in\Z}\exp\bigl(\iu\pi t(n+a)^2+2\pi\iu(n+a)(z+b)\bigr),
+\qquad \vartheta_1(z):=\vartheta\!\begin{bmatrix}1/2\\1/2\end{bmatrix}\!(z\,|\,\tau).
+\]
+The series converge absolutely and locally uniformly, and directly from them
+\begin{equation}\label{eq:thetashift}
+\vartheta\!\begin{bmatrix}a\\b\end{bmatrix}\!(z+1|t)=e^{2\pi\iu a}\vartheta\!\begin{bmatrix}a\\b\end{bmatrix}\!(z|t),\qquad
+\vartheta\!\begin{bmatrix}a\\b\end{bmatrix}\!(z+t|t)=e^{-\iu\pi t-2\pi\iu(z+b)}\vartheta\!\begin{bmatrix}a\\b\end{bmatrix}\!(z|t).
+\end{equation}
+For $j\in\Z_{\Nphi}$ let $\varpi_j(u):=\vartheta\bigl[\begin{smallmatrix}j/\Nphi\\0\end{smallmatrix}\bigr](\Nphi u\,|\,\Nphi\tau)
+=\sum_{n\equiv j}\exp(2\pi\iu nu+\iu\pi\tau n^2/\Nphi)$. Let $\Lam_u:=\Z+\tau\Z$.
+
+Let $(\mathsf e_j)_{j\in\Z_{\Nphi}}$ be the standard basis of $\C^{\Nphi}$, $c_j$ the corresponding annihilation operators on
+$\bigwedge\C^{\Nphi}$, and for $n\in\Z$
+\begin{equation}\label{eq:Bntau}
+B_n^{(\tau)}:=\sum_{A+B=n}(A-B)\,\mathsf q^{(A-B)^2}\,c_{[B]}c_{[A]},\qquad \mathsf q^{d^2}:=e^{\iu\pi\tau d^2/(2\Nphi)},
+\end{equation}
+the sum running over $(A,B)\in\Z^2$; $B^{(\tau)}_{n+2\Nphi}=B^{(\tau)}_n$. Let $T_x$, $T_y$ be the unitaries $\mathsf e_j\mapsto\mathsf e_{j+1}$
+and $\mathsf e_j\mapsto e^{2\pi\iu j/\Nphi}\mathsf e_j$.
+
+\emph{Relation to the torus.} For the rectangular torus of Definition~\ref{def:torus} put $\tau:=\iu L_x/L_y$ and
+$u:=(y-\iu x)/L_y$. Then $e^{\iu\kappa ny}e^{-(x-\kappa n)^2/2}=e^{-x^2/2}e^{2\pi\iu nu+\iu\pi\tau n^2/\Nphi}$ (use
+$\kappa(y-\iu x)=2\pi u$ and $\kappa^2/2=\pi L_x/(L_y\Nphi)$), so
+\begin{equation}\label{eq:psiphi}
+\psi_j(x,y)=(L_y\sqrt\pi)^{-1/2}\,\varpi_j(u)\,e^{-x^2/2},
+\end{equation}
+$\mathsf q^{d^2}=e^{-\kappa^2d^2/4}$, and under $\mathsf e_j\mapsto\psi_j$ the operators $B_n^{(\tau)}$ are the $\bcen n$ of
+Proposition~\ref{prop:orbital} (pair $(A,B)$ with $(B,A)$), while $T_x$, $T_y$ are $\thx$, $\thy$. In particular the
+kernel of $\HT$ on $\bigwedge^N\h$ is the joint kernel of the $B_n^{(\tau)}$.
+
+\emph{Holomorphic parts.} For $S=\{s_1<\dots<s_N\}$ let
+$\widehat{\mathsf e_{s_1}\wedge\cdots\wedge\mathsf e_{s_N}}(u_1,\dots,u_N):=\det[\varpi_{s_\alpha}(u_\beta)]_{\alpha,\beta}$, and extend linearly to a map
+$\Psi\mapsto\widehat\Psi$ from $\bigwedge^N\C^{\Nphi}$ to functions on $\C^N$ (for $N=0$, $\widehat{1}:=1$). By
+\eqref{eq:psiphi}, for a rectangular torus the wave function of $\Psi$ is
+$(N!)^{-1/2}(L_y\sqrt\pi)^{-N/2}\prod_ke^{-x_k^2/2}\,\widehat\Psi(u)$. We write $U:=\sum_ku_k$, $e_k$ for the $k$-th unit vector of
+$\C^N$, and $\one:=(1,\dots,1)$.
+
+\begin{theorem}[the kernel at $\Nphi=3N$]\label{thm:kernel}
+Let $\operatorname{Im}\tau>0$, $N\ge1$ and $\Nphi=3N$. The joint kernel $\mathcal K_N$ of the operators $B_n^{(\tau)}$,
+$n\in\Z_{2\Nphi}$, on $\bigwedge^N\C^{\Nphi}$ is three-dimensional. It is spanned by the states $\Psi_0,\Psi_1,\Psi_2$ with
+\begin{equation}\label{eq:laughlin}
+\widehat{\Psi_j}(u)=A_j(U)\,J(u)^3,\quad J(u):=\prod_{1\le i<k\le N}\vartheta_1(u_i-u_k),\quad
+A_j(s):=\vartheta\!\begin{bmatrix}j/3+(N-1)/6\\(N-1)/2\end{bmatrix}\!(3s\,|\,3\tau).
+\end{equation}
+Moreover $\Ff(T_y)\Psi_j=e^{2\pi\iu m_j/\Nphi}\Psi_j$ with $m_j=N(N-1)/2+jN$, and
+$\Ff(T_x)\Psi_j=e^{-\iu\pi(N-1)/3}\Psi_{j+1}$ (indices modulo $3$): the three states are the three centre-of-mass copies
+of one state. For a rectangular torus, $\mathcal K_N=\ker(\HT|_{\bigwedge^N\h})$.
+\end{theorem}
+
+\begin{proposition}[no zero modes above filling one third]\label{prop:overfill}
+If $N'\ge2$ and $\Nphi<3N'$, the joint kernel of the $B^{(\tau)}_n$ on $\bigwedge^{N'}\C^{\Nphi}$ is zero. In particular, at
+$\Nphi=3N$ no sector with more than $N$ particles contains a zero mode.
+\end{proposition}
+
+For $N\ge2$ the functions \eqref{eq:laughlin} are the torus Laughlin states of~\cite{HaldaneRezayiTorus}. That they are the
+only zero modes of the torus $V_1$ Hamiltonian is stated for rectangular tori in~\cite[Section~II.2]{ONDS}, and a proof for
+every lattice shape and boundary twist is claimed in~\cite{HouWu}. Theorem~\ref{thm:kernel} proves the count for the operators
+$B_n^{(\tau)}$ at every modular parameter, and hence for $\HT$ on every rectangular torus.
+
+\subsection{Theta functions}
+
+For $\ell\in\Z$, $a\in\R$ and $\beta\in\C\setminus\{0\}$ let $\Theta_\ell[a;\beta]$ be the space of entire functions $g$ on
+$\C$ with $g(s+1)=e^{2\pi\iu a}g(s)$ and $g(s+\tau)=\beta e^{-2\pi\iu\ell s}g(s)$.
+
+\begin{lemma}\label{lem:theta}
+\begin{enumerate}[(a)]
+\item $\dim\Theta_\ell[a;\beta]=\ell$ for $\ell\ge1$, and $\Theta_\ell[a;\beta]=0$ for $\ell\le-1$.
+\item A nonzero $g\in\Theta_\ell[a;\beta]$, $\ell\ge1$, has exactly $\ell$ zeros, counted with multiplicity, in every period
+parallelogram whose boundary avoids its zeros.
+\item $\vartheta_1$ is odd, $\vartheta_1(s+1)=-\vartheta_1(s)$, $\vartheta_1(s+\tau)=-e^{-\iu\pi\tau-2\pi\iu s}\vartheta_1(s)$, and its zeros
+are exactly the points of $\Lam_u$, all simple.
+\item $J(u_\pi)=\sgn(\pi)J(u)$ for permutations $\pi$; $J(u+c\one)=J(u)$ for $c\in\C$; $J(u+e_k)=(-1)^{N-1}J(u)$;
+$J(u+\tau e_k)=(-1)^{N-1}e^{-\iu\pi(N-1)\tau-2\pi\iu(Nu_k-U)}J(u)$; and the factor $\vartheta_1(u_i-u_k)$ vanishes, simply, exactly
+on the hyperplanes $D_{ik}^\lambda:=\{u_i-u_k=\lambda\}$, $\lambda\in\Lam_u$.
+\item If $f$ is a function on $\C^N$ with $f(u+e_k)=f(u)$ and $f(u+\tau e_k)=e^{-\iu\pi\Nphi(2u_k+\tau)}f(u)$ for all $k$, then
+$\mathcal A:=f/J^3$ satisfies, where defined, $\mathcal A(u+e_k)=(-1)^{N-1}\mathcal A(u)$ and
+\[
+\mathcal A(u+\tau e_k)=(-1)^{N-1}\exp\bigl(-2\pi\iu(\Nphi-3N)u_k-6\pi\iu U-\iu\pi(\Nphi-3N+3)\tau\bigr)\,\mathcal A(u).
+\]
+At $\Nphi=3N$ the factor does not depend on $u_k$: $\mathcal A(u+\tau e_k)=(-1)^{N-1}e^{-3\pi\iu(2U+\tau)}\mathcal A(u)$.
+\item The space $\Theta^{(N)}_3:=\{A\ \text{entire}:A(s+1)=(-1)^{N-1}A(s),\ A(s+\tau)=(-1)^{N-1}e^{-3\pi\iu(2s+\tau)}A(s)\}$ is
+three-dimensional, with basis $A_0,A_1,A_2$ of \eqref{eq:laughlin}, and $A_j(s+1/3)=e^{2\pi\iu a_j}A_j(s)$ with
+$a_j:=j/3+(N-1)/6$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(a) $g(s)e^{-2\pi\iu as}$ is entire and $1$-periodic, hence a Laurent series in $e^{2\pi\iu s}$, absolutely and locally
+uniformly convergent on $\C^\times$: $g(s)=\sum_nc_ne^{2\pi\iu(n+a)s}$. Comparing coefficients in the $\tau$-relation gives
+$c_ne^{2\pi\iu(n+a)\tau}=\beta c_{n+\ell}$, and by iteration, for $k\ge0$,
+$\abs{c_{m+k\ell}}=\abs\beta^{-k}\exp(-2\pi\operatorname{Im}\tau[k(m+a)+\ell k(k-1)/2])\abs{c_m}$. If $\ell\ge1$ this is Gaussian decay
+in both directions, so any $c_0,\dots,c_{\ell-1}$ determine a convergent series in the space, and conversely; the dimension is
+$\ell$. If $\ell\le-1$ and some $c_m\neq0$, then $\abs{c_n}$ grows like $\exp(\pi\operatorname{Im}\tau\abs\ell k^2)$ along
+$n=m+k\ell\to-\infty$, so the terms of the series at any point do not tend to zero, a contradiction; hence $g=0$.
+(b) $g'/g$ is $1$-periodic and $(g'/g)(s+\tau)=(g'/g)(s)-2\pi\iu\ell$, so the integral of $g'/g$ around the parallelogram with
+vertices $s_0,s_0+1,s_0+1+\tau,s_0+\tau$ is $2\pi\iu\ell$; apply the argument principle.
+(c) The relations are \eqref{eq:thetashift} with $a=b=1/2$; oddness follows by $n\mapsto-n-1$ in the series. The Fourier
+coefficients do not vanish, so $\vartheta_1\not\equiv0$, and $\vartheta_1\in\Theta_1[\tfrac12;-e^{-\iu\pi\tau}]$ has exactly one zero in
+every period parallelogram, by (b). Since $\vartheta_1(0)=0$ by oddness, the zeros are the points of $\Lam_u$, each simple.
+Consequently $\vartheta_1(s-1)=-\vartheta_1(s)$ and $\vartheta_1(s-\tau)=-e^{-\iu\pi\tau+2\pi\iu s}\vartheta_1(s)$.
+(d) A transposition of neighbouring variables changes the sign of one factor (oddness) and permutes the others. The
+shift $u\mapsto u+e_k$ changes the sign of the $N-1$ factors containing $u_k$. Under $u\mapsto u+\tau e_k$ the factor with
+partner $j$ is multiplied by $-e^{-\iu\pi\tau-2\pi\iu(u_k-u_j)}$ in both orders of the pair (by (c)), and
+$\sum_{j\neq k}(u_k-u_j)=Nu_k-U$. The last statement is (c).
+(e) Cube the relations in (d), divide, and use $-\iu\pi\Nphi\tau+3\iu\pi(N-1)\tau=-\iu\pi(\Nphi-3N+3)\tau$.
+(f) By (a) with $\ell=3$, $e^{2\pi\iu a}=(-1)^{N-1}$ and $\beta=(-1)^{N-1}e^{-3\pi\iu\tau}$, the dimension is $3$. By
+\eqref{eq:thetashift} with $t=3\tau$, $A_j(s+1)=e^{6\pi\iu a_j}A_j(s)=(-1)^{N-1}A_j(s)$ and
+$A_j(s+\tau)=e^{-2\pi\iu(N-1)/2}e^{-3\pi\iu\tau-6\pi\iu s}A_j(s)$; the $A_j$ have nonzero Fourier coefficients on the disjoint
+frequency sets $j+(N-1)/2+3\Z$, so they are independent. The last formula is the first relation of \eqref{eq:thetashift}
+at $z=3s$ with $t=3\tau$, shifted by $1$.
+\end{proof}
+
+\subsection{Holomorphic parts and pair coefficients}
+
+\begin{lemma}\label{lem:holo}
+\begin{enumerate}[(a)]
+\item $\Psi\mapsto\widehat\Psi$ is injective, and its image on $\bigwedge^N\C^{\Nphi}$ is the space of antisymmetric entire
+functions $f$ on $\C^N$ with $f(u+e_k)=f(u)$ and $f(u+\tau e_k)=e^{-\iu\pi\Nphi(2u_k+\tau)}f(u)$ for every $k$.
+\item For $N\ge2$ and $\Psi\in\bigwedge^N\C^{\Nphi}$ write $u=(u_1,u_2,u')$. Then
+\[
+\widehat\Psi(u_1,u_2,u')=\sum_{a,b\in\Z_{\Nphi}}\varpi_a(u_1)\varpi_b(u_2)\,\widehat{c_bc_a\Psi}(u').
+\]
+\item $\widehat{\Ff(T_x)\Psi}(u)=e^{2\pi\iu U+\iu\pi N\tau/\Nphi}\,\widehat\Psi(u+\tfrac{\tau}{\Nphi}\one)$ and
+$\widehat{\Ff(T_y)\Psi}(u)=\widehat\Psi(u+\tfrac1{\Nphi}\one)$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(a) Each $\varpi_j$ lies in $\Theta_{\Nphi}[0;e^{-\iu\pi\Nphi\tau}]$ (from the series, as in Lemma~\ref{lem:theta}(f)), and the
+$\varpi_j$ have disjoint Fourier supports $j+\Nphi\Z$, so they form a basis of this $\Nphi$-dimensional space. Slater
+determinants therefore have the stated properties. Products $\prod_\beta\varpi_{j_\beta}(u_\beta)$ for distinct index tuples are
+linearly independent (fix all variables but one and induct), and distinct sets $S$ give disjoint sets of tuples, so the
+map is injective. Conversely let $f$ have the properties. For $N=1$ use the basis. For $N\ge2$, choose points
+$s_1,\dots,s_{\Nphi}$ with $M:=[\varpi_j(s_i)]$ invertible (the evaluation functionals separate the span of the $\varpi_j$);
+for fixed $u'=(u_2,\dots,u_N)$, $u_1\mapsto f(u_1,u')$ lies in the one-particle space, so $f(u_1,u')=\sum_jc_j(u')\varpi_j(u_1)$
+with $c(u')=M^{-1}(f(s_i,u'))_i$, entire and with the one-particle relations in each remaining variable. By induction on the
+number of variables (without antisymmetry) $f$ is a finite combination of products of orbitals; the coefficients are unique,
+and antisymmetry of $f$ makes them antisymmetric, so $f$ is a combination of Slater determinants.
+(b) By linearity take $\Psi=\mathsf e_{s_1}\wedge\cdots\wedge\mathsf e_{s_N}$ and $a=s_p$, $b=s_q$, $p\neq q$. The Laplace expansion of
+$\det[\varpi_{s_\alpha}(u_\beta)]$ along the columns $1,2$ gives the coefficient of $\varpi_{s_p}(u_1)\varpi_{s_q}(u_2)$ as
+$(-1)^{p+q+1}\widehat{\Psi_{pq}}$ if $p<q$ and $(-1)^{p+q}\widehat{\Psi_{pq}}$ if $p>q$, where $\Psi_{pq}$ is the wedge with
+$\mathsf e_{s_p},\mathsf e_{s_q}$ removed. On the Fock side, $c_{s_p}$ acts first with the sign $(-1)^{p-1}$, then $c_{s_q}$ with the sign
+$(-1)^{q-2}$ if $q>p$ and $(-1)^{q-1}$ if $q<p$; the totals agree. Terms with $a=b$ or $\{a,b\}\not\subset S$ vanish on both sides.
+(c) $T_x$ and $T_y$ act on one-particle holomorphic parts by $f(u)\mapsto e^{\iu\pi(2u+\tau/\Nphi)}f(u+\tau/\Nphi)$ and
+$f(u)\mapsto f(u+1/\Nphi)$, as the series of $\varpi_j$ show; apply this to each row of the determinant.
+\end{proof}
+
+\subsection{Zero modes vanish to third order}
+
+\begin{lemma}\label{lem:formulation}
+Let $N\ge2$, any $\Nphi\ge1$, $\Psi\in\bigwedge^N\C^{\Nphi}$ and $f:=\widehat\Psi$. The following are equivalent:
+(i) $B^{(\tau)}_n\Psi=0$ for every $n\in\Z_{2\Nphi}$;
+(ii) $[(\partial_{u_1}-\partial_{u_2})f](w,w,u')=0$ for all $w\in\C$, $u'\in\C^{N-2}$;
+(iii) $f=(u_1-u_2)^3g$ with $g$ entire;
+(iv) for all $i<k$ and $\lambda\in\Lam_u$, $f=(u_i-u_k-\lambda)^3g_{ik}^\lambda$ with $g_{ik}^\lambda$ entire.
+\end{lemma}
+
+\begin{proof}
+(i)$\Leftrightarrow$(ii). With $\varpi_a'(w)=\sum_{A\equiv a}2\pi\iu A\,e^{2\pi\iu Aw+\iu\pi\tau A^2/\Nphi}$ and Lemma~\ref{lem:holo}(b),
+\[
+[(\partial_1-\partial_2)f](w,w,u')=\sum_{a,b}\bigl[\varpi_a'\varpi_b-\varpi_a\varpi_b'\bigr](w)\,\widehat{c_bc_a\Psi}(u')
+=2\pi\iu\sum_{n\in\Z}e^{2\pi\iu nw+\iu\pi\tau n^2/(2\Nphi)}\,\widehat{B^{(\tau)}_n\Psi}(u'),
+\]
+using $A^2+B^2=\frac12(A+B)^2+\frac12(A-B)^2$ and grouping by $n=A+B$; all rearrangements are justified by absolute
+convergence. At fixed $\operatorname{Im}w$ the right side is an absolutely convergent Fourier series in $\operatorname{Re}w$ in which each
+frequency $n\in\Z$ occurs once, with coefficient
+$e^{-2\pi n\operatorname{Im}w}e^{\iu\pi\tau n^2/(2\Nphi)}\widehat{B^{(\tau)}_{n}\Psi}(u')$. Hence (ii) holds iff
+$\widehat{B^{(\tau)}_n\Psi}\equiv0$ for all $n$, iff (i), by injectivity (Lemma~\ref{lem:holo}(a)).
+(ii)$\Leftrightarrow$(iii). Put $\tilde f(R,v,u'):=f(R+v/2,R-v/2,u')$, entire and odd in $v$. Then $\tilde f$ and
+$\partial_v^2\tilde f$ vanish at $v=0$, and (ii) says $\partial_v\tilde f|_{v=0}=0$. So the first three Taylor coefficients in $v$
+vanish and $\tilde f=v^3\tilde g$ with $\tilde g(R,v,u')=\frac12\int_0^1(1-\theta)^2\partial_v^3\tilde f(R,\theta v,u')\dd\theta$ entire.
+Conversely (iii) makes $(\partial_1-\partial_2)f$ vanish on $u_1=u_2$.
+(iii)$\Rightarrow$(iv). Antisymmetry transports the factor to every pair $(i,k)$. By the relations of
+Lemma~\ref{lem:holo}(a), $f(u+\lambda e_i)=M_\lambda(u)f(u)$ with $M_\lambda$ entire and nowhere zero, so
+$f(u)=M_\lambda(u-\lambda e_i)f(u-\lambda e_i)$ inherits the factor $(u_i-u_k-\lambda)^3$. (iv)$\Rightarrow$(iii) is the case
+$(1,2,0)$.
+\end{proof}
+
+\begin{lemma}[division by $J^3$]\label{lem:division}
+If $f$ is entire on $\C^N$ and satisfies Lemma~\ref{lem:formulation}(iv), then $f/J^3$ is entire.
+\end{lemma}
+
+\begin{proof}
+Let $\ell,\ell'$ be nonconstant affine-linear forms on $\C^N$. (D1) If $q$ is entire and $q=(\ell-\lambda)^3\tilde q_\lambda$ with
+$\tilde q_\lambda$ entire for every $\lambda\in\Lam_u$, then $q/\vartheta_1(\ell)^3$ is entire: near a point with $\ell=\lambda$,
+$\vartheta_1(\ell)=(\ell-\lambda)g(\ell)$ with $g$ holomorphic and nonzero (Lemma~\ref{lem:theta}(c)), so the quotient is
+$\tilde q_\lambda/g(\ell)^3$. (D2) If $q=hg$ with $h,g$ entire, $q=(\ell'-\mu)^3\tilde q$ with $\tilde q$ entire, and $h\not\equiv0$ on
+$\mathsf H:=\{\ell'=\mu\}$, then $g=(\ell'-\mu)^3\tilde g$ with $\tilde g$ entire: choose $\xi$ on which the linear part of $\ell'$
+equals $1$; an entire function has the factor $(\ell'-\mu)^3$ iff it and its first two derivatives along $\xi$ vanish on $\mathsf H$ (Taylor's formula with integral
+remainder along $\xi$); by Leibniz, if $\partial^r_\xi g|_{\mathsf H}=0$ for $r<m\le2$ then
+$0=\partial^m_\xi(hg)|_{\mathsf H}=h|_{\mathsf H}\,\partial_\xi^mg|_{\mathsf H}$, so
+$\partial^m_\xi g$ vanishes on the dense open subset $\{h\neq0\}$ of the connected hyperplane $\mathsf H$, hence on $\mathsf H$.
+Enumerate the pairs $p_1,\dots,p_M$, $M=N(N-1)/2$, with forms $\ell_{p}:=u_i-u_k$ for $p=(i,k)$, and put $q_0:=f$,
+$q_r:=q_{r-1}/\vartheta_1(\ell_{p_r})^3$. By induction, $q_r$ is entire and has the factor $(\ell_{p_t}-\mu)^3$ for every $t>r$ and
+$\mu\in\Lam_u$: $q_r$ is entire by (D1); and (D2) applies to $q_{r-1}=\vartheta_1(\ell_{p_r})^3q_r$ on $\{\ell_{p_t}=\mu\}$, on which
+$\ell_{p_r}$ is nonconstant (distinct pairs give independent forms), so $\vartheta_1(\ell_{p_r})^3\not\equiv0$ there. Then
+$f/J^3=q_M$ is entire.
+\end{proof}
+
+\subsection{The quotient and the count}
+
+\begin{lemma}\label{lem:quotient}
+Let $N\ge2$, $\Nphi=3N$, $\Psi\in\mathcal K_N$, $f=\widehat\Psi$. Then $f/J^3=A(U)$ for some $A\in\Theta_3^{(N)}$.
+\end{lemma}
+
+\begin{proof}
+$\mathcal A:=f/J^3$ is entire by Lemmas~\ref{lem:formulation} and~\ref{lem:division}, and by Lemma~\ref{lem:theta}(e) (off the
+coincidence set, then everywhere by continuity)
+\[
+\mathcal A(u+e_k)=(-1)^{N-1}\mathcal A(u),\qquad \mathcal A(u+\tau e_k)=(-1)^{N-1}e^{-3\pi\iu(2U+\tau)}\mathcal A(u).
+\]
+Fix $u$ and $i\neq k$ and put $g(w):=\mathcal A(u+w(e_i-e_k))$; $U$ is constant along this line. Then $g(w+1)=g(w)$, and,
+applying the $k$-relation backwards at $v-\tau e_k$ and then the $i$-relation, $\mathcal A(v+\tau e_i-\tau e_k)=\mathcal A(v)$ for every $v$, so
+$g(w+\tau)=g(w)$. Thus $g$ is entire and doubly periodic, hence constant (Liouville). Moving along one direction
+$e_k-e_1$ at a time, $\mathcal A(u+c)=\mathcal A(u)$ whenever $\sum_kc_k=0$, so $\mathcal A(u)=\mathcal A(Ue_1)=:A(U)$ with $A$ entire; its relations are those of
+$\mathcal A$ at $u=se_1$.
+\end{proof}
+
+\begin{lemma}\label{lem:converse}
+Let $N\ge1$, $\Nphi=3N$ and $A\in\Theta_3^{(N)}$. Then $f_A(u):=A(U)J(u)^3$ is the holomorphic part of a unique
+$\Psi_A\in\bigwedge^N\C^{\Nphi}$, $\Psi_A\in\mathcal K_N$, and $A\mapsto\Psi_A$ is linear and injective.
+\end{lemma}
+
+\begin{proof}
+$f_A$ is entire and antisymmetric. By Lemma~\ref{lem:theta}(d),(f), $f_A(u+e_k)=f_A(u)$ and
+$f_A(u+\tau e_k)=(-1)^{N-1}e^{-3\pi\iu(2U+\tau)}(-1)^{N-1}e^{-3\iu\pi(N-1)\tau-6\pi\iu(Nu_k-U)}f_A(u)=e^{-3\pi\iu N(2u_k+\tau)}f_A(u)$,
+so $f_A=\widehat{\Psi_A}$ for a unique $\Psi_A$ by Lemma~\ref{lem:holo}(a). For $N\ge2$,
+$f_A=(u_1-u_2)^3A(U)[\vartheta_1(u_1-u_2)/(u_1-u_2)]^3\prod_{(i,k)\neq(1,2)}\vartheta_1(u_i-u_k)^3$ with an entire cofactor, so
+$\Psi_A\in\mathcal K_N$ by Lemma~\ref{lem:formulation}; for $N=1$ there is nothing to prove. If $A\not\equiv0$ then $f_A\not\equiv0$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:kernel}]
+For $N=1$ every one-particle state is in $\mathcal K_1$, and $\C^{3}$ is three-dimensional; the holomorphic parts are the
+space $\Theta_3[0;e^{-3\iu\pi\tau}]=\Theta_3^{(1)}$, and $J=1$. For $N\ge2$, Lemmas~\ref{lem:quotient} and~\ref{lem:converse} give
+mutually inverse linear maps between $\mathcal K_N$ and $\Theta_3^{(N)}$ (injectivity of $\Psi\mapsto\widehat\Psi$), so
+$\dim\mathcal K_N=3$ by Lemma~\ref{lem:theta}(f), with basis $\Psi_j:=\Psi_{A_j}$. By Lemma~\ref{lem:holo}(c),
+$\Ff(T_y)$ shifts $U$ by $N/\Nphi=1/3$ and leaves $J$ invariant, so $\Ff(T_y)\Psi_j=e^{2\pi\iu a_j}\Psi_j$, and
+$\Nphi a_j=jN+N(N-1)/2$. $\Ff(T_x)$ multiplies by $e^{2\pi\iu U+\iu\pi\tau/3}$ and shifts $U$ by $\tau/3$; completing the square in
+the series,
+$\vartheta\bigl[\begin{smallmatrix}a\\b\end{smallmatrix}\bigr](z+\tau|3\tau)=e^{-\iu\pi\tau/3-2\pi\iu(z+b)/3}\vartheta\bigl[\begin{smallmatrix}a+1/3\\b\end{smallmatrix}\bigr](z|3\tau)$,
+and $\vartheta[{}^{a+1}_{\;b}]=\vartheta[{}^a_b]$; with $z=3U$ this gives $\Ff(T_x)\Psi_j=e^{-2\pi\iu b/3}\Psi_{j+1}$ with
+$b=(N-1)/2$. The last statement is the relation to the torus explained above.
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{prop:overfill}]
+Let $\Psi$ be in the joint kernel. Lemmas~\ref{lem:formulation} and~\ref{lem:division} do not use $\Nphi=3N'$, so
+$\mathcal A:=\widehat\Psi/J^3$ is entire with the relations of Lemma~\ref{lem:theta}(e) (with $N'$ in place of $N$). Put $m:=\Nphi-3N'<0$
+and $g(w):=\mathcal A(u+w(e_1-e_2))$ for fixed $u$. As in Lemma~\ref{lem:quotient}, $g(w+1)=g(w)$, and the same two-step
+computation with the general relation gives $g(w+\tau)=e^{-2\pi\iu m(u_1-u_2+2w+\tau)}g(w)$. So
+$g\in\Theta_{2m}[0;e^{-2\pi\iu m(u_1-u_2+\tau)}]$ with $2m\le-2$, and $g=0$ by Lemma~\ref{lem:theta}(a). Hence $\mathcal A\equiv0$,
+$\widehat\Psi\equiv0$ and $\Psi=0$. At $\Nphi=3N$ a sector with $N'>N\ge1$ particles has $N'\ge2$ and $\Nphi<3N'$.
+\end{proof}

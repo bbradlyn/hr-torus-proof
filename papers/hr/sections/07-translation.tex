@@ -1,0 +1,157 @@
+\section{The magnetic translation}\label{sec:translation}
+
+\begin{lemma}[the magnetic translation transports one orbital]\label{lem:theta}
+In Setting~\ref{set:index}, let $H$ satisfy (H1) and (H2), and let Assumption~\ref{ass:gap} hold for sectors
+$\nn_N=(n_{\up,N},n_{\dn,N})$. Then:
+\begin{enumerate}[(a)]
+\item $[\Theta,\Nup]=[\Theta,\Ndn]=0$, $[\Theta,H_N]=0$, and $[\Theta,P]=0$.
+\item $\Theta^*Q\Theta-Q=n_{N\up}-n_{0\up}$. With $T_-:=-n_{0\up}$ and $T_+:=n_{N\up}$, the operators $T_\pm$ are
+self-adjoint and sector-preserving, $\norm{T_\pm}=1$, $\iota(T_\pm)\in\Alg(\partial_\pm)$, and
+$\Theta^*Q\Theta-Q=T_-+T_+$.
+\item $e^{2\pi\iu(Q+T_-)}=e^{2\pi\iu(Q+T_+)}=\one$; moreover $e^{2\pi\iu(Q_++T_+)}=e^{2\pi\iu Q_m}=\one$.
+\item $\Tr(Pn_{j\up})=p\,n_{\up,N}/\Nphi$ for every $j\in\Z_{\Nphi}$; in particular $\Tr(PT_-)=-p\,n_{\up,N}/\Nphi$.
+\item $\Theta^*K_\pm\Theta\in\AS_{\partial_\pm}$, and $\Tr(P\,\Theta^*K_-\Theta)=\Tr(PK_-)$; hence $\Tr(P\Tt)=\Tr(PT_-)$ exactly.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(a) $\Theta$ commutes with $\Nup$ and $\Ndn$ by Lemma~\ref{lem:sectors}(iii). By (H2) and the translation invariance of
+Lebesgue measure on $\Tor_N$, for every Borel set $\mathcal D\subset\Tor_N$,
+\[
+\Theta^*H_{\mathcal D}\Theta=\int_{\mathcal D}h_{R+\kappa\ex}\,\dd R=\int_{\mathcal D+\kappa\ex}h_R\,\dd R=H_{\mathcal D+\kappa\ex};
+\]
+with $\mathcal D=\Tor_N$ this gives $[\Theta,H_N]=0$. By Lemma~\ref{lem:sectors}(ii), $P=\one_{[E_1,E_p]}(H_N)\Psec{\nn_N}$; the
+first factor is a function of $H_N$ and the second a function of $\Nup$ and $\Ndn$, and $\Theta$ commutes with both.
+Hence $[\Theta,P]=0$.
+
+(b) By Lemma~\ref{lem:sectors}(iii), $\Theta^*Q\Theta=\sum_{j=0}^{N-1}n_{j+1,\up}=\sum_{j=1}^Nn_{j\up}=Q-n_{0\up}+n_{N\up}$,
+since the classes of $0,\dots,N$ in $\Z_{\Nphi}$ are distinct. The operators $n_{0\up}$ and $n_{N\up}$ are nonzero
+orthogonal projections commuting with $\Nup$ and $\Ndn$, so $T_\pm$ are self-adjoint and sector-preserving with
+$\norm{T_\pm}=1$, and $\iota(T_-)\in\Alg(\Col(0))=\Alg(\cutm)$, $\iota(T_+)\in\Alg(\Col(N))=\Alg(\cutp)$ by
+Lemma~\ref{lem:bandcharges}(i).
+
+(c) $Q+T_-=Q_{\{1,\dots,N-1\}}$ and $Q+T_+=Q_{\{0,\dots,N\}}$ are band charges, with spectra in $\Z$
+(Lemma~\ref{lem:charges-elementary}), so their exponentials $e^{2\pi\iu(\cdot)}$ equal $\one$. Since $\Gp\subset\Gam$ does not
+contain the class of $N$, $Q_++T_+=Q_{\Gp\cup\{N\}}$; this and $Q_m$ are band charges, and the same argument applies.
+
+(d) By (a), $\Theta P\Theta^*=P$, so by the cyclicity of the trace and Lemma~\ref{lem:sectors}(iii),
+$\Tr(Pn_{j+1,\up})=\Tr(P\Theta^*n_{j\up}\Theta)=\Tr(\Theta P\Theta^*n_{j\up})=\Tr(Pn_{j\up})$ for every $j$. Hence
+$j\mapsto\Tr(Pn_{j\up})$ is constant on $\Z_{\Nphi}$, and, because $P=P\Psec{\nn_N}$ and
+$\Nup\Psec{\nn_N}=n_{\up,N}\Psec{\nn_N}$,
+\[
+\Nphi\Tr(Pn_{0\up})=\sum_{j\in\Z_{\Nphi}}\Tr(Pn_{j\up})=\Tr(P\Nup)=\Tr(P\Nup\Psec{\nn_N})=n_{\up,N}\Tr(P)=p\,n_{\up,N} .
+\]
+Thus $\Tr(Pn_{j\up})=p\,n_{\up,N}/\Nphi$ and $\Tr(PT_-)=-p\,n_{\up,N}/\Nphi$.
+
+(e) Since $[\Theta,H_N]=0$, we have $\Theta^*\tau_t(A)\Theta=\tau_t(\Theta^*A\Theta)$ for every operator $A$. By the
+identity in (a) and Lemma~\ref{lem:charges-elementary}, therefore,
+\[
+\Theta^*K_-\Theta=\int\Wg(t)\,\tau_t(\Theta^*J_-\Theta)\,\dd t,\qquad
+\Theta^*J_-\Theta=\iu\bigl[\Theta^*H_{\Tor_N^-}\Theta,\Theta^*Q\Theta\bigr]=\iu\bigl[H_{\Tor_N^-+\kappa\ex},Q_{\Gam+1}\bigr],
+\]
+which is the current of Lemma~\ref{lem:split}(iii) for $j_0=1$, and $\Theta^*K_-\Theta$ is its dressing. By
+Lemma~\ref{lem:Klocal}, $\Theta^*K_-\Theta\in\AS_{\Col(1)}$ with prefactor exponent $\frac52$ and the constants of $K_-$. Now
+$\Col(1)=\Str((\kappa-\delta_x,\kappa+\delta_x))$ is contained in $\Str((I_-)_\kappa)$ with $I_-=(-\delta_x,\delta_x)$, hence in
+$\fat{(\cutm)}{\kappa+\delta_x}$ by Lemma~\ref{lem:strips}; so $\fat{\Col(1)}r\subset\fat{(\cutm)}{r+a}$ for every $r\ge0$,
+with $a:=\kappa+\delta_x\le4\delta_0$. Given $r\ge a$, the approximant of $\Theta^*K_-\Theta$ at radius $r-a$ relative to
+$\Col(1)$ lies in $\Alg(\fat{(\cutm)}r)$, and its error is at most $C_kN^{5/2}(1+r-a)^{-k}\le(1+a)^kC_kN^{5/2}(1+r)^{-k}$,
+because $1+r\le(1+r-a)(1+a)$; for $r<a$ the approximant $0$ has error $\norm{K_-}\le CN^2\le(1+a)^kCN^2(1+r)^{-k}$. Hence
+$\Theta^*K_-\Theta\in\AS_{\cutm}$ with prefactor exponent $\frac52$. In the same way $\Theta^*K_+\Theta$ is the dressing of the
+current of Lemma~\ref{lem:split}(iii) for $j_0=1$ at the cut $\Col(N+1)\subset\fat{(\cutp)}{\kappa+\delta_x}$, and
+$\Theta^*K_+\Theta\in\AS_{\cutp}$. Finally $\Tr(P\Theta^*K_-\Theta)=\Tr(\Theta P\Theta^*K_-)=\Tr(PK_-)$, and therefore, with
+$\Tt=T_--\Theta^*K_-\Theta+K_-$ (Definition~\ref{def:bbdfobjects} for $U=\Theta$), $\Tr(P\Tt)=\Tr(PT_-)$.
+\end{proof}
+
+\begin{corollary}[the translation corollary]\label{cor:translation}
+In Setting~\ref{set:index}, let $H$ satisfy (H1) and (H2), and let Assumption~\ref{ass:gap} hold for sectors
+$\nn_N=(n_{\up,N},n_{\dn,N})$. Then $U=\Theta$ satisfies Assumption~\ref{ass:U}, with $T_\pm$ as in
+Lemma~\ref{lem:theta}, and with (U2) and the two relations in (U4) holding exactly; and there are integers $n_N$ such
+that for every $k$ there is $C_k$ with
+\[
+\Bigl\lvert\,p\,\frac{n_{\up,N}}{\Nphi}-n_N\Bigr\rvert\le C_kN^{-k}\qquad\text{for all }N\in\mathcal N .
+\]
+\end{corollary}
+
+\begin{proof}
+(U1) and (U2), the latter exactly, are Lemma~\ref{lem:theta}(a), and (U3) is
+Lemma~\ref{lem:theta}(e). For (U4), the operators $T_\pm$ of
+Lemma~\ref{lem:theta}(b) are self-adjoint and sector-preserving, with $\norm{T_\pm}=1$, so that one may take $m_T=0$; they
+lie in $\AS_{\partial_\pm}$, since $\iota(T_\pm)\in\Alg(\partial_\pm)$ is an approximant with error $0$ at every radius; and
+$\Theta^*Q\Theta-Q=T_-+T_+$ and $e^{2\pi\iu(Q+T_\pm)}=\one$ hold exactly by Lemma~\ref{lem:theta}(b) and (c). So $U=\Theta$
+satisfies Assumption~\ref{ass:U}, and Theorem~\ref{thm:index} gives integers $n'_N$ with
+$\abs{\Tr(PT_-)-n'_N}\le C_kN^{-k}$ for all $N\in\mathcal N$. By Lemma~\ref{lem:theta}(d), $\Tr(PT_-)=-p\,n_{\up,N}/\Nphi$, and
+$n_N:=-n'_N$ satisfies the claim.
+\end{proof}
+
+This is the counterpart, for lowest-Landau-level Hamiltonians, of the fractional Lieb--Schultz--Mattis theorem
+\cite[Corollary~5.2]{BBDF21}: the average up-spin charge $n_{\up,N}/\Nphi$ of an orbital, multiplied by the
+dimension of a uniformly gapped patch at the bottom of the sector (in the sense of Section~\ref{sec:intro}, that is,
+Assumption~\ref{ass:gap}), is asymptotically an integer.
+
+\begin{corollary}[half filling with zero spin polarization]\label{cor:classwide}
+Let $\mathcal N$ consist of even integers, let the tori and $H$ be as in Setting~\ref{set:index} with (H1) and (H2),
+and suppose that Assumption~\ref{ass:gap} holds for the sectors $\nn_N=(N/2,N/2)$, $N\in\mathcal N$. Then $p\in4\Z$. In
+particular, no Hamiltonian satisfying (H1) and (H2) has, in the sectors $(N/2,N/2)$ along an infinite set of
+even $N$, a uniformly gapped patch at the bottom of the spectrum (in the sense of Section~\ref{sec:intro}) whose
+dimension is not divisible by four; for instance, of dimension ten.
+\end{corollary}
+
+\begin{proof}
+For $\nn_N=(N/2,N/2)$, $n_{\up,N}/\Nphi=(N/2)/(2N)=\frac14$, so Corollary~\ref{cor:translation} with $k=1$ gives integers $n_N$
+and a constant $C$ with $\dist(p/4,\Z)\le\abs{p/4-n_N}\le CN^{-1}$ for all $N\in\mathcal N$. The left-hand side does not depend on $N$, and
+$\mathcal N$ is infinite, hence unbounded; letting $N\to\infty$ in $\mathcal N$ gives $\dist(p/4,\Z)=0$, that is, $p\in4\Z$.
+The second sentence restates the first: a patch of dimension $p$ as described is exactly Assumption~\ref{ass:gap} for the
+sectors $(N/2,N/2)$.
+\end{proof}
+
+\begin{corollary}[odd $N$ and spin one half]\label{cor:classwide-odd}
+Let $\mathcal N$ consist of odd integers, let the tori and $H$ be as in Setting~\ref{set:index} with (H1) and (H2),
+and let $\nn^\pm_N:=((N\pm1)/2,(N\mp1)/2)$.
+\begin{enumerate}[(i)]
+\item There are no $p\in\N$, $\Delta\ge0$ and $\gamma>2\Delta$ for which Assumption~\ref{ass:gap} holds for the sectors
+$\nn^+_N$ along an infinite subset of $\mathcal N$; and likewise for $\nn^-_N$.
+\item For every $D\in\N$ and $\gamma>0$, for all but finitely many $N\in\mathcal N$ the restriction of $H_N$ to
+$\sect{\nn^\pm_N}$ has more than $D$ eigenvalues, counted with multiplicity, in $[E_1(N),E_1(N)+\gamma)$, where
+$E_1(N)$ is its lowest eigenvalue.
+\end{enumerate}
+\end{corollary}
+
+\begin{proof}
+(i) Suppose that Assumption~\ref{ass:gap} holds for the sectors $\nn^+_N$, $N\in\mathcal N'$, with $\mathcal N'\subset\mathcal N$
+infinite and some $p\in\N$, $\Delta\ge0$, $\gamma>2\Delta$. The tori and $H$, restricted to $\mathcal N'$, are as in
+Setting~\ref{set:index} with (H1) and (H2), so Corollary~\ref{cor:translation} applies along $\mathcal N'$. Since
+$n_{\up,N}/\Nphi=\frac{N+1}2\cdot\frac1{2N}=\frac14+\frac1{4N}$, it gives integers $n_N$ with
+\[
+\dist\Bigl(\frac p4+\frac p{4N},\Z\Bigr)\le C_kN^{-k}\qquad(N\in\mathcal N')
+\]
+for every $k$. If $p\notin4\Z$, then $\dist(p/4,\Z)\ge\frac14$, since $p/4\in\frac14\Z\setminus\Z$; for $N\ge2p$ we have
+$p/(4N)\le\frac18$, so the left-hand side is at least $\frac18$, which contradicts the bound with $k=1$ for large
+$N\in\mathcal N'$. If $p\in4\Z$, then for $N>p/2$ we have $0<p/(4N)<\frac12$, so the left-hand side equals $p/(4N)$, and the
+bound with $k=2$ gives $p/(4N)\le C_2N^{-2}$, that is $N\le4C_2/p$, for all large $N\in\mathcal N'$, which is impossible
+because $\mathcal N'$ is unbounded. For the sectors $\nn^-_N$ the same argument applies to
+$n_{\up,N}/\Nphi=\frac14-\frac1{4N}$, with $\frac p4-\frac p{4N}$ in place of $\frac p4+\frac p{4N}$.
+
+(ii) We treat $\nn^+_N$; the case of $\nn^-_N$ is identical. Suppose the claim fails for some $D\in\N$ and $\gamma>0$.
+Then there is an infinite set $\mathcal N_1\subset\mathcal N$ such that for every $N\in\mathcal N_1$ the restriction of $H_N$ to
+$\sect{\nn^+_N}$ has at most $D$ eigenvalues in $[E_1(N),E_1(N)+\gamma)$. The sector $\sect{\nn^+_N}$ has dimension
+$\binom{2N}{(N+1)/2}\binom{2N}{(N-1)/2}\ge2N$, so, removing finitely many $N$, we may assume that it has at least $D+1$
+eigenvalues $E_1(N)\le\dots\le E_{D+1}(N)$, counted with multiplicity; then $E_{D+1}(N)-E_1(N)\ge\gamma$ for
+$N\in\mathcal N_1$. By compactness of $[0,\infty]$, there is an infinite $\mathcal N_2\subset\mathcal N_1$ such that, for each
+$j\le D+1$, $E_j(N)-E_1(N)$ converges in $[0,\infty]$ as $N\to\infty$ in $\mathcal N_2$, to a limit $\bar E_j$. Then
+$0=\bar E_1\le\bar E_2\le\dots\le\bar E_{D+1}$ and $\bar E_{D+1}\ge\gamma>0$. Let $p$ be the number of indices $j$ with
+$\bar E_j=0$, so that $1\le p\le D$ and $\bar E_{p+1}>0$, and put $\mu:=\min\{\bar E_{p+1},1\}>0$. For all large
+$N\in\mathcal N_2$, $E_p(N)-E_1(N)\le\frac\mu8$ and $E_{p+1}(N)-E_1(N)\ge\frac{3\mu}4$, hence $E_{p+1}(N)-E_p(N)\ge\frac{5\mu}8$.
+With $\Delta:=\frac\mu8$ and the gap $\frac\mu2>2\Delta$ in place of $\gamma$, Assumption~\ref{ass:gap} holds for the
+sectors $\nn^+_N$ along an infinite subset of $\mathcal N$, with $p$, $\Delta$ and the gap independent of $N$. This
+contradicts (i).
+\end{proof}
+
+\begin{remark}[scope of the class]\label{rem:class-scope}
+Corollaries~\ref{cor:classwide} and \ref{cor:classwide-odd} use only (H1), (H2) and the gap in the sector. They do not
+use frustration-freeness or the existence or number of zero modes. The hollow-core Hamiltonian is the only
+Hamiltonian whose membership in the class is proved here (Corollary~\ref{cor:hc-in-class}); which other
+lowest-Landau-level Hamiltonians satisfy (H1) and (H2) is not examined. The obstruction in
+Corollary~\ref{cor:classwide-odd} comes from the density defect $\pm p/(4N)$ of the sectors $\nn^\pm_N$, which forces
+an unpaired spin; it applies to every member of the class and therefore carries no information on whether the
+system away from that defect is gapped.
+\end{remark}

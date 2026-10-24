@@ -1,0 +1,69 @@
+% sections/08-bessel.tex
+\section{The four-body Bessel bound}\label{sec:bessel}
+
+The four-body coefficient of $\HT^2$ is $\LL_4(W_4(h\otimes h)W_4^*)$, a product of two pair operators on disjoint pairs, and its
+comparison with $\KT^{(4)}$ is not exact: the periodized planar target $\mathcal T_4$ of Proposition~\ref{prop:parts}(d) involves only
+the channels $D\le23$ of the relative coordinate of the two pair centres, and these channels are localized. The bound below
+compares $\mathcal T_4$ with $\LL_4(W_4(h\otimes h)W_4^*)$ up to a factor $1+\Ec_{22}(\Tor)$; the proof reduces it to a Gram matrix of
+the same kind as the local Gram matrix of Section~\ref{sec:local}, now for the pair centres.
+
+\begin{lemma}[four-body Bessel bound]\label{lem:bessel}
+Let $\mathcal Z_4:=\Pp_4\bigl(\sum_{D=1}^{23}\kb{\omega_{D,1}}{\omega_{D,1}}\otimes\one\bigr)$ on $\h^{\otimes4}$, and let $h\otimes h$ act on the
+particles $(1,2)$ and $(3,4)$. Then
+\[
+\mathcal Z_4\le\bigl(1+\Ec_{22}(\Tor)\bigr)\,h\otimes h .
+\]
+\end{lemma}
+
+\begin{proof}
+Let $\Fib=\Fib_{\eta_1}:\h^{\otimes2}\to\U_2$ be the fibering map of Proposition~\ref{prop:orbital}, applied to the particles $(1,2)$ and to the
+particles $(3,4)$; it maps $\h^{\otimes4}$ to $\U_2\otimes\U_2$, the two-particle space of the torus $\Tor_2=\R^2/\sqrt2\Lam$, whose two
+particles are the pair centres $\zeta_{12}=(r_1+r_2)/\sqrt2$ and $\zeta_{34}=(r_3+r_4)/\sqrt2$. Their Jacobi coordinates are
+$\rho_3=(\zeta_{12}-\zeta_{34})/\sqrt2$ and $\zeta=(\zeta_{12}+\zeta_{34})/\sqrt2$. For $d\ge0$ let $\Fib'_d$ be the fibering map of the torus
+$\Tor_2$ with the relative state $\eta_d(\rho_3)$; it maps $\U_2\otimes\U_2$ to the centre-of-mass space $\U''$ of $\Tor_2$, the lowest
+Landau level of $\R^2/2\Lam$. Since $\omega_{D,1}=\eta_1(\rho_1)\eta_1(\rho_2)\eta_{D-1}(\rho_3)$, Fubini gives
+$\Fib_{\omega_{D,1}}=\Fib'_{D-1}(\Fib\otimes\Fib)$, and Lemma~\ref{lem:Pk}(c) gives
+\[
+\mathcal Z_4=\sum_{d=0}^{22}(\Fib\otimes\Fib)^*(\Fib'_d)^*\Fib'_d(\Fib\otimes\Fib)=(\Fib\otimes\Fib)^*\mathcal G^*\mathcal G(\Fib\otimes\Fib),\qquad h\otimes h=(\Fib\otimes\Fib)^*(\Fib\otimes\Fib),
+\]
+with $\mathcal G:=(\Fib'_d)_{d\le22}:\U_2\otimes\U_2\to\bigoplus_{d\le22}\U''$. Hence $\mathcal Z_4\le\norm{\mathcal G\mathcal G^*}\,h\otimes h$.
+
+By \eqref{eq:Fstar}, applied on $\Tor_2$,
+$(\Fib'_{d'})^*g=\sum_{\gamma'\in\sqrt2\Lam}\tl^{(2)}_{\gamma'}\bigl(\eta_{d'}(\rho_3)g(\zeta)\bigr)$ for $g\in\U''$, and here
+$\tl^{(2)}_{\gamma'}=t^{(2)}_{\gamma'}$: $\Tor_2$ carries $2\Nphi$ flux quanta, so its lattice translation by $\gamma'=\sqrt2(jL_x,kL_y)$
+has the sign $(-1)^{jk\cdot2\Nphi}=1$. A magnetic translation of the second
+particle by $a$ acts as $t_{-a/\sqrt2}$ on $\rho_3$ and as $t_{a/\sqrt2}$ on $\zeta$ (as in Lemma~\ref{lem:jacobi}(ii)). Hence, writing
+$\gamma'=\sqrt2\gamma$ with $\gamma\in\Lam$,
+\[
+\Fib'_d(\Fib'_{d'})^*=\sum_{\gamma\in\Lam}\ip{\eta_d}{t_{-\gamma}\eta_{d'}}\;t_\gamma\big|_{\U''},\qquad
+\mathcal G\mathcal G^*=\sum_{\gamma\in\Lam}\Dis^{(22)}(\beta(-\gamma))\otimes t_\gamma\big|_{\U''},
+\]
+the series converging absolutely. Each $t_\gamma$, $\gamma\in\Lam$, is unitary on $\U''$ by
+Lemma~\ref{lem:irred}, since $\Lam$ is contained in the lattice $2\Lam/(4\Nphi)$ of $\R^2/2\Lam$. The term $\gamma=0$ is the identity,
+and $\norm{\Dis^{(22)}(\beta(-\gamma))}=\mu_{22}(\abs\gamma)$. So $\norm{\mathcal G\mathcal G^*}\le1+\Ec_{22}(\Tor)$.
+\end{proof}
+
+In these coordinates the relative coordinate $\rho_3$ of the two pair centres carries unit charge, and it equals the difference
+of the two pair centres of mass; so the image displacements in the proof are those of a single electron, and $\Ec_{22}$ is the
+same lattice sum as for the local Gram matrix of the orbitals $\chi_0^R,\dots,\chi_{22}^R$.
+
+\begin{proposition}[four-body comparison]\label{prop:four}
+On $\Fock$, for every rectangular torus, with $\Ec_m=\Ec_m(\Tor)$,
+\begin{gather*}
+\mathcal T_4\le(1+\Ec_{22})\,\LL_4\bigl(W_4(h\otimes h)W_4^*\bigr)\quad\text{and}\\
+\LL_4\bigl(W_4(h\otimes h)W_4^*\bigr)-\KT^{(4)}\ge-(1+\Ec_{23})^2\bigl(1222\,\eps+2444\,\Ec_{22}\bigr)\HT .
+\end{gather*}
+\end{proposition}
+
+\begin{proof}
+$W_4\omega_{D,1}=\sqrt6A_4\omega_{D,1}$ with $A_4$ acting on the relative variables, so
+$\kb{W_4\omega_{D,1}}{W_4\omega_{D,1}}\otimes\one=6A_4(\kb{\omega_{D,1}}{\omega_{D,1}}\otimes\one)A_4$, and by Lemma~\ref{lem:Pk}(b) its periodized
+image is $6A_4\Pp_4(\kb{\omega_{D,1}}{\omega_{D,1}}\otimes\one)A_4$. The operator $\Pp_4(\kb{\omega_{D,1}}{\omega_{D,1}}\otimes\one)$ maps into
+$\bigwedge^2\h\otimes\bigwedge^2\h$, and on that space $6A_4XA_4=W_4XW_4^*$ on $\bigwedge^4\h$ (Lemma~\ref{lem:lift}(iv)). Hence
+$\mathcal T_4=\LL_4(W_4\mathcal Z_4W_4^*)$, and Lemma~\ref{lem:bessel}, conjugation by $W_4$ and the lift preserve order. For the second
+inequality, Proposition~\ref{prop:parts}(d) gives $\KT^{(4)}\le\mathcal T_4+1222\eps(1+\Ec_{23})^2\HT$ and $\mathcal T_4\le2444(1+\Ec_{23})^2\HT$; so
+\[
+\LL_4(W_4(h\otimes h)W_4^*)-\KT^{(4)}\ge\frac{\mathcal T_4}{1+\Ec_{22}}-\mathcal T_4-1222\eps(1+\Ec_{23})^2\HT\ge-\Ec_{22}\,\mathcal T_4-1222\eps(1+\Ec_{23})^2\HT,
+\]
+using $\mathcal T_4\ge0$, and the bound on $\mathcal T_4$ finishes the proof.
+\end{proof}

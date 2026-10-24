@@ -1,0 +1,227 @@
+\section{Introduction}\label{sec:intro}
+
+\paragraph{The model.}
+Consider $N$ electrons of spin one half in the lowest Landau level of a flat torus pierced by
+$\Nphi=2N$ flux quanta, so that the filling factor is one half, and let them interact through the
+\emph{hollow-core} interaction: the two-body interaction which, for a pair of electrons in the plane, is
+the orthogonal projection onto the states of relative angular momentum one. In the language of
+pseudopotentials \cite{Hal83} it is the interaction with $V_1=1$ and $V_m=0$ for $m\neq1$. A pair with odd
+relative angular momentum has an antisymmetric orbital wave function and therefore a symmetric spin wave
+function, so the interaction acts only on spin-triplet pairs; spin-singlet pairs, whose relative angular
+momentum is even, cost no energy even at contact, whence the name. The Hamiltonian $H_N$ of this paper
+(Definition~\ref{def:hamiltonian}) is the periodization of this interaction on the torus, in second
+quantization on the lowest-Landau-level Fock space. It conserves the numbers $\Nup$ and $\Ndn$ of
+electrons of each spin, commutes with spin rotations and with the magnetic translations of the torus, and
+is nonnegative. Energies are measured in units in which a planar pair of relative angular momentum one has
+energy one (Lemma~\ref{lem:units}); statements about gaps that are uniform in $N$ refer to these units.
+
+Haldane and Rezayi \cite{HR88} proposed a spin-singlet incompressible state at filling one half; it has zero energy
+for this interaction \cite{RR96,GFN97}. On the torus the zero modes form a degenerate space. At even $N$, in the
+sector $\Nup=\Ndn=N/2$, the kernel of $H_N$ is ten-dimensional at every aspect ratio, and at odd $N$ each
+of the sectors $\Nup-\Ndn=\pm1$ contains exactly two zero modes. Read and Rezayi \cite{RR96} wrote down the
+ten states (the count of ten was first published by Keski-Vakkuri and Wen \cite{KVW93}), and their
+completeness is proved in Appendix~\ref{app:kernel}; see Theorem~\ref{thm:kernel}. Whether these zero modes are the ground
+states of a gapped phase has been debated. The count of ten was read as the topological ground-state
+degeneracy of a non-Abelian phase \cite{KVW93,GFN97,Ino99}; in the description of the Haldane--Rezayi state
+by a non-unitary conformal field theory of central charge $c=-2$, the ten states were attributed to a
+logarithmic partner of the identity field \cite{GFN97}. Read and Green \cite{RG00} argued instead that the
+Haldane--Rezayi state is the critical point of a transition between weak- and strong-pairing phases of
+spin-singlet $d$-wave pairing, with gapless bulk excitations, and that both neighbouring gapped phases have
+eight states on the torus; general arguments that trial states built from non-unitary conformal field
+theories do not describe gapped phases are given in \cite{Rea09a,Rea09b}, and numerical studies of small
+systems \cite{CRE19,NPBG23} are consistent with a vanishing gap. To our knowledge the question has not been
+settled rigorously.
+
+\paragraph{The result.}
+We prove that the zero modes are not separated from the rest of the spectrum by a gap that is uniform in
+the number of electrons.
+
+\begin{theorem*}[informal version of Theorem~\ref{thm:main}]
+Fix $\lambda>0$, and let $H_N$ be the hollow-core Hamiltonian on the rectangular torus with side lengths
+$L_x$, $L_y$, $L_x/L_y=\lambda$, pierced by $\Nphi=2N$ flux quanta. For even $N$ let
+$E_1(N)\le E_2(N)\le\cdots$ be the eigenvalues of $H_N$ in the sector $\Nup=\Ndn=N/2$, repeated according to
+multiplicity. Then $E_1(N)=\cdots=E_{10}(N)=0$, and $E_{11}(N)\to0$ as $N\to\infty$ through the even
+integers.
+\end{theorem*}
+
+In other words, there is no $\gamma>0$ such that for infinitely many $N$ the ten-dimensional space of zero
+modes is separated by $\gamma$ from the rest of the spectrum in this sector. The theorem follows from a
+stronger statement (Theorem~\ref{thm:main}(i)): if for infinitely many even $N$ the $p$ lowest eigenvalues
+of the sector lie in an interval of length $\Delta$ and are separated from the rest of the sector by a gap
+$\gamma>2\Delta$, with $p$, $\Delta$ and $\gamma$ independent of $N$, then $p$ is divisible by four. We call
+such eigenvalues a \emph{uniformly gapped patch} of dimension $p$ at the bottom of the sector: along an infinite
+set of $N$, the width of the patch is less than half of its gap to the rest of the sector, uniformly in $N$. The
+same condition for a general Hamiltonian and general sectors is Assumption~\ref{ass:gap}, and the term is used
+only in this sense; every result stated below for such patches holds also when the width is merely less than the gap
+(Remark~\ref{rem:weaker-gap}). Since ten is not divisible by four, the eleventh eigenvalue cannot stay away from zero. At
+odd $N$ the same argument gives
+$E_3(N)\to0$ in each of the sectors $\Nup-\Ndn=\pm1$, which contain two zero modes each
+(Corollary~\ref{cor:oddN}).
+
+\paragraph{The index theorem of Bachmann, Bols, De Roeck and Fraas.}
+Our tool is the index theorem of \cite{BBDF21} for gapped quantum lattice systems with a conserved charge.
+Suppose that a charge-conserving Hamiltonian of finite range on a lattice has a patch of $p$ eigenvalues at
+the bottom of its spectrum, separated from the rest by a gap, and that a locality-preserving,
+charge-conserving unitary $U$ leaves the corresponding spectral subspace invariant. Then the charge
+transported by $U$ across a cut, averaged over the patch, lies in $p^{-1}\Z$ up to errors that vanish faster
+than any power of the size of the system \cite[Theorem~3.2]{BBDF21}. When $U$ is a lattice translation the
+transported charge is the average charge of a slab, and the theorem becomes a fractional
+Lieb--Schultz--Mattis theorem \cite[Corollary~5.2]{BBDF21}, extending \cite{LSM61,Osh00,Has04,NS07}.
+
+In our setting $U$ is the magnetic translation $\Theta$ by one Landau-gauge orbital, which commutes with
+$H_N$, $\Nup$ and $\Ndn$; the charge is the number of up-spin electrons in a band of $N$ consecutive
+orbitals; and one application of $\Theta$ moves exactly one orbital's worth of up-spin charge across each of
+the two boundaries of the band (Lemma~\ref{lem:theta}). By translation invariance every orbital carries, on
+average over a spectral patch of the sector $(N/2,N/2)$, the up-spin charge $(N/2)/\Nphi=1/4$. The index
+theorem therefore requires that $p/4$ be an integer up to $\Onf$, hence exactly, since $p$ does not depend
+on $N$. For the ten zero modes, $10/4=5/2$ is a half-integer.
+
+\paragraph{Why the index theorem does not apply as written.}
+Two features of the lowest Landau level stand in the way.
+
+\emph{The lowest Landau level is not a lattice.} The theorem of \cite{BBDF21} is formulated on a finite graph
+with a finite-dimensional space at each vertex, for Hamiltonians that are sums of uniformly bounded terms of
+bounded range, and the locality of operators is measured in the graph. The natural basis of the lowest
+Landau level of the torus, the Landau-gauge orbitals $\psi_j$, $j\in\Z_{\Nphi}$, is localized in one
+direction only: $\psi_j$ is a Gaussian of width one magnetic length about the line $x=2\pi j/L_y$, extended
+along it. In this basis $H_N$ is a ring of $\Nphi$ orbitals in which pairs of orbitals at index distance up
+to order $L_y$ interact (Theorem~\ref{thm:localform}(c)), and the velocity given by the standard
+Lieb--Robinson bound for this chain, measured in orbitals per unit time, grows with $L_y$; a heuristic count,
+which we do not make precise, puts it of order $L_y^2$. (In the form of Theorem~\ref{thm:localform}(c), the pair
+weights $2d\,e^{-\kappa^2d^2/4}$ of the pairs that contain a given orbital sum to order $\kappa^{-2}$, the pair
+operators $\bcen\nu n$ have norms at most of order $\kappa^{-2}$, and the prefactor is $\kappa^3$; so the part of
+$H_N$ that does not commute with an even operator at one orbital has norm at most of order $\kappa^{-1}$, and its
+range is of order $\kappa^{-1}$ orbitals, which gives a velocity of order $\kappa^{-2}\propto L_y^2$.) The two
+boundaries of the band in the argument of
+\cite{BBDF21} are $N$ orbitals apart, and at fixed aspect ratio $N$ is of order $L_y^2$, so the time after
+which this bound no longer separates the two boundaries does not grow with $N$. The argument of
+\cite{BBDF21}, however, filters the dynamics over all times, and it needs the filtered operators to stay
+localized near the boundaries (Section~\ref{sec:index}).
+
+\emph{The gap can only be assumed in a sector.} The Fock space of the lowest Landau level contains every
+particle number, and at densities below one half the hollow-core Hamiltonian has large kernels; every state
+with at most one electron, for instance, is a zero mode. The theorem of \cite{BBDF21} assumes a gap above
+the bottom of the spectrum on the whole Hilbert space. For $H_N$ this assumption fails, and a gap can be
+assumed at most inside the sector $\Nup=\Ndn=N/2$.
+
+\paragraph{The lowest Landau level as a lattice.}
+The main new ingredient of this paper is a way to regard the lowest Landau level of the torus as a
+two-dimensional lattice system in which the hollow-core Hamiltonian is a short-range interaction of uniform
+size. We construct in Section~\ref{sec:frame} vectors $z_s$ of the lowest Landau level, indexed by the points
+$s$ of a rectangular lattice $\Slots$ of \emph{slots} whose spacings are of the order of the magnetic length,
+with the following properties.
+\begin{enumerate}[(i)]
+\item They form a tight (Parseval) frame: $\sum_s\lvert z_s\rangle\langle z_s\rvert$ is the identity on the
+lowest Landau level, exactly, for every $N$ (Proposition~\ref{prop:parseval}).
+\item Each $z_s$ is localized near the centre $\cen{s}$ of its slot, with Gaussian decay across the
+orbitals and decay faster than any power along them, with constants independent of $N$
+(Lemma~\ref{lem:localization}).
+\item Each orbital $\psi_j$ is a linear combination of the $z_s$ in a single column of slots, two lattice
+spacings wide (Lemma~\ref{lem:columns}).
+\end{enumerate}
+The $z_s$ are windowed Fourier transforms of the orbitals: smooth windows in the orbital index, about one
+magnetic length wide, multiplied by Fourier modes along the circumference. The lattice has about twice as
+many slots as there are orbitals. A redundant frame rather than an orthonormal basis is natural here: the
+lowest Landau level is a band of nonzero Chern number, and for such bands no orthonormal basis made of magnetic
+translates of finitely many functions (a system of composite Wannier functions) has finite second moments of the
+position \cite{MPPT18}. By (i) the analysis map
+$\Sa f=(\ip{z_s}{f})_{s\in\Slots}$ is an isometry, and $c(f)\mapsto\chat(\Sa f)$ extends to an isometric
+embedding $\iota$ of the algebra of operators on the lowest-Landau-level Fock space into the algebra of a
+lattice fermion system on $\Slots$ with one spin-up and one spin-down mode per slot
+(Lemma~\ref{lem:embedding}). The physical Fock space is the subspace of the lattice Fock space in which the
+modes orthogonal to the range of $\Sa$ are empty, and $\iota$ intertwines the dynamics and the gauge
+transformations generated by $\Nup$ and $\Ndn$.
+
+In this lattice the hollow-core Hamiltonian is local. We show that
+$H_N=\int_{\Tor_N}h_R\,\dd R$ exactly, where $h_R=8\pi\sum_\nu B_\nu(R)^*B_\nu(R)$ and $B_\nu(R)$ annihilates
+a spin-triplet pair at the point $R$ with relative angular momentum one (Theorem~\ref{thm:localform}); and
+that $\iota(h_R)$ is approximated, within $C_k(1+r)^{-k}$ for every $k$, by operators acting only on the
+slots within distance $r$ of $R$, with $\norm{h_R}$ and $C_k$ independent of $N$ (Proposition~\ref{prop:slotH}).
+Lieb--Robinson bounds \cite{LR72,NS06} hold for lattice fermions with even interactions \cite{NSY18}. We prove
+that the dynamics generated by $\iota(H_N)$ carries an operator supported in
+a set $X$ of slots to within distance $\rho$ of $X$, up to an error $C_k\norm{A}\abs{X}\rho^{-k}$, whenever
+$\rho\ge C_{\rm lc}(1+\abs{t})^\alpha$, for any fixed $\alpha>1$, with constants independent of $N$
+(Theorem~\ref{thm:propagation}). The two boundaries of the band are at distance of order $\sqrt N$ magnetic
+lengths, so the time up to which this bound keeps them apart now grows with $N$, and the filtered operators
+of the argument of \cite{BBDF21} stay localized near the boundaries (Lemma~\ref{lem:Klocal},
+Remark~\ref{rem:crossing}). Property (iii) makes the band charges exactly supported in strips of slots, and
+conjugation by a band charge preserves strips exactly (Lemma~\ref{lem:bandcharges}); every distance used in
+the argument is a distance between strips.
+
+We regard this embedding as a result of independent interest. It turns lowest-Landau-level Hamiltonians
+that are integrals of local terms into two-dimensional lattice fermion Hamiltonians to which the locality
+theory of lattice systems applies with constants independent of the size of the system. The device itself is not
+new: on the sphere, \cite[Section~3]{OAI26} builds a tight frame of the lowest Landau level from windowed
+Fourier modes of the orbitals, embeds the physical fermions by its analysis map into the Fock space of a larger set
+of fermionic modes, and proves there propagation and time-filter estimates with constants independent of the flux;
+it attributes the use of localized frames for the locality of fermions in the continuum to \cite{BDN24}. The frame
+constructed here is the analogue on the torus. What the index argument needs from it beyond locality is that each
+Landau-gauge orbital is exactly supported in a column of slots, so that the band charges are exactly supported in
+strips and conjugation by them preserves strips.
+
+\paragraph{The gap in a sector.}
+The assumption of a gap on the whole Hilbert space enters the proof of \cite{BBDF21} in two places: in the
+identity $[K,P]=[Q,P]$ for the generator $K$ that dresses the charge $Q$, and in the clustering of the
+spectral patch $P$ \cite[Proposition~3.1]{BBDF21}. We show that both remain true when the gap is assumed
+only inside a sector, provided they are applied to operators that conserve $\Nup$ and $\Ndn$
+(Lemma~\ref{lem:KP} and Proposition~\ref{prop:clustering}), and every operator to which the argument
+applies them does. The gap is thus assumed only where it can hold.
+
+\paragraph{The general statement.}
+The argument is not specific to the hollow-core interaction. Theorem~\ref{thm:index} is an index theorem for
+any sequence of lowest-Landau-level Hamiltonians on rectangular tori which are integrals of terms that
+conserve $\Nup$ and $\Ndn$, are uniformly bounded, and are rapidly local in the slot lattice
+(Definition~\ref{def:class}); the hollow-core Hamiltonian belongs to this class
+(Corollary~\ref{cor:hc-in-class}). For members of the class that are covariant under the magnetic
+translation it yields a constraint of Lieb--Schultz--Mattis type (Corollaries~\ref{cor:translation} and
+\ref{cor:classwide}): in the sector $\Nup=\Ndn=N/2$, a uniformly gapped patch at the bottom of the spectrum,
+in the sense defined above, has dimension divisible by four. In particular no Hamiltonian of the class has in this sector a uniformly
+gapped ground-state space of dimension ten. The finite-dimensional part of its proof, which turns the locality estimates into the integrality statement,
+has been formalized and verified in Lean~4 (Remark~\ref{rem:lean}).
+
+\paragraph{What is excluded, and what is not.}
+The theorem excludes a gapped phase whose ground-state space is the space of Haldane--Rezayi zero modes, at
+any fixed aspect ratio of a rectangular torus, and uniformly over the aspect ratios of rectangular tori whose
+shorter side exceeds a fixed length (Corollary~\ref{cor:uniform}). This is the scenario in which the degeneracy ten of the zero
+modes would be the topological ground-state degeneracy of a gapped Haldane--Rezayi phase, as in
+\cite{KVW93,GFN97,Ino99}. A uniformly gapped patch at the bottom of the sector, in the sense defined above,
+contains the ten zero modes,
+so its dimension is at least ten and, being divisible by four, at least twelve; in particular the eight-dimensional ground-state
+spaces of the gapped phases adjacent to the Haldane--Rezayi point in the picture of \cite{RG00} are not
+ground-state spaces of $H_N$ either. The theorem does \emph{not} exclude a gapped phase whose ground-state
+space strictly contains the zero modes and has dimension $12$, $16$, $\dots$: in such a phase
+$E_{11}(N)\to0$ would be a splitting inside the ground-state space, not the closing of a gap above it.
+The index theorem cannot exclude this, because the conclusions it yields here are divisibility conditions
+(Remark~\ref{rem:loophole}). To our
+knowledge no such phase has been proposed, and the expectation since \cite{RG00} is that the hollow-core
+Hamiltonian has no gap at all; that stronger statement is not proved here. The result is also purely
+asymptotic. The constants in our estimates exist but are not explicit, and through the light cone of the
+propagation bound of Theorem~\ref{thm:propagation} they are very large; the proof gives neither a rate for $E_{11}(N)\to0$ nor a value of
+$N$ beyond which $E_{11}(N)$ is below a prescribed number. At fixed circumference a separate, variational argument with spin
+twists bounds $E_{11}(N)$ by $C(L_y)/N$ for every even $N$ and every circumference $L_y$, with $C(L_y)$ explicit
+(Theorem~\ref{thm:twist}); this complements the result above and, together with it, gives $E_{11}(N)\to0$ uniformly over
+all rectangular tori (Corollary~\ref{cor:alltori}).
+
+\paragraph{Organization.}
+Section~\ref{sec:setting} sets up the torus, its lowest Landau level, the Fock space and its sectors, and
+the hollow-core Hamiltonian, and quotes the theorem on its zero modes. Section~\ref{sec:frame} constructs
+the slot frame and the embedding $\iota$ and defines locality in the slot lattice. Section~\ref{sec:hamiltonian}
+proves the local form of the hollow-core Hamiltonian, its uniform size and rapid locality in the slot
+lattice and its covariance, introduces the class of Hamiltonians to which the index theorem applies, and
+describes the band charges in the slot lattice. Section~\ref{sec:locality} proves the locality estimates: a
+Lieb--Robinson bound, propagation from a set with a light cone independent of $N$, the filters, and the
+calculus of almost-supported operators. Section~\ref{sec:index} states and proves the index theorem with the
+gap assumed in a sector, and Section~\ref{sec:translation} specializes it to the magnetic translation.
+Section~\ref{sec:hollowcore} applies the result to the hollow-core Hamiltonian and discusses what it
+excludes. Appendix~\ref{app:bbdf} reproduces the operator-theoretic lemmas of \cite{BBDF21} that the proof
+uses, Appendix~\ref{app:LR} states the Lieb--Robinson input from \cite{NSY18} and derives the form we use,
+Appendix~\ref{app:kernel} proves the theorem on the zero modes, Appendix~\ref{app:twist} proves the variational bound at
+fixed circumference, and Appendix~\ref{app:notation} collects the notation.
+
+\paragraph{Conventions.}
+Inner products are linear in the second argument. Annihilation operators $c(f)$ are conjugate-linear in
+$f$. For $u\in\R$ and $P>0$, $\abs{u}_P$ denotes the distance from $u$ to $P\Z$, and $\pos{u}=\max\{u,0\}$.
+Constants denoted $C$, $C'$, $c$ may change from line to line but never depend on $N$; $C_k$ denotes a
+constant that may depend on an index $k$. A sequence of operators or numbers $A_N$ is $\Onf$ if for every
+$k$ there is $C_k$ with $\norm{A_N}\le C_kN^{-k}$; we write $A\eqN B$ if $A-B=\Onf$, and $x\in\Z+\Onf$ if
+$x=x_N$ lies within $\Onf$ of an integer $n_N$ that may depend on $N$.

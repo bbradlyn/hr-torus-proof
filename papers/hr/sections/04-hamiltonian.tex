@@ -1,0 +1,515 @@
+\section{The Hamiltonian in the slot frame}\label{sec:hamiltonian}
+
+\subsection{Triplet pairs and the local form}
+
+\begin{definition}[triplet pairs, local terms, centre pair operators]\label{def:pairs}
+The \emph{triplet spinors} are the symmetric matrices $\chi^\nu=(\chi^\nu_{\sigma\sigma'})_{\sigma,\sigma'\in\{\up,\dn\}}$,
+$\nu\in\{+,0,-\}$, with $\chi^+_{\up\up}=1$, $\chi^-_{\dn\dn}=1$, $\chi^0_{\up\dn}=\chi^0_{\dn\up}=2^{-1/2}$, and all
+other entries zero. For $f,g\in\hN$ and $h,h'\in\ell^2(\Slots)$ let
+\[
+\cpair\nu(f,g):=\sum_{\sigma,\sigma'}\overline{\chi^\nu_{\sigma\sigma'}}\,c(f\otimes\sigma')\,c(g\otimes\sigma),\qquad
+\cpairhat\nu(h,h'):=\sum_{\sigma,\sigma'}\overline{\chi^\nu_{\sigma\sigma'}}\,\chat(h\otimes\sigma')\,\chat(h'\otimes\sigma),
+\]
+so that $\cpair\nu(g,f)=-\cpair\nu(f,g)$ and $\iota(\cpair\nu(f,g))=\cpairhat\nu(\Sa f,\Sa g)$. For $R\in\R^2$ let
+\[
+B_\nu(R):=\cpair\nu(\ev R,\evD R),\qquad h_R:=8\pi\sum_{\nu\in\{+,0,-\}}B_\nu(R)^*B_\nu(R).
+\]
+For $n\in\Z$ let
+\[
+\bcen\nu n:=\sum_{d\in\N,\ d\equiv n\ (\mathrm{mod}\ 2)}2d\,e^{-\kappa^2d^2/4}\,
+\cpair\nu\bigl(\psi_{[(n-d)/2]},\psi_{[(n+d)/2]}\bigr),
+\]
+an absolutely convergent sum with $\bcen\nu{n+2\Nphi}=\bcen\nu n$.
+\end{definition}
+
+The antisymmetry follows from the symmetry of $\chi^\nu$ and the anticommutation of the annihilation operators:
+$\cpair\nu(g,f)=-\sum_{\sigma\sigma'}\overline{\chi^\nu_{\sigma\sigma'}}c(f\otimes\sigma)c(g\otimes\sigma')=-\cpair\nu(f,g)$; in
+particular $\cpair\nu(f,f)=0$. Both $\cpair\nu$ and $\cpairhat\nu$ are conjugate-linear in each argument, and
+$\iota(\cpair\nu(f,g))=\cpairhat\nu(\Sa f,\Sa g)$ because $\iota(c(f\otimes\sigma))=\chat(\Sa f\otimes\sigma)$. The series
+defining $\bcen\nu n$ converges absolutely since $\norm{\cpair\nu(f,g)}\le\sqrt2\norm f\norm g$ (see the proof of
+Proposition~\ref{prop:slotH}), and $\bcen\nu{n+2\Nphi}=\bcen\nu n$ because $(n+2\Nphi\pm d)/2=(n\pm d)/2+\Nphi$.
+
+By Lemma~\ref{lem:evaluation}(i), $B_\nu(R+(0,L_y))=B_\nu(R)$ and $B_\nu(R+(L_x,0))=e^{2\iu L_xR_y}B_\nu(R)$, so
+$h_R$ is a function of $R\in\Tor_N$. By conjugate linearity, $c(f\otimes\sigma)=\sum_j\ip f{\psi_j}c_{j\sigma}$ for
+$f\in\hN$; in particular $c(\ev R\otimes\sigma)=\sum_j\psi_j(R)c_{j\sigma}$ and $c(\evD R\otimes\sigma)=\sum_j(D\psi_j)(R)c_{j\sigma}$,
+so that $B_\nu(R)=\sum_{j,j'}\psi_j(R)\,(D\psi_{j'})(R)\,\cpair\nu(\psi_j,\psi_{j'})$. The functions $\psi_j$ and $D\psi_{j'}$
+are smooth on $\R^2$ (Lemma~\ref{lem:orbitals}(i)), so $R\mapsto B_\nu(R)$ is a finite linear combination of fixed
+operators with smooth coefficients, and $h_R$ is a finite linear combination of fixed operators whose coefficients
+are products of these coefficients and their complex conjugates; the map $R\mapsto h_R$ is therefore smooth. In the
+plane, the analogous operator $B_\nu(R)^*$ creates from the vacuum a spin-triplet pair of relative angular
+momentum one whose centre of mass is in the coherent state at $R$; this motivates the definition and is not
+used below. The operator $\bcen\nu n$ annihilates triplet pairs of orbitals whose centres are symmetric about
+the half-integer orbital position $n/2$.
+
+\begin{theorem}[the exact local form]\label{thm:localform}
+For every torus as in Definition~\ref{def:torus}:
+\begin{enumerate}[(a)]
+\item $H_N=8\pi\int_{\Tor_N}\sum_\nu B_\nu(R)^*B_\nu(R)\,\dd R=\int_{\Tor_N}h_R\,\dd R$, as operators on $\Fock$.
+\item For $R=(R_x,R_y)\in\R^2$,
+\[
+B_\nu(R)=\frac{\kappa}{2L_y\sqrt\pi}\sum_{n\in\Z}e^{\iu\kappa nR_y}e^{-(R_x-\kappa n/2)^2}\,\bcen\nu n .
+\]
+\item $H_N=\dfrac{\kappa^3}{\sqrt{2\pi}}\displaystyle\sum_{n\in\Z_{2\Nphi}}\sum_\nu(\bcen\nu n)^*\,\bcen\nu n$.
+\end{enumerate}
+\end{theorem}
+
+The proof of (a) rests on the following identity for pair wave functions, in which the symmetric gauge
+centred at $R$ is used; the proof of the theorem follows that of the lemma.
+
+\begin{lemma}[jets on the diagonal]\label{lem:jets}
+Let $U\subset\R^2\times\R^2$ be an open neighbourhood of the diagonal, and let $\Phi:U\to\C$ be smooth and of
+the lowest Landau level in each variable, $(D_{x_1}+\iu D_{y_1})\Phi=(D_{x_2}+\iu D_{y_2})\Phi=0$, where
+$D_{x_i},D_{y_i}$ are the covariant derivatives \eqref{eq:covariant} in $r_i=(x_i,y_i)$. For $R\in\R^2$ and small
+$r\in\R^2$ let $F_R(r):=\abs{\Phi(R+r/2,R-r/2)}^2$.
+\begin{enumerate}[(a)]
+\item If $\Phi(r_1,r_2)=\Phi(r_2,r_1)$, then $F_R(0)+(\nabla^2F_R)(0)=0$ for every $R$.
+\item If $\Phi(r_1,r_2)=-\Phi(r_2,r_1)$, then $F_R(0)=0$ and $(\nabla^2F_R)(0)=4\abs{(D_1\Phi)(R,R)}^2$ for every
+$R$, where $D_1:=\frac12(D_{x_1}-\iu D_{y_1})$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Fix $R=(R_x,R_y)$ and let $\varsigma_R(x,y):=\frac12(x+R_x)(y-R_y)$. For a smooth function $f$ of $(x,y)$,
+\[
+e^{-\iu\varsigma_R}D_x(e^{\iu\varsigma_R}f)=\Bigl(\partial_x+\frac\iu2(y-R_y)\Bigr)f,\qquad
+e^{-\iu\varsigma_R}D_y(e^{\iu\varsigma_R}f)=\Bigl(\partial_y-\frac\iu2(x-R_x)\Bigr)f,
+\]
+the covariant derivatives of the symmetric gauge centred at $R$. In the complex coordinate
+$\omega:=(x-R_x)+\iu(y-R_y)$, with $\partial_\omega=\frac12(\partial_x-\iu\partial_y)$ and $\partial_{\bar\omega}=\frac12(\partial_x+\iu\partial_y)$,
+this reads
+\[
+e^{-\iu\varsigma_R}(D_x+\iu D_y)(e^{\iu\varsigma_R}f)=\Bigl(2\partial_{\bar\omega}+\frac\omega2\Bigr)f=2e^{-\abs\omega^2/4}\partial_{\bar\omega}\bigl(e^{\abs\omega^2/4}f\bigr),\qquad
+e^{-\iu\varsigma_R}D(e^{\iu\varsigma_R}f)=\Bigl(\partial_\omega-\frac{\bar\omega}4\Bigr)f .
+\]
+Let $\omega_1,\omega_2$ be the complex coordinates, in this sense, of $r_1,r_2$, and on (the image of) $U$ let
+\[
+\Xi(\omega_1,\omega_2):=e^{(\abs{\omega_1}^2+\abs{\omega_2}^2)/4}\,e^{-\iu\varsigma_R(r_1)-\iu\varsigma_R(r_2)}\,\Phi(r_1,r_2).
+\]
+$\Xi$ is smooth, and the hypotheses on $\Phi$ give $\partial_{\bar\omega_1}\Xi=\partial_{\bar\omega_2}\Xi=0$. For $r=(r_x,r_y)$ put
+$u:=r_x+\iu r_y$; the points $R+r/2$ and $R-r/2$ have the coordinates $\omega_1=u/2$ and $\omega_2=-u/2$. The function
+$\widetilde\Xi(u):=\Xi(u/2,-u/2)$ is defined and smooth near $u=0$, and by the chain rule
+$\partial_{\bar u}\widetilde\Xi=\frac12\partial_{\bar\omega_1}\Xi-\frac12\partial_{\bar\omega_2}\Xi=0$; so $\widetilde\Xi$ is holomorphic
+near $0$, with $\widetilde\Xi(0)=\Xi(0,0)$ and $\widetilde\Xi'(0)=\frac12(\partial_{\omega_1}\Xi-\partial_{\omega_2}\Xi)(0,0)$. Since
+$\abs{\omega_1}^2+\abs{\omega_2}^2=\abs u^2/2$ and the phases have modulus one,
+\[
+F_R(r)=e^{-u\bar u/4}\,\widetilde\Xi(u)\,\overline{\widetilde\Xi(u)} .
+\]
+Now $\nabla^2=4\partial_u\partial_{\bar u}$, $\partial_{\bar u}\widetilde\Xi=0$ and $\partial_u\overline{\widetilde\Xi}=0$, and at $u=0$ the
+function $e^{-u\bar u/4}$ equals $1$, its first derivatives vanish, and $\partial_u\partial_{\bar u}e^{-u\bar u/4}=-\frac14$. By the
+product rule, therefore, $\partial_u\partial_{\bar u}F_R$ at $u=0$ equals $\abs{\widetilde\Xi'(0)}^2-\frac14\abs{\widetilde\Xi(0)}^2$, that
+is,
+\begin{equation}\label{eq:jet}
+F_R(0)=\abs{\widetilde\Xi(0)}^2,\qquad(\nabla^2F_R)(0)=4\abs{\widetilde\Xi'(0)}^2-\abs{\widetilde\Xi(0)}^2 .
+\end{equation}
+
+(a) If $\Phi$ is symmetric, then so is $\Xi$, because the prefactor in its definition is symmetric in $(r_1,r_2)$.
+Hence $\widetilde\Xi(-u)=\widetilde\Xi(u)$, $\widetilde\Xi'(0)=0$, and \eqref{eq:jet} gives $F_R(0)+(\nabla^2F_R)(0)=0$.
+
+(b) If $\Phi$ is antisymmetric, then so is $\Xi$. Hence $\widetilde\Xi$ is odd, $\widetilde\Xi(0)=0$, and
+$(\partial_{\omega_2}\Xi)(0,0)=-(\partial_{\omega_1}\Xi)(0,0)$, so $\widetilde\Xi'(0)=(\partial_{\omega_1}\Xi)(0,0)$. By \eqref{eq:jet},
+$F_R(0)=0$ and $(\nabla^2F_R)(0)=4\abs{(\partial_{\omega_1}\Xi)(0,0)}^2$. On the other hand, by the second identity displayed
+above, applied in the variable $r_1$ (the factor $e^{-\iu\varsigma_R(r_2)}$ does not depend on $r_1$),
+\[
+e^{-\iu\varsigma_R(r_1)-\iu\varsigma_R(r_2)}(D_1\Phi)(r_1,r_2)=\Bigl(\partial_{\omega_1}-\frac{\bar\omega_1}4\Bigr)\Bigl(e^{-(\abs{\omega_1}^2+\abs{\omega_2}^2)/4}\,\Xi\Bigr)
+=e^{-(\abs{\omega_1}^2+\abs{\omega_2}^2)/4}\Bigl(\partial_{\omega_1}\Xi-\frac{\bar\omega_1}2\,\Xi\Bigr),
+\]
+which at $r_1=r_2=R$, that is at $\omega_1=\omega_2=0$, gives $\abs{(D_1\Phi)(R,R)}=\abs{(\partial_{\omega_1}\Xi)(0,0)}$. This proves
+(b).
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:localform}]
+Let $\Omega_0$ be the vacuum of $\Fock$ and $\Fock^{(2)}$ the two-particle subspace, spanned by the vectors
+$c_i^*c_{i'}^*\Omega_0$. Indices $i=(j,\sigma)$ range over $\Z_{\Nphi}\times\{\up,\dn\}$, which we order totally, and
+$c_i:=c_{j\sigma}$.
+
+\emph{Step 1: two-particle wave functions.} For $\Upsilon\in\Fock^{(2)}$ let $\upsilon_{ii'}:=2^{-1/2}\ip{\Omega_0}{c_{i'}c_i\Upsilon}$,
+so that $\upsilon_{i'i}=-\upsilon_{ii'}$ and $c_{i'}c_i\Upsilon=\sqrt2\,\upsilon_{ii'}\Omega_0$ (two annihilation operators map a
+two-particle vector into $\C\Omega_0$). For $r_1,r_2\in\R^2$ and spins $\sigma,\sigma'$ let
+\[
+\Upsilon_{\sigma\sigma'}(r_1,r_2):=\sum_{j,j'\in\Z_{\Nphi}}\upsilon_{(j\sigma)(j'\sigma')}\,\psi_j(r_1)\,\psi_{j'}(r_2).
+\]
+These functions are smooth, of the lowest Landau level and satisfy \eqref{eq:bc} in each variable, and
+$\Upsilon_{\sigma\sigma'}(r_1,r_2)=-\Upsilon_{\sigma'\sigma}(r_2,r_1)$. By the expansions of $c(\ev R\otimes\sigma)$ and
+$c(\evD R\otimes\sigma)$ given after Definition~\ref{def:pairs},
+\begin{equation}\label{eq:pairamp}
+\ip{\Omega_0}{c(\ev R\otimes\sigma')\,c(\evD R\otimes\sigma)\Upsilon}
+=\sum_{j,j'}\psi_{j'}(R)(D\psi_j)(R)\ip{\Omega_0}{c_{j'\sigma'}c_{j\sigma}\Upsilon}=\sqrt2\,(D_1\Upsilon_{\sigma\sigma'})(R,R),
+\end{equation}
+where $D_1$ is the operator $D$ acting on the first variable.
+
+\emph{Step 2: the quadratic form of $H_N$.} By \eqref{eq:HN}, since $(c_{b\sigma'}c_{a\sigma})^*=c^*_{a\sigma}c^*_{b\sigma'}$,
+\[
+\ip\Upsilon{H_N\Upsilon}=\frac12\sum_{\sigma,\sigma'}\sum_{a,b,c,d}V_{abcd}\ip{c_{b\sigma'}c_{a\sigma}\Upsilon}{c_{d\sigma'}c_{c\sigma}\Upsilon}
+=\sum_{\sigma,\sigma'}\sum_{a,b,c,d}V_{abcd}\,\overline{\upsilon_{(a\sigma)(b\sigma')}}\,\upsilon_{(c\sigma)(d\sigma')}.
+\]
+Let $\abs\Upsilon^2(r_1,r_2):=\sum_{\sigma,\sigma'}\abs{\Upsilon_{\sigma\sigma'}(r_1,r_2)}^2$. Since
+\[
+\sum_{a,b,c,d}\overline{\upsilon_{(a\sigma)(b\sigma')}}\,\upsilon_{(c\sigma)(d\sigma')}\,\overline{\psi_a(r_1)}\psi_c(r_1)\,\overline{\psi_b(r_2)}\psi_d(r_2)=\abs{\Upsilon_{\sigma\sigma'}(r_1,r_2)}^2,
+\]
+the definition \eqref{eq:Vabcd} gives, after applying $\nabla^2$ in $r_1$ to this identity and setting $r_1=r_2=r$,
+\[
+\ip\Upsilon{H_N\Upsilon}=4\pi\int_{\Tor_N}\Bigl[\abs\Upsilon^2(r,r)+\bigl(\nabla_1^2\abs\Upsilon^2\bigr)(r,r)\Bigr]\dd r,
+\]
+where $\nabla_1^2$ is the Laplacian in $r_1$. The function $\abs\Upsilon^2$ is smooth, periodic in each variable with
+respect to $L_x\Z\times L_y\Z$ (the phases in \eqref{eq:bc} have modulus one), and symmetric:
+$\abs\Upsilon^2(r_1,r_2)=\abs\Upsilon^2(r_2,r_1)$.
+
+\emph{Step 3: relative coordinates.} Let $F_R(r):=\abs\Upsilon^2(R+r/2,R-r/2)$, as a function of $(R,r)$. Since
+$\partial_{r_1}=\frac12\partial_R+\partial_r$ and $\partial_{r_2}=\frac12\partial_R-\partial_r$ componentwise, $\nabla_1^2+\nabla_2^2=\frac12\nabla_R^2+2\nabla_r^2$;
+and differentiating the symmetry relation twice gives $(\nabla_1^2\abs\Upsilon^2)(R,R)=(\nabla_2^2\abs\Upsilon^2)(R,R)$. Hence
+$(\nabla_1^2\abs\Upsilon^2)(R,R)=\frac14\nabla_R^2\bigl[F_R(0)\bigr]+(\nabla^2F_R)(0)$. The function
+$R\mapsto F_R(0)=\abs\Upsilon^2(R,R)$ is smooth and periodic, so the integral of its Laplacian over $\Tor_N$ vanishes,
+and
+\[
+\ip\Upsilon{H_N\Upsilon}=4\pi\int_{\Tor_N}\bigl[F_R(0)+(\nabla^2F_R)(0)\bigr]\dd R .
+\]
+
+\emph{Step 4: spin decomposition.} Let $\chi^{\rm sing}$ be the antisymmetric matrix with
+$\chi^{\rm sing}_{\up\dn}=-\chi^{\rm sing}_{\dn\up}=2^{-1/2}$ and zero diagonal. The four matrices $\chi^+,\chi^0,\chi^-,\chi^{\rm sing}$
+form an orthonormal basis of the complex $2\times2$ matrices for the Hilbert--Schmidt inner product. Let $f_\nu:=\sum_{\sigma\sigma'}\overline{\chi^\nu_{\sigma\sigma'}}\Upsilon_{\sigma\sigma'}$
+and $f_{\rm sing}:=\sum_{\sigma\sigma'}\overline{\chi^{\rm sing}_{\sigma\sigma'}}\Upsilon_{\sigma\sigma'}$. Then
+$\abs\Upsilon^2=\sum_\nu\abs{f_\nu}^2+\abs{f_{\rm sing}}^2$ pointwise; these functions are smooth and of the lowest Landau
+level in each variable; and by $\Upsilon_{\sigma\sigma'}(r_1,r_2)=-\Upsilon_{\sigma'\sigma}(r_2,r_1)$, the symmetry of $\chi^\nu$ and the
+antisymmetry of $\chi^{\rm sing}$, $f_\nu(r_2,r_1)=-f_\nu(r_1,r_2)$ and $f_{\rm sing}(r_2,r_1)=f_{\rm sing}(r_1,r_2)$. Hence
+$F_R(r)=\sum_\nu\abs{f_\nu(R+r/2,R-r/2)}^2+\abs{f_{\rm sing}(R+r/2,R-r/2)}^2$, and Lemma~\ref{lem:jets}, applied to each
+$f_\nu$ and to $f_{\rm sing}$, yields
+\[
+\ip\Upsilon{H_N\Upsilon}=16\pi\sum_\nu\int_{\Tor_N}\abs{(D_1f_\nu)(R,R)}^2\,\dd R .
+\]
+(The integrand is periodic, since $D_1f_\nu$ satisfies \eqref{eq:bc} in each variable by Lemma~\ref{lem:orbitals}(iii).)
+
+\emph{Step 5: the quadratic form of the local integral.} For $\Upsilon\in\Fock^{(2)}$ the vector $B_\nu(R)\Upsilon$ lies
+in $\C\Omega_0$, so that $\ip\Upsilon{B_\nu(R)^*B_\nu(R)\Upsilon}=\abs{\ip{\Omega_0}{B_\nu(R)\Upsilon}}^2$, and by
+\eqref{eq:pairamp}
+\[
+\ip{\Omega_0}{B_\nu(R)\Upsilon}=\sqrt2\sum_{\sigma,\sigma'}\overline{\chi^\nu_{\sigma\sigma'}}(D_1\Upsilon_{\sigma\sigma'})(R,R)=\sqrt2\,(D_1f_\nu)(R,R).
+\]
+Hence, with $H':=8\pi\int_{\Tor_N}\sum_\nu B_\nu(R)^*B_\nu(R)\,\dd R$ (the integrand is a continuous function on $\Tor_N$),
+$\ip\Upsilon{H'\Upsilon}=16\pi\sum_\nu\int_{\Tor_N}\abs{(D_1f_\nu)(R,R)}^2\dd R=\ip\Upsilon{H_N\Upsilon}$.
+
+\emph{Step 6: from two particles to the Fock space.} For a pair $\mathbf i=(i,i')$ with $i<i'$ let $A_{\mathbf i}:=c_{i'}c_i$.
+The vectors $A_{\mathbf i}^*\Omega_0=c_i^*c_{i'}^*\Omega_0$ form an orthonormal basis of $\Fock^{(2)}$, and
+$A_{\mathbf j}A_{\mathbf i}^*\Omega_0$ is the multiple $\ip{A_{\mathbf j}^*\Omega_0}{A_{\mathbf i}^*\Omega_0}\Omega_0=\delta_{\mathbf j\mathbf i}\Omega_0$ of
+the vacuum. Every product $c_{i_2}c_{i_1}$ is $0$ or $\pm A_{\mathbf i}$ for some pair $\mathbf i$, and $B_\nu(R)$ is a
+linear combination of such products with continuous coefficients. Hence $H_N$ and $H'$ are both of the form
+$O=\sum_{\mathbf i,\mathbf j}O_{\mathbf i\mathbf j}\,A_{\mathbf i}^*A_{\mathbf j}$, and for such an operator
+$\ip{A_{\mathbf i}^*\Omega_0}{O\,A_{\mathbf j}^*\Omega_0}=O_{\mathbf i\mathbf j}$: the coefficient matrix of $O$ is its matrix on
+$\Fock^{(2)}$. By Step 5 and polarization, $\ip\Upsilon{H_N\Upsilon'}=\ip\Upsilon{H'\Upsilon'}$ for all
+$\Upsilon,\Upsilon'\in\Fock^{(2)}$, so the coefficient matrices of $H_N$ and $H'$ coincide, and $H_N=H'$ on $\Fock$. This is
+(a).
+
+(b) Unfolding the orbitals by \eqref{eq:psi}, and using $D\phi_n=-(x-\kappa n)\phi_n$ (Lemma~\ref{lem:orbitals}(iii)),
+\[
+B_\nu(R)=\sum_{j_1,j_2\in\Z}\phi_{j_1}(R)(D\phi_{j_2})(R)\,\cpair\nu\bigl(\psi_{[j_1]},\psi_{[j_2]}\bigr)
+=-\sum_{j_1,j_2\in\Z}(R_x-\kappa j_2)\,\phi_{j_1}(R)\phi_{j_2}(R)\,\cpair\nu\bigl(\psi_{[j_1]},\psi_{[j_2]}\bigr),
+\]
+an absolutely convergent double series. Put $n:=j_1+j_2$ and $d:=j_2-j_1$. Completing the square,
+$(R_x-\kappa j_1)^2+(R_x-\kappa j_2)^2=2(R_x-\kappa n/2)^2+\kappa^2d^2/2$, so
+\[
+\phi_{j_1}(R)\phi_{j_2}(R)=\frac1{L_y\sqrt\pi}\,e^{\iu\kappa nR_y}e^{-(R_x-\kappa n/2)^2}e^{-\kappa^2d^2/4},
+\]
+and $-(R_x-\kappa j_2)=\frac{\kappa d}2-(R_x-\frac{\kappa n}2)$. For fixed $n$, the exchange $j_1\leftrightarrow j_2$ maps
+$d$ to $-d$ and changes the sign of $\cpair\nu(\psi_{[j_1]},\psi_{[j_2]})$. Hence the terms with the factor
+$R_x-\kappa n/2$, which does not change under the exchange, cancel in pairs (the term $d=0$ vanishes because
+$\cpair\nu(\psi,\psi)=0$), and the terms with the factor $\kappa d/2$, which changes sign, contribute twice their sum
+over $d>0$:
+\[
+\sum_{j_1+j_2=n}\frac{\kappa d}2\,e^{-\kappa^2d^2/4}\cpair\nu\bigl(\psi_{[j_1]},\psi_{[j_2]}\bigr)
+=\kappa\sum_{d\ge1,\ d\equiv n\,(\mathrm{mod}\,2)}d\,e^{-\kappa^2d^2/4}\cpair\nu\bigl(\psi_{[(n-d)/2]},\psi_{[(n+d)/2]}\bigr)=\frac\kappa2\,\bcen\nu n .
+\]
+This gives (b).
+
+(c) By (b), for each $\nu$,
+\[
+B_\nu(R)^*B_\nu(R)=\frac{\kappa^2}{4\pi L_y^2}\sum_{n,n'\in\Z}e^{\iu\kappa(n'-n)R_y}e^{-(R_x-\kappa n/2)^2-(R_x-\kappa n'/2)^2}
+(\bcen\nu n)^*\bcen\nu{n'},
+\]
+absolutely and uniformly convergent on $[0,L_x]\times[0,L_y]$. The integral over $R_y\in[0,L_y)$ of
+$e^{\iu\kappa(n'-n)R_y}$ is $L_y\delta_{nn'}$, since $\kappa L_y=2\pi$. Writing $n=n_0+2\Nphi q$ with
+$n_0\in\{0,\dots,2\Nphi-1\}$ and $q\in\Z$, we have $\bcen\nu n=\bcen\nu{n_0}$ and $\kappa n/2=\kappa n_0/2+qL_x$, so
+$\sum_{q\in\Z}\int_0^{L_x}e^{-2(R_x-\kappa n_0/2-qL_x)^2}\dd R_x=\int_\R e^{-2t^2}\dd t=\sqrt{\pi/2}$. Hence
+\[
+8\pi\int_{\Tor_N}B_\nu(R)^*B_\nu(R)\,\dd R=8\pi\cdot\frac{\kappa^2}{4\pi L_y}\sqrt{\frac\pi2}\sum_{n_0\in\Z_{2\Nphi}}(\bcen\nu{n_0})^*\bcen\nu{n_0}
+=\frac{\kappa^3}{\sqrt{2\pi}}\sum_{n_0\in\Z_{2\Nphi}}(\bcen\nu{n_0})^*\bcen\nu{n_0},
+\]
+using $L_y=2\pi/\kappa$. Summing over $\nu$ and using (a) gives (c).
+\end{proof}
+
+\subsection{The Hamiltonian in the slot lattice}
+
+\begin{proposition}[uniform size and rapid locality]\label{prop:slotH}
+For every admissible torus and every $R\in\R^2$:
+\begin{enumerate}[(i)]
+\item $\norm{B_\nu(R)}\le\sqrt2\,\norm{\ev R}\norm{\evD R}$, and $\norm{h_R}\le32\pi\norm{\ev R}^2\norm{\evD R}^2\le C_h$
+with $C_h:=7/\pi$.
+\item For $r\ge0$ let $B^{(r)}_\nu(R):=\cpairhat\nu\bigl(\one_{\Ball rR}\Sa\ev R,\one_{\Ball rR}\Sa\evD R\bigr)$ and
+$h_{R,r}:=8\pi\sum_\nu B^{(r)}_\nu(R)^*B^{(r)}_\nu(R)$. Then $h_{R,r}\in\Alg(\Ball rR)$ is self-adjoint and commutes
+with $\Nhat\up$ and $\Nhat\dn$, and for every $k$
+\[
+\norm{\iota(h_R)-h_{R,r}}\le C^H_k(1+r)^{-k},
+\]
+with $C^H_k$ depending only on $k$, $\eta$ and $\delta_0$.
+\item For each $r\ge0$ the map $R\mapsto h_{R,r}$ is Borel measurable.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(i) For $f\in\kN$ the anticommutation relations give
+\[
+\bigl(c(f)^*c(f)\bigr)^2=c(f)^*\bigl(\norm f^2-c(f)^*c(f)\bigr)c(f)=\norm f^2c(f)^*c(f),
+\]
+because $c(f)^2=0$; so $c(f)^*c(f)$ is $\norm f^2$ times an orthogonal projection, nonzero if $f\ne0$, and
+$\norm{c(f)}=\norm f$. The same holds for $\chat$. Hence $\norm{c(f\otimes\sigma')c(g\otimes\sigma)}\le\norm f\norm g$, and
+since $\sum_{\sigma\sigma'}\abs{\chi^\nu_{\sigma\sigma'}}$ is $1$ for $\nu=\pm$ and $\sqrt2$ for $\nu=0$,
+\[
+\norm{\cpair\pm(f,g)}\le\norm f\norm g,\qquad\norm{\cpair0(f,g)}\le\sqrt2\norm f\norm g,
+\]
+and likewise for $\cpairhat\nu$. With $f=\ev R$ and $g=\evD R$ this gives the bound on $B_\nu(R)$, and
+$\norm{h_R}\le8\pi\sum_\nu\norm{B_\nu(R)}^2\le8\pi(1+2+1)\norm{\ev R}^2\norm{\evD R}^2$. An admissible torus has
+$\min\{L_x,L_y\}\ge4$, so by Lemma~\ref{lem:evaluation}(iv) $2\pi\norm{\ev R}^2\le1.08$ and $4\pi\norm{\evD R}^2\le1.62$,
+and $32\pi\norm{\ev R}^2\norm{\evD R}^2\le4\cdot1.08\cdot1.62/\pi<7/\pi$.
+
+(ii) Let $X:=\Ball rR$. For $h$ supported in $X$, $\chat(h\otimes\sigma)=\sum_{s\in X}\overline{h(s)}\chat_{s\sigma}\in\CAR(X)$.
+Hence $B^{(r)}_\nu(R)\in\CAR(X)$, and $h_{R,r}$ is a linear combination of products of two creation and two
+annihilation operators of modes in $X$; it is self-adjoint, and even, since conjugation by the parity changes the
+sign of each $\chat_{s\sigma}$; so $h_{R,r}\in\Alg(X)$. The anticommutation relations give
+$[\chat^*_{s\sigma}\chat_{s\sigma},\chat(h\otimes\sigma')]=-\{\chat^*_{s\sigma},\chat(h\otimes\sigma')\}\chat_{s\sigma}
+=-\delta_{\sigma\sigma'}\overline{h(s)}\chat_{s\sigma}$, hence $[\Nhat\sigma,\chat(h\otimes\sigma')]=-\delta_{\sigma\sigma'}\chat(h\otimes\sigma')$.
+Each term of $B^{(r)}_\nu(R)$ contains the same number of annihilation operators of spin $\sigma$ (two, one or none
+of each spin, for $\nu=+,0,-$), so $[\Nhat\sigma,B^{(r)}_\nu(R)]$ is this number times $-B^{(r)}_\nu(R)$; taking
+adjoints, $[\Nhat\sigma,B^{(r)}_\nu(R)^*]$ is the same number times $B^{(r)}_\nu(R)^*$, and so
+$[\Nhat\sigma,B^{(r)}_\nu(R)^*B^{(r)}_\nu(R)]=0$.
+
+For the estimate let $f:=\Sa\ev R$, $g:=\Sa\evD R$, $f_r:=\one_Xf$ and $g_r:=\one_Xg$. Since $\iota$ is a
+$*$-homomorphism, $\iota(B_\nu(R))=\cpairhat\nu(f,g)$ and $\iota(h_R)=8\pi\sum_\nu\iota(B_\nu(R))^*\iota(B_\nu(R))$. By the
+identity $ab-a'b'=(a-a')b+a'(b-b')$, the bounds of (i), $\norm g=\norm{\evD R}$ and $\norm{f_r}\le\norm f=\norm{\ev R}$
+(Proposition~\ref{prop:parseval}), and Lemma~\ref{lem:localization}(iii),
+\[
+\norm{\iota(B_\nu(R))-B^{(r)}_\nu(R)}\le\sqrt2\bigl(\norm{f-f_r}\norm{\evD R}+\norm{\ev R}\norm{g-g_r}\bigr)
+\le\sqrt2\bigl(\norm{\ev R}+\norm{\evD R}\bigr)C_k(1+r)^{-k},
+\]
+with $C_k$ the constant of Lemma~\ref{lem:localization}. Moreover $\norm{\iota(B_\nu(R))}$ and $\norm{B^{(r)}_\nu(R)}$ are at
+most $\sqrt2\norm{\ev R}\norm{\evD R}$, by (i). Writing
+$\iota(B_\nu)^*\iota(B_\nu)-B^{(r)*}_\nu B^{(r)}_\nu=\iota(B_\nu)^*(\iota(B_\nu)-B^{(r)}_\nu)+(\iota(B_\nu)-B^{(r)}_\nu)^*B^{(r)}_\nu$, with
+$B_\nu=B_\nu(R)$ and $B^{(r)}_\nu=B^{(r)}_\nu(R)$, we obtain
+\begin{align*}
+\norm{\iota(h_R)-h_{R,r}}&\le8\pi\sum_\nu\norm{\iota(B_\nu(R))-B^{(r)}_\nu(R)}\cdot2\sqrt2\norm{\ev R}\norm{\evD R}\\
+&\le96\pi\norm{\ev R}\norm{\evD R}\bigl(\norm{\ev R}+\norm{\evD R}\bigr)C_k(1+r)^{-k}.
+\end{align*}
+By Lemma~\ref{lem:evaluation}(iv), $\norm{\ev R}<\frac12$ and $\norm{\evD R}<\frac25$, so the right side is at most
+$96\pi\cdot\frac15\cdot\frac9{10}\,C_k(1+r)^{-k}<55\,C_k(1+r)^{-k}$. Thus $C^H_k:=55\,C_k$ depends only on $k$, $\eta$ and
+$\delta_0$.
+
+(iii) By Lemma~\ref{lem:evaluation}(i), $\Sa\ev{R+(L_x,0)}=e^{-\iu L_xR_y}\Sa\ev R$ and likewise for $\evD R$, while
+$\Sa\ev{R+(0,L_y)}=\Sa\ev R$; since $\cpairhat\nu$ is conjugate-linear in each argument, the phases cancel in
+$B^{(r)}_\nu(R)^*B^{(r)}_\nu(R)$, and $h_{R,r}$ is a function of $R\in\Tor_N$. For $Y\subset\Slots$ let
+$\mathcal D_Y:=\{R\in\Tor_N:\Ball rR=Y\}=\bigcap_{s\in Y}\{R:d(s,R)\le r\}\cap\bigcap_{s\notin Y}\{R:d(s,R)>r\}$, a Borel set,
+since $R\mapsto d(s,R)$ is continuous. The finitely many sets $\mathcal D_Y$ partition $\Tor_N$. On $\mathcal D_Y$,
+$h_{R,r}=8\pi\sum_\nu\cpairhat\nu(\one_Y\Sa\ev R,\one_Y\Sa\evD R)^*\cpairhat\nu(\one_Y\Sa\ev R,\one_Y\Sa\evD R)$ is a linear
+combination of fixed operators whose coefficients are polynomials in the continuous functions
+$(\Sa\ev R)_s=\overline{z_s(R)}$, $(\Sa\evD R)_s=\overline{(Dz_s)(R)}$ and their complex conjugates. So
+$R\mapsto h_{R,r}$ is the sum over $Y$ of $\one_{\mathcal D_Y}$ times continuous functions, and is Borel measurable.
+\end{proof}
+
+Thus the local terms of $H_N$ have a size bounded independently of $N$, and in the slot lattice they are
+local up to errors that decay faster than any power of the distance, uniformly in $N$. In the language of
+lattice systems, $\Hhat_N=\int\iota(h_R)\,\dd R$ is a rapidly decaying interaction of uniform size.
+
+The constant $C_h=7/\pi$ is not optimal, and the norm of $h_R$ can be computed. Let $f,g\in\hN$ with $f\ne0$, and
+write $g=\mu f+g^\perp$ with $\mu\in\C$ and $g^\perp\perp f$. Since $\cpair\nu$ is conjugate-linear in its second
+argument and $\cpair\nu(f,f)=0$, we have $\cpair\nu(f,g)=\cpair\nu(f,g^\perp)$. If $g^\perp\ne0$, let
+$\hat f:=f/\norm f$ and $\hat g:=g^\perp/\norm{g^\perp}$; then $\cpair\nu(f,g)=\norm f\norm{g^\perp}\cpair\nu(\hat f,\hat g)$, and
+the four vectors $\hat f\otimes\sigma$, $\hat g\otimes\sigma$ are orthonormal. By the factorization of the Fock space used in
+the proof of Lemma~\ref{lem:embedding}, with an orthonormal basis of $\kN$ that begins with these four vectors,
+$O:=\sum_\nu\cpair\nu(\hat f,\hat g)^*\cpair\nu(\hat f,\hat g)$ is an operator on the sixteen-dimensional Fock space of the four
+modes, tensored with the identity, and its norm may be computed there. Each $\cpair\nu(\hat f,\hat g)$ lowers both
+$n_{\hat f}:=\sum_\sigma c(\hat f\otimes\sigma)^*c(\hat f\otimes\sigma)$ and $n_{\hat g}:=\sum_\sigma c(\hat g\otimes\sigma)^*c(\hat g\otimes\sigma)$ by
+one, so $O$ commutes with them, and it vanishes unless $n_{\hat f},n_{\hat g}\ge1$. On the space
+$n_{\hat f}=n_{\hat g}=1$, $O$ is the orthogonal projection onto the span of the three orthonormal vectors obtained by
+applying the $\cpair\nu(\hat f,\hat g)^*$ to the vacuum. On the spaces $(n_{\hat f},n_{\hat g})=(2,1)$ and $(1,2)$, $O=\frac32$:
+for instance, if $n_{\hat f}=2$, then $\cpair\pm(\hat f,\hat g)^*\cpair\pm(\hat f,\hat g)$ are the occupation numbers of
+$\hat g\otimes\up$ and of $\hat g\otimes\dn$, while $\cpair0(\hat f,\hat g)^*\cpair0(\hat f,\hat g)$ equals $\frac12n_{\hat g}$, its
+spin-exchanging cross terms vanishing because both modes $\hat f\otimes\sigma$ are occupied; so $O=\frac32n_{\hat g}=\frac32$. On the
+one-dimensional space $n_{\hat f}=n_{\hat g}=2$, $O=3$, since each of the three operators $\cpair\nu(\hat f,\hat g)$ maps the
+fully occupied unit vector to a unit vector. Hence $\norm O=3$, and
+$\norm{\sum_\nu\cpair\nu(f,g)^*\cpair\nu(f,g)}=3\norm f^2\norm{g^\perp}^2$, which also holds if $g^\perp=0$. With $f=\ev R$
+and $g=\evD R$,
+\[
+\norm{h_R}=24\pi\norm{\ev R}^2\Bigl(\norm{\evD R}^2-\frac{\abs{\ip{\ev R}{\evD R}}^2}{\norm{\ev R}^2}\Bigr)
+\le24\pi\norm{\ev R}^2\norm{\evD R}^2<\frac{21}{4\pi}
+\]
+on admissible tori, by Lemma~\ref{lem:evaluation}(iv). Moreover
+$\ip{\ev R}{\evD R}=\frac12(\partial_{R_x}+\iu\partial_{R_y})\norm{\ev R}^2$. Indeed, by Lemma~\ref{lem:evaluation}(i) and
+Lemma~\ref{lem:orbitals}(iii), $\ip{\ev R}{\evD R}$ equals $\sum_j\psi_j(R)\overline{(\partial_x\psi_j)(R)}$, whose real
+part is $\frac12\partial_{R_x}\sum_j\abs{\psi_j(R)}^2$; and since $\partial_y\psi_j=\iu\partial_x\psi_j+\iu x\psi_j$ by \eqref{eq:lll},
+\[
+\partial_{R_y}\sum_j\abs{\psi_j(R)}^2=2\,\mathrm{Re}\sum_j\psi_j(R)\overline{(\partial_y\psi_j)(R)}
+=2\,\mathrm{Im}\sum_j\psi_j(R)\overline{(\partial_x\psi_j)(R)} .
+\]
+Differentiating the first formula of Lemma~\ref{lem:evaluation}(iii) term by term (its constant term does not depend
+on $R$) gives $\abs{\ip{\ev R}{\evD R}}\le(4\pi)^{-1}\sum_v\abs ve^{-\abs v^2/4}$, the sum over the nonzero vectors $v$ of
+the lattice $L_x\Z\times L_y\Z$, and by dominated convergence this tends to zero as $\min\{L_x,L_y\}\to\infty$. Together with
+Lemma~\ref{lem:evaluation}(iv) this shows that $\norm{h_R}\to24\pi\cdot\frac1{2\pi}\cdot\frac1{4\pi}=\frac3\pi$, uniformly in $R$, as
+$\min\{L_x,L_y\}\to\infty$. Nothing below uses this value; any bound uniform over admissible tori serves as $C_h$.
+
+\begin{lemma}[covariance]\label{lem:covariance}
+For every torus as in Definition~\ref{def:torus} and every $R\in\R^2$,
+$\Theta^*B_\nu(R)\Theta=e^{-2\iu\kappa R_y}B_\nu(R+\kappa\ex)$ and $\Theta^*h_R\Theta=h_{R+\kappa\ex}$. Consequently, with
+$H_{\mathcal D}:=\int_{\mathcal D}h_R\,\dd R$ for a Borel set $\mathcal D\subset\Tor_N$,
+$\Theta^*H_{\mathcal D}\Theta=H_{\mathcal D+\kappa\ex}$; in particular $[\Theta,H_N]=0$.
+\end{lemma}
+
+\begin{proof}
+By Lemma~\ref{lem:sectors}(iii), $\Theta^*c(f)\Theta=c((\thx\otimes\one)f)$ for $f\in\kN$. By
+Lemma~\ref{lem:magtrans}(iv), $\thx\ev R=e^{\iu\kappa R_y}\ev{R+\kappa\ex}$ and $\thx\evD R=e^{\iu\kappa R_y}\evD{R+\kappa\ex}$, and
+$c$ is conjugate-linear, so
+\[
+\Theta^*c(\ev R\otimes\sigma)\Theta=e^{-\iu\kappa R_y}c(\ev{R+\kappa\ex}\otimes\sigma),\qquad
+\Theta^*c(\evD R\otimes\sigma)\Theta=e^{-\iu\kappa R_y}c(\evD{R+\kappa\ex}\otimes\sigma).
+\]
+Since conjugation by $\Theta$ is multiplicative, $\Theta^*B_\nu(R)\Theta=e^{-2\iu\kappa R_y}B_\nu(R+\kappa\ex)$, and then
+\[
+\Theta^*B_\nu(R)^*B_\nu(R)\Theta=\bigl(\Theta^*B_\nu(R)\Theta\bigr)^*\bigl(\Theta^*B_\nu(R)\Theta\bigr)=B_\nu(R+\kappa\ex)^*B_\nu(R+\kappa\ex),
+\]
+so that $\Theta^*h_R\Theta=h_{R+\kappa\ex}$. Conjugation by $\Theta$ is a linear map on a finite-dimensional space and commutes with
+the integral, and Lebesgue measure on $\Tor_N$ is invariant under translations; hence
+$\Theta^*H_{\mathcal D}\Theta=\int_{\mathcal D}h_{R+\kappa\ex}\dd R=\int_{\mathcal D+\kappa\ex}h_R\,\dd R=H_{\mathcal D+\kappa\ex}$. For
+$\mathcal D=\Tor_N$, Theorem~\ref{thm:localform}(a) gives $\Theta^*H_N\Theta=H_N$, and since $\Theta$ is unitary, $[\Theta,H_N]=0$.
+\end{proof}
+
+\subsection{A class of lowest-Landau-level Hamiltonians}
+
+\begin{definition}[slot-local covariant Hamiltonians]\label{def:class}
+Let $\mathcal N\subset\N$ be infinite and let $(\Tor_N)_{N\in\mathcal N}$ be admissible tori. A sequence
+$H=(H_N)_{N\in\mathcal N}$ of self-adjoint operators on $\Fock$ satisfies:
+\begin{description}
+\item[(H1)] (\emph{slot locality of uniform size}) if $H_N=\int_{\Tor_N}h_R\,\dd R$, where $R\mapsto h_R=h_{N,R}$ is a
+Borel measurable map from $\Tor_N$ to the self-adjoint, sector-preserving operators on $\Fock$ with
+$\sup_R\norm{h_R}\le C_h$, and for every $k$ there is $C^H_k$ such that for all $N\in\mathcal N$, $R\in\Tor_N$ and
+$r\ge0$ some $h_{R,r}\in\Alg(\Ball rR)$ satisfies $\norm{\iota(h_R)-h_{R,r}}\le C^H_k(1+r)^{-k}$; the constants $C_h$
+and $C^H_k$ do not depend on $N$;
+\item[(H2)] (\emph{covariance}) if, in addition, $\Theta^*h_R\Theta=h_{R+\kappa\ex}$ for all $N\in\mathcal N$ and
+$R\in\Tor_N$.
+\end{description}
+\end{definition}
+
+Under (H1) the operators $h_R$ are even (Lemma~\ref{lem:sectors}(ii)), and under (H2) $[\Theta,H_N]=0$, by the
+translation invariance of Lebesgue measure. Condition (H1) is the lowest-Landau-level counterpart of the
+charge-conserving finite-range interactions of \cite[Sections~2.1--2.2]{BBDF21}: the terms $h_R$ conserve the
+up-spin number $\Nup$, which plays the role of the charge, and also $\Ndn$, which is needed because the gap
+will be assumed in a sector; finite range is replaced by rapid decay in the slot lattice.
+
+\begin{remark}\label{rem:class-discrete}
+A sum $\sum_ih_i$ of self-adjoint sector-preserving operators $h_i$ that are uniformly bounded and rapidly
+local, in the sense of (H1), at points $R_i\in\Tor_N$ of which at most a fixed number lie in any disc of
+radius one, can be written as $\int h'_R\,\dd R$ with $h'_R:=(4/\pi)\sum_{i:\,d(R,R_i)<1/2}h_i$, which satisfies
+(H1); and (H2) is inherited when the family $(R_i,h_i)$ is covariant. We do not use this.
+\end{remark}
+
+\begin{corollary}[the hollow-core Hamiltonian is in the class]\label{cor:hc-in-class}
+For every infinite $\mathcal N\subset\N$ and admissible tori $(\Tor_N)_{N\in\mathcal N}$, the hollow-core Hamiltonians
+$(H_N)_{N\in\mathcal N}$ satisfy (H1), with the local terms $h_R$ of Definition~\ref{def:pairs}, $C_h=7/\pi$ and the
+constants $C^H_k$ of Proposition~\ref{prop:slotH}, and they satisfy (H2).
+\end{corollary}
+
+\begin{proof}
+By Theorem~\ref{thm:localform}(a), $H_N=\int_{\Tor_N}h_R\,\dd R$. The map $R\mapsto h_R$ is smooth (see the remarks after
+Definition~\ref{def:pairs}), hence Borel measurable, and each $h_R$ is self-adjoint. The computation in the proof of
+Proposition~\ref{prop:slotH}(ii), carried out on $\Fock$ instead of $\FockS$, gives
+$[N_\sigma,c(f\otimes\sigma')]=-\delta_{\sigma\sigma'}c(f\otimes\sigma')$ for $f\in\hN$; hence $B_\nu(R)$ lowers
+$(\Nup,\Ndn)$ by $(2,0)$, $(1,1)$ or $(0,2)$, $[N_\sigma,B_\nu(R)^*B_\nu(R)]=0$, and $h_R$ commutes with $\Nup$ and $\Ndn$,
+that is, it is sector-preserving. By Proposition~\ref{prop:slotH}(i), $\sup_R\norm{h_R}\le7/\pi$, and
+Proposition~\ref{prop:slotH}(ii) provides $h_{R,r}\in\Alg(\Ball rR)$ with $\norm{\iota(h_R)-h_{R,r}}\le C^H_k(1+r)^{-k}$,
+where $C^H_k$ depends only on $k$, $\eta$ and $\delta_0$. Neither constant depends on $N$, so (H1) holds; (H2) is
+Lemma~\ref{lem:covariance}.
+\end{proof}
+
+\subsection{Band charges}
+
+\begin{definition}[band charges]\label{def:charges}
+For a band $\mathcal B\subset\Z_{\Nphi}$ let $Q_{\mathcal B}:=\sum_{j\in\mathcal B}n_{j\up}$.
+\end{definition}
+
+\begin{lemma}[elementary properties of band charges]\label{lem:charges-elementary}
+The operators $Q_{\mathcal B}$ commute with one another and with $\Nup$ and $\Ndn$; each has spectrum in
+$\{0,1,\dots,\abs{\mathcal B}\}$, so that $\norm{Q_{\mathcal B}}\le\abs{\mathcal B}$ and $e^{2\pi\iu Q_{\mathcal B}}=\one$;
+$Q_{\Z_{\Nphi}}=\Nup$; $Q_{\mathcal B}+Q_{\mathcal B'}=Q_{\mathcal B\cup\mathcal B'}$ for disjoint bands; and
+$\Theta^*Q_{\mathcal B}\Theta=Q_{\mathcal B+1}$.
+\end{lemma}
+
+\begin{proof}
+By the anticommutation relations, $n_{j\sigma}^2=c^*_{j\sigma}\bigl(\one-c^*_{j\sigma}c_{j\sigma}\bigr)c_{j\sigma}=n_{j\sigma}$,
+because $c_{j\sigma}^2=0$, and $n_{j\sigma}$ commutes with $c_{j'\sigma'}$ and $c^*_{j'\sigma'}$ for
+$(j',\sigma')\ne(j,\sigma)$, being a product of two operators that anticommute with them. So the $n_{j\sigma}$ are
+mutually commuting orthogonal projections, and the $Q_{\mathcal B}$, $\Nup$ and $\Ndn$, which are sums of them,
+commute. In the occupation-number basis $c^*_{j_1\sigma_1}\cdots c^*_{j_p\sigma_p}\Omega_0$, with $\Omega_0$ the vacuum, every
+$n_{j\sigma}$ is diagonal with eigenvalues $0$ and $1$, so $Q_{\mathcal B}$ is diagonal with eigenvalues in
+$\{0,\dots,\abs{\mathcal B}\}$; this gives $\norm{Q_{\mathcal B}}\le\abs{\mathcal B}$ and $e^{2\pi\iu Q_{\mathcal B}}=\one$. The
+identities $Q_{\Z_{\Nphi}}=\Nup$ and $Q_{\mathcal B}+Q_{\mathcal B'}=Q_{\mathcal B\cup\mathcal B'}$ are immediate from the
+definitions, and by Lemma~\ref{lem:sectors}(iii), $\Theta^*Q_{\mathcal B}\Theta=\sum_{j\in\mathcal B}n_{j+1,\up}=Q_{\mathcal B+1}$.
+\end{proof}
+
+\begin{lemma}[band charges in the slot lattice]\label{lem:bandcharges}
+Let the torus be admissible.
+\begin{enumerate}[(i)]
+\item For every $j$, $\iota(n_{j\up})=\chat(v_j)^*\chat(v_j)$ with $v_j:=\Sa\psi_j\otimes\up$, which is supported in
+$\Col(j)\times\{\up\}$. The operators $\iota(n_{j\up})$ are mutually commuting orthogonal projections on $\FockS$,
+$\iota(n_{j\up})\in\Alg(\Col(j))$, and $\iota(Q_{\mathcal B})\in\Alg(\Col(\mathcal B))$ for every band $\mathcal B$.
+\item For $X\subset\Slots$ and a band $\mathcal B$ let $\mathcal B_X:=\{j\in\mathcal B:\Col(j)\cap X\ne\emptyset\}$. For
+$A\in\Alg(X)$ and $u\in\R$,
+\[
+e^{\iu u\iota(Q_{\mathcal B})}Ae^{-\iu u\iota(Q_{\mathcal B})}=e^{\iu u\iota(Q_{\mathcal B_X})}Ae^{-\iu u\iota(Q_{\mathcal B_X})}
+\in\Alg\bigl(X\cup\Col(\mathcal B_X)\bigr).
+\]
+If $X=\Str(I)$ for an interval $I$, then $X\cup\Col(\mathcal B_X)\subset\Str(I_{2\delta_x})$.
+\item Let $(\Tor_N)_{N\in\mathcal N}$ be admissible, let $Z_N=\Str(I_N)$ with $I_N$ open intervals of length at least
+$2\delta_x$, and let $A\in\AS_Z$ with prefactor exponent $m$ and $\norm{A_N}\le CN^m$. Then for all bands
+$\mathcal B_N$ and $u\in\R$, $e^{\iu uQ_{\mathcal B_N}}A_Ne^{-\iu uQ_{\mathcal B_N}}$ is almost supported in $Z$ with
+prefactor exponent $m$ and constants depending only on $C$, on the constants of $A$ and on $\delta_0$,
+uniformly in $u$ and in the bands.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(i) Since $\iota$ is a $*$-homomorphism and $\Sa(\psi_j\otimes\up)=\Sa\psi_j\otimes\up$,
+$\iota(n_{j\up})=\iota(c_{j\up})^*\iota(c_{j\up})=\chat(v_j)^*\chat(v_j)$. By Lemma~\ref{lem:columns}, $\Sa\psi_j$ is supported
+in $\Col(j)$, so $\chat(v_j)=\sum_{s\in\Col(j)}\overline{(\Sa\psi_j)(s)}\chat_{s\up}\in\CAR(\Col(j))$, and
+$\chat(v_j)^*\chat(v_j)$, a sum of products of two generators, is even; thus $\iota(n_{j\up})\in\Alg(\Col(j))$. The
+$n_{j\up}$ are mutually commuting orthogonal projections (proof of Lemma~\ref{lem:charges-elementary}), hence so are
+their images under the $*$-homomorphism $\iota$, and
+$\iota(Q_{\mathcal B})=\sum_{j\in\mathcal B}\iota(n_{j\up})\in\Alg(\Col(\mathcal B))$.
+
+(ii) By (i), $\iota(Q_{\mathcal B})=\iota(Q_{\mathcal B_X})+\iota(Q_{\mathcal B\setminus\mathcal B_X})$ with commuting summands,
+so
+\[
+e^{\iu u\iota(Q_{\mathcal B})}=e^{\iu u\iota(Q_{\mathcal B_X})}\,e^{\iu u\iota(Q_{\mathcal B\setminus\mathcal B_X})}.
+\]
+The second factor lies in $\Alg(Y)$, $Y:=\Col(\mathcal B\setminus\mathcal B_X)$, since $\Alg(Y)$ is a finite-dimensional algebra
+containing $\iota(Q_{\mathcal B\setminus\mathcal B_X})$ and hence its exponential series; and $Y\cap X=\emptyset$ by the
+definition of $\mathcal B_X$. So this factor commutes with $A\in\Alg(X)$, which gives the identity. The right side
+lies in $\Alg(X\cup\Col(\mathcal B_X))$, since $e^{\pm\iu u\iota(Q_{\mathcal B_X})}\in\Alg(\Col(\mathcal B_X))$. Now let
+$X=\Str(I)$ and $j\in\mathcal B_X$, and let $s\in\Col(j)\cap X$. For every $s'\in\Col(j)$,
+$\abs{x_{s'}-x_s}_{L_x}\le\abs{x_{s'}-\kappa j}_{L_x}+\abs{\kappa j-x_s}_{L_x}<2\delta_x$ and $x_s\in I$, so
+$\dist(x_{s'},I)<2\delta_x$ and $s'\in\Str(I_{2\delta_x})$. Hence $\Col(\mathcal B_X)\subset\Str(I_{2\delta_x})$, and
+$X\subset\Str(I_{2\delta_x})$ trivially.
+
+(iii) Let $C_k$ be the constants of $A$, and $A_{N,r}\in\Alg(\fat{(Z_N)}r)$ with
+$\norm{\iota(A_N)-A_{N,r}}\le C_kN^m(1+r)^{-k}$. Put $\mathcal U_N:=e^{\iu u\iota(Q_{\mathcal B_N})}$, which equals
+$\iota(e^{\iu uQ_{\mathcal B_N}})$ by Lemma~\ref{lem:embedding}(ii), so that
+$\iota(e^{\iu uQ_{\mathcal B_N}}A_Ne^{-\iu uQ_{\mathcal B_N}})=\mathcal U_N\iota(A_N)\mathcal U_N^*$. By Lemma~\ref{lem:strips},
+$\fat{(Z_N)}r\subset\Str((I_N)_r)$; by (ii), $\mathcal U_NA_{N,r}\mathcal U_N^*\in\Alg(\Str(((I_N)_r)_{2\delta_x}))$; the triangle
+inequality gives $((I_N)_r)_{2\delta_x}\subset(I_N)_{r+2\delta_x}$; and by Lemma~\ref{lem:strips} again,
+$\Str((I_N)_{r+2\delta_x})\subset\fat{(Z_N)}{r+3\delta_x}$. Hence $\mathcal U_NA_{N,r}\mathcal U_N^*\in\Alg(\fat{(Z_N)}{r+3\delta_x})$, and
+$\norm{\mathcal U_N\iota(A_N)\mathcal U_N^*-\mathcal U_NA_{N,r}\mathcal U_N^*}=\norm{\iota(A_N)-A_{N,r}}\le C_kN^m(1+r)^{-k}$. Given
+$r'\ge0$, if $r'\ge3\delta_x$, take $r:=r'-3\delta_x$; since $1+r'\le(1+3\delta_x)(1+r)$, the error is at most
+$C_k(1+3\delta_x)^kN^m(1+r')^{-k}$. If $r'<3\delta_x$, take the approximant $0$; the error is
+$\norm{A_N}\le CN^m\le C(1+3\delta_x)^kN^m(1+r')^{-k}$. As $\delta_x\le2\delta_0$, the conjugated sequence is almost
+supported in $Z$ with prefactor exponent $m$ and constants $(1+6\delta_0)^k\max\{C_k,C\}$, independent of $u$ and of
+the bands.
+\end{proof}
+
+Conjugation by a band charge thus preserves strips exactly. A ball, on the other hand, is in general only
+mapped into its union with full columns: on a column that straddles an edge of the band, the one-particle
+operator $\Sa P_{\mathcal B}\Sa^*$, with $P_{\mathcal B}$ the orthogonal projection onto the span of the $\psi_j$,
+$j\in\mathcal B$, is a sharply truncated Fourier sum along the column. For this reason every distance used in
+Sections~\ref{sec:index} and \ref{sec:translation} is a transverse distance between strips.

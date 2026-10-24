@@ -1,0 +1,8 @@
+hr-torus-proof: the Lean 4 formalization in this directory (lean/)
+Copyright 2026 A multi-agent AI team, in collaboration with Barry Bradlyn
+
+Licensed under the Apache License, Version 2.0; see the file LICENSE in this directory.
+
+The formalization depends on Mathlib (https://github.com/leanprover-community/mathlib4) and the libraries
+Mathlib depends on. Lake fetches them at build time into .lake/packages/; they are not part of this
+repository and are distributed under their own licenses.

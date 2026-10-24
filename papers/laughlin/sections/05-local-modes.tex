@@ -1,0 +1,139 @@
+% sections/05-local-modes.tex
+\section{Local modes on the torus}\label{sec:local}
+
+The comparison operator of Section~\ref{sec:moyal} is built, at every base point $R$, from the periodizations of the
+planar orbitals and pair states about $R$. This section defines them and bounds their Gram matrix.
+
+\subsection{Periodized orbitals and pair states}
+
+For $p\ge0$ and $R\in\R^2$ let $v_p^{*R}$ be the planar two-particle state with relative orbital $\eta_1$ and centre-of-mass
+orbital $\eta_p$ about $\sqrt2R$, that is $v_p^{*R}(r_1,r_2):=\eta_1(\rho)\,\eta_p^{\sqrt2R}(\zeta)$ with $\rho=(r_1-r_2)/\sqrt2$,
+$\zeta=(r_1+r_2)/\sqrt2$; it is antisymmetric. Let
+\[
+v_p^*(i,j):=(i-j)\sqrt{\frac{p!}{2^p\,i!\,j!}}\;\one_{i+j=p+1}\qquad(0\le i<j).
+\]
+
+\begin{lemma}[periodized local modes]\label{lem:localmodes}
+Let $\chi_m^R:=\Pk\eta_m^R$ and $\ut_p(R):=\Pk^{(2)}v_p^{*R}$.
+\begin{enumerate}[(a)]
+\item $\chi_m^R\in\h$, $\ut_p(R)\in\bigwedge^2\h$, and
+$\ip{\psi_j}{\chi_m^R}=\sqrt\kappa\sum_{n\equiv j}e^{-\iu\kappa nR_y}\mathcal H_m(\kappa n-R_x)$.
+\item $v_p^{*R}=\sum_{i<j}v_p^*(i,j)\,\eta_i^R\wedge\eta_j^R$, and hence $\ut_p(R)=\sum_{i<j}v_p^*(i,j)\,\chi_i^R\wedge\chi_j^R$.
+\item For $\gamma\in\Lam$ there is a real $\theta=\theta(R,\gamma)$, independent of $m$, with
+$\chi_m^{R+\gamma}=e^{\iu\theta}\chi_m^R$; then $\ut_p(R+\gamma)=e^{2\iu\theta}\ut_p(R)$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(a) $\eta_m^R$ is an LLL function with Gaussian decay about $R$, so Lemma~\ref{lem:unfold} applies, and
+$\ip{\psi_j}{\chi_m^R}=\overline{\ip{\chi_m^R}{\psi_j}}=\int_{\R^2}\overline{\psi_j}\,\eta_m^R=\sum_{n\equiv j}\ip{\phi_n}{\eta_m^R}_{\R^2}$, which
+is the stated sum by \eqref{eq:landaurep}. $\Pk^{(2)}$ preserves antisymmetry. (b) At $R=0$, in the Bargmann form
+(Lemmas~\ref{lem:bargmann}(i) and~\ref{lem:jacobi}(i)), $v_p^{*0}$ corresponds to $wZ^p/\sqrt{p!}$ with $w=(z_1-z_2)/\sqrt2$,
+$Z=(z_1+z_2)/\sqrt2$. In $(z_1-z_2)(z_1+z_2)^p$ the coefficient of $z_1^iz_2^j$, $i+j=p+1$, is
+$\binom p{i-1}-\binom pi=p!(i-j)/(i!j!)$; passing to the normalized tensors $z_1^iz_2^j/\sqrt{i!j!}$ and then to the normalized
+wedges ($\eta_i\wedge\eta_j$ corresponds to $(\eta_i\otimes\eta_j-\eta_j\otimes\eta_i)/\sqrt2$) gives the coefficient $v_p^*(i,j)$. For
+general $R$ apply $t_R\otimes t_R$, which acts as $t_{\sqrt2R}$ on $\zeta$ and trivially on $\rho$ (Lemma~\ref{lem:jacobi}(ii)) and
+multiplies both sides by $e^{\iu R_xR_y}$ (by \eqref{eq:etaR}). The second identity follows because $\Pk^{(2)}$ is linear and
+$\Pk^{(2)}(\eta_i\wedge\eta_j)=\Pk\eta_i\wedge\Pk\eta_j$.
+(c) By \eqref{eq:etaR} and Lemma~\ref{lem:magtrans}(ii), $\eta_m^{R+\gamma}$ is an $m$-independent phase times $t_\gamma\eta_m^R$,
+and $\Pk t_\gamma=\pm\Pk\tl_\gamma=\pm\Pk$ by reindexing. The statement for $\ut_p$ follows from (b).
+\end{proof}
+
+\subsection{The local Gram matrix}
+
+For $R\in\R^2$ let $\Gamma(R)_{mm'}:=\ip{\chi_m^R}{\chi_{m'}^R}$, $m,m'\ge0$, and let $\Gamma^{(m)}(R)$ be its truncation to
+$0\le m,m'\le m$. For $r\ge0$ let
+\[
+\mu_m(r):=\norm{\Dis^{(m)}(r/\sqrt2)},\qquad \Ec_m(\Tor):=\sum_{\gamma\in\Lam\setminus\{0\}}\mu_m(\abs\gamma);
+\]
+by Lemma~\ref{lem:bargmann}(iii), $\norm{\Dis^{(m)}(\beta)}=\mu_m(\sqrt2\abs\beta)$ for every $\beta\in\C$.
+
+\begin{lemma}[the local Gram matrix]\label{lem:localgram}
+For every $R\in\R^2$ and $m,m'\ge0$,
+\begin{equation}\label{eq:localgram}
+\Gamma(R)_{mm'}=\sum_{\gamma\in\Lam}\varsigma_\gamma\,e^{\iu\,\gamma\wedge R}\,\bra m\Dis(\beta(\gamma))\ket{m'},\qquad
+\varsigma_{(jL_x,kL_y)}:=(-1)^{jk\Nphi},
+\end{equation}
+with $\beta(\gamma)=(\gamma_x-\iu\gamma_y)/\sqrt2$. Consequently
+\[
+\norm{\Gamma^{(m)}(R)-\one}\le\Ec_m(\Tor),\qquad \Gamma(R)_{mm}\le1+\sum_{\gamma\in\Lam\setminus0}\abs{\bra m\Dis(\beta(\gamma))\ket m}.
+\]
+\end{lemma}
+
+\begin{proof}
+By Lemma~\ref{lem:unfold}, $\Gamma(R)_{mm'}=\int_{\R^2}\overline{\eta_m^R}\,\Pk\eta_{m'}^R=\sum_\gamma\ip{\eta_m^R}{\tl_\gamma\eta_{m'}^R}_{\R^2}$, absolutely
+convergent. By \eqref{eq:etaR} the phases $e^{\mp\iu R_xR_y/2}$ cancel, and
+$t_R^*t_\gamma t_R=t_{-R}t_\gamma t_R=e^{\iu\,\gamma\wedge R}t_\gamma$ by Lemma~\ref{lem:magtrans}(ii). Lemma~\ref{lem:bargmann}(ii)
+gives $\ip{\eta_m}{t_\gamma\eta_{m'}}=\bra m\Dis(\beta(\gamma))\ket{m'}$. The term $\gamma=0$ is $\delta_{mm'}$, and the
+truncation of each other term has norm $\mu_m(\abs\gamma)$.
+\end{proof}
+
+\subsection{Bounds on the lattice sums}
+
+\begin{lemma}\label{lem:Ebounds}
+For $m\ge0$ and $r\ge0$ put $\mathfrak g_m(r):=(r^2/2+m)^me^{-r^2/4}/m!$.
+\begin{enumerate}[(a)]
+\item For $m\le23$, $\mu_m$ is nonincreasing on $[16,\infty)$. Consequently, for every rectangular torus whose shorter period
+is at least $L$, with $L\ge16$, and every $m\le23$,
+\[
+\Ec_m(\Tor)\le\Ec_m(L):=\sum_{(j,k)\in\Z^2\setminus0}\mu_m\bigl(L\sqrt{j^2+k^2}\bigr),
+\]
+and $\Ec_m(L)$ is nonincreasing in $L\ge16$.
+\item For $m\ge1$ and $r\ge0$, $\mu_m(r)\le(m+1)\,\mathfrak g_m(r)$, and $\mathfrak g_m$ is decreasing
+for $r^2>2m$. Hence, for every rectangular torus whose shorter period is at least $L$ with $L^2\ge2m$,
+\[
+\Ec_m(\Tor)\le\widehat{\Ec}_m(L):=4(m+1)\,\mathfrak g_m(L)\Bigl(1+\sum_{n\ge2}(n+1)\,n^m\,e^{-(n-1)L^2/4}\Bigr)\xrightarrow[L\to\infty]{}0 ,
+\]
+and the same bound holds for $\Ec_m(L)$.
+\item For every $m\ge0$ and $\abs\beta=r/\sqrt2$, $\abs{\bra m\Dis(\beta)\ket m}\le\min\{1,\mathfrak g_m(r)\}$;
+$\mathfrak g_m(r)$ is nondecreasing in $m$, and $\min\{1,\mathfrak g_z(r)\}$ is
+nonincreasing in $r$. Hence, for every rectangular torus whose shorter period is at least $L>0$,
+\[
+\sigma_z(\Tor):=\sup_R\max_{m\le z}\bigl(\Gamma(R)_{mm}-1\bigr)\le\Xi_z(L):=\sum_{(j,k)\in\Z^2\setminus0}\min\bigl\{1,\mathfrak g_z\bigl(L\sqrt{j^2+k^2}\bigr)\bigr\}.
+\]
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(a) Take $\beta=r/\sqrt2>0$ and put $x:=\beta^2=r^2/2$, so that $r\ge16$ means $x\ge128$. By Lemma~\ref{lem:bargmann}(iii), for
+$a,b\le m$ the entry $\bra a\Dis(\beta)\ket b$ equals $\pm\sqrt{n!/(n+\alpha)!}\,x^{\alpha/2}e^{-x/2}\mathrm L_n^{(\alpha)}(x)$ with
+$n=\min(a,b)$, $\alpha=\abs{a-b}$, and the sign $(-1)^{b-a}$ if $a<b$. The monic polynomials $p_i:=(-1)^ii!\,\mathrm L_i^{(\alpha)}$
+satisfy $p_{i+1}=(x-(2i+\alpha+1))p_i-i(i+\alpha)p_{i-1}$, so, expanding a determinant along its last row, $p_n(x)=\det(x-M_n)$ for
+the symmetric tridiagonal matrix $M_n$ with diagonal entries $2i+\alpha+1$ ($0\le i<n$) and off-diagonal entries $\sqrt{i(i+\alpha)}$
+($1\le i<n$). Hence the zeros $x_1,\dots,x_n$ of $\mathrm L_n^{(\alpha)}$ are real; they are positive (for $x\le0$ all terms of
+$\mathrm L_n^{(\alpha)}(x)$ have the same sign), and by Gershgorin's theorem and $\sqrt{i(i+\alpha)}\le i+\alpha/2$ they are at most
+$\max_i(4i+2\alpha+2)\le4n+2\alpha-2=2a+2b-2\le90$. So for $x\ge128$ the polynomial $\mathrm L_n^{(\alpha)}(x)$ has the sign
+$(-1)^n$ of its leading coefficient, and every entry of the column $b$ of $\Dis^{(m)}(\beta)$ has the sign $(-1)^b$; thus
+$\Dis^{(m)}(\beta)=\abs{\Dis^{(m)}(\beta)}\,\mathrm{diag}((-1)^b)$ with the entrywise modulus $\abs{\Dis^{(m)}(\beta)}$, and
+$\mu_m(r)=\norm{\abs{\Dis^{(m)}(\beta)}}$. The logarithmic derivative of the modulus of an entry is
+$\frac\alpha{2x}-\frac12+\sum_i\frac1{x-x_i}$. By convexity of $t\mapsto1/(x-t)$ on $[0,90]$, $\frac1{x-t}\le\frac1x+\frac t{x(x-90)}$,
+and $\sum_ix_i=\tr M_n=n(n+\alpha)$; hence for $x\ge128$
+\[
+\frac\alpha{2x}+\sum_i\frac1{x-x_i}\le\frac{\alpha+2n}{2x}+\frac{n(n+\alpha)}{x(x-90)}\le\frac{46}{256}+\frac{529}{128\cdot38}<0.29<\frac12 .
+\]
+So every entry of $\abs{\Dis^{(m)}(\beta)}$ is nonincreasing in $r\ge16$. For entrywise nonnegative matrices the spectral norm is
+$\max\{v^{\mathsf T}Au:u,v\ge0,\ \norm u=\norm v=1\}$, which is monotone in the entries. For a torus with periods $L_x,L_y\ge L\ge16$,
+$\abs{(jL_x,kL_y)}\ge L\sqrt{j^2+k^2}\ge16$ for $(j,k)\neq0$, which gives the bound and the monotonicity in $L$.
+
+(b) For $a\ge b$ write $n=b$, $\alpha=a-b$. The coefficients of $\mathrm L_n^{(\alpha)}(-x)=\sum_i\binom{n+\alpha}{n-i}x^i/i!$ are
+dominated by those of $(x+n+\alpha)^n/n!$, since $(n+\alpha)!/(\alpha+i)!\le(n+\alpha)^{n-i}$; and $\abs{\mathrm L_n^{(\alpha)}(x)}\le\mathrm L_n^{(\alpha)}(-x)$
+for $x\ge0$ termwise. Hence the entry is at most $\sqrt{b!/a!}\,x^{(a-b)/2}e^{-x/2}(x+a)^b/b!\le(x+m)^{(a+b)/2}e^{-x/2}/\sqrt{a!b!}$,
+which is nondecreasing in $a$ and in $b$ as long as $x+m\ge a+1$, so at most $(x+m)^me^{-x/2}/m!=\mathfrak g_m(r)$. The spectral norm of
+an $(m+1)\times(m+1)$ matrix is at most $m+1$ times its largest entry. $\frac{\dd}{\dd r}\log\mathfrak g_m(r)=r\bigl(\frac m{r^2/2+m}-\frac12\bigr)<0$ for
+$r^2>2m$; so $\mu_m(\abs{(jL_x,kL_y)})\le(m+1)\,\mathfrak g_m(L\sqrt{j^2+k^2})$ when $L^2\ge2m$. Group the lattice points by
+$n=j^2+k^2$: there are $4$ with $n=1$ and at most $2(2\sqrt n+1)\le4(n+1)$ for each $n\ge2$, and
+$\mathfrak g_m(L\sqrt n)\le n^me^{-(n-1)L^2/4}\mathfrak g_m(L)$.
+
+(c) $\abs{\bra m\Dis(\beta)\ket m}\le1$ by unitarity, and $=e^{-x/2}\abs{\mathrm L_m^{(0)}(x)}\le e^{-x/2}\mathrm L_m^{(0)}(-x)\le\mathfrak g_m(r)$ by
+(b) with $\alpha=0$. Next $\mathfrak g_{m+1}/\mathfrak g_m\ge(x+m+1)/(m+1)\ge1$. Finally $\frac{\dd}{\dd r}\log\mathfrak g_z>0$ only for
+$r^2<2z$, and there $\mathfrak g_z(r)\ge\mathfrak g_z(0)=z^z/z!\ge1$; so $\min\{1,\mathfrak g_z\}$ equals $1$ on $[0,\sqrt{2z}]$ and is
+decreasing beyond. With Lemma~\ref{lem:localgram} and $\abs{(jL_x,kL_y)}\ge L\sqrt{j^2+k^2}$ this gives the bound on $\sigma_z$.
+\end{proof}
+
+\begin{remark}\label{rem:closedbound}
+The bound (b) is far from sharp near the thresholds of the main theorem. For $m=22$ and $m=23$, the indices of the binding
+four-body term, it gives $\widehat\Ec_{22}(L)\approx9.82$, $0.0255$ and $3.6\cdot10^{-5}$ and $\widehat\Ec_{23}(L)\approx77.9$,
+$0.221$ and $3.4\cdot10^{-4}$ at $L=16$, $17$ and $18$, against the values $\Ec_{22}(17)=1.13\cdot10^{-6}$ and
+$\Ec_{23}(17)=4.73\cdot10^{-6}$ computed from the exact norms (Table~\ref{tab:constants}). It is used only for the limit
+$L\to\infty$ and its rate; the numerical values in Section~\ref{sec:theorem} use the exact norms $\mu_m$ and part (a).
+\end{remark}

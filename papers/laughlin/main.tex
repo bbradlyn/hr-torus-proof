@@ -1,0 +1,126 @@
+% main.tex -- the paper. Compile with: pdflatex main (three passes).
+\documentclass[11pt]{article}
+\input{preamble}
+
+\title{An explicit uniform spectral gap for the Laughlin state parent Hamiltonian on rectangular tori}
+\author{A multi-agent AI team,\\ in collaboration with Barry Bradlyn}
+\date{Preprint \quad---\quad 23 October 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We consider spinless fermions in the lowest Landau level of a rectangular torus with periods $L_x$, $L_y$,
+interacting through the untruncated $V_1$ pseudopotential, normalized so that every pair of relative angular
+momentum one pays energy one. We prove a transfer principle: every planar certificate of the form used by OpenAI on the
+sphere, with constant $\gamma$, gives $\HT^2\ge(\gamma-\etr(\Tor))\HT$ for the Hamiltonian $\HT$ on the whole Fock
+space of every rectangular torus, where $\etr(\Tor)$ is bounded by an explicit function of the shorter period $L$
+that tends to zero at the Gaussian rate $O(L^4\,2^{-L^2/20})$. For OpenAI's planar certificate the bounds are explicit: $\HT^2\ge\gT\HT$, with a
+constant $\gT$ that depends on the torus only through its lattice of periods, and for every rectangular torus whose
+shorter period is at least $L$, with $L\ge16$ (in units of the magnetic length), one has $\gT\ge\gl(L)$, where $\gl$ is
+nondecreasing and tends at the same rate to $\gs=4616733319001/10^{14}$, the constant of OpenAI's certificate;
+numerically $\gl(L)>0$ for $L\ge16.457$, $\gl(L)>1/25$ for $L\ge16.857$ and $\gl(L)\ge\gs-10^{-5}$ for $L\ge18.685$.
+The bound is uniform in the particle number and in the aspect ratio. Hence the spectrum of $\HT$ in every particle
+sector lies in $\{0\}\cup[\gT,\infty)$. At $\Nphi=3N$ flux quanta the kernel on $N$ particles is spanned by the three
+centre-of-mass copies of the Laughlin state, and no sector with more particles has a zero mode; the same
+three-dimensional count holds, for every modular parameter, for the explicit theta-function pair operators
+$B_n^{(\tau)}$, whose identification with the $V_1$ Hamiltonian of an oblique torus is not proved here. The proof
+transcribes OpenAI's spherical argument to the torus and consumes the planar certificate as data. On the torus the
+averaging over rotations is replaced by an average over magnetic translations, and torus Moyal identities make the
+pair-level and four-body parts of the comparison operator exact. The three-body coefficient of the normal-ordered
+square of $\HT$ is exactly the periodized planar three-body target, so the three-body target transfers without error;
+the comparison operator's three-body part carries one non-orthonormality term, bounded by $\Cth\Ec_8(1+\Ec_8)\HT$. The
+remaining errors are Gaussian in the shorter period.
+\end{abstract}
+
+\setcounter{tocdepth}{2}
+\tableofcontents
+
+\input{sections/01-introduction}
+\input{sections/02-setting}
+\input{sections/03-kernel}
+\input{sections/04-projector}
+\input{sections/05-local-modes}
+\input{sections/06-moyal}
+\input{sections/07-square}
+\input{sections/08-bessel}
+\input{sections/09-theorem}
+\input{sections/10-outlook}
+
+\appendix
+\input{appendices/A-certificate}
+\input{appendices/B-notation}
+
+\begin{thebibliography}{99}
+
+\bibitem{OAI:A-Fock-space-inequality-and-the-Laughlin-spectral-gap-September-24-2026}
+OpenAI.
+\newblock A {F}ock-space inequality and the {L}aughlin spectral gap.
+\newblock OpenAI Math Release preprint
+  \href{https://github.com/openai/math/blob/main/preprints/A-Fock-space-inequality-and-the-Laughlin-spectral-gap-September-24-2026/A-Fock-space-inequality-and-the-Laughlin-spectral-gap-September-24-2026.pdf}{OAI:A-Fock-space-inequality-and-the-Laughlin-spectral-gap-September-24-2026},
+  2026.
+
+\bibitem{Laughlin}
+R.~B. Laughlin.
+\newblock Anomalous quantum {H}all effect: an incompressible quantum fluid with fractionally charged excitations.
+\newblock \emph{Phys. Rev. Lett.} 50, 1395--1398 (1983).
+
+\bibitem{Haldane}
+F.~D.~M. Haldane.
+\newblock Fractional quantization of the {H}all effect: a hierarchy of incompressible quantum fluid states.
+\newblock \emph{Phys. Rev. Lett.} 51, 605--608 (1983).
+
+\bibitem{HaldaneRezayiTorus}
+F.~D.~M. Haldane and E.~H. Rezayi.
+\newblock Periodic {L}aughlin--{J}astrow wave functions for the fractional quantized {H}all effect.
+\newblock \emph{Phys. Rev. B} 31, 2529--2531(R) (1985).
+
+\bibitem{ONDS}
+G.~Ortiz, Z.~Nussinov, J.~Dukelsky, and A.~Seidel.
+\newblock Repulsive interactions in quantum {H}all systems as a pairing problem.
+\newblock \emph{Phys. Rev. B} 88, 165303 (2013).
+
+\bibitem{NWY}
+B.~Nachtergaele, S.~Warzel, and A.~Young.
+\newblock Spectral gaps and incompressibility in a $\nu=1/3$ fractional quantum {H}all system.
+\newblock \emph{Commun. Math. Phys.} 383, 1093--1149 (2021).
+
+\bibitem{WY}
+S.~Warzel and A.~Young.
+\newblock The spectral gap of a fractional quantum {H}all system on a thin torus.
+\newblock \emph{J. Math. Phys.} 63, 041901 (2022).
+
+\bibitem{Gao}
+Q.~Gao.
+\newblock Improving the lower bound on the {L}aughlin gap: {A}n {SDP} search.
+\newblock Preprint, arXiv:2610.12700 (2026).
+
+\bibitem{ScheerKhalaf}
+M.~G. Scheer and E.~Khalaf.
+\newblock A hierarchy of exact lower bounds on the {L}aughlin spectral gap.
+\newblock Preprint, arXiv:2610.18854 (2026).
+
+\bibitem{HouWu}
+Uniform {L}aughlin gaps on large flat tori from finite {F}ock-space certificates.
+\newblock Candidate proof for review, 16~October 2026, prepared by X.-J.~Hou with advice from Y.-H.~Wu.
+\newblock \url{https://github.com/certainpineapple/Laughlin-torus-gap}, commit 22144aa.
+
+\bibitem{Rougerie}
+N.~Rougerie.
+\newblock On the {L}aughlin function and its perturbations.
+\newblock \emph{S\'eminaire Laurent Schwartz --- EDP et applications} (2018--2019), Exp.~II, 1--17.
+
+\bibitem{ASZ}
+J.~E. Avron, R.~Seiler, and P.~G. Zograf.
+\newblock Viscosity of quantum {H}all fluids.
+\newblock \emph{Phys. Rev. Lett.} 75, 697--700 (1995).
+
+\bibitem{Read09}
+N.~Read.
+\newblock Non-{A}belian adiabatic statistics and {H}all viscosity in quantum {H}all states and $p_x+ip_y$ paired
+superfluids.
+\newblock \emph{Phys. Rev. B} 79, 045308 (2009).
+
+\end{thebibliography}
+
+\end{document}

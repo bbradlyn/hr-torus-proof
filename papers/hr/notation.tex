@@ -1,0 +1,122 @@
+\section{Notation}\label{app:notation}
+
+The table lists the notation of Sections~\ref{sec:intro}--\ref{sec:hollowcore} and Appendices~\ref{app:bbdf},
+\ref{app:LR} and \ref{app:twist}; the first subsection of Appendix~\ref{app:bbdf} describes the setting of \cite{BBDF21} in
+the notation of that paper. Appendix~\ref{app:kernel} uses its own notation, which is defined there.
+
+\begingroup\small
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.27\textwidth}>{\raggedright\arraybackslash}p{0.55\textwidth}>{\raggedright\arraybackslash}p{0.12\textwidth}@{}}
+\toprule
+symbol & meaning & where\\
+\midrule
+\endfirsthead
+\toprule
+symbol & meaning & where\\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+\multicolumn{3}{@{}l}{\emph{General}}\\*
+$\ip fg$ & inner product, linear in $g$ & \S\ref{sec:intro}\\
+$\abs u_P$, $\pos u$ & distance from $u$ to $P\Z$; $\max\{u,0\}$ & \S\ref{sec:intro}\\
+$\Onf$, $\eqN$ & bounded by $C_kN^{-k}$ for every $k$; equality up to $\Onf$ & \S\ref{sec:intro}\\
+$C,C',c$; $C_k$ & constants independent of $N$; depending on an index $k$ & \S\ref{sec:intro}\\
+$\one_X$ & identity; orthogonal projection onto functions supported in $X$ & \S\ref{sec:frame}\\
+\midrule
+\multicolumn{3}{@{}l}{\emph{Torus, lowest Landau level, Fock space (Section~\ref{sec:setting})}}\\*
+$N$, $\Nphi=2N$ & electron-number parameter; number of flux quanta and of orbitals & Def.~\ref{def:torus}\\
+$\Tor_N$, $L_x$, $L_y$, $\kappa$ & torus $\R^2/(L_x\Z\times L_y\Z)$, $L_xL_y=4\pi N$; $\kappa=2\pi/L_y$, $L_x=\kappa\Nphi$ & Def.~\ref{def:torus}\\
+$r=(x,y)$; $R=(R_x,R_y)$ & points of $\Tor_N$ ($x$ transverse, across the cuts); centres of local terms & Def.~\ref{def:torus}\\
+$d(r,r')$, $\abs{\Tor_N}$, $\ex$ & flat distance; area; unit vector along $x$ & Def.~\ref{def:torus}\\
+$D_x$, $D_y$, $D$ & covariant derivatives $\partial_x$, $\partial_y-\iu x$; $D=\frac12(D_x-\iu D_y)$ & \eqref{eq:covariant}\\
+$\hN$ & lowest Landau level of $\Tor_N$ & Def.~\ref{def:torus}\\
+$\phi_n$, $\psi_j$ & Landau-gauge orbitals in the plane ($n\in\Z$) and on the torus ($j\in\Z_{\Nphi}$) & Lem.~\ref{lem:orbitals}\\
+$[j]$ & class of $j\in\Z$ in $\Z_{\Nphi}$ & Lem.~\ref{lem:orbitals}\\
+$\ev R$, $\evD R$ & evaluation vectors: $\ip{\ev R}f=f(R)$, $\ip{\evD R}f=(Df)(R)$ & Lem.~\ref{lem:evaluation}\\
+$L_{\min}$ & $\min\{L_x,L_y\}$ & Lem.~\ref{lem:evaluation}\\
+$\thx$, $\thy$ & one-particle magnetic translations, $\thx\psi_j=\psi_{j+1}$ & Lem.~\ref{lem:magtrans}\\
+$\kN$, $\Fock$, $\Ff(u)$ & $\hN\otimes\C^2$; Fock space $\Ff(\kN)$; second quantization of $u$ & Def.~\ref{def:fock}\\
+$\Omega_0$, $\widehat\Omega_0$ & the vacua of $\Fock$ and of $\FockS$ & Lem.~\ref{lem:embedding}\\
+$c(f)$, $c_{j\sigma}$, $n_{j\sigma}$ & annihilation operators (conjugate-linear in $f$); occupation numbers & Def.~\ref{def:fock}\\
+$\sigma,\sigma'\in\{\up,\dn\}$ & spin labels & Def.~\ref{def:fock}\\
+$\Nup$, $\Ndn$, $S_z$ & numbers of electrons of each spin; $\frac12(\Nup-\Ndn)$ & Def.~\ref{def:fock}\\
+$\nn=(n_\up,n_\dn)$, $\sect\nn$, $\Psec\nn$ & sector label; sector; projection onto it & Def.~\ref{def:fock}\\
+$\Theta$ & many-body magnetic translation $\Ff(\thx\otimes\one)^*$, $\Theta^*n_{j\sigma}\Theta=n_{j+1,\sigma}$ & Def.~\ref{def:fock}\\
+$V_{abcd}$ & two-body matrix elements & Def.~\ref{def:hamiltonian}\\
+$H_N$ & hollow-core Hamiltonian in $V_1$ units & Def.~\ref{def:hamiltonian}\\
+$V$, $\Vint$ & planar interaction $4\pi(\delta+\nabla^2\delta)$; its periodization & Def.~\ref{def:hamiltonian}\\
+$\mathcal K_N$ & zero modes with $N$ electrons & Thm.~\ref{thm:kernel}\\
+$E_j(N)$ & eigenvalues in the relevant sector, increasing, with multiplicity & \eqref{eq:E11}\\
+\midrule
+\multicolumn{3}{@{}l}{\emph{The slot frame (Section~\ref{sec:frame})}}\\*
+$\eta$, $\delta_0$, $w$ & profile; target slot width; window $\eta/(\sum_k\eta(\cdot-k)^2)^{1/2}$ & Def.~\ref{def:frame}\\
+$L_0$, $\delta_\pm$ & $\max\{4,3\pi/\delta_0\}$ (admissibility); $\frac23\delta_0$, $2\delta_0$ & Def.~\ref{def:frame}\\
+$\nx$, $\delta_x$, $x_a$ & number of windows; window spacing $L_x/\nx$; window centres & Def.~\ref{def:frame}\\
+$\ny$, $\delta_y$, $y_\ell$ & slots per window $\lceil2\delta_x/\kappa\rceil$; spacing $L_y/\ny$; positions & Def.~\ref{def:frame}\\
+$w_a(j)$, $I_a$ & window $a$ in the orbital index; its support & Def.~\ref{def:frame}\\
+$\Slots$, $s=(a,\ell)$ & slot lattice $\Z_{\nx}\times\Z_{\ny}$; a slot & Def.~\ref{def:frame}\\
+$\cen s$, $x_s$ & centre of the slot $s$; its transverse coordinate & Def.~\ref{def:frame}\\
+$z_s$, $\Sa$ & frame vectors; analysis map $f\mapsto(\ip{z_s}f)_s$ (also $\Sa\otimes\one$) & Def.~\ref{def:frame}\\
+$d(s,s')$, $d(s,R)$, $d(X,Y)$ & distances between slot centres, points, sets of slots; $d(X,Y):=+\infty$ if $X$ or $Y$ is empty & Def.~\ref{def:frame}, Lem.~\ref{lem:separations}\\
+$\Ball rR$, $\Cvol$ & slots within distance $r$ of $R$; ball-count constant & Prop.~\ref{prop:geometry}\\
+$\Str(I)$, $I_\rho$ & strip over a transverse interval $I$; $\rho$-neighbourhood of $I$ & Prop.~\ref{prop:geometry}, Def.~\ref{def:strips}\\
+$C_{\rm str}$ & strip-count constant: $\abs{\Str(I)}\le C_{\rm str}L_y(1+\abs I)$ & Prop.~\ref{prop:geometry}\\
+$\Col(j)$, $\Col(\mathcal B)$ & column of the orbital $j$ (width $2\delta_x$); union over a band & Lem.~\ref{lem:columns}, Def.~\ref{def:strips}\\
+$\FockS$, $\chat(g)$, $\chat_{s\sigma}$, $\Nhat\sigma$ & slot Fock space; slot annihilators; slot number operators & Def.~\ref{def:slotfock}\\
+$\CAR(X)$, $\Alg(X)$ & algebra of the modes of $X$; its even part & Def.~\ref{def:slotfock}\\
+$\fat Xr$ & $r$-fattening $\{s:d(s,X)\le r\}$ & Def.~\ref{def:slotfock}\\
+$\iota$, $\Hhat$ & embedding $\iota(c(f))=\chat(\Sa f)$; $\iota(H)$ & Def.~\ref{def:slotfock}\\
+$\AS_Z$, $m$ & almost supported in $Z$; prefactor exponent & Def.~\ref{def:almostsupported}\\
+$\norm A_{X;k}$ & set norm of order $k$ & Def.~\ref{def:almostsupported}\\
+\midrule
+\multicolumn{3}{@{}l}{\emph{The Hamiltonian in the slot frame (Section~\ref{sec:hamiltonian})}}\\*
+$\nu\in\{+,0,-\}$, $\chi^\nu$ & triplet label; triplet spinors & Def.~\ref{def:pairs}\\
+$\cpair\nu(f,g)$, $\cpairhat\nu(h,h')$ & triplet pair annihilators on $\Fock$, on $\FockS$ & Def.~\ref{def:pairs}\\
+$B_\nu(R)$, $h_R$ & $\cpair\nu(\ev R,\evD R)$; local term $8\pi\sum_\nu B_\nu(R)^*B_\nu(R)$ & Def.~\ref{def:pairs}\\
+$\bcen\nu n$ & orbital pair operators with centre $n/2$, $n\in\Z_{2\Nphi}$ & Def.~\ref{def:pairs}\\
+$B^{(r)}_\nu(R)$, $h_{R,r}$ & slot approximants of $B_\nu(R)$, $h_R$ in $\Alg(\Ball rR)$ & Prop.~\ref{prop:slotH}\\
+$C_h$, $C^H_k$ & bound on $\norm{h_R}$; rapid-locality constants & Prop.~\ref{prop:slotH}, Def.~\ref{def:class}\\
+$H_{\mathcal D}$ & $\int_{\mathcal D}h_R\,\dd R$ & Lem.~\ref{lem:covariance}\\
+(H1), (H2) & slot locality of uniform size; covariance & Def.~\ref{def:class}\\
+$\mathcal B$, $Q_{\mathcal B}$ & band (set of orbitals); its up-spin charge & Def.~\ref{def:charges}\\
+\midrule
+\multicolumn{3}{@{}l}{\emph{Locality estimates (Section~\ref{sec:locality})}}\\*
+$\tau_t$ & $A\mapsto e^{\iu t\Hhat}Ae^{-\iu t\Hhat}$ (and $e^{\iu tH_N}Ae^{-\iu tH_N}$ on $\Fock$) & \S\ref{sec:locality}\\
+$\CE_Y$ & conditional expectation onto $\CAR(Y)$ & Lem.~\ref{lem:condexp}\\
+$\Psi$, $\tau^\Psi_t$, $M^\Psi$, $C(\Psi,\lambda)$ & even interaction; its dynamics; chain matrix; weighted row sum & Thm.~\ref{thm:LR}\\
+$c_k$, $r_j$, $C_1$ & constants and dyadic radii of the propagation theorem & Thm.~\ref{thm:propagation}\\
+$\tau^{\lambda,Y}$, $\Hhat_{\lambda,Y}$ & truncated dynamics; its generator, in $\Alg(Y)$ & Thm.~\ref{thm:propagation}\\
+$\rho$, $\lambda$, $\alpha$, $\beta$ & approximation radius; truncation scale; light-cone exponent; $1-1/\alpha$ & Thm.~\ref{thm:propagation}\\
+$C_{\rm lc}$ & light-cone constant, $\max\{1,(4C_1)^4\}$ for $\alpha=4$ & Thm.~\ref{thm:propagation}\\
+$M_j(F)$ & moments $\int(1+\abs t)^j\abs{F(t)}\,\dd t$ & Lem.~\ref{lem:filters}\\
+$\Wg$, $\widehat W_\gamma$, $\vartheta$ & generator filter; its Fourier transform; cutoff & Def.~\ref{def:filters}\\
+$g$, $\zeta$, $\delta$, $\Qf$ & clustering step; mollifier and its width; $\Qf(A)=g(\ad_H)(A)$ & Def.~\ref{def:filters}\\
+$\gamma'$, $\hat\zeta$, $F$, $G$, $c_F$ & $-\gamma/2$; Fourier transform; time representation of $g$ & Lem.~\ref{lem:timerep}\\
+$m_*$ & bound on all prefactor exponents of the proof & Lem.~\ref{lem:bookkeeping}, \ref{lem:objects}\\
+\midrule
+\multicolumn{3}{@{}l}{\emph{The index theorem (Sections~\ref{sec:index}--\ref{sec:translation})}}\\*
+$\mathcal N$, $c_*$ & infinite index set; constant in $L_x\ge c_*\sqrt N$ & Set.~\ref{set:index}\\
+$\Gam$, $\Gm$, $\Gp$, $\Gmid$ & half band $\{0,\dots,N-1\}$; its quarters; its middle half & Set.~\ref{set:index}\\
+$\cutm$, $\cutp$ & the cuts $\Col(0)$, $\Col(N)$ & Set.~\ref{set:index}\\
+$N_*$ & $\lceil(96\delta_0/c_*)^2\rceil$; separations $\ge c_*\sqrt N/16$ for $N\ge N_*$ & Lem.~\ref{lem:separations}\\
+$\Tor_N^\pm$ & half-tori centred on the lines of the cuts & Set.~\ref{set:index}\\
+$Q$, $Q_\pm$, $Q_m$ & $Q_\Gam$, $Q_{\Gamma_\pm}$, $Q_{\Gmid}$ & Set.~\ref{set:index}\\
+$\nn_N$, $p$, $\Delta$, $\gamma$, $P$ & sectors; rank, spread and gap of the patch; its projection & Ass.~\ref{ass:gap}\\
+$U$, $T_\pm$, $m_T$ & transport unitary; transported charges; their norm exponent & Ass.~\ref{ass:U}\\
+$J_\pm$, $K$, $K_\pm$, $\Qb$ & current halves; generator; its halves; dressed charge & Def.~\ref{def:dressing}\\
+$K^U_\pm$, $\Qb_\pm$, $\Qb^U_\pm$, $\Qb^U$ & objects of \cite[Section~4.2]{BBDF21} & Def.~\ref{def:bbdfobjects}\\
+$\varphi$, $\mathcal M(\varphi)$, $\mathcal M_\pm(\varphi)$, $\Tt$ & flux angle; flux insertions; dressed transport & Def.~\ref{def:bbdfobjects}\\
+$\Zc$, $\Gc$, $\Yc$, $\Ec$, $\detP$ & compressed $\mathcal M_-$; generator, solution and error of the comparison equation; determinant on $\ran P$ & Lem.~\ref{lem:ode}\\
+$\expP A$ & $p^{-1}\Tr(PA)$ & Thm.~\ref{thm:index}\\
+$\nn^\pm_N$ & $((N\pm1)/2,(N\mp1)/2)$ at odd $N$ & Cor.~\ref{cor:classwide-odd}\\
+$\mathcal R$ & rotation exchanging the sides of the torus & Lem.~\ref{lem:exchange}\\
+$\mathcal T_N$ & rectangular tori with $L_xL_y=4\pi N$, $\min\{L_x,L_y\}\ge L_0$ & Cor.~\ref{cor:uniform}\\
+\midrule
+\multicolumn{3}{@{}l}{\emph{The variational bound (Appendix~\ref{app:twist})}}\\*
+$\mathsf G_k(\kappa)$ & Gaussian sums $\sum_{d\ge1}2d^ke^{-\kappa^2d^2/4}$ & \eqref{eq:gauss-sums}\\
+$\mathcal W_\sigma$ & twist of the electrons of spin $\sigma$: $c_{j\sigma}\mapsto e^{2\pi\iu j/\Nphi}c_{j\sigma}$ & Lem.~\ref{lem:twists}\\
+$\chi^{\rm sing}$, $c^{\rm sing}(f,g)$ & singlet spinor; singlet pair annihilator & App.~\ref{app:twist}\\
+$c^\nu_{n,d}$, $c^{\rm sing}_{n,d}$ & pair annihilators of the orbitals $[(n\mp d)/2]$ & App.~\ref{app:twist}\\
+$\sect\nn(\mu)$ & eigenspace of $\Theta$ in $\sect\nn$ for the eigenvalue $\mu$ & App.~\ref{app:twist}\\
+\end{longtable}
+\endgroup

@@ -1,0 +1,137 @@
+% sections/04-projector.tex
+\section{The pair Gram matrix and the projector form}\label{sec:projector}
+
+On two particles $\HT=h=\sum_n\kb{v_n}{v_n}$ is not a projection: the pair functions $v_n$ of
+Proposition~\ref{prop:orbital} are not orthonormal. Their Gram matrix is computed exactly in this section; its
+smallest eigenvalue enters the main theorem through the two-body term. We also record the normal-ordered square of a
+lifted pair operator, which is the starting point of Section~\ref{sec:square}.
+
+\subsection{The Gram matrix}
+
+Let $G_{nn'}:=\ip{v_n}{v_{n'}}$ for $n,n'\in\Z_{2\Nphi}$, and put
+\[
+\mathfrak f(s):=(1-s)e^{-s/2},\qquad s_{jk}:=\tfrac14\bigl(j^2L_x^2+k^2L_y^2\bigr)\quad((j,k)\in\Z^2).
+\]
+
+\begin{lemma}[the Gram matrix in closed form]\label{lem:gram}
+$G_{nn'}=0$ unless $n'\equiv n\pmod{\Nphi}$, and for integers $n$ and $m$
+\begin{equation}\label{eq:gram}
+G_{n,n+m\Nphi}=\sum_{j\equiv m\ (2)}\ \sum_{k\in\Z}e^{\iu\pi k(n+j\Nphi/2)}\,\mathfrak f(s_{jk}).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+By the proof of Proposition~\ref{prop:orbital}, $v_n$ is $\sqrt{2c_0}$ times the tensor $\sum_{A+B=n}f(A-B)\psi_{[A]}\otimes\psi_{[B]}$.
+Hence $G_{nn'}=2c_0\sum f(A-B)f(A'-B')$ over $A+B=n$, $A'+B'=n'$, $A'\equiv A$, $B'\equiv B\pmod{\Nphi}$. Writing
+$A'=A+p\Nphi$, $B'=B+q\Nphi$ forces $(p+q)\Nphi=n'-n$, which proves the first claim. For $n'=n+m\Nphi$ we have $p+q=m$ and
+$A'-B'=(A-B)+j\Nphi$ with $j=p-q$, which runs once over the integers $j\equiv m\pmod2$. With $d=A-B$, which runs over
+$d\equiv n\pmod 2$,
+\[
+G_{n,n+m\Nphi}=\sum_{j\equiv m\ (2)}S_j,\qquad S_j:=2c_0\sum_{d\equiv n\ (2)}f(d)f(d+j\Nphi).
+\]
+Put $M:=j\Nphi$ and $u:=d+M/2$. Then $f(d)f(d+M)=(u^2-M^2/4)e^{-\kappa^2u^2/2}e^{-\kappa^2M^2/8}$, and $u$ runs over the coset
+$n+M/2+2\Z$. Poisson summation on a coset, $\sum_{u\in c+2\Z}g(u)=\frac12\sum_{k\in\Z}\hat g(k/2)e^{\iu\pi kc}$ with
+$\hat g(\xi)=\int g(u)e^{-2\pi\iu u\xi}\dd u$, and
+\[
+\int_\R\bigl(u^2-M^2/4\bigr)e^{-\kappa^2u^2/2}e^{-\iu\pi ku}\dd u=\frac{\sqrt{2\pi}}{\kappa^3}\Bigl(1-\frac{\pi^2k^2}{\kappa^2}-\frac{\kappa^2M^2}4\Bigr)e^{-\pi^2k^2/(2\kappa^2)}
+\]
+give, since $\pi k/\kappa=kL_y/2$ and $\kappa M=jL_x$,
+$S_j=\sum_ke^{\iu\pi k(n+j\Nphi/2)}(1-s_{jk})e^{-s_{jk}/2}$.
+\end{proof}
+
+Let $\Dlev(\ell):=2(\ell^2/4-1)e^{-\ell^2/8}$ for $\ell>0$, let $\mathcal X:=\{(0,0),(\pm1,0),(0,\pm1)\}$ and
+\[
+\Ups(L_x,L_y):=\sum_{(j,k)\in\Z^2\setminus\mathcal X}\abs{\mathfrak f(s_{jk})} .
+\]
+
+\begin{lemma}[the levels]\label{lem:levels}
+The matrix $G$ is block diagonal with $2\times2$ blocks on $\{n,n+\Nphi\}$, and its entries depend on $n$ only through
+$n\bmod2$.
+\begin{enumerate}[(a)]
+\item If $\Nphi$ is even, $G$ has the four eigenvalues $1-(-1)^s\Dlev(L_y)\mp\Dlev(L_x)+r_{s,\pm}$, $s\in\{0,1\}$, each of
+multiplicity $\Nphi/2$, with eigenvectors $e_n\pm e_{n+\Nphi}$, $n\equiv s$.
+\item If $\Nphi$ is odd, $G$ has the two eigenvalues $1\pm\sqrt{\Dlev(L_x)^2+\Dlev(L_y)^2}+r_\pm$, each of multiplicity $\Nphi$.
+\item In both cases $\abs r\le\Ups(L_x,L_y)$, and for $L_x,L_y\ge3$
+\[
+\Ups(L_x,L_y)\le1.20\,(L_x^2+L_y^2)\,e^{-(L_x^2+L_y^2)/8}+2.02\,\bigl(L_x^2e^{-L_x^2/2}+L_y^2e^{-L_y^2/2}\bigr).
+\]
+\end{enumerate}
+Consequently the extreme eigenvalues $\lambda_{\min},\lambda_{\max}$ of $G$ satisfy
+$\dG:=\max\{\lambda_{\max}-1,1-\lambda_{\min}\}\le\Dlev(L_x)+\Dlev(L_y)+\Ups(L_x,L_y)$.
+\end{lemma}
+
+\begin{proof}
+The block structure and the dependence on $n\bmod2$ are read off \eqref{eq:gram}. Put $d_s:=G_{nn}$ and
+$o_s:=G_{n,n+\Nphi}$ for $n\equiv s\pmod2$. Both are real: $d_s$ is a diagonal entry of the Hermitian matrix $G$; for even
+$\Nphi$ every phase in $o_s$ is $\pm1$; and for odd $\Nphi$ the terms of $o_s$ with odd $k$ cancel in the pairs $(j,k),(-j,k)$, as
+shown in (b), while those with even $k$ have phases $\pm1$.
+In $d_s$ the term $(0,0)$ is $1$ and the terms $(0,\pm1)$ give $2(-1)^s\mathfrak f(L_y^2/4)=-(-1)^s\Dlev(L_y)$; in $o_s$ the terms
+$(\pm1,0)$ give $2\mathfrak f(L_x^2/4)=-\Dlev(L_x)$. The remaining terms of $d_s$ (even $j$) and of $o_s$ (odd $j$) run over disjoint
+subsets of $\Z^2\setminus\mathcal X$, so $\abs{d_s-1+(-1)^s\Dlev(L_y)}+\abs{o_s+\Dlev(L_x)}\le\Ups$.
+
+(a) For even $\Nphi$, $n$ and $n+\Nphi$ have the same parity $s$; the block is
+$\bigl[\begin{smallmatrix}d_s&o_s\\o_s&d_s\end{smallmatrix}\bigr]$ with eigenvalues $d_s\pm o_s$ on $e_n\pm e_{n+\Nphi}$, and there are
+$\Nphi/2$ blocks of each parity.
+
+(b) For odd $\Nphi$, $n$ and $n+\Nphi$ have opposite parities. Moreover $o_s=:o$ does not depend on $s$: for odd $j$ and odd
+$\Nphi$, the terms with odd $k$ cancel in the pairs $(j,k),(-j,k)$ because $\cos(\pi kj\Nphi/2)=0$, and for even $k$ the phase
+$e^{\iu\pi kn}$ equals $1$. The block is $\bigl[\begin{smallmatrix}d_s&o\\o&d_{1-s}\end{smallmatrix}\bigr]$, with eigenvalues
+$\frac12(d_0+d_1)\pm\sqrt{\frac14(d_0-d_1)^2+o^2}$, the same for all $\Nphi$ blocks. With the leading terms above and
+$\abs{\sqrt{a^2+b^2}-\sqrt{a'^2+b'^2}}\le\abs{a-a'}+\abs{b-b'}$ the error is at most $\max_s\abs{d_s-1+(-1)^s\Dlev(L_y)}+\abs{o+\Dlev(L_x)}\le\Ups$.
+
+(c) Put $a:=L_x^2/4$ and $b:=L_y^2/4$, both at least $9/4$. Off $\mathcal X$, $s_{jk}\ge9/2$, so $\abs{\mathfrak f(s)}\le se^{-s/2}$. The
+terms with $j=0$, $\abs k\ge2$ sum to at most $2\cdot4be^{-2b}/(1-q)$, where $q\le\frac94e^{-5b/2}\le0.0081$ bounds the ratio of
+consecutive terms; this is at most $2.02\,L_y^2e^{-L_y^2/2}$, and likewise for $k=0$, $\abs j\ge2$. The terms with $j,k\neq0$ sum
+to $\Sigma_1(a)\Sigma_0(b)+\Sigma_0(a)\Sigma_1(b)$ with $\Sigma_0(a)=\sum_{j\ne0}e^{-j^2a/2}\le2e^{-a/2}/(1-e^{-3a/2})$ and
+$\Sigma_1(a)=\sum_{j\neq0}j^2ae^{-j^2a/2}\le2ae^{-a/2}/(1-4e^{-3a/2})$ (use $j^2-1\ge3(j-1)$ and $j^2\le4^{j-1}$); with $e^{-3a/2}\le e^{-27/8}$
+this is at most $4(a+b)e^{-(a+b)/2}/((1-e^{-27/8})(1-4e^{-27/8}))\le1.20(L_x^2+L_y^2)e^{-(L_x^2+L_y^2)/8}$.
+The bound on $\dG$ follows from (a)--(c) and $\sqrt{a^2+b^2}\le a+b$.
+\end{proof}
+
+\subsection{The projector form}
+
+\begin{proposition}[the projector form]\label{prop:projector}
+$\spec(h)\subset\{0\}\cup[\lambda_{\min},\lambda_{\max}]$, so $h^2\ge\lambda_{\min}h$. If $\dG<1$, then $\dim\VT=2\Nphi$, and
+with $P_V$ the orthogonal projection onto $\VT$ and $H':=\LL_2(P_V)$,
+\[
+\lambda_{\min}P_V\le h\le\lambda_{\max}P_V,\qquad \lambda_{\min}H'\le\HT\le\lambda_{\max}H',\qquad \ker H'=\ker\HT .
+\]
+\end{proposition}
+
+\begin{proof}
+Let $\mathsf V:\C^{2\Nphi}\to\bigwedge^2\h$ have the columns $v_n$. Then $h=\mathsf V\mathsf V^*$, whose nonzero spectrum is that of
+$G=\mathsf V^*\mathsf V$; this gives the first claim, and $h^2-\lambda_{\min}h\ge0$ by the functional calculus. If $\dG<1$ then
+$G>0$, $\mathsf V$ is injective, $\dim\VT=2\Nphi$, and with the isometry $W:=\mathsf VG^{-1/2}$ one has $h=WGW^*$ and $P_V=WW^*$,
+whence the first sandwich. The lift
+preserves order (Lemma~\ref{lem:lift}(iii)), which gives the second, and the kernels coincide because $\lambda_{\min}>0$.
+\end{proof}
+
+\subsection{The square of a lifted pair operator}
+
+For an operator $h$ on $\bigwedge^2\h$, extended by $hA_2$ to $\h^{\otimes2}$, and $\{i,j\}\subset\{1,\dots,n\}$, $h_{ij}$ denotes
+$h$ acting on the tensor positions $i,j$; $h_{ij}=h_{ji}$.
+
+\begin{lemma}[the normal-ordered square]\label{lem:square}
+For every self-adjoint $h$ on $\bigwedge^2\h$, on $\Fock$,
+\begin{equation}\label{eq:square}
+\LL_2(h)^2=\LL_2(h^2)+\LL_3\bigl(X_3(h)\bigr)+\LL_4\bigl(W_4(h\otimes h)W_4^*\bigr),\qquad
+X_3(h):=\sum_{(ij)\neq(kl)}h_{ij}h_{kl}\ \text{ on }\textstyle\bigwedge^3\h,
+\end{equation}
+the sum running over the six ordered pairs of distinct pairs in $\{1,2,3\}$. Moreover
+$X_3(h)=W_3(h\otimes\one)(W_3^*W_3-\one)(h\otimes\one)W_3^*$. For $h=P_V$ a projection this is the identity
+$H'^2=H'+\LL_3\bigl(W_3(W_3^*W_3-\one)W_3^*\bigr)+\LL_4(W_4W_4^*)$, with $W_3$, $W_4$ restricted to $\VT\otimes\h$ and
+$\VT\otimes\VT$, of~\cite[Lemma~2.1 (Normal-ordered square)]{OAI:A-Fock-space-inequality-and-the-Laughlin-spectral-gap-September-24-2026}.
+\end{lemma}
+
+\begin{proof}
+On $\bigwedge^n\h$, $\LL_2(h)=\sum_{\abs S=2}h_S$ by Lemma~\ref{lem:lift}(ii), so $\LL_2(h)^2=\sum_{S,S'}h_Sh_{S'}$. The terms with
+$S=S'$ give $\sum_S(h^2)_S=\LL_2(h^2)$. The terms with $\abs{S\cap S'}=1$ are grouped by the triple $Q=S\cup S'$ and give
+$\sum_{\abs Q=3}(X_3)_Q$, where $X_3$ commutes with permutations of its three positions; this is $\LL_3(X_3)$. The terms with
+$S\cap S'=\emptyset$ are grouped by $Q=S\cup S'$, $\abs Q=4$, and give $\LL_4(X_4)$ with $X_4:=\sum h_Sh_{S'}$ over the six ordered
+pairs of disjoint pairs in $\{1,2,3,4\}$. On antisymmetric tensors $W_4^*\Psi=\sqrt6\Psi$ and $W_4=\sqrt6A_4$
+(Lemma~\ref{lem:lift}(iv)), and $A_4h_{12}h_{34}\Psi=\frac16X_4\Psi$, because each ordered pair of disjoint pairs is the image of
+$(\{1,2\},\{3,4\})$ under four permutations; hence $X_4=W_4(h\otimes h)W_4^*$ on $\bigwedge^4\h$. Similarly
+$W_3(h\otimes\one)W_3^*=3A_3h_{12}=h_{12}+h_{13}+h_{23}$ and $W_3(h^2\otimes\one)W_3^*=(h^2)_{12}+(h^2)_{13}+(h^2)_{23}$ on
+$\bigwedge^3\h$, so $X_3=(W_3(h\otimes\one)W_3^*)^2-W_3(h^2\otimes\one)W_3^*$, which is the second formula. For $h=P_V$,
+$h^2=h$ and the restrictions are as stated.
+\end{proof}

@@ -1,0 +1,467 @@
+% sections/02-setting.tex
+\section{Setting}\label{sec:setting}
+
+We use units in which the magnetic field and the magnetic length are equal to one ($\hbar=e=1$). For
+$a=(a_x,a_y)$ and $b=(b_x,b_y)$ in $\R^2$ we write $a\wedge b:=a_xb_y-a_yb_x$, and for $r=(x,y)\in\R^2$ we write
+$w:=x+\iu y$ for the corresponding complex coordinate. Inner products are linear in the second argument.
+
+\subsection{The torus and its lowest Landau level}
+
+\begin{definition}[the torus and its lowest Landau level]\label{def:torus}
+Let $\Nphi\in\N$ and $L_x,L_y>0$ with $L_xL_y=2\pi\Nphi$; put $\kappa:=2\pi/L_y$, so that $L_x=\kappa\Nphi$. Let
+$\Lam:=L_x\Z\times L_y\Z$, $\Tor:=\R^2/\Lam$, $\cell:=[0,L_x)\times[0,L_y)$, and let $L:=\min\{L_x,L_y\}$ be the
+\emph{shorter period}. Let
+\[
+D_x:=\partial_x,\qquad D_y:=\partial_y-\iu x
+\]
+be the covariant derivatives of the vector potential $(0,x)$. A smooth function $f$ on $\R^2$ is an \emph{LLL
+function} if $(D_x+\iu D_y)f=0$. The \emph{lowest Landau level of the torus}, $\h$, is the space of LLL functions with
+\begin{equation}\label{eq:bc}
+f(x,y+L_y)=f(x,y),\qquad f(x+L_x,y)=e^{\iu L_xy}f(x,y),
+\end{equation}
+with the inner product $\ip fg:=\int_\cell\overline f\,g\,\dd r$.
+\end{definition}
+
+An LLL function is exactly a function of the form $f=e^{-x^2/2}g(w)$ with $g$ entire, since
+$(D_x+\iu D_y)(e^{-x^2/2}g)=e^{-x^2/2}(\partial_x+\iu\partial_y)g$. The functions $\abs f^2$ and $\overline fg$ are
+$\Lam$-periodic for $f,g\in\h$, so the inner product is an integral over $\Tor$. All results concern these
+boundary conditions, without Aharonov--Bohm phases through the cycles.
+
+\begin{lemma}[Landau-gauge orbitals]\label{lem:orbitals}
+For $n\in\Z$ let $\phi_n(x,y):=(L_y\sqrt\pi)^{-1/2}e^{\iu\kappa ny}e^{-(x-\kappa n)^2/2}$ and for $j\in\Z_{\Nphi}$ let
+$\psi_j:=\sum_{m\in\Z}\phi_{\tilde\jmath+m\Nphi}$, where $\tilde\jmath\in\Z$ is any representative of $j$. Write $[n]$
+for the class of $n\in\Z$ in $\Z_{\Nphi}$.
+\begin{enumerate}[(i)]
+\item The series converges absolutely and locally uniformly, $\psi_j$ does not depend on $\tilde\jmath$, and
+$\psi_j\in\h$.
+\item $(\psi_j)_{j\in\Z_{\Nphi}}$ is an orthonormal basis of $\h$; in particular $\dim\h=\Nphi$, and every $f\in\h$ is
+bounded.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(i) $\abs{\phi_n(x,y)}=(L_y\sqrt\pi)^{-1/2}e^{-(x-\kappa n)^2/2}$, and these Gaussians are summable over
+$n\in\tilde\jmath+\Nphi\Z$ locally uniformly in $x$. Each $\phi_n$ is $e^{-x^2/2}$ times an entire function of $w$
+(namely $(L_y\sqrt\pi)^{-1/2}e^{\kappa nw-\kappa^2n^2/2}$), so $e^{x^2/2}\psi_j$ is a locally uniform limit of
+entire functions, hence entire, and $\psi_j$ is an LLL function. Replacing $\tilde\jmath$ by $\tilde\jmath+\Nphi$
+relabels the sum. Since $\kappa L_y=2\pi$ each $\phi_n$ is $L_y$-periodic in $y$, and since $\kappa\Nphi=L_x$,
+$\phi_n(x+L_x,y)=e^{\iu L_xy}\phi_{n-\Nphi}(x,y)$; summing over the class gives \eqref{eq:bc}.
+
+(ii) For $n,n'\in\Z$ the $y$-integral of $\overline{\phi_n}\phi_{n'}$ over $[0,L_y)$ is
+$\delta_{nn'}\pi^{-1/2}e^{-(x-\kappa n)^2}$. Hence $\ip{\psi_i}{\psi_j}=0$ for $i\neq j$, and
+$\ip{\psi_j}{\psi_j}=\sum_m\int_0^{L_x}\pi^{-1/2}e^{-(x-\kappa\tilde\jmath-mL_x)^2}\dd x=1$. Let $f\in\h$. By the first
+condition in \eqref{eq:bc}, $f(x,y)=\sum_nf_n(x)e^{\iu\kappa ny}$ with smooth $f_n$; the LLL condition reads
+$f_n'+(x-\kappa n)f_n=0$, so $f_n=a_ne^{-(x-\kappa n)^2/2}$, and the second condition in \eqref{eq:bc} gives
+$a_n=a_{n-\Nphi}$. Hence $f=(L_y\sqrt\pi)^{1/2}\sum_{j=0}^{\Nphi-1}a_j\psi_j$. Each $\psi_j$ is bounded by (i).
+\end{proof}
+
+\subsection{The planar lowest Landau level and magnetic translations}
+
+Let $\hpl$ be the Hilbert space of square-integrable LLL functions on $\R^2$. For $a\in\R^2$ the \emph{magnetic
+translation} $t_a$ acts on functions on $\R^2$ by
+\begin{equation}\label{eq:ta}
+(t_af)(r):=e^{-\iu a_xa_y/2}\,e^{\iu a_xy}\,f(r-a).
+\end{equation}
+For $\gamma=(jL_x,kL_y)\in\Lam$ put $\tl_\gamma:=(-1)^{jk\Nphi}t_\gamma$, and on the torus put
+$\thx:=t_{(\kappa,0)}$ and $\thy:=t_{(0,-L_y/\Nphi)}$, that is $(\thx f)(x,y)=e^{\iu\kappa y}f(x-\kappa,y)$ and
+$(\thy f)(x,y)=f(x,y+L_y/\Nphi)$.
+
+\begin{lemma}[magnetic translations]\label{lem:magtrans}
+\begin{enumerate}[(i)]
+\item $t_a$ maps LLL functions to LLL functions, $\abs{(t_af)(r)}=\abs{f(r-a)}$, and $t_a$ is unitary on $\hpl$
+with $t_a^*=t_{-a}$.
+\item $t_at_b=e^{\iu(a\wedge b)/2}\,t_{a+b}$, hence $t_at_b=e^{\iu\,a\wedge b}\,t_bt_a$.
+\item $\gamma\mapsto\tl_\gamma$ is a representation of $\Lam$, and $\h$ is the space of LLL functions $f$ with
+$\tl_\gamma f=f$ for all $\gamma\in\Lam$.
+\item For $\delta\in\Lam/\Nphi:=(L_x/\Nphi)\Z\times(L_y/\Nphi)\Z$, $t_\delta$ maps $\h$ onto $\h$ unitarily. In particular
+$\thx\psi_j=\psi_{j+1}$, $\thy\psi_j=e^{2\pi\iu j/\Nphi}\psi_j$, $\thy\thx=e^{2\pi\iu/\Nphi}\thx\thy$ and
+$\thx^{\Nphi}=\thy^{\Nphi}=\one$ on $\h$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(i) $t_a$ is multiplication by a unimodular function composed with a translation, so it preserves absolute values
+and $L^2$ norms; a direct computation gives $(D_x+\iu D_y)t_af=t_a(D_x+\iu D_y)f$, and $t_at_{-a}=\one$ by (ii).
+(ii) Expanding \eqref{eq:ta} twice, $t_at_bf(r)$ has the phase
+$-\tfrac12a_xa_y-\tfrac12b_xb_y+(a_x+b_x)y-b_xa_y$ and $t_{a+b}f(r)$ has the phase
+$-\tfrac12(a_x+b_x)(a_y+b_y)+(a_x+b_x)y$; the difference is $\tfrac12(a_xb_y-a_yb_x)$. (iii) For $\gamma=(jL_x,kL_y)$
+and $\gamma'=(j'L_x,k'L_y)$, $\gamma\wedge\gamma'=2\pi\Nphi(jk'-kj')$, so by (ii)
+$\tl_\gamma\tl_{\gamma'}=(-1)^{(jk+j'k'+jk'-kj')\Nphi}t_{\gamma+\gamma'}=\tl_{\gamma+\gamma'}$, since
+$jk+j'k'+jk'-kj'\equiv(j+j')(k+k')\pmod 2$. The two conditions \eqref{eq:bc} are $\tl_{(0,L_y)}f=f$ and
+$\tl_{(L_x,0)}f=f$. (iv) By (ii), $t_\delta\tl_\gamma=e^{\iu\,\delta\wedge\gamma}\tl_\gamma t_\delta$ with
+$\delta\wedge\gamma\in2\pi\Z$ for $\delta\in\Lam/\Nphi$, so $t_\delta$ preserves $\h$; it is isometric for the inner
+product of $\h$ by (i), because $\abs{t_\delta f}^2$ is a translate of the $\Lam$-periodic function $\abs f^2$. The
+formulas for $\thx$, $\thy$ follow from $\thx\phi_n=\phi_{n+1}$ and $\thy\phi_n=e^{2\pi\iu n/\Nphi}\phi_n$.
+\end{proof}
+
+\paragraph{Bargmann form.}
+Let $\Hb$ be the Bargmann space of entire functions $g$ with
+\[
+\norm g_\Hb^2:=\frac1\pi\int_\C\abs{g(z)}^2e^{-\abs z^2}\dd^2z<\infty ;
+\]
+the monomials $z^m/\sqrt{m!}$ form an orthonormal basis, written $\ket m$, and multiplication by $z$ and $\partial_z$ are
+mutually adjoint. For $\beta\in\C$
+the \emph{displacement operator} is
+\begin{equation}\label{eq:displacement}
+(\Dis(\beta)g)(z):=e^{-\abs\beta^2/2}e^{\beta z}g(z-\bar\beta),
+\end{equation}
+that is $\Dis(\beta)=e^{-\abs\beta^2/2}e^{\beta z}e^{-\bar\beta\partial_z}$, and for $m\ge0$ we write
+$\Dis^{(m)}(\beta):=[\bra a\Dis(\beta)\ket b]_{0\le a,b\le m}$ for its truncation to the first $m+1$ levels.
+$\mathrm L_n^{(\alpha)}$ denotes the generalized Laguerre polynomial.
+
+\begin{lemma}[symmetric-gauge orbitals and displacements]\label{lem:bargmann}
+\begin{enumerate}[(i)]
+\item The map $\mathcal U:\Hb\to\hpl$ defined by
+\[
+(\mathcal U g)(r):=(2\pi)^{-1/2}e^{\iu xy/2}g(w/\sqrt2)e^{-\abs w^2/4}
+\]
+is unitary. Put $\eta_m:=\mathcal U(z^m/\sqrt{m!})$, so that
+\[
+\eta_m(r)=\frac{e^{\iu xy/2}\,w^m\,e^{-\abs w^2/4}}{\sqrt{2\pi\,2^m\,m!}},\qquad m\ge0 .
+\]
+\item $\mathcal U^{-1}t_a\mathcal U=\Dis(\beta(a))$ with $\beta(a):=(a_x-\iu a_y)/\sqrt2$, so that $\abs{\beta(a)}^2=\abs a^2/2$ and
+$\ip{\eta_m}{t_a\eta_n}=\bra m\Dis(\beta(a))\ket n$.
+\item For $m\ge n$ and $x:=\abs\beta^2$,
+\begin{gather*}
+\bra m\Dis(\beta)\ket n=\sqrt{\tfrac{n!}{m!}}\,\beta^{m-n}e^{-x/2}\,\mathrm L_n^{(m-n)}(x),\\
+\bra n\Dis(\beta)\ket m=\sqrt{\tfrac{n!}{m!}}\,(-\bar\beta)^{m-n}e^{-x/2}\,\mathrm L_n^{(m-n)}(x).
+\end{gather*}
+In particular $\abs{\bra m\Dis(\beta)\ket n}\le1$, and $\norm{\Dis^{(m)}(\beta)}$ depends only on $\abs\beta$.
+\item The orthogonal projection of $L^2(\R^2)$ onto $\hpl$ has the kernel
+$\Ppl(r,r')=\sum_m\eta_m(r)\overline{\eta_m(r')}$, with $\abs{\Ppl(r,r')}=(2\pi)^{-1}e^{-\abs{r-r'}^2/4}$, and
+$\int \Ppl(r,r')f(r')\dd r'=f(r)$ for every bounded LLL function $f$. Every $f\in\hpl$ satisfies
+$\abs{f(r)}\le(2\pi)^{-1/2}\norm f$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(i) Write $z=w/\sqrt2$. Then $\abs{\mathcal U g}^2=(2\pi)^{-1}\abs{g(z)}^2e^{-\abs z^2}$ and $\dd r=2\,\dd^2z$, so $\mathcal U$ is
+isometric. Since $e^{\iu xy/2-\abs w^2/4}=e^{-x^2/2}e^{w^2/4}$, $\mathcal U g$ is an LLL function; conversely an LLL function
+$e^{-x^2/2}\tilde g(w)$ equals $\mathcal U g$ with $g(z)=(2\pi)^{1/2}e^{-z^2/2}\tilde g(\sqrt2z)$, and square integrability is
+$g\in\Hb$. (ii) Put $b:=(a_x+\iu a_y)/\sqrt2$. Then $e^{-\abs{z-b}^2/2}=e^{-\abs z^2/2}e^{(\bar zb+z\bar b)/2-\abs b^2/2}$,
+and the phases in $t_a\mathcal U g$ combine to $e^{\iu xy/2}e^{\iu(a_xy-a_yx)/2}$ with $\iu(a_xy-a_yx)/2=(z\bar b-\bar zb)/2$.
+Hence $\mathcal U^{-1}t_a\mathcal U g(z)=e^{z\bar b-\abs b^2/2}g(z-b)$, which is \eqref{eq:displacement} with $\beta=\bar b$.
+(iii) By the Baker--Campbell--Hausdorff formula ($[\beta z,-\bar\beta\partial_z]=\abs\beta^2$),
+$\Dis(\beta)=e^{-x/2}e^{\beta z}e^{-\bar\beta\partial_z}$, and
+\[
+\bra m\Dis(\beta)\ket n=e^{-x/2}\sum_{k\le n}\frac{\sqrt{m!\,n!}\;\beta^{m-k}(-\bar\beta)^{n-k}}{(m-k)!\,(n-k)!\,k!}
+=\sqrt{\tfrac{n!}{m!}}\,\beta^{m-n}e^{-x/2}\sum_{i=0}^n\frac{m!\,(-x)^i}{(m-n+i)!\,i!\,(n-i)!},
+\]
+with $i=n-k$; the last sum is $\mathrm L_n^{(m-n)}(x)$. The second formula follows from
+$\bra n\Dis(\beta)\ket m=\overline{\bra m\Dis(-\beta)\ket n}$, since $\Dis(\beta)^*=\Dis(-\beta)$ by (i)--(ii) and
+Lemma~\ref{lem:magtrans}(i). The bound $\abs{\bra m\Dis\ket n}\le1$ holds because $\Dis(\beta)$ is unitary. By the two
+formulas, $\bra a\Dis(e^{\iu\theta}\beta)\ket b=e^{\iu\theta(a-b)}\bra a\Dis(\beta)\ket b$ for real $\theta$, so the truncations
+at $\beta$ and $e^{\iu\theta}\beta$ are conjugate by a diagonal unitary.
+
+(iv) $\sum_m\eta_m(r)\overline{\eta_m(r')}=(2\pi)^{-1}e^{\iu(xy-x'y')/2}e^{z\bar z'-(\abs z^2+\abs{z'}^2)/2}$, of modulus
+$(2\pi)^{-1}e^{-\abs{z-z'}^2/2}$, and $\abs{z-z'}^2=\abs{r-r'}^2/2$. For $f=\mathcal U g$ bounded, $\abs{g(z)}\le Ce^{\abs z^2/2}$, and
+$\int \Ppl(r,r')f(r')\dd r'=(\mathcal U h)(r)$ with $h(z)=\pi^{-1}\int g(z')e^{z\bar z'}e^{-\abs{z'}^2}\dd^2z'$. The substitution
+$z'=z+u$ gives $h(z)=\pi^{-1}\int g(z+u)e^{-\bar zu}e^{-\abs u^2}\dd^2u$, an absolutely convergent integral; in polar
+coordinates the mean value of the entire function $u\mapsto g(z+u)e^{-\bar zu}$ over each circle is $g(z)$, so
+$h(z)=g(z)$. For $f=\mathcal U g\in\hpl$, that is $g\in\Hb$, both integrals converge absolutely by Cauchy--Schwarz, since
+$z'\mapsto g(z')e^{-\abs{z'}^2/2}$ and $z'\mapsto e^{z\bar z'}e^{-\abs{z'}^2/2}$ are square-integrable, and the same computation
+proves the reproducing identity on $\hpl$. Finally, for $f\in\hpl$, $\abs{f(r)}=\abs{\ip{\Ppl(\cdot,r)}f}\le \Ppl(r,r)^{1/2}\norm f$.
+\end{proof}
+
+For $R=(R_x,R_y)\in\R^2$ and $m\ge0$ we put
+\begin{equation}\label{eq:etaR}
+\eta_m^R:=e^{-\iu R_xR_y/2}\,t_R\,\eta_m,\qquad
+\eta_m^R(r)=\frac{e^{\iu(y-R_y)(x+R_x)/2}\,w_R^m\,e^{-\abs{w_R}^2/4}}{\sqrt{2\pi\,2^m\,m!}},\quad w_R:=w-(R_x+\iu R_y),
+\end{equation}
+the symmetric-gauge orbitals about the point $R$, written in the gauge $(0,x)$. They form an orthonormal basis of
+$\hpl$ for every $R$.
+
+\paragraph{The Landau representation.}
+For $s\in\R$ let $\phi^\delta_s(x,y):=(2\pi)^{-1/2}\pi^{-1/4}e^{\iu sy}e^{-(x-s)^2/2}$ ($\delta$-normalized Landau orbitals)
+and let $\mathcal H_m(s):=(2^mm!\sqrt\pi)^{-1/2}H_m(s)e^{-s^2/2}$ be the normalized Hermite functions. A direct Gaussian integration with the generating functions of
+$\eta_m$ and $\mathcal H_m$ gives
+\begin{equation}\label{eq:landaurep}
+\ip{\phi^\delta_s}{\eta_m^R}_{\R^2}=e^{-\iu sR_y}\,\mathcal H_m(s-R_x),
+\end{equation}
+the integral being absolutely convergent. For $R=0$ use the generating function
+\[
+\sum_m\frac{t^m}{m!}\sqrt{2\pi2^mm!}\,\eta_m=e^{\iu xy/2}e^{tw-\abs w^2/4};
+\]
+the $y$-integral and then the $x$-integral are Gaussian:
+\[
+\int_{\R^2}e^{-\iu sy-(x-s)^2/2}\,e^{\iu xy/2}e^{tw-\abs w^2/4}\,\dd r=2\pi e^{-s^2/2+2ts-t^2}
+=2\pi e^{-s^2/2}\sum_mH_m(s)\frac{t^m}{m!},
+\]
+and comparing coefficients gives \eqref{eq:landaurep}; the case of general $R$ follows from
+$t_R\phi^\delta_s=e^{-\iu R_y(s+R_x/2)}\phi^\delta_{s+R_x}$. Since $\phi_n=\sqrt\kappa\,\phi^\delta_{\kappa n}$,
+\[
+\ip{\phi_n}{\eta_m^R}_{\R^2}=\sqrt\kappa\,e^{-\iu\kappa nR_y}\mathcal H_m(\kappa n-R_x).
+\]
+
+\subsection{Periodization and unfolding}
+
+For $k\ge1$ we realize $\h^{\otimes k}$ as the space of functions on $(\R^2)^k$ that are LLL functions of each
+variable and invariant under $\tl^{(i)}_\gamma$ (the operator $\tl_\gamma$ acting on the $i$-th variable) for every
+$i$ and every $\gamma\in\Lam$, with the inner product $\int_{\cell^k}$. This space is spanned by the products
+$\psi_{j_1}(r_1)\cdots\psi_{j_k}(r_k)$: expanding such a function $\Psi$ in its first variable in the basis $(\psi_j)$ of
+Lemma~\ref{lem:orbitals}, the coefficients $\ip{\psi_j}{\Psi(\cdot,r_2,\dots,r_k)}$ are functions of the same kind in $k-1$ variables
+(Morera's theorem), and one inducts. In particular its elements are bounded. Permutations $P_\sigma$ of the
+variables act on it unitarily.
+
+\begin{lemma}[periodization and unfolding]\label{lem:unfold}
+Let $f$ be a function on $(\R^2)^k$ which is an LLL function of each variable and satisfies
+$\abs{f(r)}\le Ce^{-c\sum_i\abs{r_i-r_0}^2}$ for some $C,c>0$ and $r_0\in\R^2$. Then
+\[
+\Pk^{(k)}f:=\sum_{\gamma\in\Lam^k}\tl^{(1)}_{\gamma_1}\cdots\tl^{(k)}_{\gamma_k}f
+\]
+converges absolutely and locally uniformly, $\Pk^{(k)}f\in\h^{\otimes k}$, and for every $\Psi\in\h^{\otimes k}$
+\begin{equation}\label{eq:unfold}
+\ip{\Pk^{(k)}f}{\Psi}=\int_{(\R^2)^k}\overline f\,\Psi .
+\end{equation}
+$\Pk^{(k)}$ commutes with permutations of the variables. We write $\Pk:=\Pk^{(1)}$.
+\end{lemma}
+
+\begin{proof}
+$\abs{\tl^{(i)}_{\gamma_i}f(r)}$ is $\abs f$ translated by $\gamma_i$ in the $i$-th variable, so the series converges
+absolutely and locally uniformly by the Gaussian bound. Each term is $\prod_ie^{-x_i^2/2}$ times an entire function of
+$(w_1,\dots,w_k)$, so the limit is of the same form and is an LLL function of each variable. Reindexing and
+Lemma~\ref{lem:magtrans}(iii) give $\tl^{(i)}_\gamma\Pk^{(k)}f=\Pk^{(k)}f$. For \eqref{eq:unfold}, use
+$\Psi=\tl^{(1)}_{\gamma_1}\cdots\tl^{(k)}_{\gamma_k}\Psi$ and the fact that for any two functions $g_1,g_2$,
+$\overline{\tl_\gamma g_1}\,\tl_\gamma g_2$ is the translate of $\overline{g_1}g_2$ by $\gamma$; thus the term $\gamma$ of
+$\int_{\cell^k}\overline{\Pk^{(k)}f}\Psi$ is $\int_{\cell^k-\gamma}\overline f\Psi$, and the translates of $\cell^k$ tile
+$(\R^2)^k$. All rearrangements are justified by absolute convergence, since $\Psi$ is bounded. Permutations commute
+with the sum because all variables carry the same boundary conditions.
+\end{proof}
+
+\subsection{Fock space and lifts}\label{ssec:fock}
+
+Let $\Fock:=\bigoplus_{n=0}^{\Nphi}\bigwedge^n\h$, with the convention that wedges of orthonormal vectors
+$e_{i_1}\wedge\cdots\wedge e_{i_n}$, $i_1<\cdots<i_n$, have norm one. For $v\in\bigwedge^k\h$ let $B(v)$ be the adjoint
+of left wedge multiplication by $v$; $B(v)$ is conjugate-linear in $v$ and
+\begin{equation}\label{eq:Bwedge}
+B(v\wedge w)=B(w)B(v).
+\end{equation}
+For $f\in\h$, $c(f):=B(f)$ is the annihilation operator; it is conjugate-linear in $f$, satisfies the canonical
+anticommutation relations $\{c(f),c(g)^*\}=\ip fg$, $\{c(f),c(g)\}=0$, and $\norm{c(f)}=\norm f$. We put
+$c_j:=c(\psi_j)$. For a unitary $u$ on $\h$, $\Ff(u)$ is its second quantization. The map
+$\iota_n(f_1\wedge\cdots\wedge f_n):=\sqrt{n!}\,A_n(f_1\otimes\cdots\otimes f_n)$, $A_n:=(n!)^{-1}\sum_\sigma\sgn(\sigma)P_\sigma$,
+identifies $\bigwedge^n\h$ isometrically with the antisymmetric elements of $\h^{\otimes n}$; we use it without
+further mention, so that $\bigwedge^n\h$ is the space of antisymmetric functions in $\h^{\otimes n}$.
+
+For an operator $X$ on $\bigwedge^k\h$ its \emph{lift} is defined by linear extension of
+\begin{equation}\label{eq:lift}
+\LL_k(\kb vw):=B(v)^*B(w),\qquad v,w\in\textstyle\bigwedge^k\h .
+\end{equation}
+We extend $X$ to $\h^{\otimes k}$ by $XA_k$; this extension commutes with permutations, and for a $k$-subset $S$ of
+$\{1,\dots,n\}$ we write $X_S$ for it acting on the tensor positions in $S$.
+
+\begin{lemma}[lifts]\label{lem:lift}
+\begin{enumerate}[(i)]
+\item For $v\in\bigwedge^k\h$, $\Phi\in\bigwedge^{n-k}\h$ and $\Psi\in\bigwedge^n\h$:
+$v\wedge\Phi=\binom nk^{1/2}A_n(v\otimes\Phi)$ and $B(v)\Psi=\binom nk^{1/2}(\bra v\otimes\one)\Psi$.
+\item On $\bigwedge^n\h$, $\LL_k(X)=\sum_{\abs S=k}X_S$ for $n\ge k$, and $\LL_k(X)=0$ for $n<k$; in particular $\LL_k(X)$
+restricted to $\bigwedge^k\h$ is $X$.
+\item $\LL_k$ is linear, $\LL_k(X)^*=\LL_k(X^*)$, and $X\ge0$ implies $\LL_k(X)\ge0$. Operators $Z_k$ on $\bigwedge^k\h$
+with $\sum_{k=0}^{m}\LL_k(Z_k)=0$ vanish.
+\item The wedge maps $W_3:\bigwedge^2\h\otimes\h\to\bigwedge^3\h$, $W_3(v\otimes u):=v\wedge u$, and
+$W_4:\bigwedge^2\h\otimes\bigwedge^2\h\to\bigwedge^4\h$, $W_4(v\otimes v'):=v\wedge v'$, are $\sqrt3A_3$ and $\sqrt6A_4$
+restricted to these subspaces of $\h^{\otimes3}$, $\h^{\otimes4}$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(i) For orthonormal basis vectors, $v=e_1\wedge\cdots\wedge e_k$ and $\Phi=e_{k+1}\wedge\cdots\wedge e_n$, the first
+identity reads $\sqrt{n!}A_n(e_1\otimes\cdots\otimes e_n)=\binom nk^{1/2}\sqrt{k!(n-k)!}A_n(A_k\otimes A_{n-k})(e_1\otimes\cdots\otimes e_n)$,
+which holds since $A_n(A_k\otimes A_{n-k})=A_n$; it extends by multilinearity. Then
+$\ip\Phi{B(v)\Psi}=\ip{v\wedge\Phi}\Psi=\binom nk^{1/2}\ip{v\otimes\Phi}{\Psi}$, because $A_n$ is an orthogonal
+projection fixing $\Psi$. (ii) By (i), $B(v)^*B(w)\Psi=\binom nkA_n(Y\otimes\one)\Psi$ with $Y=\kb vw$, which commutes with
+permutations of its $k$ positions. For antisymmetric $\Psi$,
+$A_n(Y\otimes\one)\Psi=(n!)^{-1}\sum_\sigma(P_\sigma(Y\otimes\one)P_\sigma^{-1})\Psi$, and each $k$-subset occurs for
+$k!(n-k)!$ permutations; this gives $\binom nk^{-1}\sum_SY_S\Psi$. For $n<k$, $B(w)\Psi=0$. (iii) Linearity and the
+adjoint are clear; a positive $X$ is a sum $\sum\kb vv$, and $B(v)^*B(v)\ge0$. If $\sum_k\LL_k(Z_k)=0$, restricting to
+$k=0,1,\dots$ particles successively gives $Z_0=0$, $Z_1=0$, and so on, by (ii). (iv) is (i) with $n=3,4$.
+\end{proof}
+
+\subsection{Jacobi coordinates and the periodized image}
+
+For $k\ge1$ fix a real orthogonal $k\times k$ matrix $O$ whose first row is $k^{-1/2}(1,\dots,1)$, and let it act on
+$(r_1,\dots,r_k)\in(\R^2)^k$ componentwise. The new variables are the \emph{centre-of-mass coordinate}
+$\zeta:=k^{-1/2}\sum_ir_i\in\R^2$ and \emph{relative coordinates} $\rho\in(\R^2)^{k-1}$. The specific choices used below
+are, for $k=2$, $\rho=(r_1-r_2)/\sqrt2$; for $k=3$, $\rho=(\rho_1,\rho_2)$ with $\rho_1=(r_1-r_2)/\sqrt2$,
+$\rho_2=(r_1+r_2-2r_3)/\sqrt6$; for $k=4$, $\rho=(\rho_1,\rho_2,\rho_3)$ with $\rho_1=(r_1-r_2)/\sqrt2$,
+$\rho_2=(r_3-r_4)/\sqrt2$, $\rho_3=(r_1+r_2-r_3-r_4)/2$.
+
+\begin{lemma}[Jacobi coordinates]\label{lem:jacobi}
+\begin{enumerate}[(i)]
+\item A function on $(\R^2)^k$ is an LLL function of each $r_i$ if and only if, written in $(\zeta,\rho)$, it is an LLL
+function of each new variable. The change of variables is unitary on $L^2$; it identifies
+$\hpl^{\otimes k}$ with $\hpl\otimes\hpl^{\otimes(k-1)}$ (centre of mass $\otimes$ relative).
+\item The simultaneous translation $\prod_it^{(i)}_a$ acts as $t_{\sqrt k\,a}$ on $\zeta$ and trivially on $\rho$.
+\item A permutation of the particles acts on $(\zeta,\rho)$ by an orthogonal map that fixes $\zeta$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(i) With $(\xi,\upsilon)=(Ox,Oy)$, $\partial_{x_i}+\iu\partial_{y_i}+x_i=\sum_jO_{ji}(\partial_{\xi_j}+\iu\partial_{\upsilon_j}+\xi_j)$, and $O$ is
+invertible; the Jacobian is one; and $\sum_ix_iy_i$, $\sum_i\abs{w_i}^2$ are invariant, so the Bargmann factorization of
+Lemma~\ref{lem:bargmann}(i) is preserved. (ii) $\prod_it_a^{(i)}f(r)=e^{-\iu ka_xa_y/2}e^{\iu a_x\sum_iy_i}f(r-a\one)$; here
+$\sum_iy_i=\sqrt k\,\zeta_y$, and $r\mapsto r-a\one$ is $\zeta\mapsto\zeta-\sqrt ka$ with $\rho$ fixed, because the rows of
+$O$ other than the first are orthogonal to $(1,\dots,1)$; this is $t_{\sqrt ka}$ in $\zeta$. (iii) A permutation matrix
+fixes $(1,\dots,1)$.
+\end{proof}
+
+Let $\Tor_k:=\R^2/\sqrt k\Lam$, a rectangular torus with periods $\sqrt kL_x$, $\sqrt kL_y$ and $k\Nphi$ flux quanta, and
+let $\U_k$ be its lowest Landau level (Definition~\ref{def:torus} with these periods), the \emph{centre-of-mass
+torus space}; by Lemma~\ref{lem:orbitals}, $\dim\U_k=k\Nphi$. Its lattice translations are $\tl'_{\gamma'}$,
+$\gamma'\in\sqrt k\Lam$. For $\gamma=(jL_x,lL_y)\in\Lam$, Lemma~\ref{lem:jacobi}(ii) and $(-1)^{jl\Nphi\cdot k}=(-1)^{jl(k\Nphi)}$ show
+that the simultaneous lattice translation $\tl^{\otimes k}_\gamma:=\prod_i\tl^{(i)}_\gamma$ acts as $\tl'_{\sqrt k\gamma}$ on $\zeta$ and trivially on
+$\rho$.
+
+\begin{definition}[admissible operators, the periodized image]\label{def:admissible}
+A \emph{$k$-body admissible operator} is an integral operator $Y$ on functions on $(\R^2)^k$ with a continuous kernel
+$Y(r;r')$ such that
+\begin{enumerate}[(Y1)]
+\item for each $r'$, $Y(\cdot\,;r')$ is an LLL function of each variable, and for each $r$, $\overline{Y(r;\cdot)}$ is;
+\item $Y$ commutes with the simultaneous magnetic translations $\prod_it_a^{(i)}$, $a\in\R^2$;
+\item $\abs{Y(r;r')}\le C\exp\bigl(-c\sum_i(\abs{r_i-r_1}^2+\abs{r'_i-r_1}^2)\bigr)$ for some $C,c>0$.
+\end{enumerate}
+For admissible $Y$ the \emph{periodized image} $\Pp_k(Y)$ is the operator on $\h^{\otimes k}$ defined by
+\begin{equation}\label{eq:Pk}
+\ip\Phi{\Pp_k(Y)\Psi}:=\int_{\mathsf D}\overline{\Phi}\,(Y\Psi),\qquad \Phi,\Psi\in\h^{\otimes k},
+\end{equation}
+where $\mathsf D\subset(\R^2)^k$ is a fundamental domain for the diagonal action $r\mapsto r+\gamma\one$ of $\Lam$, for
+instance $\{r_1\in\cell\}$ or, in Jacobi coordinates, $\{\zeta\in\sqrt k\cell,\ \rho\ \text{arbitrary}\}$.
+\end{definition}
+
+\begin{lemma}[the periodized image]\label{lem:Pk}
+Let $Y$ be admissible and $\Phi,\Psi\in\h^{\otimes k}$.
+\begin{enumerate}[(a)]
+\item $Y\Psi(r)=\int Y(r;r')\Psi(r')\dd r'$ converges absolutely, is an LLL function of each variable, satisfies
+$\tl^{\otimes k}_\gamma(Y\Psi)=Y\Psi$ for $\gamma\in\Lam$, and $\abs{Y\Psi(r)}\le C'\exp(-c'\sum_i\abs{r_i-r_1}^2)$. The integral
+\eqref{eq:Pk} converges absolutely and does not depend on $\mathsf D$.
+\item $\Pp_k$ is linear, $\Pp_k(Y)^*=\Pp_k(Y^*)$, and $P_\sigma\Pp_k(Y)P_\sigma^{-1}=\Pp_k(P_\sigma YP_\sigma^{-1})$,
+$\Pp_k(Y)P_\sigma=\Pp_k(YP_\sigma)$. In particular $\Pp_k(Y)$ restricted to $\bigwedge^k\h$ equals $\Pp_k(A_kYA_k)$
+restricted to $\bigwedge^k\h$.
+\item \emph{(Fibering.)} For a Gaussian-decaying relative LLL function $a$ (that is, $\abs{a(\rho)}\le Ce^{-c\abs\rho^2}$) and a
+bounded function $\Psi$ on $(\R^2)^k$ put $(\Fib_a\Psi)(\zeta):=\int\overline{a(\rho)}\,\Psi(\zeta,\rho)\,\dd\rho$. Then $\Fib_a$
+maps $\h^{\otimes k}$ into $\U_k$; the operator $\kb ab\otimes\one$, with kernel $a(\rho)\overline{b(\rho')}\Ppl(\zeta,\zeta')$,
+is admissible; and $\Pp_k(\kb ab\otimes\one)=\Fib_a^*\Fib_b$. Consequently $\Pp_k(Y_{\mathrm{rel}}\otimes\one)\ge0$ for every
+positive finite-rank operator $Y_{\mathrm{rel}}$ on the relative variables whose range consists of Gaussian-decaying
+relative LLL functions. Moreover, for $g\in\U_k$,
+\begin{equation}\label{eq:Fstar}
+\Fib_a^*g=\sum_{\gamma\in\Lam^{k-1}}\Bigl(\prod_{i=2}^k\tl^{(i)}_{\gamma_i}\Bigr)\bigl(a\otimes g\bigr),\qquad (a\otimes g)(\zeta,\rho):=a(\rho)g(\zeta),
+\end{equation}
+the series converging absolutely and locally uniformly.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(a) The kernel decays in $r'_i-r_1$ for every $i$ and $\Psi$ is bounded, so the integral converges, locally uniformly in
+$r$, with the stated Gaussian bound. By (Y1), $e^{x_i^2/2}Y(r;r')$ is an entire function of $w_i$ for fixed values of the other
+variables, so by Morera's theorem the locally uniformly convergent integral $e^{x_i^2/2}Y\Psi(r)$ is entire in $w_i$, and $Y\Psi$ is
+an LLL function of each variable. By (Y2) and $\tl^{\otimes k}_\gamma=(\pm1)\prod_it^{(i)}_\gamma$,
+$\tl^{\otimes k}_\gamma Y\Psi=Y\tl^{\otimes k}_\gamma\Psi=Y\Psi$. The integrand of \eqref{eq:Pk} is therefore invariant under $r\mapsto r+\gamma\one$
+(the phases of $\tl^{\otimes k}_\gamma$ cancel in $\overline\Phi\,Y\Psi$) and decays like a Gaussian in the relative coordinates,
+so it is integrable over a fundamental domain, and any two fundamental domains give the same integral.
+(b) Linearity is clear. For the adjoint, let $G(r,r'):=\overline{\Phi(r)}\,Y(r;r')\,\Psi(r')$. By (Y2), conjugation by
+$\tl^{\otimes k}_\gamma$ multiplies the kernel by the phase of $\tl^{\otimes k}_\gamma$ at $r$ and its inverse at $r'$, and $\Phi$, $\Psi$ are
+$\tl^{\otimes k}_\gamma$-invariant; hence $G(r+\gamma\one,r'+\gamma\one)=G(r,r')$. By (Y3) and the boundedness of $\Phi,\Psi$, $G$ is
+absolutely integrable over $\mathsf D\times(\R^2)^k$ and over $(\R^2)^k\times\mathsf D$, and both integrals equal the
+integral of $G$ over a fundamental domain of the joint diagonal action on $(\R^2)^k\times(\R^2)^k$. The first is
+$\int_{\mathsf D}\overline\Phi\,Y\Psi$ and the second is $\int_{\mathsf D}\overline{Y^*\Phi}\,\Psi$, where $Y^*$ has the kernel
+$\overline{Y(r';r)}$, which is again admissible. For permutations: $P_\sigma$ preserves $\h^{\otimes k}$ and maps
+fundamental domains to fundamental domains. The last statement follows from $A_k\Psi=\Psi$ for $\Psi\in\bigwedge^k\h$.
+(c) $\Fib_a\Psi$ is an LLL function of $\zeta$ by Lemma~\ref{lem:jacobi}(i) and Morera's theorem as in (a), it is bounded,
+and it is $\tl'$-invariant because $\tl^{\otimes k}_\gamma$ acts on $\zeta$ alone; so $\Fib_a\Psi\in\U_k$. The kernel
+$a(\rho)\overline{b(\rho')}\Ppl(\zeta,\zeta')$ satisfies (Y1) and (Y2) (Lemma~\ref{lem:jacobi}(ii), and $\Ppl$ commutes with $t_a$),
+and (Y3) holds because $\abs\rho^2+\abs{\rho'}^2+\abs{\zeta-\zeta'}^2$ dominates a multiple of
+$\sum_i(\abs{r_i-r_1}^2+\abs{r'_i-r_1}^2)$, all these differences being linear combinations of $\rho$, $\rho'$ and
+$\zeta-\zeta'$. By Lemma~\ref{lem:bargmann}(iv) applied in $\zeta$ to the bounded LLL function $\Fib_b\Psi$,
+$((\kb ab\otimes\one)\Psi)(\zeta,\rho)=a(\rho)(\Fib_b\Psi)(\zeta)$, and with $\mathsf D=\{\zeta\in\sqrt k\cell\}$ the integral
+\eqref{eq:Pk} becomes $\int_{\sqrt k\cell}\overline{\Fib_a\Phi}\,\Fib_b\Psi=\ip{\Fib_a\Phi}{\Fib_b\Psi}_{\U_k}$. A positive finite-rank
+$Y_{\mathrm{rel}}$ is $\sum_\mu\kb{b_\mu}{b_\mu}$ with $b_\mu$ in its range, and $\Pp_k$ depends only on the kernel of its
+argument, so $\Pp_k(Y_{\mathrm{rel}}\otimes\one)=\sum_\mu \Fib_{b_\mu}^*\Fib_{b_\mu}\ge0$. For \eqref{eq:Fstar}: $a\otimes g$ is an LLL function
+of each particle, invariant under the diagonal action (because $g\in\U_k$), and decays like a Gaussian in $r_i-r_1$. For
+$\Psi\in\h^{\otimes k}$, $\ip\Psi{\Fib_a^*g}=\ip{\Fib_a\Psi}g=\int_{\mathsf D}\overline\Psi\,(a\otimes g)$ with $\mathsf D=\{\zeta\in\sqrt k\cell\}$; the
+integrand is invariant under the diagonal action, so we may take $\mathsf D=\{r_1\in\cell\}$ instead, and unfolding the variables
+$r_2,\dots,r_k$ into $\cell$ as in Lemma~\ref{lem:unfold} shows that the right side of \eqref{eq:Fstar}, which lies in
+$\h^{\otimes k}$ by the argument of Lemma~\ref{lem:unfold}, has the same inner product with every $\Psi$.
+\end{proof}
+
+\subsection{The Hamiltonian}
+
+Two-particle LLL functions are, by Lemma~\ref{lem:jacobi}, functions of the relative coordinate $\rho=(r_1-r_2)/\sqrt2$
+and of $\zeta=(r_1+r_2)/\sqrt2$, and the relative angular momentum of the pair is the degree in $\rho$. Let
+\[
+P_1:=\kb{\eta_1}{\eta_1}\otimes\one,
+\]
+with $\eta_1$ in the relative variable $\rho$: the orthogonal projection of $\hpl^{\otimes2}$ onto the pairs of relative
+angular momentum one, with every centre-of-mass state. The planar $N$-particle operator $\sum_{i<j}(P_1)_{ij}$ is the
+$V_1$ pseudopotential Hamiltonian in which every pair of relative angular momentum one pays energy one and every other
+pair pays nothing, which is the normalization of~\cite{OAI:A-Fock-space-inequality-and-the-Laughlin-spectral-gap-September-24-2026}
+and of the planar spectral-gap conjecture~\cite[Appendix~A]{Rougerie}.
+
+\begin{definition}[the torus $V_1$ Hamiltonian]\label{def:HT}
+$h:=\Pp_2(P_1)$, an operator on $\h^{\otimes2}$ which preserves $\bigwedge^2\h$ (Lemma~\ref{lem:Pk}(b)); we use the same
+letter for its restriction to $\bigwedge^2\h$. The \emph{torus $V_1$ Hamiltonian} is $\HT:=\LL_2(h)$ on $\Fock$. We put
+$\VT:=\ran h\subset\bigwedge^2\h$.
+\end{definition}
+
+By Lemma~\ref{lem:Pk}(c), $h\ge0$, so $\HT\ge0$; $\HT$ preserves the particle number, and on $n$ particles
+$\HT=\sum_{i<j}h_{ij}$ by Lemma~\ref{lem:lift}(ii). The next proposition gives its orbital form; the pair functions
+$v_n$ are the image sums of the planar pair states.
+
+\begin{proposition}[orbital form]\label{prop:orbital}
+Let $c_0:=\kappa^3/\sqrt{2\pi}$ and $f(d):=d\,e^{-\kappa^2d^2/4}$. For $n\in\Z$ put
+\begin{equation}\label{eq:vtau}
+v_n:=\sqrt{c_0}\sum_{A+B=n}f(A-B)\,\psi_{[A]}\wedge\psi_{[B]}\in\textstyle\bigwedge^2\h,
+\end{equation}
+the sum running over $(A,B)\in\Z^2$; it converges absolutely and $v_{n+2\Nphi}=v_n$. Then
+\begin{equation}\label{eq:horbital}
+h=\sum_{n\in\Z_{2\Nphi}}\kb{v_n}{v_n},\qquad
+\HT=c_0\sum_{n\in\Z_{2\Nphi}}\bcen n^*\bcen n,\qquad \bcen n:=\sum_{\substack{d\ge1\\ d\equiv n\ (2)}}2d\,e^{-\kappa^2d^2/4}\,
+c_{[(n-d)/2]}\,c_{[(n+d)/2]} .
+\end{equation}
+Moreover, with $\Fib:=\Fib_{\eta_1}:\h^{\otimes2}\to\U_2$ and $(\psi'_n)_{n\in\Z_{2\Nphi}}$ the orbitals of
+$\Tor_2=\R^2/\sqrt2\Lam$ (Lemma~\ref{lem:orbitals} with periods $\sqrt2L_x$, $\sqrt2L_y$), $h=\Fib^*\Fib$ and
+\begin{equation}\label{eq:imagesum}
+v_n=\Fib^*\psi'_n=\sum_{\gamma\in\Lam}\tl^{(2)}_\gamma\bigl(\eta_1(\rho)\,\psi'_n(\zeta)\bigr),
+\end{equation}
+the image sum over the second particle of the planar pair state with relative orbital $\eta_1$ and centre-of-mass
+state $\psi'_n$ (in the tensor realization of $\bigwedge^2\h$).
+\end{proposition}
+
+\begin{proof}
+By Lemma~\ref{lem:Pk}(c), $h=\Fib^*\Fib$. For $A,B\in\Z$ write $d=A-B$ and $m=A+B$. In the coordinates
+$\rho=(r_1-r_2)/\sqrt2$, $\zeta=(r_1+r_2)/\sqrt2$, orthogonality of the coordinate change gives
+\[
+\phi_{A}(r_1)\phi_{B}(r_2)=(L_y\sqrt\pi)^{-1}\,e^{\iu\kappa d\rho_y/\sqrt2}e^{-(\rho_x-\kappa d/\sqrt2)^2/2}\;
+e^{\iu\kappa m\zeta_y/\sqrt2}e^{-(\zeta_x-\kappa m/\sqrt2)^2/2}.
+\]
+By \eqref{eq:landaurep} at $R=0$, $\int\overline{\eta_1(\rho)}\,e^{\iu s\rho_y}e^{-(\rho_x-s)^2/2}\dd\rho=(2\pi)^{1/2}\pi^{1/4}\mathcal H_1(s)$,
+with $\mathcal H_1(s)=\pi^{-1/4}\sqrt2\,s\,e^{-s^2/2}$. The orbitals $\phi'_m$, $\psi'_n$ of $\Tor_2$ are built with
+$\kappa':=\kappa/\sqrt2=2\pi/(\sqrt2L_y)$ and $2\Nphi$ flux quanta, and
+$e^{\iu\kappa m\zeta_y/\sqrt2}e^{-(\zeta_x-\kappa m/\sqrt2)^2/2}=(\sqrt2L_y\sqrt\pi)^{1/2}\phi'_m(\zeta)$. Hence
+\[
+\Fib(\phi_{A}\otimes\phi_{B})=2^{1/4}\sqrt\kappa\;\mathcal H_1(\kappa d/\sqrt2)\,\phi'_m
+=2^{1/4}\pi^{-1/4}\kappa^{3/2}f(A-B)\,\phi'_{A+B} .
+\]
+Since $\sum_{A,B}\abs{\phi_{A}(r_1)\phi_{B}(r_2)}$ is bounded and $\eta_1$ is integrable, dominated convergence gives
+$\Fib(\psi_a\otimes\psi_b)=\sum_{A\equiv a,\,B\equiv b}\Fib(\phi_{A}\otimes\phi_{B})$ for $a,b\in\Z_{\Nphi}$. The coefficient of
+$\phi'_m$ in this sum depends on $m$ only through its class modulo $2\Nphi$ (shift $A$ and $B$ by $\Nphi$), so, grouping the
+$m$ by classes,
+\[
+\Fib(\psi_a\otimes\psi_b)=2^{1/4}\pi^{-1/4}\kappa^{3/2}\sum_{n\in\Z_{2\Nphi}}C_n(a,b)\,\psi'_n,\qquad
+C_n(a,b):=\sum_{\substack{A+B=n\\ A\equiv a,\ B\equiv b}}f(A-B),
+\]
+for any representative $n$ of the class. As $(\psi'_n)$ is orthonormal and the $C_n$ are real,
+$\ip\Phi{h\Psi}=\ip{\Fib\Phi}{\Fib\Psi}=\sum_n\overline{\ip{w_n}\Phi}\,\ip{w_n}\Psi$ with
+$w_n:=2^{1/4}\pi^{-1/4}\kappa^{3/2}\sum_{A+B=n}f(A-B)\,\psi_{[A]}\otimes\psi_{[B]}$, and $w_n=\Fib^*\psi'_n$. The tensor
+$\sum_{A+B=n}f(A-B)\psi_{[A]}\otimes\psi_{[B]}$ is antisymmetric ($f$ is odd), and it equals $2^{-1/2}$ times the
+antisymmetric tensor of $\sum_{A+B=n}f(A-B)\psi_{[A]}\wedge\psi_{[B]}$; since $2^{1/4}\pi^{-1/4}\kappa^{3/2}2^{-1/2}=c_0^{1/2}$,
+$w_n=v_n$. This proves $h=\sum_n\kb{v_n}{v_n}$. Then $\HT=\sum_nB(v_n)^*B(v_n)$, and
+$B(\psi_{[A]}\wedge\psi_{[B]})=c_{[B]}c_{[A]}$ by \eqref{eq:Bwedge}; pairing $(A,B)$ with $(B,A)$ gives $B(v_n)=\sqrt{c_0}\,\bcen n$.
+Finally, \eqref{eq:imagesum} is \eqref{eq:Fstar} with $k=2$, $a=\eta_1$ and $g=\psi'_n$.
+\end{proof}
+
+\begin{remark}\label{rem:normalization}
+The operator $\sum_n\bcen n^*\bcen n$ differs from $\HT$ by the factor $c_0^{-1}=\sqrt{2\pi}/\kappa^3$, which grows like
+$\Nphi^{3/2}$ at fixed aspect ratio; every uniform statement below refers to $\HT$, the normalization in which a pair of
+relative angular momentum one has energy one. The kernel of $\HT$ is the joint kernel of the operators $\bcen n$, which
+does not depend on any normalization.
+\end{remark}

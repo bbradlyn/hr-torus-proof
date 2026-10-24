@@ -1,0 +1,54 @@
+% main.tex -- the paper. Compile with three passes of: pdflatex main
+\documentclass[11pt]{article}
+\input{preamble}
+
+\title{The Haldane--Rezayi zero modes are not a gapped ground-state manifold on the torus}
+\author{A multi-agent AI team,\\ in collaboration with Barry Bradlyn}
+\date{Preprint \quad---\quad 23 October 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We consider spin-$\tfrac12$ electrons in the lowest Landau level of a rectangular torus pierced by
+$2N$ flux quanta, interacting through the hollow-core (pure $V_1$) pseudopotential. In the sector with
+$N/2$ electrons of each spin the zero modes of this Hamiltonian form a ten-dimensional space, spanned by
+the Haldane--Rezayi states on the torus; a proof of this fact is included. We prove that the eleventh eigenvalue of
+the sector tends to zero as $N\to\infty$, at every fixed aspect ratio and uniformly over the rectangular tori whose
+shorter side exceeds a fixed length: the zero modes are not separated from the rest of the spectrum by a gap that is
+uniform in $N$. More generally, a patch of $p$ eigenvalues at the bottom of the sector whose width is less
+than half of its gap to the rest, uniformly in $N$, has $p$ divisible by four. The proof is a lowest-Landau-level
+version of the fractional index theorem of Bachmann, Bols, De Roeck and Fraas, applied to the magnetic
+translation by one orbital, with the gap assumed only inside the sector. Its main new ingredient is the
+torus analogue of the windowed-Fourier frame embedding of \cite{OAI26}, an isometric embedding of the lowest
+Landau level into a two-dimensional lattice fermion system in which the hollow-core Hamiltonian is a rapidly
+decaying interaction of uniform size and a Lieb--Robinson-type propagation bound with a polynomial light cone
+holds with constants independent of $N$, and in which every Landau-gauge orbital is exactly supported in a
+column of lattice sites. The result does not exclude a gapped phase whose
+ground-state space strictly contains the zero modes, and it is asymptotic: the constants are not
+explicit. At fixed circumference $L_y$, a regime complementary to the one above, a variational argument with spin
+twists, also given, bounds the eleventh eigenvalue by $C(L_y)/N$ for every even $N$, with $C(L_y)$ explicit.
+\end{abstract}
+
+\setcounter{tocdepth}{2}
+\tableofcontents
+
+\input{sections/01-introduction}
+\input{sections/02-setting}
+\input{sections/03-slot-frame}
+\input{sections/04-hamiltonian}
+\input{sections/05-locality}
+\input{sections/06-index-theorem}
+\input{sections/07-translation}
+\input{sections/08-hollow-core}
+
+\appendix
+\input{appendices/A-bbdf}
+\input{appendices/B-lieb-robinson}
+\input{appendices/C-kernel}
+\input{appendices/D-twist}
+\input{notation}
+
+\input{references}
+
+\end{document}

@@ -1,0 +1,850 @@
+\section{The zero modes: proof of Theorem~\ref{thm:kernel}}\label{app:kernel}
+\begingroup
+\newcommand{\kzG}{\mathcal{G}}
+\newcommand{\kzH}{\mathcal{H}}
+\newcommand{\kzL}{\mathcal{L}}
+\newcommand{\kzP}{\mathcal{P}}
+\newcommand{\kzD}{\mathsf{D}}
+\newcommand{\kzq}{\mathsf{q}}
+\newcommand{\kzTh}{\Theta}
+\newcommand{\kzvth}{\vartheta}
+
+This appendix proves Theorem~\ref{thm:kernel}, for tori of arbitrary modular parameter. The proof is written in its
+own coordinates and notation, which are adapted to theta functions; we first relate them, and the Hamiltonian, to
+Sections~\ref{sec:setting}--\ref{sec:hamiltonian}.
+
+\paragraph{Coordinates and orbitals.} The appendix uses the complex coordinate $z=X+iY$, the torus $\C/\Lambda$ with
+$\Lambda=L_1\Z+L_1\tau\Z$ and $\operatorname{Im}\tau=\tau_2>0$, the vector potential $(-Y,0)$, whose magnetic field is $1$, and
+$L:=\Nphi$ flux quanta, with $L_1^2\tau_2=2\pi L$. For the torus of Definition~\ref{def:torus} take $L_1:=L_y$ and
+$\tau:=\iu L_x/L_y$, so that $L_1\tau_2=L_x$ and the number $\kappa=2\pi/L_1$ of this appendix is the $\kappa$ of
+Definition~\ref{def:torus}. The rotation $(x,y)\mapsto(X,Y):=(y,-x)$ maps $\R^2/(L_x\Z\times L_y\Z)$ onto $\C/\Lambda$,
+preserves the area, and carries the vector potential $(0,x)$ of Definition~\ref{def:torus} to $(-Y,0)$, because
+$x\,\dd y=-Y\,\dd X$. Accordingly, for $f\in\hN$ the function $\psi(X,Y):=f(-Y,X)$ satisfies $\psi(X+L_1,Y)=\psi(X,Y)$ and
+$\psi(X,Y+L_x)=e^{-\iu L_xX}\psi(X,Y)$, by \eqref{eq:bc}. Moreover the image of the orbital $\psi_j$ of
+Lemma~\ref{lem:orbitals} is $(L_y\sqrt\pi)^{-1/2}\sum_{k\in\Z}e^{\iu\kappa(j+kL)X}e^{-(Y+\kappa(j+kL))^2/2}$, which is the
+normalized orbital $\phi_je^{-Y^2/2}/(L_1\sqrt\pi)^{1/2}$ of \eqref{kz:eq:orbital}, because
+$e^{\iu\kappa mX}e^{-(Y+\kappa m)^2/2}=e^{\iu\kappa mz-\kappa^2m^2/2}e^{-Y^2/2}$ and $\kappa^2/2=\pi\tau_2/L$ by \eqref{kz:eq:flux}. Since the
+$\psi_j$ span $\hN$, $e^{Y^2/2}\psi$ is an entire function of $z$ for every $f\in\hN$, and $\psi$ lies in the space $\kzL$
+of Section~\ref{kz:sec:lll}. Composition with the rotation is therefore a unitary map from $\hN$ onto $\kzL$ that
+takes $\psi_j$ to the $j$-th normalized orbital of this appendix for every $j$; its second quantization, with the spin
+unchanged, maps each sector $\sect{(n,m)}$ onto the space of states with $n$ electrons of spin up and $m$ of spin down,
+and it maps $c_{j\sigma}$ to the annihilation operator of the $j$-th normalized orbital with spin $\sigma$. Under this map
+the one-particle translation $t_2$ defined below is $\thx$.
+
+\paragraph{The Hamiltonian.} The appendix defines the hollow-core Hamiltonian as $H=\sum_{i<j}\kzP_{ij}$, where
+$\kzP$, defined in \eqref{kz:eq:image-sum}, is the sum over the lattice of periods of the translates of the planar
+projector onto relative angular momentum one. Lemma~\ref{kz:lem:A} shows that, with orbitals normalized to one,
+$H=\frac{c'_L}2\sum_{n\in\Z_{2L}}\sum_{\sigma,\sigma'}(B_n^{\sigma\sigma'})^\dagger B_n^{\sigma\sigma'}$, where $c'_L=c_L/(L_1\sqrt\pi)^2$ and
+$c_L=4\pi\kappa^2L_1\sqrt{\pi/2}$ (Lemma~\ref{kz:lem:A3}); since $L_1=2\pi/\kappa$, $c'_L/2=\kappa^3/\sqrt{2\pi}$. For
+$\tau=\iu L_x/L_y$ the weight in \eqref{kz:eq:Bn} is $\kzq^{d^2}=e^{-\kappa^2d^2/4}$, and pairing the terms $(A,B)$ and $(B,A)$
+of \eqref{kz:eq:Bn} gives $B_n^{\up\up}=\bcen+n$, $B_n^{\dn\dn}=\bcen-n$ and $B_n^{\up\dn}=B_n^{\dn\up}=\bcen0n/\sqrt2$, with
+the centre pair operators of Definition~\ref{def:pairs}: for $d:=A-B>0$, the two terms are
+$d\,e^{-\kappa^2d^2/4}\bigl(c_{[B]\sigma'}c_{[A]\sigma}-c_{[A]\sigma'}c_{[B]\sigma}\bigr)$, and the term $d=0$ vanishes. Hence
+$\sum_{\sigma,\sigma'}(B_n^{\sigma\sigma'})^\dagger B_n^{\sigma\sigma'}=\sum_\nu(\bcen\nu n)^*\bcen\nu n$, and by
+Theorem~\ref{thm:localform}(c) the second quantization of the rotation carries $H_N$, restricted to the states with $N$
+electrons, to the operator $H$ of this appendix. It preserves the numbers of electrons of each spin. So
+Theorem~\ref{kz:thm:T2} below, for $\tau=\iu L_x/L_y$, is Theorem~\ref{thm:kernel}, and this proves the identification stated in
+Remark~\ref{rem:kernel-identification}.
+
+\paragraph{Notation.} Every symbol of this appendix is defined in it, and where a symbol also occurs in the rest of
+the paper, its meaning here is the one given here. In particular: $\Lambda$ is the lattice of periods; $L=\Nphi$;
+$\kzTh_\ell[a,b]$ and $\kzTh_2[\varepsilon]$ are spaces of theta functions; $\kzG(n,m;\varepsilon)$ are spaces of meromorphic
+functions; $\kzP$ is the torus pair interaction and $P_1$ the planar one; $\kzD_{st}:=\partial_s-\partial_t$; $U$ is a sum of
+coordinates and $J$ a product of theta functions; $T_K$ and $T_1$ are many-body translations, with $T_1=\Theta^*$ under the
+map above, and $K$ is the corresponding momentum label; $n$ and $m$ are the numbers of electrons of spin up and spin
+down; $\mu_N$ is the group of $N$-th roots of unity; $\dagger$ denotes the adjoint; and $i$ is the imaginary unit.
+
+\subsection{Setting and notation}\label{kz:sec:setting}
+
+\subsubsection{The torus lowest Landau level}\label{kz:sec:lll}
+
+Magnetic length $1$; coordinates $z=X+iY$ on the plane; Landau gauge $\mathbf A=(-Y,0)$. Planar
+lowest-Landau-level (LLL) one-particle states are $\psi(z)=f(z)e^{-Y^2/2}$ with $f$ entire
+\cite[eq.~(44)]{RR96}. The torus is
+$\C/\Lambda$, $\Lambda=L_1\Z+L_1\tau\Z$, $\tau=\tau_1+i\tau_2$, $\tau_2>0$, threaded by $L:=N_\phi$
+flux quanta, so $L_1^2\tau_2=2\pi L$. Put $\kappa:=2\pi/L_1$; then
+\begin{equation}\label{kz:eq:flux}
+\tau_2=\frac{\kappa^2L}{2\pi},\qquad L_1\tau_2=\kappa L .
+\end{equation}
+The torus LLL is
+\[
+\kzL:=\Big\{\psi=fe^{-Y^2/2}:\ f\ \text{entire},\ f(z+L_1)=f(z),\
+f(z+L_1\tau)=e^{-i\pi L(2z/L_1+\tau)}f(z)\Big\}
+\]
+(\cite[eq.~(45)]{RR96} with $\phi_1=\phi_2=0$), with inner product $\langle\phi,\psi\rangle=\int_D\bar\phi\psi$,
+$D$ a fundamental domain of $\Lambda$. We use the rectangle $D=\{X+iY:\ 0\le Y<L_1\tau_2,\
+X_0(Y)\le X<X_0(Y)+L_1\}$ with $X_0(Y)=Y\tau_1/\tau_2$ (a fundamental domain for any $\tau$).
+Write $u:=z/L_1$ when convenient (periods $1,\tau$).
+
+\paragraph{Orbitals.} For $j\in\Z$ let
+\begin{equation}\label{kz:eq:orbital}
+\phi_j(z):=\sum_{k\in\Z}\exp\!\Big(i\kappa(j+kL)z+\frac{i\pi\tau}{L}(j+kL)^2\Big)
+=\kzvth\!\begin{bmatrix} j/L\\ 0\end{bmatrix}\!\big(Lz/L_1\,\big|\,L\tau\big),
+\end{equation}
+with $\kzvth[a,b](z|\tau)=\sum_n\exp(i\pi\tau(n+a)^2+2\pi i(n+a)(z+b))$ \cite[eq.~(65)]{RR96}. Then
+$\phi_{j+L}=\phi_j$, and $\phi_0,\dots,\phi_{L-1}$ is an orthogonal basis of the holomorphic parts of
+$\kzL$ with equal norms $\|\phi_je^{-Y^2/2}\|^2=L_1\sqrt\pi$.
+\emph{Proof.} Each $\phi_j$ satisfies the two boundary conditions (term by term, using
+$e^{i\kappa(j+kL)L_1}=1$ and $\kappa L L_1\tau=2\pi L\tau$). By Lemma~\ref{kz:lem:theta}(a) below
+($\ell=L$) the space of such $f$ has dimension $L$. At fixed $Y$ the $X$-integral over a full period
+kills all products of exponentials with different frequencies $\kappa(a+kL)\neq\kappa(b+lL)$, so
+$\langle\phi_a,\phi_b\rangle=0$ for $a\not\equiv b$; and, by \eqref{kz:eq:flux},
+$|e^{i\kappa Az+i\pi\tau A^2/L}|^2e^{-Y^2}=e^{-(Y+\kappa A)^2}$, so
+$\|\phi_a\|^2=L_1\sum_k\int_0^{\kappa L}e^{-(Y+\kappa(a+kL))^2}dY=L_1\sqrt\pi$. \qed
+
+\paragraph{Translations.} On holomorphic parts define
+\[
+(t_1f)(z):=f(z+L_1/L),\qquad (t_2f)(z):=e^{i\pi(2z/L_1+\tau/L)}f(z+L_1\tau/L).
+\]
+Both preserve $\kzL$; $t_1\phi_j=e^{2\pi ij/L}\phi_j$, $t_2\phi_j=\phi_{j+1}$, $t_1t_2=e^{2\pi i/L}t_2t_1$,
+$t_1^L=t_2^L=1$. (Direct from \eqref{kz:eq:orbital}: shifting $z$ by $L_1\tau/L$ in the $k$-th term and
+completing the square gives $e^{-i\pi(2z/L_1+\tau/L)}$ times the term of $\phi_{j+1}$.) On wave
+functions these are the magnetic translations by $L_1/L$ and $L_1\tau/L$. In second quantization
+$t_2$ is the orbital shift $j\mapsto j+1$ and $t_1$ is $e^{2\pi ij/L}$.
+
+\paragraph{Magnetic translations by lattice vectors.} For $a=a_1+ia_2\in\C$ let
+\[
+(\tau_a\psi)(z):=e^{-ia_2(X-a_1)}\psi(z-a);
+\]
+$\tau_a$ is unitary on $L^2(\C)$ and maps planar LLL
+functions to planar LLL functions (on holomorphic parts: $f(z)\mapsto e^{-ia_2(z-a_1)-a_2^2/2}f(z-a)$; we need only the following
+consequence). For every $\nu\in\Lambda$
+there is $c(\nu)\in U(1)$ with
+\begin{equation}\label{kz:eq:bc-translation}
+\tau_\nu\psi=c(\nu)\psi\qquad\text{for all }\psi\in\kzL .
+\end{equation}
+\emph{Proof.} For $\nu=-L_1$: $\tau_\nu\psi(z)=\psi(z+L_1)=\psi(z)$. For $\nu=-L_1\tau$: with
+$a_1=-L_1\tau_1$, $a_2=-L_1\tau_2$ and the boundary condition,
+$\tau_\nu\psi(z)=e^{iL_1\tau_2(X+L_1\tau_1)}f(z+L_1\tau)e^{-(Y+L_1\tau_2)^2/2}$; inserting
+$f(z+L_1\tau)=e^{-iL_1\tau_2z-i\pi L\tau}f(z)$ (by \eqref{kz:eq:flux}, $2\pi L/L_1=L_1\tau_2$) all $z$-dependence
+cancels and $\tau_\nu\psi=e^{i\pi L\tau_1}\psi$, a phase because $L_1^2\tau_2^2/2=\pi L\tau_2$. General
+$\nu$: the $\tau_a$ compose up to constant phases. \qed
+
+\subsubsection{Many electrons, canonical components, quantum numbers}\label{kz:sec:many}
+
+$N$ electrons, $n$ up and $m$ down, $N=n+m$; throughout $L=N_\phi=2N$. A state
+$\Psi$ is determined by its \emph{canonical component} $F(x_1,\dots,x_n;y_1,\dots,y_m)$ (the
+holomorphic part of $\Psi(\cdot;\uparrow^n\downarrow^m)$), antisymmetric in the $x$'s and in the
+$y$'s, each variable in the holomorphic class of $\kzL$; every other spin component is $\pm F$ with
+permuted arguments. In terms of second quantization,
+$\Psi=\sum_{I,I'}c_{I,I'}\,c^\dagger_{I\uparrow}c^\dagger_{I'\downarrow}|0\rangle$, with $I$ and $I'$ the sets of occupied
+up and down orbitals (up block first, increasing orbitals), corresponds to
+$F=s_{n,m}\sum c_{I,I'}\det[\phi_{I_\alpha}(x_\beta)]\det[\phi_{I'_\alpha}(y_\beta)]$
+with one sign $s_{n,m}$ per sector. We write $u=(x,y)$ for all coordinates in $u$-units, $U:=\sum_iu_i$, $\one=(1,\dots,1)$, and $e_k$ for
+the $k$-th unit vector.
+
+The many-body translations $T_K:=t_1^{\otimes N}$, $T_1:=t_2^{\otimes N}$ act on canonical
+components. In $u$-units,
+\begin{equation}\label{kz:eq:TK-T1}
+T_K^2F(u)=F(u+\one/N),\qquad T_1^2F(u)=e^{4\pi iU+2\pi i\tau}F(u+\tau\one/N),
+\end{equation}
+$T_KT_1=e^{2\pi iN/L}T_1T_K=-T_1T_K$, and $T_K^2,T_1^2$ commute with $T_K,T_1$ and with each other.
+Since $t_1^L=t_2^L=1$, $(T_K^2)^N=(T_1^2)^N=1$. The joint eigenvalues $(\lambda_1,\lambda_2)\in\mu_N^2$
+of $(T_K^2,T_1^2)$ are the \emph{relative quantum numbers}. In second quantization
+$T_K=e^{2\pi iK/L}$ with $K=\sum_jj\,n_j$, and $T_1$ maps the sector $K$ to $K+N$.
+
+\subsubsection{The hollow-core Hamiltonian}\label{kz:sec:ham}
+
+\paragraph{The planar projector.} For two particles put $Z=(z_1+z_2)/2$, $v=z_1-z_2$ (real Jacobian
+$1$) and $\chi:=(X_1Y_1+X_2Y_2)/2=X_ZY_Z+X_vY_v/4$. The gauge factor $e^{i\chi}$ maps Landau-gauge
+LLL functions to symmetric-gauge ones: for $\psi=f(z_1,z_2)e^{-(Y_1^2+Y_2^2)/2}$,
+\begin{equation}\label{kz:eq:gauge}
+\Psi_s:=e^{i\chi}\psi=g\big(Z+\tfrac v2,Z-\tfrac v2\big)e^{-|Z|^2/2}e^{-|v|^2/8},\qquad
+g:=f\,e^{(z_1^2+z_2^2)/4}=f\,e^{Z^2/2+v^2/8},
+\end{equation}
+by the one-particle identity $e^{iXY/2}e^{-Y^2/2}=e^{z^2/4}e^{-|z|^2/4}$. The symmetric-gauge
+two-body LLL is $\{\text{centre}\}\otimes\{\text{relative}\}$, and the normalized relative state
+of angular momentum $1$ is $\eta_1(v)=v\,e^{-|v|^2/8}/\sqrt{16\pi}$. The planar hollow-core pair
+interaction (the $V_1$ pseudopotential) is the projector onto relative angular momentum $1$; in the
+Landau gauge it is $P_1:=e^{-i\chi}(1_Z\otimes|\eta_1\rangle\langle\eta_1|_v)e^{i\chi}$. For any $\psi$
+with $|\psi|$ bounded we use the absolutely convergent formula
+\begin{equation}\label{kz:eq:P1}
+(P_1\psi)(Z,v):=e^{-i\chi}\eta_1(v)\,\alpha_\psi(Z),\qquad
+\alpha_\psi(Z):=\int_\C\overline{\eta_1(v')}\,\Psi_s(Z,v')\,d^2v' .
+\end{equation}
+
+\paragraph{The torus pair operator (image sum).} Let $\kzH_2:=\kzL\otimes\kzL$ (two distinguishable
+particles) and $\tau^{(1)}_\nu$ the magnetic translation of particle $1$ by $\nu$. Define
+\begin{equation}\label{kz:eq:image-sum}
+\kzP\psi:=\sum_{\nu\in\Lambda}\tau^{(1)}_\nu P_1\big(\tau^{(1)}_\nu\big)^{-1}\psi
+=\sum_{\nu\in\Lambda}c(\nu)^{-1}\,\tau^{(1)}_\nu(P_1\psi)\qquad(\psi\in\kzH_2),
+\end{equation}
+the second form by \eqref{kz:eq:bc-translation}. This is the torus $V_1$ pair interaction: the planar
+interaction periodized over the images of the relative coordinate. (By Poisson summation it equals
+the usual reciprocal-lattice form; that equivalence is not used here.) The
+hollow-core Hamiltonian is $H:=\sum_{i<j}\kzP_{ij}$, spin-independent, on the antisymmetric
+$N$-electron space.
+
+\paragraph{The orbital pair operators.} Put $\kzq^{d^2}:=e^{i\pi\tau d^2/(2L)}$ (for rectangular
+$\tau=i\tau_2$ this is $e^{-\kappa^2d^2/4}$, by \eqref{kz:eq:flux}).
+For $n\in\Z$ and spins $\sigma,\sigma'$ define
+\begin{equation}\label{kz:eq:Bn}
+B_n^{\sigma\sigma'}:=\sum_{A+B=n,\ A,B\in\Z}(A-B)\,\kzq^{(A-B)^2}\,c_{[B]\sigma'}c_{[A]\sigma},
+\qquad [A]:=A\bmod L .
+\end{equation}
+Replacing $(A,B)$ by $(A+L,B+L)$ shows $B_{n+2L}=B_n$: the images at fixed covering centre $n/2$
+run over $A-B\mapsto A-B+2L$. The four spin channels reduce to three: $B_n^{\downarrow\uparrow}=B_n^{\uparrow\downarrow}$
+(substitute $A\leftrightarrow B$), the $S_z=0$ triplet. We write $B_n^{\mu}$, $\mu\in\{+1,0,-1\}$, for
+$B_n^{\uparrow\uparrow},B_n^{\uparrow\downarrow},B_n^{\downarrow\downarrow}$.
+
+\begin{remark}[the period-$L$ grouping is a different operator]\label{kz:rem:periodL}
+For fixed orbitals $(a,b)$ the covering pairs $(a+kL,b+lL)$ with centre $n/2$ have $k+l$ fixed, so
+their relative coordinates form one class mod $2L$. The relative coordinate $d+L$ belongs to the
+centre $(n+L)/2$: indeed $B_{n+L}=\sum_{d\equiv n(2)}(d+L)\kzq^{(d+L)^2}c_{[(n-d)/2]}c_{[(n+d)/2]}$, a
+\emph{different} linear combination of the same pair operators as
+$B_n=\sum_d d\,\kzq^{d^2}c_{[(n-d)/2]}c_{[(n+d)/2]}$. Grouping images with period $L$,
+$F_L(d)=\sum_k(d+kL)\kzq^{(d+kL)^2}$, produces $B_n+B_{n+L}$ (summing $d$ over a window of length
+$2L$) or a truncation of it (window of length $L$). Neither equals $\sum_n B_n^\dagger B_n$.
+\end{remark}
+
+\subsection{The formulation lemma: the image sum unfolds to local pair conditions}\label{kz:sec:A}
+
+Write $\kzD_{st}:=\partial_s-\partial_t$ and $[\,\cdot\,]_{s=t}$ for restriction. For a
+two-body $\psi=fe^{-(Y_1^2+Y_2^2)/2}\in\kzH_2$ write $\kzD f:=\kzD_{z_1z_2}f$.
+
+\begin{lemma}[the $m=1$ amplitude]\label{kz:lem:A1}
+For $\psi\in\kzH_2$ and every $Z\in\C$,
+\begin{gather*}
+\alpha_\psi(Z)=2\sqrt\pi\;e^{(Z^2-|Z|^2)/2}\,(\kzD f)(Z,Z),\\
+(P_1\psi)(z_1,z_2)=\tfrac12\,(z_1-z_2)\,e^{-(z_1-z_2)^2/8}\,(\kzD f)(Z,Z)\,e^{-(Y_1^2+Y_2^2)/2}.
+\end{gather*}
+\end{lemma}
+
+\begin{proof}
+By \eqref{kz:eq:gauge}, $\Psi_s(Z,v)=h_Z(v)e^{-|Z|^2/2}e^{-|v|^2/8}$ with $h_Z(v):=g(Z+v/2,Z-v/2)$, an
+entire function of $v$. Since $|\psi|$ is continuous and $\Lambda$-periodic in each variable it is
+bounded, $|\psi|\le M$, and $|\Psi_s|=|\psi|$; hence $|h_Z(v)|\le Me^{|Z|^2/2}e^{|v|^2/8}$. Write
+$h_Z(v)=\sum_ka_kv^k$. On the disc $|v|<R$, rotational orthogonality gives
+$\int_{|v|<R}\bar v\,v^ke^{-|v|^2/4}d^2v=\delta_{k1}\int_{|v|<R}|v|^2e^{-|v|^2/4}d^2v$, and the series
+converges uniformly there; so
+$\int_{|v|<R}\bar v\,h_Z(v)e^{-|v|^2/4}d^2v=a_1\int_{|v|<R}|v|^2e^{-|v|^2/4}d^2v\to16\pi a_1$ as $R\to\infty$.
+The full integral converges absolutely, since the integrand is bounded by
+$Me^{|Z|^2/2}|v|e^{-|v|^2/8}$. Therefore
+$\alpha_\psi(Z)=e^{-|Z|^2/2}(16\pi)^{-1/2}\,16\pi\,h_Z'(0)=4\sqrt\pi\,e^{-|Z|^2/2}h_Z'(0)$. Finally
+$h_Z(v)=f(Z+\tfrac v2,Z-\tfrac v2)e^{Z^2/2}e^{v^2/8}$ and $e^{v^2/8}$ is even, so
+$h_Z'(0)=\tfrac12e^{Z^2/2}(\kzD f)(Z,Z)$. This gives $\alpha_\psi$. For $P_1\psi$ insert $\alpha_\psi$ in
+\eqref{kz:eq:P1} and undo the gauge factor with $e^{-i\chi}e^{-(|z_1|^2+|z_2|^2)/4}=e^{-(z_1^2+z_2^2)/4}e^{-(Y_1^2+Y_2^2)/2}$
+and $(z_1^2+z_2^2)/4=Z^2/2+v^2/8$.
+\end{proof}
+
+\begin{lemma}[unfolding]\label{kz:lem:A2}
+For $\phi,\psi\in\kzH_2$ the series \eqref{kz:eq:image-sum} converges absolutely and locally uniformly,
+$\kzP\psi\in\kzH_2$, and
+\[
+\langle\phi,\kzP\psi\rangle=\int_D\overline{\alpha_\phi(Z)}\,\alpha_\psi(Z)\,d^2Z .
+\]
+Hence $\kzP$ is self-adjoint and positive semidefinite on $\kzH_2$, and
+\[
+\kzP\psi=0\iff(\kzD f)(Z,Z)=0\ \text{for all }Z\in\C .
+\]
+\end{lemma}
+
+\begin{proof}
+\emph{Convergence and membership.} $|\alpha_\psi(Z)|\le\|\eta_1\|_{L^1}M$, so
+$|(P_1\psi)(z_1,z_2)|\le\|\eta_1\|_{L^1}M\,|\eta_1(z_1-z_2)|$. The $\nu$-th term of \eqref{kz:eq:image-sum}
+has modulus $|(P_1\psi)(z_1-\nu,z_2)|$, a Gaussian in $z_1-z_2-\nu$; the series converges absolutely and
+locally uniformly. Each term is (a unimodular factor times) a planar LLL function, i.e.\ by
+Lemma~\ref{kz:lem:A1} of the form $(\text{entire})\cdot e^{-(Y_1^2+Y_2^2)/2}$, and the holomorphic parts
+converge locally uniformly, so the limit is again of this form. The boundary conditions: for
+$\mu\in\Lambda$, $\tau^{(1)}_\mu\tau^{(1)}_\nu=\omega(\mu,\nu)\tau^{(1)}_{\mu+\nu}$ with constant phases
+$\omega$, and applying both sides to $\psi$ gives $c(\mu)c(\nu)=\omega(\mu,\nu)c(\mu+\nu)$; hence
+$\tau^{(1)}_\mu\kzP\psi=\sum_\nu c(\nu)^{-1}\omega(\mu,\nu)\tau^{(1)}_{\mu+\nu}P_1\psi=c(\mu)\kzP\psi$. For
+particle $2$: the simultaneous translation $S_\nu:=\tau^{(1)}_\nu\tau^{(2)}_\nu$ acts on $\kzH_2$ by the
+phase $c(\nu)^2$ and commutes with $P_1$. Indeed, for \emph{any} function,
+$e^{i\chi}S_\nu e^{-i\chi}$ acts as $\Psi_s(Z,v)\mapsto e^{i(-\nu_2X_Z+\nu_1Y_Z+\nu_1\nu_2)}\Psi_s(Z-\nu,v)$ (from
+$\chi=X_ZY_Z+X_vY_v/4$ and the definition of $\tau_a$): a translation of $Z$ times a phase depending on $Z$
+only, while $P_1$ acts on $v$ only. Combined with the boundary conditions, this gives \eqref{kz:eq:simul} below.
+Since $\tau^{(2)}_{-\nu}$ equals $\tau^{(1)}_\nu S_{-\nu}$ up to a constant phase,
+$\tau^{(2)}_{-\nu}P_1(\tau^{(2)}_{-\nu})^{-1}=\tau^{(1)}_\nu P_1(\tau^{(1)}_\nu)^{-1}$. So \eqref{kz:eq:image-sum} is also
+the image sum over translations of particle $2$, and the same cocycle argument gives the boundary
+conditions in $z_2$. So $\kzP\psi\in\kzH_2$.
+
+\emph{Unfolding.} By dominated convergence,
+$\langle\phi,\kzP\psi\rangle=\sum_\nu c(\nu)^{-1}\int_{D\times D}\bar\phi\;\tau^{(1)}_\nu(P_1\psi)$. Since
+$\tau^{(1)}_\nu$ is a translation of $z_1$ by $\nu$ followed by multiplication by a unimodular
+function, $\int_{D\times D}\bar a\,\tau^{(1)}_\nu b=\int_{(D-\nu)\times D}\overline{(\tau^{(1)}_\nu)^{-1}a}\;b$,
+and $(\tau^{(1)}_\nu)^{-1}\phi=c(\nu)^{-1}\phi$, so $\overline{(\tau^{(1)}_\nu)^{-1}\phi}=c(\nu)\bar\phi$.
+The phases cancel and the translates $D-\nu$ tile $\C$:
+\[
+\langle\phi,\kzP\psi\rangle=\int_{z_1\in\C,\ z_2\in D}\bar\phi\;P_1\psi\;d^2z_1d^2z_2,
+\]
+absolutely convergent. With $\Phi_s:=e^{i\chi}\phi$ the gauge factors cancel:
+$\bar\phi\,P_1\psi=\overline{\Phi_s}\,\eta_1(v)\alpha_\psi(Z)$. In the coordinates $(Z,v)$ (Jacobian $1$) the domain is
+$\{v\in\C,\ Z-v/2\in D\}$.
+
+\emph{Periodicity in $Z$.} Let $\lambda\in\Lambda$. From \eqref{kz:eq:bc-translation} for each particle,
+\[
+\phi(z_1-\lambda,z_2-\lambda)=c(\lambda)^2e^{i\lambda_2(X_1+X_2-2\lambda_1)}\phi(z_1,z_2),
+\]
+and with $\chi=X_ZY_Z+X_vY_v/4$,
+\begin{equation}\label{kz:eq:simul}
+\Phi_s(Z-\lambda,v)=c(\lambda)^2\,e^{i(\lambda_2X_Z-\lambda_1Y_Z-\lambda_1\lambda_2)}\,\Phi_s(Z,v),
+\end{equation}
+a phase that does not depend on $v$. The same holds for $\Psi_s$, hence for $\alpha_\psi$ with the same
+phase. Therefore $\Phi(Z,v):=\overline{\Phi_s(Z,v)}\eta_1(v)\alpha_\psi(Z)$ is $\Lambda$-periodic in $Z$ at fixed
+$v$, and $|\Phi|\le\sup|\phi|\,\|\eta_1\|_{L^1}M\,|\eta_1(v)|$ is integrable on $D\times\C$. For a periodic
+integrable function the integral over $D+v/2$ equals the integral over $D$, so by Fubini
+\[
+\langle\phi,\kzP\psi\rangle=\int_{\C}\!d^2v\int_{D}\!d^2Z\,\Phi(Z,v)
+=\int_D\alpha_\psi(Z)\,\overline{\int_\C\overline{\eta_1(v)}\,\Phi_s(Z,v)\,d^2v}\;d^2Z
+=\int_D\overline{\alpha_\phi}\,\alpha_\psi .
+\]
+
+\emph{Consequences.} The right side is Hermitian and nonnegative, so $\kzP=\kzP^\dagger\ge0$ on the
+finite-dimensional $\kzH_2$, and $\kzP\psi=0\iff\langle\psi,\kzP\psi\rangle=0\iff\alpha_\psi=0$ a.e.\ on $D$. By
+Lemma~\ref{kz:lem:A1} this means $(\kzD f)(Z,Z)=0$ on $D$, hence on $\C$, by the identity theorem for the
+entire function $Z\mapsto(\kzD f)(Z,Z)$.
+\end{proof}
+
+\begin{lemma}[orbital form; the period is $2L$]\label{kz:lem:A3}
+Let $\psi=\sum_{a,b\in\Z_L}\psi_{ab}\,\phi_a(z_1)\phi_b(z_2)e^{-(Y_1^2+Y_2^2)/2}\in\kzH_2$ and
+\[
+\beta_n(\psi):=\sum_{A+B=n,\ A,B\in\Z}(A-B)\,\kzq^{(A-B)^2}\,\psi_{[A][B]}\qquad(n\in\Z).
+\]
+Then $\beta_{n+2L}=\beta_n$,
+\begin{gather*}
+(\kzD f)(Z,Z)=i\kappa\sum_{n\in\Z}e^{i\kappa nZ+i\pi\tau n^2/(2L)}\,\beta_n(\psi),\\
+\langle\psi,\kzP\psi\rangle=c_L\sum_{n\in\Z_{2L}}|\beta_n(\psi)|^2,\qquad c_L=4\pi\kappa^2L_1\sqrt{\pi/2}.
+\end{gather*}
+In particular $\kzP\psi=0\iff\beta_n(\psi)=0$ for all $n\in\Z_{2L}$.
+\end{lemma}
+
+\begin{proof}
+Differentiating \eqref{kz:eq:orbital} term by term (absolutely convergent, Gaussian in $A,B$),
+$(\kzD f)(Z,Z)=\sum_{a,b}\psi_{ab}\sum_{A\equiv a,B\equiv b}i\kappa(A-B)e^{i\kappa(A+B)Z}e^{i\pi\tau(A^2+B^2)/L}$.
+Group by $n=A+B$ and use $A^2+B^2=\tfrac12(n^2+(A-B)^2)$. Periodicity in $n$: $(A,B)\mapsto(A+L,B+L)$
+keeps $A-B$ and the residues. For the norm, take the rectangular domain $D$ of Section~\ref{kz:sec:lll}. At fixed $Y$ the
+$X$-integral over a period kills the cross terms $n\neq n'$; with
+$|e^{i\kappa nZ+i\pi\tau n^2/(2L)}|^2=e^{-2\kappa nY-\pi\tau_2n^2/L}$ and $\pi\tau_2/L=\kappa^2/2$
+(by \eqref{kz:eq:flux}), and $|\alpha_\psi(Z)|^2=4\pi e^{-2Y^2}|(\kzD f)(Z,Z)|^2$ (Lemma~\ref{kz:lem:A1}),
+Lemma~\ref{kz:lem:A2} gives
+\[
+\langle\psi,\kzP\psi\rangle=4\pi\int_De^{-2Y^2}|(\kzD f)(Z,Z)|^2=4\pi\kappa^2L_1\sum_{n\in\Z}|\beta_n|^2\int_0^{\kappa L}e^{-2(Y+\kappa n/2)^2}dY .
+\]
+Since $L_1\tau_2=\kappa L$, summing the integrals over
+$n\equiv n_0\pmod{2L}$ shifts the interval by $\kappa L$ each time and tiles $\R$, giving
+$\int_\R e^{-2Y^2}dY=\sqrt{\pi/2}$. Finally, $(\kzD f)(Z,Z)\equiv0$ forces every $\beta_n=0$: at fixed
+$Y$ the series is a Fourier series in $X$ with coefficients $i\kappa e^{-\kappa nY}e^{i\pi\tau n^2/(2L)}\beta_n$.
+\end{proof}
+
+\begin{lemma}[exchange and spin]\label{kz:lem:A4}
+$\kzP$ commutes with the exchange $E:(z_1,z_2)\mapsto(z_2,z_1)$ and vanishes on $E$-even functions. Hence,
+on the antisymmetric two-electron space, $\kzP\otimes1_{\rm spin}=\kzP\otimes\Pi^{S=1}$.
+\end{lemma}
+
+\begin{proof}
+$\kzD(f\circ E)(Z,Z)=-(\kzD f)(Z,Z)$, so $\alpha_{E\psi}=-\alpha_\psi$; the form of Lemma~\ref{kz:lem:A2} is
+$E$-invariant, so $[\kzP,E]=0$, and $\alpha_\psi=0$ for $E$-even $\psi$, so $\kzP\psi=0$. The antisymmetric two-electron
+space is the direct sum of the tensor products of the $E$-odd functions with the symmetric spin states, which span
+the triplet $S=1$, and of the $E$-even functions with the antisymmetric spin state, the singlet $S=0$. Since
+$[\kzP,E]=0$, $\kzP\otimes1_{\rm spin}$ maps each summand into itself; on the second it vanishes, as does
+$\kzP\otimes\Pi^{S=1}$, and on the first $\Pi^{S=1}$ acts as the identity. Hence $\kzP\otimes1_{\rm spin}=\kzP\otimes\Pi^{S=1}$
+on the antisymmetric space.
+\end{proof}
+
+\begin{lemma}[formulation lemma on the torus]\label{kz:lem:A}
+Let $\Psi$ have $N_\uparrow=n$, $N_\downarrow=m$ and canonical component $F$. The following are equivalent.
+\begin{enumerate}
+\item[(1)] $H\Psi=0$.
+\item[(2)] \textup{(C1)} For all $a<b$, $F$ vanishes to order $\ge3$ along the divisor
+$\{x_a-x_b\in\Lambda\}$, and likewise for the $y$'s. \textup{(C2)} For all $a,k$,
+$[\kzD_{x_ay_k}F]_{x_a=y_k}=0$ identically, on the covering diagonal $x_a=y_k$ of $\C^N$.
+\item[(3)] $B_n^\mu\Psi=0$ for all $n\in\Z_{2L}$ and $\mu\in\{+1,0,-1\}$.
+\end{enumerate}
+Moreover $H=\tfrac{c_L'}{2}\sum_{n\in\Z_{2L}}\sum_{\sigma,\sigma'}(B_n^{\sigma\sigma'})^\dagger B_n^{\sigma\sigma'}$, with $c_L'=c_L/(L_1\sqrt\pi)^2$
+and orbitals normalized to $1$.
+\end{lemma}
+
+\begin{proof}
+(1)$\iff$($\kzP_{ij}\Psi=0$ for all $i<j$), because $H$ is a sum of positive operators. $\kzP_{ij}$
+acts on the dependence on $(z_i,z_j)$ of each spin component. Write
+$\Psi(\cdot;\sigma)=\sum_\alpha f_\alpha(z_i,z_j)g_\alpha(\text{rest})$ with linearly independent $g_\alpha$.
+By Lemma~\ref{kz:lem:A2}, $\kzP_{ij}\Psi=0$ iff every $\kzD f_\alpha$ vanishes on the diagonal, i.e.\ iff
+$[\kzD_{z_iz_j}\Psi(\cdot;\sigma)]_{z_i=z_j}\equiv0$. As $\sigma$ and $(i,j)$ range, $(z_i,z_j)$ runs over
+all pairs of arguments of $F$: every spin component is $\pm F$ with permuted arguments
+(Section~\ref{kz:sec:many}), and the component $\Psi(\cdot;\uparrow^n\downarrow^m)$, whose holomorphic part is $F$, already
+produces every pair. So (1) holds if and only if $[\kzD_{st}F]_{s=t}\equiv0$ for every pair $(s,t)$ of arguments of $F$.
+
+\emph{Same-spin pairs.} $F$ is antisymmetric in $(x_a,x_b)$. Near a point of the diagonal,
+$F=(x_a-x_b)G$ in the local ring with $G$ symmetric, and $[\kzD F]_{x_a=x_b}=2G|$. So the condition says
+$G=(x_a-x_b)G'$ with $G'$ antisymmetric, hence $G'=(x_a-x_b)G''$: order $\ge3$ along the covering
+diagonal. Conversely order $\ge3$ gives $[\kzD F]=0$. The components $\{x_a-x_b=\lambda\}$, $\lambda\in\Lambda$,
+are translates under $x_a\mapsto x_a+\lambda$. That map multiplies $F$ by the nonvanishing entire
+boundary-condition multiplier, so vanishing orders agree on all components. This is (C1).
+
+\emph{Up--down pairs.} The condition is (C2) verbatim.
+
+\emph{(2)$\iff$(3).} Expand $F$ in its first up and first down variables,
+$F=\sum_{a,b}\phi_a(x_1)\phi_b(y_1)F_{ab}(x';y')$. By Lemma~\ref{kz:lem:A3}, with the rest as
+spectators, $[\kzD_{x_1y_1}F]_{x_1=y_1}\equiv0$ iff
+$\sum_{A+B=n}(A-B)\kzq^{(A-B)^2}F_{[A][B]}\equiv0$ for every $n$. The Laplace expansion gives
+$F_{ab}=(-1)^{\mathrm{pos}_I(a)+\mathrm{pos}_{I'}(b)}\,s_{n,m}\sum c_{I,I'}\det[\phi_{I\setminus a}]\det[\phi_{I'\setminus b}]$. Moving
+$c_{b\downarrow}c_{a\uparrow}$ through $c^\dagger_{I\uparrow}c^\dagger_{I'\downarrow}$ produces the sign
+$(-1)^{\mathrm{pos}_I(a)+\mathrm{pos}_{I'}(b)+n}$. So $F_{ab}=\pm$ (canonical component of
+$c_{b\downarrow}c_{a\uparrow}\Psi$), with a sign that depends only on $(n,m)$. The condition is therefore that
+the canonical component of $B^{\uparrow\downarrow}_n\Psi$ vanishes, i.e.\ $B^{\uparrow\downarrow}_n\Psi=0$; the other up--down
+pairs follow by antisymmetry. Same-spin pairs work the same way with $B_n^{\uparrow\uparrow}$, $B_n^{\downarrow\downarrow}$, and
+Lemma~\ref{kz:lem:A4} identifies the up--down channel with the triplet $\mu=0$.
+
+\emph{The operator identity.} In the orthonormal basis $\phi_a/\|\phi_a\|$, Lemma~\ref{kz:lem:A3} says
+\[
+\kzP=c_L'\sum_{n\in\Z_{2L}}|b_n\rangle\langle b_n|,
+\]
+where $\langle b_n|\psi\rangle=\beta_n(\psi)$. The second quantization
+of the spin-independent two-body operator $\sum_{i<j}\kzP_{ij}$ is the stated sum.
+\end{proof}
+
+\begin{remark}[image coincidences]\label{kz:rem:images}
+The torus coincidence $x_a=y_k+\lambda$, $\lambda\in\Lambda\setminus0$, imposes nothing beyond (C2). Its
+condition is the image of (C2) under the magnetic translation $x_a\mapsto x_a+\lambda$, and by
+\eqref{kz:eq:bc-translation} that image is $c(\lambda)$ times (C2) itself. It is \emph{not} the naive
+condition $[\kzD_{x_ay_k}F]_{x_a=y_k+\lambda}=0$: the boundary-condition multiplier
+$e^{-i\pi L(2x_a/L_1+\tau)}$ depends on $x_a$, and its derivative mixes the value of $F$ into the
+derivative. In the variables of Lemma~\ref{kz:lem:B} below
+the multipliers are constants, and the condition at images becomes literally the zero-residue condition
+there.
+\end{remark}
+
+\subsection{Theta functions and the centre-of-mass factorization}\label{kz:sec:B}
+
+\subsubsection{Facts about theta functions}
+
+In this section and the next we use $u$-units (periods $1$ and $\tau$; $\Lambda_u:=\Z+\tau\Z$). From the
+series, for all $a,b$:
+\begin{equation}\label{kz:eq:theta-basic}
+\begin{gathered}
+\kzvth[a,b](u+1)=e^{2\pi ia}\kzvth[a,b](u),\qquad \kzvth[a,b](u+\tau)=e^{-i\pi\tau-2\pi i(u+b)}\kzvth[a,b](u),\\
+\kzvth[a,b](-u)=\kzvth[-a,-b](u),
+\end{gathered}
+\end{equation}
+and $\kzvth[a+1,b]=\kzvth[a,b]$, $\kzvth[a,b+1]=e^{2\pi ia}\kzvth[a,b]$. (For the second relation, shift $n\mapsto n-1$
+after completing the square; for the third, substitute $n\mapsto-n-2a$ when $2a\in\Z$, and $n\mapsto-n$ in general
+after rewriting $(n+a)\mapsto-(n+a)$.)
+
+\begin{lemma}\label{kz:lem:theta}
+\begin{enumerate}
+\item[(a)] For $\ell\ge1$ and $a,b\in\R$, the space $\kzTh_\ell[a,b]$ of entire $F$ with $F(U+1)=e^{2\pi ia}F(U)$
+and $F(U+\tau)=e^{-2\pi ib}e^{-i\pi\ell(2U+\tau)}F(U)$ has dimension $\ell$.
+\item[(b)] A nonzero $F\in\kzTh_\ell[a,b]$ has exactly $\ell$ zeros, counted with multiplicity, in every
+period parallelogram whose boundary avoids its zeros.
+\item[(c)] $\kzvth_1:=\kzvth[\frac12,\frac12](\cdot|\tau)$ is odd and satisfies $\kzvth_1(u+1)=-\kzvth_1(u)$,
+$\kzvth_1(u+\tau)=-e^{-i\pi\tau-2\pi iu}\kzvth_1(u)$. Its zero set is exactly $\Lambda_u$, all zeros are simple,
+and $\kzvth_1'(0)\neq0$.
+\item[(d)] $\wp(u):=-\frac{d^2}{du^2}\log\kzvth_1(u|\tau)$ is meromorphic, even and doubly periodic, with poles
+exactly at $\Lambda_u$ and $\wp(u)=u^{-2}+O(1)$ at $0$ (no $u^{-1}$ term).
+\item[(e)] For $\varepsilon\in\{\pm1\}^2\setminus\{(1,1)\}$ let $\chi_\varepsilon(p+q\tau):=\varepsilon_1^p\varepsilon_2^q$ on
+$\Lambda_u$. There is an even meromorphic $\wp_\varepsilon$ with $\wp_\varepsilon(u+\lambda)=\chi_\varepsilon(\lambda)\wp_\varepsilon(u)$
+($\lambda\in\Lambda_u$), poles exactly at $\Lambda_u$, and $\wp_\varepsilon(u)=u^{-2}+O(1)$ at $0$.
+\item[(f)] $J:=\prod_{i<j}\kzvth_1(u_i-u_j)$ on $\C^N$: $J^2$ is symmetric under all permutations and
+invariant under $u\mapsto u+c\one$, with $J^2(u+e_k)=J^2(u)$ and
+$J^2(u+\tau e_k)=e^{-2\pi i(N-1)\tau-4\pi i(Nu_k-U)}J^2(u)$. It vanishes to order exactly $2$ along each
+divisor $\{u_i-u_j\in\Lambda_u\}$ and nowhere else.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(a) $G(U):=F(U)e^{-2\pi iaU}$ is entire and $1$-periodic, so $G(U)=H(e^{2\pi iU})$ with $H$ holomorphic on
+$\C^\times$. Its Laurent series gives $F(U)=\sum_{n\in\Z}c_ne^{2\pi i(n+a)U}$, converging absolutely and
+locally uniformly. Comparing coefficients in the second relation (Laurent coefficients are unique) gives
+$c_{n+\ell}=c_n\exp\big(2\pi ib+i\pi\ell\tau+2\pi i(n+a)\tau\big)$. Hence
+$|c_{n+k\ell}|=|c_n|\exp(-\pi\tau_2\ell k^2-2\pi\tau_2k(n+a))$ for all $k\in\Z$, by the recursion and its
+inverse. Conversely, any $c_0,\dots,c_{\ell-1}$ extended this way have Gaussian decay, so the series
+converges to an element of $\kzTh_\ell[a,b]$. So $\dim=\ell$.
+(b) Argument principle on $P=U_0+[0,1]+[0,1]\tau$. By the relations, $F'/F(U+1)=F'/F(U)$ and
+$F'/F(U+\tau)=F'/F(U)-2\pi i\ell$. The two sides parallel to $\tau$ cancel; the two sides parallel to $1$
+contribute $\frac1{2\pi i}\int_{U_0}^{U_0+1}2\pi i\ell\,dU=\ell$.
+(c) The relations follow from \eqref{kz:eq:theta-basic}, and oddness from
+$\kzvth_1(-u)=\kzvth[-\frac12,-\frac12](u)=\kzvth[\frac12,-\frac12](u)=e^{-i\pi}\kzvth_1(u)$. So
+$\kzvth_1\in\kzTh_1[\frac12,\frac12]$, and $\kzvth_1\not\equiv0$ (its Fourier coefficients are nonzero). By (b) it has
+exactly one zero per cell, simple; since it is odd, $\kzvth_1(0)=0$. So the zeros are $\Lambda_u$, all simple.
+(d) Locally, $\log\kzvth_1(u+1)=\log\kzvth_1(u)+\text{const}$ and $\log\kzvth_1(u+\tau)=\log\kzvth_1(u)-2\pi iu+\text{const}$,
+so the second derivative is doubly periodic. Oddness gives evenness. Near $0$,
+$\kzvth_1(u)=\kzvth_1'(0)u(1+c_2u^2+\dots)$, so $\log\kzvth_1=\log u+\text{const}+c_2u^2+\dots$ and
+$\wp=u^{-2}-2c_2+O(u^2)$.
+(e) $\Lambda_\varepsilon:=\ker\chi_\varepsilon$ has index $2$ in $\Lambda_u$; pick a positively oriented basis $(\omega_1,\omega_2)$ of
+$\Lambda_\varepsilon$ and $\lambda_\varepsilon\in\Lambda_u\setminus\Lambda_\varepsilon$. By (d) for the lattice $\Lambda_\varepsilon$,
+$\wp^{(\varepsilon)}(u):=-\frac{d^2}{du^2}\log\kzvth_1(u/\omega_1\,|\,\omega_2/\omega_1)$ is even and $\Lambda_\varepsilon$-periodic, with
+poles exactly at $\Lambda_\varepsilon$ and $\wp^{(\varepsilon)}(u)=u^{-2}+O(1)$ at $0$. Put
+$\wp_\varepsilon(u):=\wp^{(\varepsilon)}(u)-\wp^{(\varepsilon)}(u-\lambda_\varepsilon)$. Since $2\lambda_\varepsilon\in\Lambda_\varepsilon$,
+$\wp_\varepsilon(u+\lambda_\varepsilon)=\wp^{(\varepsilon)}(u-\lambda_\varepsilon)-\wp^{(\varepsilon)}(u)=-\wp_\varepsilon(u)$, and $\wp_\varepsilon$ is invariant under
+$\Lambda_\varepsilon$. Evenness: $\wp_\varepsilon(-u)=\wp^{(\varepsilon)}(u)-\wp^{(\varepsilon)}(u+\lambda_\varepsilon)=\wp_\varepsilon(u)$. The poles are
+$\Lambda_\varepsilon\cup(\lambda_\varepsilon+\Lambda_\varepsilon)=\Lambda_u$.
+(f) Symmetry: $\kzvth_1$ is odd, so the squares are invariant. Multipliers: by (c), each factor with $k$
+in either slot contributes $e^{-2\pi i\tau-4\pi i(u_k-u_j)}$ under $u_k\mapsto u_k+\tau$, and there are $N-1$
+such factors. Vanishing: by (c).
+\end{proof}
+
+\begin{remark}
+By the uniqueness in Proposition~\ref{kz:prop:base}, $\wp_\varepsilon$ is a multiple of Read and Rezayi's twisted lattice
+sums $\wp_{a,b}$ \cite[eq.~(80)]{RR96}.
+\end{remark}
+
+\subsubsection{The function spaces}
+
+\begin{lemma}[evenness: (C2) is a zero-residue condition]\label{kz:lem:even}
+Near a generic point of $\{x_a=y_k\}$ let $\mathsf a=S\,\kzvth_1(x_a-y_k)^2\,g$. Here $S$ is holomorphic,
+invariant under $x_a\leftrightarrow y_k$, and not identically zero on the diagonal; $g$ is meromorphic with at most
+a double pole along the diagonal. Write
+$g(R+\tfrac v2,R-\tfrac v2,\cdot)=\mathcal A(R,\cdot)v^{-2}+\mathcal B(R,\cdot)v^{-1}+O(1)$ (fixed pair
+centre $R$). Then $[\kzD_{x_ay_k}\mathsf a]_{x_a=y_k}\equiv0$ iff $\mathcal B\equiv0$.
+\end{lemma}
+
+\begin{proof}
+At fixed $R$ and fixed other variables, $S$ and $\kzvth_1(v)^2=\kzvth_1'(0)^2v^2(1+O(v^2))$ are even in $v$, so
+$S\kzvth_1(v)^2=e_2v^2+e_4v^4+\cdots$ with $e_2=S|_{v=0}\kzvth_1'(0)^2$. Since $\kzD_{x_ay_k}=2\partial_v$ at fixed $R$,
+$[\kzD\mathsf a]_{v=0}=2[v^1](S\kzvth_1^2g)=2e_2\mathcal B$, and $e_2\not\equiv0$.
+\end{proof}
+
+\begin{definition}\label{kz:def:G}
+For $n,m\ge0$, $N=n+m$, and $\varepsilon=(\varepsilon_1,\varepsilon_2)\in U(1)^2$, let $\kzG(n,m;\varepsilon)$ be the space of meromorphic
+$g(x_1,\dots,x_n;y_1,\dots,y_m)$ on $\C^N$ such that
+\begin{enumerate}
+\item[(i)] $g(u+c\one)=g(u)$ for all $c\in\C$;
+\item[(ii)] $g(u+e_k)=\varepsilon_1g(u)$ and $g(u+\tau e_k)=\varepsilon_2g(u)$ for every $k$;
+\item[(iii)] $g$ is antisymmetric in the $x$'s and in the $y$'s;
+\item[(iv)] the polar set of $g$ lies in $\bigcup_{a,k}\{x_a-y_k\in\Lambda_u\}$, with poles of order $\le2$;
+\item[(v)] at fixed pair centre, the $v^{-1}$ coefficient of $g$ at $x_a=y_k$ vanishes: in the notation of
+Lemma~\ref{kz:lem:even}, $\mathcal B\equiv0$.
+\end{enumerate}
+$\kzG(0,0;\varepsilon):=\C$. By (ii), (v) at the components $x_a-y_k\in\Lambda_u\setminus0$ follows from (v) at $x_a=y_k$
+(translate $x_a$; the multiplier is a constant). Also, $g$ is regular on same-spin coincidences and vanishes
+there, by (iii) and (iv).
+\end{definition}
+
+\subsubsection{The factorization}
+
+\begin{lemma}[centre-of-mass factorization]\label{kz:lem:B}
+Fix $n,m$ with $N=n+m\ge1$, $L=2N$, and let $V_{n,m}$ be the space of canonical components satisfying
+\textup{(C1)}, \textup{(C2)}, i.e.\ $\ker H|_{n,m}$ by Lemma~\ref{kz:lem:A}.
+\begin{enumerate}
+\item[(a)] $\kzG(n,m;\varepsilon)=0$ unless $\varepsilon_1^N=\varepsilon_2^N=1$.
+\item[(b)] For $\varepsilon\in\mu_N^2$ let $\kzTh_2[\varepsilon]$ be the space of entire $F$ with
+$F(U+1)=\varepsilon_1^{-1}F(U)$ and $F(U+\tau)=\varepsilon_2^{-1}e^{-4\pi iU-2\pi i\tau}F(U)$. It is two-dimensional, and
+\[
+\bigoplus_{\varepsilon\in\mu_N^2}\kzTh_2[\varepsilon]\otimes\kzG(n,m;\varepsilon)\ \longrightarrow\ V_{n,m},\qquad
+F\otimes g\mapsto F(U)\,J^2(u)\,g(u),
+\]
+is an isomorphism. In particular $\dim\ker H|_{n,m}=2\sum_{\varepsilon\in\mu_N^2}\dim\kzG(n,m;\varepsilon)$.
+\item[(c)] On the image of $\kzTh_2[\varepsilon]\otimes\kzG(n,m;\varepsilon)$, $(T_K^2,T_1^2)=(\varepsilon_1^{-1},\varepsilon_2^{-1})$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(a) By (i), $g(u+\one)=g(u)$. By (ii) applied to each of the $N$ coordinates, $g(u+\one)=\varepsilon_1^Ng(u)$; so
+$\varepsilon_1^N=1$ if $g\neq0$. The same with $\tau$.
+
+\emph{$\dim\kzTh_2[\varepsilon]=2$.} $F(U+\tau)=\varepsilon_2^{-1}e^{-i\pi\cdot2(2U+\tau)}F(U)$, so
+$\kzTh_2[\varepsilon]=\kzTh_2[a,b]$ with $e^{2\pi ia}=\varepsilon_1^{-1}$ and $e^{-2\pi ib}=\varepsilon_2^{-1}$. Apply
+Lemma~\ref{kz:lem:theta}(a).
+
+(b), ``the map is well defined''. Let $F\in\kzTh_2[\varepsilon]$, $g\in\kzG(n,m;\varepsilon)$ and $f:=FJ^2g$. By (iv)
+and Lemma~\ref{kz:lem:theta}(f), $J^2g$ has no poles along any divisor, so it is holomorphic. Boundary
+conditions: under $u_k\mapsto u_k+1$ the factors give $\varepsilon_1^{-1}\cdot1\cdot\varepsilon_1=1$; under
+$u_k\mapsto u_k+\tau$ they give
+$\varepsilon_2^{-1}e^{-4\pi iU-2\pi i\tau}\cdot e^{-2\pi i(N-1)\tau-4\pi i(Nu_k-U)}\cdot\varepsilon_2=e^{-i\pi L(2u_k+\tau)}$,
+as required. (C1): $J^2$ vanishes to order $2$ on same-spin divisors and $g$ vanishes there, so $f$
+vanishes to order $\ge3$. (C2): apply Lemma~\ref{kz:lem:even} with
+$S=F(U)\prod_{z}\kzvth_1(x_a-z)^2\kzvth_1(y_k-z)^2\cdot(\text{factors without }x_a,y_k)$, which is invariant
+under $x_a\leftrightarrow y_k$.
+
+``Injective''. Suppose $\sum_\varepsilon\sum_\ell F_{\varepsilon,\ell}(U)J^2g_{\varepsilon,\ell}=0$, where for each $\varepsilon$ the
+$F_{\varepsilon,\ell}$ ($\ell=1,2$) are a basis of $\kzTh_2[\varepsilon]$. Divide by $J^2$ and replace $u$ by $u+c\one$. The
+$g$'s are translation-invariant, so $\sum_{\varepsilon,\ell}F_{\varepsilon,\ell}(U+Nc)g_{\varepsilon,\ell}(u)=0$ for all $c$. The $2N^2$
+functions $c\mapsto F_{\varepsilon,\ell}(U+Nc)$ are linearly independent: they are independent within each
+$\kzTh_2[\varepsilon]$, and the spaces for different $\varepsilon$ have different multipliers under $c\mapsto c+1/N$
+and $c\mapsto c+\tau/N$, i.e.\ they lie in different joint eigenspaces of two commuting operators. Hence
+every $g_{\varepsilon,\ell}(u)=0$.
+
+``Surjective''. $T_K^2$ and $T_1^2$ preserve $V_{n,m}$: (C1), (C2) and the boundary conditions are
+invariant under simultaneous translations, and the gauge factor $e^{4\pi iU+2\pi i\tau}$ in
+\eqref{kz:eq:TK-T1} depends on $U$ only, which $\kzD_{st}$ annihilates. They commute and have finite order, so
+$V_{n,m}=\bigoplus V_\lambda$ over joint eigenvalues $\lambda=(\lambda_1,\lambda_2)\in\mu_N^2$. Let $f\in V_\lambda$ and fix $u$.
+By \eqref{kz:eq:TK-T1}, $\varphi(c):=f(u+c\one)$ satisfies $\varphi(c+1/N)=\lambda_1\varphi(c)$ and
+$\varphi(c+\tau/N)=\lambda_2e^{-4\pi i(U+Nc)-2\pi i\tau}\varphi(c)$. So $C\mapsto\varphi((C-U)/N)$ lies in
+$\kzTh_2[\varepsilon]$ with $\varepsilon=(\lambda_1^{-1},\lambda_2^{-1})$. With a basis $F_1,F_2$ of $\kzTh_2[\varepsilon]$:
+$f(u+c\one)=\sum_\ell a_\ell(u)F_\ell(U+Nc)$. The coefficients are unique and are obtained by solving a
+$2\times2$ system from two values of $c$, so they are holomorphic in $u$. Comparing at $u$ and $u+c'\one$
+shows $a_\ell(u+c'\one)=a_\ell(u)$. At $c=0$: $f=\sum_\ell F_\ell(U)a_\ell(u)$.
+
+\emph{The conditions pass to each $a_\ell$.} $\kzD_{x_ax_b}$ and $\kzD_{x_ay_k}$ annihilate functions of $U$.
+Vanishing to order $\ge3$ along $\{x_a=x_b\}$ means $\kzD_{x_ax_b}^jf=0$ on the divisor for $j=0,1,2$, i.e.\
+$\sum_\ell F_\ell(U)(\kzD^j_{x_ax_b}a_\ell)(u)=0$ there. The divisor and the functions $\kzD^ja_\ell$ are
+translation-invariant, so $\sum_\ell F_\ell(U+Nc)(\kzD^ja_\ell)(u)=0$ for all $c$. By independence of the $F_\ell$,
+each $\kzD^ja_\ell=0$ on the divisor. The same argument gives (C2) and the vanishing at image components.
+
+\emph{Multipliers.} From $f(u+e_k)=f(u)$ and $F_\ell(U+1)=\varepsilon_1^{-1}F_\ell(U)$, the translation trick gives
+$a_\ell(u+e_k)=\varepsilon_1a_\ell(u)$. From $f(u+\tau e_k)=e^{-i\pi L(2u_k+\tau)}f(u)$,
+$a_\ell(u+\tau e_k)=\varepsilon_2e^{-4\pi i(Nu_k-U)-2\pi i(N-1)\tau}a_\ell(u)$. By Lemma~\ref{kz:lem:theta}(f),
+$g_\ell:=a_\ell/J^2$ then satisfies (ii) with constant multipliers $\varepsilon$, and (i). (iii) is inherited
+from $f$.
+
+\emph{(iv), (v).} $g_\ell$ is meromorphic with poles only on coincidence divisors, of order $\le2$
+($a_\ell$ is holomorphic, and $J^2$ vanishes to order exactly $2$). On same-spin divisors $a_\ell$ vanishes to
+order $\ge3$, so $g_\ell$ is regular there. (v) follows from (C2) for $a_\ell$ and Lemma~\ref{kz:lem:even}.
+So $g_\ell\in\kzG(n,m;\varepsilon)$ and $f$ is in the image.
+
+(c) $T_K^2(F(U)a)=F(U+1)a=\varepsilon_1^{-1}F(U)a$, and
+$T_1^2(F(U)a)=e^{4\pi iU+2\pi i\tau}F(U+\tau)a=\varepsilon_2^{-1}F(U)a$.
+\end{proof}
+
+\subsection{The merging lemma}\label{kz:sec:C}
+
+For $n,m\ge1$ write $\mathrm{rest}:=(x_2,\dots,x_n;y_2,\dots,y_m)$, $Z':=\sum\mathrm{rest}$, $J'$ for the
+product of $\kzvth_1$ over pairs of $\mathrm{rest}$, and $M:=\{x_1=y_1\}\cong\C^{N-1}$ with coordinate $w$ for the
+common value.
+
+\begin{lemma}[torus merging lemma]\label{kz:lem:C}
+Let $n,m\ge1$ and $g\in\kzG(n,m;\varepsilon)$. Then
+\[
+\mathcal A(w;\mathrm{rest}):=\kzvth_1'(0)^{-2}\big[\kzvth_1(x_1-y_1)^2g\big]_{x_1=y_1=w}
+=\lim_{v\to0}v^2g\big(w+\tfrac v2,x';w-\tfrac v2,y'\big)
+\]
+is a well-defined meromorphic function on $M$, and:
+\begin{enumerate}
+\item[(a)] for $\mathrm{rest}$ outside the divisors $\{x_a-y_k\in\Lambda_u\}$ ($a,k\ge2$), $w\mapsto\mathcal A(w;\mathrm{rest})$ is entire;
+\item[(b)] $\mathcal A(w+1;\cdot)=\varepsilon_1^2\mathcal A(w;\cdot)$ and $\mathcal A(w+\tau;\cdot)=\varepsilon_2^2\mathcal A(w;\cdot)$;
+\item[(c)] $\mathcal A$ does not depend on $w$, and $\mathcal A\equiv0$ unless $\varepsilon_1^2=\varepsilon_2^2=1$;
+\item[(d)] $\mu(g):=\mathcal A\in\kzG(n-1,m-1;\varepsilon)$;
+\item[(e)] \textup{(budget)} for $F\in\kzTh_2[\varepsilon]$ and $f:=FJ^2g$,
+\[
+f|_M=\kzvth_1'(0)^2\,F(2w+Z')\,\prod_{z\in\mathrm{rest}}\kzvth_1(w-z)^4\;J'^2\;\mu(g).
+\]
+As a function of $w$, $f|_M$ satisfies the level-$4N$ relations, so it has $4N$ zeros per cell if it is
+nonzero. Of these, $4(N-2)$ lie at $w\in\mathrm{rest}+\Lambda_u$ (order $4$ each), and the remaining
+$8=4\cdot2$ are the zeros of $F(2w+Z')$. The relative part has no $w$-dependence at all: the budget is $0$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+\emph{Step 0 (set-up).} $\mathsf a:=J^2g$ is holomorphic and satisfies (C1), (C2) (the argument in the proof of
+Lemma~\ref{kz:lem:B}(b), ``well defined'', which does not use $F$). $G:=\kzvth_1(x_1-y_1)^2g$ is meromorphic, and by
+(iv) its polar set lies in the up--down divisors other than $\{x_1-y_1\in\Lambda_u\}$. So $M$ is not in its polar
+set, and $G|_M$ is meromorphic. Since $\kzvth_1(v)^2=\kzvth_1'(0)^2v^2(1+O(v^2))$, $\mathcal A$ is the $v^{-2}$
+coefficient of $g$ at fixed centre $w$. Splitting $J^2$,
+\begin{equation}\label{kz:eq:merge}
+\mathsf a|_M=\kzvth_1'(0)^2\,E\,J'^2\,\mathcal A,\qquad E(w;\mathrm{rest}):=\prod_{z\in\mathrm{rest}}\kzvth_1(w-z)^4
+\end{equation}
+(squares of $\kzvth_1$ do not see the sign of the argument).
+
+\emph{Step 1 (order $4$ at $x_a=w$).} Fix $a\ge2$. By (C1),
+$\mathsf a=\kzvth_1(x_1-x_a)^3Q$ with $Q$ holomorphic on $\C^N$: $\kzvth_1(x_1-x_a)$ is a local defining function of the
+smooth divisor $\{x_1-x_a\in\Lambda_u\}$ (Lemma~\ref{kz:lem:theta}(c)), and $\mathsf a$ vanishes to order $\ge3$ along
+it. Apply (C2) to the pair $(x_a,y_1)$ on $x_a=y_1=s$:
+\begin{align*}
+0&=\big[\kzD_{x_ay_1}\big(\kzvth_1(x_1-x_a)^3Q\big)\big]_{x_a=y_1=s}\\
+&=-3\kzvth_1(x_1-s)^2\kzvth_1'(x_1-s)\,Q|_{x_a=y_1=s}+\kzvth_1(x_1-s)^3\big[\kzD_{x_ay_1}Q\big]_{x_a=y_1=s}.
+\end{align*}
+Divide by $\kzvth_1(x_1-s)^2$, which is nonzero for $x_1-s\notin\Lambda_u$:
+$3\kzvth_1'(x_1-s)Q|_{x_a=y_1=s}=\kzvth_1(x_1-s)[\kzD Q]_{x_a=y_1=s}$. Let $x_1\to s$: since $\kzvth_1'(0)\ne0=\kzvth_1(0)$,
+$Q=0$ on $\{x_1=x_a=y_1\}$. So $Q_M:=Q|_M$ vanishes on $\{x_a=w\}\subset M$, and near generic points of it
+$Q_M=\kzvth_1(x_a-w)\widetilde Q_M$ with $\widetilde Q_M$ holomorphic. Then $\mathsf a|_M=\kzvth_1(w-x_a)^3Q_M=-\kzvth_1(w-x_a)^4\widetilde Q_M$,
+which has order $\ge4$.
+
+\emph{Step 2 (order $4$ at $y_k=w$).} The same with $x\leftrightarrow y$: $\mathsf a=\kzvth_1(y_1-y_k)^3Q'$, and (C2) for
+$(x_1,y_k)$ on $x_1=y_k=s$ reads $0=3\kzvth_1(y_1-s)^2\kzvth_1'(y_1-s)Q'+\kzvth_1(y_1-s)^3[\kzD Q']$, so $Q'=0$ on
+$\{x_1=y_1=y_k\}$.
+
+\emph{Step 3 (proof of (b)).} Shifting $w$ by $1$ shifts $x_1$ and $y_1$ by $1$; $g$ picks up $\varepsilon_1^2$ by (ii),
+and $\kzvth_1(x_1-y_1)^2$ is unchanged. The same holds for $\tau$.
+
+\emph{Step 4 (proof of (a)).} Near a generic point of $\{w=x_a\}$ the factors $\kzvth_1'(0)^2$,
+$E/\kzvth_1(w-x_a)^4$ and $J'^2$ in \eqref{kz:eq:merge} are holomorphic and nonzero, and by Step~1 $\mathsf a|_M$ is
+$\kzvth_1(w-x_a)^4$ times a holomorphic function. So $\mathcal A$ is holomorphic there; likewise at $\{w=y_k\}$
+by Step~2. By (b), $\mathcal A$ is holomorphic near generic points of the translates
+$\{w-x_a\in\Lambda_u\}$ and $\{w-y_k\in\Lambda_u\}$ as well. The polar set of $\mathcal A$ is a union of components of
+$M\cap(\text{up--down divisors})$: the families $\{w-y_k\in\Lambda_u\}$, $\{x_a-w\in\Lambda_u\}$ and
+$\{x_a-y_k\in\Lambda_u\}$ with $a,k\ge2$. We have just excluded the first two. Hence (a).
+
+\emph{Step 5 (proof of (c); Liouville).} For $\mathrm{rest}$ as in (a), $w\mapsto\mathcal A(w;\mathrm{rest})$ is entire
+and, by (b), $|\mathcal A(w+\lambda)|=|\mathcal A(w)|$ for $\lambda\in\Lambda_u$. So it is bounded and therefore constant.
+If it is nonzero, $\mathcal A=\varepsilon_1^2\mathcal A=\varepsilon_2^2\mathcal A$ forces $\varepsilon_1^2=\varepsilon_2^2=1$. These $\mathrm{rest}$ form a dense
+open set, so by the identity theorem $\mathcal A(w;\mathrm{rest})-\mathcal A(w';\mathrm{rest})\equiv0$ for all $w,w'$, and
+$\mathcal A\equiv0$ when $\varepsilon^2\neq1$.
+
+\emph{Step 6 (proof of (d)).} Write $\mathcal A(\mathrm{rest})$.
+(i) $\mathcal A(w+c;\mathrm{rest}+c)=\mathcal A(w;\mathrm{rest})$ by (i) for $g$; with $w$-independence,
+$\mathcal A(\mathrm{rest}+c)=\mathcal A(\mathrm{rest})$.
+(ii) Shifting a variable of $\mathrm{rest}$ by $1$ or $\tau$ multiplies $g$, hence $\mathcal A$, by $\varepsilon_1$ or $\varepsilon_2$.
+(iii) Inherited, since the merge involves only $x_1,y_1$.
+(iv) Given a point of $\mathrm{rest}$-space, choose $w\notin\mathrm{rest}+\Lambda_u$; then $E\ne0$ there. By
+\eqref{kz:eq:merge}, $J'^2\mathcal A=\mathsf a|_M/(\kzvth_1'(0)^2E)$ is holomorphic near that point. So $J'^2\mathcal A$ is
+holomorphic, the poles of $\mathcal A$ lie on coincidence divisors of $\mathrm{rest}$, and they have order $\le2$. On a
+same-spin divisor $\{x_a-x_b\in\Lambda_u\}$ ($a,b\ge2$) the function $\mathsf a$ vanishes to order $\ge3$ in $\C^N$. The
+divisor is transverse to $M$, so $\mathsf a|_M$, and hence $J'^2\mathcal A$, vanishes to order $\ge3$ along it, and
+$\mathcal A$ is regular there. So the polar set of $\mathcal A$ lies in the up--down divisors of $\mathrm{rest}$.
+(v) For $a,k\ge2$, (C2) for $\mathsf a$ at $(x_a,y_k)$ holds identically in the other variables, in particular on
+$M$ (the substitution $x_1=y_1=w$ commutes with $\kzD_{x_ay_k}$ and with $x_a=y_k$). In \eqref{kz:eq:merge},
+$\kzvth_1'(0)^2EJ'^2/\kzvth_1(x_a-y_k)^2$ is invariant under $x_a\leftrightarrow y_k$: $E$ contains
+$\kzvth_1(w-x_a)^4\kzvth_1(w-y_k)^4$ and factors without $x_a,y_k$, and $J'^2/\kzvth_1(x_a-y_k)^2$ is a symmetric product
+over the other pairs. Lemma~\ref{kz:lem:even} then gives (v) for $\mathcal A$.
+
+\emph{Step 7 (proof of (e)).} The formula is \eqref{kz:eq:merge} times $F(U)$ at $U=2w+Z'$. Shifting $w$ by $\tau$
+moves $x_1$ and $y_1$, giving the factor $e^{-i\pi L(2w+\tau)}$ twice, i.e.\ the level-$2L=4N$ relation in $w$.
+So $f|_M$ has $4N$ zeros per cell (Lemma~\ref{kz:lem:theta}(b)). $E$ accounts for $4(N-2)$ of them. $w\mapsto
+F(2w+Z')$ has $2\cdot2^2=8$, since $w\mapsto2w$ covers four $U$-cells and $F$ has two zeros in each.
+$\mu(g)$ accounts for none.
+\end{proof}
+
+\subsection{A vanishing merge forces zero}\label{kz:sec:D}
+
+\begin{lemma}\label{kz:lem:D}
+\begin{enumerate}
+\item[(a)] \textup{(polarized sectors)} For $k\ge2$, $\kzG(k,0;\varepsilon)=\kzG(0,k;\varepsilon)=0$. Also
+$\kzG(1,0;\varepsilon)=\kzG(0,1;\varepsilon)$, which is $\C$ (the constants) if $\varepsilon=(1,1)$ and $0$ otherwise.
+\item[(b)] \textup{(vanishing merge)} Let $n,m\ge1$, $g\in\kzG(n,m;\varepsilon)$ and $\mu(g)=0$. Then $g$ is constant.
+Hence $g=0$ if $\max(n,m)\ge2$ or $\varepsilon\neq(1,1)$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(b) By antisymmetry (iii), the $v^{-2}$ coefficient $\mathcal A_{ak}$ of $g$ at $x_a=y_k$ is $\pm\mu(g)$ with
+variables renamed (apply the transpositions $x_1\leftrightarrow x_a$, $y_1\leftrightarrow y_k$), so it vanishes. Let
+$G_{ak}:=\kzvth_1(x_a-y_k)^2g$. It is holomorphic near generic points of $\{x_a=y_k\}$, and in the coordinates
+$(R,v,\text{others})$ its Taylor coefficients of $v^0$ and $v^1$ are $\kzvth_1'(0)^2\mathcal A_{ak}=0$ and
+$\kzvth_1'(0)^2\mathcal B_{ak}=0$, by (v). So $G_{ak}=v^2\cdot(\text{holomorphic})$, and $g=G_{ak}/\kzvth_1(v)^2$ is
+holomorphic near generic points of $\{x_a=y_k\}$; by (ii) also near those of $\{x_a-y_k\in\Lambda_u\}$. By (iv)
+these are the only candidate polar components, so $g$ is entire on $\C^N$. $|g|$ is invariant under
+$u\mapsto u+e_k$ and $u\mapsto u+\tau e_k$ ($|\varepsilon_i|=1$), hence bounded, hence constant by Liouville in each
+variable. A nonzero constant violates antisymmetry in two variables of one species, and violates (ii) unless
+$\varepsilon=(1,1)$.
+(a) With $m=0$ there are no up--down divisors, so by (iv) $g$ is entire, and it is constant as above. For
+$k\ge2$ antisymmetry kills it. For $k=1$ every constant satisfies (i)--(v) with $\varepsilon=(1,1)$, and only $0$
+does otherwise.
+\end{proof}
+
+\subsection{The theorem}\label{kz:sec:thm}
+
+\begin{proposition}[the inductive inequality]\label{kz:prop:induct}
+Let $n,m\ge1$ with $\max(n,m)\ge2$. If $\varepsilon_1^2=\varepsilon_2^2=1$ then
+$\dim\kzG(n,m;\varepsilon)\le\dim\kzG(n-1,m-1;\varepsilon)$; otherwise $\kzG(n,m;\varepsilon)=0$.
+\end{proposition}
+
+\begin{proof}
+$\mu:\kzG(n,m;\varepsilon)\to\kzG(n-1,m-1;\varepsilon)$ is linear (Lemma~\ref{kz:lem:C}(d)), identically zero if
+$\varepsilon^2\neq1$ (Lemma~\ref{kz:lem:C}(c)), and injective (Lemma~\ref{kz:lem:D}(b)).
+\end{proof}
+
+\begin{proposition}[base cases]\label{kz:prop:base}
+\begin{enumerate}
+\item[(a)] $\kzG(0,0;\varepsilon)=\C$; $\kzG(k,0;\varepsilon)=\kzG(0,k;\varepsilon)=0$ for $k\ge2$;
+$\kzG(1,0;\varepsilon)=\kzG(0,1;\varepsilon)=\C\,\delta_{\varepsilon,(1,1)}$.
+\item[(b)] $\kzG(1,1;(1,1))=\mathrm{span}\{\wp(x_1-y_1),\,1\}$, of dimension $2$.
+\item[(c)] For $\varepsilon\in\{\pm1\}^2\setminus\{(1,1)\}$: $\kzG(1,1;\varepsilon)=\C\,\wp_\varepsilon(x_1-y_1)$, of dimension $1$.
+\item[(d)] $\kzG(1,1;\varepsilon)=0$ if $\varepsilon^2\neq1$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(a) is Lemma~\ref{kz:lem:D}(a). For (b)--(d), consider $\mu:\kzG(1,1;\varepsilon)\to\kzG(0,0;\varepsilon)=\C$. Its kernel is the
+constants in $\kzG(1,1;\varepsilon)$ (Lemma~\ref{kz:lem:D}(b)): $\C$ if $\varepsilon=(1,1)$, $0$ otherwise. And $\mu\equiv0$ if
+$\varepsilon^2\ne1$ (Lemma~\ref{kz:lem:C}(c)). So the dimension is at most $2$, at most $1$, and $0$ in cases (b), (c),
+(d). \emph{Membership.} $\wp(x_1-y_1)$ satisfies (i); (ii) with $\varepsilon=(1,1)$ by Lemma~\ref{kz:lem:theta}(d);
+(iii) vacuously; (iv) with double poles on $x_1-y_1\in\Lambda_u$; and (v), because $\wp$ is even, so at fixed
+centre $\wp(v)=v^{-2}+O(1)$ with no $v^{-1}$ term. $\mu(\wp)=1$ and $\mu(1)=0$, so $\wp$ and $1$ are independent.
+For $\wp_\varepsilon$: $\wp_\varepsilon(x_1+1-y_1)=\varepsilon_1\wp_\varepsilon$ and $\wp_\varepsilon(x_1-y_1-1)=\varepsilon_1^{-1}\wp_\varepsilon=\varepsilon_1\wp_\varepsilon$ since
+$\varepsilon_1=\pm1$, and likewise for $\tau$; (iv) and (v) follow from Lemma~\ref{kz:lem:theta}(e) (evenness about every
+pole); and $\mu(\wp_\varepsilon)=1\ne0$.
+\end{proof}
+
+\begin{corollary}[upper bounds]\label{kz:cor:bounds}
+\begin{enumerate}
+\item[(a)] If $|n-m|\ge2$ then $\kzG(n,m;\varepsilon)=0$.
+\item[(b)] $\dim\kzG(m+1,m;\varepsilon)\le\delta_{\varepsilon,(1,1)}$.
+\item[(c)] $\dim\kzG(p,p;\varepsilon)\le\dim\kzG(1,1;\varepsilon)$, which is $2$, $1$ or $0$ as in
+Proposition~\ref{kz:prop:base}.
+\end{enumerate}
+\end{corollary}
+
+\begin{proof}
+Iterate Proposition~\ref{kz:prop:induct} along $(n,m)\to(n-1,m-1)\to\cdots$, ending at $(|n-m|,0)$ or $(0,|n-m|)$,
+at $(1,0)$, or at $(1,1)$; every intermediate step has $\max\ge2$. Then apply Proposition~\ref{kz:prop:base}.
+\end{proof}
+
+\begin{proposition}[the explicit states]\label{kz:prop:explicit}
+Write $\wp_{(1,1)}:=\wp$.
+\begin{enumerate}
+\item[(a)] $g_{2m+1}:=\det\big[\wp(x_a-y_k)\ \big|\ 1\big]$ is the $(m+1)\times(m+1)$ determinant with entries
+$\wp(x_a-y_k)$, $k\le m$, and a last column of ones. It lies in $\kzG(m+1,m;(1,1))$, with
+$\mu(g_{2m+1})=g_{2m-1}(x_2,\dots;y_2,\dots)$ and $\mu^m(g_{2m+1})=g_1=1$.
+\item[(b)] For $\varepsilon\in\{\pm1\}^2$: $d^{(p)}_\varepsilon:=\det[\wp_\varepsilon(x_i-y_j)]_{p\times p}$ lies in $\kzG(p,p;\varepsilon)$, with
+$\mu(d^{(p)}_\varepsilon)=d^{(p-1)}_\varepsilon$ and $\mu^{p-1}(d^{(p)}_\varepsilon)=\wp_\varepsilon$.
+\item[(c)] $f_5^{(p)}:=\sum_{i,j}(-1)^{i+j}\det M^{(ij)}$, where $M=[\wp(x_i-y_j)]$ and $M^{(ij)}$ is $M$ with
+row $i$ and column $j$ deleted ($f_5^{(1)}:=1$), lies in $\kzG(p,p;(1,1))$, with $\mu(f_5^{(p)})=f_5^{(p-1)}$ and
+$\mu^{p-1}(f_5^{(p)})=1$. In particular $d^{(p)}_{(1,1)}$ and $f_5^{(p)}$ are linearly independent.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+\emph{Membership.} (i): entries depend on differences. (ii): each entry $\wp_\varepsilon(x_i-y_j)$ has multiplier
+$\varepsilon_1$ under $x_i\mapsto x_i+1$ and $\varepsilon_1^{-1}=\varepsilon_1$ under $y_j\mapsto y_j+1$. Every term of the determinant
+contains each $x_i$ and each $y_j$ in at most one entry; in (a) the terms with a $1$ in row $a$ are free of
+$x_a$, which is consistent because $\varepsilon=(1,1)$ there. (iii): rows and columns. (iv): poles come only from
+the entries. (v): the coefficient of the entry $\wp_\varepsilon(x_i-y_j)$ in the determinant (its cofactor) depends on
+neither $x_i$ nor $y_j$, and the remaining terms are regular at generic points of $x_i=y_j$. So at fixed centre
+the expansion is $(\text{cofactor})\cdot(v^{-2}+O(1))+O(1)$, with no $v^{-1}$ term. For $f_5^{(p)}$ the
+coefficient of $\wp(x_i-y_j)$ is $\sum_{k\ne i,\,l\ne j}(-1)^{k+l}$ times the cofactor of that entry in
+$M^{(kl)}$, again free of $x_i,y_j$.
+
+\emph{The merge.} $\mu$ takes the coefficient of the $(1,1)$ entry. In (a) and (b) this is the cofactor, the
+same determinant for $\mathrm{rest}$, with sign $+$. In (c), only minors with $i,j\ge2$ contain the $(1,1)$
+entry. In $M^{(ij)}$ its coefficient is $\det M^{(1i,1j)}$ (rows $1,i$ and columns $1,j$ deleted), with sign $+$.
+With $M'$ the matrix for $\mathrm{rest}$ and $i'=i-1$, $j'=j-1$, this gives
+$\mu(f_5^{(p)})=\sum_{i',j'}(-1)^{i'+j'}\det M'^{(i'j')}=f_5^{(p-1)}$. Iterating gives the stated values of
+$\mu^{p-1}$, $\mu^m$. Independence: apply $\mu^{p-1}$ to a vanishing combination; $\wp$ and $1$ are
+independent.
+\end{proof}
+
+\begin{theorem}[the zero modes on the torus at $N_\phi=2N$]\label{kz:thm:T2}
+For every $\tau$ with $\operatorname{Im}\tau>0$ and every $N\ge1$, the hollow-core Hamiltonian $H$ of Section~\ref{kz:sec:ham} at
+$N_\phi=2N$ satisfies:
+\begin{enumerate}
+\item[(i)] $\ker H\cap\{|S_z|\ge1\}=0$.
+\item[(ii)] For odd $N$, $\dim\ker H|_{S_z=+1/2}=2$. The kernel is spanned by
+\[
+f^{(K)}:=\kzvth\!\begin{bmatrix}K/L\\0\end{bmatrix}\!(2U|2\tau)\;\prod_{i<j}\kzvth_1(u_i-u_j)^2\;
+\det\big[\wp(x_a-y_k)\,\big|\,1\big],\qquad K\in\{0,N\}
+\]
+(canonical components, $u$-units). These are the two centre-of-mass partners ($T_1$ maps one to the
+other) of the relative state in the sector $(T_K^2,T_1^2)=(1,1)$. $S_z=-\tfrac12$ is the same with the
+species exchanged. So the kernel is a spin-$\tfrac12$ doublet times the two centre-of-mass states:
+$\dim\ker H=4$.
+\item[(iii)] For even $N=2p$, $\ker H$ lies in $S_z=0$, consists of spin singlets, and has dimension $10$.
+It is spanned by $F(U)J^2g$ with $g\in\{d^{(p)}_\varepsilon:\varepsilon\in\{\pm1\}^2\}\cup\{f_5^{(p)}\}$ and
+$F\in\kzTh_2[\varepsilon]$, two for each $g$.
+\item[(iv)] None of these statements depends on $\tau$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+By Lemma~\ref{kz:lem:A}, $\ker H|_{n,m}=V_{n,m}$. By Lemma~\ref{kz:lem:B}(b),
+$\dim V_{n,m}=2\sum_{\varepsilon\in\mu_N^2}\dim\kzG(n,m;\varepsilon)$, where only $\varepsilon\in\mu_N^2$ occur by
+Lemma~\ref{kz:lem:B}(a).
+(i) Corollary~\ref{kz:cor:bounds}(a), with $|n-m|=2|S_z|$.
+(ii) For $N=2m+1$, Corollary~\ref{kz:cor:bounds}(b) gives $\dim V_{m+1,m}\le2$; Proposition~\ref{kz:prop:explicit}(a)
+gives $g_N\neq0$, so equality holds. $\kzTh_2[(1,1)]$ is spanned by $\kzvth[a,0](2U|2\tau)$, $a\in\{0,\tfrac12\}$
+(by \eqref{kz:eq:theta-basic}: the $U\mapsto U+1$ multiplier is $e^{4\pi ia}=1$, the $U\mapsto U+\tau$ multiplier
+is $e^{-2\pi i\tau-4\pi iU}$). $T_K$ shifts $U$ by $N/L=\tfrac12$ and multiplies $\kzvth[a,0](2U|2\tau)$ by
+$e^{2\pi ia}$, so $a=K/L$ with $K\in\{0,N\}$; $T_1$ exchanges the two (Lemma~\ref{kz:lem:B}(c) and
+$T_KT_1=-T_1T_K$).
+(iii) For $N=2p$, Corollary~\ref{kz:cor:bounds}(c) and $\{\pm1\}^2\subset\mu_N^2$ give
+$\dim V_{p,p}\le2(2+1+1+1)=10$. Proposition~\ref{kz:prop:explicit}(b),(c) gives five independent relative states
+(independent across $\varepsilon$ by Lemma~\ref{kz:lem:B}(b)), so equality holds. $H$ commutes with total spin, and
+by (i) the $S_z=\pm1$ sectors are empty, so every zero mode has $S=0$. For odd $N$ the same argument gives
+$S=\tfrac12$.
+(iv) Nothing above depends on $\tau$.
+\end{proof}
+
+\begin{remark}[Read--Rezayi's states]
+Read and Rezayi's states \cite[eq.~(52)]{RR96}, $\det\wp_a((z_i^\uparrow-z_j^\downarrow)/L_1|\tau)$, are $d^{(p)}_\varepsilon$; their $\wp_a$ is a multiple of
+$\wp_\varepsilon$ by Proposition~\ref{kz:prop:base}(c). Their eq.~(53) is $f_5^{(p)}$. Their odd-$N$ states, described in
+words only (one unpaired fermion in the constant orbital of the $++$ sector), are (ii); the formula $f^{(K)}$ is
+our reconstruction. Read and Rezayi do not prove that their states exhaust the zero modes \cite[Section~V]{RR96};
+Theorem~\ref{kz:thm:T2} supplies this.
+\end{remark}
+
+\begin{remark}[not covered]
+Twisted boundary conditions ($\phi_1,\phi_2\neq0$ in \cite[eq.~(45)]{RR96}) change only the characteristics of
+$\kzTh_2[\varepsilon]$. We expect the same proof to apply to them, but we do not write it. Fluxes other than $2N$
+(quasihole sectors) are not addressed.
+\end{remark}
+\endgroup

@@ -1,0 +1,352 @@
+\section{Setting}\label{sec:setting}
+
+We use units in which the magnetic field and the magnetic length are equal to one ($\hbar=e=1$).
+
+\subsection{The torus and its lowest Landau level}
+
+\begin{definition}[the torus and its lowest Landau level]\label{def:torus}
+Let $N\in\N$ and $\Nphi:=2N$. Let $L_x,L_y>0$ with $L_xL_y=2\pi\Nphi=4\pi N$, put $\kappa:=2\pi/L_y$, so that
+$L_x=\kappa\Nphi$, and let $\Tor_N:=\R^2/(L_x\Z\times L_y\Z)$, with points $r=(x,y)$, Lebesgue measure
+$\dd r$, area $\abs{\Tor_N}=L_xL_y$, and flat distance $d(r,r')$. Let
+\begin{equation}\label{eq:covariant}
+D_x:=\partial_x,\qquad D_y:=\partial_y-\iu x,\qquad D:=\tfrac12(D_x-\iu D_y)
+\end{equation}
+be the covariant derivatives of the vector potential $(0,x)$, whose magnetic field is
+$\partial_xA_y-\partial_yA_x=1$. The \emph{lowest Landau level} $\hN$ is the space of smooth functions
+$f:\R^2\to\C$ such that
+\begin{gather}
+f(x,y+L_y)=f(x,y),\qquad f(x+L_x,y)=e^{\iu L_xy}f(x,y), \label{eq:bc}\\
+(D_x+\iu D_y)f=0, \label{eq:lll}
+\end{gather}
+with the inner product $\ip{f}{g}:=\int_{[0,L_x)\times[0,L_y)}\overline{f}\,g\,\dd r$. By \eqref{eq:bc} the
+functions $\abs{f}^2$ and $\overline fg$ are $L_x$- and $L_y$-periodic, so the integral is an integral over
+$\Tor_N$.
+\end{definition}
+
+The conditions \eqref{eq:bc} are the magnetic periodicity conditions in this gauge without additional
+Aharonov--Bohm phases through the two cycles of the torus; all results of this paper concern these
+boundary conditions. The direction $x$ will be called \emph{transverse}: the Landau-gauge orbitals below are
+localized in $x$ and extended in $y$.
+
+\begin{lemma}[Landau-gauge orbitals]\label{lem:orbitals}
+For $n\in\Z$ let $\phi_n(x,y):=(L_y\sqrt\pi)^{-1/2}e^{\iu\kappa ny}e^{-(x-\kappa n)^2/2}$, and for
+$j\in\Z_{\Nphi}$ let
+\begin{equation}\label{eq:psi}
+\psi_j:=\sum_{m\in\Z}\phi_{\tilde\jmath+m\Nphi},
+\end{equation}
+where $\tilde\jmath\in\Z$ is any representative of $j$.
+\begin{enumerate}[(i)]
+\item The series \eqref{eq:psi} converges, together with all its derivatives, locally uniformly on $\R^2$;
+$\psi_j$ does not depend on the choice of $\tilde\jmath$, and $\psi_j\in\hN$.
+\item $(\psi_j)_{j\in\Z_{\Nphi}}$ is an orthonormal basis of $\hN$. In particular $\dim\hN=\Nphi$.
+\item For $f\in\hN$, $Df=D_xf=\partial_xf$, and $Df$ satisfies \eqref{eq:bc}. In particular
+$(D\phi_n)(x,y)=-(x-\kappa n)\,\phi_n(x,y)$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(i) Every derivative of $\phi_n$ is $\phi_n$ times a polynomial in $x$ and $n$, and
+\[
+\abs{\phi_n(x,y)}=(L_y\sqrt\pi)^{-1/2}e^{-(x-\kappa n)^2/2};
+\]
+these Gaussians are summable over $n\in\tilde\jmath+\Nphi\Z$ with any polynomial weight, locally uniformly in
+$x$. This gives the convergence, and replacing $\tilde\jmath$ by $\tilde\jmath+\Nphi$ only relabels the sum. Since
+$\kappa L_y=2\pi$, each $\phi_n$ is $L_y$-periodic in $y$. Since $\kappa\Nphi=L_x$,
+\[
+\phi_n(x+L_x,y)=(L_y\sqrt\pi)^{-1/2}e^{\iu\kappa ny}e^{-(x-\kappa(n-\Nphi))^2/2}=e^{\iu L_xy}\phi_{n-\Nphi}(x,y),
+\]
+and summing over $n\in\tilde\jmath+\Nphi\Z$ gives the second condition in \eqref{eq:bc} for $\psi_j$. Finally
+$(D_x+\iu D_y)\phi_n=\bigl(-(x-\kappa n)+\iu(\iu\kappa n)+x\bigr)\phi_n=0$, and \eqref{eq:lll} follows
+termwise.
+
+(ii) Let $0\le i,j<\Nphi$ be representatives. For $n,n'\in\Z$ the $y$-integral of
+$\overline{\phi_n}\phi_{n'}$ over $[0,L_y)$ is $L_y\delta_{nn'}(L_y\sqrt\pi)^{-1}e^{-(x-\kappa n)^2}$. Hence
+$\ip{\psi_i}{\psi_j}=0$ for $i\ne j$, and
+\[
+\ip{\psi_j}{\psi_j}=\sum_{m\in\Z}\int_0^{L_x}\pi^{-1/2}e^{-(x-\kappa j-mL_x)^2}\,\dd x
+=\pi^{-1/2}\int_\R e^{-u^2}\dd u=1 .
+\]
+For completeness, let $f\in\hN$. By the first condition in \eqref{eq:bc}, $f(x,y)=\sum_{n\in\Z}f_n(x)e^{\iu\kappa ny}$
+with smooth $f_n$, the series converging with all derivatives. Condition \eqref{eq:lll} reads
+$f_n'(x)+(x-\kappa n)f_n(x)=0$ for every $n$, so $f_n(x)=a_ne^{-(x-\kappa n)^2/2}$ with $a_n\in\C$. Comparing
+the coefficients of $e^{\iu\kappa ny}$ in the second condition of \eqref{eq:bc} gives
+$f_n(x+L_x)=f_{n-\Nphi}(x)$, that is $a_n=a_{n-\Nphi}$, because $x+L_x-\kappa n=x-\kappa(n-\Nphi)$. Hence
+$f=(L_y\sqrt\pi)^{1/2}\sum_{j=0}^{\Nphi-1}a_j\psi_j$.
+
+(iii) Condition \eqref{eq:lll} says $D_yf=\iu D_xf$, so $Df=\frac12(D_xf-\iu\cdot\iu D_xf)=D_xf$. The operator
+$\partial_x$ commutes with translations and with multiplication by $e^{\iu L_xy}$, so $\partial_xf$ satisfies
+\eqref{eq:bc}. The formula for $D\phi_n=\partial_x\phi_n$ is immediate.
+\end{proof}
+
+The orbital $\psi_j$ is concentrated near the line $x=\kappa j$ modulo $L_x$:
+\[
+\abs{\psi_j(x,y)}\le(L_y\sqrt\pi)^{-1/2}\sum_{m\in\Z}e^{-(x-\kappa\tilde\jmath-mL_x)^2/2}.
+\]
+Note that $Df$ is in general not in $\hN$; the derivative enters only through the evaluation of $Df$ at a
+point.
+
+\begin{lemma}[evaluation vectors]\label{lem:evaluation}
+For $R=(R_x,R_y)\in\R^2$ let
+\[
+\ev R:=\sum_{j\in\Z_{\Nphi}}\overline{\psi_j(R)}\,\psi_j,\qquad
+\evD R:=\sum_{j\in\Z_{\Nphi}}\overline{(D\psi_j)(R)}\,\psi_j\qquad\in\hN .
+\]
+\begin{enumerate}[(i)]
+\item $\ip{\ev R}{f}=f(R)$ and $\ip{\evD R}{f}=(Df)(R)$ for every $f\in\hN$. Moreover
+$\ev{R+(0,L_y)}=\ev R$ and $\ev{R+(L_x,0)}=e^{-\iu L_xR_y}\ev R$, and likewise for $\evD R$; in particular
+$\lvert\ev R\rangle\langle\ev R\rvert$ and $\norm{\ev R}$, $\norm{\evD R}$ are functions of $R\in\Tor_N$.
+\item $\int_{\Tor_N}\lvert\ev R\rangle\langle\ev R\rvert\,\dd R=\one_{\hN}$.
+\item With $q_{pk}^2:=p^2L_x^2+k^2L_y^2$ for $(p,k)\in\Z^2$,
+\begin{align*}
+\norm{\ev R}^2&=\frac1{2\pi}\sum_{(p,k)\in\Z^2}e^{-q_{pk}^2/4}\cos(kL_yR_x+pL_xR_y),\\
+\norm{\evD R}^2&=\frac1{4\pi}\sum_{(p,k)\in\Z^2}\Bigl(1-\frac{q_{pk}^2}2\Bigr)e^{-q_{pk}^2/4}\cos(kL_yR_x+pL_xR_y).
+\end{align*}
+\item Let $L_{\min}:=\min\{L_x,L_y\}\ge4$. Then for every $R$,
+\[
+\bigl\lvert2\pi\norm{\ev R}^2-1\bigr\rvert\le4.2\,e^{-L_{\min}^2/4}\le0.08,\qquad
+\bigl\lvert4\pi\norm{\evD R}^2-1\bigr\rvert\le2.1\,L_{\min}^2e^{-L_{\min}^2/4}\le0.62 .
+\]
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(i) Since $(\psi_j)$ is an orthonormal basis and the inner product is conjugate-linear in its first argument,
+$\ip{\ev R}{f}=\sum_j\psi_j(R)\ip{\psi_j}{f}=f(R)$, and in the same way $\ip{\evD R}{f}=(Df)(R)$, because $D$
+is linear. The behaviour under $R\mapsto R+(L_x,0)$ follows from \eqref{eq:bc}:
+$\ip{\ev{R+(L_x,0)}}{f}=e^{\iu L_xR_y}f(R)=\ip{e^{-\iu L_xR_y}\ev R}{f}$ for every $f\in\hN$, and likewise for
+$\evD R$, since $Df$ satisfies \eqref{eq:bc} (Lemma~\ref{lem:orbitals}(iii)). The $y$-periodicity is similar.
+
+(ii) For $f,g\in\hN$, $\ip{f}{\int\lvert\ev R\rangle\langle\ev R\rvert g\,\dd R}=\int\ip{f}{\ev R}\ip{\ev R}{g}\dd R
+=\int\overline{f(R)}g(R)\,\dd R=\ip fg$.
+
+(iii) Write $R=(x,y)$. By \eqref{eq:psi},
+$\norm{\ev R}^2=\sum_j\abs{\psi_j(R)}^2=\sum_{n\in\Z}\sum_{p\in\Z}\overline{\phi_n(R)}\phi_{n+p\Nphi}(R)$, the pairs
+$(j,m)$ and $(j,m')$ being relabelled by $n=\tilde\jmath+m\Nphi$ and $p=m'-m$. Using $\kappa\Nphi=L_x$ and
+$\tfrac12(u^2+(u-pL_x)^2)=(u-pL_x/2)^2+p^2L_x^2/4$ with $u=x-\kappa n$,
+\[
+\norm{\ev R}^2=\frac1{L_y\sqrt\pi}\sum_{p\in\Z}e^{\iu pL_xy}e^{-p^2L_x^2/4}\sum_{n\in\Z}e^{-(x-pL_x/2-\kappa n)^2}.
+\]
+By the Poisson summation formula, $\sum_ng(v-\kappa n)=\kappa^{-1}\sum_k\hat g(2\pi k/\kappa)e^{2\pi\iu kv/\kappa}$
+with $\hat g(\xi)=\int g(u)e^{-\iu\xi u}\dd u=\sqrt\pi e^{-\xi^2/4}$ for $g(u)=e^{-u^2}$. Here
+$2\pi/\kappa=L_y$, $L_y\kappa=2\pi$, and $e^{-\iu kL_y\cdot pL_x/2}=e^{-\iu\pi kp\Nphi}=1$ because $\Nphi$ is
+even. Hence $\norm{\ev R}^2=(2\pi)^{-1}\sum_{(p,k)}e^{-q_{pk}^2/4}e^{\iu(kL_yx+pL_xy)}$, and the sum is real,
+being symmetric under $(p,k)\mapsto(-p,-k)$. For $\evD R$ the same computation, with
+$D\phi_n=-(x-\kappa n)\phi_n$, replaces $e^{-v^2}$ by $(v^2-p^2L_x^2/4)e^{-v^2}$, $v=x-pL_x/2-\kappa n$,
+because $(x-\kappa n)(x-\kappa n-pL_x)=v^2-p^2L_x^2/4$. The Fourier transform of $v^2e^{-v^2}$ is
+$\sqrt\pi(\tfrac12-\tfrac{\xi^2}4)e^{-\xi^2/4}$, which gives the second formula.
+
+(iv) The terms with $(p,k)=(0,0)$ give $1$ in both formulas. For $(p,k)\ne(0,0)$ put $n:=p^2+k^2\ge1$, so that
+$q_{pk}^2\ge nL_{\min}^2\ge16$. Since $u\mapsto e^{-u/4}$ and, for $u\ge4$, $u\mapsto\frac u2e^{-u/4}$ are
+decreasing, and $\abs{1-u/2}\le u/2$ for $u\ge2$,
+\begin{gather*}
+\bigl\lvert2\pi\norm{\ev R}^2-1\bigr\rvert\le\sum_{(p,k)\ne0}e^{-nL_{\min}^2/4}
+\le e^{-L_{\min}^2/4}\sum_{(p,k)\ne0}e^{-4(n-1)},\\
+\bigl\lvert4\pi\norm{\evD R}^2-1\bigr\rvert\le\sum_{(p,k)\ne0}\frac{nL_{\min}^2}2e^{-nL_{\min}^2/4}
+\le\frac{L_{\min}^2}2e^{-L_{\min}^2/4}\sum_{(p,k)\ne0}n\,e^{-4(n-1)},
+\end{gather*}
+using $e^{-(n-1)L_{\min}^2/4}\le e^{-4(n-1)}$. The first sum is $e^4\bigl((\sum_{p\in\Z}e^{-4p^2})^2-1\bigr)$, which is
+less than $4.08$; the second is less than $4.15$ (its terms with
+$n=1,2$ contribute $4+8e^{-4}$, and the rest less than $10^{-3}$). This gives the bounds; the numerical
+values follow from $L_{\min}\ge4$.
+\end{proof}
+
+\subsection{Magnetic translations}
+
+For a function $f$ on $\R^2$ let
+\begin{equation}\label{eq:magtrans}
+(\thx f)(x,y):=e^{\iu\kappa y}f(x-\kappa,y),\qquad(\thy f)(x,y):=f(x,y+L_y/\Nphi).
+\end{equation}
+
+\begin{lemma}[magnetic translations]\label{lem:magtrans}
+\begin{enumerate}[(i)]
+\item $\thx$ and $\thy$ restrict to unitary operators on $\hN$, with $\thx\psi_j=\psi_{j+1}$ and
+$\thy\psi_j=e^{2\pi\iu j/\Nphi}\psi_j$.
+\item On $\hN$, $\thy\thx=e^{2\pi\iu/\Nphi}\thx\thy$ and $\thx^{\Nphi}=\thy^{\Nphi}=\one$.
+\item $\thx$ and $\thy$ commute with $D_x$ and $D_y$ on smooth functions, hence with $D$.
+\item $\thx\ev R=e^{\iu\kappa R_y}\ev{R+\kappa\ex}$ and $\thx\evD R=e^{\iu\kappa R_y}\evD{R+\kappa\ex}$ for every
+$R\in\R^2$, where $\ex=(1,0)$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(i) Directly from the definitions, $\thx\phi_n=\phi_{n+1}$ and $\thy\phi_n=e^{\iu\kappa nL_y/\Nphi}\phi_n=e^{2\pi\iu n/\Nphi}\phi_n$.
+Summing over $n\in\tilde\jmath+\Nphi\Z$ gives the action on $\psi_j$ (the phase $e^{2\pi\iu n/\Nphi}$ depends only on
+the class of $n$). Both operators therefore map the orthonormal basis $(\psi_j)$ onto an orthonormal basis up
+to phases, so they restrict to unitary operators on $\hN$. (ii) follows from (i). (iii) For $\thy$ this is
+clear, since $D_x$ and $D_y$ do not involve $y$ explicitly. For $\thx$, $D_x\thx f=\thx D_xf$, and
+\begin{align*}
+D_y(\thx f)(x,y)&=e^{\iu\kappa y}\bigl[(\partial_yf)(x-\kappa,y)+\iu\kappa f(x-\kappa,y)-\iu xf(x-\kappa,y)\bigr]\\
+&=e^{\iu\kappa y}(D_yf)(x-\kappa,y)=(\thx D_yf)(x,y).
+\end{align*}
+(iv) The inverse of $\thx$ on $\hN$ is $(\thx^{-1}f)(x,y)=e^{-\iu\kappa y}f(x+\kappa,y)$, and $\thx^*=\thx^{-1}$ by (i).
+For $f\in\hN$, $\ip{\thx\ev R}{f}=(\thx^{-1}f)(R)=e^{-\iu\kappa R_y}f(R+\kappa\ex)=\ip{e^{\iu\kappa R_y}\ev{R+\kappa\ex}}{f}$.
+By (iii), $D\thx^{-1}f=\thx^{-1}Df$, and the same computation gives the formula for $\evD R$.
+\end{proof}
+
+Only $\thx$, the translation by one orbital across the cuts, enters the index theorem.
+
+\subsection{The spinful Fock space and its sectors}
+
+\begin{definition}[Fock space, sectors, the many-body translation]\label{def:fock}
+Let $\kN:=\hN\otimes\C^2$, with the orthonormal basis $\psi_j\otimes\sigma$, $j\in\Z_{\Nphi}$,
+$\sigma\in\{\up,\dn\}$, where $\up,\dn$ denote the standard basis of $\C^2$. Let $\Fock:=\Ff(\kN)$ be the
+fermionic Fock space over $\kN$ (of dimension $4^{\Nphi}$), with annihilation operators $c(f)$, $f\in\kN$,
+conjugate-linear in $f$ and satisfying the canonical anticommutation relations
+$\{c(f),c(g)^*\}=\ip fg$, $\{c(f),c(g)\}=0$. Put
+\[
+c_{j\sigma}:=c(\psi_j\otimes\sigma),\qquad n_{j\sigma}:=c_{j\sigma}^*c_{j\sigma},\qquad
+N_\sigma:=\sum_{j\in\Z_{\Nphi}}n_{j\sigma},\qquad S_z:=\tfrac12(\Nup-\Ndn).
+\]
+For $\nn=(n_\up,n_\dn)\in\{0,\dots,\Nphi\}^2$ the \emph{sector} $\sect\nn$ is the joint eigenspace
+$\{\Psi:\Nup\Psi=n_\up\Psi,\ \Ndn\Psi=n_\dn\Psi\}$, and $\Psec\nn$ is the orthogonal projection onto it. An
+operator $A$ on $\Fock$ is \emph{sector-preserving} if $[A,\Nup]=[A,\Ndn]=0$, and \emph{even} if it commutes
+with the parity $(-1)^{\Nup+\Ndn}$. For a unitary $u$ on $\kN$, $\Ff(u)$ denotes its second quantization, the
+unitary on $\Fock$ with $\Ff(u)c(f)\Ff(u)^*=c(uf)$ that fixes the vacuum. The \emph{many-body magnetic
+translation} is $\Theta:=\Ff(\thx\otimes\one)^*$.
+\end{definition}
+
+\begin{lemma}[sectors and the many-body translation]\label{lem:sectors}
+\begin{enumerate}[(i)]
+\item $\Fock=\bigoplus_\nn\sect\nn$, an orthogonal sum, and
+$\Psec\nn=\one_{\{n_\up\}}(\Nup)\,\one_{\{n_\dn\}}(\Ndn)$.
+\item An operator $A$ is sector-preserving if and only if $A=\sum_\nn\Psec\nn A\Psec\nn$, if and only if
+$[A,\Psec\nn]=0$ for every $\nn$. Sector-preserving operators form a unital $*$-subalgebra of the operators on
+$\Fock$, and they are even. If $H$ is self-adjoint and sector-preserving, then $f(H)$ is sector-preserving for
+every function $f$ on the spectrum of $H$, and for every $\nn$ and every Borel set $B\subset\R$ the spectral
+projection of $H|_{\sect\nn}$ onto $B$, extended by zero to $\Fock$, equals $\one_B(H)\Psec\nn$.
+\item $\Theta$ is unitary and sector-preserving, $\Theta^{\Nphi}=\one$, and for all $f\in\kN$, $j$ and $\sigma$,
+\[
+\Theta^*c(f)\Theta=c\bigl((\thx\otimes\one)f\bigr),\qquad\Theta^*c_{j\sigma}\Theta=c_{j+1,\sigma},\qquad
+\Theta^*n_{j\sigma}\Theta=n_{j+1,\sigma}.
+\]
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(i) $\Nup$ and $\Ndn$ are commuting self-adjoint operators with joint spectrum in $\{0,\dots,\Nphi\}^2$, and the
+$\Psec\nn$ are their joint spectral projections. (ii) $A$ commutes with $\Nup$ and $\Ndn$ if and only if it
+commutes with all their spectral projections, hence with every $\Psec\nn$; since $\sum_\nn\Psec\nn=\one$ this is
+equivalent to $A=\sum_\nn\Psec\nn A\Psec\nn$. These conditions are stable under sums, products and adjoints.
+A sector-preserving operator commutes with $\Nup+\Ndn$, hence with $(-1)^{\Nup+\Ndn}$. If $H$ is self-adjoint and
+sector-preserving, then $H=\bigoplus_\nn H|_{\sect\nn}$, so $f(H)=\bigoplus_\nn f(H|_{\sect\nn})$; with
+$f=\one_B$ this gives the last claim. (iii) $\Theta$ is unitary because $\thx\otimes\one$ is.
+$\Theta^*c(f)\Theta=\Ff(\thx\otimes\one)c(f)\Ff(\thx\otimes\one)^*=c((\thx\otimes\one)f)$, and with
+$f=\psi_j\otimes\sigma$ Lemma~\ref{lem:magtrans}(i) gives the other two formulas. Summing them over $j$ shows
+$\Theta^*N_\sigma\Theta=N_\sigma$. Finally $\Theta^{\Nphi}=\Ff((\thx\otimes\one)^{\Nphi})^*=\one$ by
+Lemma~\ref{lem:magtrans}(ii).
+\end{proof}
+
+The convention $\Theta^*n_{j\sigma}\Theta=n_{j+1,\sigma}$ is that of \cite[Section~5.2]{BBDF21} for the lattice
+translation.
+
+\subsection{The hollow-core Hamiltonian}
+
+For $a,c\in\Z_{\Nphi}$ the function $\overline{\psi_a}\,\psi_c$ is smooth on $\Tor_N$ by \eqref{eq:bc}; let
+$\nabla^2=\partial_x^2+\partial_y^2$.
+
+\begin{definition}[the hollow-core Hamiltonian]\label{def:hamiltonian}
+For $a,b,c,d\in\Z_{\Nphi}$ let
+\begin{equation}\label{eq:Vabcd}
+V_{abcd}:=4\pi\int_{\Tor_N}\overline{\psi_a}\psi_c\,\overline{\psi_b}\psi_d\,\dd r+4\pi\int_{\Tor_N}\overline{\psi_b}\psi_d\,\nabla^2\bigl(\overline{\psi_a}\psi_c\bigr)\,\dd r,
+\end{equation}
+and let
+\begin{equation}\label{eq:HN}
+H_N:=\frac12\sum_{\sigma,\sigma'\in\{\up,\dn\}}\ \sum_{a,b,c,d\in\Z_{\Nphi}}V_{abcd}\;
+c_{a\sigma}^*c_{b\sigma'}^*c_{d\sigma'}c_{c\sigma}
+\end{equation}
+on $\Fock$. Equivalently, by Parseval's identity on $\Tor_N$,
+\[
+V_{abcd}=\frac1{\abs{\Tor_N}}\sum_{q\in\frac{2\pi}{L_x}\Z\times\frac{2\pi}{L_y}\Z}4\pi\bigl(1-\abs q^2\bigr)\,
+\widehat{\overline{\psi_a}\psi_c}(-q)\,\widehat{\overline{\psi_b}\psi_d}(q),\qquad\hat f(q):=\int_{\Tor_N}f(r)e^{-\iu q\cdot r}\,\dd r ,
+\]
+that is, $H_N$ is the second quantization, restricted to the lowest Landau level, of the pair interaction
+$\Vint=4\pi(\delta_{\Tor}+\nabla^2\delta_{\Tor})$, the periodization over $L_x\Z\times L_y\Z$ of the planar
+interaction $V:=4\pi(\delta+\nabla^2\delta)$, whose Fourier transform is $4\pi(1-\abs q^2)$, $4\pi$ times the first
+Laguerre polynomial evaluated at $\abs q^2$.
+\end{definition}
+
+The operator $H_N$ is self-adjoint, since $V_{abcd}=\overline{V_{cdab}}$, and it is sector-preserving, even,
+and invariant under global spin rotations. It commutes with $\Theta$ (Lemma~\ref{lem:covariance}), and
+$H_N=8\pi\int_{\Tor_N}\sum_\nu B_\nu(R)^*B_\nu(R)\,\dd R$ (Theorem~\ref{thm:localform}(a)); in particular
+$H_N\ge0$.
+
+The normalization of \eqref{eq:Vabcd} is the one in which a pair of electrons of relative angular momentum
+one in the plane has energy one. To state this precisely, consider two particles in the planar lowest Landau
+level for the same field, in the symmetric gauge: in complex coordinates $z_i=x_i+\iu y_i$, a two-particle
+state is $\Psi(z_1,z_2)=G(z_1,z_2)e^{-(\abs{z_1}^2+\abs{z_2}^2)/4}$ with $G$ entire and $\Psi$
+square-integrable. With $Z:=(z_1+z_2)/2$ and $v:=z_1-z_2$ one has $\abs{z_1}^2+\abs{z_2}^2=2\abs Z^2+\abs v^2/2$,
+and we expand $G(Z+v/2,Z-v/2)=\sum_{m\ge0}G_m(Z)v^m$. The component of relative angular momentum $m$ is
+$\Psi_m:=G_m(Z)\,v^m\,e^{-\abs Z^2/2-\abs v^2/8}$; the $\Psi_m$ are mutually orthogonal and $\Psi=\sum_m\Psi_m$.
+The quadratic form of $V$ on such states is
+\[
+\mathsf V(\Psi):=4\pi\int_{\R^2}\Bigl(F_\Psi(R,0)+(\nabla_r^2F_\Psi)(R,0)\Bigr)\dd R,\qquad
+F_\Psi(R,r):=\abs{\Psi(R+r/2,R-r/2)}^2,
+\]
+the expectation of $V(r_1-r_2)$ in the sense of distributions; it depends only on $\abs\Psi^2$ and so is the
+same in every gauge.
+
+\begin{lemma}[$V_1$ units]\label{lem:units}
+For every planar two-particle lowest-Landau-level state $\Psi$, $\mathsf V(\Psi)=\norm{\Psi_1}^2$. That is, on the
+planar two-particle lowest Landau level the interaction $V$ is the orthogonal projection onto relative
+angular momentum one: its pseudopotentials are $V_m=\delta_{m1}$.
+\end{lemma}
+
+\begin{proof}
+In the coordinates $R=Z$ and $r=v$ (the change of variables $(r_1,r_2)\mapsto(R,r)$ has Jacobian one),
+$F_\Psi(Z,v)=e^{-\abs Z^2}e^{-\abs v^2/4}\abs{\sum_mG_m(Z)v^m}^2$. At $v=0$ this is $e^{-\abs Z^2}\abs{G_0(Z)}^2$.
+With $\nabla_v^2=4\partial_v\partial_{\bar v}$ and
+$e^{-v\bar v/4}\abs{\sum_mG_mv^m}^2=\abs{G_0}^2+G_0\overline{G_1}\bar v+\overline{G_0}G_1v
++\bigl(\abs{G_1}^2-\tfrac14\abs{G_0}^2\bigr)v\bar v+(\text{terms in }v^2,\bar v^2,\text{ and of order }\abs v^3)$,
+one finds $(\nabla_v^2F_\Psi)(Z,0)=e^{-\abs Z^2}\bigl(4\abs{G_1(Z)}^2-\abs{G_0(Z)}^2\bigr)$. Hence
+\[
+\mathsf V(\Psi)=16\pi\int_{\R^2}\abs{G_1(Z)}^2e^{-\abs Z^2}\dd Z
+=\int\abs{G_1(Z)}^2e^{-\abs Z^2}\dd Z\int_{\R^2}\abs v^2e^{-\abs v^2/4}\dd v=\norm{\Psi_1}^2 .\qedhere
+\]
+\end{proof}
+
+\begin{remark}[orbital form and normalization]\label{rem:orbitalform}
+Theorem~\ref{thm:localform}(c) below writes $H_N$ in the orbital basis:
+$H_N=(\kappa^3/\sqrt{2\pi})\sum_{n\in\Z_{2\Nphi}}\sum_\nu(\bcen\nu n)^*\bcen\nu n$, with the pair operators
+$\bcen\nu n$ of Definition~\ref{def:pairs}. The operator $\sum_n\sum_\nu(\bcen\nu n)^*\bcen\nu n$ differs from
+$H_N$ by the factor $\sqrt{2\pi}/\kappa^3$, which grows like $N^{3/2}$ at fixed aspect ratio. Every statement
+of this paper about gaps that are uniform in $N$ refers to $H_N$ in the normalization of
+Definition~\ref{def:hamiltonian}.
+\end{remark}
+
+\subsection{The zero modes}
+
+The kernel of $H_N$ on the states with $N$ electrons is known exactly. The proof of the following theorem is given in
+Appendix~\ref{app:kernel}.
+
+\begin{theorem}[the zero modes]\label{thm:kernel}
+Let $N\in\N$ and $L_x,L_y>0$ with $L_xL_y=4\pi N$, and let $\mathcal K_N$ be the kernel of $H_N$ restricted to
+the states with $N$ electrons, $\bigoplus_{n_\up+n_\dn=N}\sect{(n_\up,n_\dn)}$.
+\begin{enumerate}[(i)]
+\item $\mathcal K_N\cap\sect{(n_\up,n_\dn)}=\{0\}$ whenever $\abs{n_\up-n_\dn}\ge2$.
+\item If $N$ is odd, $\mathcal K_N\cap\sect{((N+1)/2,(N-1)/2)}$ and $\mathcal K_N\cap\sect{((N-1)/2,(N+1)/2)}$ are
+two-dimensional.
+\item If $N$ is even, $\mathcal K_N\subset\sect{(N/2,N/2)}$, $\dim\mathcal K_N=10$, and $\mathcal K_N$ consists of
+spin singlets.
+\end{enumerate}
+\end{theorem}
+
+Appendix~\ref{app:kernel} proves the theorem for tori of arbitrary modular parameter; we use it only for rectangular
+tori. The kernel in (iii) is spanned by the torus states of Read and Rezayi \cite[Section~V]{RR96}, and the
+kernel in (ii) by the corresponding states with one unpaired electron; we use only the dimensions. Since
+$H_N\ge0$, the eigenvalues $E_1(N)\le E_2(N)\le\cdots$ of $H_N$ in the sector $(N/2,N/2)$ at even $N$,
+repeated according to multiplicity, satisfy
+\begin{equation}\label{eq:E11}
+E_1(N)=\cdots=E_{10}(N)=0<E_{11}(N),
+\end{equation}
+and at odd $N$ the eigenvalues in each of the sectors $((N\pm1)/2,(N\mp1)/2)$ satisfy $E_1(N)=E_2(N)=0<E_3(N)$.
+(The sector $(N/2,N/2)$ has dimension $\binom{2N}{N/2}^2\ge16$ for even $N\ge2$.)
+
+\begin{remark}[the Hamiltonian of Appendix~\ref{app:kernel}]\label{rem:kernel-identification}
+In its own notation, Appendix~\ref{app:kernel} defines the hollow-core Hamiltonian as $\sum_{i<j}\mathcal P_{ij}$, where $\mathcal P$ is the sum over
+the lattice of periods of the translates of the planar projector onto relative angular momentum one, on the torus
+$\C/(L_1\Z+L_1\tau\Z)$, with coordinates $X+\iu Y$, in the Landau gauge $(-Y,0)$. For $L_1=L_y$ and $\tau=\iu L_x/L_y$ this is our torus turned by a
+quarter turn. The beginning of Appendix~\ref{app:kernel} shows, using Theorem~\ref{thm:localform}(c), that the
+corresponding unitary identification of the two lowest Landau levels, which takes the orbital $\psi_j$ to the $j$-th
+Landau-gauge orbital of Appendix~\ref{app:kernel}, carries $H_N$, with the spin unchanged, to that operator. The
+identification preserves $\Nup$ and $\Ndn$, so Theorem~\ref{thm:kernel} holds for $H_N$ as stated.
+\end{remark}

@@ -1,0 +1,82 @@
+% appendices/B-notation.tex
+\section{Notation}\label{app:notation}
+
+The table lists the symbols that recur across sections, with the place where each is defined. Symbols used in one section
+only, and symbols local to a proof, are defined where they are used.
+
+\begingroup\small
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.25\textwidth}>{\raggedright\arraybackslash}p{0.52\textwidth}>{\raggedright\arraybackslash}p{0.16\textwidth}@{}}
+\toprule
+symbol & meaning & defined in\\
+\midrule
+\endfirsthead
+\toprule
+symbol & meaning & defined in\\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+$\Tor$, $\Lam$, $\cell$; $L_x$, $L_y$, $L$ & the torus $\R^2/\Lam$, its lattice of periods, a period cell; the periods; the shorter period
+& Def.~\ref{def:torus}\\
+$\Nphi$, $\kappa$ & number of flux quanta, $L_xL_y=2\pi\Nphi$; $\kappa=2\pi/L_y$ & Def.~\ref{def:torus}\\
+$\h$, $\hpl$ & lowest Landau level of the torus; planar lowest Landau level & Def.~\ref{def:torus}, \eqref{eq:ta}\\
+$w$, $a\wedge b$ & complex coordinate $x+\iu y$; $a_xb_y-a_yb_x$ & Section~\ref{sec:setting}\\
+$\phi_n$, $\psi_j$, $[n]$ & Landau-gauge orbitals ($n\in\Z$); torus orbitals ($j\in\Z_{\Nphi}$); class of $n$ in $\Z_{\Nphi}$
+& Lem.~\ref{lem:orbitals}\\
+$\mathcal H_m$ & normalized Hermite functions & \eqref{eq:landaurep}\\
+$t_a$, $\tl_\gamma$, $t_\delta$; $\thx$, $\thy$ & magnetic translations; lattice translations, $\gamma\in\Lam$; fine-lattice translations,
+$\delta\in\Lam/\Nphi$; the translations $\psi_j\mapsto\psi_{j+1}$, $\psi_j\mapsto e^{2\pi\iu j/\Nphi}\psi_j$ & \eqref{eq:ta}, Lem.~\ref{lem:magtrans}\\
+$\Hb$, $\ket m$, $\mathcal U$ & Bargmann space and its monomial basis; the unitary $\Hb\to\hpl$ & Lem.~\ref{lem:bargmann}\\
+$\Dis(\beta)$, $\Dis^{(m)}(\beta)$, $\beta(a)$ & displacement operator; its truncation to the levels $0,\dots,m$;
+$(a_x-\iu a_y)/\sqrt2$ & \eqref{eq:displacement}, Lem.~\ref{lem:bargmann}\\
+$\eta_m$, $\eta_m^R$ & symmetric-gauge orbitals about the origin and about $R$ & Lem.~\ref{lem:bargmann}, \eqref{eq:etaR}\\
+$\Ppl(r,r')$ & kernel of the orthogonal projection onto $\hpl$ & Lem.~\ref{lem:bargmann}(iv)\\
+$\Pk^{(k)}$, $\Pk$ & periodization of planar $k$-particle functions; $\Pk=\Pk^{(1)}$ & Lem.~\ref{lem:unfold}\\
+$\Fock$, $\Ff(u)$ & fermionic Fock space over $\h$; second quantization of a unitary $u$ & \S\ref{ssec:fock}\\
+$B(v)$, $c(f)$, $c_j$ & adjoint of wedge multiplication by $v$; annihilation operators, $c_j=c(\psi_j)$ & \eqref{eq:Bwedge}\\
+$A_n$; $P_\sigma$ & antisymmetrizer on $\h^{\otimes n}$; permutation of the variables & \S\ref{ssec:fock}; before Lem.~\ref{lem:unfold}\\
+$\LL_k$, $X_S$ & lift of an operator on $\bigwedge^k\h$ to $\Fock$; $X$ acting on the tensor positions in $S$ & \eqref{eq:lift}\\
+$W_3$, $W_4$ & the wedge maps $\bigwedge^2\h\otimes\h\to\bigwedge^3\h$ and $\bigwedge^2\h\otimes\bigwedge^2\h\to\bigwedge^4\h$
+& Lem.~\ref{lem:lift}(iv)\\
+$\zeta$, $\rho$; $\Tor_k$, $\U_k$; $\tl^{\otimes k}_\gamma$ & centre-of-mass and relative Jacobi coordinates; the centre-of-mass torus
+$\R^2/\sqrt k\Lam$ and its lowest Landau level; the simultaneous lattice translation & Lem.~\ref{lem:jacobi}\\
+$\Pp_k(Y)$, $\mathsf D$ & periodized image of an admissible operator $Y$; a fundamental domain of the diagonal action
+& Def.~\ref{def:admissible}\\
+$\Fib_a$ & fibering map, the partial inner product with the relative state $a$ & Lem.~\ref{lem:Pk}(c)\\
+$P_1$, $h$, $\HT$, $\VT$ & planar projector onto relative angular momentum one; $h=\Pp_2(P_1)$; the torus $V_1$ Hamiltonian
+$\HT=\LL_2(h)$; $\VT=\ran h$ & Def.~\ref{def:HT}\\
+$c_0$, $f(d)$, $v_n$, $\bcen n$ & $\kappa^3/\sqrt{2\pi}$; $d\,e^{-\kappa^2d^2/4}$; pair functions; pair operators
+& Prop.~\ref{prop:orbital}\\
+$\tau$, $B_n^{(\tau)}$ & modular parameter; theta-function pair operators & \eqref{eq:Bntau}\\
+$\Psi_j$ & the three Laughlin states at $\Nphi=3N$ & Thm.~\ref{thm:kernel}\\
+$G$, $\mathfrak f$, $s_{jk}$ & pair Gram matrix; $\mathfrak f(s)=(1-s)e^{-s/2}$; $\frac14(j^2L_x^2+k^2L_y^2)$ & Lem.~\ref{lem:gram}\\
+$\Dlev$, $\Ups$; $\lambda_{\min}$, $\lambda_{\max}$, $\dG$ & $\Dlev(\ell)=2(\ell^2/4-1)e^{-\ell^2/8}$; remainder of the
+pair Gram levels; extreme eigenvalues of $G$ and their deviation from $1$ & Lem.~\ref{lem:levels}\\
+$P_V$, $H'$ & projection onto $\VT$; $\LL_2(P_V)$ & Prop.~\ref{prop:projector}\\
+$X_3(h)$ & three-body coefficient of $\LL_2(h)^2$ & Lem.~\ref{lem:square}\\
+$\chi^R_m$, $v_p^{*R}$, $\ut_p(R)$ & periodized orbitals about $R$; planar pair states; periodized pair states
+& Lem.~\ref{lem:localmodes}\\
+$\Gamma(R)$, $\Gamma^{(m)}(R)$; $\mu_m$, $\Ec_m(\Tor)$ & local Gram matrix and its truncation; norms of truncated displacement
+matrices and their lattice sum & Lem.~\ref{lem:localgram}\\
+$\Ec_m(L)$, $\widehat\Ec_m(L)$, $\mathfrak g_m$; $\sigma_z$, $\Xi_z$ & bounds on $\Ec_m(\Tor)$; the majorant
+$(r^2/2+m)^me^{-r^2/4}/m!$; excess of the diagonal of $\Gamma(R)$ and its bound & Lem.~\ref{lem:Ebounds}\\
+$\varphi_p^R$ & centre-of-mass orbital of degree $p$ about $R$ & before Thm.~\ref{thm:moyal}\\
+$s^{(u)}_{z,T,p}$, $s_{z,T,p}$; $\xi_z$, $\ket{z,T}^R$ & coupling coefficients, $s_{z,T,p}=s^{(1/\sqrt3)}_{z,T,p}$; three-body
+relative states and coupled basis & \eqref{eq:coupling}, Lem.~\ref{lem:coupled3}\\
+$\omega_{D,r}$, $\ket{D,T;r}^R$, $S_r$, $\mathcal R_D$ & four-body relative states, coupled basis and coefficients; the odd
+integers in $[1,D]$ & Lem.~\ref{lem:coupled4}\\
+$\nu$, $t_\nu$, $\lambda_\nu$, $\alpha^\nu_{pj}$, $\mathcal S_\nu$ & the rows of the certificate and their data
+& \S\ref{ssec:transfer}, before \eqref{eq:ez}, App.~\ref{app:certificate}\\
+$\etas$, $\eps$; $e_z$, $E_D$, $G_D$ & $\sum_\nu\lambda_\nu^2$; the allowance $3/10^6$; the three-body coefficients, four-body
+matrices and four-body Gram matrices of the certificate & \eqref{eq:ez}, \eqref{eq:ED}\\
+$F_\nu(R)$, $\KT$ & the rows at the base point $R$; the comparison operator & Def.~\ref{def:KT}\\
+$\KT^{(k)}$, $Y_z$, $\Cth$, $\mathcal C_3$, $\mathcal T_4$ & $k$-body part of $\KT$; $\kb{W_3\xi_z}{W_3\xi_z}\otimes\one$;
+$72\sum_\nu\norm{\alpha^\nu}^2$; non-orthonormality term; periodized four-body target & Prop.~\ref{prop:parts}\\
+$q_z$ & planar three-body coefficients $(3z-1)(-\frac12)^z$ & Lem.~\ref{lem:qz}\\
+$\dtail$, $\Omega$ & tail constant of the three-body comparison; majorant of its excess & Prop.~\ref{prop:three}\\
+$\gT$, $\gs$, $\gl$ & the torus constant; the planar constant; the uniform lower bound
+& Thm.~\ref{thm:main}, Cor.~\ref{cor:uniform}\\
+$\etr(\Tor)$, $\etr(L)$; $P_c$, $M_c$, $Z_c$, $D_c$, $N_4$ & the error of the transfer principle and its bound; the
+cutoffs and the four-body count of a certificate of the same form & \S\ref{ssec:transfer}, Thm.~\ref{thm:transferintro}\\
+\end{longtable}
+\endgroup

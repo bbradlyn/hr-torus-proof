@@ -1,0 +1,283 @@
+% sections/06-moyal.tex
+\section{The torus Moyal identities and the comparison operator}\label{sec:moyal}
+
+On the sphere the comparison operator is averaged over rotations, and Schur's lemma for $SU(2)$ reduces it to fixed
+spin blocks. On the torus we average the base point $R$ of the local modes over the torus. The magnetic translations
+of the centre-of-mass torus then play the role of the rotations, and the resulting identities are exact.
+
+\subsection{Magnetic translations of the centre-of-mass torus}
+
+\begin{lemma}\label{lem:irred}
+Let $\Tor'$ be a rectangular torus with periods $L'_x,L'_y$, lattice $\Lam'$, $M=L'_xL'_y/2\pi\in\N$ flux quanta and lowest
+Landau level $\U$, and let $\Pk'$ be its periodization. For $\delta\in\Lam'/M$, $t_\delta$ is unitary on $\U$ and
+$t_\delta\Pk'f=\Pk't_\delta f$ for every Gaussian-decaying LLL function $f$. An operator on $\U$ that commutes with all $t_\delta$,
+$\delta\in\Lam'/M$, is a multiple of the identity.
+\end{lemma}
+
+\begin{proof}
+The first statement is Lemma~\ref{lem:magtrans}(iv) for $\Tor'$, and $t_\delta\tl'_{\gamma'}=e^{\iu\,\delta\wedge\gamma'}\tl'_{\gamma'}t_\delta$
+with $\delta\wedge\gamma'\in2\pi\Z$. Let $C$ commute with $\theta'_y:=t_{(0,-L'_y/M)}$ and $\theta'_x:=t_{(L'_x/M,0)}$. By
+Lemma~\ref{lem:magtrans}(iv), $\theta'_y$ has the $M$ distinct eigenvalues $e^{2\pi\iu j/M}$ on the orbitals $\psi'_j$, so
+$C\psi'_j=c_j\psi'_j$, and $\theta'_x\psi'_j=\psi'_{j+1}$ forces $c_{j+1}=c_j$.
+\end{proof}
+
+\subsection{The Moyal identity}
+
+For $k\ge1$ a \emph{relative state} is a function $a$ of the relative Jacobi coordinates $\rho\in(\R^2)^{k-1}$ which is an LLL
+function of each of them and decays like a Gaussian. For $R\in\R^2$ and $p\ge0$ we write $a\otimes\varphi_p^R$ for the planar
+$k$-particle function $(\zeta,\rho)\mapsto a(\rho)\,\eta_p^{\sqrt kR}(\zeta)$: relative state $a$, centre-of-mass orbital of
+degree $p$ about the point $R$ (the centre of mass $k^{-1}\sum r_i$ equals $\zeta/\sqrt k$). By Lemma~\ref{lem:jacobi}(i) it is an
+LLL function of each particle and decays like a Gaussian about $R$ in all variables, so $\Pk^{(k)}(a\otimes\varphi_p^R)\in\h^{\otimes k}$.
+
+\begin{theorem}[torus Moyal identity]\label{thm:moyal}
+Let $k\ge1$, let $a,b$ be relative states and $p,q\ge0$. The operator $\kb{\Pk^{(k)}(a\otimes\varphi_p^R)}{\Pk^{(k)}(b\otimes\varphi_q^R)}$ on
+$\h^{\otimes k}$ is a $\Lam$-periodic continuous function of $R$, and
+\begin{equation}\label{eq:moyal}
+\frac k{2\pi}\int_\cell\kb{\Pk^{(k)}(a\otimes\varphi_p^R)}{\Pk^{(k)}(b\otimes\varphi_q^R)}\,\dd R=\delta_{pq}\,\Pp_k\bigl(\kb ab\otimes\one\bigr)=\delta_{pq}\,\Fib_a^*\Fib_b .
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Let $\Pk'$ be the periodization of the centre-of-mass torus $\Tor_k=\R^2/\sqrt k\Lam$. For $\Psi\in\h^{\otimes k}$, by
+Lemma~\ref{lem:unfold} on $\Tor$, Fubini in Jacobi coordinates, and Lemma~\ref{lem:unfold} on $\Tor_k$ (recall
+$\Fib_b\Psi\in\U_k$),
+\[
+\ip{\Pk^{(k)}(b\otimes\varphi_q^R)}\Psi=\int_{(\R^2)^k}\overline{b(\rho)\,\eta_q^{\sqrt kR}(\zeta)}\,\Psi=\int_{\R^2}\overline{\eta_q^{\sqrt kR}}\,\Fib_b\Psi
+=\ip{\Pk'\eta_q^{\sqrt kR}}{\Fib_b\Psi}_{\U_k}.
+\]
+Hence, as a form in $(\Phi,\Psi)$, the left side of \eqref{eq:moyal} is $\ip{\Fib_a\Phi}{\mathcal Q_{pq}\Fib_b\Psi}$ with
+\[
+\mathcal Q_{pq}:=\frac1{2\pi}\int_{\sqrt k\cell}\kb{\Pk'\eta_p^{\zeta_0}}{\Pk'\eta_q^{\zeta_0}}\,\dd\zeta_0
+\]
+(substitute $\zeta_0=\sqrt kR$). \emph{Periodicity.} For $\gamma'\in\sqrt k\Lam$, $\eta_p^{\zeta_0+\gamma'}$ is a $p$-independent phase times
+$t_{\gamma'}\eta_p^{\zeta_0}$ (by \eqref{eq:etaR} and Lemma~\ref{lem:magtrans}(ii)), and $\Pk't_{\gamma'}=\pm\Pk'$; so the integrand is
+periodic, which also proves the first assertion. \emph{Schur.} For $\delta\in\sqrt k\Lam/(k\Nphi)$, $t_\delta\eta_p^{\zeta_0}$ is a
+$p$-independent phase times $\eta_p^{\zeta_0+\delta}$ and $t_\delta$ commutes with $\Pk'$ (Lemma~\ref{lem:irred}); so
+$t_\delta\mathcal Q_{pq}t_\delta^*$ is the integral of the translated periodic integrand over a period cell, which is
+$\mathcal Q_{pq}$. By Lemma~\ref{lem:irred}, $\mathcal Q_{pq}=c_{pq}\one$ on $\U_k$. \emph{The scalar.} $c_{pq}=\tr\mathcal Q_{pq}/(k\Nphi)$ and
+$\tr\kb{\Pk'\eta_p^{\zeta_0}}{\Pk'\eta_q^{\zeta_0}}=\ip{\Pk'\eta_q^{\zeta_0}}{\Pk'\eta_p^{\zeta_0}}
+=\sum_{\gamma'\in\sqrt k\Lam}\varsigma'_{\gamma'}e^{\iu\,\gamma'\wedge\zeta_0}\bra q\Dis(\beta(\gamma'))\ket p$, exactly as in
+Lemma~\ref{lem:localgram}, the series converging absolutely. For $\gamma'=(j\sqrt kL_x,l\sqrt kL_y)\neq0$ the integral of
+$e^{\iu\,\gamma'\wedge\zeta_0}=e^{\iu j\sqrt kL_x\zeta_{0,y}}e^{-\iu l\sqrt kL_y\zeta_{0,x}}$ over $\sqrt k\cell$ vanishes, because
+$\sqrt kL_x\cdot\sqrt kL_y=2\pi k\Nphi$; the term $\gamma'=0$ gives $\abs{\sqrt k\cell}\,\delta_{pq}=2\pi k\Nphi\,\delta_{pq}$. Hence
+$c_{pq}=\delta_{pq}$, and Lemma~\ref{lem:Pk}(c) gives the second equality.
+\end{proof}
+
+The identity holds for every $k$ with the normalization built into the definition of $\Pp_k$. For $k=2$ the normalization
+of $h$ itself was identified in Proposition~\ref{prop:orbital}, so no further normalization step is needed.
+
+\begin{corollary}[pair level]\label{cor:pairmoyal}
+For $p,q\ge0$, $\frac1\pi\int_\cell\kb{\ut_p(R)}{\ut_q(R)}\dd R=\delta_{pq}\,h$. Consequently $\ut_p(R)\in\VT$ for every $p$ and $R$, and
+\[
+\frac1\pi\int_\cell B(\ut_p(R))^*B(\ut_p(R))\,\dd R=\HT\qquad\text{for every }p\ge0 .
+\]
+\end{corollary}
+
+\begin{proof}
+Take $k=2$ and $a=b=\eta_1$; then $\Pk^{(2)}(\eta_1\otimes\varphi_p^R)=\ut_p(R)$ and $\Pp_2(\kb{\eta_1}{\eta_1}\otimes\one)=h$. If $w\perp\VT$,
+then $\int_\cell\abs{\ip w{\ut_p(R)}}^2\dd R=\pi\ip w{hw}=0$, and $R\mapsto\ip w{\ut_p(R)}$ is continuous, so it vanishes. The last
+identity follows by applying the linear map $\LL_2$ (Lemma~\ref{lem:lift}) to the first, the integrand being continuous with
+values in a finite-dimensional space.
+\end{proof}
+
+\subsection{Planar coupled bases}
+
+The certificate of~\cite{OAI:A-Fock-space-inequality-and-the-Laughlin-spectral-gap-September-24-2026} is written in terms of
+coupling coefficients. For $0<u<1$, $v:=\sqrt{1-u^2}$ and integers $0\le z\le T$, $0\le p\le T$, the coefficients
+$s^{(u)}_{z,T,p}$ are defined by the polynomial identity
+\begin{equation}\label{eq:coupling}
+\frac{(uX-vY)^z(vX+uY)^{T-z}}{\sqrt{z!(T-z)!}}=\sum_{p=0}^Ts^{(u)}_{z,T,p}\,\frac{X^pY^{T-p}}{\sqrt{p!(T-p)!}}
+\end{equation}
+\cite[Lemma~3.3 (Fixed-deficit coupling limit)]{OAI:A-Fock-space-inequality-and-the-Laughlin-spectral-gap-September-24-2026}, and are zero for indices outside these
+ranges. The substitution $(X,Y)\mapsto(uX-vY,vX+uY)$ is orthogonal, hence unitary for the Bargmann inner product, so for
+fixed $T$ the real matrix $(s^{(u)}_{z,T,p})_{z,p}$ is orthogonal.
+
+\paragraph{Three particles.} Use the Jacobi coordinates $\rho_1=(r_1-r_2)/\sqrt2$, $\rho_2=(r_1+r_2-2r_3)/\sqrt6$ and
+$\zeta=(r_1+r_2+r_3)/\sqrt3$, and put $s_{z,T,p}:=s^{(1/\sqrt3)}_{z,T,p}$,
+\[
+\xi_z(\rho):=\eta_1(\rho_1)\,\eta_z(\rho_2),\qquad \ket{z,T}^R:=\xi_z\otimes\varphi^R_{T-z}\quad(0\le z\le T).
+\]
+Permutations of the particles act on $\rho$ only (Lemma~\ref{lem:jacobi}(iii)); we write $W_3\xi_z:=\sqrt3A_3\xi_z$, so that
+$W_3\ket{z,T}^R=(W_3\xi_z)\otimes\varphi^R_{T-z}$.
+
+\begin{lemma}\label{lem:coupled3}
+For $p,j\ge0$ and $R\in\R^2$, $v_p^{*R}\otimes\eta_j^R=\sum_{z=0}^{p+j}s_{z,p+j,p}\ket{z,p+j}^R$, where $v_p^{*R}$ acts on the
+particles $1,2$ and $\eta_j^R$ on particle $3$.
+\end{lemma}
+
+\begin{proof}
+At $R=0$, in the Bargmann form, $v_p^{*0}\otimes\eta_j$ is $w\,X^pY^j/\sqrt{p!j!}$ with $w=(z_1-z_2)/\sqrt2$, $X=(z_1+z_2)/\sqrt2$,
+$Y=z_3$. For $u=1/\sqrt3$, $uX-vY=(z_1+z_2-2z_3)/\sqrt6$ and $vX+uY=(z_1+z_2+z_3)/\sqrt3$ are the Bargmann forms of $\rho_2$ and
+$\zeta$, so $\ket{z,T}^0$ is $w$ times the left side of \eqref{eq:coupling}; invert the orthogonal matrix. For general $R$ apply
+$t_R^{\otimes3}$, which acts as $t_{\sqrt3R}$ on $\zeta$ and trivially on $\rho$ and multiplies both sides by $e^{3\iu R_xR_y/2}$.
+\end{proof}
+
+\paragraph{Four particles.} Use $\rho_1=(r_1-r_2)/\sqrt2$, $\rho_2=(r_3-r_4)/\sqrt2$, $\rho_3=(r_1+r_2-r_3-r_4)/2$ and
+$\zeta=(r_1+r_2+r_3+r_4)/2$. For odd $r$ and $D\ge r$ let
+\[
+\omega_{D,r}(\rho):=\eta_1(\rho_1)\,\eta_r(\rho_2)\,\eta_{D-r}(\rho_3),\qquad \ket{D,T;r}^R:=\omega_{D,r}\otimes\varphi^R_{T-D}\quad(T\ge D),
+\]
+and, following~\cite[Section~4.2, (23)]{OAI:A-Fock-space-inequality-and-the-Laughlin-spectral-gap-September-24-2026},
+$S_r(D,T;p,j,k):=\sqrt2\,s^{(1/\sqrt2)}_{r,j+k,j}\,s^{(1/\sqrt2)}_{D-r,T-r,p}$, interpreted as zero if $r>j+k$, for $p+j+k=T$. Let
+$\mathcal R_D$ be the set of odd integers in $[1,D]$.
+
+\begin{lemma}\label{lem:coupled4}
+For $p\ge0$ and $j\ne k$, with $T=p+j+k$, $S_r(D,T;p,j,k)=-S_r(D,T;p,k,j)$ and
+$v_p^{*R}\otimes(\eta_j^R\wedge\eta_k^R)=\sum_{D\le T}\sum_{r\in\mathcal R_D}S_r(D,T;p,j,k)\ket{D,T;r}^R$, with $v_p^{*R}$ on the
+particles $1,2$ and $\eta_j^R\wedge\eta_k^R$ on $3,4$. The vectors $\ket{D,T;r}^R$, $r\in\mathcal R_D$, $D\le T$, are orthonormal;
+in particular, for $b=(p,j,k)$ with $p+j+k=D$ and $j<k$, the matrix $S_{rb}:=S_r(D,D;b)$ satisfies $SS^{\mathsf T}=\one$.
+\end{lemma}
+
+\begin{proof}
+At $R=0$, in the Bargmann form, $\eta_j\wedge\eta_k$ on the particles $3,4$ is $(z_3^jz_4^k-z_3^kz_4^j)/\sqrt{2j!k!}$. By
+\eqref{eq:coupling} with $u=v=1/\sqrt2$, $X=z_3$, $Y=z_4$ and $m=j+k$, the normalized monomial $z_3^jz_4^{m-j}/\sqrt{j!(m-j)!}$ is
+$\sum_rs^{(1/\sqrt2)}_{r,m,j}\,\omega_{34}^r\Omega_{34}^{m-r}/\sqrt{r!(m-r)!}$ with $\omega_{34}=(z_3-z_4)/\sqrt2$, $\Omega_{34}=(z_3+z_4)/\sqrt2$;
+exchanging $X$ and $Y$ multiplies the left side of \eqref{eq:coupling} by $(-1)^r$, so $s^{(1/\sqrt2)}_{r,m,m-j}=(-1)^rs^{(1/\sqrt2)}_{r,m,j}$,
+and the antisymmetric combination keeps the odd $r$ with the coefficient $\sqrt2\,s^{(1/\sqrt2)}_{r,m,j}$. Next couple the pair
+centres $X'=(z_1+z_2)/\sqrt2$ (degree $p$) and $Y'=\Omega_{34}$ (degree $m-r$) by \eqref{eq:coupling} with $u=1/\sqrt2$: the
+relative variable $(X'-Y')/\sqrt2$ is the Bargmann form of $\rho_3$ and $(X'+Y')/\sqrt2$ that of $\zeta$, and the relative degree
+$d=D-r$ comes with the coefficient $s^{(1/\sqrt2)}_{D-r,T-r,p}$. With the factor $w=(z_1-z_2)/\sqrt2$ of $v_p^{*0}$ this is the
+expansion. The vectors $\ket{D,T;r}^0$ are products of normalized monomials in the orthonormal Jacobi coordinates, hence
+orthonormal; translate by $t_R^{\otimes4}$ for general $R$. The antisymmetry in $(j,k)$ was shown above. Finally, at fixed $T$
+both $\{v_p^{*R}\otimes(\eta_j^R\wedge\eta_k^R):p+j+k=T,\ j<k\}$ and $\{\ket{D,T;r}^R:r\in\mathcal R_D,\ D\le T\}$ are orthonormal bases of the
+same space (in the Bargmann form: $w$ times the polynomials of degree $T$ in the remaining variables that are odd under
+$z_3\leftrightarrow z_4$), so the change of basis is orthogonal; its rows with $D=T$ are the rows of $S$, whence $SS^{\mathsf T}=\one$.
+\end{proof}
+
+We write $W_4\omega_{D,r}:=\sqrt6A_4\,\omega_{D,r}$; then $W_4\ket{D,T;r}^R=(W_4\omega_{D,r})\otimes\varphi^R_{T-D}$, and
+$W_4\ket{D,D;r}^0$ is the vector $w^*_{Dr}$ of~\cite[Section~4.2, (27)]{OAI:A-Fock-space-inequality-and-the-Laughlin-spectral-gap-September-24-2026}.
+
+\subsection{The certificate}
+
+The following data and inequalities are taken from~\cite[Section~4 and Appendix~A]{OAI:A-Fock-space-inequality-and-the-Laughlin-spectral-gap-September-24-2026};
+the exact rows are reproduced in Appendix~\ref{app:certificate}. There are seven \emph{rows} $\nu=1,\dots,7$, each with an
+integer $t_\nu\in\{0,\dots,7\}$, a real $\lambda_\nu$ and real coefficients $\alpha^\nu_{pj}$ supported in
+\[
+\mathcal S_\nu:=\{(p,j)\in\Z^2:0\le p\le7,\ 0\le j\le8,\ 0\le p+j-t_\nu\le8\}.
+\]
+Put $\etas:=\sum_\nu\lambda_\nu^2=93527408868499/10^{14}$ and $\eps:=3\cdot10^{-6}$. For $z\ge0$ define
+\begin{equation}\label{eq:ez}
+e_z:=\sum_\nu\sum_{T=\max(z,t_\nu)}^{15}\Bigl[2\lambda_\nu\,s_{z,T,t_\nu}\sum_{p+j=T}\alpha^\nu_{pj}s_{z,T,p}
++\Bigl(\sum_{p+j=T}\alpha^\nu_{pj}s_{z,T,p}\Bigr)^2\Bigr],
+\end{equation}
+so that $e_z=0$ for $z\ge16$, and for $1\le D\le23$ and $r,s\in\mathcal R_D$
+\begin{equation}\label{eq:ED}
+(E_D)_{rs}:=-\sum_\nu\sum_{\substack{(p,j),(q,l)\in\mathcal S_\nu\\ T\ge D}}\alpha^\nu_{pj}\alpha^\nu_{ql}\,S_r(D,T;p,j,k)\,S_s(D,T;q,l,i),
+\end{equation}
+where $i=p+j-t_\nu$, $k=q+l-t_\nu$ and $T=p+j+k$. Let $(e_r)_{r\in\mathcal R_D}$ be the standard basis of $\C^{\mathcal R_D}$, so
+that $\kb{e_1}{e_1}$ is the matrix with $(1,1)$ entry $1$ and all other entries zero, and let $G_D$ be the Gram matrix of the
+vectors $W_4\omega_{D,r}$, $r\in\mathcal R_D$. The certificate consists of the inequalities
+\begin{align}
+&e_z<\tfrac32(3z-1)(-\tfrac12)^z\qquad\text{for } z\in\{2,4,5,\dots,15\},\label{eq:C3}\\
+&G_D\,(2\kb{e_1}{e_1}-E_D+\eps\one)\,G_D\ge0\qquad\text{for }1\le D\le23,\label{eq:C4}
+\end{align}
+which are proved in~\cite[Appendix~A]{OAI:A-Fock-space-inequality-and-the-Laughlin-spectral-gap-September-24-2026} by exact rational
+arithmetic. We use them as data.
+
+\begin{lemma}[compression; {\cite[Lemma~5.1 (Compression and annihilator bounds)]{OAI:A-Fock-space-inequality-and-the-Laughlin-spectral-gap-September-24-2026}}]\label{lem:compression}
+Let $W$ be a linear map between finite-dimensional Hilbert spaces, $G=W^*W$, and $C$ self-adjoint on the domain of $W$. Then
+$GCG\ge0$ if and only if $WCW^*\ge0$. In particular \eqref{eq:C4} is equivalent to
+$\sum_{r,s\in\mathcal R_D}(2\kb{e_1}{e_1}-E_D+\eps\one)_{rs}\kb{W_4\omega_{D,r}}{W_4\omega_{D,s}}\ge0$.
+\end{lemma}
+
+\begin{proof}
+Both conditions say that the quadratic form of $C$ is nonnegative on $\ran G=\ran W^*$. Apply this to the map
+$e_r\mapsto W_4\omega_{D,r}$.
+\end{proof}
+
+\subsection{The comparison operator and its parts}
+
+\begin{definition}[the comparison operator]\label{def:KT}
+For $R\in\R^2$ and each row $\nu$ let
+\[
+F_\nu(R):=\lambda_\nu\,B(\ut_{t_\nu}(R))+\sum_{(p,j)\in\mathcal S_\nu}\alpha^\nu_{pj}\,c(\chi^R_{p+j-t_\nu})^*\,c(\chi_j^R)\,B(\ut_p(R)),
+\]
+\[
+\KT:=\frac1\pi\int_\cell\sum_\nu F_\nu(R)^*F_\nu(R)\,\dd R .
+\]
+By Lemma~\ref{lem:localmodes}(c), $F_\nu(R+\gamma)=e^{-2\iu\theta}F_\nu(R)$ for $\gamma\in\Lam$, so the integrand is a function on
+$\Tor$. Clearly $\KT\ge0$; by Corollary~\ref{cor:pairmoyal}, every summand of $F_\nu(R)$ annihilates $\ker\HT$.
+\end{definition}
+
+These are the rows of~\cite[Section~4, (14)]{OAI:A-Fock-space-inequality-and-the-Laughlin-spectral-gap-September-24-2026} with every planar
+mode replaced by its periodization; each summand removes two particles and lowers the total orbital degree by $t_\nu+1$.
+
+\begin{proposition}[the parts of $\KT$]\label{prop:parts}
+Let $Y_z:=\kb{W_3\xi_z}{W_3\xi_z}\otimes\one$ and $\Cth:=72\sum_\nu\norm{\alpha^\nu}^2$, where $\norm{\alpha^\nu}^2=\sum_{p,j}(\alpha^\nu_{pj})^2$.
+Then $\KT=\KT^{(2)}+\KT^{(3)}+\KT^{(4)}$ with
+\begin{enumerate}[(a)]
+\item $\KT^{(2)}=\etas\,\HT$;
+\item $\KT^{(3)}=\frac23\LL_3\Pp_3\bigl(\sum_{z\le15}e_zY_z\bigr)+\mathcal C_3$ with $\pm\mathcal C_3\le\Cth\,\Ec_8(\Tor)\bigl(1+\Ec_8(\Tor)\bigr)\HT$;
+\item $\KT^{(4)}=\frac12\LL_4\Pp_4\bigl(\sum_{D=1}^{23}\sum_{r,s\in\mathcal R_D}(E_D)_{rs}\kb{W_4\omega_{D,r}}{W_4\omega_{D,s}}\otimes\one\bigr)$;
+\item with $\mathcal T_4:=\LL_4\Pp_4\bigl(\sum_{D=1}^{23}\kb{W_4\omega_{D,1}}{W_4\omega_{D,1}}\otimes\one\bigr)$,
+\[
+\tfrac12\LL_4\Pp_4\Bigl(\sum_{D=1}^{23}\sum_{r\in\mathcal R_D}\kb{W_4\omega_{D,r}}{W_4\omega_{D,r}}\otimes\one\Bigr)\le1222\,(1+\Ec_{23})^2\HT,\qquad
+\mathcal T_4\le2444\,(1+\Ec_{23})^2\HT,
+\]
+with $\Ec_{23}=\Ec_{23}(\Tor)$, and $\KT^{(4)}\le\mathcal T_4+1222\,\eps\,(1+\Ec_{23})^2\HT$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Fix $R$ and a row; write $t=t_\nu$, $\alpha_b=\alpha^\nu_{pj}$ for $b=(p,j)$, $i=i(b):=p+j-t$, $c_m:=c(\chi^R_m)$, $B_p:=B(\ut_p(R))$ and
+$\Gamma=\Gamma(R)$. Since $\{c(f),c(g)^*\}=\ip fg$, $c_ic_k^*=\Gamma_{ik}-c_k^*c_i$, and normal ordering gives
+\[
+F^*F=\lambda^2B_t^*B_t+\sum_b\lambda\alpha_b\bigl[(c_iB_t)^*c_jB_p+\mathrm{h.c.}\bigr]+\sum_{b,b'}\alpha_b\alpha_{b'}\Gamma_{ik}(c_jB_p)^*c_lB_q
+-\sum_{b,b'}\alpha_b\alpha_{b'}O_{p,j,k}^*O_{q,l,i},
+\]
+with $b'=(q,l)$, $k=i(b')$ and $O_{p,j,k}:=c_kc_jB_p$. By \eqref{eq:Bwedge}, $c_jB_p=B(\ut_p\wedge\chi_j)$ and $O_{p,j,k}=B(\ut_p\wedge\chi_j\wedge\chi_k)$,
+and by Lemma~\ref{lem:localmodes}(b), $\ut_p(R)\wedge\chi^R_j=\Pk^{(3)}W_3(v_p^{*R}\otimes\eta_j^R)$ and
+$\ut_p\wedge\chi_j\wedge\chi_k=\Pk^{(4)}W_4(v_p^{*R}\otimes(\eta^R_j\wedge\eta^R_k))$. Let $\KT^{(2)}$, $\KT^{(3)}$, $\KT^{(4)}$ be $\frac1\pi\int_\cell$ of the
+sums over the rows of the two-, three- and four-body terms, and $\mathcal C_3$ the part of $\KT^{(3)}$ with $\Gamma_{ik}-\delta_{ik}$ in place
+of $\Gamma_{ik}$.
+
+(a) is Corollary~\ref{cor:pairmoyal} with $p=t$.
+
+(b) For a finite-rank planar operator $X=\sum_\mu\kb{x_\mu}{y_\mu}$ with Gaussian-decaying $x_\mu,y_\mu$ write
+$\Pk^{(3)}[X]:=\sum_\mu\kb{\Pk^{(3)}x_\mu}{\Pk^{(3)}y_\mu}$. With $\delta_{ik}$ in place of $\Gamma_{ik}$, the three-body terms summed over
+the rows are $\LL_3\bigl(\Pk^{(3)}[W_3M_3(R)W_3^*]\bigr)$, where
+\[
+M_3(R):=\sum_\nu\Bigl[\lambda_\nu\sum_b\alpha_b\bigl(\kb{v_t^{*R}\otimes\eta_i^R}{v_p^{*R}\otimes\eta_j^R}+\mathrm{h.c.}\bigr)
++\sum_{b,b':\,i=k}\alpha_b\alpha_{b'}\kb{v_p^{*R}\otimes\eta_j^R}{v_q^{*R}\otimes\eta_l^R}\Bigr];
+\]
+we expand $M_3(R)$ with Lemma~\ref{lem:coupled3}. Every term has equal total degree on both sides ($t+i=p+j$, and $p+j=q+l$ when $i=k$),
+so $M_3(R)=\sum m_{(z,c),(z',c')}\kb{\xi_z\otimes\varphi_c^R}{\xi_{z'}\otimes\varphi_{c'}^R}$ with real coefficients independent of $R$ and
+supported on $z+c=z'+c'\le15$. By Theorem~\ref{thm:moyal} with $k=3$ and $\frac1\pi=\frac23\cdot\frac3{2\pi}$, only $c=c'$, hence $z=z'$,
+survives, and the result is $\frac23\LL_3\Pp_3(\sum_z\bigl[\sum_cm_{(z,c),(z,c)}\bigr]Y_z)$. Finally
+$\sum_cm_{(z,c),(z,c)}=\sum_{T\ge z}\ip{\ket{z,T}^0}{M_3(0)\ket{z,T}^0}$, and since $\ip{\ket{z,T}^0}{v_p^{*0}\otimes\eta_j}=s_{z,T,p}$ for
+$p+j=T$ (Lemma~\ref{lem:coupled3}), this is \eqref{eq:ez}. For $\mathcal C_3$, let $x_b:=c_jB_p\Psi$ and $M_{bb'}:=\alpha_b\alpha_{b'}(\Gamma-\one)_{ik}$.
+Only the modes $0,\dots,8$ occur in $(i,k)$, so $\norm M\le\norm M_{\mathrm{HS}}\le\Ec_8\norm{\alpha^\nu}^2$ by Lemma~\ref{lem:localgram}, and
+since $[\ip{x_b}{x_{b'}}]\ge0$, $\abs{\sum M_{bb'}\ip{x_b}{x_{b'}}}\le\norm M\sum_b\norm{x_b}^2$. Next
+$\norm{c_jB_p\Psi}^2\le\Gamma_{jj}\norm{B_p\Psi}^2\le(1+\Ec_8)\norm{B_p\Psi}^2$, each $p\le7$ occurs with at most nine values of $j$, and
+$\frac1\pi\int_\cell\sum_{p\le7}\norm{B(\ut_p(R))\Psi}^2\dd R=8\ip\Psi{\HT\Psi}$ by Corollary~\ref{cor:pairmoyal}. Summing over the rows gives
+$\abs{\ip\Psi{\mathcal C_3\Psi}}\le72\,\Ec_8(1+\Ec_8)\sum_\nu\norm{\alpha^\nu}^2\ip\Psi{\HT\Psi}$.
+
+(c) The four-body terms summed over the rows are $\LL_4\bigl(\Pk^{(4)}[W_4M_4(R)W_4^*]\bigr)$, with the notation of (b) and
+\[
+M_4(R):=-\sum_\nu\sum_{b,b'}\alpha_b\alpha_{b'}\kb{v_p^{*R}\otimes(\eta_j^R\wedge\eta_k^R)}{v_q^{*R}\otimes(\eta_l^R\wedge\eta_i^R)}.
+\]
+Expanding
+with Lemma~\ref{lem:coupled4}, both sides have total degree $T=p+j+k=q+l+i\le23$; Theorem~\ref{thm:moyal} with $k=4$ and
+$\frac1\pi=\frac12\cdot\frac4{2\pi}$ keeps the equal centre-of-mass degrees, hence equal $D$, with the copy matrix
+$\sum_{T\ge D}\ip{\ket{D,T;r}^0}{M_4(0)\ket{D,T;s}^0}$, which is \eqref{eq:ED} because
+$\ip{\ket{D,T;r}^0}{v_p^{*0}\otimes(\eta_j\wedge\eta_k)}=S_r(D,T;p,j,k)$.
+
+(d) By Theorem~\ref{thm:moyal} with $k=4$ and $p=q=0$,
+\begin{gather*}
+\LL_4\Pp_4\bigl(\kb{W_4\omega_{D,r}}{W_4\omega_{D,r}}\otimes\one\bigr)=\frac2\pi\int_\cell B(x_{D,r}(R))^*B(x_{D,r}(R))\,\dd R,\\
+x_{D,r}(R):=\Pk^{(4)}W_4\ket{D,D;r}^R=\sum_bS_{rb}\,\ut_p(R)\wedge\chi_j^R\wedge\chi_k^R,
+\end{gather*}
+with $b=(p,j,k)$, $p+j+k=D$, $j<k$ (Lemma~\ref{lem:coupled4}; $S$ is real). Hence $B(x_{D,r})=\sum_bS_{rb}O_b$ with
+$O_b:=c_kc_jB_p$, and since $SS^{\mathsf T}=\one$,
+\[
+\sum_r\norm{B(x_{D,r})\Psi}^2\le\sum_b\norm{O_b\Psi}^2\le(1+\Ec_{23})^2\sum_b\norm{B_p\Psi}^2,
+\]
+the mode indices $j<k\le D$ being at most $23$.
+For the single vector $r=1$, Cauchy--Schwarz with $\sum_bS_{1b}^2=1$ gives the same bound for $\norm{B(x_{D,1})\Psi}^2$. There are
+$n_D=\sum_{m=1}^D\lceil m/2\rceil=\lfloor(D+1)^2/4\rfloor$ triples $b$, and $\sum_{D=1}^{23}n_D=1222$. Averaging with
+Corollary~\ref{cor:pairmoyal} gives the two bounds. Finally, by Lemma~\ref{lem:compression} and \eqref{eq:C4}, for each $D$,
+\[
+\sum_{r,s}(E_D)_{rs}\kb{W_4\omega_{D,r}}{W_4\omega_{D,s}}\le2\kb{W_4\omega_{D,1}}{W_4\omega_{D,1}}+\eps\sum_r\kb{W_4\omega_{D,r}}{W_4\omega_{D,r}}
+\]
+as relative operators, and $\frac12\LL_4\Pp_4(\,\cdot\otimes\one)$ preserves order (Lemmas~\ref{lem:Pk}(c) and~\ref{lem:lift}(iii)), which gives the last inequality.
+\end{proof}

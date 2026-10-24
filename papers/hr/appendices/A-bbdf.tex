@@ -1,0 +1,235 @@
+\section{The index theorem of Bachmann, Bols, De Roeck and Fraas}\label{app:bbdf}
+
+This appendix states the setting and the main results of \cite{BBDF21}, which Section~\ref{sec:index} adapts;
+reproduces with proofs the operator-theoretic lemmas of \cite[Section~4.1]{BBDF21} together with the elementary
+inequalities used in Section~\ref{sec:index}; matches the steps of \cite{BBDF21} with those of
+Sections~\ref{sec:locality}--\ref{sec:translation}; and records two misprints in \cite[Section~4.2]{BBDF21}. We follow
+version~3 of the arXiv e-print; its Lemma~4.1 replaces an incorrect lemma of the published version, and the proof of
+its Lemma~4.2 changes accordingly, while the statement does not \cite[Section~4.1]{BBDF21}. Numbers such as Lemma~4.1
+or~(4.13) refer to that version.
+
+\subsection{The setting and the theorem}
+
+In \cite[Sections~2--3]{BBDF21}, $\Lambda$ is a finite graph with the graph distance, of diameter $L$, with
+$\sup_x\abs{\{x\}_{(r)}}\le C(1+r)^d$, carrying a copy of $\C^n$ at each vertex (a spin system, or a fermion system
+with $n=2^f$, whose algebra of observables is the even part of the canonical anticommutation algebra). The
+Hamiltonian is $H=\sum_{Z\subset\Lambda}h_Z$ with $\supp h_Z=Z$, $h_Z=0$ unless $\diam Z\le R_H$, and $\norm{h_Z}\le m_H$.
+The charges $q_Z$ satisfy $\supp q_Z=Z$, $q_Z=0$ unless $\diam Z\le R_Q$, $\norm{q_Z}\le m_Q$, $\sigma(q_Z)\subset\Z$ and
+$[q_Z,q_{Z'}]=0$; $Q_S:=\sum_{Z\subset S}q_Z$, and $[Q_\Lambda,H]=0$. A set $\Gamma\subset\Lambda$ has boundary
+$\partial\Gamma=\partial_-\cup\partial_+$ with $\dist(\partial_-,\partial_+)\ge cL$, and $Q:=Q_\Gamma$. All of $R_H$, $R_Q$, $m_H$,
+$m_Q$, $\gamma$ and $p$ are independent of $L$. A sequence $A=A_L$ is almost supported in $Z=Z_L$ if there are
+$A_r$ supported in $Z_{(r)}$ with $\norm{A-A_r}=\norm A\abs Z\,O(r^{-\infty})$, and a sequence of unitaries $U$ is
+locality-preserving if $U^*\AS_ZU\subset\AS_Z$ for all $Z$, where $\AS_Z$ denotes the sequences almost supported in $Z$.
+
+\begin{assumption}[gap {\cite[Assumption~1]{BBDF21}}]\label{ass:bbdf-gap}
+The eigenvalues $E_1\le E_2\le\cdots$ of $H$ on the whole Hilbert space, repeated according to multiplicity,
+satisfy $E_{p+1}-E_p\ge\gamma$ and $E_p-E_1\le\Delta$, with $L$-independent $\gamma>0$, $\Delta>0$ and $p$, and $\gamma>2\Delta$.
+$P$ is the spectral projection onto $\{E_1,\dots,E_p\}$.
+\end{assumption}
+
+\begin{proposition}[clustering {\cite[Proposition~3.1]{BBDF21}}]\label{prop:bbdf-cluster}
+Under Assumption~\ref{ass:bbdf-gap}, for $A\in\AS_X$, $B\in\AS_Y$ with $X\cap Y=\emptyset$ and every normalized
+$\Omega\in\ran P$, $\abs{\ip\Omega{AB\Omega}-\ip\Omega{APB\Omega}}=\norm A\norm B\abs X\abs Y\,O(d(X,Y)^{-\infty})$.
+\end{proposition}
+
+\begin{assumption}[charge- and locality-preserving unitary {\cite[Assumption~2]{BBDF21}}]\label{ass:bbdf-U}
+There is a locality-preserving unitary $U$ with $[U,P]=O(L^{-\infty})$ and $[U,Q_\Lambda]=0$.
+\end{assumption}
+
+Under Assumption~\ref{ass:bbdf-U}, $U^*QU-Q=T_-+T_+$ with $T_\pm\in\AS_{\partial_\pm}$ and $\norm{T_\pm}\le C\abs\Lambda$
+\cite[(3.3)]{BBDF21}, and $T_\pm$ can be chosen so that $e^{2\pi\iu(Q+T_\pm)}=\one+O(L^{-\infty})$ \cite[(3.4)]{BBDF21}.
+
+\begin{theorem}[{\cite[Theorem~3.2]{BBDF21}}]\label{thm:bbdf-index}
+Under Assumptions~\ref{ass:bbdf-gap} and \ref{ass:bbdf-U}, $\Tr(PT_-)$ lies within $O(L^{-\infty})$ of an integer.
+\end{theorem}
+
+\begin{corollary}[fractional Lieb--Schultz--Mattis theorem {\cite[Corollary~5.2]{BBDF21}}]\label{cor:bbdf-lsm}
+Let $\Lambda=\mathbb T\,\Box\,\Lambda'$ be the cartesian product of a discrete circle $\mathbb T=\Z/L_1\Z$ and a graph
+$\Lambda'$, let $\mathcal T$ be the shift along $\mathbb T$ with $[H,\mathcal T]=0$, and let $\Gamma=\{(x_1,x'):0\le x_1<L_1/2\}$.
+Then $T_-=-Q_{[0]}$, the charge of the slab $[0]=\{0\}\times\Lambda'$, and under Assumption~\ref{ass:bbdf-gap},
+$p\expP{Q_{[0]}}$ lies within $O(L^{-\infty})$ of an integer.
+\end{corollary}
+
+\subsection{Operator-theoretic lemmas}
+
+\begin{lemma}[{\cite[Lemma~4.1]{BBDF21}}, with a sharpened conclusion]\label{lem:bbdf41}
+Let $V$ be a unitary and $P$ an orthogonal projection on a Hilbert space.
+\begin{enumerate}[(i)]
+\item For every unit vector $\psi\in\ran P$, $\norm{PV\psi}^2=1+\ip\psi{V^*[P,V]\psi}\ge1-\norm{[V,P]}$, and likewise
+$\norm{PV^*\psi}^2\ge1-\norm{[V,P]}$.
+\item Let $\varepsilon\in[0,1]$. If $\norm{PV\psi}^2\ge(1-\varepsilon^2)\norm\psi^2$ and $\norm{PV^*\psi}^2\ge(1-\varepsilon^2)\norm\psi^2$ for
+every $\psi\in\ran P$, then $\norm{(\one-P)VP}\le\varepsilon$, $\norm{PV(\one-P)}\le\varepsilon$, and $\norm{[V,P]}\le\varepsilon$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(i) Since $PV=VP+[P,V]$, we have $V^*PV=P+V^*[P,V]$. For a unit vector $\psi$ with $P\psi=\psi$, therefore,
+\[
+\norm{PV\psi}^2=\ip{V\psi}{PV\psi}=\ip\psi{V^*PV\psi}=\ip\psi{P\psi}+\ip\psi{V^*[P,V]\psi}=1+\ip\psi{V^*[P,V]\psi},
+\]
+which is at least $1-\norm{V^*[P,V]}=1-\norm{[V,P]}$. In the same way $VPV^*=(PV+[V,P])V^*=P+[V,P]V^*$ gives
+$\norm{PV^*\psi}^2=1+\ip\psi{[V,P]V^*\psi}\ge1-\norm{[V,P]}$.
+
+(ii) Let $\phi$ be any vector and $\psi:=P\phi\in\ran P$. Since $V$ is unitary and $P$ and $\one-P$ are complementary
+orthogonal projections,
+\[
+\norm\psi^2=\norm{V\psi}^2=\norm{(\one-P)V\psi}^2+\norm{PV\psi}^2\ge\norm{(\one-P)V\psi}^2+(1-\varepsilon^2)\norm\psi^2 ,
+\]
+so $\norm{(\one-P)VP\phi}^2\le\varepsilon^2\norm{P\phi}^2\le\varepsilon^2\norm\phi^2$, that is, $\norm{(\one-P)VP}\le\varepsilon$. The same
+argument with $V^*$ in place of $V$ gives $\norm{(\one-P)V^*P}\le\varepsilon$, and $PV(\one-P)=((\one-P)V^*P)^*$ has the same
+norm. Finally $[V,P]=VP-PV=(\one-P)VP-PV(\one-P)$. For $\phi=\phi_1+\phi_2$ with $\phi_1\in\ran P$ and
+$\phi_2\in\ran(\one-P)$ we get $[V,P]\phi=(\one-P)VP\phi_1-PV(\one-P)\phi_2$, and the two terms lie in the orthogonal
+subspaces $\ran(\one-P)$ and $\ran P$; hence $\norm{[V,P]\phi}^2\le\varepsilon^2(\norm{\phi_1}^2+\norm{\phi_2}^2)=\varepsilon^2\norm\phi^2$.
+\end{proof}
+
+In \cite[Lemma~4.1(ii)]{BBDF21} the two hypotheses are strict inequalities with $\norm{P\psi}^2$ on the right-hand side,
+the second is printed without the square on $\norm{PV^*\psi}$, and the conclusion is $\norm{[V,P]}<2\varepsilon$. The proof
+given there yields the bounds on $(\one-P)VP$ and $PV(\one-P)$ stated here; the block structure of $[V,P]$ used in the
+last step replaces $2\varepsilon$ by $\varepsilon$.
+
+\begin{lemma}[{\cite[Lemma~4.3]{BBDF21}}]\label{lem:bbdf43}
+Let $A$ be a bounded self-adjoint operator, $P$ an orthogonal projection, and $\varphi\in\R$. Then
+$[e^{-\iu\varphi A},P]=-\iu\int_0^\varphi e^{-\iu uA}[A,P]e^{-\iu(\varphi-u)A}\,\dd u$; in particular
+$\norm{[e^{\iu\varphi A},P]}\le\abs\varphi\norm{[A,P]}$.
+\end{lemma}
+
+\begin{proof}
+The function $u\mapsto e^{-\iu uA}Pe^{-\iu(\varphi-u)A}$ is differentiable in norm, with derivative
+$e^{-\iu uA}(-\iu AP+\iu PA)e^{-\iu(\varphi-u)A}=-\iu e^{-\iu uA}[A,P]e^{-\iu(\varphi-u)A}$. Its values at $u=\varphi$ and at
+$u=0$ are $e^{-\iu\varphi A}P$ and $Pe^{-\iu\varphi A}$, so the fundamental theorem of calculus gives the identity. The
+exponentials are unitary, so the integrand has norm at most $\norm{[A,P]}$, and
+$\norm{[e^{-\iu\varphi A},P]}\le\abs\varphi\norm{[A,P]}$ for every $\varphi\in\R$; replacing $\varphi$ by $-\varphi$ gives the stated
+bound.
+\end{proof}
+
+Lemma~\ref{lem:bbdf43} is reproduced for completeness; it is not used in the proofs of this paper, which use instead
+the identity~\eqref{eq:ix-duhamel} and Lemma~\ref{lem:expbounds}.
+
+\begin{lemma}[exponentials of almost commuting operators]\label{lem:expbounds}
+Let $A$, $B$, $A'$ be bounded self-adjoint operators. Then
+\[
+\norm{[e^{\iu\varphi A},B]}\le\abs\varphi\norm{[A,B]},\qquad\norm{e^{\iu(A+B)}-e^{\iu A}e^{\iu B}}\le\tfrac12\norm{[A,B]},\qquad
+\norm{e^{\iu A}-e^{\iu A'}}\le\norm{A-A'} .
+\]
+None of these bounds depends on $\norm A$ or $\norm B$.
+\end{lemma}
+
+\begin{proof}
+For the first bound, $u\mapsto e^{\iu uA}Be^{\iu(\varphi-u)A}$ has derivative $\iu e^{\iu uA}[A,B]e^{\iu(\varphi-u)A}$, so
+$[e^{\iu\varphi A},B]=\iu\int_0^\varphi e^{\iu uA}[A,B]e^{\iu(\varphi-u)A}\,\dd u$, whose norm is at most $\abs\varphi\norm{[A,B]}$;
+this part does not use the self-adjointness of $B$. For the second, let $O(s):=e^{\iu sA}e^{\iu sB}e^{-\iu s(A+B)}$,
+$s\in[0,1]$. Then $O(0)=\one$ and, since $A$ commutes with $e^{\iu sA}$ and $B$ with $e^{\iu sB}$,
+\[
+O'(s)=e^{\iu sA}\bigl(\iu Ae^{\iu sB}+e^{\iu sB}\,\iu B-e^{\iu sB}\,\iu(A+B)\bigr)e^{-\iu s(A+B)}
+=\iu\,e^{\iu sA}[A,e^{\iu sB}]e^{-\iu s(A+B)} .
+\]
+By the first bound, with the roles of $A$ and $B$ exchanged, $\norm{O'(s)}\le\norm{[e^{\iu sB},A]}\le s\norm{[A,B]}$, and so
+\[
+\norm{e^{\iu A}e^{\iu B}-e^{\iu(A+B)}}=\norm{(O(1)-\one)e^{\iu(A+B)}}=\norm{O(1)-\one}\le\int_0^1s\norm{[A,B]}\,\dd s=\tfrac12\norm{[A,B]} .
+\]
+For the third, $u\mapsto e^{\iu uA}e^{\iu(1-u)A'}$ has derivative $\iu e^{\iu uA}(A-A')e^{\iu(1-u)A'}$, so
+$e^{\iu A}-e^{\iu A'}=\iu\int_0^1e^{\iu uA}(A-A')e^{\iu(1-u)A'}\,\dd u$, of norm at most $\norm{A-A'}$. All exponentials of
+self-adjoint operators that occur are unitary, so no bound depends on $\norm A$ or $\norm B$.
+\end{proof}
+
+\begin{lemma}[determinants and integers]\label{lem:det}
+Let $P$ be an orthogonal projection of rank $p$, and for $A$ with $[A,P]=0$ let $\detP A:=\det(PAP|_{\ran P})$.
+\begin{enumerate}[(i)]
+\item If $A$ and $B$ act on a $p$-dimensional space and $\norm A,\norm B\le1$, then $\abs{\det A-\det B}\le p\norm{A-B}$.
+\item If $[A,P]=0$, then $\detP(e^A)=e^{\Tr(PA)}$; and $\detP(AB)=\detP(A)\detP(B)$ when $[A,P]=[B,P]=0$.
+\item If $V$ is unitary, then $PV^*PVP-P=PV^*[P,V]P$; hence $\abs{\det(PV^*P|_{\ran P})\det(PVP|_{\ran P})-1}\le p\norm{[P,V]}$.
+\item $\abs{e^{2\pi\iu x}-1}\ge4\dist(x,\Z)$ for every $x\in\R$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(i) Fix an orthonormal basis of the $p$-dimensional space, and let $a_k$ and $b_k$ be the $k$-th columns of the
+matrices of $A$ and $B$. By the multilinearity of the determinant in the columns,
+\[
+\det A-\det B=\sum_{k=1}^p\det\bigl(b_1,\dots,b_{k-1},\,a_k-b_k,\,a_{k+1},\dots,a_p\bigr).
+\]
+By Hadamard's inequality, $\abs{\det(v_1,\dots,v_p)}\le\prod_k\abs{v_k}$ for the Euclidean norms of the columns: in the
+Gram--Schmidt factorization $(v_1,\dots,v_p)=OR$, with $O$ unitary and $R$ upper triangular, $\abs{R_{kk}}\le\abs{v_k}$ and
+$\abs{\det(v_1,\dots,v_p)}=\prod_k\abs{R_{kk}}$. The columns of $A$ and $B$ are images of unit vectors under contractions,
+so they have norm at most one, and $\abs{a_k-b_k}\le\norm{A-B}$. Hence each term has modulus at most $\norm{A-B}$.
+
+(ii) If $[A,P]=0$, then $A$ maps $\ran P$ into itself, and the restriction of $e^A$ to $\ran P$ is $e^{A_P}$, with
+$A_P:=PAP|_{\ran P}$. A matrix $M$ with eigenvalues $\mu_1,\dots,\mu_p$, counted with algebraic multiplicity, is similar
+to an upper triangular matrix with these diagonal entries, and $e^M$ is then similar to an upper triangular matrix
+with diagonal entries $e^{\mu_1},\dots,e^{\mu_p}$; so $\det e^M=e^{\mu_1+\dots+\mu_p}=e^{\Tr M}$. Hence
+$\detP(e^A)=e^{\Tr(A_P)}=e^{\Tr(PAP)}=e^{\Tr(PA)}$. If $[A,P]=[B,P]=0$, then $PA(\one-P)=AP(\one-P)=0$, so
+$PABP=PAPBP+PA(\one-P)BP=PAPBP$; the restriction of $PABP$ to $\ran P$ is the product of those of $PAP$ and $PBP$, and
+the determinant is multiplicative.
+
+(iii) Since $PV=VP+[P,V]$, $PV^*PVP=PV^*(VP+[P,V])P=P+PV^*[P,V]P$. The operators $PV^*P$ and $PVP$ map $\ran P$ into itself,
+and the restriction of their product is that of $PV^*PVP$; so
+$\det(PV^*P|_{\ran P})\det(PVP|_{\ran P})=\det\bigl((P+PV^*[P,V]P)|_{\ran P}\bigr)$. By (i), applied to
+$A:=PV^*PVP|_{\ran P}$ and $B:=\one_{\ran P}$, both of norm at most one, this differs from $\det B=1$ by at most
+$p\norm{PV^*[P,V]P}\le p\norm{[P,V]}$.
+
+(iv) $\abs{e^{2\pi\iu x}-1}=2\abs{\sin(\pi x)}$. With $d:=\dist(x,\Z)\in[0,\frac12]$ we have $\abs{\sin(\pi x)}=\sin(\pi d)\ge2d$,
+because $d\mapsto\sin(\pi d)$ is concave on $[0,\frac12]$ and equals $2d$ at $d=0$ and $d=\frac12$.
+\end{proof}
+
+\subsection{Correspondence with Sections~\ref{sec:locality}--\ref{sec:translation}}
+
+The following table matches the objects and steps of \cite{BBDF21} with those of this paper. The main differences are
+two. The locality of \cite{BBDF21} is that of a graph and a finite-range Hamiltonian; here it is that of the slot
+lattice, into which the lowest Landau level is embedded by Lemma~\ref{lem:embedding}, and of a Hamiltonian that is
+rapidly local there (Definition~\ref{def:class}); every error $O(L^{-\infty})$ of \cite{BBDF21} becomes an error $\Onf$,
+controlled by Lemma~\ref{lem:bookkeeping}. And the gap is assumed only in a sector (Assumption~\ref{ass:gap}), which is
+what Lemma~\ref{lem:KP} and Proposition~\ref{prop:clustering} accommodate.
+
+\begingroup\small
+\begin{longtable}{@{}p{0.45\textwidth}p{0.49\textwidth}@{}}
+\toprule
+\cite{BBDF21} & this paper\\
+\midrule
+\endfirsthead
+\toprule
+\cite{BBDF21} & this paper\\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+graph $\Lambda$ of diameter $L$; errors $O(L^{-\infty})$ (Section~2, Appendix~C) & slot lattice $\Slots$ and the
+embedding $\iota$ (Definitions~\ref{def:frame} and \ref{def:slotfock}, Lemma~\ref{lem:embedding}); errors $\Onf$
+(Remark~\ref{rem:bbdf-almost})\\
+local charges $q_Z$ and $Q_S$ (Section~2.2) & occupation numbers $n_{j\up}$ and band charges $Q_{\mathcal B}$, exactly
+supported in columns (Definition~\ref{def:charges}, Lemmas~\ref{lem:charges-elementary} and \ref{lem:bandcharges})\\
+finite-range Hamiltonian $H=\sum_Zh_Z$ (Section~2.1) & $H_N=\int h_R\,\dd R$ with (H1) and (H2)
+(Definition~\ref{def:class}, Corollary~\ref{cor:hc-in-class})\\
+almost supported sequences $\AS_Z$ (Section~2.3.1, Appendix~C) & Definition~\ref{def:almostsupported},
+Lemma~\ref{lem:calculus}\\
+the Lieb--Robinson bound, used in Section~4.1 and Appendix~A & Theorems~\ref{thm:LR} and \ref{thm:propagation},
+Lemmas~\ref{lem:almostinputs}--\ref{lem:commutatorH}\\
+Assumption~1 (gap on the whole Hilbert space) & Assumption~\ref{ass:gap} (gap in a sector, $\Delta\ge0$)\\
+Assumption~2 (locality-preserving $U$) and the choice (3.4) of $T_\pm$ & Assumption~\ref{ass:U}, (U1)--(U4)\\
+$K$, $\Qb$ and $[\Qb,P]=0$, (4.1)--(4.3) & Definition~\ref{def:dressing}, Lemma~\ref{lem:KP}\\
+$\iu[H,Q]=J_-+J_+$ and $K_\pm\in\AS_{\partial_\pm}$ (Section~4.1) & Lemmas~\ref{lem:split} and \ref{lem:Klocal},
+Remark~\ref{rem:crossing}\\
+Proposition~3.1 and its proof in Appendix~A (clustering) & Definition~\ref{def:filters}, Lemma~\ref{lem:timerep},
+Propositions~\ref{prop:Qlocal} and \ref{prop:clustering}\\
+Lemma~4.1 & Lemma~\ref{lem:bbdf41}\\
+Lemma~4.2 & Lemma~\ref{lem:bbdf42}\\
+Lemma~4.3 & Lemma~\ref{lem:bbdf43}\\
+the objects of Section~4.2, (4.5)--(4.7) & Definition~\ref{def:bbdfobjects}, Lemma~\ref{lem:objects}\\
+the splitting and the commutation relations (4.8), (4.9) & Lemma~\ref{lem:commutation}\\
+(4.10) and (4.11) & Corollary~\ref{cor:Zcommute}\\
+the differential equation for $\mathcal Z_-$ and (4.12) & Lemma~\ref{lem:ode}\\
+(4.13), (4.14) and the determinant at $2\pi$ & Lemma~\ref{lem:determinant}\\
+Theorem~3.2 & Theorem~\ref{thm:index}\\
+the translation $\mathcal T$ and Corollary~5.2 & the magnetic translation $\Theta$, Lemma~\ref{lem:theta} and
+Corollary~\ref{cor:translation}\\
+\end{longtable}
+\endgroup
+
+\begin{remark}[two misprints in {\cite[Section~4.2]{BBDF21}}]\label{rem:bbdf-misprints}
+(a) In the display that precedes (4.13), the first equality,
+$U^*e^{2\pi\iu\Qb_-}U=U^*e^{2\pi\iu(\Qb_-+Q_m+Q_+)}U$, holds only up to $O(L^{-\infty})$: $Q_m+Q_+$ has integer spectrum, but
+it commutes with $\Qb_-=Q_--K_-$ only approximately, because $K_-$ commutes with $Q_m$ and $Q_+$ only approximately. The
+argument is unaffected; Step~1 of the proof of Lemma~\ref{lem:determinant}(i) gives the corresponding estimate. (b) In
+the display that follows (4.14), the two exponents are printed as $\Tr(PD_-P+\Qb)$ and $\Tr(\Qb)$, where $D_-$ is our $\Tt$.
+By Lemma~\ref{lem:det}(ii) they are $\Tr(PD_-P)+\Tr(P\Qb)$ and $\Tr(P\Qb)$; the product of the two exponentials, and hence
+the conclusion $e^{2\pi\iu\Tr(PD_-)}$, is unaffected (Lemma~\ref{lem:determinant}(ii)).
+\end{remark}

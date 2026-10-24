@@ -1,0 +1,488 @@
+\section{The lowest Landau level as a lattice: the slot frame}\label{sec:frame}
+
+\subsection{Construction}
+
+\begin{definition}[admissible tori and the slot frame]\label{def:frame}
+Fix once and for all a \emph{profile} $\eta\in C^\infty(\R)$ with $\eta>0$ on $(-1,1)$ and $\eta=0$ on
+$\R\setminus(-1,1)$, and a \emph{target slot width} $\delta_0>0$ (for definiteness $\eta(u)=e^{-1/(1-u^2)}$ for
+$\abs u<1$, and $\delta_0=\sqrt\pi$). Put
+\[
+w(u):=\eta(u)\Bigl(\sum_{k\in\Z}\eta(u-k)^2\Bigr)^{-1/2},\qquad L_0:=\max\{4,\,3\pi/\delta_0\},\qquad
+\delta_-:=\tfrac23\delta_0,\qquad\delta_+:=2\delta_0 .
+\]
+A torus as in Definition~\ref{def:torus} is \emph{admissible} if $L_y\ge L_0$ and $L_x\ge4\delta_0+4$. For an
+admissible torus let
+\begin{gather*}
+\nx:=\text{the integer nearest to }L_x/\delta_0,\qquad\delta_x:=L_x/\nx,\qquad x_a:=a\delta_x\ \ (a\in\Z),\\
+\ny:=\lceil2\delta_x/\kappa\rceil,\qquad\delta_y:=L_y/\ny,\qquad y_\ell:=\ell\delta_y\ \ (\ell\in\Z),
+\end{gather*}
+and let the \emph{slot lattice} be $\Slots:=\Z_{\nx}\times\Z_{\ny}$, with slots $s=(a,\ell)$, centres
+$\cen s:=(x_a,y_\ell)\in\Tor_N$ and transverse coordinates $x_s:=x_a$. For $a,j\in\Z$ let
+$w_a(j):=w(\kappa j/\delta_x-a)$, supported in $I_a:=\{j\in\Z:\abs{\kappa j-x_a}<\delta_x\}$. The \emph{slot frame}
+is the family
+\begin{equation}\label{eq:zs}
+z_s:=\ny^{-1/2}\sum_{j\in I_a}w_a(j)\,e^{-2\pi\iu j\ell/\ny}\,\psi_{[j]}\in\hN,\qquad s=(a,\ell)\in\Slots,
+\end{equation}
+where $a\in\{0,\dots,\nx-1\}$ is a representative and $[j]$ is the class of $j$ in $\Z_{\Nphi}$. The
+\emph{analysis map} is $\Sa:\hN\to\ell^2(\Slots)$, $(\Sa f)_s:=\ip{z_s}{f}$; we write $\Sa$ also for
+$\Sa\otimes\one_{\C^2}:\kN\to\ell^2(\Slots)\otimes\C^2$. Distances between slots, and between slots and points
+of $\Tor_N$, are the flat distances between the corresponding points: $d(s,s'):=d(\cen s,\cen{s'})$,
+$d(s,R):=d(\cen s,R)$, and $d(X,Y):=\min\{d(s,s'):s\in X,\ s'\in Y\}$ for $X,Y\subset\Slots$.
+\end{definition}
+
+\begin{lemma}[consistency of the construction]\label{lem:frame-consistency}
+Let the torus be admissible.
+\begin{enumerate}[(i)]
+\item $w$ is smooth, $w=0$ on $\R\setminus(-1,1)$, and $\sum_{k\in\Z}w(u-k)^2=1$ for every $u\in\R$.
+\item $\nx\ge4$, $\delta_x\in[\delta_-,\delta_+]$, and $\delta_x/\kappa\ge1$: every window contains at least one
+orbital centre.
+\item $I_a$ contains fewer than $2\delta_x/\kappa+1$ integers, and these lie in distinct classes of
+$\Z_{\Nphi}$. Moreover $w_{a+\nx}(j+\Nphi)=w_a(j)$, so that replacing the representative $a$ of the first
+coordinate of $s=(a,\ell)$ by $a+m\nx$ in \eqref{eq:zs} multiplies $z_s$ by the phase
+$e^{-2\pi\iu m\Nphi\ell/\ny}$; no statement below depends on these phases.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(i) Let $\Sigma(u):=\sum_{k\in\Z}\eta(u-k)^2$. On every bounded interval only finitely many terms of this sum are
+not identically zero, so $\Sigma$ is smooth; it is $1$-periodic; and if $k_0$ is an integer nearest to $u$, then
+$\Sigma(u)\ge\eta(u-k_0)^2\ge\min_{\abs t\le1/2}\eta(t)^2>0$. Hence $w=\eta\,\Sigma^{-1/2}$ is smooth and vanishes
+wherever $\eta$ does, in particular on $\R\setminus(-1,1)$, and by the periodicity of $\Sigma$,
+$\sum_kw(u-k)^2=\Sigma(u)^{-1}\sum_k\eta(u-k)^2=1$. In particular $0\le w\le1$. Since $w$ is smooth and vanishes on
+$\R\setminus(-1,1)$, so do all its derivatives (on the open set $\abs u>1$ trivially, at $u=\pm1$ by continuity).
+
+(ii) Let $v:=L_x/\delta_0$. Admissibility gives $v\ge4+4/\delta_0>4$, and $\abs{\nx-v}\le\frac12$ (if $v$ is a
+half-integer either nearest integer may be taken; only this inequality is used). Hence $\nx\ge4$, and
+\[
+\frac{\delta_x}{\delta_0}=\frac v{\nx}\in\Bigl[\frac v{v+1/2},\,\frac v{v-1/2}\Bigr]\subset\Bigl[\frac89,\,\frac87\Bigr],
+\]
+because $v\mapsto v/(v+\frac12)$ is increasing and $v\mapsto v/(v-\frac12)$ is decreasing on $(\frac12,\infty)$, and
+$v\ge4$. Thus $\delta_-<\frac89\delta_0\le\delta_x\le\frac87\delta_0<\delta_+$. Since $L_y\ge3\pi/\delta_0$,
+$\delta_x/\kappa=\delta_xL_y/(2\pi)\ge\frac89\cdot\frac32=\frac43$. The window $(x_a-\delta_x,x_a+\delta_x)$ has length
+$2\delta_x>\kappa$ and therefore contains a point of $\kappa\Z$.
+
+(iii) An integer $j$ lies in $I_a$ if and only if it lies in the open interval of length $2\delta_x/\kappa$ centred at
+$x_a/\kappa$. If $j_1<\dots<j_p$ lie in this interval, then $p-1\le j_p-j_1<2\delta_x/\kappa$, so $p<2\delta_x/\kappa+1$.
+Two elements of $I_a$ differ by less than $2\delta_x/\kappa=2\Nphi/\nx\le\Nphi/2$ (recall $\nx\delta_x=L_x=\kappa\Nphi$),
+so they lie in distinct classes of $\Z_{\Nphi}$. Since $\kappa\Nphi/\delta_x=\nx$ and $x_{a+\nx}=x_a+L_x$, we have
+$w_{a+\nx}(j+\Nphi)=w_a(j)$ and $I_{a+\nx}=I_a+\Nphi$, and by induction $w_{a+m\nx}(j+m\Nphi)=w_a(j)$ and
+$I_{a+m\nx}=I_a+m\Nphi$ for all $m\in\Z$. Writing \eqref{eq:zs} with $a+m\nx$ in place of $a$, substituting
+$j'=j+m\Nphi$ with $j\in I_a$, and using $\psi_{[j+m\Nphi]}=\psi_{[j]}$, we obtain
+$\ny^{-1/2}\sum_{j\in I_a}w_a(j)e^{-2\pi\iu(j+m\Nphi)\ell/\ny}\psi_{[j]}=e^{-2\pi\iu m\Nphi\ell/\ny}z_s$. The right side
+of \eqref{eq:zs} depends on $\ell$ only through its class modulo $\ny$, and $\cen s$ and $x_s$ do not depend on the
+representatives, because $x_{a+\nx}=x_a+L_x$ and $y_{\ell+\ny}=y_\ell+L_y$. A change of these phases replaces $\Sa$
+by $\mathcal U\Sa$, with $\mathcal U$ a diagonal unitary on $\ell^2(\Slots)$. This changes neither $\abs{z_s}$,
+$\abs{Dz_s}$ and $\lvert z_s\rangle\langle z_s\rvert$ nor the supports of the vectors $\Sa f$, and
+$\chat((\mathcal Ug)\otimes\sigma)$ is a linear combination of the same operators $\chat_{s\sigma}$ as
+$\chat(g\otimes\sigma)$; these are the only ways in which the frame enters below.
+\end{proof}
+
+\begin{proposition}[Parseval]\label{prop:parseval}
+For every admissible torus, $\sum_{s\in\Slots}\lvert z_s\rangle\langle z_s\rvert=\one_{\hN}$. Equivalently
+$\Sa^*\Sa=\one$: the analysis map is an isometry, and $\Sa\Sa^*$ is the orthogonal projection of
+$\ell^2(\Slots)$ onto $\ran\Sa$, of rank $\Nphi$.
+\end{proposition}
+
+\begin{proof}
+Fix $a\in\{0,\dots,\nx-1\}$. Since $w$ is real, \eqref{eq:zs} gives
+\[
+\sum_{\ell=0}^{\ny-1}\lvert z_{(a,\ell)}\rangle\langle z_{(a,\ell)}\rvert
+=\sum_{j,j'\in I_a}w_a(j)w_a(j')\Bigl[\frac1{\ny}\sum_{\ell=0}^{\ny-1}e^{-2\pi\iu(j-j')\ell/\ny}\Bigr]
+\lvert\psi_{[j]}\rangle\langle\psi_{[j']}\rvert .
+\]
+The bracket is $1$ if $\ny$ divides $j-j'$ and $0$ otherwise. For $j,j'\in I_a$ we have
+$\abs{j-j'}<2\delta_x/\kappa\le\ny$, so the bracket is $\delta_{jj'}$, and the sum equals
+$\sum_{j\in I_a}w_a(j)^2\lvert\psi_{[j]}\rangle\langle\psi_{[j]}\rvert=\sum_{j\in\Z}w_a(j)^2\lvert\psi_{[j]}\rangle\langle\psi_{[j]}\rvert$,
+because $w_a$ vanishes off $I_a$. Now sum over $a$ and group the $j\in\Z$ by their class $c\in\{0,\dots,\Nphi-1\}$,
+$j=c+m\Nphi$. By Lemma~\ref{lem:frame-consistency}(iii), $w_a(c+m\Nphi)=w_{a-m\nx}(c)$, and as $(a,m)$ runs over
+$\{0,\dots,\nx-1\}\times\Z$, $a-m\nx$ runs over $\Z$ exactly once. Hence the coefficient of
+$\lvert\psi_c\rangle\langle\psi_c\rvert$ is $\sum_{a'\in\Z}w(\kappa c/\delta_x-a')^2=1$ by
+Lemma~\ref{lem:frame-consistency}(i), and $\sum_s\lvert z_s\rangle\langle z_s\rvert=\sum_c\lvert\psi_c\rangle\langle\psi_c\rvert=\one_{\hN}$
+by Lemma~\ref{lem:orbitals}(ii). Since $\Sa^*\Sa f=\sum_sz_s\ip{z_s}f$, this is $\Sa^*\Sa=\one$. Then $\Sa\Sa^*$ is
+self-adjoint and $(\Sa\Sa^*)^2=\Sa\Sa^*$, so it is an orthogonal projection; its range contains
+$\Sa\Sa^*\Sa\hN=\ran\Sa$ and is contained in $\ran\Sa$; and $\dim\ran\Sa=\dim\hN=\Nphi$, $\Sa$ being injective.
+The same holds for $\Sa\otimes\one_{\C^2}$.
+\end{proof}
+
+\begin{proposition}[slot geometry]\label{prop:geometry}
+Let the torus be admissible.
+\begin{enumerate}[(i)]
+\item $\pi/(\delta_x+\kappa/2)<\delta_y\le\pi/\delta_x$; in particular $\delta_y>\pi/(3\delta_0)$. The number of
+slots satisfies $2\Nphi\le\abs{\Slots}=\nx\ny\le(2+\kappa/\delta_x)\Nphi$.
+\item (ball count) For all $R\in\Tor_N$ and $r\ge0$, $\#\Ball rR\le(1+2r/\delta_x)(1+2r/\delta_y)\le\Cvol(1+r)^2$,
+where $\Ball rR:=\{s\in\Slots:d(s,R)\le r\}$ and $\Cvol$ depends only on $\delta_0$.
+\item (strip count) For every interval $I\subset\R/L_x\Z$ of length $\abs I$, the strip
+$\Str(I):=\{s\in\Slots:x_s\in I\}$ has at most $\ny(\abs I/\delta_x+1)\le C_{\rm str}L_y(1+\abs I)$ slots, with
+$C_{\rm str}$ depending only on $\delta_0$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(i) Since $2\delta_x/\kappa\le\ny<2\delta_x/\kappa+1$ and $\kappa L_y=2\pi$, we have
+$\delta_y=L_y/\ny\le\kappa L_y/(2\delta_x)=\pi/\delta_x$ and $\delta_y>\kappa L_y/(2\delta_x+\kappa)=\pi/(\delta_x+\kappa/2)$.
+By Lemma~\ref{lem:frame-consistency}(ii), $\kappa\le\delta_x\le2\delta_0$, so $\delta_x+\kappa/2\le\frac32\delta_x\le3\delta_0$.
+Finally $\nx=L_x/\delta_x=\kappa\Nphi/\delta_x$, so $\nx\ny\ge\nx\cdot2\delta_x/\kappa=2\Nphi$ and
+$\nx\ny<\nx(2\delta_x/\kappa+1)=2\Nphi+\nx=(2+\kappa/\delta_x)\Nphi$.
+
+(ii) The lifts to $\R^2$ of the centre of $s=(a,\ell)$ are the points $((a+m_1\nx)\delta_x,(\ell+m_2\ny)\delta_y)$,
+$m_1,m_2\in\Z$, because $\nx\delta_x=L_x$ and $\ny\delta_y=L_y$. Hence the lifts of all slot centres form the
+lattice $\delta_x\Z\times\delta_y\Z$, and distinct slots have disjoint sets of lifts. Let $\tilde R\in\R^2$ be a lift
+of $R$. If $d(s,R)\le r$, some lift of $\cen s$ lies in the closed disc of radius $r$ about $\tilde R$; choosing one
+such lift for each $s\in\Ball rR$ defines an injective map from $\Ball rR$ into the set of points of
+$\delta_x\Z\times\delta_y\Z$ in the square $[\tilde R_x-r,\tilde R_x+r]\times[\tilde R_y-r,\tilde R_y+r]$. A closed
+interval of length $2r$ contains at most $2r/\delta+1$ points of $\delta\Z$, so
+$\#\Ball rR\le(1+2r/\delta_x)(1+2r/\delta_y)$. By Lemma~\ref{lem:frame-consistency}(ii) and (i),
+$\delta_x\ge\frac23\delta_0$ and $\delta_y>\pi/(3\delta_0)$, so $1+2r/\delta_x\le\max\{1,3/\delta_0\}(1+r)$ and
+$1+2r/\delta_y\le\max\{1,6\delta_0/\pi\}(1+r)$; we take $\Cvol:=\max\{1,3/\delta_0\}\max\{1,6\delta_0/\pi\}$.
+
+(iii) Let $I$ be the image of an interval $\tilde I\subset\R$ of length $\abs I$. Every $a\in\Z_{\nx}$ with $x_a\in I$
+has a lift in $\tilde I\cap\delta_x\Z$, and distinct classes have distinct lifts, so there are at most
+$\abs I/\delta_x+1$ such $a$, each contributing the $\ny$ slots $(a,\ell)$, $\ell\in\Z_{\ny}$. Moreover
+$\ny<2\delta_x/\kappa+1=\delta_xL_y/\pi+1\le(2\delta_0/\pi+\frac14)L_y$, by $\delta_x\le2\delta_0$ and $L_y\ge4$, and
+$\abs I/\delta_x+1\le\max\{1,3/(2\delta_0)\}(1+\abs I)$ by $\delta_x\ge\frac23\delta_0$. So
+$C_{\rm str}:=(2\delta_0/\pi+\frac14)\max\{1,3/(2\delta_0)\}$ will do.
+\end{proof}
+
+\begin{lemma}[uniform localization]\label{lem:localization}
+For every $k\ge0$ there is a constant $C_k$, depending only on $k$, $\eta$ and $\delta_0$, such that for every
+admissible torus, every slot $s=(a,\ell)$ and every $R=(R_x,R_y)\in\R^2$:
+\begin{enumerate}[(i)]
+\item $\abs{z_s(R)}\le C_k\bigl(1+\abs{R_y-y_\ell}_{L_y}\bigr)^{-k}\exp\bigl(-\pos{\abs{R_x-x_a}_{L_x}-\delta_x}^2/8\bigr)$;
+\item the same bound holds for $\abs{(Dz_s)(R)}$;
+\item $\norm{\one_{\Slots\setminus\Ball rR}\,\Sa\ev R}\le C_k(1+r)^{-k}$ and
+$\norm{\one_{\Slots\setminus\Ball rR}\,\Sa\evD R}\le C_k(1+r)^{-k}$ for every $r\ge0$, where $\one_X$ denotes the
+orthogonal projection of $\ell^2(\Slots)$ onto the functions supported in $X$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+It suffices to treat integer $k$, since $(1+t)^{-\lceil k\rceil}\le(1+t)^{-k}$ for $t\ge0$. Fix $s=(a,\ell)$ with
+$a\in\{0,\dots,\nx-1\}$ and $R\in\R^2$, and write
+\[
+\Delta_x:=\abs{R_x-x_a}_{L_x},\qquad\Delta_y:=\abs{R_y-y_\ell}_{L_y},\qquad\xi:=\kappa(R_y-y_\ell),\qquad
+\mathcal I_a:=(x_a-\delta_x,x_a+\delta_x)\subset\R .
+\]
+The only properties of the torus used below are those given by admissibility through
+Lemma~\ref{lem:frame-consistency}(ii), namely $\delta_x/\kappa\ge1$ and $\frac23\delta_0\le\delta_x\le2\delta_0$, and
+$L_x\ge4\delta_0+4$, which gives $L_x>2\delta_x$ and $L_x\ge4$.
+
+\emph{Step 1: a representation.} Let $q_0(u):=e^{-u^2/2}$ and $q_1(u):=ue^{-u^2/2}$. For $j\in\Z$, \eqref{eq:psi}
+with the representative $j$, together with $\kappa\Nphi=L_x$ and $\kappa y_\ell=2\pi\ell/\ny$, gives
+\[
+e^{-2\pi\iu j\ell/\ny}\psi_{[j]}(R)=(L_y\sqrt\pi)^{-1/2}\sum_{m\in\Z}e^{\iu mL_xR_y}\,e^{\iu j\xi}\,q_0\bigl(\kappa j+mL_x-R_x\bigr).
+\]
+Since $D\phi_n=-(x-\kappa n)\phi_n$ and the series \eqref{eq:psi} may be differentiated termwise
+(Lemma~\ref{lem:orbitals}), the same identity holds for $e^{-2\pi\iu j\ell/\ny}(D\psi_{[j]})(R)$ with $q_1$ in place of
+$q_0$. For $q\in\{q_0,q_1\}$, $m\in\Z$ and $v\in\R$ let $R^{(m)}_x:=R_x-mL_x$, $u_m(v):=\kappa v-R^{(m)}_x$,
+\[
+g_m(v):=w(\kappa v/\delta_x-a)\,q\bigl(u_m(v)\bigr),\qquad S_m:=\sum_{j\in\Z}g_m(j)\,e^{\iu j\xi};
+\]
+the sum is finite, since $g_m(j)=w_a(j)q(u_m(j))$ vanishes for $j\notin I_a$. Inserting the identity above into
+\eqref{eq:zs} gives
+\begin{equation}\label{eq:zs-images}
+(\ny L_y\sqrt\pi)^{1/2}\,z_s(R)=\sum_{m\in\Z}e^{\iu mL_xR_y}S_m\qquad\text{for }q=q_0,
+\end{equation}
+and the same expression for $(\ny L_y\sqrt\pi)^{1/2}(Dz_s)(R)$ for $q=q_1$; the series converge absolutely,
+because of the Gaussian factors.
+
+\emph{Step 2: summation by parts.} For a finitely supported $g:\Z\to\C$ put $(\mathfrak dg)(j):=g(j)-g(j-1)$.
+Shifting the summation index gives $(1-e^{\iu\xi})\sum_jg(j)e^{\iu j\xi}=\sum_j(\mathfrak dg)(j)e^{\iu j\xi}$, and by
+induction
+\[
+(1-e^{\iu\xi})^k\sum_{j\in\Z}g(j)e^{\iu j\xi}=\sum_{j\in\Z}(\mathfrak d^kg)(j)\,e^{\iu j\xi}.
+\]
+If $g$ is the restriction to $\Z$ of a $C^k$ function on $\R$, again denoted $g$, then the fundamental theorem of
+calculus and induction on $k$ give $(\mathfrak d^kg)(j)=\int_{[0,1]^k}g^{(k)}(j-t_1-\dots-t_k)\,\dd t_1\cdots\dd t_k$. We
+apply this to $g=g_m$. By Lemma~\ref{lem:frame-consistency}(i), $w$ and all its derivatives vanish outside $(-1,1)$,
+so $g_m^{(k)}(v)=0$ unless $\kappa v\in\mathcal I_a$. Hence $(\mathfrak d^kg_m)(j)=0$ unless $j$ lies in
+$\kappa^{-1}\mathcal I_a+[0,k]$, an open interval of length $2\delta_x/\kappa+k$ containing fewer than
+$2\delta_x/\kappa+k+1$ integers, and $\abs{(\mathfrak d^kg_m)(j)}\le\sup\{\abs{g_m^{(k)}(v)}:\kappa v\in\mathcal I_a\}$.
+
+\emph{Step 3: the Leibniz bound.} Every derivative of $q_0$ and of $q_1$ is a polynomial times $e^{-u^2/2}$, so
+$\mu_n:=\max_{i\in\{0,1\}}\sup_{u\in\R}e^{u^2/4}\abs{q_i^{(n)}(u)}$ is finite for every $n$; let
+$C'_k:=\max_{0\le i\le k}\norm{w^{(i)}}_\infty\mu_{k-i}$, a number that depends only on $k$ and $\eta$. Since
+$\frac{\dd^i}{\dd v^i}w(\kappa v/\delta_x-a)=(\kappa/\delta_x)^iw^{(i)}(\kappa v/\delta_x-a)$ and
+$\frac{\dd^n}{\dd v^n}q(u_m(v))=\kappa^nq^{(n)}(u_m(v))$, the Leibniz rule gives
+\[
+\abs{g_m^{(k)}(v)}\le\sum_{i=0}^k\binom ki\Bigl(\frac\kappa{\delta_x}\Bigr)^i\kappa^{k-i}\norm{w^{(i)}}_\infty\mu_{k-i}\,
+e^{-u_m(v)^2/4}\le C'_k\,\kappa^k\Bigl(1+\frac1{\delta_x}\Bigr)^ke^{-u_m(v)^2/4}.
+\]
+If $\kappa v\in\mathcal I_a$, then $\abs{u_m(v)}\ge\varepsilon_m:=\dist(R^{(m)}_x,\mathcal I_a)$.
+
+\emph{Step 4: decay along the cuts.} Steps 2 and 3 give
+\[
+\abs{1-e^{\iu\xi}}^k\abs{S_m}\le\Bigl(\frac{2\delta_x}\kappa+k+1\Bigr)C'_k\,\kappa^k\Bigl(1+\frac1{\delta_x}\Bigr)^ke^{-\varepsilon_m^2/4},
+\]
+and, for $k=0$, $\abs{S_m}\le(2\delta_x/\kappa+1)\norm w_\infty\mu_0e^{-\varepsilon_m^2/4}$. Now
+$\abs{1-e^{\iu\xi}}=2\abs{\sin(\xi/2)}\ge\frac2\pi\abs\xi_{2\pi}=\frac2\pi\kappa\Delta_y$, because $\abs{\sin t}\ge\frac2\pi\abs t$
+for $\abs t\le\pi/2$ and $\abs\xi_{2\pi}=\kappa\abs{R_y-y_\ell}_{L_y}$ by $\kappa L_y=2\pi$. With $1/\delta_x\le3/(2\delta_0)$
+and $\min\{1,\Delta_y^{-k}\}\le2^k(1+\Delta_y)^{-k}$ we obtain
+\[
+\abs{S_m}\le C''_k\Bigl(\frac{2\delta_x}\kappa+k+1\Bigr)(1+\Delta_y)^{-k}e^{-\varepsilon_m^2/4},\qquad
+C''_k:=2^k\max\Bigl\{\norm w_\infty\mu_0,\ \Bigl(\frac\pi2\Bigr)^k\Bigl(1+\frac3{2\delta_0}\Bigr)^kC'_k\Bigr\}.
+\]
+
+\emph{Step 5: the prefactor.} Since $\ny\ge2\delta_x/\kappa$ and $L_y=2\pi/\kappa$, $\ny L_y\sqrt\pi\ge4\pi^{3/2}\delta_x/\kappa^2$,
+and therefore, using $\kappa/\delta_x\le1$ and $\delta_x\le2\delta_0$,
+\[
+(\ny L_y\sqrt\pi)^{-1/2}\Bigl(\frac{2\delta_x}\kappa+k+1\Bigr)\le\frac{\sqrt{\delta_x}}{2\pi^{3/4}}\Bigl(2+(k+1)\frac\kappa{\delta_x}\Bigr)
+\le\frac{\sqrt{2\delta_0}}{2\pi^{3/4}}\,(k+3).
+\]
+
+\emph{Step 6: the images.} Choose $m_0\in\Z$ with $\abs{R^{(m_0)}_x-x_a}=\Delta_x\le L_x/2$. Since $\mathcal I_a$ is the
+open interval of radius $\delta_x$ about $x_a$, $\varepsilon_m=\pos{\abs{R^{(m)}_x-x_a}-\delta_x}$, so
+$\varepsilon_{m_0}=\pos{\Delta_x-\delta_x}$. For $n:=\abs{m-m_0}\ge1$,
+$\abs{R^{(m)}_x-x_a}\ge nL_x-\Delta_x=(n-1)L_x+(L_x-\Delta_x)$, and $L_x-\Delta_x-\delta_x\ge\pos{\Delta_x-\delta_x}$
+because $L_x-\Delta_x\ge\Delta_x$ and $L_x-\Delta_x-\delta_x\ge L_x/2-\delta_x>0$. Hence
+$\varepsilon_m\ge(n-1)L_x+\pos{\Delta_x-\delta_x}$, so $\varepsilon_m^2\ge(n-1)^2L_x^2+\pos{\Delta_x-\delta_x}^2$, and with $L_x\ge4$,
+\[
+\sum_{m\in\Z}e^{-\varepsilon_m^2/4}\le e^{-\pos{\Delta_x-\delta_x}^2/4}\Bigl(1+2\sum_{n\ge0}e^{-4n^2}\Bigr)\le4\,e^{-\pos{\Delta_x-\delta_x}^2/4}.
+\]
+
+\emph{Proof of (i) and (ii).} By \eqref{eq:zs-images} and Steps 4--6, for both choices of $q$,
+\[
+\abs{z_s(R)},\ \abs{(Dz_s)(R)}\ \le\ \frac{2\sqrt{2\delta_0}}{\pi^{3/4}}\,(k+3)\,C''_k\,(1+\Delta_y)^{-k}e^{-\pos{\Delta_x-\delta_x}^2/4},
+\]
+which is (i) and (ii) with $C_k:=2\sqrt{2\delta_0}\,\pi^{-3/4}(k+3)C''_k$, and with the stronger Gaussian factor
+$e^{-\pos{\Delta_x-\delta_x}^2/4}$.
+
+\emph{Proof of (iii).} By Lemma~\ref{lem:evaluation}(i), $(\Sa\ev R)_s=\ip{z_s}{\ev R}=\overline{\ip{\ev R}{z_s}}=\overline{z_s(R)}$
+and likewise $(\Sa\evD R)_s=\overline{(Dz_s)(R)}$, so that
+$\norm{\one_{\Slots\setminus\Ball rR}\Sa\ev R}^2=\sum_{s:\,d(s,R)>r}\abs{z_s(R)}^2$, and the same for $\evD R$ with
+$Dz_s$. The flat distance between $\cen s$ and the image of $R$ in $\Tor_N$ is $d(s,R)=(\Delta_x^2+\Delta_y^2)^{1/2}\le
+\Delta_x+\Delta_y$. Let $\tilde C_{k'}:=\sup_{t\ge0}(1+t)^{k'}e^{-\pos{t-2\delta_0}^2/8}$, which is finite and depends
+only on $k'$ and $\delta_0$. Since $\pos{t-\delta_x}\ge\pos{t-2\delta_0}$ and $(1+\Delta_x)(1+\Delta_y)\ge1+d(s,R)$, (i)
+and (ii) of order $k'$ give $\abs{z_s(R)},\abs{(Dz_s)(R)}\le C_{k'}\tilde C_{k'}(1+d(s,R))^{-k'}$. Take $k'=k+2$ and
+let $n_0:=\lfloor r\rfloor$, so that $1+n_0\ge(1+r)/2$. Every $s$ with $d(s,R)>r$ lies in one of the shells
+$\{n<d(s,R)\le n+1\}$, $n\ge n_0$, and by Proposition~\ref{prop:geometry}(ii) the $n$th shell has at most
+$\Cvol(2+n)^2\le4\Cvol(1+n)^2$ elements. Hence
+\begin{align*}
+\sum_{s:\,d(s,R)>r}\abs{z_s(R)}^2&\le4\Cvol\,C_{k+2}^2\tilde C_{k+2}^2\sum_{n\ge n_0}(1+n)^{-2k-2}\\
+&\le8\Cvol\,C_{k+2}^2\tilde C_{k+2}^2(1+n_0)^{-2k-1}\le2^{2k+4}\Cvol\,C_{k+2}^2\tilde C_{k+2}^2(1+r)^{-2k},
+\end{align*}
+where we used $\sum_{n\ge n_0}(1+n)^{-2k-2}\le(1+n_0)^{-2k-2}+\int_{n_0}^\infty(1+t)^{-2k-2}\dd t\le2(1+n_0)^{-2k-1}$.
+The same bound holds with $Dz_s$. This is (iii) with the constant $2^{k+2}\Cvol^{1/2}C_{k+2}\tilde C_{k+2}$, which
+depends only on $k$, $\eta$ and $\delta_0$; we rename the larger of the constants in (i)--(iii) $C_k$.
+\end{proof}
+
+The decay in (i) is Gaussian across the cuts and faster than any power along them, uniformly in $N$; the
+Gaussian decay across the cuts reflects the exact support property of the next lemma.
+
+\begin{lemma}[exact column support]\label{lem:columns}
+For every admissible torus, $j\in\Z$ and $s=(a,\ell)$: $\ip{\psi_{[j]}}{z_s}=\ny^{-1/2}w_a(j')e^{-2\pi\iu j'\ell/\ny}$
+if some $j'\in I_a$ lies in the class of $j$ (it is then unique), and $\ip{\psi_{[j]}}{z_s}=0$ otherwise.
+Consequently $\Sa\psi_{[j]}$ is supported in the \emph{column}
+\[
+\Col(j):=\{s\in\Slots:\abs{x_s-\kappa j}_{L_x}<\delta_x\}=\Str\bigl((\kappa j-\delta_x,\kappa j+\delta_x)\bigr),
+\]
+a strip of width $2\delta_x$ containing the slots of at most two windows.
+\end{lemma}
+
+\begin{proof}
+By \eqref{eq:zs}, $\ip{\psi_{[j]}}{z_s}=\ny^{-1/2}\sum_{j''\in I_a}w_a(j'')e^{-2\pi\iu j''\ell/\ny}\ip{\psi_{[j]}}{\psi_{[j'']}}$,
+and by Lemma~\ref{lem:orbitals}(ii) the inner product $\ip{\psi_{[j]}}{\psi_{[j'']}}$ is $1$ if $[j'']=[j]$ and $0$
+otherwise. By Lemma~\ref{lem:frame-consistency}(iii) at most one element $j'$ of $I_a$ lies in the class of $j$; this
+gives the formula. If $(\Sa\psi_{[j]})_s=\overline{\ip{\psi_{[j]}}{z_s}}\ne0$, there is $m\in\Z$ with
+$j'=j+m\Nphi\in I_a$, that is $\abs{\kappa j+mL_x-x_a}<\delta_x$, so $\abs{x_s-\kappa j}_{L_x}<\delta_x$ and $s\in\Col(j)$.
+The condition $\abs{x_s-\kappa j}_{L_x}<\delta_x$ says that $x_s$ lies in the image in $\R/L_x\Z$ of the interval
+$(\kappa j-\delta_x,\kappa j+\delta_x)$, which is the second description of $\Col(j)$. Finally, the lifts of the window
+centres form $\delta_x\Z$, an open interval of length $2\delta_x$ contains at most two points of $\delta_x\Z$, and since
+$2\delta_x<L_x$ distinct classes $a$ with $x_a$ in this arc have distinct lifts in the interval; so $\Col(j)$ consists of
+the slots of at most two windows.
+\end{proof}
+
+\subsection{The slot Fock space and the embedding}
+
+\begin{definition}[slot Fock space, local algebras, the embedding]\label{def:slotfock}
+The \emph{slot Fock space} is $\FockS:=\Ff(\ell^2(\Slots)\otimes\C^2)$, with annihilation operators $\chat(g)$,
+$g\in\ell^2(\Slots)\otimes\C^2$, and $\chat_{s\sigma}:=\chat(\delta_s\otimes\sigma)$, where $\delta_s$ is the
+indicator of the slot $s$; $\Nhat\sigma:=\sum_s\chat_{s\sigma}^*\chat_{s\sigma}$. For $X\subset\Slots$, $\CAR(X)$
+is the unital $*$-algebra generated by the $\chat_{s\sigma}$ with $s\in X$, and $\Alg(X)$ is its even part,
+the elements commuting with $(-1)^{\Nhat\up+\Nhat\dn}$. For $r\ge0$ the \emph{$r$-fattening} of $X$ is
+$\fat Xr:=\{s\in\Slots:d(s,X)\le r\}$. The \emph{embedding} $\iota$ is the unital $*$-homomorphism from the
+operators on $\Fock$ to the operators on $\FockS$ determined by
+\[
+\iota\bigl(c(f)\bigr)=\chat(\Sa f),\qquad f\in\kN .
+\]
+For an operator $H$ on $\Fock$ we write $\Hhat:=\iota(H)$.
+\end{definition}
+
+Elements of $\Alg(X)$ and of $\Alg(Y)$ commute when $X\cap Y=\emptyset$, and an element of $\Alg(X)$ commutes
+with every element of $\CAR(Y)$ in that case. Indeed, conjugation by $(-1)^{\Nhat\up+\Nhat\dn}$ changes the sign of
+every $\chat_{s\sigma}$ and of every $\chat_{s\sigma}^*$, so it multiplies a monomial of degree $n$ in these operators
+by $(-1)^n$; since $\CAR(X)$ is spanned by the monomials in the $\chat_{s\sigma},\chat^*_{s\sigma}$ with $s\in X$,
+its even part $\Alg(X)$ is spanned by those of even degree. By the canonical anticommutation relations the
+generators belonging to distinct slots anticommute, so a monomial of even degree in the generators of $X$ commutes
+with every generator of $Y$, hence with $\CAR(Y)$.
+
+\begin{lemma}[properties of the embedding]\label{lem:embedding}
+Let the torus be admissible.
+\begin{enumerate}[(i)]
+\item $\iota$ is well defined, unital, injective and isometric, and it maps even operators to even
+operators. With $\Ff(\Sa):\Fock\to\FockS$ the second quantization of the isometry $\Sa$, an isometry onto the
+subspace of $\FockS$ in which the modes orthogonal to $\ran\Sa$ are empty, $\iota(A)\Ff(\Sa)=\Ff(\Sa)A$ for every
+operator $A$ on $\Fock$.
+\item For every self-adjoint $A$ on $\Fock$, $\iota(A)$ has the same spectrum as $A$ and $\iota(f(A))=f(\iota(A))$
+for every function $f$ on that spectrum. In particular
+$\iota(e^{\iu tH}Ae^{-\iu tH})=e^{\iu t\Hhat}\iota(A)e^{-\iu t\Hhat}$, and $\iota$ maps the spectral projections of
+$H$ to those of $\Hhat$.
+\item For $\varphi=(\varphi_\up,\varphi_\dn)\in\R^2$,
+$\iota\bigl(e^{\iu(\varphi_\up\Nup+\varphi_\dn\Ndn)}Ae^{-\iu(\varphi_\up\Nup+\varphi_\dn\Ndn)}\bigr)
+=e^{\iu(\varphi_\up\Nhat\up+\varphi_\dn\Nhat\dn)}\iota(A)e^{-\iu(\varphi_\up\Nhat\up+\varphi_\dn\Nhat\dn)}$, and these
+gauge transformations map every $\CAR(X)$ and $\Alg(X)$ onto itself. Consequently, if $A$ is
+sector-preserving (respectively self-adjoint), then for every $X\subset\Slots$ and every $A'\in\Alg(X)$ there is
+$A''\in\Alg(X)$ that commutes with $\Nhat\up$ and $\Nhat\dn$ (respectively is self-adjoint, respectively both, if
+$A$ is both) and satisfies $\norm{\iota(A)-A''}\le\norm{\iota(A)-A'}$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Let $\mathfrak r:=\ran\Sa\subset\ell^2(\Slots)\otimes\C^2$, $n_1:=\dim\kN=2\Nphi$ and $n_2:=2\abs{\Slots}$. Choose an
+orthonormal basis $f_1,\dots,f_{n_1}$ of $\kN$ and put $g_i:=\Sa f_i$ for $i\le n_1$. These are orthonormal by
+Proposition~\ref{prop:parseval}; complete them to an orthonormal basis $g_1,\dots,g_{n_2}$ of
+$\ell^2(\Slots)\otimes\C^2$, so that $g_{n_1+1},\dots,g_{n_2}$ is an orthonormal basis of $\mathfrak r^\perp$. Let
+$\Omega_0$ and $\widehat\Omega_0$ be the vacua of $\Fock$ and $\FockS$, and let $\Ff(\mathfrak r^\perp)$ be the Fock space
+over $\mathfrak r^\perp$, with vacuum $\Omega''$ and annihilation operators $a(e)$. For
+$\mathbf m=(m_1,\dots,m_{n_2})\in\{0,1\}^{n_2}$ the vectors
+$\widehat e_{\mathbf m}:=\chat(g_1)^{*m_1}\cdots\chat(g_{n_2})^{*m_{n_2}}\widehat\Omega_0$ form an orthonormal basis of
+$\FockS$ (the occupation-number basis), and likewise the vectors
+$e_{\mathbf m'}:=c(f_1)^{*m_1}\cdots c(f_{n_1})^{*m_{n_1}}\Omega_0$, $\mathbf m'\in\{0,1\}^{n_1}$, for $\Fock$, and the
+vectors $e''_{\mathbf m''}:=a(g_{n_1+1})^{*m_{n_1+1}}\cdots a(g_{n_2})^{*m_{n_2}}\Omega''$, $\mathbf m''\in\{0,1\}^{n_2-n_1}$, for
+$\Ff(\mathfrak r^\perp)$. Let $\mathcal V:\FockS\to\Fock\otimes\Ff(\mathfrak r^\perp)$ be the unitary with
+$\mathcal V\widehat e_{(\mathbf m',\mathbf m'')}=e_{\mathbf m'}\otimes e''_{\mathbf m''}$. For $i\le n_1$, the canonical
+anticommutation relations give $\chat(g_i)\widehat e_{\mathbf m}=0$ if $m_i=0$ and
+$\chat(g_i)\widehat e_{\mathbf m}=(-1)^{m_1+\dots+m_{i-1}}\widehat e_{\mathbf m-\mathbf 1_i}$ if $m_i=1$, with $\mathbf 1_i$ the
+$i$th unit vector; $c(f_i)$ acts on the $e_{\mathbf m'}$ by the same formula, with the same sign, which involves only
+$m_1,\dots,m_{i-1}$. Hence $\mathcal V\chat(g_i)\mathcal V^*=c(f_i)\otimes\one$ for $i\le n_1$, and since
+$\Sa f=\sum_i\ip{f_i}fg_i$ and both $c$ and $\chat$ are conjugate-linear,
+\begin{equation}\label{eq:V-intertwines}
+\mathcal V\chat(\Sa f)\mathcal V^*=c(f)\otimes\one\qquad(f\in\kN).
+\end{equation}
+
+(i) Define $\iota(A):=\mathcal V^*(A\otimes\one)\mathcal V$. This is a unital, injective, isometric $*$-homomorphism,
+and $\iota(c(f))=\chat(\Sa f)$ by \eqref{eq:V-intertwines}. It is the only unital $*$-homomorphism with this
+property, because the operators $c(f)$ generate all operators on $\Fock$ as a unital $*$-algebra:
+$\lvert\Omega_0\rangle\langle\Omega_0\rvert=\prod_{i=1}^{n_1}(\one-c(f_i)^*c(f_i))$, and the matrix units
+\[
+\lvert e_{\mathbf a}\rangle\langle e_{\mathbf b}\rvert=c(f_1)^{*a_1}\cdots c(f_{n_1})^{*a_{n_1}}\,
+\lvert\Omega_0\rangle\langle\Omega_0\rvert\,\bigl(c(f_1)^{*b_1}\cdots c(f_{n_1})^{*b_{n_1}}\bigr)^*\qquad(\mathbf a,\mathbf b\in\{0,1\}^{n_1})
+\]
+span the operators on $\Fock$. The number operator $\Nhat\up+\Nhat\dn$ does not depend on the choice of orthonormal
+basis, so it equals $\sum_i\chat(g_i)^*\chat(g_i)$ and acts on $\widehat e_{\mathbf m}$ as multiplication by
+$\sum_im_i$. Therefore $\mathcal V(-1)^{\Nhat\up+\Nhat\dn}\mathcal V^*=(-1)^{\Nup+\Ndn}\otimes(-1)^{N''}$, with $N''$ the
+number operator of $\Ff(\mathfrak r^\perp)$, and $\iota$ maps even operators to even operators. The second
+quantization $\Ff(\Sa)$ is determined by $\Ff(\Sa)c(h_1)^*\cdots c(h_p)^*\Omega_0=\chat(\Sa h_1)^*\cdots\chat(\Sa h_p)^*\widehat\Omega_0$;
+by \eqref{eq:V-intertwines}, $\mathcal V\Ff(\Sa)\Upsilon=\Upsilon\otimes\Omega''$ for every $\Upsilon\in\Fock$, so $\Ff(\Sa)$ is a
+well-defined isometry with range $\mathcal V^*(\Fock\otimes\C\Omega'')$, the span of the $\widehat e_{(\mathbf m',0)}$. Since
+$\norm{\chat(g_i)\Upsilon}^2=\ip\Upsilon{\chat(g_i)^*\chat(g_i)\Upsilon}$ and $\chat(g_i)^*\chat(g_i)\widehat e_{\mathbf m}=m_i\widehat e_{\mathbf m}$,
+this span is the subspace on which every $\chat(e)$, $e\in\mathfrak r^\perp$, vanishes: the subspace in which the modes
+orthogonal to $\ran\Sa$ are empty. Finally
+$\iota(A)\Ff(\Sa)\Upsilon=\mathcal V^*(A\otimes\one)(\Upsilon\otimes\Omega'')=\mathcal V^*(A\Upsilon\otimes\Omega'')=\Ff(\Sa)A\Upsilon$.
+
+(ii) $\iota(A)$ is unitarily equivalent to $A\otimes\one$, which has the spectrum of $A$, and
+$f(\iota(A))=\mathcal V^*f(A\otimes\one)\mathcal V=\mathcal V^*(f(A)\otimes\one)\mathcal V=\iota(f(A))$. The two particular
+statements are the cases $f(x)=e^{\pm\iu tx}$, together with the multiplicativity of $\iota$, and $f=\one_B$ for
+Borel sets $B$.
+
+(iii) Write $\varphi\cdot\mathbf N:=\varphi_\up\Nup+\varphi_\dn\Ndn$ and $\varphi\cdot\widehat{\mathbf N}:=\varphi_\up\Nhat\up+\varphi_\dn\Nhat\dn$.
+The anticommutation relations give $[N_\sigma,c(h\otimes\sigma')]=-\delta_{\sigma\sigma'}c(h\otimes\sigma')$ for
+$h\in\hN$, hence $e^{\iu\varphi\cdot\mathbf N}c(h\otimes\sigma')e^{-\iu\varphi\cdot\mathbf N}=e^{-\iu\varphi_{\sigma'}}c(h\otimes\sigma')$, and
+in the same way $e^{\iu\varphi\cdot\widehat{\mathbf N}}\chat(g\otimes\sigma')e^{-\iu\varphi\cdot\widehat{\mathbf N}}=e^{-\iu\varphi_{\sigma'}}\chat(g\otimes\sigma')$
+for $g\in\ell^2(\Slots)$. The maps $A\mapsto\iota(e^{\iu\varphi\cdot\mathbf N}Ae^{-\iu\varphi\cdot\mathbf N})$ and
+$A\mapsto e^{\iu\varphi\cdot\widehat{\mathbf N}}\iota(A)e^{-\iu\varphi\cdot\widehat{\mathbf N}}$ are unital $*$-homomorphisms which,
+since $\iota(c(h\otimes\sigma'))=\chat(\Sa h\otimes\sigma')$, agree on the generators $c(h\otimes\sigma')$; by the
+uniqueness in (i) they are equal. Conjugation by $e^{\iu\varphi\cdot\widehat{\mathbf N}}$ multiplies each $\chat_{s\sigma}$ by
+a phase, so it maps $\CAR(X)$ into itself, and onto itself since its inverse is the conjugation with $-\varphi$; it
+commutes with the parity, so it maps $\Alg(X)$ onto itself.
+
+Now let $A'\in\Alg(X)$. If $A$ is sector-preserving, then $A$ commutes with $e^{\iu\varphi\cdot\mathbf N}$, hence
+$\iota(A)$ commutes with $e^{\iu\varphi\cdot\widehat{\mathbf N}}$ for all $\varphi$. Since $\Nhat\up$ and $\Nhat\dn$ have integer
+spectra, $e^{\iu\varphi\cdot\widehat{\mathbf N}}$ is $2\pi$-periodic in $\varphi_\up$ and in $\varphi_\dn$; let
+\[
+A'':=\frac1{4\pi^2}\int_{[0,2\pi]^2}e^{\iu\varphi\cdot\widehat{\mathbf N}}A'e^{-\iu\varphi\cdot\widehat{\mathbf N}}\,\dd\varphi .
+\]
+Then $A''\in\Alg(X)$, a finite-dimensional space mapped into itself by each of these conjugations;
+$\norm{\iota(A)-A''}=\norm{(4\pi^2)^{-1}\int e^{\iu\varphi\cdot\widehat{\mathbf N}}(\iota(A)-A')e^{-\iu\varphi\cdot\widehat{\mathbf N}}\,\dd\varphi}\le\norm{\iota(A)-A'}$;
+and, by the invariance of the integral under translations of $\varphi$, $A''$ commutes with
+$e^{\iu\varphi'\cdot\widehat{\mathbf N}}$ for all $\varphi'\in\R^2$, hence with $\Nhat\up$ and $\Nhat\dn$ (differentiate at
+$\varphi'=0$). If $A$ is self-adjoint, $A'':=\frac12(A'+A'^*)\in\Alg(X)$ satisfies
+$\norm{\iota(A)-A''}=\norm{\frac12(\iota(A)-A')+\frac12(\iota(A)-A')^*}\le\norm{\iota(A)-A'}$. If $A$ is both, apply the
+first construction and then the second; the self-adjoint part of an operator commuting with $\Nhat\up$ and
+$\Nhat\dn$ commutes with them.
+\end{proof}
+
+The operators $\iota(A)$ are the \emph{physical} operators. Spectra, traces, sectors and spectral projections
+are always those of operators on $\Fock$; operators in the algebras $\Alg(X)$, which in general are not
+physical, appear only as approximants of physical operators.
+
+\subsection{Locality in the slot lattice}
+
+\begin{definition}[strips, columns]\label{def:strips}
+For an interval $I\subset\R/L_x\Z$, $\Str(I)$ is the strip of Proposition~\ref{prop:geometry}(iii), and $I_\rho$
+denotes the closed $\rho$-neighbourhood of $I$. For a set $\mathcal B\subset\Z_{\Nphi}$ of orbitals (a \emph{band}),
+$\Col(\mathcal B):=\bigcup_{j\in\mathcal B}\Col(j)$.
+\end{definition}
+
+\begin{lemma}[strips and fattenings]\label{lem:strips}
+Let the torus be admissible and let $I\subset\R/L_x\Z$ be an open interval of length at least $2\delta_x$. Then for
+every $\rho\ge0$,
+\[
+\fat{\Str(I)}\rho\subset\Str(I_\rho)\subset\fat{\Str(I)}{\rho+\delta_x}.
+\]
+\end{lemma}
+
+\begin{proof}
+Let $I$ be the image of an open interval $(\underline x,\overline x)\subset\R$ with $\overline x-\underline x\ge2\delta_x$ (if
+$\overline x-\underline x>L_x$, then $I$ is the whole circle). For two slots,
+$d(s,s')^2=\abs{x_s-x_{s'}}_{L_x}^2+\abs{y_s-y_{s'}}_{L_y}^2$, where $y_s$ denotes the second coordinate of $\cen s$; in
+particular $\abs{x_s-x_{s'}}_{L_x}\le d(s,s')$.
+
+First inclusion: if $d(s,s')\le\rho$ for some $s'\in\Str(I)$, then $\dist(x_s,I)\le\abs{x_s-x_{s'}}_{L_x}\le\rho$, so
+$x_s\in I_\rho$.
+
+Second inclusion: we first show that every point $x$ of the closure $\bar I$ is within distance $\delta_x$ of the
+centre $x_{a'}$ of some window with $x_{a'}\in I$. Let $\tilde x\in[\underline x,\overline x]$ be a lift of $x$. The
+half-open intervals $(\underline x,\underline x+\delta_x]$ and $[\overline x-\delta_x,\overline x)$ are contained in
+$(\underline x,\overline x)$, because $\overline x-\underline x>\delta_x$, and each contains a point of $\delta_x\Z$. Let
+$\underline v$ and $\overline v$ be the smallest and the largest point of $\delta_x\Z\cap(\underline x,\overline x)$; then
+$\underline v\le\underline x+\delta_x$, $\overline v\ge\overline x-\delta_x$, and consecutive points of
+$\delta_x\Z\cap(\underline x,\overline x)$ are $\delta_x$ apart. If $\tilde x\le\underline v$, then $\underline v-\tilde x\le\delta_x$;
+if $\tilde x\ge\overline v$, then $\tilde x-\overline v\le\delta_x$; otherwise $\tilde x$ lies between two consecutive points
+and is within $\delta_x/2$ of one of them. In each case some $v\in\delta_x\Z\cap(\underline x,\overline x)$ satisfies
+$\abs{v-\tilde x}\le\delta_x$, and its image is a window centre $x_{a'}\in I$ with $\abs{x-x_{a'}}_{L_x}\le\delta_x$.
+
+Now let $s=(a,\ell)\in\Str(I_\rho)$. The distance $\dist(x_s,I)\le\rho$ is attained at a point $x\in\bar I$, and with
+$x_{a'}$ as above, $s':=(a',\ell)\in\Str(I)$ and $d(s,s')=\abs{x_a-x_{a'}}_{L_x}\le\rho+\delta_x$. Hence
+$s\in\fat{\Str(I)}{\rho+\delta_x}$. (The proof uses only $\overline x-\underline x>\delta_x$; the lemma therefore holds for open
+intervals of length greater than $\delta_x$.)
+\end{proof}
+
+\begin{definition}[almost supported operators]\label{def:almostsupported}
+Let $\mathcal N\subset\N$ be infinite, let $(\Tor_N)_{N\in\mathcal N}$ be admissible tori, and let $Z=(Z_N)_{N\in\mathcal N}$
+with $Z_N\subset\Slots$. A sequence $A=(A_N)_{N\in\mathcal N}$ of operators $A_N$ on $\Fock$ is \emph{almost supported
+in $Z$}, written $A\in\AS_Z$, if there are $m\ge0$ and, for every $k\in\N$, a constant $C_k$ such that for all
+$N\in\mathcal N$ and $r\ge0$ there is $A_{N,r}\in\Alg(\fat{(Z_N)}r)$ with
+\[
+\norm{\iota(A_N)-A_{N,r}}\le C_kN^m(1+r)^{-k}.
+\]
+Such an $m$ is a \emph{prefactor exponent} of $A$. A family of such sequences depending on a parameter is
+almost supported \emph{uniformly} in the parameter if one $m$ and one set of constants $C_k$ serve for all
+values of the parameter. For an operator $A$ on $\FockS$ and $X\subset\Slots$, the \emph{set norm} of order
+$k$ is $\norm A_{X;k}:=\sup_{r\ge0}(1+r)^k\inf\{\norm{A-A'}:A'\in\Alg(\fat Xr)\}$.
+\end{definition}
+
+Since $\Alg(\fat Xr)$ consists of even operators, only even operators can be almost supported in this sense;
+every operator to which the definition is applied below is even.
+
+\begin{remark}[comparison with \cite{BBDF21}]\label{rem:bbdf-almost}
+In \cite[Section~2.3.1 and Appendix~C]{BBDF21} the error is required to be $\norm{A_N}\abs{Z_N}O(r^{-\infty})$.
+Since $\norm{A_N}\abs{Z_N}$ is bounded by a power of $N$ for every operator considered here, operators almost
+supported in their sense are almost supported in the sense of Definition~\ref{def:almostsupported}. The
+relaxed form is needed because propagation from a strip produces factors of the size of the strip, which is
+of order $L_y$ times its width, and because filters and products raise prefactors by fixed powers of $N$;
+the class of Definition~\ref{def:almostsupported} is closed under these operations (Section~\ref{sec:locality}).
+Every almost-support estimate of the proof is finally used at a distance of order $\sqrt N$, where
+$N^m(1+r)^{-k}=\Onf$ for every fixed $m$ (Lemma~\ref{lem:bookkeeping}). At fixed aspect ratio the diameter of
+$\Slots$, the distance between the two cuts and the square root of the number of slots are all of order
+$\sqrt N$, so $\Onf$ is the same as the $O(L^{-\infty})$ of \cite{BBDF21} with $L$ the diameter.
+\end{remark}

@@ -1,0 +1,753 @@
+\section{Locality estimates}\label{sec:locality}
+
+Throughout this section $(\Tor_N)_{N\in\mathcal N}$ are admissible tori and $H=(H_N)$ satisfies (H1) of
+Definition~\ref{def:class}, with constants $C_h$ and $C^H_k$. We write $\Hhat=\Hhat_N:=\iota(H_N)=\int\iota(h_R)\,\dd R$
+and $\tau_t(A):=e^{\iu t\Hhat}Ae^{-\iu t\Hhat}$ for operators $A$ on $\FockS$. By Lemma~\ref{lem:embedding}(ii),
+$\tau_t(\iota(A))=\iota(e^{\iu tH_N}Ae^{-\iu tH_N})$ for operators $A$ on $\Fock$, and we use the same symbol $\tau_t$
+for the dynamics $A\mapsto e^{\iu tH_N}Ae^{-\iu tH_N}$ on $\Fock$. All constants in this section depend only on
+the indicated orders, on $\Cvol$ (hence on $\delta_0$), on $C_h$, on finitely many of the $C^H_k$, and on the
+constants of the operators or sequences to which a statement is applied (for Lemma~\ref{lem:bookkeeping}, those of
+the sequences in $\mathcal O$); in addition, those of Lemma~\ref{lem:filters} depend on $F$, those of
+Lemmas~\ref{lem:Wexists} and \ref{lem:timerep} and of Proposition~\ref{prop:Qlocal} on $\vartheta$, $\gamma$, $\Delta$,
+$\delta$ and $\zeta$, and those of Lemma~\ref{lem:bookkeeping} on $c$, $C$ and $m_*$. None depends on $N$.
+
+\subsection{Conditional expectations and the Lieb--Robinson bound}
+
+\begin{lemma}[conditional expectations]\label{lem:condexp}
+For $Y\subset\Slots$ let $\CE_Y$ be the trace-preserving conditional expectation from the operators on $\FockS$
+onto $\CAR(Y)$, that is, the orthogonal projection onto $\CAR(Y)$ for the Hilbert--Schmidt inner product. Then
+$\CE_Y$ is linear, unital, positive, contractive, idempotent and $*$-preserving; it commutes with the parity
+automorphism and with the gauge transformations of Lemma~\ref{lem:embedding}(iii); it maps even operators into
+$\Alg(Y)$; and for every even $A$,
+\[
+\norm{A-\CE_Y(A)}\le2\inf\{\norm{A-A'}:A'\in\Alg(Y)\}.
+\]
+In particular, if $u\mapsto A_u$ is continuous (respectively Borel) and $u\mapsto Y_u$ takes finitely many
+values on Borel sets, then $u\mapsto\CE_{Y_u}(A_u)$ is Borel; approximants may therefore always be chosen
+measurable in time and in space, at the cost of a factor $2$.
+\end{lemma}
+
+\begin{proof}
+Write $\widehat N:=\Nhat\up+\Nhat\dn$, so that the parity automorphism is $A\mapsto(-1)^{\widehat N}A(-1)^{\widehat N}$.
+
+\emph{A tensor decomposition adapted to $Y$.} Number the $n:=2\abs{\Slots}$ modes $(s,\sigma)$ of $\FockS$ as
+$\mu_1,\dots,\mu_n$ in such a way that the modes with $s\in Y$ are $\mu_1,\dots,\mu_{n_Y}$, $n_Y:=2\abs Y$, and write
+$a_j:=\chat_{\mu_j}$. With $\widehat\Omega_0$ the vacuum of $\FockS$, the vectors
+\[
+\lvert n_1\cdots n_n\rangle:=(a_1^*)^{n_1}\cdots(a_n^*)^{n_n}\,\widehat\Omega_0,\qquad n_j\in\{0,1\},
+\]
+form an orthonormal basis of $\FockS$, and moving $a_j$ to the right with the anticommutation relations gives
+$a_j\lvert n_1\cdots n_n\rangle=(-1)^{n_1+\cdots+n_{j-1}}\,n_j\,\lvert n_1\cdots n_{j-1}\,0\,n_{j+1}\cdots n_n\rangle$. We
+identify $\FockS$ with $(\C^2)^{\otimes n}$ by $\lvert n_1\cdots n_n\rangle\mapsto e_{n_1}\otimes\cdots\otimes e_{n_n}$,
+where $(e_0,e_1)$ is the standard basis of $\C^2$; for an operator $b$ on $\C^2$ we write $b_{(i)}$ for $b$ acting
+in the $i$-th factor, and we put $\mathsf l:=\lvert e_0\rangle\langle e_1\rvert$ and
+$\mathsf z:=\lvert e_0\rangle\langle e_0\rvert-\lvert e_1\rangle\langle e_1\rvert$. Then
+\[
+a_j=\mathsf z_{(1)}\cdots\mathsf z_{(j-1)}\,\mathsf l_{(j)},\qquad a_j^*a_j=\lvert e_1\rangle\langle e_1\rvert_{(j)} .
+\]
+Each $a_j$ with $j\le n_Y$ acts only in the first $n_Y$ factors, so $\CAR(Y)\subset\mathcal B_{n_Y}\otimes\one$, where
+$\mathcal B_{n_Y}$ denotes the algebra of all operators on $(\C^2)^{\otimes n_Y}$ and $\one$ the identity of
+$(\C^2)^{\otimes(n-n_Y)}$. Conversely, for $j\le n_Y$, $\mathsf z_{(j)}=\one-2a_j^*a_j\in\CAR(Y)$, hence
+$\mathsf l_{(j)}=\mathsf z_{(1)}\cdots\mathsf z_{(j-1)}a_j\in\CAR(Y)$; the operators $\mathsf l_{(j)}\mathsf l_{(j)}^*$,
+$\mathsf l_{(j)}$, $\mathsf l_{(j)}^*$ and $\mathsf l_{(j)}^*\mathsf l_{(j)}$ are the four matrix units of the $j$-th
+factor, and products of matrix units of the factors $1,\dots,n_Y$ span $\mathcal B_{n_Y}\otimes\one$. Therefore
+\begin{equation}\label{eq:loc-JW}
+\CAR(Y)=\mathcal B_{n_Y}\otimes\one .
+\end{equation}
+For $Y=\Slots$ this says that $\CAR(\Slots)$ is the algebra of all operators on $\FockS$, and hence that
+$\Alg(\Slots)$ is the algebra of all even operators on $\FockS$.
+
+\emph{The conditional expectation.} Let $\mathrm{tr}'$ be the normalized trace on the operators on
+$(\C^2)^{\otimes(n-n_Y)}$, and let $\CE'$ be the linear map with $\CE'(A_1\otimes A_2)=\mathrm{tr}'(A_2)\,A_1\otimes\one$. It maps
+onto $\CAR(Y)$ and fixes every element of $\CAR(Y)$, and for $C=C_1\otimes\one\in\CAR(Y)$ and $A=A_1\otimes A_2$,
+\[
+\Tr\bigl(C^*(A-\CE'(A))\bigr)=\Tr(C_1^*A_1)\bigl(\Tr A_2-2^{n-n_Y}\mathrm{tr}'(A_2)\bigr)=0 .
+\]
+By linearity $A-\CE'(A)$ is orthogonal to $\CAR(Y)$ for the Hilbert--Schmidt inner product for every $A$, so
+$\CE'=\CE_Y$. Let $\mathsf p_0:=\one$, $\mathsf p_1$, $\mathsf p_2$ and $\mathsf p_3=\mathsf z$ be the identity and the three
+Pauli matrices on $\C^2$, and for $\alpha\in\{0,1,2,3\}^q$ let
+$\mathsf p_\alpha:=\mathsf p_{\alpha_1}\otimes\cdots\otimes\mathsf p_{\alpha_q}$. For every operator $C$ on $(\C^2)^{\otimes q}$,
+\begin{equation}\label{eq:loc-twirl}
+4^{-q}\sum_{\alpha\in\{0,1,2,3\}^q}\mathsf p_\alpha\,C\,\mathsf p_\alpha^*=2^{-q}\Tr(C)\,\one :
+\end{equation}
+for $q=1$ this is checked on the four matrix units $\lvert e_a\rangle\langle e_b\rvert$, and for general $q$ both
+sides are multiplicative on products $C_1\otimes\cdots\otimes C_q$, which span. Applied in the last $n-n_Y$ factors,
+\eqref{eq:loc-twirl} gives
+\[
+\CE_Y(A)=4^{-(n-n_Y)}\sum_{\alpha\in\{0,1,2,3\}^{n-n_Y}}(\one\otimes\mathsf p_\alpha)\,A\,(\one\otimes\mathsf p_\alpha)^*,
+\]
+an average of conjugations by unitaries. Hence $\CE_Y$ is linear, unital, positive, $*$-preserving and
+contractive; it is idempotent, being a projection, and it preserves the trace.
+
+\emph{Symmetries.} The parity operator $(-1)^{\widehat N}=\prod_j(\one-2a_j^*a_j)=\mathsf z^{\otimes n}$ and the gauge
+unitaries $e^{\iu(\varphi_\up\Nhat\up+\varphi_\dn\Nhat\dn)}=\bigotimes_je^{\iu\varphi_{\sigma(j)}a_j^*a_j}$, where
+$\sigma(j)$ is the spin of the mode $\mu_j$, are products $U=U_1\otimes U_2$ of a unitary on the first $n_Y$ factors
+and one on the last $n-n_Y$ factors. For such $U$ and $A=A_1\otimes A_2$,
+$\CE_Y(UAU^*)=\mathrm{tr}'(U_2A_2U_2^*)\,U_1A_1U_1^*\otimes\one=U\,\CE_Y(A)\,U^*$, because $\mathrm{tr}'$ is invariant under unitary
+conjugation; by linearity $\CE_Y$ commutes with conjugation by $U$. If $A$ is even, then
+$(-1)^{\widehat N}\CE_Y(A)(-1)^{\widehat N}=\CE_Y(A)$, so $\CE_Y(A)$ is an even element of $\CAR(Y)$, that is,
+$\CE_Y(A)\in\Alg(Y)$.
+
+\emph{The approximation bound.} If $A'\in\Alg(Y)$, then $\CE_Y(A')=A'$, hence
+$A-\CE_Y(A)=(A-A')-\CE_Y(A-A')$ and $\norm{A-\CE_Y(A)}\le2\norm{A-A'}$.
+
+\emph{Measurability.} $\CE_Y$ is a linear map of a finite-dimensional space, hence continuous, so
+$u\mapsto\CE_Y(A_u)$ is continuous (respectively Borel) when $u\mapsto A_u$ is. If $Y_u=Y_i$ for $u\in\mathcal U_i$,
+where $\mathcal U_1,\dots,\mathcal U_J$ are Borel sets partitioning the parameter set, then
+$\CE_{Y_u}(A_u)=\sum_i\one_{\mathcal U_i}(u)\,\CE_{Y_i}(A_u)$ is Borel.
+\end{proof}
+
+An \emph{even interaction} on $\Slots$ is a map $\Psi$ from the subsets of $\Slots$ to operators on $\FockS$ with
+$\Psi(Z)=\Psi(Z)^*\in\Alg(Z)$; its Hamiltonian is $H_\Psi:=\sum_Z\Psi(Z)$, its dynamics is
+$\tau^\Psi_t(A):=e^{\iu tH_\Psi}Ae^{-\iu tH_\Psi}$, and its \emph{chain matrix} is the
+$\Slots\times\Slots$ matrix $M^\Psi_{ss'}:=\sum_{Z\ni s,s'}\norm{\Psi(Z)}$ (diagonal included).
+
+\begin{theorem}[Lieb--Robinson bound for even interactions]\label{thm:LR}
+Let $\Psi$ be an even interaction on $\Slots$, let $X,Y\subset\Slots$, and let $A\in\CAR(X)$, $B\in\Alg(Y)$ (or
+$A\in\Alg(X)$, $B\in\CAR(Y)$). Then for every $t\in\R$
+\[
+\norm{[\tau^\Psi_t(A),B]}\le2\norm A\norm B\sum_{s\in X,\ s'\in Y}\bigl[e^{2\abs t M^\Psi}\bigr]_{ss'},
+\]
+and the matrix $e^{2\abs tM^\Psi}$ may be replaced by $e^{2\abs tM^\Psi}-\one$ if $X\cap Y=\emptyset$. For
+$\lambda>0$ let
+$C(\Psi,\lambda):=\max_s\sum_{s'}M^\Psi_{ss'}e^{d(s,s')/\lambda}$. Then
+\[
+\norm{[\tau^\Psi_t(A),B]}\le2\norm A\norm B\,e^{2\abs tC(\Psi,\lambda)}\sum_{s\in X}e^{-d(s,Y)/\lambda},
+\]
+and $e^{2\abs tC(\Psi,\lambda)}$ may be replaced by $e^{2\abs tC(\Psi,\lambda)}-1$ if $X\cap Y=\emptyset$. Both bounds
+remain valid, with the same matrix $M^\Psi$, for the dynamics of any interaction obtained from $\Psi$ by setting
+some of its terms to zero.
+\end{theorem}
+
+This is the Lieb--Robinson bound of \cite[Theorem~3.1]{NSY18} for lattice fermions, in the form that results
+from bounding the chain sums in its proof by powers of the chain matrix; it is derived from
+\cite[Lemma~3.3]{NSY18} in Appendix~\ref{app:LR}, where the proof is given.
+
+\subsection{Propagation from a set}
+
+\begin{theorem}[propagation from a set]\label{thm:propagation}
+Assume (H1). Let $c_k:=2^k\max\{C_h,4C^H_k\}$, $r_j:=2^j$ for $j\ge0$, and
+\[
+C_1:=e^2\Cvol\sum_{j\ge0}c_5(1+r_j)^{-5}\,\pi r_j^2\,(1+2r_j)^2\ \le\ 192\pi e^2\,\Cvol\max\{C_h,4C^H_5\}.
+\]
+\begin{enumerate}[(a)]
+\item (\emph{master inequality}) For every dyadic $\lambda=r_{j_0}\ge1$, every $k\ge3$, $\rho>0$, $X\subset\Slots$,
+$A\in\CAR(X)$ and $t\in\R$,
+\[
+\bigl\lVert\tau_t(A)-\tau^{\lambda,\fat X\rho}_t(A)\bigr\rVert\le\norm A\abs X\Bigl[\frac{16\pi c_k}{3C_1}\lambda^{-(k-2)}
+(1+C_1\abs t)^3+e^{-\rho/\lambda}\bigl(e^{2C_1\abs t}-1\bigr)\Bigr],
+\]
+where, for $Y\subset\Slots$, $\tau^{\lambda,Y}$ is the dynamics generated by a self-adjoint operator
+$\Hhat_{\lambda,Y}\in\Alg(Y)$ constructed in the proof; in particular $\tau^{\lambda,\fat X\rho}_t(A)\in\CAR(\fat X\rho)$
+has the parity of $A$.
+\item (\emph{light cone}) For $\beta\in(0,1)$ and $k'>0$ put $C_{\rm lc}(\beta):=\max\{1,(4C_1)^{1/(1-\beta)}\}$,
+$\lambda:=2^{\lfloor\beta\log_2\rho\rfloor}$ and $k:=2+\lceil(k'+3)/\beta\rceil$. Whenever
+$\rho\ge C_{\rm lc}(\beta)(1+\abs t)^{1/(1-\beta)}$,
+\[
+\inf\bigl\{\norm{\tau_t(A)-A'}:A'\in\CAR(\fat X\rho)\text{ of the parity of }A\bigr\}\le C_{k',\beta}\norm A\abs X\rho^{-k'},
+\]
+where
+\[
+C_{k',\beta}:=\frac{16\pi c_k2^{k-2}}{3C_1}\Bigl(\frac{\max\{1,C_1\}}{4C_1}\Bigr)^3+\Bigl(\frac{2k'}{e(1-\beta)}\Bigr)^{k'/(1-\beta)}.
+\]
+\item (\emph{every light-cone exponent above one}) Consequently, for every $\alpha>1$ and $k>0$ there are
+$C_{\rm lc}$ and $C_k$, depending only on $\alpha$, $k$, $\Cvol$, $C_h$ and finitely many $C^H_{k'}$, such that for all
+$N$, $X\subset\Slots$, even $A\in\Alg(X)$, $t\in\R$ and $\rho\ge C_{\rm lc}(1+\abs t)^\alpha$,
+\[
+\inf\{\norm{\tau_t(A)-A'}:A'\in\Alg(\fat X\rho)\}\le C_k\norm A\abs X\rho^{-k};
+\]
+for $k=0$ the same bound holds with the constant $1$ in place of $C_k$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Fix $N$ and drop it from the notation. Besides (H1), the proof uses only the ball count of
+Proposition~\ref{prop:geometry}(ii), the fact that the disc $\mathbb D_r(R):=\{R'\in\Tor_N:d(R,R')\le r\}$ has measure at
+most $\pi r^2$, being the image of a planar disc of radius $r$ under the covering map, and, in Step~4, the fact that the
+lattice of periods of $\Tor_N$ is rectangular. For a statement $S$ we write $[S]:=1$ if $S$ holds and $[S]:=0$ otherwise. We may assume
+$X\ne\emptyset$: if $X=\emptyset$, then $A\in\CAR(\emptyset)=\C\one$ and every difference estimated below vanishes.
+
+\emph{Step 0: canonical approximants.} For $R\in\Tor_N$ and $r\ge0$ put
+\[
+\tilde h_{R,r}:=\CE_{\Ball rR}\bigl(\iota(h_R)\bigr).
+\]
+Since $h_R$ is sector-preserving it is even (Lemma~\ref{lem:sectors}(ii)), hence so is $\iota(h_R)$
+(Lemma~\ref{lem:embedding}(i)). By Lemma~\ref{lem:condexp} and (H1), $\tilde h_{R,r}\in\Alg(\Ball rR)$ is
+self-adjoint, $\norm{\tilde h_{R,r}}\le\norm{h_R}\le C_h$, and $\norm{\iota(h_R)-\tilde h_{R,r}}\le2C^H_k(1+r)^{-k}$ for
+every $k$ at once. For fixed $r$, the map $R\mapsto\Ball rR$ takes finitely many values, each on a Borel set
+$\{R:\Ball rR=Z\}=\bigcap_{s\in Z}\{R:d(s,R)\le r\}\cap\bigcap_{s\notin Z}\{R:d(s,R)>r\}$, and $R\mapsto\iota(h_R)$ is
+Borel because $R\mapsto h_R$ is and $\iota$ is linear; by Lemma~\ref{lem:condexp}, $R\mapsto\tilde h_{R,r}$ is Borel.
+
+\emph{Step 1: the multiscale interaction.} Let $j_{\max}$ be the least $j$ with $r_j\ge\diam\Tor_N$. For
+$j\ge j_{\max}$ and every $R$, $\Ball{r_j}R=\Slots$, so $\tilde h_{R,r_j}=\iota(h_R)$ by \eqref{eq:loc-JW}. Put
+\[
+\hat h^{(0)}_R:=\tilde h_{R,r_0},\qquad\hat h^{(j)}_R:=\tilde h_{R,r_j}-\tilde h_{R,r_{j-1}}\quad(1\le j\le j_{\max}).
+\]
+Then $\sum_{j=0}^{j_{\max}}\hat h^{(j)}_R=\iota(h_R)$, each $\hat h^{(j)}_R\in\Alg(\Ball{r_j}R)$ is self-adjoint and
+Borel in $R$, and, since $1+r_{j-1}\ge(1+r_j)/2$,
+$\norm{\hat h^{(j)}_R}\le2C^H_k\bigl[(1+r_j)^{-k}+(1+r_{j-1})^{-k}\bigr]\le2^{k+2}C^H_k(1+r_j)^{-k}$ for $j\ge1$, while
+$\norm{\hat h^{(0)}_R}\le C_h=2^kC_h(1+r_0)^{-k}$. Hence, for all $j$, $R$ and $k$,
+\begin{equation}\label{eq:loc-pieces}
+\norm{\hat h^{(j)}_R}\le c_k(1+r_j)^{-k}.
+\end{equation}
+For $Z\subset\Slots$ and a dyadic $\lambda=r_{j_0}\ge1$ let
+\[
+\Psi(Z):=\sum_{j=0}^{j_{\max}}\int_{\Tor_N}\bigl[\Ball{r_j}R=Z\bigr]\,\hat h^{(j)}_R\,\dd R,\qquad
+\Psi_\lambda(Z):=\sum_{j=0}^{\min\{j_0,j_{\max}\}}\int_{\Tor_N}\bigl[\Ball{r_j}R=Z\bigr]\,\hat h^{(j)}_R\,\dd R .
+\]
+The integrands are bounded Borel functions with values in the finite-dimensional space $\Alg(Z)$, so $\Psi$ and
+$\Psi_\lambda$ are even interactions in the sense of Theorem~\ref{thm:LR}, and $\sum_Z\Psi(Z)=\sum_j\int\hat h^{(j)}_R\,\dd R
+=\Hhat$. Put $\Hhat_\lambda:=\sum_Z\Psi_\lambda(Z)=\int\tilde h_{R,r_{\min\{j_0,j_{\max}\}}}\dd R$ and, for $Y\subset\Slots$,
+$\Hhat_{\lambda,Y}:=\sum_{Z\subset Y}\Psi_\lambda(Z)\in\Alg(Y)$; $\tau^\lambda$ and $\tau^{\lambda,Y}$ denote the dynamics
+they generate. The operator $\Hhat_{\lambda,Y}$ is the Hamiltonian of the interaction obtained from $\Psi_\lambda$ by
+setting its terms $\Psi_\lambda(Z)$ with $Z\not\subset Y$ to zero. (Terms with $Z=\emptyset$ are multiples of the
+identity and play no role.)
+
+\emph{Step 2: the chain weights of $\Psi_\lambda$.} Let $M:=M^{\Psi_\lambda}$. Since $s\in\Ball rR$ if and only if
+$R\in\mathbb D_r(\cen s)$, \eqref{eq:loc-pieces} with $k=5$ gives
+\[
+M_{ss'}\le\sum_{j\le j_0}\int\bigl[s,s'\in\Ball{r_j}R\bigr]\,\norm{\hat h^{(j)}_R}\,\dd R\le
+\sum_{j\le j_0}c_5(1+r_j)^{-5}\,\bigl\lvert\mathbb D_{r_j}(\cen s)\cap\mathbb D_{r_j}(\cen{s'})\bigr\rvert .
+\]
+The intersection is empty unless $d(s,s')\le2r_j$, and its measure is at most $\pi r_j^2$. If $d(s,s')\le2r_j$ with
+$j\le j_0$, then $e^{d(s,s')/\lambda}\le e^2$, as $r_j\le\lambda$; and the number of $s'$ with $d(s,s')\le2r_j$ is
+$\#\Ball{2r_j}{\cen s}\le\Cvol(1+2r_j)^2$. Hence
+\begin{equation}\label{eq:loc-C1}
+C(\Psi_\lambda,\lambda)=\max_s\sum_{s'}M_{ss'}e^{d(s,s')/\lambda}\le e^2\Cvol\sum_{j\ge0}c_5(1+r_j)^{-5}\,\pi r_j^2\,(1+2r_j)^2=C_1,
+\end{equation}
+uniformly in $\lambda$ and $N$. The uniformity in $\lambda$ rests on the summability over the scales $j$: for a
+representation of $\Hhat_\lambda$ by a single term $\tilde h_{R,\lambda}$ per point $R$, the same argument bounds the weighted
+row sums only by $e^2C_h\pi\lambda^2\Cvol(1+2\lambda)^2$, which grows like $\lambda^4$. Since $\pi r_j^2\le\pi(1+r_j)^2$ and
+$(1+2r_j)^2\le4(1+r_j)^2$, the $j$-th term of the series
+is at most $4\pi c_5(1+2^j)^{-1}$, and $\sum_{j\ge0}(1+2^j)^{-1}<\frac32$; this gives
+$C_1\le6\pi e^2\Cvol c_5=192\pi e^2\Cvol\max\{C_h,4C^H_5\}$.
+
+\emph{Step 3: localization in $\fat X\rho$.} We write the time integrals for $t\ge0$; for $t<0$ the same estimates
+hold with $\int_0^t$ replaced by $\int_t^0$, since all bounds below depend on time only through its absolute value.
+Let $Y:=\fat X\rho\supset X$. As $A\in\CAR(X)\subset\CAR(Y)$ and $e^{\iu t\Hhat_{\lambda,Y}}$ is an even element of
+$\Alg(Y)$, the operator $\tau^{\lambda,Y}_t(A)$ lies in $\CAR(Y)$ and has the parity of $A$. The derivative of
+$u\mapsto\tau^\lambda_u(\tau^{\lambda,Y}_{t-u}(A))$ is $\tau^\lambda_u\bigl(\iu[\Hhat_\lambda-\Hhat_{\lambda,Y},\tau^{\lambda,Y}_{t-u}(A)]\bigr)$,
+so that
+\[
+\tau^\lambda_t(A)-\tau^{\lambda,Y}_t(A)=\int_0^t\tau^\lambda_u\Bigl(\iu\bigl[\Hhat_\lambda-\Hhat_{\lambda,Y},\tau^{\lambda,Y}_{t-u}(A)\bigr]\Bigr)\dd u,
+\qquad\Hhat_\lambda-\Hhat_{\lambda,Y}=\sum_{Z\not\subset Y}\Psi_\lambda(Z).
+\]
+Theorem~\ref{thm:LR}, applied to the interaction whose dynamics is $\tau^{\lambda,Y}$ (with the matrix $M$, by its
+last sentence), to $A\in\CAR(X)$ and to $B=\Psi_\lambda(Z)\in\Alg(Z)$, gives
+\[
+\norm{[\Psi_\lambda(Z),\tau^{\lambda,Y}_{t'}(A)]}\le2\norm A\norm{\Psi_\lambda(Z)}\sum_{s\in X}\sum_{s''\in Z}\bigl[e^{2\abs{t'}M}\bigr]_{ss''}.
+\]
+For each $Z\not\subset Y$ choose $s_Z\in Z\setminus Y$. For every nonnegative function $f$ on $\Slots$,
+\[
+\sum_{Z\not\subset Y}\norm{\Psi_\lambda(Z)}\sum_{s''\in Z}f(s'')\le\sum_{s'\notin Y}\sum_{s''\in\Slots}f(s'')\sum_{Z\ni s'',s'}\norm{\Psi_\lambda(Z)}
+=\sum_{s'\notin Y}\sum_{s''\in\Slots}f(s'')M_{s''s'},
+\]
+because for each $Z$ the right-hand side contains the term with $s'=s_Z$. Hence, as
+$\frac{\dd}{\dd t'}e^{2t'M}=2e^{2t'M}M$,
+\[
+\norm{\tau^\lambda_t(A)-\tau^{\lambda,Y}_t(A)}\le2\norm A\sum_{s\in X}\sum_{s'\notin Y}\int_0^{\abs t}\bigl[e^{2t'M}M\bigr]_{ss'}\dd t'
+=\norm A\sum_{s\in X}\sum_{s'\notin Y}\bigl[e^{2\abs tM}-\one\bigr]_{ss'}.
+\]
+For $s\in X$, every $s'\notin Y=\fat X\rho$ satisfies $d(s,s')>\rho$. By \eqref{eq:LR-rowsum} of Appendix~\ref{app:LR}
+and \eqref{eq:loc-C1}, $\sum_{s'\notin Y}[e^{2\abs tM}-\one]_{ss'}\le e^{-\rho/\lambda}(e^{2C_1\abs t}-1)$, and therefore
+\begin{equation}\label{eq:loc-localize}
+\norm{\tau^\lambda_t(A)-\tau^{\lambda,\fat X\rho}_t(A)}\le\norm A\abs X\,e^{-\rho/\lambda}\bigl(e^{2C_1\abs t}-1\bigr).
+\end{equation}
+
+\emph{Step 4: restoring the scales above $\lambda$.} If $j_0\ge j_{\max}$, then $\Hhat_\lambda=\Hhat$ and
+$\tau=\tau^\lambda$. Otherwise $\Hhat-\Hhat_\lambda=\sum_{j_0<j\le j_{\max}}\int\hat h^{(j)}_R\,\dd R$ and, as in Step~3,
+\begin{gather*}
+\tau_t(A)-\tau^\lambda_t(A)=\int_0^t\tau_u\Bigl(\iu\bigl[\Hhat-\Hhat_\lambda,\tau^\lambda_{t-u}(A)\bigr]\Bigr)\dd u,\\
+\norm{\tau_t(A)-\tau^\lambda_t(A)}\le\int_0^{\abs t}\sum_{j_0<j\le j_{\max}}\int_{\Tor_N}\norm{[\hat h^{(j)}_R,\tau^\lambda_{t'}(A)]}\,\dd R\,\dd t'.
+\end{gather*}
+Only the truncated dynamics $\tau^\lambda$ enters, since $\tau_u$ is isometric; the norm $\norm{\Hhat-\Hhat_\lambda}$,
+for which only a bound proportional to $N(1+\lambda)^{-k}$ is available, is never used. Fix $j>j_0$, $R$ and $t'$. Since
+$\hat h^{(j)}_R\in\Alg(\Ball{r_j}R)$ and $d(s,\Ball{r_j}R)\ge\pos{d(s,R)-r_j}$ for every slot $s$, the weighted bound of
+Theorem~\ref{thm:LR} for $\tau^\lambda$, \eqref{eq:loc-C1}, the trivial bound $\norm{[B,\tau^\lambda_{t'}(A)]}\le2\norm A\norm B$
+and $\min\{1,\sum_sa_s\}\le\sum_s\min\{1,a_s\}$ (for $a_s\ge0$) give, with \eqref{eq:loc-pieces},
+\begin{align*}
+\norm{[\hat h^{(j)}_R,\tau^\lambda_{t'}(A)]}&\le2\norm Ac_k(1+r_j)^{-k}\sum_{s\in X}\min\bigl\{1,e^{2C_1\abs{t'}-\pos{d(s,R)-r_j}/\lambda}\bigr\}\\
+&=2\norm Ac_k(1+r_j)^{-k}\sum_{s\in X}e^{-\pos{d(s,R)-q}/\lambda},
+\end{align*}
+where $q:=r_j+2C_1\abs{t'}\lambda$. Keeping the sum over $s\in X$ outside the integral over $R$ is what makes the
+final bound linear in $\abs X$. For a slot $s$, let $\tilde r_s\in\R^2$ be a lift of $\cen s$. The rectangle
+$\tilde r_s+[-L_x/2,L_x/2)\times[-L_y/2,L_y/2)$ is a fundamental domain of $\Tor_N$, and for $\tilde R$ in it the distance
+from $\cen s$ to the image of $\tilde R$ equals the Euclidean distance $\abs{\tilde R-\tilde r_s}$, because the lattice of
+periods is rectangular. Hence
+\begin{align*}
+\int_{\Tor_N}e^{-\pos{d(s,R)-q}/\lambda}\dd R&\le\int_{\R^2}e^{-\pos{\abs\xi-q}/\lambda}\dd\xi
+=\pi q^2+2\pi\int_q^\infty v\,e^{-(v-q)/\lambda}\dd v\\
+&=\pi\bigl(q^2+2q\lambda+2\lambda^2\bigr)\le2\pi(q+\lambda)^2 .
+\end{align*}
+Since $r_j\ge2\lambda$, $q+\lambda\le2r_j(1+C_1\abs{t'})$, and therefore
+\[
+\int_{\Tor_N}\norm{[\hat h^{(j)}_R,\tau^\lambda_{t'}(A)]}\,\dd R\le16\pi c_k\norm A\abs X(1+C_1\abs{t'})^2r_j^{2-k}.
+\]
+As $k\ge3$, $\sum_{j>j_0}r_j^{2-k}=\lambda^{2-k}/(2^{k-2}-1)\le\lambda^{-(k-2)}$, and
+$\int_0^{\abs t}(1+C_1t')^2\dd t'\le(1+C_1\abs t)^3/(3C_1)$. Hence
+\begin{equation}\label{eq:loc-restore}
+\norm{\tau_t(A)-\tau^\lambda_t(A)}\le\frac{16\pi c_k}{3C_1}\norm A\abs X\lambda^{-(k-2)}(1+C_1\abs t)^3 .
+\end{equation}
+
+\emph{Proof of (a).} Add \eqref{eq:loc-localize} and \eqref{eq:loc-restore}; the properties of
+$\tau^{\lambda,\fat X\rho}_t(A)$ were shown in Step~3.
+
+\emph{Proof of (b).} Let $\rho\ge C_{\rm lc}(\beta)(1+\abs t)^{1/(1-\beta)}$. Then $\rho\ge1$, so $\lambda=r_{j_0}$ with
+$j_0=\lfloor\beta\log_2\rho\rfloor\ge0$ and $\rho^\beta/2<\lambda\le\rho^\beta$; moreover
+$\rho^{1-\beta}\ge C_{\rm lc}(\beta)^{1-\beta}(1+\abs t)\ge4C_1(1+\abs t)$, and $\rho/\lambda\ge\rho^{1-\beta}$. We apply (a) with
+this $\lambda$, with $k=2+\lceil(k'+3)/\beta\rceil\ge3$, and with the approximant $A':=\tau^{\lambda,\fat X\rho}_t(A)$,
+which lies in $\CAR(\fat X\rho)$ and has the parity of $A$. For the second term of (a), $2C_1\abs t\le\rho^{1-\beta}/2$
+gives $e^{-\rho/\lambda}(e^{2C_1\abs t}-1)\le e^{-\rho^{1-\beta}/2}$, and with $x:=\rho^{1-\beta}$, $b:=k'/(1-\beta)$ and
+$\max_{x>0}x^be^{-x/2}=(2b/e)^b$,
+\[
+e^{-\rho^{1-\beta}/2}\le\Bigl(\frac{2k'}{e(1-\beta)}\Bigr)^{k'/(1-\beta)}\rho^{-k'} .
+\]
+For the first term, $1+C_1\abs t\le\max\{1,C_1\}(1+\abs t)\le\max\{1,C_1\}\rho^{1-\beta}/(4C_1)$ and
+$\lambda^{-(k-2)}<2^{k-2}\rho^{-\beta(k-2)}$, so it is at most
+\[
+\frac{16\pi c_k2^{k-2}}{3C_1}\Bigl(\frac{\max\{1,C_1\}}{4C_1}\Bigr)^3\rho^{3(1-\beta)-\beta(k-2)},
+\]
+and $\beta(k-2)\ge k'+3$ gives $3(1-\beta)-\beta(k-2)\le-k'$; since $\rho\ge1$, the power of $\rho$ is at most
+$\rho^{-k'}$. Adding the two terms gives (b).
+
+\emph{Proof of (c).} Let $\beta:=1-1/\alpha\in(0,1)$, so that $1/(1-\beta)=\alpha$, and $C_{\rm lc}:=C_{\rm lc}(\beta)=\max\{1,(4C_1)^\alpha\}$.
+If $A\in\Alg(X)$ is even, the approximant of (b) is an even element of $\CAR(\fat X\rho)$, that is, an element of
+$\Alg(\fat X\rho)$. For $k>0$, (b) with $k'=k$ gives the claim with $C_k:=C_{k,\beta}$, which depends on $\alpha$,
+$k$, $C_1$, $C_h$ and $C^H_{2+\lceil(k+3)/\beta\rceil}$. For $k=0$ the claim holds with constant $1$: if $X\ne\emptyset$
+the approximant $0$ gives $\norm{\tau_t(A)}=\norm A\le\norm A\abs X$, and if $X=\emptyset$ then $\tau_t(A)=A\in\Alg(\emptyset)$.
+
+\emph{Independence of $N$.} The constants $C_1$, $C_{\rm lc}(\beta)$, $C_{k',\beta}$, $C_{\rm lc}$ and $C_k$ depend only on $\beta$ (or
+$\alpha$), on the decay orders, on $\Cvol$, $C_h$, $C^H_5$ and one further $C^H_{k''}$, and not on $N$. Through $\Cvol$
+(Proposition~\ref{prop:geometry}(ii)) and the constants of (H1) they depend on the torus only through its
+admissibility.
+\end{proof}
+
+We fix the light-cone exponent $\alpha:=4$, that is $\beta=3/4$, in the rest of the paper, and write
+$C_{\rm lc}:=\max\{1,(4C_1)^4\}$. Any fixed $\alpha>1$ would do.
+
+\begin{remark}[what the propagation bound says, and what it does not]\label{rem:propagation}
+Theorem~\ref{thm:propagation} gives a polynomial light cone with a constant independent of $N$; for
+$\alpha>1$ it does not give a finite propagation velocity, and the argument does not reach $\alpha=1$. The
+size $\abs X$ of the initial support enters to the first power. The constants are not explicit in any useful
+sense: the bound on $C_1$ is about $4.5\cdot10^3\,\Cvol\max\{C_h,4C^H_5\}$, where $C^H_5$ involves high derivatives of
+the window, and $C_{\rm lc}=\max\{1,(4C_1)^4\}$. The bound has content only for $\rho\ge C_{\rm lc}$, so every statement derived
+from it below is purely asymptotic in $N$.
+\end{remark}
+
+\subsection{Almost-supported inputs and time filters}
+
+\begin{lemma}[propagation of almost-supported operators]\label{lem:almostinputs}
+For every $k\ge0$ there is $C_k$ such that for every even operator $A$ on $\FockS$, every $X\subset\Slots$ and
+every $t\in\R$,
+\[
+\norm{\tau_t(A)}_{X;k}\le C_k(1+\abs t)^{4k}\abs X\bigl(\norm A+\norm A_{X;\max\{k,3\}}\bigr).
+\]
+\end{lemma}
+
+\begin{proof}
+Let $\bar k:=\max\{k,3\}$ and $n_A:=\norm A+\norm A_{X;\bar k}$. We may assume $n_A<\infty$, and also $X\ne\emptyset$: if
+$X=\emptyset$, then $\fat Xr=\emptyset$ for every $r$ and $\Alg(\emptyset)=\C\one$, so $n_A<\infty$ forces $A\in\C\one$,
+and then $\tau_t(A)=A$ and both sides vanish. Let $C_{\rm lc}=\max\{1,(4C_1)^4\}$ and, for $k>0$, let $C^\tau_k$ be the constant
+of Theorem~\ref{thm:propagation}(c) for $\alpha=4$ and decay order $k$; for $k=0$ put $C^\tau_0:=1$, which is allowed by
+Theorem~\ref{thm:propagation}(c).
+
+\emph{Dyadic decomposition.} For $j\ge0$ let $B_j\in\Alg(\fat X{2^j})$ be a best approximant of $A$; it exists because
+$\Alg(\fat X{2^j})$ is finite-dimensional, and $\norm{A-B_j}\le\norm A_{X;\bar k}(1+2^j)^{-\bar k}$. Let $j_X$ be the least
+$j$ with $\fat X{2^j}=\Slots$; then $B_{j_X}=A$, since $A$ is even and $\Alg(\Slots)$ contains every even operator
+(Lemma~\ref{lem:condexp}, \eqref{eq:loc-JW}). Put $A^{(0)}:=B_0$ and $A^{(j)}:=B_j-B_{j-1}$ for $1\le j\le j_X$. Then
+$A=\sum_{j=0}^{j_X}A^{(j)}$ and $A^{(j)}\in\Alg(\fat X{2^j})$. Moreover, as $1+2^{j-1}\ge(1+2^j)/2$,
+\[
+\norm{A^{(j)}}\le\norm{A-B_j}+\norm{A-B_{j-1}}\le2^{\bar k+1}n_A(1+2^j)^{-\bar k}\qquad(1\le j\le j_X),
+\]
+and the same bound holds for $j=0$, since $\norm{A^{(0)}}\le\norm A+\norm{A-B_0}\le n_A$.
+
+\emph{Large radii.} Let $r\ge2C_{\rm lc}(1+\abs t)^4$ and $\rho:=r/2$, so that $\rho\ge C_{\rm lc}(1+\abs t)^4$ and $r\ge2$. For $j$
+with $2^j\le r/2$, Theorem~\ref{thm:propagation}(c), applied to the even operator $A^{(j)}\in\Alg(\fat X{2^j})$, gives
+$B'_j\in\Alg\bigl((\fat X{2^j})_{(\rho)}\bigr)$ with $\norm{\tau_t(A^{(j)})-B'_j}\le C^\tau_k\norm{A^{(j)}}\abs{\fat X{2^j}}\rho^{-k}$,
+and $(\fat X{2^j})_{(\rho)}\subset\fat X{2^j+\rho}\subset\fat Xr$ by the triangle inequality. By
+Proposition~\ref{prop:geometry}(ii), $\abs{\fat X{2^j}}\le\sum_{s\in X}\#\Ball{2^j}{\cen s}\le\Cvol(1+2^j)^2\abs X$. With
+$B':=\sum_{2^j\le r/2}B'_j\in\Alg(\fat Xr)$, and approximating $\tau_t(A^{(j)})$ by $0$ when $2^j>r/2$,
+\[
+\norm{\tau_t(A)-B'}\le C^\tau_k2^kr^{-k}\,\Cvol\abs X\sum_{j\ge0}\norm{A^{(j)}}(1+2^j)^2+\sum_{2^j>r/2}\norm{A^{(j)}} .
+\]
+Since $\bar k\ge3$, $\sum_j(1+2^j)^{2-\bar k}\le\sum_j(1+2^j)^{-1}<\frac32$, so the first sum is at most $3\cdot2^{\bar k}n_A$.
+If $j_*$ is the least $j$ with $2^j>r/2$, the second sum is at most
+$2^{\bar k+1}n_A\sum_{j\ge j_*}2^{-j\bar k}\le2^{\bar k+1}\tfrac87n_A(r/2)^{-\bar k}\le2^{k+\bar k+2}n_Ar^{-k}$, because
+$r/2\ge1$ and $\bar k\ge k$. As $\abs X\ge1$ and $1+r\le2r$,
+\[
+(1+r)^k\inf\{\norm{\tau_t(A)-A'}:A'\in\Alg(\fat Xr)\}\le2^{2k+\bar k}\bigl(3C^\tau_k\Cvol+4\bigr)\abs X\,n_A .
+\]
+
+\emph{Small radii.} If $r<2C_{\rm lc}(1+\abs t)^4$, then $1+r\le3C_{\rm lc}(1+\abs t)^4$, and the approximant $0$ gives
+$(1+r)^k\inf\{\norm{\tau_t(A)-A'}:A'\in\Alg(\fat Xr)\}\le(1+r)^k\norm A\le(3C_{\rm lc})^k(1+\abs t)^{4k}\abs X\,n_A$, since
+$\norm{\tau_t(A)}=\norm A$.
+
+Taking the supremum over $r\ge0$ proves the lemma with $C_k:=\max\{2^{2k+\bar k}(3C^\tau_k\Cvol+4),(3C_{\rm lc})^k\}$, which depends
+only on $k$, $\Cvol$, $C_h$ and finitely many $C^H_{k'}$.
+\end{proof}
+
+\begin{lemma}[time filters]\label{lem:filters}
+Let $F\in L^1(\R)$ with $M_j(F):=\int(1+\abs t)^j\abs{F(t)}\,\dd t<\infty$ for every $j$. For every $k$ there is
+$C_k$ such that for every even operator $A$ on $\FockS$ and every $X\subset\Slots$,
+\[
+\Bigl\lVert\int F(t)\tau_t(A)\,\dd t\Bigr\rVert_{X;k}\le C_k\abs X\bigl(\norm A+\norm A_{X;\max\{k,3\}}\bigr)M_{4k}(F).
+\]
+Consequently, if $A=(A_N)\in\AS_Z$ is even, with prefactor exponent $m$ and $\norm{A_N}\le CN^{m'}$, and
+$\abs{Z_N}\le CN^{m''}$, then $\bigl(\int F(t)\tau_t(A_N)\,\dd t\bigr)_N\in\AS_Z$ with prefactor exponent
+$\max\{m,m'\}+m''$.
+\end{lemma}
+
+\begin{proof}
+Let $C^\sharp_k$ be the constant of Lemma~\ref{lem:almostinputs}, $\bar k:=\max\{k,3\}$ and
+$n_A:=\norm A+\norm A_{X;\bar k}$; as in the proof of Lemma~\ref{lem:almostinputs} we may assume $n_A<\infty$ and
+$X\ne\emptyset$. The map $t\mapsto\tau_t(A)$ is continuous and bounded by $\norm A$, and $\tau_t(A)$ is even, because
+$\Hhat$ is even (Lemma~\ref{lem:sectors}(ii) and Lemma~\ref{lem:embedding}(i)); so $\int F(t)\tau_t(A)\,\dd t$ is
+defined. Fix $r\ge0$ and put $B_t:=\CE_{\fat Xr}(\tau_t(A))$. By Lemma~\ref{lem:condexp}, $t\mapsto B_t$ is continuous
+with values in $\Alg(\fat Xr)$, $\norm{B_t}\le\norm A$, and, by the definition of the set norm and
+Lemma~\ref{lem:almostinputs},
+\[
+\norm{\tau_t(A)-B_t}\le2(1+r)^{-k}\norm{\tau_t(A)}_{X;k}\le2C^\sharp_k(1+\abs t)^{4k}\abs X\,n_A\,(1+r)^{-k}.
+\]
+Hence $B:=\int F(t)B_t\,\dd t\in\Alg(\fat Xr)$, and
+\[
+\Bigl\lVert\int F(t)\tau_t(A)\,\dd t-B\Bigr\rVert\le\int\abs{F(t)}\,\norm{\tau_t(A)-B_t}\,\dd t\le2C^\sharp_k\abs X\,n_A\,M_{4k}(F)(1+r)^{-k},
+\]
+which is the first claim with $C_k:=2C^\sharp_k$.
+
+For the second claim let $C^A_j$ be the constants of $A$ in Definition~\ref{def:almostsupported}. For each $N$, the
+operator $\iota(A_N)$ is even, $\norm{\iota(A_N)}=\norm{A_N}\le CN^{m'}$, and $\norm{\iota(A_N)}_{Z_N;j}\le C^A_jN^m$ for
+every $j$. Since $\iota$ is linear and continuous and intertwines the dynamics (Lemma~\ref{lem:embedding}(ii)),
+$\iota\bigl(\int F(t)\tau_t(A_N)\,\dd t\bigr)=\int F(t)\tau_t(\iota(A_N))\,\dd t$. By the first claim with $X=Z_N$, for every
+$r\ge0$ the distance of this operator to $\Alg(\fat{(Z_N)}r)$ is at most
+\[
+C_k\,CN^{m''}\bigl(CN^{m'}+C^A_{\bar k}N^m\bigr)M_{4k}(F)(1+r)^{-k}\le C'_kN^{\max\{m,m'\}+m''}(1+r)^{-k},
+\]
+and the distance is attained by an element of $\Alg(\fat{(Z_N)}r)$. This is the second claim.
+\end{proof}
+
+\begin{lemma}[commutator with the Hamiltonian]\label{lem:commutatorH}
+If $A=(A_N)\in\AS_X$ is even, with prefactor exponent $m$ and $\norm{A_N}\le CN^{m'}$, then
+$(\iu[H_N,A_N])_N\in\AS_X$ with prefactor exponent $1+\max\{m,m'\}$, and
+$\norm{[H_N,A_N]}\le2C_h\abs{\Tor_N}\norm{A_N}=8\pi C_hN\norm{A_N}$.
+\end{lemma}
+
+\begin{proof}
+By (H1), $\norm{H_N}\le\int\norm{h_R}\,\dd R\le C_h\abs{\Tor_N}=4\pi C_hN$, which gives the norm bound. Fix $N$, drop it
+from the notation, and fix $r\ge0$. Let $A_r\in\Alg(\fat Xr)$ be a best approximant of $\iota(A)$, so that
+$\norm{\iota(A)-A_r}\le C^A_kN^m(1+r)^{-k}$ for every $k$, with the constants $C^A_k$ of $A$; in particular
+$\norm{A_r}\le CN^{m'}+C^A_0N^m=:a_N$. For $R\in\Tor_N$ let $d_R:=\min\{d(s,R):s\in\fat Xr\}$, and split $\Tor_N$ into
+the Borel sets $\mathcal D_\le:=\{R:d_R\le r\}$ and $\mathcal D_>:=\{R:d_R>r\}$. With the canonical approximants
+$\tilde h_{R,r}=\CE_{\Ball rR}(\iota(h_R))$ of the proof of Theorem~\ref{thm:propagation}, which are Borel in $R$, lie in
+$\Alg(\Ball rR)$ and satisfy $\norm{\iota(h_R)-\tilde h_{R,r}}\le2C^H_k(1+r)^{-k}$, put
+\[
+B_r:=\iu\int_{\mathcal D_\le}[\tilde h_{R,r},A_r]\,\dd R .
+\]
+If $R\in\mathcal D_\le$ and $s\in\Ball rR$, choose $s'\in\fat Xr$ with $d(s',R)\le r$; then
+$d(s,X)\le d(s,s')+d(s',X)\le2r+r$. Hence $\Ball rR\cup\fat Xr\subset\fat X{3r}$ for $R\in\mathcal D_\le$, and
+$B_r\in\Alg(\fat X{3r})$. Since $\iota(\iu[H,A])=\iu[\Hhat,\iota(A)-A_r]+\iu\int_{\Tor_N}[\iota(h_R),A_r]\,\dd R$,
+\[
+\iota(\iu[H,A])-B_r=\iu[\Hhat,\iota(A)-A_r]+\iu\int_{\mathcal D_\le}[\iota(h_R)-\tilde h_{R,r},A_r]\,\dd R
++\iu\int_{\mathcal D_>}[\iota(h_R),A_r]\,\dd R .
+\]
+The first term has norm at most $2\norm{\Hhat}\norm{\iota(A)-A_r}\le8\pi C_hC^A_kN^{1+m}(1+r)^{-k}$, and the second at
+most $\abs{\Tor_N}\cdot2\cdot2C^H_k(1+r)^{-k}a_N=16\pi C^H_kNa_N(1+r)^{-k}$. For the third, let $R\in\mathcal D_>$. The
+slots of $\Ball{d_R/2}R$ are at distance at most $d_R/2<d_R$ from $R$, so $\Ball{d_R/2}R\cap\fat Xr=\emptyset$, and the
+operator $h_{R,d_R/2}\in\Alg(\Ball{d_R/2}R)$ of (H1) commutes with $A_r$. Hence
+$[\iota(h_R),A_r]=[\iota(h_R)-h_{R,d_R/2},A_r]$, whose norm is at most
+$2C^H_k(1+d_R/2)^{-k}a_N\le2^{k+1}C^H_k(1+r)^{-k}a_N$, as $d_R>r$; the third term is at most
+$4\pi N\cdot2^{k+1}C^H_ka_N(1+r)^{-k}$. Altogether
+\[
+\norm{\iota(\iu[H,A])-B_r}\le C'_kN^{1+\max\{m,m'\}}(1+r)^{-k},
+\]
+with $C'_k$ depending only on $C$, $C_h$, $C^H_k$ and the constants of $A$. Since $B_{r/3}\in\Alg(\fat Xr)$ and
+$(1+r/3)^{-k}\le3^k(1+r)^{-k}$, the sequence $(\iu[H_N,A_N])_N$, which is even, is almost supported in $X$ with prefactor
+exponent $1+\max\{m,m'\}$.
+\end{proof}
+
+\subsection{The filters}
+
+\begin{definition}[the filters]\label{def:filters}
+Fix an even $\vartheta\in C_c^\infty((-1,1))$ with $0\le\vartheta\le1$ and $\vartheta=1$ near $0$. For $\gamma>0$ let
+\[
+\widehat W_\gamma(\omega):=\frac{\iu\,(1-\vartheta(\omega/\gamma))}{\omega},\qquad
+\Wg(t):=\frac1{2\pi}\lim_{\Omega\to\infty}\int_{-\Omega}^{\Omega}\widehat W_\gamma(\omega)e^{\iu\omega t}\,\dd\omega ,
+\]
+an improper integral, since $\widehat W_\gamma$ is not integrable; the limit exists for every $t$
+(Lemma~\ref{lem:Wexists}).
+For $\Delta\ge0$ and $\gamma>2\Delta$ fix $\delta\in(0,\gamma/2-\Delta)$ and $\zeta\in C_c^\infty((-\delta,\delta))$
+with $\zeta\ge0$ and $\int\zeta=1$, and let
+\[
+g(\omega):=\int_\R\zeta(\omega-\omega')\,\one_{\{\omega'<-\gamma/2\}}\,\dd\omega' .
+\]
+For an operator $A$ on $\Fock$ let
+\[
+\Qf(A):=g(\ad_{H_N})(A):=\sum_{E,E'\in\sigma(H_N)}g(E-E')\,\one_{\{E\}}(H_N)\,A\,\one_{\{E'\}}(H_N),
+\]
+and define $\Qf$ on operators on $\FockS$ in the same way, with $\Hhat_N$ in place of $H_N$.
+\end{definition}
+
+The function $g$ is smooth and real, with $g(\omega)=0$ for $\omega\ge-\Delta$ and $g(\omega)=1$ for
+$\omega\le-\gamma+\Delta$, in particular for $\omega\le-\gamma$. By Lemma~\ref{lem:embedding}(ii), $\Qf(\iota(A))=\iota(\Qf(A))$. The filter $\Wg$ is that
+of \cite[Section~4.1]{BBDF21}, and $g$ and $\Qf$ are those of \cite[Appendix~A]{BBDF21}.
+
+\begin{lemma}[the generator filter]\label{lem:Wexists}
+$\Wg$ is real and bounded, smooth on $\R\setminus\{0\}$, with a jump of $-1$ at $t=0$, and
+\[
+\Wg(t)=-\tfrac12\operatorname{sign}(t)+\frac1\pi\int_0^\infty\vartheta(\omega/\gamma)\frac{\sin(\omega t)}{\omega}\,\dd\omega,
+\qquad\Wg(t)=W_1(\gamma t).
+\]
+Moreover $\Wg(t)=O(\abs t^{-\infty})$ as $\abs t\to\infty$, so $M_j(\Wg)<\infty$ for every $j$; for every $n$ there
+is $C_n$ with $\int_{\abs t>T}\abs{\Wg(t)}\,\dd t\le C_n\gamma^{-1}(\gamma T)^{-n}$; $\int\Wg(t)e^{-\iu\omega t}\,\dd t
+=\widehat W_\gamma(\omega)=\iu/\omega$ for $\abs\omega\ge\gamma$; and for every operator $A$ on $\Fock$,
+\[
+\int\Wg(t)\,\tau_t(A)\,\dd t=\sum_{E,E'\in\sigma(H_N)}\widehat W_\gamma(E'-E)\,\one_{\{E\}}(H_N)\,A\,\one_{\{E'\}}(H_N).
+\]
+\end{lemma}
+
+\begin{proof}
+We first show that the limit in Definition~\ref{def:filters} exists for every $t$. As $\vartheta$ is even,
+$\widehat W_\gamma$ is odd, and the part of $e^{\iu\omega t}$ even in $\omega$ integrates to zero:
+\begin{equation}\label{eq:loc-Wtrunc}
+\frac1{2\pi}\int_{-\Omega}^\Omega\widehat W_\gamma(\omega)e^{\iu\omega t}\,\dd\omega
+=-\frac1\pi\int_0^\Omega\frac{\sin(\omega t)}{\omega}\,\dd\omega+\frac1\pi\int_0^\Omega\vartheta(\omega/\gamma)\frac{\sin(\omega t)}{\omega}\,\dd\omega .
+\end{equation}
+Let $\operatorname{Si}(x):=\int_0^x\sin v\,\dd v/v$; then $0\le\operatorname{Si}(x)\le\operatorname{Si}(\pi)<2$ for $x\ge0$, and
+$\operatorname{Si}(x)\to\pi/2$ as $x\to\infty$. The first term of \eqref{eq:loc-Wtrunc} is
+$-\pi^{-1}\operatorname{sign}(t)\operatorname{Si}(\Omega\abs t)$, which tends to $-\frac12\operatorname{sign}(t)$; the second
+does not depend on $\Omega$ once $\Omega\ge\gamma$, since $\vartheta(\omega/\gamma)=0$ for $\omega\ge\gamma$. This proves the
+existence of the limit and the formula for $\Wg$, and the substitution $\omega=\gamma\omega'$ in the formula gives
+$\Wg(t)=W_1(\gamma t)$. For $t\ne0$ and $0<\Omega\le\infty$, the substitution $v=\omega\abs t$ and an integration by
+parts give
+\[
+\int_0^\Omega\vartheta(\omega/\gamma)\frac{\sin(\omega t)}{\omega}\,\dd\omega=\operatorname{sign}(t)\Bigl[\vartheta(\Omega/\gamma)\operatorname{Si}(\Omega\abs t)
+-\int_0^{\Omega\abs t}\operatorname{Si}(v)\,\vartheta'\Bigl(\frac v{\gamma\abs t}\Bigr)\frac{\dd v}{\gamma\abs t}\Bigr]
+\]
+(with $\vartheta(\infty):=0$), whose absolute value is at most $2+2\int_0^\infty\abs{\vartheta'}$. Hence the truncated integrals
+\eqref{eq:loc-Wtrunc}, and $\Wg$, are bounded uniformly in $t$ and $\Omega$. The second term of the formula for $\Wg$
+equals $\pi^{-1}\int_0^\gamma\vartheta(\omega/\gamma)\sin(\omega t)\,\dd\omega/\omega$, a smooth function of $t$ which vanishes
+at $t=0$; so $\Wg$ is real, odd and smooth on $\R\setminus\{0\}$, and $\Wg(0\pm)=\mp\frac12$, a jump of $-1$.
+
+\emph{Decay.} Let $f(\omega):=(1-\vartheta(\omega))/\omega$ for $\omega>0$. Since $\vartheta=1$ near $0$ and $\vartheta(\omega)=0$ for
+$\omega\ge1$, $f$ is smooth, vanishes near $0$ and equals $1/\omega$ for $\omega\ge1$; hence every derivative
+$f^{(j)}$, $j\ge0$, tends to $0$ at infinity, and $f^{(j)}\in L^1(0,\infty)$ for $j\ge1$. For $t>0$,
+\eqref{eq:loc-Wtrunc} with $\gamma=1$ gives $W_1(t)=-\pi^{-1}\lim_{\Omega\to\infty}\int_0^\Omega f(\omega)\sin(\omega t)\,\dd\omega$.
+The integration by parts
+$\int_0^\Omega f(\omega)\sin(\omega t)\,\dd\omega=-f(\Omega)\cos(\Omega t)/t+t^{-1}\int_0^\Omega f'(\omega)\cos(\omega t)\,\dd\omega$
+shows that $W_1(t)=-(\pi t)^{-1}\int_0^\infty f'(\omega)\cos(\omega t)\,\dd\omega$, an absolutely convergent integral, and
+$n-1$ further integrations by parts, whose boundary terms vanish because each $f^{(j)}$ vanishes near $0$ and at
+infinity, give $\abs{W_1(t)}\le\pi^{-1}\norm{f^{(n)}}_{L^1(0,\infty)}\,t^{-n}$ for every $n\ge1$. By oddness the same
+bound holds for $t<0$. Together with the boundedness of $W_1$ this gives $\abs{W_1(t)}\le C'_n(1+\abs t)^{-n}$ for every
+$n$, with $C'_n$ depending only on $\vartheta$. Hence $\Wg(t)=W_1(\gamma t)=O(\abs t^{-\infty})$, $M_j(\Wg)<\infty$ for every
+$j$, and for $T>0$ and $n\ge1$
+\[
+\int_{\abs t>T}\abs{\Wg(t)}\,\dd t=\frac1\gamma\int_{\abs u>\gamma T}\abs{W_1(u)}\,\dd u
+\le\frac{C'_{n+1}}\gamma\int_{\abs u>\gamma T}\abs u^{-n-1}\,\dd u=\frac{2C'_{n+1}}n\,\gamma^{-1}(\gamma T)^{-n},
+\]
+while for $n=0$ the same integral is at most $\gamma^{-1}\norm{W_1}_{L^1}$.
+
+\emph{The Fourier transform.} Fix $\omega_0\in\R$ and $\varepsilon>0$. The truncated integrals \eqref{eq:loc-Wtrunc} are
+bounded uniformly and converge to $\Wg(t)$ for every $t\ne0$; by dominated convergence and Fubini's theorem on
+$[-\Omega,\Omega]\times\R$,
+\[
+\int\Wg(t)e^{-\iu\omega_0t-\varepsilon t^2}\,\dd t
+=\lim_{\Omega\to\infty}\frac1{2\pi}\int_{-\Omega}^\Omega\widehat W_\gamma(\omega)\int e^{\iu(\omega-\omega_0)t-\varepsilon t^2}\,\dd t\,\dd\omega
+=\int_\R\widehat W_\gamma(\omega)\,\frac{e^{-(\omega-\omega_0)^2/4\varepsilon}}{\sqrt{4\pi\varepsilon}}\,\dd\omega .
+\]
+As $\varepsilon\to0$, the left-hand side tends to $\int\Wg(t)e^{-\iu\omega_0t}\,\dd t$, because $\Wg\in L^1$, and the
+right-hand side tends to $\widehat W_\gamma(\omega_0)$, because $\widehat W_\gamma$ is bounded and continuous
+($1-\vartheta(\omega/\gamma)$ vanishes near $\omega=0$) and the Gaussians form an approximate identity. Hence
+$\int\Wg(t)e^{-\iu\omega t}\,\dd t=\widehat W_\gamma(\omega)$ for every $\omega$, and this is $\iu/\omega$ for $\abs\omega\ge\gamma$,
+where $\vartheta(\omega/\gamma)=0$.
+
+\emph{The spectral formula.} By the spectral theorem in the finite-dimensional space $\Fock$,
+$\tau_t(A)=\sum_{E,E'}e^{\iu t(E-E')}\one_{\{E\}}(H_N)A\one_{\{E'\}}(H_N)$, and
+$\int\Wg(t)e^{\iu t(E-E')}\,\dd t=\widehat W_\gamma(E'-E)$.
+\end{proof}
+
+\begin{lemma}[time representation of the clustering filter]\label{lem:timerep}
+Let $\gamma':=-\gamma/2$, $\hat\zeta(t):=\int\zeta(u)e^{-\iu ut}\,\dd u$ and $F(t):=-e^{-\iu\gamma't}\hat\zeta(t)/(2\pi\iu)$, a
+Schwartz function. Then $g(\omega)=\tfrac12+\PV F(t)e^{\iu\omega t}\,\dd t/t$ for every $\omega\in\R$, and for every
+operator $A$ on $\Fock$
+\[
+\Qf(A)=\bigl(\tfrac12+c_F\bigr)A+\int_{\abs t\ge1}\frac{F(t)}t\,\tau_t(A)\,\dd t+\int_{-1}^1G(u)\,\tau_u\bigl(\iu[H_N,A]\bigr)\,\dd u,
+\]
+where $c_F:=\PV_{-1}^{1}F(t)\,\dd t/t$, $G(u):=\int_u^1F(t)\,\dd t/t$ for $0<u<1$ and $G(u):=-\int_{-1}^uF(t)\,\dd t/t$ for
+$-1<u<0$. Here $\abs{G(u)}\le\norm F_\infty\log(1/\abs u)$, so both filters on the right have finite moments of all
+orders, and $\norm{\Qf(A)}\le C(1+\norm{H_N})\norm A$ with $C$ depending only on $\zeta$ and $\gamma$. The same holds on
+$\FockS$ with $\Hhat_N$.
+\end{lemma}
+
+\begin{proof}
+Since $\zeta\in C_c^\infty$, $\hat\zeta$ is a Schwartz function, and so is $F$.
+
+\emph{The representation of $g$.} For $\mu\in\R$ and $0<\varepsilon<T$,
+\[
+\int_{\varepsilon<\abs t<T}e^{\iu\mu t}\,\frac{\dd t}t=2\iu\int_\varepsilon^T\sin(\mu t)\,\frac{\dd t}t
+=2\iu\operatorname{sign}(\mu)\bigl[\operatorname{Si}(T\abs\mu)-\operatorname{Si}(\varepsilon\abs\mu)\bigr],
+\]
+with $\operatorname{Si}$ as in the proof of Lemma~\ref{lem:Wexists}; this is bounded by $4$ and tends to
+$\iu\pi\operatorname{sign}(\mu)$ as $\varepsilon\to0$ and $T\to\infty$ (with $\operatorname{sign}(0):=0$). Fix $\omega$. By
+Fubini's theorem on $\{\varepsilon<\abs t<T\}\times\supp\zeta$ and dominated convergence,
+\begin{align*}
+\PV F(t)e^{\iu\omega t}\,\frac{\dd t}t&=-\frac1{2\pi\iu}\lim_{\varepsilon\to0,\,T\to\infty}\int\zeta(v)\int_{\varepsilon<\abs t<T}e^{\iu(\omega-\gamma'-v)t}\,\frac{\dd t}t\,\dd v\\
+&=-\frac12\int\zeta(v)\operatorname{sign}(\omega-\gamma'-v)\,\dd v .
+\end{align*}
+The substitution $\omega'=\omega-v$ in the definition gives $g(\omega)=\int\zeta(v)\,\one_{\{v>\omega-\gamma'\}}\,\dd v$, and
+$\int\zeta=1$; so the last expression equals $-\frac12\bigl((1-g(\omega))-g(\omega)\bigr)=g(\omega)-\frac12$.
+
+\emph{The operator identity.} By the spectral theorem in the finite-dimensional space $\Fock$,
+$\Qf(A)=\sum_{E,E'}g(E-E')\one_{\{E\}}(H_N)A\one_{\{E'\}}(H_N)$ and
+$\tau_t(A)=\sum_{E,E'}e^{\iu t(E-E')}\one_{\{E\}}(H_N)A\one_{\{E'\}}(H_N)$. Inserting the representation of $g$ gives
+$\Qf(A)=\frac12A+\PV F(t)\tau_t(A)\,\dd t/t$, the principal value existing because the sum is finite. The part
+$\abs t\ge1$ of the integral converges absolutely. For $0<\abs t<1$ write $\tau_t(A)=A+\int_0^t\tau_u(B)\,\dd u$ with
+$B:=\iu[H_N,A]$, so that $\norm{\tau_t(A)-A}\le\abs t\norm B$. Then
+\[
+\PV_{-1}^{1}F(t)\tau_t(A)\,\frac{\dd t}t=c_FA+\int_{-1}^1\frac{F(t)}t\int_0^t\tau_u(B)\,\dd u\,\dd t,
+\]
+where $c_F=\int_{-1}^1(F(t)-F(0))\,\dd t/t$ is finite because $F$ is smooth, and the double integral converges absolutely,
+since $\int_{-1}^1\abs{F(t)/t}\,\abs t\norm B\,\dd t<\infty$. Exchanging the order of integration, the part $t>0$ becomes
+$\int_0^1\bigl(\int_u^1F(t)\,\dd t/t\bigr)\tau_u(B)\,\dd u$ and the part $t<0$ becomes
+$-\int_{-1}^0\bigl(\int_{-1}^uF(t)\,\dd t/t\bigr)\tau_u(B)\,\dd u$; together they are $\int_{-1}^1G(u)\tau_u(B)\,\dd u$. This
+is the formula.
+
+\emph{The filters.} $\abs{G(u)}\le\norm F_\infty\int_{\abs u}^1\dd t/t=\norm F_\infty\log(1/\abs u)$, so $G$, extended by
+zero outside $(-1,1)$, is integrable with $\int\abs G\le2\norm F_\infty$, and $M_j(G)\le2^{j+1}\norm F_\infty$. The function
+equal to $F(t)/t$ for $\abs t\ge1$ and to $0$ otherwise is bounded by $\abs F$, so its moments are bounded by those of
+the Schwartz function $F$. Finally
+\[
+\norm{\Qf(A)}\le\Bigl(\tfrac12+\abs{c_F}+\int\abs{F(t)}\,\dd t\Bigr)\norm A+2\norm F_\infty\cdot2\norm{H_N}\norm A,
+\]
+and $F$ is determined by $\zeta$ and $\gamma$. On $\FockS$ the same argument applies verbatim with $\Hhat_N$ in place of
+$H_N$.
+\end{proof}
+
+\begin{proposition}[locality of the clustering filter]\label{prop:Qlocal}
+If $A=(A_N)\in\AS_X$ is even, with prefactor exponent $m$ and $\norm{A_N}\le CN^{m'}$, and $\abs{X_N}\le CN^{m''}$,
+then $(\Qf(A_N))_N\in\AS_X$ with prefactor exponent $1+\max\{m,m'\}+m''$, and $\norm{\Qf(A_N)}\le CN^{1+m'}$. No
+spectral assumption on $H$ is used.
+\end{proposition}
+
+\begin{proof}
+By Lemma~\ref{lem:timerep},
+\[
+\Qf(A_N)=\bigl(\tfrac12+c_F\bigr)A_N+\int F_1(t)\,\tau_t(A_N)\,\dd t+\int G_1(u)\,\tau_u(B_N)\,\dd u,\qquad B_N:=\iu[H_N,A_N],
+\]
+where $F_1(t):=F(t)/t$ for $\abs t\ge1$, $F_1(t):=0$ otherwise, and $G_1$ is $G$ on $(-1,1)$ and $0$ otherwise. Both
+$F_1$ and $G_1$ are integrable with finite moments of all orders (Lemma~\ref{lem:timerep}). The first term is in
+$\AS_X$ with prefactor exponent $m$. By Lemma~\ref{lem:filters} with $Z=X$, the second is in $\AS_X$ with prefactor
+exponent $\max\{m,m'\}+m''$. By Lemma~\ref{lem:commutatorH}, $B=(B_N)$ is even, lies in $\AS_X$ with prefactor exponent
+$1+\max\{m,m'\}$, and $\norm{B_N}\le8\pi C_hN\cdot CN^{m'}$; so, by Lemma~\ref{lem:filters}, the third term is in $\AS_X$
+with prefactor exponent $\max\{1+\max\{m,m'\},1+m'\}+m''=1+\max\{m,m'\}+m''$. A sum of sequences in $\AS_X$ is in
+$\AS_X$, with the largest of the prefactor exponents (the approximants add; Lemma~\ref{lem:calculus}(b)), which gives
+the first claim. The norm bound follows from Lemma~\ref{lem:timerep} and $\norm{H_N}\le C_h\abs{\Tor_N}=4\pi C_hN$.
+Nothing about the spectrum of $H_N$ was used.
+\end{proof}
+
+\subsection{The locality calculus and the bookkeeping}
+
+\begin{lemma}[locality calculus]\label{lem:calculus}
+Let $(\Tor_N)_{N\in\mathcal N}$ be admissible.
+\begin{enumerate}[(a)]
+\item (\emph{far-apart operators almost commute}) If $A\in\AS_X$ and $B\in\AS_Y$ are even, with prefactor
+exponents $m_A$ and $m_B$, then for every $k$ there is $C_k$, depending only on the constants of $A$ and $B$, with
+\[
+\norm{[A_N,B_N]}\le C_kN^{m_A+m_B}\bigl(1+\norm{A_N}+\norm{B_N}\bigr)\bigl(1+d(X_N,Y_N)\bigr)^{-k}
+\]
+for every $N$ with $X_N\cap Y_N=\emptyset$.
+\item (\emph{sums, products, adjoints}) Let $A,B\in\AS_X$ have prefactor exponents $m_A$ and $m_B$, and let
+$\norm{A_N},\norm{B_N}\le CN^{m'}$. Then $A+B$, $A^*$ and $AB$ are in $\AS_X$, with prefactor exponents
+$\max\{m_A,m_B\}$, $m_A$ and $m_A+m_B+m'$, respectively.
+\item (\emph{ordered exponentials}) Let $G_N(u)$, $u\in[0,u_0]$, be self-adjoint and continuous in $u$, and let
+$G=(G_N(u))_N$ be in $\AS_X$ uniformly in $u$. Then the solution of $V_N'(u)=\iu V_N(u)G_N(u)$, $V_N(0)=\one$, satisfies $V_N(u_0)\in\AS_X$, with the
+same prefactor exponent and constants multiplied by $2u_0$.
+\item (\emph{conjugation by band charges}) Let $Z_N=\Str(I_N)$ with $I_N$ open intervals of length at least
+$2\delta_x$, let $A=(A_N)\in\AS_Z$ be self-adjoint with prefactor exponent $m$ and $\norm{A_N}\le CN^m$, and let
+$\mathcal B_N$ be bands. Then $e^{\iu\varphi(Q_{\mathcal B_N}+A_N)}e^{-\iu\varphi Q_{\mathcal B_N}}\in\AS_Z$ with prefactor
+exponent $m$, uniformly in $\varphi\in[0,2\pi]$ and in the bands.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Throughout, $C^A_k$ and $C^B_k$ denote the constants of $A$ and $B$ in Definition~\ref{def:almostsupported}, and
+$A_{N,r}$, $B_{N,r}$ best approximants of $\iota(A_N)$, $\iota(B_N)$ in $\Alg(\fat{(X_N)}r)$ (respectively
+$\Alg(\fat{(Y_N)}r)$), which exist because these algebras are finite-dimensional and which satisfy the bounds of
+Definition~\ref{def:almostsupported} for every $k$ at once. In particular $\norm{A_{N,r}}\le\norm{A_N}+C^A_0N^{m_A}$.
+
+(a) Let $N$ be such that $X_N\cap Y_N=\emptyset$, and put $d:=d(X_N,Y_N)$; since distinct slots have distinct centres,
+$d>0$. Let $r:=d/3$. If $s\in\fat{(X_N)}r\cap\fat{(Y_N)}r$, there are $s_1\in X_N$ and $s_2\in Y_N$ with
+$d(s,s_1),d(s,s_2)\le r$, whence $d\le2r<d$; so $\fat{(X_N)}r\cap\fat{(Y_N)}r=\emptyset$, and the even operators
+$A_{N,r}$ and $B_{N,r}$ commute (Proposition~\ref{prop:nsy-disjoint}). Since $\iota$ is an isometric homomorphism,
+\begin{align*}
+\norm{[A_N,B_N]}&=\norm{[\iota(A_N),\iota(B_N)]}\\
+&\le\norm{[\iota(A_N)-A_{N,r},\iota(B_N)]}+\norm{[A_{N,r},\iota(B_N)-B_{N,r}]}\\
+&\le2C^A_kN^{m_A}(1+r)^{-k}\norm{B_N}+2\bigl(\norm{A_N}+C^A_0N^{m_A}\bigr)C^B_kN^{m_B}(1+r)^{-k}\\
+&\le2\bigl(C^A_k+C^B_k+C^A_0C^B_k\bigr)N^{m_A+m_B}\bigl(1+\norm{A_N}+\norm{B_N}\bigr)(1+r)^{-k},
+\end{align*}
+and $(1+d/3)^{-k}\le3^k(1+d)^{-k}$. This proves (a) with $C_k:=2\cdot3^k(C^A_k+C^B_k+C^A_0C^B_k)$.
+
+(b) The approximants $A_{N,r}+B_{N,r}$ and $A_{N,r}^*$ lie in $\Alg(\fat{(X_N)}r)$, with errors at most
+$(C^A_k+C^B_k)N^{\max\{m_A,m_B\}}(1+r)^{-k}$ and $C^A_kN^{m_A}(1+r)^{-k}$, since $\iota(A_N)^*=\iota(A_N^*)$. For the
+product, $A_{N,r}B_{N,r}\in\Alg(\fat{(X_N)}r)$ and
+\begin{align*}
+\norm{\iota(A_NB_N)-A_{N,r}B_{N,r}}&\le\norm{\iota(A_N)-A_{N,r}}\norm{B_N}+\norm{A_{N,r}}\norm{\iota(B_N)-B_{N,r}}\\
+&\le\bigl(CC^A_k+CC^B_k+C^A_0C^B_k\bigr)N^{m_A+m_B+m'}(1+r)^{-k}.
+\end{align*}
+
+(c) Let $C_k$ be the constants of $G$, uniform in $u$. Each $\iota(G_N(u))$ is even: since $\Alg(\fat{(X_N)}r)$
+consists of even operators, the distance of $\iota(G_N(u))$ to the even operators is at most $C_kN^m(1+r)^{-k}$ for
+every $r\ge0$, hence zero. Fix $N$ and $r\ge0$ and put $G_{N,r}(u):=\CE_{\fat{(X_N)}r}(\iota(G_N(u)))$. By Lemma~\ref{lem:condexp} these are
+self-adjoint elements of $\Alg(\fat{(X_N)}r)$, continuous in $u$, with
+$\norm{\iota(G_N(u))-G_{N,r}(u)}\le2C_kN^m(1+r)^{-k}$. Let $V_{N,r}$ be the solution of
+$V_{N,r}'(u)=\iu V_{N,r}(u)G_{N,r}(u)$, $V_{N,r}(0)=\one$. As the solution of a linear differential equation with continuous
+coefficients in the finite-dimensional algebra $\Alg(\fat{(X_N)}r)$, it takes values in that algebra; it is unitary,
+as is $V_N$, because the generators are self-adjoint. Since $\iota$ is linear, continuous and multiplicative,
+$\iota(V_N)$ solves the equation with $\iota(G_N)$ in place of $G_N$. The function $O(u):=\iota(V_N(u))V_{N,r}(u)^*$
+satisfies $O(0)=\one$ and $O'(u)=\iu\,\iota(V_N(u))\bigl(\iota(G_N(u))-G_{N,r}(u)\bigr)V_{N,r}(u)^*$, so
+\[
+\norm{\iota(V_N(u_0))-V_{N,r}(u_0)}=\norm{O(u_0)-\one}\le\int_0^{u_0}\norm{\iota(G_N(u))-G_{N,r}(u)}\,\dd u\le2u_0C_kN^m(1+r)^{-k}.
+\]
+
+(d) Write $Q:=Q_{\mathcal B_N}$ and $V(\varphi):=e^{\iu\varphi(Q+A_N)}e^{-\iu\varphi Q}$. Then $V(0)=\one$ and
+\[
+V'(\varphi)=e^{\iu\varphi(Q+A_N)}\,\iu A_N\,e^{-\iu\varphi Q}=\iu\,V(\varphi)\,G(\varphi),\qquad G(\varphi):=e^{\iu\varphi Q}A_Ne^{-\iu\varphi Q},
+\]
+with $G(\varphi)$ self-adjoint and continuous in $\varphi$. By Lemma~\ref{lem:bandcharges}(iii), $(G(\varphi))_N$ is
+almost supported in $Z$ with prefactor exponent $m$ and with constants independent of $\varphi\in\R$ and of the bands.
+Part (c) with $u_0=\varphi\in[0,2\pi]$ shows that $V(\varphi)$ is almost supported in $Z$ with prefactor exponent $m$
+and constants at most $4\pi$ times those of $G$, uniformly in $\varphi$ and in the bands. No separation between $Z$
+and the band is needed, because conjugation by a band charge preserves strips exactly.
+\end{proof}
+
+\begin{lemma}[bookkeeping]\label{lem:bookkeeping}
+Let $(\Tor_N)_{N\in\mathcal N}$ be admissible with $L_x\ge c_*\sqrt N$. Let $\mathcal O$ be a finite set, independent of
+$N$, of sequences of even operators $O=(O_N)$, possibly depending on a parameter, such that for
+some $m_*\ge0$ every $O\in\mathcal O$ satisfies $\norm{O_N}\le CN^{m_*}$ and $O\in\AS_{Z_O}$ with prefactor exponent at
+most $m_*$, uniformly in the parameter. If $O,O'\in\mathcal O$ and $d(Z_{O,N},Z_{O',N})\ge c\sqrt N-C$ for all $N$, with
+$c>0$, then $[O_N,O'_N]=\Onf$ uniformly in the parameter. Any expression obtained from finitely many such
+commutators, independently of $N$, by sums and by products with operators of norm at most $CN^m$ is $\Onf$
+uniformly in the parameter.
+\end{lemma}
+
+\begin{proof}
+Let $O,O'\in\mathcal O$ be as stated, and let $N_1:=(2C/c)^2$, so that $c\sqrt N-C\ge\frac c2\sqrt N>0$ for $N\ge N_1$.
+For $N\ge N_1$ the sets $Z_{O,N}$ and $Z_{O',N}$ are at positive distance, hence disjoint, and
+Lemma~\ref{lem:calculus}(a), whose constants are those of $O$ and $O'$ and hence independent of the parameter, gives
+for every $k$
+\[
+\norm{[O_N,O'_N]}\le C_kN^{2m_*}\bigl(1+2CN^{m_*}\bigr)\bigl(1+\tfrac c2\sqrt N\bigr)^{-k}\le C_k(1+2C)(c/2)^{-k}N^{3m_*-k/2}.
+\]
+Given $j\ge0$, the choice $k:=2(j+3m_*)$ gives $\norm{[O_N,O'_N]}\le C'_jN^{-j}$ for $N\ge N_1$. For the finitely many
+$N\in\mathcal N$ with $N<N_1$, $\norm{[O_N,O'_N]}\le2C^2N^{2m_*}\le2C^2N_1^{2m_*+j}N^{-j}$. Hence $[O_N,O'_N]=\Onf$, with
+constants independent of the parameter. An expression of the stated kind is a sum, with a number of terms independent
+of $N$, of products each containing one such commutator and a number, independent of $N$, of operators of norm at most
+$CN^m$; each term, and hence the sum, is bounded by a fixed power of $N$ times $C''_jN^{-j}$ for every $j$, which is
+$\Onf$ uniformly in the parameter. The hypothesis $L_x\ge c_*\sqrt N$ enters only through the assumed separations.
+\end{proof}
+
+\begin{remark}\label{rem:bookkeeping}
+Lemma~\ref{lem:bookkeeping} replaces the bookkeeping of \cite{BBDF21}, in which almost-support errors carry the
+factor $\norm A\abs Z$: here every operator of the proof carries a fixed power of $N$, every almost-support
+estimate is used at a distance of order $\sqrt N$, and the number of such estimates does not depend on $N$. The
+commutators to which Lemma~\ref{lem:bookkeeping} is applied in Section~\ref{sec:index} are listed in the proofs of
+Lemma~\ref{lem:commutation}(ii) and Corollary~\ref{cor:Zcommute}.
+\end{remark}

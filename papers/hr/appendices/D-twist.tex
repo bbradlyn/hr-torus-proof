@@ -1,0 +1,393 @@
+\section{A variational bound at fixed circumference}\label{app:twist}
+
+Corollary~\ref{cor:uniform} concerns tori whose sides both exceed the length $L_0$, and, like Theorem~\ref{thm:main},
+it gives neither a rate nor explicit constants. This appendix proves a bound of a different kind. It holds on every
+rectangular torus and for every $N\ge2$, it is explicit in the units of Definition~\ref{def:hamiltonian}, and it is of
+order $L_y^3/N$ for $L_y$ bounded below. It is therefore useful when the circumference $L_y$ is bounded, or grows more slowly than $N^{1/3}$, in
+particular on the thin tori of Remark~\ref{rem:thin}, and it says nothing at fixed aspect ratio. The trial state is a
+zero mode in which every orbital $\psi_j$ of the electrons of one spin species is multiplied by the phase
+$e^{2\pi\iu j/\Nphi}$, which winds once around the torus in the transverse direction (a \emph{spin twist}); the zero mode
+is chosen so that the twisted state is orthogonal to all zero modes. Apart from elementary facts of
+Section~\ref{sec:setting}, the argument uses only the orbital form of $H_N$ (Theorem~\ref{thm:localform}(c)), the
+commutation of $H_N$ with $\Theta$ (Lemma~\ref{lem:covariance}) and the dimensions of its kernel
+(Theorem~\ref{thm:kernel}). The slot frame is not used, and the tori need not be admissible.
+
+Throughout this appendix $N\in\N$, $L_x,L_y>0$ with $L_xL_y=4\pi N$, and $\kappa=2\pi/L_y$, as in
+Definition~\ref{def:torus}. For $k\ge1$ let
+\begin{equation}\label{eq:gauss-sums}
+\mathsf G_k(\kappa):=\sum_{d=1}^\infty2d^k\,e^{-\kappa^2d^2/4},
+\end{equation}
+a convergent series.
+
+\subsection{The statement}
+
+\begin{theorem}[a variational bound at fixed circumference]\label{thm:twist}
+Let $N\ge2$. If $N$ is even, let $\nn:=(N/2,N/2)$; if $N$ is odd, let $\nn$ be $((N+1)/2,(N-1)/2)$ or
+$((N-1)/2,(N+1)/2)$. Then $\sect\nn$ contains a unit vector, orthogonal to $\mathcal K_N$, at which the expectation of
+$H_N$ is at most
+\begin{equation}\label{eq:twist-bound}
+\frac{\kappa^3}{\sqrt{2\pi}}\Bigl(\frac{\pi^2\,\mathsf G_2(\kappa)^2}{2N}+\frac{\pi^4\,\mathsf G_3(\kappa)^2}{32N^3}\Bigr)
+\le\frac1{\sqrt{2\pi}}\Bigl(1+\frac{2\kappa}{e\sqrt\pi}\Bigr)^2\frac{L_y^3}N
++\frac1{4\pi\sqrt{2\pi}}\Bigl(1+\frac{(6/e)^{3/2}\kappa}8\Bigr)^2\frac{L_y^5}{N^3}.
+\end{equation}
+Consequently, if $N$ is even, $E_{11}(N)$ is at most the right-hand side of \eqref{eq:twist-bound}, and if $N$ is odd,
+so is $E_3(N)$ in each of the two sectors $((N\pm1)/2,(N\mp1)/2)$. In particular both are at most
+\[
+0.40\,(1+0.42\,\kappa)^2\,\frac{L_y^3}N+0.032\,(1+0.41\,\kappa)^2\,\frac{L_y^5}{N^3}.
+\]
+\end{theorem}
+
+Here $E_{11}(N)$ and $E_3(N)$ are the eigenvalues of \eqref{eq:E11} and of the sentence that follows it, that is, the
+lowest eigenvalue of $H_N$ in the sector above its zero modes, on the torus with the given $L_x$ and $L_y$. The unit
+vector of the theorem is $\mathcal W_\up\Upsilon$ for a suitable zero mode $\Upsilon\in\mathcal K_N\cap\sect\nn$, with the
+twist $\mathcal W_\up$ of Lemma~\ref{lem:twists} below.
+
+If $L_y^3/N\to0$ as $N\to\infty$, for instance if $L_y$ stays bounded, the right-hand side of \eqref{eq:twist-bound}
+tends to zero; for bounded $L_y$ it is $O(1/N)$, with explicit constants. At fixed aspect ratio $L_y$ is of order
+$N^{1/2}$, and the right-hand side grows like $N^{1/2}$; that regime is the one of Theorem~\ref{thm:main}. Unlike
+Theorem~\ref{thm:main}, which uses only that the kernel has dimension at least ten, Theorem~\ref{thm:twist} uses the exact
+dimensions of Theorem~\ref{thm:kernel}, and with them all of Appendix~\ref{app:kernel}. Together with
+Corollary~\ref{cor:uniform} it gives the following.
+
+\begin{corollary}[all rectangular tori]\label{cor:alltori}
+For even $N$ and a rectangular torus $\Tor$ with $L_xL_y=4\pi N$, let $E_{11}(N;\Tor)$ be the eleventh eigenvalue of
+the hollow-core Hamiltonian of $\Tor$ in the sector $(N/2,N/2)$. Then $\sup_\Tor E_{11}(N;\Tor)\to0$ as $N\to\infty$
+through the even integers, where the supremum runs over all rectangular tori with $L_xL_y=4\pi N$.
+\end{corollary}
+
+\begin{proof}
+Let $N\ge L_0^2/(4\pi)$ be even, and let $\Tor$ be a rectangular torus with $L_xL_y=4\pi N$. If
+$\min\{L_x,L_y\}\ge L_0$, then $\Tor\in\mathcal T_N$. Otherwise, by Lemma~\ref{lem:exchange} we may exchange the sides
+and assume that $L_y=\min\{L_x,L_y\}<L_0$. Since $\kappa L_y=2\pi$,
+\[
+\Bigl(1+\frac{2\kappa}{e\sqrt\pi}\Bigr)^2L_y^3=\Bigl(L_y+\frac{4\sqrt\pi}e\Bigr)^2L_y,\qquad
+\Bigl(1+\frac{(6/e)^{3/2}\kappa}8\Bigr)^2L_y^5=\Bigl(L_y+\frac{\pi(6/e)^{3/2}}4\Bigr)^2L_y^3,
+\]
+both increasing in $L_y$, and Theorem~\ref{thm:twist} gives $E_{11}(N;\Tor)\le C/N$ with
+$C:=(2\pi)^{-1/2}(L_0+4\sqrt\pi/e)^2L_0+(4\pi\sqrt{2\pi})^{-1}(L_0+\pi(6/e)^{3/2}/4)^2L_0^3$, which depends only on $L_0$.
+Hence $\sup_\Tor E_{11}(N;\Tor)\le\max\{\sup_{\Tor\in\mathcal T_N}E_{11}(N;\Tor),\,C/N\}$, which tends to zero by
+Corollary~\ref{cor:uniform}.
+\end{proof}
+
+\subsection{The twists}
+
+\begin{lemma}[the twists]\label{lem:twists}
+For $\sigma\in\{\up,\dn\}$ let
+\[
+\mathcal W_\sigma:=\exp\Bigl(\frac{2\pi\iu}{\Nphi}\sum_{j=0}^{\Nphi-1}j\,n_{[j]\sigma}\Bigr).
+\]
+\begin{enumerate}[(i)]
+\item $\mathcal W_\sigma$ is unitary and diagonal in the occupation-number basis; it commutes with $\Nup$, $\Ndn$ and the
+other twist, so it maps every sector into itself; and it does not change if the representatives $0,\dots,\Nphi-1$ of
+the classes in $\Z_{\Nphi}$ are replaced by any other representatives.
+\item For every $j\in\Z_{\Nphi}$, $\mathcal W_\sigma^*c_{j\sigma}\mathcal W_\sigma=e^{2\pi\iu j/\Nphi}c_{j\sigma}$, and
+$\mathcal W_\sigma^*c_{j\sigma'}\mathcal W_\sigma=c_{j\sigma'}$ for $\sigma'\ne\sigma$.
+\item $\Theta^*\mathcal W_\sigma\Theta=e^{-2\pi\iu N_\sigma/\Nphi}\mathcal W_\sigma$. Consequently, if $\Upsilon\in\sect\nn$,
+$\nn=(n_\up,n_\dn)$, and $\Theta\Upsilon=\mu\Upsilon$, then
+\[
+\Theta\mathcal W_\up\Upsilon=e^{2\pi\iu n_\up/\Nphi}\mu\,\mathcal W_\up\Upsilon,\qquad
+\Theta\mathcal W_\up\mathcal W_\dn^*\Upsilon=e^{2\pi\iu(n_\up-n_\dn)/\Nphi}\mu\,\mathcal W_\up\mathcal W_\dn^*\Upsilon .
+\]
+\item $\mathcal W_\sigma=\Ff\bigl(\thy\otimes\lvert\sigma\rangle\langle\sigma\rvert+\one\otimes(\one-\lvert\sigma\rangle\langle\sigma\rvert)\bigr)$:
+the twist $\mathcal W_\sigma$ is the magnetic translation $\thy$ of Lemma~\ref{lem:magtrans}, by $L_y/\Nphi$ along the
+circumference, applied to the electrons of spin $\sigma$ alone.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(i) The $n_{j\sigma}$ are mutually commuting orthogonal projections, diagonal in the occupation-number basis
+$c^*_{j_1\sigma_1}\cdots c^*_{j_p\sigma_p}\Omega_0$ (proof of Lemma~\ref{lem:charges-elementary}). So $\mathcal W_\sigma$ is the
+product of the commuting unitaries $\exp(2\pi\iu j\,n_{[j]\sigma}/\Nphi)$, it is diagonal in that basis, and it commutes with
+$\Nup$, $\Ndn$ and $\mathcal W_{\sigma'}$, which are diagonal there too. Since $e^{2\pi\iu n_{j\sigma}}=\one$, replacing a
+representative $j$ by $j+m\Nphi$, $m\in\Z$, does not change the corresponding factor.
+
+(ii) By the anticommutation relations $c_{j\sigma'}^2=0$ and $c_{j\sigma'}c_{j\sigma'}^*=\one-n_{j\sigma'}$, so
+$n_{j\sigma'}c_{j\sigma'}=c_{j\sigma'}^*c_{j\sigma'}^2=0$ and $c_{j\sigma'}n_{j\sigma'}=(\one-n_{j\sigma'})c_{j\sigma'}=c_{j\sigma'}$. Since
+$n_{j\sigma'}$ is an orthogonal projection, $e^{\iu\alpha n_{j\sigma'}}=\one+(e^{\iu\alpha}-1)n_{j\sigma'}$ for $\alpha\in\R$; hence
+$e^{-\iu\alpha n_{j\sigma'}}c_{j\sigma'}=c_{j\sigma'}$ and $c_{j\sigma'}e^{\iu\alpha n_{j\sigma'}}=e^{\iu\alpha}c_{j\sigma'}$, so
+$e^{-\iu\alpha n_{j\sigma'}}c_{j\sigma'}e^{\iu\alpha n_{j\sigma'}}=e^{\iu\alpha}c_{j\sigma'}$. The factors of $\mathcal W_\sigma$ that belong to
+the other modes commute with $c_{j\sigma'}$ (proof of Lemma~\ref{lem:charges-elementary}). With
+$\alpha=2\pi\tilde\jmath/\Nphi$, $\tilde\jmath$ the representative of $j$, if $\sigma'=\sigma$, and with no factor for the mode
+$(j,\sigma')$ if $\sigma'\ne\sigma$, this gives (ii); the phase $e^{2\pi\iu\tilde\jmath/\Nphi}=e^{2\pi\iu j/\Nphi}$ depends
+only on the class $j$.
+
+(iii) By Lemma~\ref{lem:sectors}(iii), $\Theta^*n_{[j]\sigma}\Theta=n_{[j+1]\sigma}$, and conjugation by the unitary $\Theta$
+commutes with the exponential of a self-adjoint operator, so, with $k=j+1$,
+\[
+\Theta^*\mathcal W_\sigma\Theta=\exp\Bigl(\frac{2\pi\iu}{\Nphi}\sum_{j=0}^{\Nphi-1}j\,n_{[j+1]\sigma}\Bigr)
+=\exp\Bigl(\frac{2\pi\iu}{\Nphi}\sum_{k=1}^{\Nphi}k\,n_{[k]\sigma}\Bigr)\exp\Bigl(-\frac{2\pi\iu}{\Nphi}\sum_{k=1}^{\Nphi}n_{[k]\sigma}\Bigr),
+\]
+the $n_{[k]\sigma}$ commuting. The first factor is $\mathcal W_\sigma$ by (i), with the representatives $1,\dots,\Nphi$, and
+the sum in the second is $N_\sigma$. Hence $\Theta^*\mathcal W_\sigma\Theta=e^{-2\pi\iu N_\sigma/\Nphi}\mathcal W_\sigma$, and,
+$\Theta$ commuting with $N_\sigma$, $\Theta\mathcal W_\sigma\Theta^*=e^{2\pi\iu N_\sigma/\Nphi}\mathcal W_\sigma$ and
+$\Theta\mathcal W_\sigma^*\Theta^*=e^{-2\pi\iu N_\sigma/\Nphi}\mathcal W_\sigma^*$. If $\Upsilon\in\sect\nn$ and $\Theta\Upsilon=\mu\Upsilon$,
+then, as the twists map $\sect\nn$ into itself, $\Theta\mathcal W_\up\Upsilon=e^{2\pi\iu N_\up/\Nphi}\mathcal W_\up\Theta\Upsilon
+=e^{2\pi\iu n_\up/\Nphi}\mu\,\mathcal W_\up\Upsilon$, and likewise
+$\Theta\mathcal W_\up\mathcal W_\dn^*\Upsilon=e^{2\pi\iu(N_\up-N_\dn)/\Nphi}\mathcal W_\up\mathcal W_\dn^*\Theta\Upsilon
+=e^{2\pi\iu(n_\up-n_\dn)/\Nphi}\mu\,\mathcal W_\up\mathcal W_\dn^*\Upsilon$.
+
+(iv) Let $u$ be the unitary on $\kN$ in the parentheses. By Definition~\ref{def:fock} and the linearity of $c(\cdot)^*$,
+$\Ff(u)$ fixes $\Omega_0$, and $\Ff(u)c^*_{j\sigma}\Ff(u)^*=c(u(\psi_j\otimes\sigma))^*=e^{2\pi\iu j/\Nphi}c^*_{j\sigma}$ by
+Lemma~\ref{lem:magtrans}(i), while $\Ff(u)c^*_{j\sigma'}\Ff(u)^*=c^*_{j\sigma'}$ for $\sigma'\ne\sigma$. By (ii), taking
+adjoints, $\mathcal W_\sigma c^*_{j\sigma}\mathcal W_\sigma^*=e^{2\pi\iu j/\Nphi}c^*_{j\sigma}$ and $\mathcal W_\sigma$ fixes
+$c^*_{j\sigma'}$ for $\sigma'\ne\sigma$; and $\mathcal W_\sigma\Omega_0=\Omega_0$. So the two unitaries agree on the
+occupation-number basis, and they are equal.
+\end{proof}
+
+By (iv), and since $\Ff$ is multiplicative (by the uniqueness in its definition), $\mathcal W_\up\mathcal W_\dn=\Ff(\thy\otimes\one)$ translates all electrons along the
+circumference, while $\mathcal W_\up$ translates the electrons of spin up relative to those of spin down.
+
+\subsection{The energy of a twisted zero mode}
+
+For $n\in\Z$ and $d\in\N$ with $d\equiv n\pmod2$ put
+\[
+c^\nu_{n,d}:=\cpair\nu\bigl(\psi_{[(n-d)/2]},\psi_{[(n+d)/2]}\bigr)\quad(\nu\in\{+,0,-\}),\qquad
+c^{\rm sing}_{n,d}:=c^{\rm sing}\bigl(\psi_{[(n-d)/2]},\psi_{[(n+d)/2]}\bigr),
+\]
+where $c^{\rm sing}(f,g):=\sum_{\sigma,\sigma'}\overline{\chi^{\rm sing}_{\sigma\sigma'}}\,c(f\otimes\sigma')\,c(g\otimes\sigma)$ is
+the singlet pair annihilator, built from the antisymmetric spinor $\chi^{\rm sing}$ with
+$\chi^{\rm sing}_{\up\dn}=-\chi^{\rm sing}_{\dn\up}=2^{-1/2}$ and zero diagonal (as in the proof of Theorem~\ref{thm:localform}).
+With $j:=[(n-d)/2]$ and $j':=[(n+d)/2]$,
+\begin{gather*}
+c^+_{n,d}=c_{j\up}c_{j'\up},\qquad c^-_{n,d}=c_{j\dn}c_{j'\dn},\\
+c^0_{n,d}=2^{-1/2}\bigl(c_{j\dn}c_{j'\up}+c_{j\up}c_{j'\dn}\bigr),\qquad
+c^{\rm sing}_{n,d}=2^{-1/2}\bigl(c_{j\dn}c_{j'\up}-c_{j\up}c_{j'\dn}\bigr),
+\end{gather*}
+and $\bcen\nu n=\sum_{d}2d\,e^{-\kappa^2d^2/4}c^\nu_{n,d}$, the sum running over $d\in\N$ with $d\equiv n\pmod2$
+(Definition~\ref{def:pairs}). As in the proof of Proposition~\ref{prop:slotH}(i), $\norm{c^\nu_{n,d}}\le\sqrt2$ and
+$\norm{c^{\rm sing}_{n,d}}\le\sqrt2$, so all series below converge absolutely in norm.
+
+\begin{lemma}[the energy of a twisted zero mode]\label{lem:twist-energy}
+Let $\Upsilon$ be a unit vector with $N$ electrons such that $H_N\Upsilon=0$. Then
+\begin{equation}\label{eq:twist-identity}
+\ip{\mathcal W_\up\Upsilon}{H_N\mathcal W_\up\Upsilon}=\frac{\kappa^3}{\sqrt{2\pi}}\sum_{n\in\Z_{2\Nphi}}\Bigl\lVert\sum_{d}2d\,e^{-\kappa^2d^2/4}
+\Bigl[\Bigl(\cos\frac{\pi d}\Nphi-1\Bigr)c^0_{n,d}+\iu\sin\frac{\pi d}\Nphi\,c^{\rm sing}_{n,d}\Bigr]\Upsilon\Bigr\rVert^2,
+\end{equation}
+the inner sum running over $d\in\N$ with $d\equiv n\pmod2$, for any representative of the class $n$; and
+\begin{equation}\label{eq:twist-energy}
+\ip{\mathcal W_\up\Upsilon}{H_N\mathcal W_\up\Upsilon}\le\frac{\kappa^3}{\sqrt{2\pi}}\Bigl(\frac{\pi^2\,\mathsf G_2(\kappa)^2}{2N}
++\frac{\pi^4\,\mathsf G_3(\kappa)^2}{32N^3}\Bigr).
+\end{equation}
+For the two-species twist $\mathcal W_\up\mathcal W_\dn^*$ in place of $\mathcal W_\up$, \eqref{eq:twist-identity} holds with
+$\pi d/\Nphi$ replaced by $2\pi d/\Nphi$, and \eqref{eq:twist-energy} with its first term multiplied by four and its
+second term by sixteen.
+\end{lemma}
+
+\begin{proof}
+\emph{Step 1: only the triplet pairs with one electron of each spin feel the twist.} By
+Theorem~\ref{thm:localform}(c), $H_N=(\kappa^3/\sqrt{2\pi})\sum_{n\in\Z_{2\Nphi}}\sum_\nu(\bcen\nu n)^*\bcen\nu n$, a sum of positive
+operators; so $0=\ip\Upsilon{H_N\Upsilon}$ gives $\bcen\nu n\Upsilon=0$ for all $n$ and $\nu$. Since $\mathcal W_\up$ is unitary,
+\[
+\ip{\mathcal W_\up\Upsilon}{H_N\mathcal W_\up\Upsilon}=\frac{\kappa^3}{\sqrt{2\pi}}\sum_{n\in\Z_{2\Nphi}}\sum_\nu\norm{\mathcal W_\up^*\bcen\nu n\mathcal W_\up\Upsilon}^2 .
+\]
+Fix a representative $n\in\Z$ and $d\in\N$ with $d\equiv n\pmod2$, and put $j_1:=(n-d)/2$ and $j_2:=(n+d)/2$, so that
+$j_1+j_2=n$, $j_2-j_1=d$, $j=[j_1]$ and $j'=[j_2]$, as in the proof of Theorem~\ref{thm:localform}(b). By
+Lemma~\ref{lem:twists}(ii),
+\[
+\mathcal W_\up^*c^+_{n,d}\mathcal W_\up=e^{2\pi\iu(j_1+j_2)/\Nphi}c^+_{n,d}=e^{2\pi\iu n/\Nphi}c^+_{n,d},\qquad
+\mathcal W_\up^*c^-_{n,d}\mathcal W_\up=c^-_{n,d},
+\]
+and, with $u:=c_{j\dn}c_{j'\up}$ and $v:=c_{j\up}c_{j'\dn}$, so that $c^0_{n,d}=2^{-1/2}(u+v)$ and
+$c^{\rm sing}_{n,d}=2^{-1/2}(u-v)$, $\mathcal W_\up^*u\mathcal W_\up=e^{2\pi\iu j_2/\Nphi}u$ and $\mathcal W_\up^*v\mathcal W_\up=e^{2\pi\iu j_1/\Nphi}v$.
+Writing $e^{2\pi\iu j_2/\Nphi}=e^{\iu\pi n/\Nphi}e^{\iu\pi d/\Nphi}$ and $e^{2\pi\iu j_1/\Nphi}=e^{\iu\pi n/\Nphi}e^{-\iu\pi d/\Nphi}$, and
+using $e^{\iu x}u+e^{-\iu x}v=\cos x\,(u+v)+\iu\sin x\,(u-v)$ for $x\in\R$, we get
+\[
+\mathcal W_\up^*c^0_{n,d}\mathcal W_\up=e^{\iu\pi n/\Nphi}\Bigl[\cos\frac{\pi d}\Nphi\,c^0_{n,d}+\iu\sin\frac{\pi d}\Nphi\,c^{\rm sing}_{n,d}\Bigr].
+\]
+The phases $e^{2\pi\iu n/\Nphi}$ and $e^{\iu\pi n/\Nphi}$ do not depend on $d$. Summing over $d$ with the weights
+$2d\,e^{-\kappa^2d^2/4}$, we obtain $\mathcal W_\up^*\bcen+n\mathcal W_\up=e^{2\pi\iu n/\Nphi}\bcen+n$, $\mathcal W_\up^*\bcen-n\mathcal W_\up=\bcen-n$
+and
+\[
+\mathcal W_\up^*\bcen0n\mathcal W_\up=e^{\iu\pi n/\Nphi}\Bigl(\bcen0n+\sum_d2d\,e^{-\kappa^2d^2/4}\Bigl[\Bigl(\cos\frac{\pi d}\Nphi-1\Bigr)c^0_{n,d}
++\iu\sin\frac{\pi d}\Nphi\,c^{\rm sing}_{n,d}\Bigr]\Bigr).
+\]
+Since $\bcen\nu n\Upsilon=0$, only the sum survives when these operators act on $\Upsilon$, and this proves
+\eqref{eq:twist-identity}. The norms in it depend on $n$ only through its class in $\Z_{2\Nphi}$, because the left-hand
+sides above do: $\bcen\nu{n+2\Nphi}=\bcen\nu n$, and the phases are $2\Nphi$-periodic in $n$. For the two-species twist,
+Lemma~\ref{lem:twists}(ii) applied to both factors multiplies $c_{j\up}$ by $e^{2\pi\iu j_1/\Nphi}$ and $c_{j\dn}$ by
+$e^{-2\pi\iu j_1/\Nphi}$, and likewise for $j'$ and $j_2$; so $c^\pm_{n,d}$ acquire the phases $e^{\pm2\pi\iu n/\Nphi}$, $u$ and
+$v$ acquire $e^{2\pi\iu d/\Nphi}$ and $e^{-2\pi\iu d/\Nphi}$, and the same computation gives \eqref{eq:twist-identity} with
+$\pi d/\Nphi$ replaced by $2\pi d/\Nphi$.
+
+\emph{Step 2: two Cauchy--Schwarz steps.} For vectors $\xi_1,\xi_2$ we have
+$\norm{\xi_1+\xi_2}^2\le2\norm{\xi_1}^2+2\norm{\xi_2}^2$. For absolutely summable coefficients $\alpha_d$ and vectors $\Phi_d$ of
+bounded norm, the triangle inequality and the Cauchy--Schwarz inequality for sums, applied to
+$\norm{\sum_d\alpha_d\Phi_d}\le\sum_d\abs{\alpha_d}^{1/2}\cdot\abs{\alpha_d}^{1/2}\norm{\Phi_d}$, give
+\[
+\Bigl\lVert\sum_d\alpha_d\Phi_d\Bigr\rVert^2\le\Bigl(\sum_d\abs{\alpha_d}\Bigr)\Bigl(\sum_d\abs{\alpha_d}\norm{\Phi_d}^2\Bigr).
+\]
+With $\abs{\sin x}\le\abs x$ and $\abs{1-\cos x}\le x^2/2$, and since the sums over $d\equiv n\pmod2$ are at most the sums
+over all $d\ge1$,
+\[
+\sum_d2d\,e^{-\kappa^2d^2/4}\Bigl\lvert\sin\frac{\pi d}\Nphi\Bigr\rvert\le\frac\pi\Nphi\,\mathsf G_2(\kappa),\qquad
+\sum_d2d\,e^{-\kappa^2d^2/4}\Bigl\lvert1-\cos\frac{\pi d}\Nphi\Bigr\rvert\le\frac{\pi^2}{2\Nphi^2}\,\mathsf G_3(\kappa).
+\]
+Applying the two inequalities to each term of \eqref{eq:twist-identity} therefore gives
+\begin{multline}\label{eq:twist-cs}
+\ip{\mathcal W_\up\Upsilon}{H_N\mathcal W_\up\Upsilon}\le\frac{\kappa^3}{\sqrt{2\pi}}\Bigl(\frac{2\pi^2}{\Nphi^2}\,\mathsf G_2(\kappa)
+\sum_{n,d}2d^2e^{-\kappa^2d^2/4}\norm{c^{\rm sing}_{n,d}\Upsilon}^2\\
++\frac{\pi^4}{2\Nphi^4}\,\mathsf G_3(\kappa)\sum_{n,d}2d^3e^{-\kappa^2d^2/4}\norm{c^0_{n,d}\Upsilon}^2\Bigr),
+\end{multline}
+where $\sum_{n,d}$ runs over $n\in\Z_{2\Nphi}$ and $d\in\N$ with $d\equiv n\pmod2$. For the two-species twist, $\pi$ is
+replaced by $2\pi$, which multiplies the two terms by four and by sixteen.
+
+\emph{Step 3: each pair weight is bounded by its occupation.} Fix $(n,d)$, with $u$ and $v$ as in Step~1. Then
+$(c^{\rm sing}_{n,d})^*c^{\rm sing}_{n,d}+(c^0_{n,d})^*c^0_{n,d}=u^*u+v^*v$, and $u^*u=c_{j'\up}^*n_{j\dn}c_{j'\up}=n_{j\dn}n_{j'\up}$ and
+$v^*v=n_{j\up}n_{j'\dn}$, because the modes $(j,\dn)$ and $(j',\up)$ are distinct (also when $j=j'$). For commuting
+orthogonal projections $p_1,p_2$ one has $p_1p_2\le\frac12(p_1+p_2)$, since $p_1+p_2-2p_1p_2=p_1(\one-p_2)+(\one-p_1)p_2\ge0$.
+Hence
+\[
+\norm{c^{\rm sing}_{n,d}\Upsilon}^2,\ \norm{c^0_{n,d}\Upsilon}^2\ \le\ \ip\Upsilon{(n_{j\dn}n_{j'\up}+n_{j\up}n_{j'\dn})\Upsilon}
+\ \le\ \tfrac12\ip\Upsilon{(n_{j\up}+n_{j\dn}+n_{j'\up}+n_{j'\dn})\Upsilon}.
+\]
+For fixed $d$, the classes $n\in\Z_{2\Nphi}$ with $n\equiv d\pmod2$ are represented by $n=d+2k$, $k=0,\dots,\Nphi-1$; then
+$j=[k]$ and $j'=[k+d]$, and each runs once through $\Z_{\Nphi}$. Summing over these $n$, the right-hand side therefore gives
+$\frac12\cdot2\ip\Upsilon{(\Nup+\Ndn)\Upsilon}=N$. Consequently
+\[
+\sum_{n,d}2d^2e^{-\kappa^2d^2/4}\norm{c^{\rm sing}_{n,d}\Upsilon}^2\le N\,\mathsf G_2(\kappa),\qquad
+\sum_{n,d}2d^3e^{-\kappa^2d^2/4}\norm{c^0_{n,d}\Upsilon}^2\le N\,\mathsf G_3(\kappa).
+\]
+Inserted in \eqref{eq:twist-cs}, with $\Nphi=2N$, this gives
+$\frac{2\pi^2}{4N^2}\mathsf G_2\cdot N\mathsf G_2=\frac{\pi^2\mathsf G_2^2}{2N}$ and
+$\frac{\pi^4}{2\cdot16N^4}\mathsf G_3\cdot N\mathsf G_3=\frac{\pi^4\mathsf G_3^2}{32N^3}$, which is \eqref{eq:twist-energy}; for the two-species
+twist the factors four and sixteen of Step 2 carry over.
+\end{proof}
+
+\subsection{A zero mode twisted off the kernel}
+
+For a sector $\nn$ and $\mu\in\C$ let $\sect\nn(\mu):=\{\Upsilon\in\sect\nn:\Theta\Upsilon=\mu\Upsilon\}$.
+
+\begin{lemma}[a zero mode twisted off the kernel]\label{lem:twist-off}
+Let $\nn=(n_\up,n_\dn)$ be a sector with $n_\up+n_\dn=N$, and let $\mathcal W$ be $\mathcal W_\up$ or $\mathcal W_\up\mathcal W_\dn^*$.
+Suppose that the dimension of $\mathcal K_N\cap\sect\nn$ is not divisible by the order of the root of unity
+$e^{2\pi\iu n_\up/\Nphi}$, respectively $e^{2\pi\iu(n_\up-n_\dn)/\Nphi}$ (the least $k\ge1$ for which its $k$-th power is
+$1$). Then there is a unit vector $\Upsilon\in\mathcal K_N\cap\sect\nn$, an eigenvector of $\Theta$, such that $\mathcal W\Upsilon$ is
+orthogonal to $\mathcal K_N$.
+\end{lemma}
+
+\begin{proof}
+Let $\omega$ be the root of unity of the statement, and put $\mathcal K(\mu):=\mathcal K_N\cap\sect\nn(\mu)$. The unitary $\Theta$
+maps $\sect\nn$ onto itself (Lemma~\ref{lem:sectors}(iii)) and commutes with $H_N$ (Lemma~\ref{lem:covariance}), so it maps
+the finite-dimensional space $\mathcal K_N\cap\sect\nn$ onto itself; its restriction is unitary, and
+$\mathcal K_N\cap\sect\nn$ is the orthogonal sum of the spaces $\mathcal K(\mu)$, $\abs\mu=1$, of which finitely many are
+nonzero.
+
+Suppose that $\dim\mathcal K(\mu)\le\dim\mathcal K(\omega\mu)$ for every $\mu$. Along an orbit $\{\omega^k\mu:k\in\Z\}$, which has
+as many elements as the order of $\omega$, the dimensions are then nondecreasing and return to their initial value, so they
+are constant. Then $\dim(\mathcal K_N\cap\sect\nn)=\sum_\mu\dim\mathcal K(\mu)$ is a sum, over the finitely many orbits on which
+the dimensions do not vanish, of the order of $\omega$ times the value on the orbit, and so it is divisible by that order,
+contrary to the hypothesis. Hence
+there is $\mu_0$ with $\dim\mathcal K(\mu_0)>\dim\mathcal K(\omega\mu_0)$.
+
+By Lemma~\ref{lem:twists}(i) and (iii), $\mathcal W$ maps $\mathcal K(\mu_0)$ into $\sect\nn(\omega\mu_0)$. A vector of
+$\sect\nn(\omega\mu_0)$ is orthogonal to $\mathcal K(\mu)$ for $\mu\ne\omega\mu_0$, as eigenvectors of the unitary $\Theta$ for
+distinct eigenvalues are orthogonal, and to $\mathcal K_N\cap\sect{\nn'}$ for $\nn'\ne\nn$; since $H_N$ is sector-preserving,
+$\mathcal K_N$ is the orthogonal sum of the spaces $\mathcal K_N\cap\sect{\nn'}$, so such a vector is orthogonal to
+$\mathcal K_N$ as soon as it is orthogonal to $\mathcal K(\omega\mu_0)$. The linear map from $\mathcal K(\mu_0)$ to
+$\mathcal K(\omega\mu_0)$ that sends $\Upsilon'$ to the orthogonal projection of $\mathcal W\Upsilon'$ onto $\mathcal K(\omega\mu_0)$ goes
+to a space of smaller dimension, so it has a nonzero kernel. A unit vector $\Upsilon$ in this kernel lies in
+$\mathcal K(\mu_0)$, so it is a zero mode in $\sect\nn$ and an eigenvector of $\Theta$, and $\mathcal W\Upsilon$ is orthogonal to
+$\mathcal K(\omega\mu_0)$, hence to $\mathcal K_N$.
+\end{proof}
+
+\subsection{The Gaussian sums}
+
+\begin{lemma}[the Gaussian sums]\label{lem:gauss}
+For every $\kappa>0$,
+\[
+\mathsf G_2(\kappa)\le\frac{4\sqrt\pi}{\kappa^3}\Bigl(1+\frac{2\kappa}{e\sqrt\pi}\Bigr),\qquad
+\mathsf G_3(\kappa)\le\frac{16}{\kappa^4}\Bigl(1+\frac{(6/e)^{3/2}\kappa}8\Bigr).
+\]
+\end{lemma}
+
+\begin{proof}
+Let $f\ge0$ be continuous and integrable on $[0,\infty)$, nondecreasing on $[0,t_*]$ and nonincreasing on $[t_*,\infty)$.
+Then $\sum_{d\ge1}f(d)\le\int_0^\infty f+\max f$. Indeed, let $d_*:=\lfloor t_*\rfloor$. For integers $1\le d\le d_*-1$,
+$f(d)\le\int_d^{d+1}f$, and for $d\ge d_*+2$, $f(d)\le\int_{d-1}^df$. On $[d_*,d_*+1]$, which contains $t_*$, $f$ is at least
+$f(d_*)$ on $[d_*,t_*]$ and at least $f(d_*+1)$ on $[t_*,d_*+1]$, hence at least $\min\{f(d_*),f(d_*+1)\}$; so
+$f(d_*)+f(d_*+1)\le\max f+\int_{d_*}^{d_*+1}f$ if $d_*\ge1$, while if $d_*=0$ only $f(1)\le\max f$ is needed. The intervals of
+integration used are disjoint and contained in $[0,\infty)$, which proves the claim.
+
+We apply this to $f(t)=2t^ke^{-\kappa^2t^2/4}$ with $k=2$ and $k=3$. Since $f'(t)=t^{k-1}e^{-\kappa^2t^2/4}(2k-\kappa^2t^2)$, $f$ is
+nondecreasing up to $t_*=\sqrt{2k}/\kappa$ and nonincreasing after it, and $\max f=f(t_*)=2(2k/\kappa^2)^{k/2}e^{-k/2}$, that
+is, $8/(e\kappa^2)$ for $k=2$ and $2(6/e)^{3/2}/\kappa^3$ for $k=3$. The substitution $t=2s/\kappa$ and
+$\int_0^\infty s^2e^{-s^2}\,\dd s=\sqrt\pi/4$, $\int_0^\infty s^3e^{-s^2}\,\dd s=\frac12$ give $\int_0^\infty f=4\sqrt\pi/\kappa^3$ for $k=2$
+and $16/\kappa^4$ for $k=3$. Hence $\mathsf G_2(\kappa)\le4\sqrt\pi/\kappa^3+8/(e\kappa^2)$ and
+$\mathsf G_3(\kappa)\le16/\kappa^4+2(6/e)^{3/2}/\kappa^3$, which are the stated bounds.
+\end{proof}
+
+\subsection{Proof of Theorem~\ref{thm:twist}}
+
+\emph{Even $N$.} Let $\nn=(N/2,N/2)$. By Theorem~\ref{thm:kernel}(iii), $\mathcal K_N\subset\sect\nn$ and
+$\dim\mathcal K_N=10$. The root of unity of Lemma~\ref{lem:twist-off} for $\mathcal W_\up$ is
+$e^{2\pi\iu(N/2)/(2N)}=\iu$, of order four, and ten is not divisible by four. So Lemma~\ref{lem:twist-off} gives a unit
+vector $\Upsilon\in\mathcal K_N$ such that $\mathcal W_\up\Upsilon$ is orthogonal to $\mathcal K_N$; it is a unit vector in $\sect\nn$
+by Lemma~\ref{lem:twists}(i), and Lemma~\ref{lem:twist-energy} bounds $\ip{\mathcal W_\up\Upsilon}{H_N\mathcal W_\up\Upsilon}$ by the left-hand
+side of \eqref{eq:twist-bound}. By Lemma~\ref{lem:gauss} and $\kappa=2\pi/L_y$,
+\begin{align*}
+\frac{\kappa^3}{\sqrt{2\pi}}\cdot\frac{\pi^2\,\mathsf G_2(\kappa)^2}{2N}&\le\frac{\kappa^3}{\sqrt{2\pi}}\cdot\frac{\pi^2}{2N}\cdot\frac{16\pi}{\kappa^6}\Bigl(1+\frac{2\kappa}{e\sqrt\pi}\Bigr)^2
+=\frac{8\pi^3}{\kappa^3}\cdot\frac1{\sqrt{2\pi}\,N}\Bigl(1+\frac{2\kappa}{e\sqrt\pi}\Bigr)^2,\\
+\frac{\kappa^3}{\sqrt{2\pi}}\cdot\frac{\pi^4\,\mathsf G_3(\kappa)^2}{32N^3}&\le\frac{\kappa^3}{\sqrt{2\pi}}\cdot\frac{\pi^4}{32N^3}\cdot\frac{256}{\kappa^8}\Bigl(1+\frac{(6/e)^{3/2}\kappa}8\Bigr)^2
+=\frac{8\pi^4}{\kappa^5}\cdot\frac1{\sqrt{2\pi}\,N^3}\Bigl(1+\frac{(6/e)^{3/2}\kappa}8\Bigr)^2,
+\end{align*}
+and $8\pi^3/\kappa^3=L_y^3$, $8\pi^4/\kappa^5=L_y^5/(4\pi)$; this is \eqref{eq:twist-bound}. The eigenvalue $0$ of $H_N$ in
+$\sect\nn$ has multiplicity ten and eigenspace $\mathcal K_N$ (Theorem~\ref{thm:kernel} and \eqref{eq:E11}), so, expanding in
+an orthonormal basis of eigenvectors, every unit vector of $\sect\nn$ orthogonal to $\mathcal K_N$ has expectation at least
+$E_{11}(N)$. This gives the bound on $E_{11}(N)$.
+
+\emph{Odd $N$.} Let $N\ge3$ be odd and $\nn$ one of the two sectors; by Theorem~\ref{thm:kernel}(ii),
+$\dim(\mathcal K_N\cap\sect\nn)=2$. The root of unity for $\mathcal W_\up$ is $\omega=e^{2\pi\iu n_\up/(2N)}$. If $\omega^k=1$,
+then $2N$ divides $kn_\up$; since $2n_\up-N=\pm1$, every common divisor of $n_\up$ and $N$ divides $1$, so $N$ divides $k$.
+Hence the order of $\omega$ is at least $N\ge3$, and two is not divisible by it. Lemma~\ref{lem:twist-off} gives a unit vector
+$\Upsilon\in\mathcal K_N\cap\sect\nn$ such that $\mathcal W_\up\Upsilon$ is orthogonal to $\mathcal K_N$, and the rest of the argument is
+the same, with $E_1(N)=E_2(N)=0<E_3(N)$ in place of \eqref{eq:E11}.
+
+\emph{The numbers.} $1/\sqrt{2\pi}=0.39894\ldots$, $2/(e\sqrt\pi)=0.41510\ldots$, $1/(4\pi\sqrt{2\pi})=0.031746\ldots$ and
+$(6/e)^{3/2}/8=0.40991\ldots$, so the right-hand side of \eqref{eq:twist-bound} is at most
+$0.40(1+0.42\kappa)^2L_y^3/N+0.032(1+0.41\kappa)^2L_y^5/N^3$. \qed
+
+\subsection{Remarks}
+
+\begin{remark}[the two-species twist]\label{rem:twist-two}
+The twist $\mathcal W_\up\mathcal W_\dn^*$, which multiplies the orbitals of the two spins by opposite phases, also moves the zero
+modes off the kernel at odd $N$: in the sectors $((N\pm1)/2,(N\mp1)/2)$ the root of unity of
+Lemma~\ref{lem:twist-off} is $e^{\pm\iu\pi/N}$, of order $2N$, and two is not divisible by $2N$. By
+Lemma~\ref{lem:twist-energy} it gives the bound on $E_3(N)$ with four times the first and sixteen times the second term
+of \eqref{eq:twist-bound}, which is weaker than Theorem~\ref{thm:twist}. At even $N$, in the sector $(N/2,N/2)$, its root
+of unity is $1$: it commutes with $\Theta$ there, and Lemma~\ref{lem:twist-off} gives nothing. The single-species twist
+multiplies the eigenvalues of $\Theta$ by $\iu$ instead, and the count of Lemma~\ref{lem:twist-off} then rests on the fact
+that ten is not divisible by four, the arithmetic of Corollary~\ref{cor:classwide}.
+\end{remark}
+
+\begin{remark}[the eigenvalues of $\Theta^2$ on the kernel]\label{rem:twist-kernel}
+Lemma~\ref{lem:twist-off} uses only the dimension of the kernel. Appendix~\ref{app:kernel} gives more. Under the
+identification of Remark~\ref{rem:kernel-identification}, $\Theta$ is the inverse of the translation $T_1$ of that
+appendix, and $\mathcal K_N$ at even $N=2p$ is the sum of the images of the spaces of Lemma~\ref{kz:lem:B}(b) for
+$\varepsilon\in\{\pm1\}^2$, of dimensions $2\cdot2$ for $\varepsilon=(1,1)$ and $2\cdot1$ for each of the other three
+(Theorem~\ref{kz:thm:T2}(iii) and Proposition~\ref{kz:prop:explicit}); on the image for $\varepsilon$,
+$T_1^2=\varepsilon_2^{-1}$ (Lemma~\ref{kz:lem:B}(c)), so $\Theta^2=\varepsilon_2$. Hence $\Theta^2=1$ on a six-dimensional and
+$\Theta^2=-1$ on a four-dimensional subspace of $\mathcal K_N$. Since $\mathcal W_\up$ multiplies the eigenvalues of $\Theta$ by $\iu$,
+it maps the eigenspace of $\Theta^2$ for $1$ into that for $-1$, and the argument of Lemma~\ref{lem:twist-off}, applied to
+$\Theta^2$, shows that the zero modes $\Upsilon$ for which $\mathcal W_\up\Upsilon$ is orthogonal to $\mathcal K_N$ form a subspace of
+dimension at least two. The proof of Theorem~\ref{thm:twist} does not use this.
+\end{remark}
+
+\begin{remark}[the constants]\label{rem:twist-constants}
+The constants are not optimal. If $\Upsilon$ has real coefficients in the occupation-number basis, in which the
+operators $c_{j\sigma}$, and hence $c^0_{n,d}$ and $c^{\rm sing}_{n,d}$, have real matrix elements, the two vectors whose sum
+appears in each term of \eqref{eq:twist-identity} are a real vector and $\iu$ times a real vector; the real part of
+their inner product then vanishes, the factor two of $\norm{\xi_1+\xi_2}^2\le2\norm{\xi_1}^2+2\norm{\xi_2}^2$ in Step~2 of the
+proof of Lemma~\ref{lem:twist-energy} can be dropped, and both terms of \eqref{eq:twist-energy} halve. Lemma~\ref{lem:twist-off} does not provide a real $\Upsilon$ in general. Since
+$\sin(\pi d/\Nphi)$ and $\cos(\pi d/\Nphi)$ depend on $d$ only modulo $2\Nphi$, $d$ may be replaced in Step~2 by its distance
+to $2\Nphi\Z$, which is at most $d$; with the Gaussian weights this gains nothing of importance. For large $\kappa$, that
+is, for thin tori, $\mathsf G_k(\kappa)$ is close to its first term $2e^{-\kappa^2/4}$, and the comparison of
+Lemma~\ref{lem:gauss} with an integral is crude.
+\end{remark}
+
+\begin{remark}[what the bound does not give]\label{rem:twist-scope}
+At fixed circumference Theorem~\ref{thm:twist} bounds the lowest eigenvalue above the zero modes by a quantity of order
+$1/N$. An eigenvalue of this size, or smaller, is compatible with a gapped phase whose ground-state space strictly
+contains the zero modes, in which it would be a splitting inside the ground-state space; so the theorem does not bear on
+the situation of Remark~\ref{rem:loophole}. At fixed aspect ratio it says nothing,
+and there Theorem~\ref{thm:main} is the result of this paper.
+\end{remark}

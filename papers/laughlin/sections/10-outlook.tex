@@ -1,0 +1,50 @@
+% sections/10-outlook.tex
+\section{What is not proved, and what remains}\label{sec:outlook}
+
+\paragraph{The transfer principle.} Theorem~\ref{thm:transferintro} separates the two halves of the argument: the planar certificate,
+a finite computation in the plane, and its passage to rectangular tori, which the theorem carries out for every planar
+certificate of the form of~\cite{OAI:A-Fock-space-inequality-and-the-Laughlin-spectral-gap-September-24-2026}, with errors
+bounded by explicit functions of the shorter period that decay at a Gaussian rate. It is the part of this paper on which
+further work can build, in particular on the spinful hollow-core model discussed at the end of this section. For the
+certificate of~\cite{OAI:A-Fock-space-inequality-and-the-Laughlin-spectral-gap-September-24-2026} the bounds are explicit:
+evaluated numerically (Remark~\ref{rem:evaluation}), they give the thresholds $16.457$, $16.857$ and $18.685$ magnetic lengths
+for a positive constant, a constant above $1/25$ and a constant within $10^{-5}$ of $\gs$ (Theorem~\ref{thm:openai}), and
+the lower bound $\gl(L)$ tends to $\gs$ at the Gaussian rate $O(L^4\,2^{-L^2/20})$ of Remark~\ref{rem:rate}. The candidate proof of~\cite{HouWu} claims a uniform
+bound of broader scope, on flat tori of every lattice shape and with every boundary twist, above an existential threshold;
+the bounds here are restricted to rectangular tori and are explicit.
+
+\paragraph{Oblique tori.} Theorem~\ref{thm:main} is proved for rectangular tori, uniformly in the aspect ratio; it says nothing
+about tori with an oblique lattice of periods. The kernel theorem (Theorem~\ref{thm:kernel} and Proposition~\ref{prop:overfill})
+holds for every modular parameter, but for non-rectangular $\tau$ it is a statement about the operators $B^{(\tau)}_n$ of
+\eqref{eq:Bntau}, and we have not identified $\sum_n(B_n^{(\tau)})^*B_n^{(\tau)}$ with the periodized planar pair projector on an oblique
+torus. The definition $\HT:=\LL_2(\Pp_2(P_1))$ makes sense for every lattice, and we expect most of the argument to carry over: the
+proof of the Moyal identity (Theorem~\ref{thm:moyal}) uses only the irreducibility of the fine-lattice magnetic translations of
+the centre-of-mass torus and the vanishing of the averaged image terms, and the image-sum calculus of Section~\ref{sec:square}
+never uses the shape of the lattice. What would have to be redone is the part tied to the rectangular Landau gauge: the orbital
+form (Proposition~\ref{prop:orbital}), the pair Gram matrix and its levels (Lemmas~\ref{lem:gram} and~\ref{lem:levels}), the
+irreducibility argument of Lemma~\ref{lem:irred} written in an oblique orbital basis, and the lattice sums $\Ec_m$ and $\Xi_z$, whose
+first shell can contain six vectors instead of four. A bound uniform in the modular parameter would allow the modular parameter to
+be varied within the gapped phase, which is the setting in which the Hall viscosity appears as an adiabatic curvature over the
+space of flat metrics~\cite{ASZ,Read09}; this is a separate problem, not addressed here.
+
+\paragraph{Sharper constants.} The threshold is set almost entirely by the four-body term $2444\,\Ec_{22}(1+\Ec_{23})^2$ and, after
+it, by the tail excess (Table~\ref{tab:constants}). The first comes from bounding the periodized four-body target $\mathcal T_4$ by
+the pair energy through Cauchy--Schwarz over all $n_D$ triples of each block (Proposition~\ref{prop:parts}(d)); the second from the
+crude bound $\abs{\bra m\Dis\ket m}\le\min\{1,\mathfrak g_m\}$ on the diagonal entries of the local Gram matrix. A sharper estimate of
+$\mathcal T_4$, or the exact Laguerre values in $\Xi_z$, would lower the threshold; we have not attempted either. The bound on the
+pair-level term is already far below the others, and so is the non-orthonormality term $\Cth\Ec_8(1+\Ec_8)$.
+
+\paragraph{Finite tori below the threshold.} Below the threshold the method gives nothing. For instance at the square aspect ratio
+and filling one third the bound is positive only for $N\ge15$; smaller systems are accessible to exact diagonalization, which is a
+different kind of statement.
+
+\paragraph{The spinful case.} For spin-$\frac12$ fermions with the hollow-core (pure $V_1$) interaction, at $\Nphi=2N$ flux quanta,
+the zero modes are the Haldane--Rezayi states. We expect a spinful transfer principle of the form of Theorem~\ref{thm:transferintro}: a
+planar certificate of the same form for the spinful model, with constant $\gamma>0$, should give a uniform gap above the zero
+modes on rectangular tori. What it would need is the spinful version of each step: the spinful pair Gram matrix and its levels; the torus Moyal
+identities for pair states with spin labels, which should follow from the same Schur argument, since the magnetic translations
+act on the orbital factor only; and the three-body coefficient of the square of the spinful Hamiltonian, whose exact
+periodization should follow from Lemma~\ref{lem:product}, which does not depend on internal labels, but whose planar coefficients
+replace the $q_z$ by spin-dependent blocks that have to be computed. None of this is done here. In the contrapositive, such a
+principle would show that no planar certificate of this form can exist for the spinful hollow-core model if a uniform gap above
+its zero modes on rectangular tori is excluded.

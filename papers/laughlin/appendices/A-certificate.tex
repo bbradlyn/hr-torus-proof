@@ -1,0 +1,99 @@
+% appendices/A-certificate.tex
+\section{The certificate data}\label{app:certificate}
+
+This appendix records the data of the planar certificate
+of~\cite{OAI:A-Fock-space-inequality-and-the-Laughlin-spectral-gap-September-24-2026} that the proof consumes, in the form given
+there (its Appendix~A and the file \texttt{verification/rows.txt} of its source directory). Nothing in this appendix is re-derived;
+the inequalities \eqref{eq:C3} and \eqref{eq:C4} are proved in~\cite[Appendix~A]{OAI:A-Fock-space-inequality-and-the-Laughlin-spectral-gap-September-24-2026}
+by exact rational arithmetic.
+
+\subsection{The rows}
+
+Let $P:=10^7$. Each row below starts with the integers $t_\nu$ and $\ell_\nu=P\lambda_\nu$; an entry \texttt{pj:a} specifies the
+integer $a^\nu_{pj}$, with $p$ and $j$ read as single digits; omitted entries are zero, and indented lines continue the
+preceding row. The coefficients are
+\begin{equation}\label{eq:alphadata}
+\alpha^\nu_{pj}=\frac{a^\nu_{pj}}P\sqrt{\frac{2^{p-t_\nu}\,t_\nu!\,(p+j-t_\nu)!}{p!\,j!}} ,
+\end{equation}
+\cite[Appendix~A.1, (39)]{OAI:A-Fock-space-inequality-and-the-Laughlin-spectral-gap-September-24-2026}; every nonzero entry has
+$0\le p+j-t_\nu\le8$, so the support lies in $\mathcal S_\nu$.
+{\footnotesize
+\begin{verbatim}
+0 7181518 05:-849651 07:-2958744 15:751659 16:-43084 17:-146216 32:720949 35:-127514
+  42:222437 43:-262822 53:-117700 61:-55024 71:-166049
+1 -112991 05:142772 06:-142342 07:527055 08:50742 16:197917 18:-18343 24:5764 27:-21183
+  32:75832 35:-6115 45:2660 53:-9455 61:-27091 63:-3494 71:479 72:-15331
+1 -4247311 05:-12207250 06:-14064191 07:-14063663 08:-15662679 16:483831 18:3987214
+  24:-814558 27:888887 32:966462 35:145978 45:-171722 53:34350 61:389319 63:97603
+  71:412447 72:-53786
+2 3438746 14:6689266 15:6620205 16:6625065 17:4969272 18:4878238 27:-1387380 36:-586188
+  37:344087 42:-1120634 45:-318530 46:559169 55:157455 61:1207103 63:211617 64:33240
+  71:577001 73:-142578
+5 -98645 05:-2719776 08:-8519913 14:-949523 17:-1952105 18:-1562606 28:-8919966 32:248826
+  35:-1017623 37:3656005 38:-2081871 42:-33163 43:-305905 46:35677 47:-1320749
+  48:-1040378 53:502094 55:1060633 58:-998003 61:-113617 63:184919 64:209239 65:-68198
+  67:-266297 72:-606696 73:-563620 74:437345 76:-432189
+5 -3160276 05:-1698129 08:10575875 14:-252576 17:-8002616 18:22592844 28:7370640
+  32:289294 35:1400647 37:1987740 38:4030699 42:-1731401 43:-1034062 46:-1106371
+  47:-1257051 48:1461735 53:1408149 55:1136847 58:1878501 61:-2838516 63:-734099
+  64:1062416 65:11745 67:611312 72:-480776 73:20459 74:316925 76:37092
+7 1441784 07:3441286 08:-6097155 37:-1002399 47:-251321 58:1143225 66:-17397 71:-1007464
+  73:-662286 76:-344621 78:-1115284
+\end{verbatim}
+}
+
+\subsection{The constants}
+
+\begin{itemize}
+\item $P^2\etas=\sum_\nu\ell_\nu^2=93527408868499$, so $\etas=93527408868499/10^{14}=0.93527408868499$.
+\item $\eps=3/10^6$, and $\sum_{D=1}^{23}n_D=\sum_{m=1}^{12}m^2+\sum_{m=1}^{11}m(m+1)=1222$ with $n_D=\lfloor(D+1)^2/4\rfloor$.
+\item $\frac32\sum_{z\ge17,\,z\ \mathrm{odd}}(3z-1)(z+1)2^{-z}=61/4096$ (Proposition~\ref{prop:three}).
+\item $\gs=1-\etas-61/4096-1222\eps=4616733319001/10^{14}=0.04616733319001>1/25$.
+\item $\sum_\nu\norm{\alpha^\nu}^2$ is a rational number determined by \eqref{eq:alphadata}; its value is $3.9764514174$ to the digits
+shown, so $\Cth=72\sum_\nu\norm{\alpha^\nu}^2=286.3045\ldots$; only the bound $\Cth\le286.31$ is used.
+\item Only the orbital modes $0,\dots,8$ and the pair labels $0,\dots,7$ occur in the rows; the three-body blocks are $z\le15$ and the
+four-body blocks $D\le23$.
+\end{itemize}
+
+\subsection{The three-body inequalities}
+
+For $z\in\{2,4,5,\dots,15\}$ the margins $m_z:=\frac32(3z-1)(-\frac12)^z-e_z$ are rational, with $e_z$ given by \eqref{eq:ez}.
+In~\cite[Appendix~A.2]{OAI:A-Fock-space-inequality-and-the-Laughlin-spectral-gap-September-24-2026} they are computed exactly,
+by a formula in which all radicals cancel; the integer parts $\lfloor10^6m_z\rfloor$ recorded there are
+\begin{center}
+\setlength{\tabcolsep}{4pt}\begin{tabular}{rrrrrrrrrrrrrr}
+\toprule
+$z$&2&4&5&6&7&8&9&10&11&12&13&14&15\\
+\midrule
+$\lfloor10^6m_z\rfloor$&1298313&211317&249&250&249&250&250&250&249&250&250&6470&250\\
+\bottomrule
+\end{tabular}
+\end{center}
+All are positive, which is \eqref{eq:C3}.
+
+\subsection{The four-body inequalities}
+
+For $1\le D\le23$ and $r,s\in\mathcal R_D$ put $u_r:=1/(r!(D-r)!)$. Then $(E_D)_{rs}=\sqrt{u_ru_s}\,Y_{rs}$ and
+$(G_D)_{rs}=\sqrt{u_ru_s}\,Z_{rs}$ with rational matrices $Y$, $Z$ given by explicit finite sums over the rows,
+and the matrix in \eqref{eq:C4} equals $D_{\sqrt u}MD_{\sqrt u}$ with $M=ZBZ$, $B=\mathrm{diag}((2\one_{r=1}+\eps)u_r)-D_uYD_u$
+\cite[Appendix~A.3, (42)--(46)]{OAI:A-Fock-space-inequality-and-the-Laughlin-spectral-gap-September-24-2026}. Positivity of the rational symmetric
+matrix $M$ is verified there through the signs of the coefficients of $\det(x\one+M)$, computed exactly by the Leverrier--Faddeev
+recurrence: all coefficients after the leading one are nonnegative, so $M$ has no negative eigenvalue. The recorded sign patterns
+(\texttt{+} positive, \texttt{0} zero, in descending degree) are
+\begin{center}
+\begin{tabular}{rl@{\qquad}rl@{\qquad}rl}
+\toprule
+$D$&signs&$D$&signs&$D$&signs\\
+\midrule
+1&\texttt{0}&9&\texttt{++000}&17&\texttt{++++++000}\\
+2&\texttt{0}&10&\texttt{+0000}&18&\texttt{+++++0000}\\
+3&\texttt{00}&11&\texttt{+++000}&19&\texttt{+++++++000}\\
+4&\texttt{00}&12&\texttt{++0000}&20&\texttt{++++++0000}\\
+5&\texttt{+00}&13&\texttt{++++000}&21&\texttt{++++++++000}\\
+6&\texttt{000}&14&\texttt{+++0000}&22&\texttt{+++++++0000}\\
+7&\texttt{+000}&15&\texttt{+++++000}&23&\texttt{+++++++++000}\\
+8&\texttt{+000}&16&\texttt{++++0000}&&\\
+\bottomrule
+\end{tabular}
+\end{center}
+which is \eqref{eq:C4}.

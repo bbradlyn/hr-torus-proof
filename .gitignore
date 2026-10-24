@@ -1,0 +1,12 @@
+# LaTeX build by-products
+*.aux
+*.log
+*.out
+*.toc
+*.synctex.gz
+
+# Lake's build output and fetched packages
+lean/.lake/
+
+# macOS
+.DS_Store

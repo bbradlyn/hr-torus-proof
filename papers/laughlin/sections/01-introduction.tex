@@ -1,0 +1,229 @@
+% sections/01-introduction.tex
+\section{Introduction}\label{sec:intro}
+
+We prove that spectral-gap certificates for the Laughlin $V_1$ model pass from the plane to rectangular tori with explicit
+errors. The main result is a transfer principle (Theorem~\ref{thm:transferintro}): every planar certificate of the form introduced
+by OpenAI~\cite{OAI:A-Fock-space-inequality-and-the-Laughlin-spectral-gap-September-24-2026}, with constant $\gamma$, gives
+$\HT^2\ge(\gamma-\etr(\Tor))\HT$ on the whole Fock space for the untruncated $V_1$ Hamiltonian $\HT$ of every rectangular
+torus, where $\etr(\Tor)$ is bounded by an explicit function of the shorter period that tends to zero at a Gaussian rate. For
+the certificate of~\cite{OAI:A-Fock-space-inequality-and-the-Laughlin-spectral-gap-September-24-2026} we evaluate these bounds.
+On every rectangular torus whose shorter period is at least $L$, with $L\ge16$, the inequality $\HT^2\ge\gT\HT$ holds with a
+constant $\gT\ge\gl(L)$, uniformly in the particle number and in the aspect ratio, where $\gl$ is an explicit nondecreasing
+function that tends to the planar constant $\gs$
+of~\cite{OAI:A-Fock-space-inequality-and-the-Laughlin-spectral-gap-September-24-2026} at a Gaussian rate in $L$; both
+$\gs-\gl(L)$ and the bound on $\etr(\Tor)$ are $O(L^4\,2^{-L^2/20})$ (Remark~\ref{rem:rate}).
+The thresholds are explicit: a numerical evaluation of $\gl$ (Remark~\ref{rem:evaluation}) gives $\gl(L)>0$ for $L\ge16.457$,
+$\gl(L)>1/25$ for $L\ge16.857$ and $\gl(L)\ge\gs-10^{-5}$ for $L\ge18.685$, in units of the magnetic length
+(Theorem~\ref{thm:openai}).
+
+Laughlin's wave function~\cite{Laughlin} is the exact zero-energy ground state of Haldane's $V_1$ pseudopotential
+Hamiltonian~\cite{Haldane}, in which a pair of spinless fermions in the lowest Landau level pays energy one if its relative
+angular momentum is one and nothing otherwise. Whether this Hamiltonian has a spectral gap above its zero modes that stays
+bounded below as the system grows is a long-standing question~\cite[Appendix~A]{Rougerie}. For the untruncated interaction it
+was answered on the sphere and in the plane by OpenAI~\cite{OAI:A-Fock-space-inequality-and-the-Laughlin-spectral-gap-September-24-2026}:
+with $\gs=4616733319001/10^{14}>1/25$, the spherical Hamiltonian $H_Q$ satisfies $H_Q^2\ge\gamma H_Q$ on the whole Fock space for every
+$\gamma<\gs$ and all sufficiently large flux $Q$, and the planar Hamiltonian satisfies $(H^{\mathrm{pl}}_N)^2\ge\gs H^{\mathrm{pl}}_N$ for every
+particle number. The proof compares $H_Q^2$ with a positive operator built from seven explicit rows, averaged over rotations; the
+rows satisfy finitely many planar inequalities, verified by exact rational arithmetic. Uniform gaps for truncated versions of the
+pseudopotential were obtained earlier, on thin cylinders and thin tori~\cite{NWY,WY}. Two further works treat the untruncated
+interaction on the sphere: Gao~\cite{Gao} raised the constant to about $0.219$, on the sphere and in the plane, by a semidefinite
+search, and Scheer and Khalaf~\cite{ScheerKhalaf} constructed a semidefinite hierarchy of lower bounds on the sphere, with exact
+rational certificates and a rigorous lower bound on the limit inferior of the gap as the flux grows, and leave the torus to
+future work. In all three spherical results the flux threshold is existential: it is shown to exist, not computed.
+
+A uniform bound of this kind, for every flat torus whose shortest lattice vector exceeds an existential threshold, has also
+been claimed in a recent candidate proof prepared by Hou with advice from Wu~\cite{HouWu}; the present argument, obtained
+independently, is restricted to rectangular tori but makes the threshold, the constant $\gl(L)$ and its Gaussian rate of
+convergence to $\gs$ explicit. That candidate proof, which is unrefereed and not on arXiv, states the bound $H^2\ge\gamma H$ for
+every $\gamma<\gs$, uniformly in the particle number, on tori of every lattice shape and with every boundary twist, and also
+claims that the kernel at filling one third is three-dimensional for every shape. Where the two overlap --- the uniform
+bound on rectangular tori and the three-dimensional kernel --- the statements agree. It transfers fixed certificates and states
+no principle for a class of certificates; Theorem~\ref{thm:transferintro} below is such a principle, with its error explicit.
+
+\subsection{The transfer principle}\label{ssec:transfer}
+
+Let $\Tor$ be a rectangular torus with periods $L_x,L_y$ (in units of the magnetic length) and $\Nphi=L_xL_y/2\pi$ flux quanta,
+let $\h$ be its lowest Landau level and $\Fock$ the fermionic Fock space over $\h$, and let $\HT$ be the untruncated $V_1$
+Hamiltonian: the second quantization of the periodization, over the lattice of periods, of the planar projector onto pairs of
+relative angular momentum one (Definition~\ref{def:HT}). Let $L:=\min\{L_x,L_y\}$ be the shorter period.
+
+The certificate of~\cite{OAI:A-Fock-space-inequality-and-the-Laughlin-spectral-gap-September-24-2026} is a finite family of rows
+together with planar inequalities that they satisfy. On the torus, at a base point $R$, row $\nu$ is the operator
+\[
+F_\nu(R)=\lambda_\nu\,B(\ut_{t_\nu}(R))+\sum_{(p,j)\in\mathcal S_\nu}\alpha^\nu_{pj}\,c(\chi^R_{p+j-t_\nu})^*\,c(\chi_j^R)\,B(\ut_p(R))
+\]
+of Definition~\ref{def:KT}, where $B(\ut_p(R))$ removes a pair in the periodized pair state of label $p$ about $R$ and $c(\chi^R_m)$ a
+particle in the periodized orbital of degree $m$ about $R$ (Section~\ref{sec:local}). The proof uses the certificate only through
+the data of the rows and the inequalities, which define the following class.
+
+\begin{definition*}[planar certificates of the same form]
+A \emph{planar certificate of the same form} as that
+of~\cite{OAI:A-Fock-space-inequality-and-the-Laughlin-spectral-gap-September-24-2026} consists of finitely many rows $\nu$, each with an
+integer $t_\nu\ge0$, a real $\lambda_\nu$ and real coefficients $\alpha^\nu_{pj}$ supported in a finite set
+$\mathcal S_\nu\subset\{(p,j):0\le p\le P_c,\ 0\le j\le M_c,\ 0\le p+j-t_\nu\le M_c\}$, where $P_c,M_c\ge0$ are integers, and an
+allowance $\eps\ge0$, such that, with the cutoffs $Z_c:=\max\{p+j:(p,j)\in\bigcup_\nu\mathcal S_\nu\}$ and
+$D_c:=\max\{p+j+(q+l-t_\nu)\}$ over $(p,j),(q,l)\in\mathcal S_\nu$, the inequalities
+\begin{equation}\label{eq:certgeneral}
+e_z\le\tfrac32q_z\ \ (z\le Z_c,\ z\notin\{0,1,3\}),\qquad G_D(2\kb{e_1}{e_1}-E_D+\eps\one)G_D\ge0\ \ (1\le D\le D_c)
+\end{equation}
+hold. Here $q_z=(3z-1)(-\frac12)^z$ are the planar three-body coefficients (Lemma~\ref{lem:qz}); $e_z$ and $E_D$ are the three-body
+scalars and the four-body copy matrices of the rows, defined by \eqref{eq:ez} and \eqref{eq:ED} from the planar coupling
+coefficients (the sum over $T$ in \eqref{eq:ez} running to $Z_c$, and \eqref{eq:ED} taken for $1\le D\le D_c$); $G_D$ is the Gram
+matrix of the planar four-body relative states $W_4\omega_{D,r}$, $r\in\mathcal R_D$, defined with them in Section~\ref{sec:moyal}; $\mathcal R_D$
+is the set of odd integers in $[1,D]$; and $\kb{e_1}{e_1}$ is the matrix with $(1,1)$ entry $1$ and all other entries zero. The
+\emph{constant} of the certificate is
+\[
+\gamma:=1-\etas-\delta_\infty(Z_c)-\eps\,N_4,\qquad \etas=\sum_\nu\lambda_\nu^2,
+\]
+\[
+\delta_\infty(Z_c):=\frac32\sum_{\substack{z>Z_c\\ z\ \mathrm{odd}}}\frac{(3z-1)(z+1)}{2^z},\qquad N_4:=\sum_{D=1}^{D_c}\Bigl\lfloor\frac{(D+1)^2}4\Bigr\rfloor .
+\]
+We require that some $\mathcal S_\nu$ be nonempty, that $M_c\ge1$ and that $D_c\ge2$, so that $Z_c$ is defined and the bounds of
+Lemma~\ref{lem:Ebounds}(b) are used only for $m\ge1$; the certificate of~\cite{OAI:A-Fock-space-inequality-and-the-Laughlin-spectral-gap-September-24-2026}
+has $M_c=8$ and $D_c=23$.
+\end{definition*}
+
+Every row of this form ends in a pair annihilator and has a definite weight $t_\nu+1$ (each of its summands removes two particles
+and lowers the total orbital degree by $t_\nu+1$), and these two features are all that the proof uses of a row; that is why the
+principle is a property of the form, not of the numbers in the certificate
+of~\cite{OAI:A-Fock-space-inequality-and-the-Laughlin-spectral-gap-September-24-2026}.
+
+\begin{theorem}[the transfer principle]\label{thm:transferintro}
+Given a planar certificate of the same form with constant $\gamma$, for every rectangular torus, on $\Fock$,
+\[
+\HT^2\ge(\gamma-\etr(\Tor))\,\HT,
+\]
+where, with $\Ec_m=\Ec_m(\Tor)$ and $\sigma_z=\sigma_z(\Tor)$,
+\begin{multline*}
+\etr(\Tor):=(1-\lambda_{\min})+\frac32\sum_{\substack{z>Z_c\\ z\ \mathrm{odd}}}\frac{(3z-1)(z+1)}{2^z}\sigma_z
++(M_c+1)(P_c+1)\sum_\nu\norm{\alpha^\nu}^2\,\Ec_{M_c}(1+\Ec_{M_c})\\
++\eps N_4\bigl((1+\Ec_{D_c})^2-1\bigr)+2N_4\,\Ec_{D_c-1}(1+\Ec_{D_c})^2 .
+\end{multline*}
+Here $\lambda_{\min}$ is the smallest eigenvalue of the Gram matrix of the torus pair functions (Lemma~\ref{lem:levels}),
+$\sigma_z(\Tor)=\sup_R\max_{m\le z}\bigl(\norm{\chi^R_m}^2-1\bigr)$ (Lemma~\ref{lem:Ebounds}(c)), $\Ec_m(\Tor)$ is the lattice sum, over
+the nonzero periods, of the norms of the truncated displacement matrices $\Dis^{(m)}$ (Section~\ref{sec:local}), and
+$\norm{\alpha^\nu}^2=\sum_{p,j}(\alpha^\nu_{pj})^2$. For every rectangular torus whose shorter period is at least $L$, $\etr(\Tor)\le\etr(L)$
+with $\etr(L)\to0$ as $L\to\infty$. In particular, if $\gamma>0$, then for every $\gamma'<\gamma$ there is $L_0$ such that $\HT^2\ge\gamma'\HT$
+on the whole Fock space of every rectangular torus whose shorter period is at least $L_0$, uniformly in the particle number and the
+aspect ratio.
+\end{theorem}
+
+The function $\etr(L)$, obtained in the proof from explicit bounds on the terms of $\etr(\Tor)$, is $O(L^4\,2^{-L^2/20})$ as
+$L\to\infty$, with a constant that depends on the certificate (Remark~\ref{rem:rate}). The theorem does not require the planar
+certificate to come from a spherical proof: any finite family of rows of this form satisfying \eqref{eq:certgeneral} with $\gamma>0$
+yields a gap on rectangular tori, uniform above a threshold period, with that rate.
+
+For the certificate of~\cite{OAI:A-Fock-space-inequality-and-the-Laughlin-spectral-gap-September-24-2026}
+(Section~\ref{sec:moyal} and Appendix~\ref{app:certificate}), $P_c=7$, $M_c=8$, $Z_c=15$, $D_c=23$, $\delta_\infty(15)=61/4096$ and
+$N_4=1222$, with $\etas=93527408868499/10^{14}$ and $\eps=3/10^6$; its constant is $\gamma=\gs=4616733319001/10^{14}>1/25$, and
+$\gs-\etr(\Tor)$ is, term by term, the constant $\gT$ of \eqref{eq:gT}. Theorem~\ref{thm:transferintro} for this certificate, together
+with an evaluation of $\etr$ for it, gives the following explicit bounds.
+
+\begin{theorem}[OpenAI's certificate on rectangular tori]\label{thm:openai}
+For every rectangular torus $\Tor$, on the whole Fock space,
+\[
+\HT^2\ge\gT\,\HT,
+\]
+with the explicit constant $\gT$ of \eqref{eq:gT}, which depends on the torus only through its lattice of periods. For $L\ge16$ let
+$\gl(L)$ be the explicit function of Corollary~\ref{cor:uniform}. Then $\gT\ge\gl(L)$ for every rectangular torus whose shorter period
+is at least $L$, so that $\HT^2\ge\gl(L)\HT$ uniformly in the particle number and in the aspect ratio; $\gl$ is nondecreasing on
+$[16,\infty)$, and $\gl(L)\to\gs$ as $L\to\infty$, with $\gs-\gl(L)=O(L^4\,2^{-L^2/20})$. Numerically, $\gl(L)>0$ for $L\ge16.457$,
+$\gl(L)>1/25$ for $L\ge16.857$ and $\gl(L)\ge\gs-10^{-5}$ for $L\ge18.685$, in units of the magnetic length; these values are
+floating-point evaluations of rigorous closed-form bounds, not interval-arithmetic certificates (Remark~\ref{rem:evaluation}).
+\end{theorem}
+
+Theorem~\ref{thm:openai} is thus the case of Theorem~\ref{thm:transferintro} for the certificate
+of~\cite{OAI:A-Fock-space-inequality-and-the-Laughlin-spectral-gap-September-24-2026}, with $\etr$ evaluated. Section~\ref{sec:theorem}
+proves the two in the opposite order: Theorem~\ref{thm:main} and Corollary~\ref{cor:uniform}, with Remark~\ref{rem:rate} and the
+thresholds evaluated in Section~\ref{ssec:constants}, prove Theorem~\ref{thm:openai} directly, and Section~\ref{ssec:transferproof} then
+proves Theorem~\ref{thm:transferintro}, restated as Theorem~\ref{thm:transfer}, by the same argument with the data of the certificate
+left general.
+
+\begin{remark}[scope]\label{rem:scope}
+Theorem~\ref{thm:transferintro} is proved for the form of the definition: rows each of whose summands is a pair annihilator, alone
+or dressed by one creation and one annihilation operator; the two-body $V_1$ interaction of a single species of spinless fermions;
+and rectangular tori without boundary twists. Three natural extensions are not covered. Rows of higher degree in the fermion
+operators have squares with parts on five or more particles; they would need the torus Moyal identity on that many particles,
+which Theorem~\ref{thm:moyal} states and proves for every number of particles, and a comparison term for those parts, which is not
+constructed here. Two species, as in the spinful hollow-core model of Section~\ref{sec:outlook}, and general lattices of periods
+with boundary twists are not treated. Whether these extensions hold is not claimed here.
+\end{remark}
+
+By Theorem~\ref{thm:openai}, the spectrum of $\HT$ in every particle sector lies in $\{0\}\cup[\gT,\infty)$. At $\Nphi=3N$ the kernel on
+$N$ particles is three-dimensional, spanned by the three centre-of-mass copies of the Laughlin state, and no sector with more than
+$N$ particles has a zero mode (Theorem~\ref{thm:kernel}, Proposition~\ref{prop:overfill}); the same count holds, for every modular
+parameter, for the explicit theta-function pair operators $B_n^{(\tau)}$ of \eqref{eq:Bntau}, whose identification with the $V_1$
+Hamiltonian of an oblique torus is not proved here. So $\HT\ge\gT(\one-P_N)$ on $N$ particles, with $P_N$ of rank three, and
+$\HT\ge\gT$ on more particles (Corollary~\ref{cor:spectrum}).
+
+At the square aspect ratio $L=\sqrt{2\pi\Nphi}$, so the bound is positive for $\Nphi\ge44$ and exceeds $1/25$ for $\Nphi\ge46$. At
+filling one third ($\Nphi=3N$) this means a gap for $N\ge15$ ($\gl(L)\ge0.0385$ at $N=15$) and a gap larger than $1/25$ for $N\ge16$
+($\gl(L)\ge0.0456$ at $N=16$). For elongated tori the condition is on the shorter period, so larger systems are needed. All error terms
+decay like $e^{-cL^2}$ in the shorter period; the binding one at the thresholds is a lattice sum of norms of truncated
+displacement matrices, bounded by a multiple of $L^{44}e^{-L^2/4}$ (Lemma~\ref{lem:Ebounds}), and the thresholds are where it
+becomes small. The slowest-decaying bound is that on the three-body tail beyond the blocks covered by the certificate,
+$O(L^4\,2^{-L^2/20})$ (Proposition~\ref{prop:three}); it sets the rate of Remark~\ref{rem:rate}.
+
+\subsection{From the sphere to the torus}
+
+The torus proof follows the architecture
+of~\cite{OAI:A-Fock-space-inequality-and-the-Laughlin-spectral-gap-September-24-2026}. One expands $\HT^2$ in normal order into
+two-, three- and four-body terms, and compares them with the corresponding terms of a positive comparison operator
+$\KT=\frac1\pi\int_\Tor\sum_\nu F_\nu(R)^*F_\nu(R)\,\dd R$, where the rows $F_\nu(R)$ of Section~\ref{ssec:transfer} are the planar
+rows of the certificate, those of~\cite{OAI:A-Fock-space-inequality-and-the-Laughlin-spectral-gap-September-24-2026} for
+Theorem~\ref{thm:openai}, built at the base point $R$ from periodized orbitals and pair states. The planar certificate is used as
+data, without change: for that of~\cite{OAI:A-Fock-space-inequality-and-the-Laughlin-spectral-gap-September-24-2026}, the row
+coefficients, the thirteen three-body inequalities and the twenty-three four-body matrix inequalities. Section, lemma and equation numbers
+of~\cite{OAI:A-Fock-space-inequality-and-the-Laughlin-spectral-gap-September-24-2026} refer to its version of 24 September 2026,
+and its lemmas are also cited by name. On the sphere the comparison operator is
+averaged over rotations and the finite-flux corrections are controlled by a relative-error transfer lemma; on the torus the
+average over the base point $R$ replaces the rotations, and the corrections take a different and simpler form. Four facts,
+proved here, make the transcription work:
+\begin{enumerate}[(1)]
+\item \emph{The projector replacement.} On two particles $\HT$ is not a projection. The Gram matrix of the torus pair functions is
+computed in closed form as a lattice sum of image overlaps (Lemma~\ref{lem:gram}); its eigenvalues are
+$1\pm\Dlev(L_y)\pm\Dlev(L_x)$ for even $\Nphi$ and $1\pm(\Dlev(L_x)^2+\Dlev(L_y)^2)^{1/2}$ for odd $\Nphi$, up to a smaller remainder, with
+$\Dlev(\ell)=2(\ell^2/4-1)e^{-\ell^2/8}$ (Lemma~\ref{lem:levels}). Only the smallest eigenvalue enters the budget.
+\item \emph{Periodized local modes.} The periodized orbitals about a point have an explicit Gram matrix, a lattice sum of
+displacement matrices with phases (Lemma~\ref{lem:localgram}), whose deviation from the identity is bounded uniformly by lattice
+sums of norms of truncated displacement matrices (Lemma~\ref{lem:Ebounds}).
+\item \emph{Torus Moyal identities.} Averaging a projector onto periodized $k$-particle states with a fixed relative part and a
+centre-of-mass orbital about $R$ over $R\in\Tor$ gives exactly the periodized image of the relative projector, and different
+centre-of-mass degrees average to zero (Theorem~\ref{thm:moyal}). This replaces Schur's lemma for $SU(2)$; the proof uses Schur's
+lemma for the magnetic translations of the centre-of-mass torus. With it, the pair-level part of $\KT$ is exactly $\etas\HT$, and
+its three- and four-body parts are exactly the periodized images of the planar partial traces that define the certificate,
+up to one small non-orthonormality term (Proposition~\ref{prop:parts}).
+\item \emph{The square of $\HT$.} The three-body coefficient of $\HT^2$ is a sum of products of two pair operators sharing exactly
+one particle, and periodization is multiplicative on such products (Lemma~\ref{lem:product}). Hence it is \emph{exactly} the
+periodized planar three-body target, with the planar coefficients $q_z=(3z-1)(-\frac12)^z$ on every block
+(Theorem~\ref{thm:square}). The three-body target therefore transfers without error, and the tail beyond the blocks covered by
+the certificate is bounded with an explicit rate (Proposition~\ref{prop:three}). The four-body coefficient involves products on
+disjoint pairs, and a Bessel-type bound for the localized channels of the relative coordinate of the two pair centres closes
+the budget (Lemma~\ref{lem:bessel}).
+\end{enumerate}
+The resulting error terms are all relative to $\HT$ (they vanish on its kernel and carry no factor of the particle number), and all
+are Gaussian in the shorter period. They are collected in the error $\etr(\Tor)$ of Theorem~\ref{thm:transferintro}, and for the
+certificate of~\cite{OAI:A-Fock-space-inequality-and-the-Laughlin-spectral-gap-September-24-2026} in the constant $\gT$
+of \eqref{eq:gT}.
+
+Section~\ref{sec:kernel} determines the kernel at $\Nphi=3N$, for the pair operators $B_n^{(\tau)}$ of \eqref{eq:Bntau} at every
+modular parameter and hence for $\HT$ on every rectangular torus. The threefold degeneracy of the torus Laughlin states is
+classical~\cite{HaldaneRezayiTorus}; that these states are the only zero modes of the torus $V_1$ Hamiltonian is stated for
+rectangular tori in~\cite[Section~II.2]{ONDS}, and a proof for every lattice shape and boundary twist is claimed
+in~\cite{HouWu}. The argument of Section~\ref{sec:kernel} uses third-order vanishing at coincidences, division by the cube of
+the theta-function Jastrow factor, and Liouville's theorem.
+
+\subsection{Structure of the paper}
+
+Section~\ref{sec:setting} sets up the torus, the planar lowest Landau level, the periodization and the periodized image of planar
+operators, and defines $\HT$; Proposition~\ref{prop:orbital} gives its orbital form. Section~\ref{sec:kernel} determines the
+kernel. Section~\ref{sec:projector} computes the pair Gram matrix and records the normal-ordered square of a lifted pair
+operator. Section~\ref{sec:local} introduces the periodized local modes and bounds their Gram matrix. Section~\ref{sec:moyal}
+proves the torus Moyal identities, states the certificate, and decomposes the comparison operator. Section~\ref{sec:square}
+proves the exact three-body identity and the three-body comparison, and Section~\ref{sec:bessel} the four-body Bessel bound.
+Section~\ref{sec:theorem} proves Theorem~\ref{thm:transferintro} and evaluates it for the certificate
+of~\cite{OAI:A-Fock-space-inequality-and-the-Laughlin-spectral-gap-September-24-2026}: it assembles the budget and evaluates the
+constants for that certificate, which proves Theorem~\ref{thm:openai}, derives the spectral consequences, and then proves
+Theorem~\ref{thm:transferintro} by the same argument with the data of the certificate left general.
+Section~\ref{sec:outlook} discusses the transfer principle as a basis for further work and lists what is not proved.
+Appendix~\ref{app:certificate} records the certificate data, and Appendix~\ref{app:notation} lists the notation.

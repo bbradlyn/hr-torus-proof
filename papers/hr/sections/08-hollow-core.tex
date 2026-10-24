@@ -1,0 +1,321 @@
+\section{The hollow-core Hamiltonian}\label{sec:hollowcore}
+
+\subsection{The main theorem}
+
+\begin{theorem}[no uniform gap above the zero modes]\label{thm:main}
+Fix $\lambda>0$. For even $N$ let $\Tor_N$ be the rectangular torus with $L_x/L_y=\lambda$ and $L_xL_y=4\pi N$, let
+$H_N$ be the hollow-core Hamiltonian of Definition~\ref{def:hamiltonian}, and let $E_1(N)\le E_2(N)\le\cdots$ be the
+eigenvalues of $H_N$ in the sector $\sect{(N/2,N/2)}$, repeated according to multiplicity, so that
+$E_1(N)=\cdots=E_{10}(N)=0<E_{11}(N)$.
+\begin{enumerate}[(i)]
+\item If for some $p\in\N$, $\Delta\ge0$ and $\gamma>2\Delta$ the inequalities $E_p(N)-E_1(N)\le\Delta$ and
+$E_{p+1}(N)-E_p(N)\ge\gamma$ hold for infinitely many even $N$, then $p\in4\Z$ and $p\ge12$.
+\item $E_{11}(N)\to0$ as $N\to\infty$ through the even integers.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+The side lengths are $L_x=(4\pi\lambda N)^{1/2}$ and $L_y=(4\pi N/\lambda)^{1/2}$. Both tend to infinity with $N$, so
+there is $N_\lambda$ such that the torus is admissible, that is $L_y\ge L_0$ and $L_x\ge4\delta_0+4$
+(Definition~\ref{def:frame}), for every $N\ge N_\lambda$. Put $c_*:=(4\pi\lambda)^{1/2}$, so that $L_x=c_*\sqrt N$.
+
+(i) Let $\mathcal N$ be the set of even $N\ge N_\lambda$ for which the two inequalities hold; it is infinite. The tori
+$(\Tor_N)_{N\in\mathcal N}$ are admissible with $L_x\ge c_*\sqrt N$, and the hollow-core Hamiltonians
+$(H_N)_{N\in\mathcal N}$ satisfy (H1) and (H2) by Corollary~\ref{cor:hc-in-class}; so Setting~\ref{set:index} holds. The two
+inequalities say that Assumption~\ref{ass:gap} holds for the sectors $\nn_N=(N/2,N/2)$, $N\in\mathcal N$, with $p$,
+$\Delta$ and $\gamma$ independent of $N$. Corollary~\ref{cor:classwide} gives $p\in4\Z$. If $p\le9$, then
+$E_p(N)=E_{p+1}(N)=0$ by \eqref{eq:E11}, which contradicts $E_{p+1}(N)-E_p(N)\ge\gamma>0$. Hence $p\ge10$, and since
+neither $10$ nor $11$ lies in $4\Z$, $p\ge12$.
+
+(ii) Suppose not. Then there are $\gamma>0$ and infinitely many even $N$ with $E_{11}(N)\ge\gamma$. By \eqref{eq:E11},
+for these $N$ we have $E_{10}(N)-E_1(N)=0$ and $E_{11}(N)-E_{10}(N)=E_{11}(N)\ge\gamma$, so the hypothesis of (i) holds with
+$p=10$, $\Delta=0$ and this $\gamma$. By (i), $10\in4\Z$, which is false.
+\end{proof}
+
+The kernel enters the proof only through its dimension, ten, and through $E_1(N)=0$ (Theorem~\ref{thm:kernel}); no
+other property of the Haldane--Rezayi states is used. In the language of Section~\ref{sec:index}, along a sequence as
+in the proof of (ii) the transported charge is $\expP{T_-}=-\expP{n_{0\up}}=-\frac14$ (Lemma~\ref{lem:theta}(d)), and
+$10\cdot\frac14=\frac52$ is at distance $\frac12$ from $\Z$.
+
+\begin{corollary}[odd $N$]\label{cor:oddN}
+Fix $\lambda>0$, and for odd $N$ let $\Tor_N$ and $H_N$ be as in Theorem~\ref{thm:main}. In each of the sectors
+$\sect{((N\pm1)/2,(N\mp1)/2)}$ let $E_1(N)\le E_2(N)\le\cdots$ be the eigenvalues of $H_N$, so that
+$E_1(N)=E_2(N)=0<E_3(N)$.
+\begin{enumerate}[(i)]
+\item $E_3(N)\to0$ as $N\to\infty$ through the odd integers.
+\item For every $D\in\N$ and $\gamma>0$, for all sufficiently large odd $N$ there are more than $D$ eigenvalues in
+$[0,\gamma)$.
+\end{enumerate}
+\end{corollary}
+
+\begin{proof}
+Let $N_\lambda$ and $c_*$ be as in the proof of Theorem~\ref{thm:main}, and let $\mathcal N$ be the set of odd
+$N\ge N_\lambda$. As there, the tori $(\Tor_N)_{N\in\mathcal N}$ and the hollow-core Hamiltonians are as in
+Setting~\ref{set:index}, with (H1) and (H2). We treat the sectors $\nn^+_N=((N+1)/2,(N-1)/2)$; the sectors $\nn^-_N$ are
+treated in the same way. By Theorem~\ref{thm:kernel}(ii) and $H_N\ge0$, the eigenvalues of $H_N$ in $\sect{\nn^+_N}$
+satisfy $E_1(N)=E_2(N)=0<E_3(N)$.
+
+(i) Suppose that there are $\gamma>0$ and infinitely many odd $N$ with $E_3(N)\ge\gamma$. For these $N$,
+$E_2(N)-E_1(N)=0$ and $E_3(N)-E_2(N)=E_3(N)\ge\gamma$, so Assumption~\ref{ass:gap} holds for the sectors $\nn^+_N$ along the
+infinite set of such $N$ with $N\ge N_\lambda$, with $p=2$, $\Delta=0$ and this $\gamma$. This contradicts
+Corollary~\ref{cor:classwide-odd}(i).
+
+(ii) By Corollary~\ref{cor:classwide-odd}(ii), for every $D\in\N$ and $\gamma>0$ and all but finitely many
+$N\in\mathcal N$, the restriction of $H_N$ to $\sect{\nn^+_N}$ has more than $D$ eigenvalues, counted with multiplicity,
+in $[E_1(N),E_1(N)+\gamma)=[0,\gamma)$.
+\end{proof}
+
+By Remark~\ref{rem:class-scope}, both statements reflect the unpaired spin forced by the density of these sectors;
+they say nothing about the sector $(N/2,N/2)$ at even $N$.
+
+\subsection{The scope over aspect ratios}
+
+The construction of Section~\ref{sec:frame} distinguishes the two sides of the torus: the Landau-gauge orbitals are
+localized across the side of length $L_x$, and admissibility asks $L_y\ge L_0$ and $L_x\ge4\delta_0+4$. The spectrum of
+the hollow-core Hamiltonian does not distinguish them.
+
+\begin{lemma}[exchange of the sides]\label{lem:exchange}
+Let $L_x,L_y>0$ with $L_xL_y=4\pi N$, and let $\Tor'_N$ be the torus of Definition~\ref{def:torus} with side lengths
+$L'_x:=L_y$ and $L'_y:=L_x$. Denote its lowest Landau level, its Fock space, the annihilation operators on it, its number
+operators and its hollow-core Hamiltonian by $\mathfrak h'_N$, $\mathcal H'_N$, $c'(\cdot)$, $N'_\sigma$ and $H'_N$. For
+$f\in\hN$ let $(\mathcal Rf)(x,y):=e^{\iu xy}f(-y,x)$. Then $\mathcal R$ is a unitary from $\hN$ onto $\mathfrak h'_N$; the
+unitary $\Ff(\mathcal R\otimes\one):\Fock\to\mathcal H'_N$ that fixes the vacuum and satisfies
+$\Ff(\mathcal R\otimes\one)\,c(f)\,\Ff(\mathcal R\otimes\one)^*=c'((\mathcal R\otimes\one)f)$ for $f\in\kN$ maps $N_\sigma$ to
+$N'_\sigma$, $\sigma\in\{\up,\dn\}$, and $H_N$ to $H'_N$. In particular, for every sector label $\nn$, the restrictions of
+$H_N$ to $\sect\nn$ and of $H'_N$ to the sector of $\mathcal H'_N$ with the same label have the same eigenvalues, with
+multiplicities.
+\end{lemma}
+
+\begin{proof}
+\emph{The one-particle map.} Let $\varrho(x,y):=(-y,x)$, a rotation of $\R^2$. It maps the lattice $L'_x\Z\times L'_y\Z$
+onto $L_x\Z\times L_y\Z$, since $\varrho(mL_y,nL_x)=(-nL_x,mL_y)$, and hence induces a measure-preserving bijection of
+$\Tor'_N$ onto $\Tor_N$. Consequently, for every smooth function $F$ on $\Tor_N$, the function $F\circ\varrho$ is smooth on
+$\Tor'_N$, $\int_{\Tor'_N}F\circ\varrho\,\dd r=\int_{\Tor_N}F\,\dd r$, and $\nabla^2(F\circ\varrho)=(\nabla^2F)\circ\varrho$, because
+the Laplacian commutes with rotations.
+
+Let $f\in\hN$ and $g:=\mathcal Rf$; $g$ is smooth. By the two conditions \eqref{eq:bc} for $f$,
+\begin{gather*}
+g(x,y+L'_y)=e^{\iu x(y+L_x)}f(-y-L_x,x)=e^{\iu xy}e^{\iu L_xx}e^{-\iu L_xx}f(-y,x)=g(x,y),\\
+g(x+L'_x,y)=e^{\iu(x+L_y)y}f(-y,x+L_y)=e^{\iu L'_xy}g(x,y),
+\end{gather*}
+which are the conditions \eqref{eq:bc} for $\Tor'_N$. With $D_x=\partial_x$ and $D_y=\partial_y-\iu x$, and with
+$\partial_1f$, $\partial_2f$ the partial derivatives of $f$ in its two arguments,
+\begin{align*}
+e^{-\iu xy}\bigl((D_x+\iu D_y)g\bigr)(x,y)&=\iu y\,f(-y,x)+(\partial_2f)(-y,x)-\iu(\partial_1f)(-y,x)\\
+&=-\iu\bigl(\partial_1f+\iu\partial_2f+s\,f\bigr)(s,t)\Big|_{(s,t)=(-y,x)}=-\iu\bigl((D_x+\iu D_y)f\bigr)(-y,x)=0,
+\end{align*}
+by \eqref{eq:lll} for $f$. So $g\in\mathfrak h'_N$. Moreover $\overline{\mathcal Rf_1}\,\mathcal Rf_2=(\overline{f_1}f_2)\circ\varrho$ for
+$f_1,f_2\in\hN$, the phases cancelling, so $\ip{\mathcal Rf_1}{\mathcal Rf_2}=\ip{f_1}{f_2}$ by the first paragraph. Thus
+$\mathcal R$ is an isometry of $\hN$ into $\mathfrak h'_N$, and it is onto because both spaces have dimension
+$L_xL_y/(2\pi)=\Nphi$ (Lemma~\ref{lem:orbitals}(ii)). The operator $\Ff(\mathcal R\otimes\one)$ is then defined as in
+Definition~\ref{def:fock}: it maps $c(f_1)^*\cdots c(f_n)^*\Omega_0$ to $c'(f'_1)^*\cdots c'(f'_n)^*\Omega'_0$, with
+$f'_i:=(\mathcal R\otimes\one)f_i$ and $\Omega_0$, $\Omega'_0$ the vacua, and it is unitary by the anticommutation
+relations, because $\mathcal R\otimes\one$ is unitary.
+
+\emph{The Hamiltonian.} For $f_1,f_2,g_1,g_2\in\hN$ let
+\[
+\mathcal I(f_1,f_2;g_1,g_2):=4\pi\int_{\Tor_N}(\overline{f_1}g_1)(\overline{f_2}g_2)\,\dd r
++4\pi\int_{\Tor_N}(\overline{f_2}g_2)\,\nabla^2(\overline{f_1}g_1)\,\dd r,
+\]
+the integrands being smooth functions on $\Tor_N$ by \eqref{eq:bc}, and let $\mathcal I'$ be defined in the same way on
+$\Tor'_N$. Then $V_{abcd}=\mathcal I(\psi_a,\psi_b;\psi_c,\psi_d)$ in \eqref{eq:Vabcd}, and by the first paragraph
+$\mathcal I'(\mathcal Rf_1,\mathcal Rf_2;\mathcal Rg_1,\mathcal Rg_2)=\mathcal I(f_1,f_2;g_1,g_2)$. For an orthonormal basis
+$e=(e_a)$ of $\hN$ let
+\[
+H[e]:=\frac12\sum_{\sigma,\sigma'}\sum_{a,b,c,d}\mathcal I(e_a,e_b;e_c,e_d)\,c(e_a\otimes\sigma)^*c(e_b\otimes\sigma')^*
+c(e_d\otimes\sigma')c(e_c\otimes\sigma).
+\]
+If $e_a=\sum_ju_{ja}\psi_j$ with a unitary matrix $u$, then, since $\mathcal I$ is conjugate-linear in its first two
+arguments and linear in the last two, $c(\cdot)^*$ is linear and $c(\cdot)$ is conjugate-linear,
+\begin{multline*}
+H[e]=\frac12\sum_{\sigma,\sigma'}\ \sum_{j,k,l,m}\ \sum_{j',k',l',m'}\Bigl(\sum_{a,b,c,d}\overline{u_{ja}}u_{j'a}\,
+\overline{u_{kb}}u_{k'b}\,u_{lc}\overline{u_{l'c}}\,u_{md}\overline{u_{m'd}}\Bigr)\\
+\times\mathcal I(\psi_j,\psi_k;\psi_l,\psi_m)\,c^*_{j'\sigma}c^*_{k'\sigma'}c_{m'\sigma'}c_{l'\sigma},
+\end{multline*}
+and the coefficient in parentheses is $\delta_{jj'}\delta_{kk'}\delta_{ll'}\delta_{mm'}$ because $u$ is unitary. So
+$H[e]=H[\psi]=H_N$ by \eqref{eq:HN}. In the same way $H'[e']=H'_N$ for every orthonormal basis $e'$ of
+$\mathfrak h'_N$, with $H'[e']$ built from $\mathcal I'$ and $c'$. Now $(\mathcal R\psi_a)_a$ is an orthonormal basis of
+$\mathfrak h'_N$, conjugation by $\Ff(\mathcal R\otimes\one)$ replaces each $c(\psi_a\otimes\sigma)$ in \eqref{eq:HN} by
+$c'(\mathcal R\psi_a\otimes\sigma)$, and $V_{abcd}=\mathcal I(\psi_a,\psi_b;\psi_c,\psi_d)=\mathcal I'(\mathcal R\psi_a,\mathcal R\psi_b;\mathcal R\psi_c,\mathcal R\psi_d)$;
+hence
+\[
+\Ff(\mathcal R\otimes\one)\,H_N\,\Ff(\mathcal R\otimes\one)^*=H'[\mathcal R\psi]=H'_N .
+\]
+In the same way the number operators, $N_\sigma=\sum_ac(e_a\otimes\sigma)^*c(e_a\otimes\sigma)$ for every orthonormal basis,
+are mapped to $N'_\sigma$. So the unitary maps each sector $\sect\nn$ onto the sector of $\mathcal H'_N$ with the same
+label and intertwines the restrictions of $H_N$ and $H'_N$, which therefore have the same eigenvalues with
+multiplicities.
+\end{proof}
+
+\begin{corollary}[uniformity over aspect ratios]\label{cor:uniform}
+For even $N\ge L_0^2/(4\pi)$ let $\mathcal T_N$ be the set of rectangular tori with $L_xL_y=4\pi N$ and
+$\min\{L_x,L_y\}\ge L_0$, and for $\Tor\in\mathcal T_N$ let $E_{11}(N;\Tor)$ be the eleventh eigenvalue of the hollow-core
+Hamiltonian of $\Tor$ in the sector $(N/2,N/2)$. Then $\sup_{\Tor\in\mathcal T_N}E_{11}(N;\Tor)\to0$ as $N\to\infty$ through
+the even integers.
+\end{corollary}
+
+\begin{proof}
+By Lemma~\ref{lem:exchange}, $E_{11}(N;\Tor)$ does not change when the two sides of $\Tor$ are exchanged, so it suffices to
+consider the tori of $\mathcal T_N$ with $L_x\ge L_y$. Suppose the claim fails. Then there are $\gamma>0$, even integers
+$N_1<N_2<\cdots$ and tori $\Tor_{N_i}\in\mathcal T_{N_i}$ with $L_x\ge L_y$ and $E_{11}(N_i;\Tor_{N_i})\ge\gamma$. Since
+$L_x\ge L_y$ and $L_xL_y=4\pi N$, we have $L_x\ge(4\pi N)^{1/2}$; so $\Tor_{N_i}$ is admissible as soon as
+$(4\pi N_i)^{1/2}\ge4\delta_0+4$, and we discard the finitely many $i$ for which this fails. Let $\mathcal N$ be the set of
+the remaining $N_i$. Then $(\Tor_N)_{N\in\mathcal N}$ are admissible tori with $L_x\ge c_*\sqrt N$ for $c_*:=(4\pi)^{1/2}$,
+and the hollow-core Hamiltonians on them satisfy (H1) and (H2) by Corollary~\ref{cor:hc-in-class}, with $C_h=7/\pi$ and
+constants $C^H_k$ that depend only on $k$, $\eta$ and $\delta_0$ (Proposition~\ref{prop:slotH}); so
+Setting~\ref{set:index} holds. By \eqref{eq:E11} on each of these tori, Assumption~\ref{ass:gap} holds for the sectors
+$(N/2,N/2)$, $N\in\mathcal N$, with $p=10$, $\Delta=0$ and $\gamma$. Corollary~\ref{cor:classwide} gives $10\in4\Z$, which is
+false.
+\end{proof}
+
+In this proof the aspect ratios $L_x/L_y$ of the tori $\Tor_N$, $N\in\mathcal N$, are arbitrary numbers in $[1,\infty)$
+and may be unbounded. This is allowed: Setting~\ref{set:index} asks only that the tori be admissible with
+$L_x\ge c_*\sqrt N$, and Theorem~\ref{thm:index} and Corollaries~\ref{cor:translation} and \ref{cor:classwide} are proved
+under exactly these hypotheses. They hold in this generality because every constant of their proofs depends on the
+torus only through admissibility and $c_*$ (Remark~\ref{rem:constants}). The constants of Sections~\ref{sec:frame} and
+\ref{sec:hamiltonian} depend only on $\eta$, $\delta_0$ and the order of decay ($\Cvol$ and $C_{\rm str}$ in
+Proposition~\ref{prop:geometry}, the constants $C_k$ of Lemma~\ref{lem:localization}, and $C_h$, $C^H_k$ in
+Proposition~\ref{prop:slotH}); those of Section~\ref{sec:locality} depend only on these, on the data of the filters, and,
+in Lemma~\ref{lem:bookkeeping}, on the separation that is assumed there; and in Sections~\ref{sec:index} and
+\ref{sec:translation} the torus enters only through $\abs{\Tor_N}=4\pi N$, $L_y\le\min\{\pi N,(4\pi/c_*)\sqrt N\}$,
+$\kappa\le\delta_x\le2\delta_0$, $\ny\le CL_y$ and the separations of Lemma~\ref{lem:separations}, as recorded in the
+paragraph on the constants at the end of the proof of Theorem~\ref{thm:index}.
+
+\begin{remark}[thin tori]\label{rem:thin}
+Corollary~\ref{cor:uniform} says nothing about tori with $\min\{L_x,L_y\}<L_0$. By Lemma~\ref{lem:exchange} one may take
+$L_y$ to be the shorter side; then the slot frame of Section~\ref{sec:frame} is not available, because a window of
+width of order $\delta_0$ in the transverse direction need not contain the centre of any orbital
+(Lemma~\ref{lem:frame-consistency}(ii) uses $L_y\ge3\pi/\delta_0$), and exchanging the sides instead violates
+$L_x\ge4\delta_0+4$ and $L_x\ge c_*\sqrt N$. In particular the index argument proves nothing for sequences of tori
+whose circumference $L_y$ stays below $L_0$ while $N\to\infty$. For these tori a variational argument, which uses neither
+the slot frame nor the index theorem, bounds $E_{11}(N)$ by an explicit $C(L_y)/N$ (Theorem~\ref{thm:twist}); with
+Corollary~\ref{cor:uniform} this gives $E_{11}(N)\to0$ uniformly over all rectangular tori (Corollary~\ref{cor:alltori}).
+Section~\ref{subsec:interpretation} comments on this regime.
+\end{remark}
+
+\begin{remark}[oblique tori]\label{rem:oblique}
+The slot frame, and with it Theorems~\ref{thm:index} and \ref{thm:main}, is constructed here for rectangular tori
+only, although Theorem~\ref{thm:kernel} holds for every modular parameter (Appendix~\ref{app:kernel}). For an oblique torus
+the Landau-gauge orbitals carry phases quadratic in the orbital index; within a window these split into a linear
+part, which shifts the centres of the slots along the cuts and produces a sheared slot lattice, and a remainder
+that varies slowly on the scale of a window. We expect the localization estimates of Lemma~\ref{lem:localization}
+to hold for the resulting frame, with constants depending on the modular parameter, but this is not
+established here.
+\end{remark}
+
+\subsection{What is not excluded}
+
+\begin{remark}[a larger gapped ground-state space]\label{rem:loophole}
+Theorem~\ref{thm:main} does not exclude the following situation: there are $p\in4\Z$ with $p\ge12$, $\Delta\ge0$ and
+$\gamma>2\Delta$ such that, for infinitely many (or for all large) even $N$, $E_p(N)-E_1(N)\le\Delta$ and
+$E_{p+1}(N)-E_p(N)\ge\gamma$. This is a uniformly gapped patch of dimension $p$ containing the ten zero modes and
+$p-10$ further states of energy at most $\Delta$, with a gap above it; in such a phase the convergence
+$E_{11}(N)\to0$ of Theorem~\ref{thm:main}(ii) would be a splitting inside the ground-state space, not the closing of a
+gap above it. We do not know whether such a phase exists.
+
+The method of this paper cannot exclude it. With a magnetic translation as the transport unitary, the conclusion of
+Theorem~\ref{thm:index} is that $p\,r_N$ lies within $\Onf$ of an integer, where $r_N:=\expP{T_-}$ is the transported
+charge per state, which translation covariance determines exactly, as in Lemma~\ref{lem:theta}(d). When $r_N=r$ does
+not depend on $N$, the conclusion is $p\,r\in\Z$, and this holds for every multiple $p$ of the denominator of the
+rational number $r$. The choices available here give the following values in the sector $(N/2,N/2)$. The up-spin band
+charge with $U=\Theta$ gives $r=-n_{\up,N}/\Nphi=-\frac14$ (Corollary~\ref{cor:classwide}). The proofs of
+Sections~\ref{sec:hamiltonian}--\ref{sec:translation} use only that the charge is a sum over the orbitals $j$ of the band
+of mutually commuting, self-adjoint, sector-preserving operators $n_j$ with integer spectrum, norms bounded
+independently of $N$ and $\iota(n_j)\in\Alg(\Col(j))$, whose sum over all $j\in\Z_{\Nphi}$ commutes with every local
+term $h_R$, and which satisfy $\Theta^*n_j\Theta=n_{j+1}$; they
+therefore apply to the down-spin band charge $\sum_{j\in\Gam}n_{j\dn}$, which gives $r=-n_{\dn,N}/\Nphi=-\frac14$,
+and to the total band charge $\sum_{j\in\Gam}(n_{j\up}+n_{j\dn})$, which gives $r=-(n_{\up,N}+n_{\dn,N})/\Nphi=-\frac12$. The
+up-spin charge with $U=\Theta^2$, for which $T_-=-n_{0\up}-n_{1\up}$, gives $r=-\frac12$ as well. All of these conditions are
+met by $p=12$. Excluding the situation above requires different information: for instance, a lower bound on $E_{11}(N)$
+that excludes a splitting inside a gapped ground-state space, or an identification of every uniformly gapped patch at
+the bottom of the sector with the space of zero modes.
+\end{remark}
+
+\subsection{Interpretation}\label{subsec:interpretation}
+
+\paragraph{What is excluded.}
+Theorem~\ref{thm:main} excludes a gapped phase whose ground-state space on the torus is the space of zero modes of the
+hollow-core Hamiltonian: on rectangular tori of any fixed aspect ratio, and uniformly over aspect ratios as in
+Corollary~\ref{cor:uniform}, the ten zero modes in the sector $(N/2,N/2)$ are not separated from the rest of the
+spectrum of this sector by a gap that is uniform in $N$. This is the scenario in which the count of ten would be the
+topological ground-state degeneracy of a gapped Haldane--Rezayi phase. The count was first published, from explicit
+torus wave functions, by Keski-Vakkuri and Wen \cite{KVW93}, who took it as evidence that the state is non-Abelian;
+Gurarie, Flohr and Nayak \cite{GFN97} described the Haldane--Rezayi state by the conformal field theory of central
+charge $c=-2$ and attributed the ten-fold degeneracy to a logarithmic partner of the identity field, assuming that the
+properties of the zero-energy states of the hollow-core Hamiltonian are stable; and Ino \cite{Ino99} obtained, within
+the same description, $5p$ bulk sectors and a torus degeneracy $5p$ at filling $1/p$, hence ten at filling one half, an
+argument that presupposes an incompressible state. Read and Rezayi \cite[Section~V]{RR96}, who wrote down the ten
+states, held instead that the underlying theory has eight sectors at filling one half, the count of ten arising because
+some sectors carry two conformal blocks.
+None of these works establishes a gap; Theorem~\ref{thm:main} shows that, for the hollow-core Hamiltonian, the gap above
+the ten states that the count of ten as a degeneracy presupposes does not exist.
+
+Nor are the gapped phases with eight states on the torus that have been proposed near the Haldane--Rezayi point
+ground-state spaces of $H_N$: the weak- and strong-pairing phases of spin-singlet $d$-wave pairing in the picture of
+Read and Green, each with eight states on the torus at filling one half \cite{RG00}, and the unitary description with
+eight states of \cite{CGT99}. A uniformly gapped patch at the bottom of the sector contains the ten zero modes, so its
+dimension is at least ten and, by Theorem~\ref{thm:main}(i), at least twelve. These proposals satisfy the divisibility
+condition of Theorem~\ref{thm:main}(i), but their dimension is too small; the count ten is the one that violates the
+condition.
+
+\paragraph{What is not excluded.}
+Theorem~\ref{thm:main} does not exclude a gapped phase whose ground-state space strictly contains the zero modes and has
+dimension $12$, $16$, $\dots$ (Remark~\ref{rem:loophole}); in such a phase $E_{11}(N)\to0$ would be a splitting inside the
+ground-state space. The conclusions that the index argument yields here are divisibility conditions, and such
+dimensions meet them. The
+expectation since Read and Green \cite{RG00} is stronger than Theorem~\ref{thm:main}: that the hollow-core Hamiltonian has
+no uniformly gapped patch at the bottom of the sector at all. Read and Green argued, in a mean-field description of
+spin-singlet $d$-wave pairing, that the Haldane--Rezayi state describes the critical point between the weak- and
+strong-pairing phases, with bulk fermion excitations whose energy vanishes at zero momentum; their count of states on
+the torus at this critical point, five per centre of mass at even $N$ and one spin-$\frac12$ doublet per centre of mass at
+odd $N$, is the count of Theorem~\ref{thm:kernel}. Read \cite{Rea09a,Rea09b} gave general arguments that trial states
+built from non-unitary conformal field theories do not describe gapped phases, and named the Haldane--Rezayi state as
+critical. Exact diagonalization of small systems on the sphere is consistent with a vanishing neutral gap
+\cite{CRE19,NPBG23}, and in the limit of a thin torus Seidel and Yang \cite{SY11} constructed excitations whose energy
+tends to zero. None of this is proved; Theorem~\ref{thm:main} establishes the part of the picture that concerns the ten
+zero modes.
+
+\paragraph{The statement is asymptotic.}
+Theorem~\ref{thm:main} concerns the limit $N\to\infty$ only. The constants in Theorem~\ref{thm:index} exist but are not
+explicit, and through the light-cone constant $C_{\rm lc}=\max\{1,(4C_1)^4\}$ of Theorem~\ref{thm:propagation}, with $C_1$ bounded by
+about $4.5\cdot10^3\,\Cvol\max\{C_h,4C^H_5\}$ (Remark~\ref{rem:propagation}), they are astronomically large. The proof gives neither a
+rate for $E_{11}(N)\to0$ nor a value $N_0$ beyond which $E_{11}(N)$ is below a prescribed number, and it says nothing
+about any fixed system size, in particular about the sizes accessible to numerical diagonalization.
+
+\paragraph{Thin tori.}
+Tori whose circumference $L_y$ stays below $L_0$ while $N\to\infty$ lie outside Corollary~\ref{cor:uniform}
+(Remark~\ref{rem:thin}). For them, and more generally at every circumference, Appendix~\ref{app:twist} proves a
+variational bound: a zero mode in which the orbitals of the electrons of one spin species are multiplied by a phase that
+winds once around the torus gives, for a suitable choice of the zero mode, a state in the sector $(N/2,N/2)$ orthogonal
+to all zero modes with energy at most of order $L_y^3/N$ (for $L_y$ bounded below). Hence, with $\kappa=2\pi/L_y$,
+\[
+E_{11}(N)\le0.40\,(1+0.42\,\kappa)^2\,\frac{L_y^3}N+0.032\,(1+0.41\,\kappa)^2\,\frac{L_y^5}{N^3}
+\]
+for every even $N$ and every rectangular torus, and the same bound holds for $E_3(N)$ at odd $N$
+(Theorem~\ref{thm:twist}). At fixed aspect ratio $L_y^3/N$ grows like $N^{1/2}$, and this bound says nothing; the two
+results overlap when $L_0\le L_y\le C$, and the variational bound is needed only for $L_y<L_0$. Together with
+Lemma~\ref{lem:exchange} and Corollary~\ref{cor:uniform} it gives $E_{11}(N)\to0$ uniformly over all rectangular tori
+(Corollary~\ref{cor:alltori}). Unlike Theorem~\ref{thm:main}, the variational bound is explicit and gives a rate, but only
+at bounded or slowly growing circumference; like Theorem~\ref{thm:main}, it does not bear on the situation of
+Remark~\ref{rem:loophole}.
+
+\paragraph{The class.}
+Corollary~\ref{cor:classwide} is not specific to the hollow-core interaction. For every sequence of Hamiltonians
+satisfying (H1) and (H2), the dimension of a uniformly gapped patch at the bottom of the sector $(N/2,N/2)$, in the
+sense of Section~\ref{sec:intro} (Assumption~\ref{ass:gap} for these sectors), is divisible by four: this is a fractional Lieb--Schultz--Mattis condition for the up-spin filling $\frac14$ per orbital, in
+the sense of \cite[Corollary~5.2]{BBDF21}, and it uses neither frustration-freeness nor zero modes
+(Remark~\ref{rem:class-scope}). In particular no Hamiltonian of the class has, in this sector, a uniformly gapped
+ground-state space of dimension ten, the dimension that the conformal-field-theory description assigns to a gapped
+Haldane--Rezayi phase. Which lowest-Landau-level Hamiltonians other than $H_N$ belong to the class is not examined here.
+
+\paragraph{What remains.}
+(a) \emph{A rate at fixed aspect ratio.} Take $p=10$, $\Delta=0$ and $\gamma=E_{11}(N)$. The estimates of Sections~\ref{sec:locality} and
+\ref{sec:index}, made explicit as functions of $N$ and $\gamma$ at a single $N$, would bound
+$\abs{e^{2\pi\iu\Tr(P\Tt)}-1}$ by a quantity $\varepsilon(N,\gamma)$ that tends to zero as $N\to\infty$ for each $\gamma>0$.
+Since $\Tr(P\Tt)=\Tr(PT_-)=-\frac{10}4$ exactly (Lemma~\ref{lem:theta}(d) and (e)), the left-hand side equals $2$, so
+$\varepsilon(N,E_{11}(N))\ge2$, an explicit upper bound on $E_{11}(N)$ once $\varepsilon$ is explicit and decreasing in $\gamma$.
+A rate obtained in this way would not exclude the situation of Remark~\ref{rem:loophole}. (b) \emph{Explicit constants},
+without which no statement about a fixed system size follows. (c) \emph{Oblique tori} (Remark~\ref{rem:oblique}).
+(d) \emph{The stronger statement} that $H_N$ has no uniformly gapped patch at the bottom of the sector $(N/2,N/2)$ of any
+dimension; it requires excluding the situation of Remark~\ref{rem:loophole}, for which the index argument alone does
+not suffice. (e) \emph{Other members of the class} of Definition~\ref{def:class}.

@@ -1,0 +1,14 @@
+# The Lean 4 formalization accompanying the papers in ../papers (see README.md in this directory).
+# `autoImplicit = false` for every module of the package; Mathlib pinned to one commit.
+name = "hr-torus-proof"
+defaultTargets = ["HRTorus"]
+leanOptions = { autoImplicit = false }
+
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4"
+rev = "d13f23b723b8a846827a245b89c10fc7d3f11612"
+
+# Module HRTorus.X.Y is the file HRTorus/X/Y.lean; HRTorus.lean imports every module.
+[[lean_lib]]
+name = "HRTorus"

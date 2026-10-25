@@ -109,6 +109,24 @@ sets of the torus); Definition 4.6 (the class of slot-local covariant Hamiltonia
 Corollary 4.8 (the hollow-core Hamiltonians are in it); Definition 4.9 and Lemmas 4.10–4.11 (the band charges, their algebra,
 and their almost-support in the slot lattice, uniformly in the gauge angle and the band).
 
+**The locality estimates, Section 5 with Appendix B** — `HRTorus.Locality.LiebRobinson`, `HRTorus.Locality.Propagation`,
+`HRTorus.Locality.Calculus`, `HRTorus.Locality.Filters` (486 theorems, of which 85 are the paper's statements and the rest proof
+devices; **all proved, no `sorry`**): the Lieb–Robinson bound for even interactions on the slot lattice (Theorem 5.2 in its four
+forms, with the clause on interactions with terms set to zero), derived as the paper derives it from Appendix B — the one-step
+estimate the paper takes from its reference on lattice fermions, Proposition B.1 and Lemmas B.2–B.3, the iteration (here a
+chain-free induction on a per-slot bound) and the row sums — together with Lemma 5.1's measurability sentence; **the propagation
+bound (Theorem 5.3)**: the master inequality with the paper's constants c_k, r_j, C_1 and an auxiliary Hamiltonian in Alg(Y) for
+each set Y, the polynomial light cone with C_lc(β) and C_{k',β}, every light-cone exponent above one, and the propagation of
+almost-supported operators (Lemma 5.5); the time filters and the commutator with the Hamiltonian (Lemmas 5.6–5.7); the generator
+filter W_γ as the paper's improper integral and the clustering filter 𝒬 through spectral projections (Definition 5.8), with
+Lemmas 5.9–5.10 — the Dirichlet-integral facts and the principal values are built here, Mathlib having neither — and the locality
+of the clustering filter (Proposition 5.11); the locality calculus (Lemma 5.12: far-apart operators almost commute; sums, products
+and adjoints; ordered exponentials; conjugation by band charges) and the bookkeeping (Lemma 5.13) with the O(N^{−∞}) notion.
+Two recorded departures from the paper's proofs, both inside its constants: Lemma 5.5 by one best approximant propagated at
+order k + 2 instead of the dyadic decomposition, and Theorem 5.3(a)'s Step 4 by shells of width λ in place of the exact planar
+integral. Two statements (Lemma 5.5 and Lemma 5.6's first claim) carry the hypothesis n_A < ∞ that the paper's proofs assume in
+their first line: without it their literal transcription into ℝ≥0∞ would be false (0 · ∞ = 0 there).
+
 ## Building
 
 Install [elan](https://github.com/leanprover/elan), which reads `lean-toolchain` and installs Lean 4.34.1. Then, in
@@ -140,6 +158,7 @@ fewer, none on `sorryAx` — nothing in these three modules rests on the open st
 Block C's check, `lake env lean HRTorus/AxiomsBlockC.lean` (Section 4's four modules, `LLL.Theta`, and the two block-A modules
 block C completed): 698 declarations (`Theta` 84, `LLL.Space` 133, `Fock.Hamiltonian` 50, `Pairs` 161, `LocalForm` 150, `SlotLocal` 79, `BandCharges` 41), every one on the three standard axioms or fewer except
 `HRTorus.LLL.isLLL_iff` itself — nothing in Section 4, and nothing in Lemma 2.3(iii)–(iv), the lattice-sum form or H_N ≥ 0, rests on it.
+Block D's check, `lake env lean HRTorus/AxiomsBlockD.lean` (Section 5's four modules): 640 declarations (`LiebRobinson` 169, `Calculus` 68, `Propagation` 170, `Filters` 233), every one on the three standard axioms or fewer, none on `sorryAx`.
 
 ## The kernel replay
 

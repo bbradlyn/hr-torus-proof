@@ -29,6 +29,10 @@ import HRTorus.Hamiltonian.Pairs
 import HRTorus.Hamiltonian.LocalForm
 import HRTorus.Hamiltonian.SlotLocal
 import HRTorus.Hamiltonian.BandCharges
+import HRTorus.Locality.LiebRobinson
+import HRTorus.Locality.Propagation
+import HRTorus.Locality.Calculus
+import HRTorus.Locality.Filters
 
 /-!
 # HRTorus
@@ -58,7 +62,13 @@ The Lean 4 formalization accompanying the papers in `papers/` of this repository
   local form of the hollow-core Hamiltonian (Theorem 4.2)** with the jet lemma (4.3), the uniform size and rapid locality of the
   local terms in the slot lattice (Proposition 4.4), the covariance (Lemma 4.5), the class of slot-local covariant Hamiltonians
   (Definition 4.6) with the hollow-core Hamiltonian in it (Corollary 4.8), and the band charges (Definition 4.9, Lemmas
-  4.10–4.11): 77 statements, all proved, and `H_N ≥ 0` (`HRTorus.Fock.HN_posSemidef`) proved here from Theorem 4.2(a).
+  4.10–4.11): 77 statements, all proved, and `H_N ≥ 0` (`HRTorus.Fock.HN_posSemidef`) proved here from Theorem 4.2(a);
+* `HRTorus.Locality.LiebRobinson`, `Propagation`, `Calculus`, `Filters` — Section 5 of the HR paper with Appendix B: the
+  Lieb–Robinson bound for even interactions on the slot lattice (Theorem 5.2, from Appendix B's one-step estimate), **the
+  propagation bound (Theorem 5.3)** with the propagation of almost-supported operators (Lemma 5.5), the time filters and the
+  commutator with the Hamiltonian (Lemmas 5.6–5.7), the generator and clustering filters (Definition 5.8, Lemmas 5.9–5.10,
+  Proposition 5.11), the locality calculus (Lemma 5.12) and the bookkeeping (Lemma 5.13), and Lemma 5.1's measurability
+  sentence: 85 statements, all proved.
 
 `HRTorus/Axioms.lean` (not imported here) prints the axioms of every declaration.
 -/

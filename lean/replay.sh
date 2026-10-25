@@ -37,6 +37,10 @@ HRTorus.Hamiltonian.Pairs
 HRTorus.Hamiltonian.LocalForm
 HRTorus.Hamiltonian.SlotLocal
 HRTorus.Hamiltonian.BandCharges
+HRTorus.Locality.LiebRobinson
+HRTorus.Locality.Calculus
+HRTorus.Locality.Propagation
+HRTorus.Locality.Filters
 "
 fail=0
 for m in $MODULES; do

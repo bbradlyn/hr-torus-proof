@@ -162,15 +162,15 @@ theorem fK_neg (T : Torus) (y : ZMod T.Nφ → ZMod T.Nφ → ℂ) (hy : ∀ j j
   have hpar : ((-D) ≡ n [ZMOD 2]) ↔ (D ≡ n [ZMOD 2]) := by simp only [Int.ModEq, Int.neg_emod_two]
   have hg : gE T (-D) = gE T D := by simp [gE]
   by_cases h : D ≡ n [ZMOD 2]
-  · rw [if_pos (hpar.mpr h), if_pos h, hg, sub_neg_eq_add, ← sub_eq_add_neg, hy]
+  · rw [ite_eq_left (hpar.mpr h), ite_eq_left h, hg, sub_neg_eq_add, ← sub_eq_add_neg, hy]
     push_cast
     ring
-  · rw [if_neg (mt hpar.mp h), if_neg h]
+  · rw [ite_eq_right (mt hpar.mp h), ite_eq_right h]
 
 theorem fK_comp (T : Torus) (y : ZMod T.Nφ → ZMod T.Nφ → ℂ) (n j : ℤ) : fK T y n (n - 2 * j) = fA T y n j := by
   unfold fK fA
   have hpar : (n - 2 * j) ≡ n [ZMOD 2] := by simp only [Int.ModEq]; omega
-  rw [if_pos hpar, show (n - (n - 2 * j)) / 2 = j by omega, show (n + (n - 2 * j)) / 2 = n - j by omega]
+  rw [ite_eq_left hpar, show (n - (n - 2 * j)) / 2 = j by omega, show (n + (n - 2 * j)) / 2 = n - j by omega]
 
 theorem fB_swap (T : Torus) (y : ZMod T.Nφ → ZMod T.Nφ → ℂ) (hy : ∀ j j', y j' j = -y j j') (n j : ℤ) :
     fB T y n (n - j) = -fB T y n j := by
@@ -478,7 +478,7 @@ theorem periodic_norm_le {K : ℕ} (hK : 0 < K) (u : ℤ → ℂ) (hu : ∀ n, u
 /-- Device: `Σ_{n₀ < K} Σ_q F(n₀ + qK) = Σ_n F(n)` for summable `F : ℤ → ℂ`. -/
 theorem sum_range_tsum {K : ℕ} (hK : 0 < K) (F : ℤ → ℂ) (hF : Summable F) :
     ∑ n0 ∈ Finset.range K, ∑' q : ℤ, F (n0 + q * K) = ∑' n : ℤ, F n := by
-  haveI : NeZero K := ⟨hK.ne'⟩
+  have : NeZero K := ⟨hK.ne'⟩
   rw [← sum_zmod_tsum (N := K) F hF]
   refine (Finset.sum_bij (fun (i : ℕ) _ => (i : ZMod K)) (fun _ _ => Finset.mem_univ _) ?_ ?_ ?_)
   · intro a ha b hb h
@@ -1076,35 +1076,35 @@ theorem comp_plus (u : PairAmp T) (p : (ℝ × ℝ) × (ℝ × ℝ)) :
     opf T (wOf T u (some .plus)) p = ups T u .up .up p := by
   rw [opf_wOf, HRTorus.Fermion.Pilot.JW.sum_spin, HRTorus.Fermion.Pilot.JW.sum_spin,
     HRTorus.Fermion.Pilot.JW.sum_spin]
-  simp only [chiO, chi, chiS, Matrix.of_apply, eq_self_iff_true, ne_eq, reduceCtorEq, not_true_eq_false,
-    not_false_eq_true, and_self, and_true, true_and, and_false, false_and, ↓reduceIte, star_zero, star_one,
-    star_neg, star_s, zero_mul, one_mul, add_zero, zero_add, neg_mul]
+  simp only [chiO, chi, Matrix.of_apply, reduceCtorEq,
+    and_self, and_true, and_false, ↓reduceIte, star_zero, star_one,
+    zero_mul, one_mul, add_zero]
 
 theorem comp_minus (u : PairAmp T) (p : (ℝ × ℝ) × (ℝ × ℝ)) :
     opf T (wOf T u (some .minus)) p = ups T u .dn .dn p := by
   rw [opf_wOf, HRTorus.Fermion.Pilot.JW.sum_spin, HRTorus.Fermion.Pilot.JW.sum_spin,
     HRTorus.Fermion.Pilot.JW.sum_spin]
-  simp only [chiO, chi, chiS, Matrix.of_apply, eq_self_iff_true, ne_eq, reduceCtorEq, not_true_eq_false,
-    not_false_eq_true, and_self, and_true, true_and, and_false, false_and, ↓reduceIte, star_zero, star_one,
-    star_neg, star_s, zero_mul, one_mul, add_zero, zero_add, neg_mul]
+  simp only [chiO, chi, Matrix.of_apply, reduceCtorEq,
+    and_self, and_true, and_false, ↓reduceIte, star_zero, star_one,
+    zero_mul, one_mul, add_zero, zero_add]
 
 theorem comp_zero (u : PairAmp T) (p : (ℝ × ℝ) × (ℝ × ℝ)) :
     opf T (wOf T u (some .zero)) p = (((2 : ℝ) ^ (-(1 / 2 : ℝ)) : ℝ) : ℂ) * ups T u .up .dn p +
       (((2 : ℝ) ^ (-(1 / 2 : ℝ)) : ℝ) : ℂ) * ups T u .dn .up p := by
   rw [opf_wOf, HRTorus.Fermion.Pilot.JW.sum_spin, HRTorus.Fermion.Pilot.JW.sum_spin,
     HRTorus.Fermion.Pilot.JW.sum_spin]
-  simp only [chiO, chi, chiS, Matrix.of_apply, eq_self_iff_true, ne_eq, reduceCtorEq, not_true_eq_false,
-    not_false_eq_true, and_self, and_true, true_and, and_false, false_and, ↓reduceIte, star_zero, star_one,
-    star_neg, star_s, zero_mul, one_mul, add_zero, zero_add, neg_mul]
+  simp only [chiO, chi, Matrix.of_apply, ne_eq, reduceCtorEq, not_true_eq_false,
+    not_false_eq_true, ↓reduceIte, star_zero,
+    star_s, zero_mul, add_zero, zero_add]
 
 theorem comp_sing (u : PairAmp T) (p : (ℝ × ℝ) × (ℝ × ℝ)) :
     opf T (wOf T u none) p = (((2 : ℝ) ^ (-(1 / 2 : ℝ)) : ℝ) : ℂ) * ups T u .up .dn p -
       (((2 : ℝ) ^ (-(1 / 2 : ℝ)) : ℝ) : ℂ) * ups T u .dn .up p := by
   rw [opf_wOf, HRTorus.Fermion.Pilot.JW.sum_spin, HRTorus.Fermion.Pilot.JW.sum_spin,
     HRTorus.Fermion.Pilot.JW.sum_spin]
-  simp only [chiO, chi, chiS, Matrix.of_apply, eq_self_iff_true, ne_eq, reduceCtorEq, not_true_eq_false,
-    not_false_eq_true, and_self, and_true, true_and, and_false, false_and, ↓reduceIte, star_zero, star_one,
-    star_neg, star_s, zero_mul, one_mul, add_zero, zero_add, neg_mul]
+  simp only [chiO, chiS, Matrix.of_apply, reduceCtorEq,
+    and_self, and_true, and_false, ↓reduceIte, star_zero,
+    star_neg, star_s, zero_mul, add_zero, zero_add, neg_mul]
   ring
 
 /-- `Σ_{σσ'} |Υ_{σσ'}|² = Σ_ν |f_ν|² + |f_{sing}|²` pointwise -/
@@ -1424,8 +1424,8 @@ theorem step3 {N : (ℝ × ℝ) × (ℝ × ℝ) → ℂ} (hN : ContDiff ℝ ∞ 
       (line2 hN (R, R) e1y))
   simp only [lap, Prod.fst_zero, Prod.snd_zero]
   rw [h1x, h1y, hdx, hdy, hjx, hjy]
-  simp only [map_add, map_sub, map_smul, ContinuousLinearMap.add_apply, ContinuousLinearMap.sub_apply,
-    ContinuousLinearMap.smul_apply, Complex.real_smul]
+  simp only [map_add, map_sub, map_smul, add_apply, sub_apply,
+    smul_apply, Complex.real_smul]
   rw [hsx, hsy]
   push_cast
   ring
@@ -1453,7 +1453,7 @@ theorem N_contDiff (w : ZMod T.Nφ → ZMod T.Nφ → ℂ) :
   have hs : ContDiff ℝ ∞ (fun p => star (opf T w p)) := by
     have e : (fun p => star (opf T w p)) = fun p => Complex.conjCLE (opf T w p) := by
       funext p
-      simp [Complex.conjCLE_apply]
+      simp
     rw [e]
     exact Complex.conjCLE.contDiff.comp h
   exact hs.mul h
@@ -1735,10 +1735,10 @@ theorem opIntegral_posSemidef {S : Type*} [Fintype S] [DecidableEq S] (D : Set (
   · intro x
     have e : star x ⬝ᵥ (opIntegral D h *ᵥ x) = ∫ R in D, star x ⬝ᵥ (h R *ᵥ x) := by
       simp only [dotProduct, Matrix.mulVec, opIntegral, Matrix.of_apply, Finset.mul_sum]
-      rw [integral_finset_sum _ (fun i _ => integrable_finset_sum _
+      rw [integral_finsetSum _ (fun i _ => integrable_finsetSum _
         (fun j _ => ((hint i j).mul_const _).const_mul _))]
       refine Finset.sum_congr rfl fun i _ => ?_
-      rw [integral_finset_sum _ (fun j _ => ((hint i j).mul_const _).const_mul _)]
+      rw [integral_finsetSum _ (fun j _ => ((hint i j).mul_const _).const_mul _)]
       refine Finset.sum_congr rfl fun j _ => ?_
       rw [integral_const_mul, integral_mul_const]
     have hq : ∀ R, 0 ≤ star x ⬝ᵥ (h R *ᵥ x) := fun R => (Matrix.posSemidef_iff_dotProduct_mulVec.mp (hpsd R)).2 x

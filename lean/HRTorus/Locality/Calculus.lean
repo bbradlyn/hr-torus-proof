@@ -115,8 +115,8 @@ theorem fat_empty' {δ₀ : ℝ} {T : Torus} (r : ℝ) : fat (∅ : Finset (Slot
   exact Finset.notMem_empty s' hs'
 
 /-- The arithmetic of Lemma 5.12(a). -/
-theorem comm_arith {ea eb nB nA' a b α β x y P ρ : ℝ} (hea0 : 0 ≤ ea) (heb0 : 0 ≤ eb) (ha : 0 ≤ a) (hb : 0 ≤ b)
-    (hα : 0 ≤ α) (hβ : 0 ≤ β) (hx : 0 ≤ x) (hy : 0 ≤ y) (hρ0 : 0 ≤ ρ) (hρ1 : ρ ≤ 1)
+theorem comm_arith {ea eb nB nA' a b α β x y P ρ : ℝ} (heb0 : 0 ≤ eb) (ha : 0 ≤ a) (hb : 0 ≤ b)
+    (hα : 0 ≤ α) (hβ : 0 ≤ β) (hx : 0 ≤ x) (hρ0 : 0 ≤ ρ) (hρ1 : ρ ≤ 1)
     (hxP : x ≤ P) (hyP : y ≤ P) (hxy : x * y ≤ P) (hea : ea ≤ α * x * ρ) (heb : eb ≤ β * y * ρ)
     (hnB : nB = b) (hnA' : nA' ≤ a + α * x * ρ) :
     2 * ea * nB + 2 * nA' * eb ≤ (2 * α + 2 * β + 2 * α * β) * P * (1 + a + b) * ρ := by
@@ -200,13 +200,13 @@ theorem norm_comm_le_of_fat_disjoint {η : ℝ → ℝ} (hη : IsProfile η) {δ
     _ ≤ 2 * ‖opCLM (iota η δ₀ (Ts.T N) (A N) - A')‖ * ‖opCLM (iota η δ₀ (Ts.T N) (B N))‖ +
         2 * ‖opCLM A'‖ * ‖opCLM (iota η δ₀ (Ts.T N) (B N) - B')‖ :=
         add_le_add (norm_comm_le _ _) (norm_comm_le _ _)
-    _ ≤ _ := comm_arith (norm_nonneg _) (norm_nonneg _) (norm_nonneg _) (norm_nonneg _) (abs_nonneg _)
-          (abs_nonneg _) hx0 hy0 hρ hρ1 hxP hyP hxy hea1 heb1 (norm_iota hη hδ₀ hT _) hnA'
+    _ ≤ _ := comm_arith (norm_nonneg _) (norm_nonneg _) (norm_nonneg _) (abs_nonneg _)
+          (abs_nonneg _) hx0 hρ hρ1 hxP hyP hxy hea1 heb1 (norm_iota hη hδ₀ hT _) hnA'
 
 /-- If `v ≤ c (1 + r)⁻¹` for every `r ≥ 0`, with `c ≥ 0`, then `v ≤ 0`. -/
 theorem le_zero_of_forall_le_inv {v c : ℝ} (hc : 0 ≤ c) (h : ∀ r : ℝ, 0 ≤ r → v ≤ c * (1 + r)⁻¹) : v ≤ 0 := by
   by_contra hpos
-  push_neg at hpos
+  push Not at hpos
   have h1 := h (c / v) (div_nonneg hc hpos.le)
   have h2 : c * (1 + c / v)⁻¹ < v := by
     have hv : 0 < 1 + c / v := by positivity
@@ -284,7 +284,7 @@ theorem norm_comm_le_of_disjoint (CA CB : ℕ → ℝ) (k : ℕ) :
       simp only [pow_zero, mul_one, one_mul]
       apply ENNReal.ofReal_le_ofReal
       have h := hbound 0 le_rfl (hall 0)
-      simp only [add_zero, Nat.cast_zero, neg_zero, Real.rpow_zero, mul_one, pow_zero, one_mul] at h ⊢
+      simp only [add_zero, Nat.cast_zero, neg_zero, Real.rpow_zero, mul_one] at h ⊢
       linarith
     · rw [zero_pow hk.ne', mul_zero]
       have h0 : ‖toCLM (Ts.T N) (A N * B N - B N * A N)‖ ≤ 0 := by
@@ -534,7 +534,7 @@ theorem norm_le_of_re_inner_deriv_le {E : Type*} [NormedAddCommGroup E] [InnerPr
       (fun u hu => hle u (Set.Ico_subset_Icc_self hu))
     exact key ⟨hu₀, le_rfl⟩
   by_contra hcon
-  push_neg at hcon
+  push Not at hcon
   set δ := ‖f u₀‖ - c * u₀ with hδ
   have hδ0 : 0 < δ := by linarith
   have h1 := hmain (δ / 2) (by linarith)
@@ -607,7 +607,7 @@ theorem norm_sub_proj_le_of_ode {E : Type*} [NormedAddCommGroup E] [InnerProduct
       have e1 : star ((I : ℂ) • (z u * g' u + S u)) ψ = (-I : ℂ) • (g' u (f u) + star (S u) ψ) := by
         rw [star_smul, star_add, star_mul, hgs]
         simp only [hf, Complex.star_def, Complex.conj_I, smul_apply,
-          ContinuousLinearMap.add_apply, ContinuousLinearMap.mul_apply]
+          add_apply, mul_apply_eq_comp]
       rw [e1, inner_smul_right, inner_add_right, mul_add, Complex.add_re]
       have h0 : (-I * inner ℂ (f u) (g' u (f u))).re = 0 := by
         have hsym : (g' u : E →ₗ[ℂ] E).IsSymmetric :=
@@ -624,7 +624,7 @@ theorem norm_sub_proj_le_of_ode {E : Type*} [NormedAddCommGroup E] [InnerProduct
             rw [norm_star_clm]
             exact mul_le_mul_of_nonneg_left (mul_le_mul_of_nonneg_right (hzs u hu) (norm_nonneg _)) (norm_nonneg _)
         _ = 2 * ε * ‖ψ‖ * ‖f u‖ := by ring
-    have hf0 : f 0 = 0 := by simp only [hf, hz0, star_zero, ContinuousLinearMap.zero_apply]
+    have hf0 : f 0 = 0 := by simp only [hf, hz0, star_zero, zero_apply]
     have := norm_le_of_re_inner_deriv_le hu₀ (by positivity) hf0 hf' hb
     calc ‖star (z u₀) ψ‖ = ‖f u₀‖ := rfl
       _ ≤ 2 * ε * ‖ψ‖ * u₀ := this
@@ -1121,7 +1121,7 @@ theorem bookkeeping_comm.{u} {c : ℝ} (hc : 0 < c) (C mstar : ℝ) (hmstar : 0 
           mul_le_mul_of_nonneg_left hfin hT1
       _ ≤ _ := by nlinarith
   · -- near: the trivial bound
-    push_neg at hcase
+    push Not at hcase
     have hNlt : (N : ℝ) ≤ (2 * |C| / c) ^ 2 := by
       have h1 : Real.sqrt N ≤ 2 * |C| / c := by
         rw [le_div_iff₀ hc]

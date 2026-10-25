@@ -103,7 +103,7 @@ theorem sum_rankOne_eq_one_of (v : ι → EuclideanSpace ℂ κ)
     (h : ∀ c c' : κ, ∑ i, v i c * star (v i c') = if c = c' then 1 else 0) :
     ∑ i, InnerProductSpace.rankOne ℂ (v i) (v i) = (1 : EuclideanSpace ℂ κ →L[ℂ] EuclideanSpace ℂ κ) := by
   refine ContinuousLinearMap.ext fun f => PiLp.ext fun c => ?_
-  rw [ContinuousLinearMap.sum_apply, ContinuousLinearMap.one_apply]
+  rw [sum_apply, one_apply_eq_self]
   simp only [InnerProductSpace.rankOne_apply, WithLp.ofLp_sum, Finset.sum_apply, PiLp.smul_apply,
     smul_eq_mul, PiLp.inner_apply, RCLike.inner_apply]
   simp only [Finset.sum_mul]
@@ -120,7 +120,7 @@ theorem anaMap_isometry_of (v : ι → EuclideanSpace ℂ κ)
     (h : ∑ i, InnerProductSpace.rankOne ℂ (v i) (v i) = (1 : EuclideanSpace ℂ κ →L[ℂ] EuclideanSpace ℂ κ)) :
     LinearMap.adjoint (anaMap v) ∘ₗ anaMap v = LinearMap.id := by
   refine LinearMap.ext fun f => ?_
-  rw [LinearMap.comp_apply, adjoint_anaMap_comp_apply, ← ContinuousLinearMap.sum_apply, h]
+  rw [LinearMap.comp_apply, adjoint_anaMap_comp_apply, ← sum_apply, h]
   rfl
 
 theorem norm_anaMap_of (v : ι → EuclideanSpace ℂ κ)
@@ -546,7 +546,7 @@ theorem slotProj_isStarProjection (δ₀ : ℝ) (T : Torus) (X : Finset (Slot δ
     rw [slotProj, ← map_mul, Matrix.diagonal_mul_diagonal]
     congr 2
     funext s
-    split_ifs with h <;> simp [h]
+    split_ifs with h <;> simp
   · show star (slotProj δ₀ T X) = slotProj δ₀ T X
     rw [slotProj, ← map_star, Matrix.star_eq_conjTranspose, Matrix.diagonal_conjTranspose]
     congr 2

@@ -119,8 +119,8 @@ theorem measurable_condExp {U : Type*} [MeasurableSpace U] {A : U → Op S}
     rw [Finset.sum_eq_single (Y u)]
     · simp [Set.indicator]
     · intro b _ hb
-      simp only [Set.indicator, Set.mem_setOf_eq]
-      rw [if_neg (Ne.symm hb)]
+      simp only [Set.indicator, Set.mem_ofPred_eq]
+      rw [ite_eq_right (Ne.symm hb)]
     · intro h
       exact absurd (Finset.mem_univ _) h
   rw [hdecomp]
@@ -229,7 +229,7 @@ theorem mul_c_eq_of_mem_CARm {X : Finset (Mode S)} {ν : Mode S} (hν : ν ∉ X
       rw [hP, Matrix.mul_neg, Matrix.mul_neg]
       refine ⟨eq_neg_of_add_eq_zero_left (Fermion.Pilot.JW.c_anticomm μ ν), ?_⟩
       have h2 := Fermion.Pilot.JW.c_anticomm_star μ ν
-      rw [if_neg hne] at h2
+      rw [ite_eq_right hne] at h2
       exact eq_neg_of_add_eq_zero_left h2
     · obtain ⟨μ, hμ, h⟩ := hx
       have hx : x = (c μ)ᴴ := by
@@ -239,7 +239,7 @@ theorem mul_c_eq_of_mem_CARm {X : Finset (Mode S)} {ν : Mode S} (hν : ν ∉ X
       rw [hx, hP, Matrix.mul_neg, Matrix.mul_neg]
       constructor
       · have h2 := Fermion.Pilot.JW.c_anticomm_star ν μ
-        rw [if_neg (Ne.symm hne)] at h2
+        rw [ite_eq_right (Ne.symm hne)] at h2
         exact eq_neg_of_add_eq_zero_right h2
       · exact eq_neg_of_add_eq_zero_left (c_conjTranspose_anticomm μ ν)
   · intro r
@@ -348,7 +348,7 @@ theorem commute_parityOn_compl_c {W : Finset (Mode S)} {μ : Mode S} (hμ : μ �
   ext m' m
   rw [parityOn, Matrix.diagonal_mul, Matrix.mul_diagonal, Fermion.Pilot.JW.c, Matrix.of_apply]
   by_cases h : m μ = true ∧ m' = Function.update m μ false
-  · rw [if_pos h, h.2]
+  · rw [ite_eq_left h, h.2]
     have hset : (Wᶜ.filter fun ν => Function.update m μ false ν = true) = Wᶜ.filter fun ν => m ν = true := by
       ext ν
       simp only [Finset.mem_filter, Finset.mem_compl]
@@ -361,7 +361,7 @@ theorem commute_parityOn_compl_c {W : Finset (Mode S)} {μ : Mode S} (hμ : μ �
         have hne : ν ≠ μ := fun e => hν (e ▸ hμ)
         exact ⟨hν, by rw [Function.update_of_ne hne]; exact h'⟩
     rw [hset, mul_comm]
-  · rw [if_neg h, mul_zero, zero_mul]
+  · rw [ite_eq_right h, mul_zero, zero_mul]
 
 theorem commute_parityOn_compl_of_mem_CARm {W : Finset (Mode S)} {A : Op S} (hA : A ∈ CARm W) :
     Commute (parityOn Wᶜ) A := by
@@ -392,7 +392,7 @@ theorem CAR_eq_CARm_tilde (X : Finset S) : CAR X = CARm (tilde X) := by
   show StarAlgebra.adjoin ℂ _ = StarAlgebra.adjoin ℂ _
   congr 1
   ext A
-  simp only [Set.mem_setOf_eq, tilde, Finset.mem_product, Finset.mem_univ, and_true]
+  simp only [Set.mem_ofPred_eq, tilde, Finset.mem_product, Finset.mem_univ, and_true]
   constructor
   · rintro ⟨s, hs, σ, rfl⟩
     exact ⟨(s, σ), hs, rfl⟩
@@ -944,10 +944,10 @@ theorem norm_comm_dyn_le_oneStep {Φ : Finset (Mode S) → Op S} (hΦ : IsEvenIn
       ≤ ∫ u in (0 : ℝ)..t, 2 * ‖opCLM A‖ * ∑ Z ∈ boundarySets X,
           ‖opCLM (dyn (hamOn Φ Finset.univ) u (Φ Z) * B - B * dyn (hamOn Φ Finset.univ) u (Φ Z))‖ := by
         refine intervalIntegral.integral_mono_on ht (hBfc.norm.intervalIntegrable _ _) ?_ fun u _ => hpt u
-        exact (continuous_const.mul (continuous_finset_sum _ fun Z _ => hcZ Z)).intervalIntegrable _ _
+        exact (continuous_const.mul (continuous_finsetSum _ fun Z _ => hcZ Z)).intervalIntegrable _ _
     _ = 2 * ‖opCLM A‖ * ∑ Z ∈ boundarySets X, ∫ u in (0 : ℝ)..t,
           ‖opCLM (dyn (hamOn Φ Finset.univ) u (Φ Z) * B - B * dyn (hamOn Φ Finset.univ) u (Φ Z))‖ := by
-        rw [intervalIntegral.integral_const_mul, intervalIntegral.integral_finset_sum]
+        rw [intervalIntegral.integral_const_mul, intervalIntegral.integral_finsetSum]
         exact fun Z _ => (hcZ Z).intervalIntegrable _ _
 
 end OneStep
@@ -977,25 +977,25 @@ theorem mem_tilde {X : Finset S} {μ : Mode S} : μ ∈ tilde X ↔ μ.1 ∈ X :
 
 /-- `Φ(Z̃) = Ψ(Z)`. -/
 theorem liftInteraction_tilde (Ψ : Finset S → Op S) (Z : Finset S) : liftInteraction Ψ (tilde Z) = Ψ Z := by
-  rw [liftInteraction, image_fst_tilde, if_pos rfl]
+  rw [liftInteraction, image_fst_tilde, ite_eq_left rfl]
 
 /-- `Φ(W) = 0` for the `W` not of the form `Z̃`. -/
 theorem liftInteraction_eq_zero (Ψ : Finset S → Op S) {W : Finset (Mode S)} (hW : ∀ Z : Finset S, tilde Z ≠ W) :
     liftInteraction Ψ W = 0 := by
-  rw [liftInteraction, if_neg (hW _)]
+  rw [liftInteraction, ite_eq_right (hW _)]
 
 /-- The lift of an even interaction on `𝒮` is an even interaction on `𝔐` ("`an even interaction $\Phi$ on $\mathfrak M$ in the sense of this appendix`"). -/
 theorem isEvenInteractionM_liftInteraction {Ψ : Finset S → Op S} (hΨ : IsEvenInteraction Ψ) :
     IsEvenInteractionM (liftInteraction Ψ) := by
   intro W
   by_cases h : tilde (W.image Prod.fst) = W
-  · rw [liftInteraction, if_pos h]
+  · rw [liftInteraction, ite_eq_left h]
     obtain ⟨hsa, hmem⟩ := hΨ (W.image Prod.fst)
     refine ⟨hsa, ?_⟩
     have e : CARmEven W = CARmEven (tilde (W.image Prod.fst)) := by rw [h]
     rw [e, ← Alg_eq_CARmEven_tilde]
     exact hmem
-  · rw [liftInteraction, if_neg h]
+  · rw [liftInteraction, ite_eq_right h]
     exact ⟨IsSelfAdjoint.zero _, zero_mem _, Commute.zero_left _⟩
 
 /-- The proof of Theorem 5.2: "`For $X\subset\Slots$, $H_{\widetilde X}=\sum_{Z\subset X}\Psi(Z)=:H_X$`". -/
@@ -1038,7 +1038,7 @@ theorem boundarySets_liftInteraction (Ψ : Finset S → Op S) (X : Finset S) :
   · intro W hW hne
     have h : tilde (W.image Prod.fst) = W := by
       by_contra h
-      exact hne (by rw [liftInteraction, if_neg h])
+      exact hne (by rw [liftInteraction, ite_eq_right h])
     refine ⟨W.image Prod.fst, ?_, h.symm⟩
     rw [mem_boundarySets] at hW ⊢
     obtain ⟨⟨μ, hμ⟩, ⟨ν, hν⟩⟩ := hW
@@ -1138,9 +1138,9 @@ theorem norm_comm_dyn_hamOn_le {Ψ : Finset S → Op S} (hΨ : IsEvenInteraction
       2 * ‖opCLM A'‖ * ‖opCLM B‖ * (if (W ∩ Y).Nonempty then 1 else 0) := by
   have hHsa : IsSelfAdjoint (hamOn Ψ W) := isSelfAdjoint_hamOn (fun Z => (hΨ Z).1) W
   by_cases hWY : (W ∩ Y).Nonempty
-  · rw [if_pos hWY, mul_one]
+  · rw [ite_eq_left hWY, mul_one]
     exact norm_comm_dyn_le_two hHsa u A' B
-  · rw [if_neg hWY, mul_zero]
+  · rw [ite_eq_right hWY, mul_zero]
     have hdisj : Disjoint W Y :=
       Finset.disjoint_iff_inter_eq_empty.mpr (Finset.not_nonempty_iff_eq_empty.mp hWY)
     have hHC := hamOn_mem_CAR hΨ W
@@ -1212,7 +1212,7 @@ theorem sum_boundarySets_le {Ψ : Finset S → Op S} {N : Matrix S S ℝ} (hN : 
       if s ∈ Z then c Z else 0 := by
     intro Z s
     by_cases hs : s ∈ Z
-    · simp only [hs, true_and, if_true, hc]
+    · simp only [hs, true_and, ite_true, hc]
       rw [Finset.mul_sum, ← Finset.sum_filter, Finset.filter_mem_eq_inter, Finset.univ_inter]
     · simp [hs]
   have hM : ∑ s ∈ W, ∑ s'' : S, chainMatrix Ψ s s'' * f s'' = ∑ Z : Finset S, ((W ∩ Z).card : ℝ) * c Z := by
@@ -1462,8 +1462,8 @@ chain matrix. Everything is proved for any real matrix `N ≥ M^Ψ` entrywise, w
 
 theorem hasSum_exp_matrix (x : Matrix S S ℝ) :
     HasSum (fun n : ℕ => ((n.factorial : ℝ)⁻¹) • x ^ n) (NormedSpace.exp x) := by
-  letI : NormedRing (Matrix S S ℝ) := Matrix.linftyOpNormedRing
-  letI : NormedAlgebra ℝ (Matrix S S ℝ) := Matrix.linftyOpNormedAlgebra
+  let : NormedRing (Matrix S S ℝ) := Matrix.linftyOpNormedRing
+  let : NormedAlgebra ℝ (Matrix S S ℝ) := Matrix.linftyOpNormedAlgebra
   exact NormedSpace.exp_series_hasSum_exp' (𝕂 := ℝ) x
 
 theorem hasSum_exp_matrix_apply (x : Matrix S S ℝ) (s s' : S) :
@@ -1658,7 +1658,7 @@ theorem mem_fat_iff_slotSetDist {X : Finset (Slot δ₀ T)} {r : ℝ} (hr : 0 �
 /-- For a finite distance `d ≥ 0`, `expNegDiv` is `e^{−d/λ}`. -/
 theorem expNegDiv_ofReal {d : ℝ} (hd : 0 ≤ d) (lam : ℝ) :
     expNegDiv (ENNReal.ofReal d) lam = Real.exp (-d / lam) := by
-  rw [expNegDiv, if_neg ENNReal.ofReal_ne_top, ENNReal.toReal_ofReal hd]
+  rw [expNegDiv, ite_eq_right ENNReal.ofReal_ne_top, ENNReal.toReal_ofReal hd]
 
 /-! ### Proof devices for (B.4) and the weighted bounds (phase (b); not statements of the paper)
 

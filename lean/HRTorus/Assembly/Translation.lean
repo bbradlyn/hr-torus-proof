@@ -167,8 +167,8 @@ def orbDummy_dev (D : ArgData η δ₀) (hA : GapAssumption D.toIxSetting D.nn D
   W_conj := fun ω => by
     rw [map_div₀, Complex.conj_I, Complex.conj_ofReal, Complex.ofReal_neg, div_neg, neg_div]
   g := fun ω => if ω ≤ -D.γ then 1 else 0
-  g_zero := fun ω hω => if_neg (by linarith [hA.Δ_nonneg, hA.two_mul_Δ_lt])
-  g_one := fun ω hω => if_pos hω
+  g_zero := fun ω hω => ite_eq_right (by linarith [hA.Δ_nonneg, hA.two_mul_Δ_lt])
+  g_one := fun ω hω => ite_eq_left hω
 
 theorem orbDummy_P_dev (D : ArgData η δ₀) (hA : GapAssumption D.toIxSetting D.nn D.p D.Δ D.γ) (hH2 : D.d.H2)
     {N : ℕ} (hN : N ∈ D.Ts.idx) : (orbDummy_dev D hA hH2 hN).toSetting.P = toCLM (D.T N) (D.P N) := by
@@ -408,7 +408,7 @@ theorem no_gapped_patch (hη : IsProfile η) (hδ₀ : 0 < δ₀) (S : IxSetting
 
 The setting restricted to an infinite subset `𝒩' ⊆ 𝒩` (`restrict_dev`: "`The tori and $H$, restricted to $\mathcal N'$, are
 as in Setting~\ref{set:index} with (H1) and (H2)`"), so that Corollary 7.2 applies along `𝒩'`; and the arithmetic of (i)
-(`odd_contra_dev`): `p/4 ± p/(4N)` is not within `b < min{1/8, p/(4N)}` of an integer `k` when `p ≥ 1` and
+(`odd_contra_dev`): `p/4 ± p/(4N)` is not within `b < p/(4N)` of an integer `k` when `p ≥ 1` and
 `N ≥ 2p` — the paper's two cases `p ∉ 4ℤ` and `p ∈ 4ℤ` become `p − 4k ≠ 0` and `p − 4k = 0`. -/
 
 section OddDevices
@@ -430,7 +430,7 @@ theorem restrict_H2_dev (S : IxSetting η δ₀) {M : Set ℕ} (hM : M ⊆ S.Ts.
   fun N hN R => hH2 N (hM hN) R
 
 theorem odd_contra_dev {p : ℕ} (hp : 1 ≤ p) {N : ℕ} (hN : 2 * p ≤ N) {σ b : ℝ} (hσ : |σ| = 1) (k : ℤ)
-    (hb1 : b < 1 / 8) (hb2 : b < (p : ℝ) / (4 * N)) (h : |(p : ℝ) / 4 + σ * ((p : ℝ) / (4 * N)) - k| ≤ b) :
+    (hb2 : b < (p : ℝ) / (4 * N)) (h : |(p : ℝ) / 4 + σ * ((p : ℝ) / (4 * N)) - k| ≤ b) :
     False := by
   have hp' : (1 : ℝ) ≤ p := by exact_mod_cast hp
   have hN' : (2 : ℝ) * p ≤ N := by exact_mod_cast hN
@@ -482,7 +482,7 @@ theorem no_gap_odd (hη : IsProfile η) (hδ₀ : 0 < δ₀) (S : IxSetting η �
       (restrict_H2_dev S hM hMi hH2) hA
     obtain ⟨C, hC⟩ := hn 2
     obtain ⟨N1, hN1M⟩ := hMi.nonempty
-    have hp : 1 ≤ p := (one_le_p_lt_finrank (Δ := Δ) (by linarith) (hgap N1 hN1M).2).1
+    have hp : 1 ≤ p := (one_le_p_lt_finrank (by linarith) (hgap N1 hN1M).2).1
     obtain ⟨N, hNM, hNlt⟩ := hMi.exists_gt (2 * p + ⌈8 * |C|⌉₊ + ⌈4 * |C|⌉₊ + 1)
     have hNi : N ∈ S.Ts.idx := hM hNM
     have h : |(p : ℝ) / 4 + σ * ((p : ℝ) / (4 * N)) - n N| ≤ C * (N : ℝ) ^ (-((2 : ℕ) : ℝ)) := by
@@ -505,13 +505,10 @@ theorem no_gap_odd (hη : IsProfile η) (hδ₀ : 0 < δ₀) (S : IxSetting η �
       rw [hpow, mul_one_div]
       exact div_le_div_of_nonneg_right (le_abs_self C) (by positivity)
     have hp' : (1 : ℝ) ≤ p := by exact_mod_cast hp
-    have hb1 : |C| / (N : ℝ) ^ 2 < 1 / 8 := by
-      rw [div_lt_div_iff₀ (by positivity) (by norm_num)]
-      nlinarith
     have hb2 : |C| / (N : ℝ) ^ 2 < (p : ℝ) / (4 * N) := by
       rw [div_lt_div_iff₀ (by positivity) (by positivity)]
       nlinarith [abs_nonneg C]
-    exact odd_contra_dev hp (by omega) hσ (n N) (hb.trans_lt hb1) (hb.trans_lt hb2) h
+    exact odd_contra_dev hp (by omega) hσ (n N) (hb.trans_lt hb2) h
   have hφ : ∀ N ∈ S.Ts.idx, ((S.T N).Nφ : ℝ) = 2 * N := fun N hN => by
     show (((2 * (S.T N).N) : ℕ) : ℝ) = 2 * N
     rw [S.Ts.T_N N hN, Nat.cast_mul, Nat.cast_ofNat]
@@ -574,14 +571,14 @@ theorem many_low_odd (hη : IsProfile η) (hδ₀ : 0 < δ₀) (S : IxSetting η
             3 * (γ / 4 ^ ((q.1 : ℕ) + 1)) ≤ secEig (S.T N) (S.H N) (sec (S.T N)) ((q.2 : ℕ) + 1) -
               secEig (S.T N) (S.H N) (sec (S.T N)) q.2 := by
       intro N hN hN2 hcnt
-      push_neg at hcnt
+      push Not at hcnt
       set E := secEig (S.T N) (S.H N) (sec (S.T N)) with hEdef
       have hmono : Monotone E := secEig_mono _ _ _
       have hd := hdim N hN hN2
       -- `E_{Dc+1} ≥ E_1 + γ`
       have hA : E 1 + γ ≤ E (Dc + 1) := by
         by_contra hlt
-        push_neg at hlt
+        push Not at hlt
         have hsub : Finset.Icc 1 (Dc + 1) ⊆ (Finset.Icc 1 (Module.finrank ℂ (sector (S.T N) (sec (S.T N))))).filter
             fun k => E k ∈ Set.Ico (E 1) (E 1 + γ) := by
           intro k hk
@@ -625,7 +622,7 @@ theorem many_low_odd (hη : IsProfile η) (hδ₀ : 0 < δ₀) (S : IxSetting η
       -- a scale where the count does not drop
       obtain ⟨i, hi, hci⟩ : ∃ i ≤ Dc, c (i + 1) = c i := by
         by_contra h
-        push_neg at h
+        push Not at h
         have hdrop : ∀ i ≤ Dc + 1, c i + i ≤ c 0 := by
           intro i
           induction i with
@@ -647,7 +644,7 @@ theorem many_low_odd (hη : IsProfile η) (hδ₀ : 0 < δ₀) (S : IxSetting η
       -- `E_p - E_1 < γ / 4^{i+1}` and `E_{p+1} - E_1 ≥ γ / 4^i`
       have ha : E p < E 1 + γ / 4 ^ (i + 1) := by
         by_contra hge
-        push_neg at hge
+        push Not at hge
         have hsub : (Finset.Icc 1 (Dc + 1)).filter (fun j => E j < E 1 + γ / 4 ^ (i + 1)) ⊆ Finset.Icc 1 (p - 1) := by
           intro j hj
           rw [Finset.mem_filter, Finset.mem_Icc] at hj
@@ -662,7 +659,7 @@ theorem many_low_odd (hη : IsProfile η) (hδ₀ : 0 < δ₀) (S : IxSetting η
         omega
       have hb : E 1 + γ / 4 ^ i ≤ E (p + 1) := by
         by_contra hlt
-        push_neg at hlt
+        push Not at hlt
         have hsub : Finset.Icc 1 (p + 1) ⊆ (Finset.Icc 1 (Dc + 1)).filter (fun j => E j < E 1 + γ / 4 ^ i) := by
           intro j hj
           rw [Finset.mem_Icc] at hj
@@ -687,14 +684,14 @@ theorem many_low_odd (hη : IsProfile η) (hδ₀ : 0 < δ₀) (S : IxSetting η
             (secEig (S.T N) (S.H N) (sec (S.T N)) 1 + γ)).card} ∩ {N | 2 * Dc + 1 ≤ N}).Infinite := by
       have hfin : ({N | ¬ 2 * Dc + 1 ≤ N} : Set ℕ).Finite := by
         refine (Set.finite_lt_nat (2 * Dc + 1)).subset fun N hN => ?_
-        simp only [Set.mem_setOf_eq, not_le] at hN ⊢
+        simp only [Set.mem_ofPred_eq, not_le] at hN ⊢
         exact hN
-      have h := hinf.diff hfin
+      have h := hinf.sdiff hfin
       refine h.mono fun N hN => ⟨hN.1, ?_⟩
       have := hN.2
-      simp only [Set.mem_setOf_eq, not_not] at this
+      simp only [Set.mem_ofPred_eq, not_not] at this
       exact this
-    haveI := hF'.to_subtype
+    have := hF'.to_subtype
     obtain ⟨q, hq⟩ := Finite.exists_infinite_fiber fun x : ↥({N ∈ S.Ts.idx | ¬ Dc <
         ((Finset.Icc 1 (Module.finrank ℂ (sector (S.T N) (sec (S.T N))))).filter
           fun k => secEig (S.T N) (S.H N) (sec (S.T N)) k ∈

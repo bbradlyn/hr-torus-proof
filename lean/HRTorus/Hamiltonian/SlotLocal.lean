@@ -139,7 +139,7 @@ theorem cpairHat_mem_CAR {S : Type*} [Fintype S] [DecidableEq S] (ν : Triplet) 
   exact SMulMemClass.smul_mem _ (mul_mem (hmem h σ' hh) (hmem h' σ hh'))
 
 theorem slotProj_support (δ₀ : ℝ) (T : Torus) (X : Finset (Slot δ₀ T)) (g : SlotSpace δ₀ T) :
-    ∀ s, s ∉ X → slotProj δ₀ T X g s = 0 := fun s hs => by rw [slotProj_apply, if_neg hs]
+    ∀ s, s ∉ X → slotProj δ₀ T X g s = 0 := fun s hs => by rw [slotProj_apply, ite_eq_right hs]
 
 theorem norm_slotProj_le (δ₀ : ℝ) (T : Torus) (X : Finset (Slot δ₀ T)) (g : SlotSpace δ₀ T) :
     ‖slotProj δ₀ T X g‖ ≤ ‖g‖ := by
@@ -157,8 +157,8 @@ theorem slotProj_add_compl (δ₀ : ℝ) (T : Torus) (R : ℝ × ℝ) (r : ℝ) 
   rw [PiLp.sub_apply, slotProj_apply, slotProj_apply]
   have hb : s ∈ slotBall δ₀ T R r ↔ s ∉ ballCompl δ₀ T R r := by rw [slotBall_eq_compl, Finset.mem_compl]
   by_cases h : s ∈ ballCompl δ₀ T R r
-  · rw [if_neg (fun h' => (hb.mp h') h), if_pos h, sub_zero]
-  · rw [if_pos (hb.mpr h), if_neg h, sub_self]
+  · rw [ite_eq_right (fun h' => (hb.mp h') h), ite_eq_left h, sub_zero]
+  · rw [ite_eq_left (hb.mpr h), ite_eq_right h, sub_self]
 
 theorem cpairHat_sub_sub {S : Type*} [Fintype S] [DecidableEq S] (ν : Triplet) (f g f' g' : EuclideanSpace ℂ S) :
     cpairHat ν f g - cpairHat ν f' g' = cpairHat ν (f - f') g + cpairHat ν f' (g - g') := by
@@ -243,7 +243,7 @@ theorem continuous_flatDist_right (T : Torus) (c : ℝ × ℝ) : Continuous fun 
 
 theorem continuous_frame (η : ℝ → ℝ) (δ₀ : ℝ) (T : Torus) (s : Slot δ₀ T) : Continuous (frame η δ₀ T s) := by
   unfold frame
-  exact continuous_const.mul (continuous_finset_sum _ fun j _ => continuous_const.mul (psi_continuous T _))
+  exact continuous_const.mul (continuous_finsetSum _ fun j _ => continuous_const.mul (psi_continuous T _))
 
 theorem contDiff_frame (η : ℝ → ℝ) (δ₀ : ℝ) (T : Torus) (s : Slot δ₀ T) : ContDiff ℝ ∞ (frame η δ₀ T s) := by
   unfold frame
@@ -286,7 +286,7 @@ theorem norm_entry_le {S : Type*} [Fintype S] [DecidableEq S] (A : Op S) (m m' :
     ‖A m m'‖ ≤ ‖opCLM A‖ := by
   have h1 : (opCLM A (EuclideanSpace.single m' 1)) m = A m m' := by
     rw [show (opCLM A (EuclideanSpace.single m' 1)) m = (A *ᵥ (EuclideanSpace.single m' (1 : ℂ)).ofLp) m from rfl]
-    simp [Matrix.mulVec, dotProduct, Pi.single_apply]
+    simp [Matrix.mulVec, dotProduct]
   calc ‖A m m'‖ = ‖(opCLM A (EuclideanSpace.single m' 1)) m‖ := by rw [h1]
     _ ≤ ‖opCLM A (EuclideanSpace.single m' 1)‖ := PiLp.norm_apply_le _ _
     _ ≤ ‖opCLM A‖ * ‖EuclideanSpace.single m' (1 : ℂ)‖ := (opCLM A).le_opNorm _
@@ -296,20 +296,14 @@ theorem volume_fundDom_ne_top (T : Torus) : MeasureTheory.volume (fundDom T) ≠
   rw [fundDom, MeasureTheory.Measure.volume_eq_prod, MeasureTheory.Measure.prod_prod]
   simp [Real.volume_Ico, ENNReal.mul_eq_top]
 
-end DevicesSL
+/-! ### Proof devices for Proposition 4.4(i) under `4 ≤ min{L_x, L_y}` (end-of-stage cleanup; not statements of the paper) -/
 
-/-! ## Proposition 4.4: statements -/
-
-/-- **Proposition 4.4(i)**: "`For every admissible torus and every $R\in\R^2$:`"
-"`$\norm{B_\nu(R)}\le\sqrt2\,\norm{\ev R}\norm{\evD R}$, and $\norm{h_R}\le32\pi\norm{\ev R}^2\norm{\evD R}^2\le C_h$ with $C_h:=7/\pi$.`"
-— the first. -/
-theorem norm_Bν_le {δ₀ : ℝ} (hδ₀ : 0 < δ₀) {T : Torus} (hT : T.Admissible δ₀) (ν : Triplet) (R : ℝ × ℝ) :
-    ‖toCLM T (Bν T ν R)‖ ≤ Real.sqrt 2 * ‖ev T R‖ * ‖evD T R‖ := by
-  rw [Bν, toCLM_eq_opCLM, cpair_eq_cpairHat]
-  exact norm_cpairHat_le_sqrt ν _ _
-
-/-- **Proposition 4.4(i)**, the second: `‖h_R‖ ≤ 32π ‖e_R‖² ‖e'_R‖² ≤ C_h = 7/π`. -/
-theorem norm_hR_le {δ₀ : ℝ} (hδ₀ : 0 < δ₀) {T : Torus} (hT : T.Admissible δ₀) (R : ℝ × ℝ) :
+/-- **Device**: the bounds of Proposition 4.4(i) on `‖h_R‖` (`norm_hR_le`) for every torus with
+`4 ≤ min{L_x, L_y}`, admissible or not — the proof of `norm_hR_le`, which uses admissibility only through this
+inequality (block A's `norm_ev_sq_bound` and `norm_evD_sq_bound`). Block E needed this form (`Assembly.Main`'s
+`norm_HN_le_dev`), because a torus of `𝒯_N` need not be admissible for any `δ₀`; `norm_hR_le` is this device at an
+admissible torus (`four_le_min_of_admissible`). -/
+theorem norm_hR_le_of_four_le (T : Torus) (hL : 4 ≤ min T.Lx T.Ly) (R : ℝ × ℝ) :
     ‖toCLM T (hR T R)‖ ≤ 32 * π * ‖ev T R‖ ^ 2 * ‖evD T R‖ ^ 2 ∧
       32 * π * ‖ev T R‖ ^ 2 * ‖evD T R‖ ^ 2 ≤ ChHC := by
   have hb : ∀ ν : Triplet, ‖toCLM T ((Bν T ν R)ᴴ * Bν T ν R)‖ ≤
@@ -335,9 +329,15 @@ theorem norm_hR_le {δ₀ : ℝ} (hδ₀ : 0 < δ₀) {T : Torus} (hT : T.Admiss
       _ ≤ 8 * π * ∑ ν : Triplet, (if ν = .zero then (2 : ℝ) else 1) * (‖ev T R‖ ^ 2 * ‖evD T R‖ ^ 2) :=
           mul_le_mul_of_nonneg_left (Finset.sum_le_sum fun ν _ => hb ν) hpi
       _ = 32 * π * ‖ev T R‖ ^ 2 * ‖evD T R‖ ^ 2 := by
-          rw [sum_triplet]; simp only [reduceCtorEq, if_false, if_true]; ring
-  · have h1 := norm_ev_sq_le hδ₀ hT R
-    have h2 := norm_evD_sq_le hδ₀ hT R
+          rw [sum_triplet]; simp only [reduceCtorEq, ite_false, ite_true]; ring
+  · have h1 : 2 * π * ‖ev T R‖ ^ 2 ≤ 1.08 := by
+      have h := norm_ev_sq_bound T hL R
+      have := (abs_le.mp (h.1.trans h.2)).2
+      linarith
+    have h2 : 4 * π * ‖evD T R‖ ^ 2 ≤ 1.62 := by
+      have h := norm_evD_sq_bound T hL R
+      have := (abs_le.mp (h.1.trans h.2)).2
+      linarith
     have hπ : 0 < π := Real.pi_pos
     have ha : 0 ≤ 2 * π * ‖ev T R‖ ^ 2 := by positivity
     have hb' : 0 ≤ 4 * π * ‖evD T R‖ ^ 2 := by positivity
@@ -346,6 +346,24 @@ theorem norm_hR_le {δ₀ : ℝ} (hδ₀ : 0 < δ₀) {T : Torus} (hT : T.Admiss
       field_simp; ring
     rw [key, ChHC, div_le_div_iff_of_pos_right hπ]
     nlinarith [mul_le_mul h1 h2 hb' (by norm_num)]
+
+end DevicesSL
+
+/-! ## Proposition 4.4: statements -/
+
+/-- **Proposition 4.4(i)**: "`For every admissible torus and every $R\in\R^2$:`"
+"`$\norm{B_\nu(R)}\le\sqrt2\,\norm{\ev R}\norm{\evD R}$, and $\norm{h_R}\le32\pi\norm{\ev R}^2\norm{\evD R}^2\le C_h$ with $C_h:=7/\pi$.`"
+— the first. -/
+theorem norm_Bν_le {δ₀ : ℝ} (hδ₀ : 0 < δ₀) {T : Torus} (hT : T.Admissible δ₀) (ν : Triplet) (R : ℝ × ℝ) :
+    ‖toCLM T (Bν T ν R)‖ ≤ Real.sqrt 2 * ‖ev T R‖ * ‖evD T R‖ := by
+  rw [Bν, toCLM_eq_opCLM, cpair_eq_cpairHat]
+  exact norm_cpairHat_le_sqrt ν _ _
+
+/-- **Proposition 4.4(i)**, the second: `‖h_R‖ ≤ 32π ‖e_R‖² ‖e'_R‖² ≤ C_h = 7/π`. -/
+theorem norm_hR_le {δ₀ : ℝ} (hδ₀ : 0 < δ₀) {T : Torus} (hT : T.Admissible δ₀) (R : ℝ × ℝ) :
+    ‖toCLM T (hR T R)‖ ≤ 32 * π * ‖ev T R‖ ^ 2 * ‖evD T R‖ ^ 2 ∧
+      32 * π * ‖ev T R‖ ^ 2 * ‖evD T R‖ ^ 2 ≤ ChHC :=
+  norm_hR_le_of_four_le T (four_le_min_of_admissible hδ₀ hT) R
 
 /-- **Proposition 4.4(ii)**: "`Then $h_{R,r}\in\Alg(\Ball rR)$ is self-adjoint and commutes with $\Nhat\up$ and $\Nhat\dn$`" —
 `h_{R,r} ∈ Alg(Ball(r, R))`. -/
@@ -389,7 +407,7 @@ theorem exists_norm_iota_hR_sub_hRr_le {η : ℝ → ℝ} (hη : IsProfile η) {
   have hCl0 : 0 ≤ Cl := by
     have hpos : 0 < (1 + r) ^ (-k) := Real.rpow_pos_of_pos (by linarith) _
     by_contra h
-    push_neg at h
+    push Not at h
     have := mul_neg_of_neg_of_pos h hpos
     linarith [norm_nonneg (slotProj δ₀ T (ballCompl δ₀ T R r) (analysis η δ₀ T (ev T R)))]
   set f := analysis η δ₀ T (ev T R) with hf

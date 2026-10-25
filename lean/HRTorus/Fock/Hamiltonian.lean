@@ -95,9 +95,9 @@ theorem n_mul_c (ν μ : Modes T) :
   · have h1 : c ν * c μ = -(c μ * c ν) := eq_neg_of_add_eq_zero_left (c_anticomm ν μ)
     have h2 : (c ν)ᴴ * c μ = -(c μ * (c ν)ᴴ) := by
       have := c_anticomm_star μ ν
-      rw [if_neg (Ne.symm h)] at this
+      rw [ite_eq_right (Ne.symm h)] at this
       exact eq_neg_of_add_eq_zero_left (by rw [add_comm]; exact this)
-    rw [if_neg h, zero_smul, sub_zero, mul_assoc, h1, mul_neg, ← mul_assoc, h2, neg_mul, neg_neg, mul_assoc]
+    rw [ite_eq_right h, zero_smul, sub_zero, mul_assoc, h1, mul_neg, ← mul_assoc, h2, neg_mul, neg_neg, mul_assoc]
 
 /-- `N_τ c_μ = c_μ (N_τ − [μ.2 = τ])`. -/
 theorem Nsig_mul_c (τ : Spin) (μ : Modes T) :

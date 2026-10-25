@@ -274,7 +274,7 @@ theorem measurableSet_slotBall_eq (δ₀ : ℝ) (T : Torus) (r : ℝ) (Y₀ : Fi
     exact measurableSet_le (continuous_flatDist_right T _).measurable measurable_const
   have e : {R : ℝ × ℝ | slotBall δ₀ T R r = Y₀} = ⋂ s, {R | s ∈ slotBall δ₀ T R r ↔ s ∈ Y₀} := by
     ext R
-    simp only [Set.mem_setOf_eq, Set.mem_iInter, Finset.ext_iff]
+    simp only [Set.mem_ofPred_eq, Set.mem_iInter, Finset.ext_iff]
   rw [e]
   refine MeasurableSet.iInter fun s => ?_
   by_cases h : s ∈ Y₀
@@ -465,8 +465,8 @@ variable {S : Type*} [Fintype S] [DecidableEq S]
 /-- Device: the entries of `u ↦ e^{u N}` have derivative `(e^{u N} N)_{s s'}`. -/
 theorem hasDerivAt_exp_smul_apply (N : Matrix S S ℝ) (s s' : S) (u : ℝ) :
     HasDerivAt (fun v : ℝ => NormedSpace.exp (v • N) s s') ((NormedSpace.exp (u • N) * N) s s') u := by
-  letI : NormedRing (Matrix S S ℝ) := Matrix.linftyOpNormedRing
-  letI : NormedAlgebra ℝ (Matrix S S ℝ) := Matrix.linftyOpNormedAlgebra
+  let : NormedRing (Matrix S S ℝ) := Matrix.linftyOpNormedRing
+  let : NormedAlgebra ℝ (Matrix S S ℝ) := Matrix.linftyOpNormedAlgebra
   have h := hasDerivAt_exp_smul_const' (𝕂 := ℝ) N u
   have hc : N * NormedSpace.exp (u • N) = NormedSpace.exp (u • N) * N :=
     ((Commute.refl N).smul_right u).exp_right.eq
@@ -539,7 +539,7 @@ theorem sum_not_subset_le (Ψ : Finset S → Op S) (Y : Finset S) {f : S → ℝ
       if s ∈ Z then c Z else 0 := by
     intro Z s
     by_cases hs : s ∈ Z
-    · simp only [hs, true_and, if_true, hc]
+    · simp only [hs, true_and, ite_true, hc]
       rw [Finset.mul_sum, ← Finset.sum_filter, Finset.filter_mem_eq_inter, Finset.univ_inter]
     · simp [hs]
   have hM : ∑ s ∈ Yᶜ, ∑ s'' : S, chainMatrix Ψ s s'' * f s'' = ∑ Z : Finset S, ((Yᶜ ∩ Z).card : ℝ) * c Z := by
@@ -585,7 +585,7 @@ theorem slotDist_comm_m (s s' : Slot δ₀ T) : slotDist δ₀ T s s' = slotDist
 theorem expNegDiv_compl_fat_le {lam : ℝ} (hlam : 0 < lam) {X : Finset (Slot δ₀ T)} {ρ : ℝ} (hρ : 0 < ρ)
     {s : Slot δ₀ T} (hs : s ∈ X) : expNegDiv (slotSetDist {s} (fat X ρ)ᶜ) lam ≤ Real.exp (-ρ / lam) := by
   rcases Finset.eq_empty_or_nonempty (fat X ρ)ᶜ with hW | hW
-  · rw [hW, slotSetDist_empty_right, expNegDiv, if_pos rfl]
+  · rw [hW, slotSetDist_empty_right, expNegDiv, ite_eq_left rfl]
     exact (Real.exp_pos _).le
   · rw [slotSetDist_eq_inf' (Finset.singleton_nonempty s) hW]
     have hgt : ρ < ({s} ×ˢ (fat X ρ)ᶜ).inf' ((Finset.singleton_nonempty s).product hW)
@@ -597,7 +597,7 @@ theorem expNegDiv_compl_fat_le {lam : ℝ} (hlam : 0 < lam) {X : Finset (Slot δ
       subst ha
       rw [Finset.mem_compl] at hb
       by_contra hle
-      push_neg at hle
+      push Not at hle
       apply hb
       rw [mem_fat]
       exact ⟨a, hs, by rw [slotDist_comm_m]; exact hle⟩
@@ -752,7 +752,7 @@ theorem volume_discE {r : ℝ} (hr : 0 ≤ r) : volume (discE r) = ENNReal.ofRea
   rw [← h]
   have e : Complex.measurableEquivRealProd ⁻¹' discE r = Metric.closedBall (0 : ℂ) r := by
     ext z
-    simp only [Set.mem_preimage, discE, Set.mem_setOf_eq, Metric.mem_closedBall, dist_zero_right]
+    simp only [Set.mem_preimage, discE, Set.mem_ofPred_eq, Metric.mem_closedBall, dist_zero_right]
     show z.re ^ 2 + z.im ^ 2 ≤ r ^ 2 ↔ ‖z‖ ≤ r
     rw [← sq_le_sq₀ (norm_nonneg z) hr, Complex.sq_norm, Complex.normSq_apply]
     constructor <;> intro h <;> nlinarith
@@ -782,7 +782,7 @@ theorem volume_fundDom_inter_disc_le (T : Torus) (c : ℝ × ℝ) {r : ℝ} (hr 
   set G : ℤ × ℤ → Set (ℝ × ℝ) := fun p => {ξ | (c - v p) + ξ ∈ fundDom T} ∩ discE r with hG
   have hcover : fundDom T ∩ {R | flatDist T c R ≤ r} ⊆ ⋃ p, A p := by
     rintro R ⟨hRD, hR⟩
-    simp only [Set.mem_setOf_eq] at hR
+    simp only [Set.mem_ofPred_eq] at hR
     have e1 : pdist T.Lx (c.1 - R.1) = |(c.1 - R.1) - round (T.Lx⁻¹ * (c.1 - R.1)) * T.Lx| := by
       unfold pdist
       exact HRTorus.SlotFrame.Analysis.infDist_zmultiples_eq _ _
@@ -797,20 +797,20 @@ theorem volume_fundDom_inter_disc_le (T : Torus) (c : ℝ × ℝ) {r : ℝ} (hr 
       exact pow_le_pow_left₀ (Real.sqrt_nonneg _) hR 2
     rw [e1, e2, sq_abs, sq_abs] at hsq
     refine Set.mem_iUnion.mpr ⟨(round (T.Lx⁻¹ * (c.1 - R.1)), round (T.Ly⁻¹ * (c.2 - R.2))), hRD, ?_⟩
-    simp only [Set.mem_setOf_eq, discE, hv, Prod.fst_sub, Prod.snd_sub]
+    simp only [Set.mem_ofPred_eq, discE, hv, Prod.fst_sub, Prod.snd_sub]
     nlinarith
   have hmeasA : ∀ p, volume (A p) = volume (G p) := by
     intro p
     rw [← measure_preimage_add volume (c - v p) (A p)]
     congr 1
     ext ξ
-    simp only [hA, hG, Set.mem_preimage, Set.mem_inter_iff, Set.mem_setOf_eq, add_sub_cancel_left]
+    simp only [hA, hG, Set.mem_preimage, Set.mem_inter_iff, Set.mem_ofPred_eq, add_sub_cancel_left]
   have hdisj : Pairwise (Function.onFun Disjoint G) := by
     intro p q hpq
     rw [Function.onFun, Set.disjoint_left]
     rintro ξ ⟨hp, -⟩ ⟨hq, -⟩
     apply hpq
-    simp only [Set.mem_setOf_eq, fundDom, Set.mem_prod, Set.mem_Ico, hv, Prod.fst_add, Prod.snd_add, Prod.fst_sub,
+    simp only [Set.mem_ofPred_eq, fundDom, Set.mem_prod, Set.mem_Ico, hv, Prod.fst_add, Prod.snd_add, Prod.fst_sub,
       Prod.snd_sub] at hp hq
     have h1 : p.1 = q.1 := int_eq_of_mem_Ico (x := c.1 + ξ.1) T.Lx_pos (by linarith [hp.1.1]) (by linarith [hp.1.2])
       (by linarith [hq.1.1]) (by linarith [hq.1.2])
@@ -931,7 +931,7 @@ theorem min_one_exp_le_shells {q lam d : ℝ} (hlam : 0 < lam) {K : ℕ} (hK : 1
         exact h2.trans (Nat.floor_le hx0.le)
       exact (min_le_right _ _).trans (Real.exp_le_exp.mpr (by linarith))
   calc min 1 (Real.exp (-x)) ≤ Real.exp (-(m : ℝ)) * (if d ≤ q + (m + 1) * lam then 1 else 0) := by
-        rw [if_pos hdm, mul_one]
+        rw [ite_eq_left hdm, mul_one]
         exact hwm
     _ ≤ _ := Finset.single_le_sum hnn hmK
 
@@ -988,7 +988,7 @@ theorem ms_opIntegral_sum {ι : Type*} (s : Finset ι) (D : Set (ℝ × ℝ)) (f
     opIntegral D (fun R => ∑ i ∈ s, f i R) = ∑ i ∈ s, opIntegral D (f i) := by
   ext m m'
   simp only [opIntegral, Matrix.of_apply, Matrix.sum_apply]
-  exact integral_finset_sum s fun i hi => hf i hi m m'
+  exact integral_finsetSum s fun i hi => hf i hi m m'
 
 theorem ms_opIntegral_sub (D : Set (ℝ × ℝ)) (f g : ℝ × ℝ → Op S)
     (hf : ∀ m m' : Conf S, IntegrableOn (fun R => f R m m') D) (hg : ∀ m m' : Conf S, IntegrableOn (fun R => g R m m') D) :
@@ -1311,7 +1311,7 @@ theorem chainMatrix_PsiL_le (M : MSData δ₀ T) (j₀ : ℕ) (s s' : Slot δ₀
     have e : {R : ℝ × ℝ | slotBall δ₀ T R (rj j) ∈ F} =
         {R | flatDist T (centre δ₀ T s) R ≤ rj j} ∩ {R | flatDist T (centre δ₀ T s') R ≤ rj j} := by
       ext R
-      simp only [hF, Finset.mem_filter, Finset.mem_univ, true_and, mem_slotBall', Set.mem_setOf_eq,
+      simp only [hF, Finset.mem_filter, Finset.mem_univ, true_and, mem_slotBall', Set.mem_ofPred_eq,
         Set.mem_inter_iff]
     rw [e]
     exact (measurableSet_le (continuous_flatDist_right T _).measurable measurable_const).inter
@@ -1325,13 +1325,13 @@ theorem chainMatrix_PsiL_le (M : MSData δ₀ T) (j₀ : ℕ) (s s' : Slot δ₀
       · intro R hR
         refine ⟨hR.1, ?_⟩
         have h2 := hR.2
-        simp only [hF, Set.mem_setOf_eq, Finset.mem_filter, Finset.mem_univ, true_and, mem_slotBall'] at h2
+        simp only [hF, Set.mem_ofPred_eq, Finset.mem_filter, Finset.mem_univ, true_and, mem_slotBall'] at h2
         exact h2.1
       · exact (measure_mono Set.inter_subset_left).trans_lt (volume_fundDom_ne_top T).lt_top |>.ne
     · rw [mul_zero]
       have hempty : fundDom T ∩ {R : ℝ × ℝ | slotBall δ₀ T R (rj j) ∈ F} = ∅ := by
         ext R
-        simp only [Set.mem_inter_iff, Set.mem_setOf_eq, Set.mem_empty_iff_false, iff_false, not_and]
+        simp only [Set.mem_inter_iff, Set.mem_ofPred_eq, Set.mem_empty_iff_false, iff_false, not_and]
         intro _ h2
         simp only [hF, Finset.mem_filter, Finset.mem_univ, true_and, mem_slotBall'] at h2
         apply hd
@@ -1348,7 +1348,7 @@ theorem chainMatrix_PsiL_le (M : MSData δ₀ T) (j₀ : ℕ) (s s' : Slot δ₀
           ∫ R in fundDom T, (if slotBall δ₀ T R (rj j) = Z then c j else 0) := Finset.sum_comm
     _ = ∑ j ∈ Finset.range (j₀ + 1), ∫ R in fundDom T, (if slotBall δ₀ T R (rj j) ∈ F then c j else 0) := by
         refine Finset.sum_congr rfl fun j _ => ?_
-        rw [← integral_finset_sum _ fun Z _ =>
+        rw [← integral_finsetSum _ fun Z _ =>
           ms_integrableOn_ite_const T (measurableSet_slotBall_eq δ₀ T (rj j) Z) (c j)]
         congr 1
         funext R
@@ -1511,7 +1511,7 @@ theorem min_one_sum_le {ι : Type*} (X : Finset ι) (a : ι → ℝ) (ha : ∀ i
       _ = min 1 (a i) := (min_eq_left h1).symm
       _ ≤ ∑ i ∈ X, min 1 (a i) :=
           Finset.single_le_sum (f := fun i => min 1 (a i)) (fun i _ => le_min zero_le_one (ha i)) hi
-  · push_neg at h
+  · push Not at h
     calc min 1 (∑ i ∈ X, a i) ≤ ∑ i ∈ X, a i := min_le_right _ _
       _ = ∑ i ∈ X, min 1 (a i) := Finset.sum_congr rfl fun i hi => (min_eq_right (h i hi).le).symm
 
@@ -1539,7 +1539,7 @@ theorem min_le_shells_slot {lam a : ℝ} (hlam : 0 < lam) (ha : 0 ≤ a) {Kn : �
     refine Finset.sum_nonneg fun n _ => mul_nonneg (Real.exp_pos _).le ?_
     split_ifs <;> norm_num
   rcases Finset.eq_empty_or_nonempty (slotBall δ₀ T R r) with hb | hb
-  · rw [hb, slotSetDist_empty_right, expNegDiv, if_pos rfl, mul_zero, min_eq_right zero_le_one]
+  · rw [hb, slotSetDist_empty_right, expNegDiv, ite_eq_left rfl, mul_zero, min_eq_right zero_le_one]
     exact hnn
   · rw [slotSetDist_eq_inf' (Finset.singleton_nonempty s) hb]
     set x := ({s} ×ˢ slotBall δ₀ T R r).inf' ((Finset.singleton_nonempty s).product hb)
@@ -1593,7 +1593,7 @@ theorem integral_shells_le (T : Torus) (cpt : ℝ × ℝ) {lam rr x : ℝ} (hlam
   have hint : ∀ n ∈ Finset.range Kn, Integrable (fun R => Real.exp (-(n : ℝ)) *
       (if flatDist T cpt R ≤ (rr + 2 * x * lam) + (n + 1) * lam then (1 : ℝ) else 0)) (volume.restrict (fundDom T)) :=
     fun n _ => (ms_integrableOn_ite_const T (hmeas n) 1).const_mul _
-  rw [integral_finset_sum _ hint]
+  rw [integral_finsetSum _ hint]
   have hrr : 0 < rr := by linarith
   have hterm : ∀ n ∈ Finset.range Kn, ∫ R in fundDom T, Real.exp (-(n : ℝ)) *
       (if flatDist T cpt R ≤ (rr + 2 * x * lam) + (n + 1) * lam then (1 : ℝ) else 0) ≤
@@ -1741,7 +1741,7 @@ theorem norm_comm_tail_le (M : MSData δ₀ T) (hδ₀ : 0 < δ₀) (hT : T.Admi
     exact min_le_shells_slot hlam ha0 hKn1 hKl s R (rj j)
   refine (norm_integral_le_of_norm_le hGint (Filter.Eventually.of_forall hpt)).trans ?_
   beta_reduce
-  rw [integral_finset_sum _ fun j _ => integrable_finsetSum _ fun s _ => (shellFn_integrable T _ _ _ Kn _).const_mul _]
+  rw [integral_finsetSum _ fun j _ => integrable_finsetSum _ fun s _ => (shellFn_integrable T _ _ _ Kn _).const_mul _]
   have hrho := rho_le_half hk
   have hrho0 : 0 ≤ ((2 : ℝ) ^ (k - 2))⁻¹ := by positivity
   calc ∑ j ∈ Finset.Ioc j₀ (j₀ + J), ∫ R in fundDom T, ∑ s ∈ X, 2 * ‖opCLM A‖ *
@@ -1750,7 +1750,7 @@ theorem norm_comm_tail_le (M : MSData δ₀ T) (hδ₀ : 0 < δ₀) (hT : T.Admi
       ≤ ∑ j ∈ Finset.Ioc j₀ (j₀ + J), ∑ s ∈ X, 2 * ‖opCLM A‖ * (ck M.Ch (M.CH k) k * (1 + rj j) ^ (-(k : ℝ))) *
           (8 * π * rj j ^ 2 * (1 + C1 δ₀ M.Ch (M.CH 5) * |τ|) ^ 2) := by
         refine Finset.sum_le_sum fun j hj => ?_
-        rw [integral_finset_sum _ fun s _ => (shellFn_integrable T _ _ _ Kn _).const_mul _]
+        rw [integral_finsetSum _ fun s _ => (shellFn_integrable T _ _ _ Kn _).const_mul _]
         refine Finset.sum_le_sum fun s _ => ?_
         rw [integral_const_mul]
         refine mul_le_mul_of_nonneg_left ?_ (mul_nonneg (by positivity) (hcj j))
@@ -2370,7 +2370,7 @@ constant, which the statement does not name. -/
 
 theorem le_zero_of_forall_le_inv' {v c : ℝ} (hc : 0 ≤ c) (h : ∀ r : ℝ, 0 ≤ r → v ≤ c * (1 + r)⁻¹) : v ≤ 0 := by
   by_contra hpos
-  push_neg at hpos
+  push Not at hpos
   have h1 := h (c / v) (div_nonneg hc hpos.le)
   have h2 : c * (1 + c / v)⁻¹ < v := by
     have hv : 0 < 1 + c / v := by positivity
@@ -2503,10 +2503,10 @@ theorem small_radius_final {M t r k Ck a S x I : ℝ} (hM : 1 ≤ M) (hk : 0 ≤
         mul_le_mul_of_nonneg_left hax (mul_nonneg (h3M.trans hCk) ht0)
     _ = Ck * (1 + |t|) ^ (4 * k) * x * (a + S) := by ring
 
-/-- **Lemma 5.5**: "`For every $k\ge0$ there is $C_k$ such that for every even operator $A$ on $\FockS$, every $X\subset\Slots$ and every $t\in\R$,`"
+/-- **Lemma 5.5**: "`For every $k\ge0$ there is $C_k$ such that for every even operator $A$ on $\FockS$, every $X\subset\Slots$ with $\norm A_{X;\max\{k,3\}}<\infty$, and every $t\in\R$,`"
 "`\norm{\tau_t(A)}_{X;k}\le C_k(1+\abs t)^{4k}\abs X\bigl(\norm A+\norm A_{X;\max\{k,3\}}\bigr).`"
 — in block B's set norm (`ℝ≥0∞`); `k` real; the constant after `δ₀`, `k`, `C_h`, `C^H` ("`which depends only on $k$, $\Cvol$, $C_h$ and finitely many $C^H_{k'}$`").
-**For `A` with `n_A := ‖A‖ + ‖A‖_{X;max{k,3}} < ∞`** — the proof's "`We may assume $n_A<\infty$`": when `n_A = ∞` the
+**For `A` with `n_A := ‖A‖ + ‖A‖_{X;max{k,3}} < ∞`** — the paper's hypothesis (its proof: "`$n_A:=\norm A+\norm A_{X;\bar k}$, finite by hypothesis`"; the statement acquired it in the end-of-stage round, its proof having begun "we may assume"): when `n_A = ∞` the
 paper's right side is `+∞`, but in `ℝ≥0∞` `0 · ⊤ = 0`, so for `X = ∅` and an even non-scalar `A` the unrestricted
 transcription would be false (its left side is `⊤`). -/
 theorem setNorm_dyn_le {δ₀ : ℝ} (hδ₀ : 0 < δ₀) {k : ℝ} (hk : 0 ≤ k) (Ch : ℝ) (CH : ℕ → ℝ) :

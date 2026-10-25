@@ -134,7 +134,7 @@ def glue (h : Fintype.card (Mode S) ≤ Fintype.card (Mode S')) (κ : Conf S) (m
 
 theorem glue_segEmb (h : Fintype.card (Mode S) ≤ Fintype.card (Mode S')) (κ : Conf S) (m : Conf S') (μ : Mode S) :
     glue h κ m (segEmb h μ) = κ μ := by
-  rw [glue, dif_pos (segEmb_num_lt h μ), segPre_segEmb]
+  rw [glue, dite_eq_left (segEmb_num_lt h μ), segPre_segEmb]
 
 theorem segRestr_glue (h : Fintype.card (Mode S) ≤ Fintype.card (Mode S')) (κ : Conf S) (m : Conf S') :
     segRestr h (glue h κ m) = κ :=
@@ -143,7 +143,7 @@ theorem segRestr_glue (h : Fintype.card (Mode S) ≤ Fintype.card (Mode S')) (κ
 theorem offEq_glue (h : Fintype.card (Mode S) ≤ Fintype.card (Mode S')) (κ : Conf S) (m : Conf S') :
     OffEq h (glue h κ m) m := by
   intro ν hν
-  rw [glue, dif_neg (not_lt.mpr hν)]
+  rw [glue, dite_eq_right (not_lt.mpr hν)]
 
 theorem offEq_symm (h : Fintype.card (Mode S) ≤ Fintype.card (Mode S')) {m' m : Conf S'} (hm : OffEq h m' m) :
     OffEq h m m' :=
@@ -255,8 +255,8 @@ theorem ampl_one (h : Fintype.card (Mode S) ≤ Fintype.card (Mode S')) : ampl h
   rw [ampl_apply, Matrix.one_apply, Matrix.one_apply]
   by_cases e : m' = m
   · subst e
-    rw [if_pos (show OffEq h m' m' from fun _ _ => rfl), if_pos rfl, if_pos rfl]
-  · rw [if_neg e]
+    rw [ite_eq_left (show OffEq h m' m' from fun _ _ => rfl), ite_eq_left rfl, ite_eq_left rfl]
+  · rw [ite_eq_right e]
     split_ifs with hoff hr
     · exact absurd (eq_of_segRestr_eq h hr hoff) e
     · rfl
@@ -269,18 +269,18 @@ theorem ampl_mul (h : Fintype.card (Mode S) ≤ Fintype.card (Mode S')) (A B : O
   rw [Matrix.mul_apply, ampl_apply]
   simp only [ampl_apply]
   by_cases hm : OffEq h m' m
-  · rw [if_pos hm, Matrix.mul_apply, sum_offEq h m' _ ?hF]
+  · rw [ite_eq_left hm, Matrix.mul_apply, sum_offEq h m' _ ?hF]
     · refine Finset.sum_congr rfl fun κ _ => ?_
-      rw [if_pos (offEq_symm h (offEq_glue h κ m')), if_pos (offEq_trans h (offEq_glue h κ m') hm),
+      rw [ite_eq_left (offEq_symm h (offEq_glue h κ m')), ite_eq_left (offEq_trans h (offEq_glue h κ m') hm),
         segRestr_glue]
     · intro k hk
-      rw [if_neg hk, zero_mul]
-  · rw [if_neg hm]
+      rw [ite_eq_right hk, zero_mul]
+  · rw [ite_eq_right hm]
     symm
     refine Finset.sum_eq_zero fun k _ => ?_
     by_cases h1 : OffEq h m' k
-    · rw [if_neg (fun h2 => hm (offEq_trans h h1 h2)), mul_zero]
-    · rw [if_neg h1, zero_mul]
+    · rw [ite_eq_right (fun h2 => hm (offEq_trans h h1 h2)), mul_zero]
+    · rw [ite_eq_right h1, zero_mul]
 
 /-- `A ⊠ 1` is additive. -/
 theorem ampl_add (h : Fintype.card (Mode S) ≤ Fintype.card (Mode S')) (A B : Op S) :
@@ -302,8 +302,8 @@ theorem ampl_conjTranspose (h : Fintype.card (Mode S) ≤ Fintype.card (Mode S')
   ext m' m
   rw [Matrix.conjTranspose_apply, ampl_apply, ampl_apply, Matrix.conjTranspose_apply]
   by_cases hoff : OffEq h m' m
-  · rw [if_pos hoff, if_pos (offEq_symm h hoff)]
-  · rw [if_neg hoff, if_neg (fun h' => hoff (offEq_symm h h')), star_zero]
+  · rw [ite_eq_left hoff, ite_eq_left (offEq_symm h hoff)]
+  · rw [ite_eq_right hoff, ite_eq_right (fun h' => hoff (offEq_symm h h')), star_zero]
 
 /-- **The signs come out exactly**: `c_μ ⊠ 1` is the Jordan–Wigner annihilator of the segment mode of `μ` — the proof
 of Lemma 3.8: "`$c(f_i)$ acts on the $e_{\mathbf m'}$ by the same formula, with the same sign, which involves only $m_1,\dots,m_{i-1}$`". -/
@@ -323,8 +323,8 @@ theorem ampl_c (h : Fintype.card (Mode S) ≤ Fintype.card (Mode S')) (μ : Mode
       exact ⟨offEq_update_segEmb h m μ false, h1, segRestr_update_segEmb h m μ false⟩
   by_cases hc : m (segEmb h μ) = true ∧ m' = Function.update m (segEmb h μ) false
   · obtain ⟨hoff, hin⟩ := key.mpr hc
-    rw [if_pos hoff, if_pos hin, if_pos hc, Fermion.Pilot.JW.jwSign_eq, Fermion.Pilot.JW.jwSign_eq, cnt_segEmb]
-  · rw [if_neg hc]
+    rw [ite_eq_left hoff, ite_eq_left hin, ite_eq_left hc, Fermion.Pilot.JW.jwSign_eq, Fermion.Pilot.JW.jwSign_eq, cnt_segEmb]
+  · rw [ite_eq_right hc]
     split_ifs with hoff hin
     · exact absurd (key.mp ⟨hoff, hin⟩) hc
     · rfl
@@ -362,7 +362,7 @@ theorem ampl_injective (h : Fintype.card (Mode S) ≤ Fintype.card (Mode S')) :
   have hoff : OffEq h (glue h κ' vac) (glue h κ vac) :=
     offEq_trans h (offEq_glue h κ' vac) (offEq_symm h (offEq_glue h κ vac))
   have := congrFun (congrFun e (glue h κ' vac)) (glue h κ vac)
-  rwa [ampl_apply, ampl_apply, if_pos hoff, if_pos hoff, segRestr_glue, segRestr_glue] at this
+  rwa [ampl_apply, ampl_apply, ite_eq_left hoff, ite_eq_left hoff, segRestr_glue, segRestr_glue] at this
 
 /-- `cVec` of a matrix image (block A's computation inside `secondQuant_mul_cVec`). -/
 theorem cVec_mulVec (U : Matrix (Mode S') (Mode S) ℂ) (g : Mode S → ℂ) :
@@ -465,7 +465,7 @@ theorem toEuclideanLin_anaMat : Matrix.toEuclideanLin (𝕜 := ℂ) (anaMat η �
   apply PiLp.ext
   intro ρ
   rw [Matrix.toLpLin_apply]
-  simp only [WithLp.ofLp_toLp, Matrix.mulVec, dotProduct, WithLp.ofLp_sum, Finset.sum_apply, PiLp.smul_apply,
+  simp only [Matrix.mulVec, dotProduct, WithLp.ofLp_sum, Finset.sum_apply, PiLp.smul_apply,
     smul_eq_mul, anaMat, Matrix.of_apply]
   exact Finset.sum_congr rfl fun μ _ => mul_comm _ _
 
@@ -500,7 +500,7 @@ theorem embedU_spec (hη : IsProfile η) (hδ₀ : 0 < δ₀) (hT : T.Admissible
     have hv_seg : ∀ μ : Modes T, v (segEmb h μ) = analysis2 η δ₀ T (EuclideanSpace.single μ 1) := by
       intro μ
       simp only [v]
-      rw [dif_pos (segEmb_num_lt h μ), segPre_segEmb]
+      rw [dite_eq_left (segEmb_num_lt h μ), segPre_segEmb]
     have hon : Orthonormal ℂ ((Set.range (segEmb h)).domRestrict v) := by
       rw [orthonormal_iff_ite]
       rintro ⟨_, μ, rfl⟩ ⟨_, μ', rfl⟩
@@ -508,7 +508,7 @@ theorem embedU_spec (hη : IsProfile η) (hδ₀ : 0 < δ₀) (hT : T.Admissible
         PiLp.single_apply]
       by_cases e : μ = μ'
       · subst e; simp
-      · rw [if_neg e, if_neg (fun h' => e (segEmb_inj h (congrArg Subtype.val h')))]
+      · rw [ite_eq_right e, ite_eq_right (fun h' => e (segEmb_inj h (congrArg Subtype.val h')))]
     obtain ⟨b, hb⟩ := Orthonormal.exists_orthonormalBasis_extension_of_card_eq
       (by rw [finrank_euclideanSpace]) hon
     refine ⟨(EuclideanSpace.basisFun (Mode (Slot δ₀ T)) ℂ).toBasis.toMatrix b,
@@ -517,13 +517,13 @@ theorem embedU_spec (hη : IsProfile η) (hδ₀ : 0 < δ₀) (hT : T.Admissible
       hb _ ⟨μ, rfl⟩, hv_seg]
     rfl
   unfold embedU
-  rw [dif_pos hex]
+  rw [dite_eq_left hex]
   exact hex.choose_spec
 
 /-- `ι` unfolded. -/
 theorem iota_eq (h : Fintype.card (Modes T) ≤ Fintype.card (Mode (Slot δ₀ T))) (A : FockOp T) :
     iota η δ₀ T A = secondQuant (embedU η δ₀ T h) * ampl h A * (secondQuant (embedU η δ₀ T h))ᴴ := by
-  rw [iota, dif_pos h]
+  rw [iota, dite_eq_left h]
 
 /-! ### Proof devices for `ι` (phase (b); not statements of the paper)
 
@@ -577,7 +577,7 @@ theorem anaMat_conjTranspose_mul_self (hη : IsProfile η) (hδ₀ : 0 < δ₀) 
   ext μ μ'
   rw [Matrix.mul_apply, Matrix.one_apply]
   have h1 := hinner (EuclideanSpace.single μ 1) (EuclideanSpace.single μ' 1)
-  rw [EuclideanSpace.inner_single_left, map_one, one_mul, EuclideanSpace.single_apply] at h1
+  rw [EuclideanSpace.inner_single_left, map_one, one_mul, PiLp.single_apply] at h1
   rw [← h1, PiLp.inner_apply]
   refine Finset.sum_congr rfl fun ρ _ => ?_
   simp only [Matrix.conjTranspose_apply, anaMat, Matrix.of_apply, RCLike.inner_apply, Complex.star_def]
@@ -620,9 +620,9 @@ theorem opCLM_aeval_eigen {S : Type*} [Fintype S] [DecidableEq S] (H : Op S) (μ
   induction p using Polynomial.induction_on with
   | C a =>
     rw [Polynomial.aeval_C, Polynomial.aeval_C, Algebra.algebraMap_eq_smul_one (A := Op S) a,
-      ← Complex.coe_smul, map_smul, map_one, ContinuousLinearMap.smul_apply, ContinuousLinearMap.one_apply,
+      ← Complex.coe_smul, map_smul, map_one, smul_apply, one_apply_eq_self,
       Complex.coe_algebraMap]
-  | add p p' hp hp' => simp only [map_add, ContinuousLinearMap.add_apply, hp, hp', add_smul]
+  | add p p' hp hp' => simp only [map_add, add_apply, hp, hp', add_smul]
   | monomial n a h =>
     have e1 : Polynomial.aeval H (Polynomial.C a * Polynomial.X ^ (n + 1)) =
         Polynomial.aeval H (Polynomial.C a * Polynomial.X ^ n) * H := by
@@ -630,7 +630,7 @@ theorem opCLM_aeval_eigen {S : Type*} [Fintype S] [DecidableEq S] (H : Op S) (μ
     have e2 : Polynomial.aeval μ (Polynomial.C a * Polynomial.X ^ (n + 1)) =
         Polynomial.aeval μ (Polynomial.C a * Polynomial.X ^ n) * μ := by
       rw [pow_succ, ← mul_assoc, map_mul, Polynomial.aeval_X]
-    rw [e1, e2, map_mul, ContinuousLinearMap.mul_apply, hw, map_smul, h, smul_smul, mul_comm μ]
+    rw [e1, e2, map_mul, mul_apply_eq_comp, hw, map_smul, h, smul_smul, mul_comm μ]
 
 /-- The spectral projection `1_B(H)` of a self-adjoint matrix is the orthogonal projection onto the span of the
 eigenvectors with eigenvalues in `B` (block A's `specProj_sector` without the sector, block A's proof). -/
@@ -640,7 +640,7 @@ theorem specProj_eq {S : Type*} [Fintype S] [DecidableEq S] {H : Op S} (hH : IsS
         (μ : ℂ)).starProjection := by
   have hHerm : H.IsHermitian := hH
   have hsym : (Matrix.toEuclideanLin (𝕜 := ℂ) (m := Conf S) (n := Conf S) H).IsSymmetric :=
-    Matrix.isHermitian_iff_isSymmetric.mp hHerm
+    Matrix.isSymmetric_toEuclideanLin_iff.symm.mp hHerm
   have hlin : ∀ (M : Op S) (w : EuclideanSpace ℂ (Conf S)),
       Matrix.toEuclideanLin (𝕜 := ℂ) (m := Conf S) (n := Conf S) M w =
         Matrix.toEuclideanCLM (n := Conf S) (𝕜 := ℂ) M w := by
@@ -661,12 +661,12 @@ theorem specProj_eq {S : Type*} [Fintype S] [DecidableEq S] {H : Op S} (hH : IsS
     apply hw0
     obtain ⟨M, hM⟩ := hu.exists_left_inv
     have h0 : Matrix.toEuclideanCLM (n := Conf S) (𝕜 := ℂ) (algebraMap ℝ (Op S) r - H) w = 0 := by
-      rw [map_sub, ContinuousLinearMap.sub_apply, hw, Algebra.algebraMap_eq_smul_one (A := Op S) r,
-        ← Complex.coe_smul, map_smul, map_one, ContinuousLinearMap.smul_apply, ContinuousLinearMap.one_apply,
+      rw [map_sub, sub_apply, hw, Algebra.algebraMap_eq_smul_one (A := Op S) r,
+        ← Complex.coe_smul, map_smul, map_one, smul_apply, one_apply_eq_self,
         sub_self]
     calc w = Matrix.toEuclideanCLM (n := Conf S) (𝕜 := ℂ) (M * (algebraMap ℝ (Op S) r - H)) w := by
           rw [hM, map_one]; rfl
-      _ = 0 := by rw [map_mul, ContinuousLinearMap.mul_apply, h0, map_zero]
+      _ = 0 := by rw [map_mul, mul_apply_eq_comp, h0, map_zero]
   obtain ⟨q, hq⟩ := exists_poly_interp (Matrix.finite_real_spectrum (A := H)).toFinset (B.indicator (1 : ℝ → ℝ))
   have hPq : cfc (B.indicator (1 : ℝ → ℝ)) H = Polynomial.aeval H q := by
     rw [cfc_congr (g := fun x => q.eval x) ?_, cfc_polynomial q H hH]
@@ -808,21 +808,21 @@ theorem segIncl_mul (h : Fintype.card (Mode S) ≤ Fintype.card (Mode S')) (A : 
     simp only [segIncl, Matrix.of_apply, eq_glue_vac_iff]
     simp only [ite_mul, one_mul, zero_mul]
     by_cases hm : OffEq h m' vac
-    · rw [if_pos hm, Finset.sum_eq_single (segRestr h m')]
-      · rw [if_pos (show OffEq h m' vac ∧ segRestr h m' = segRestr h m' from ⟨hm, rfl⟩)]
+    · rw [ite_eq_left hm, Finset.sum_eq_single (segRestr h m')]
+      · rw [ite_eq_left (show OffEq h m' vac ∧ segRestr h m' = segRestr h m' from ⟨hm, rfl⟩)]
       · intro b _ hb
-        rw [if_neg (fun h' => hb h'.2.symm)]
+        rw [ite_eq_right (fun h' => hb h'.2.symm)]
       · intro hn
         exact absurd (Finset.mem_univ _) hn
-    · rw [if_neg hm]
-      exact Finset.sum_eq_zero fun x _ => if_neg (fun h' => hm h'.1)
+    · rw [ite_eq_right hm]
+      exact Finset.sum_eq_zero fun x _ => ite_eq_right (fun h' => hm h'.1)
   have hR : (ampl h A * segIncl h) m' κ = ampl h A m' (glue h κ vac) := by
     rw [Matrix.mul_apply]
-    simp only [segIncl, Matrix.of_apply, mul_ite, mul_one, mul_zero, Finset.sum_ite_eq', Finset.mem_univ, if_true]
+    simp only [segIncl, Matrix.of_apply, mul_ite, mul_one, mul_zero, Finset.sum_ite_eq', Finset.mem_univ, ite_true]
   rw [hL, hR, ampl_apply, segRestr_glue]
   by_cases hm : OffEq h m' vac
-  · rw [if_pos hm, if_pos (offEq_trans h hm (offEq_symm h (offEq_glue h κ vac)))]
-  · rw [if_neg hm, if_neg (fun h' => hm (offEq_trans h h' (offEq_glue h κ vac)))]
+  · rw [ite_eq_left hm, ite_eq_left (offEq_trans h hm (offEq_symm h (offEq_glue h κ vac)))]
+  · rw [ite_eq_right hm, ite_eq_right (fun h' => hm (offEq_trans h h' (offEq_glue h κ vac)))]
 
 theorem exists_segIncl_mulVec_iff (h : Fintype.card (Mode S) ≤ Fintype.card (Mode S')) (v : Conf S' → ℂ) :
     (∃ φ : Conf S → ℂ, v = segIncl h *ᵥ φ) ↔ ∀ m, ¬OffEq h m vac → v m = 0 := by
@@ -831,23 +831,23 @@ theorem exists_segIncl_mulVec_iff (h : Fintype.card (Mode S) ≤ Fintype.card (M
     simp only [Matrix.mulVec, dotProduct, segIncl, Matrix.of_apply, eq_glue_vac_iff]
     simp only [ite_mul, one_mul, zero_mul]
     by_cases hm : OffEq h m vac
-    · rw [if_pos hm, Finset.sum_eq_single (segRestr h m)]
-      · rw [if_pos (show OffEq h m vac ∧ segRestr h m = segRestr h m from ⟨hm, rfl⟩)]
+    · rw [ite_eq_left hm, Finset.sum_eq_single (segRestr h m)]
+      · rw [ite_eq_left (show OffEq h m vac ∧ segRestr h m = segRestr h m from ⟨hm, rfl⟩)]
       · intro b _ hb
-        rw [if_neg (fun h' => hb h'.2.symm)]
+        rw [ite_eq_right (fun h' => hb h'.2.symm)]
       · intro hn
         exact absurd (Finset.mem_univ _) hn
-    · rw [if_neg hm]
-      exact Finset.sum_eq_zero fun x _ => if_neg (fun h' => hm h'.1)
+    · rw [ite_eq_right hm]
+      exact Finset.sum_eq_zero fun x _ => ite_eq_right (fun h' => hm h'.1)
   constructor
   · rintro ⟨φ, rfl⟩ m hm
-    rw [happ, if_neg hm]
+    rw [happ, ite_eq_right hm]
   · intro hv
     refine ⟨fun κ => v (glue h κ vac), funext fun m => ?_⟩
     rw [happ]
     by_cases hm : OffEq h m vac
-    · rw [if_pos hm, glue_segRestr h hm]
-    · rw [if_neg hm, hv m hm]
+    · rw [ite_eq_left hm, glue_segRestr h hm]
+    · rw [ite_eq_right hm, hv m hm]
 
 theorem mul_prod_eq_prod_mul_rect {ι : Type*} (X : Matrix (Conf S') (Conf S) ℂ) (Y : ι → Op S) (Z : ι → Op S')
     (hXY : ∀ i, X * Y i = Z i * X) (l : List ι) : X * (l.map Y).prod = (l.map Z).prod * X := by
@@ -862,7 +862,7 @@ theorem c_mulVec_eq_zero_iff (ν : Mode S') (v : Conf S' → ℂ) : c ν *ᵥ v 
   · intro h0 m hm
     have := congrFun h0 (Function.update m ν false)
     simp only [Matrix.mulVec, dotProduct, Pi.zero_apply] at this
-    rw [Fermion.Pilot.JW.sum_c_mul ν v (Function.update m ν false), Function.update_self, if_pos rfl,
+    rw [Fermion.Pilot.JW.sum_c_mul ν v (Function.update m ν false), Function.update_self, ite_eq_left rfl,
       Function.update_idem, Function.update_eq_self_iff.mpr hm.symm] at this
     have hs := Fermion.Pilot.JW.jwSign_mul_self ν m
     rcases mul_eq_zero.mp this with h1 | h1
@@ -972,7 +972,7 @@ theorem range_FfA (hη : IsProfile η) (hδ₀ : 0 < δ₀) (hT : T.Admissible �
     · intro k
       rw [Matrix.sub_apply, FfA, secondQuant_apply_vac, Matrix.mul_apply]
       simp only [segIncl, Matrix.of_apply, glue_vac, mul_ite, mul_one, mul_zero, Finset.sum_ite_eq', Finset.mem_univ,
-        if_true, secondQuant_apply_vac, sub_self]
+        ite_true, secondQuant_apply_vac, sub_self]
   ext Ψ
   rw [LinearMap.mem_range, Submodule.mem_iInf]
   simp only [Submodule.mem_iInf, LinearMap.mem_ker]
@@ -995,7 +995,7 @@ theorem range_FfA (hη : IsProfile η) (hδ₀ : 0 < δ₀) (hT : T.Admissible �
     · intro hker m hm
       have hm' : ∃ ν : Mode (Slot δ₀ T), Fintype.card (Modes T) ≤ ((num ν : Fin _) : ℕ) ∧ m ν = true := by
         by_contra hno
-        push_neg at hno
+        push Not at hno
         apply hm
         intro ν hν
         have := hno ν hν
@@ -1006,7 +1006,7 @@ theorem range_FfA (hη : IsProfile η) (hδ₀ : 0 < δ₀) (hT : T.Admissible �
         rw [mem_orthogonal_range_analysis2_iff hη hδ₀ hT h]
         intro μ
         have := congrFun (congrFun hUU (segEmb h μ)) ν
-        rw [Matrix.mul_apply, Matrix.one_apply, if_neg (Ne.symm (ne_segEmb_of_le h hν μ))] at this
+        rw [Matrix.mul_apply, Matrix.one_apply, ite_eq_right (Ne.symm (ne_segEmb_of_le h hν μ))] at this
         rw [← this]
         rfl
       have h0 := hker _ he
@@ -1470,18 +1470,18 @@ theorem gaugeAvg_apply (A : Op S) (i j : Conf S) :
     have hd : (ctS .dn i : ℤ) - (ctS .dn j : ℤ) = 0 := by
       have : ctS .dn i = ctS .dn j := hs'.2
       omega
-    rw [if_pos hu, if_pos hd, if_pos hs, smul_eq_mul]
+    rw [ite_eq_left hu, ite_eq_left hd, ite_eq_left hs, smul_eq_mul]
     field_simp
-  · rw [if_neg hs]
+  · rw [ite_eq_right hs]
     have hne : ¬((ctS .up i : ℤ) - (ctS .up j : ℤ) = 0 ∧ (ctS .dn i : ℤ) - (ctS .dn j : ℤ) = 0) := by
       rintro ⟨hu, hd⟩
       apply hs
       rw [secOfS_eq_iff]
       exact ⟨show ctS .up i = ctS .up j by omega, show ctS .dn i = ctS .dn j by omega⟩
     by_cases hu : (ctS .up i : ℤ) - (ctS .up j : ℤ) = 0
-    · rw [if_neg (fun hd => hne ⟨hu, hd⟩), smul_eq_mul]
+    · rw [ite_eq_right (fun hd => hne ⟨hu, hd⟩), smul_eq_mul]
       simp
-    · rw [if_neg hu, smul_eq_mul]
+    · rw [ite_eq_right hu, smul_eq_mul]
       simp
 
 theorem gaugeAvg_mem_Alg {X : Finset S} {A : Op S} (hA : A ∈ Alg X) (M : ℕ) : gaugeAvg M A ∈ Alg X := by
@@ -1495,7 +1495,7 @@ theorem gaugeAvg_isSectorPreservingS (A : Op S) : IsSectorPreservingS (gaugeAvg 
   intro i j h
   rw [gaugeAvg_apply] at h
   by_contra hne
-  exact h (if_neg hne)
+  exact h (ite_eq_right hne)
 
 open scoped Matrix.Norms.L2Operator in
 theorem norm_sub_gaugeAvg_le {B A' : Op S} (hB : ∀ φ, Fermion.Pilot.JW.gauge φ B = B) (M : ℕ) (hM : 0 < M) :

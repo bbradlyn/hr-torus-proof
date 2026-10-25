@@ -34,8 +34,8 @@ definition and is not stated).
   (`almostSupported_iff` restates it with the paper's quantifiers), and "uniformly in a parameter" is one `m` and
   one `C` for every value of a parameter in an arbitrary type.
 * **The set norm** `‖A‖_{X;k}` lives in `ℝ≥0∞`: it is `+∞` for an operator that is not even and `k > 0`
-  (`setNorm_eq_top`), and also, for `k > 0`, for a non-scalar operator and `X = ∅` (§5 uses both conventions:
-  "`We may assume $n_A<\infty$`"). The order `k` is real (`(1 + r)^k` is `Real.rpow`), so that §5's `\max\{k,3\}`
+  (`setNorm_eq_top`), and also, for `k > 0`, for a non-scalar operator and `X = ∅` (§5 states Lemmas 5.5–5.6 for
+  "`$\norm A_{X;\max\{k,3\}}<\infty$`" and uses both conventions). The order `k` is real (`(1 + r)^k` is `Real.rpow`), so that §5's `\max\{k,3\}`
   and real orders are covered.
 -/
 

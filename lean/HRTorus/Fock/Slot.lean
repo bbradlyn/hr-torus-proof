@@ -148,7 +148,7 @@ theorem mul_c_eq_of_mem_CAR {X : Finset S} {ν : Mode S} (hν : ν.1 ∉ X) {A :
       rw [hP, Matrix.mul_neg, Matrix.mul_neg]
       refine ⟨eq_neg_of_add_eq_zero_left (c_anticomm (s, σ) ν), ?_⟩
       have h2 := c_anticomm_star (s, σ) ν
-      rw [if_neg hne] at h2
+      rw [ite_eq_right hne] at h2
       exact eq_neg_of_add_eq_zero_left h2
     · obtain ⟨s, hs, σ, h⟩ := hx
       have hx : x = (chat s σ)ᴴ := by
@@ -159,7 +159,7 @@ theorem mul_c_eq_of_mem_CAR {X : Finset S} {ν : Mode S} (hν : ν.1 ∉ X) {A :
       rw [hx, hP, Matrix.mul_neg, Matrix.mul_neg]
       constructor
       · have h2 := c_anticomm_star ν (s, σ)
-        rw [if_neg (Ne.symm hne)] at h2
+        rw [ite_eq_right (Ne.symm hne)] at h2
         exact eq_neg_of_add_eq_zero_right h2
       · exact eq_neg_of_add_eq_zero_left (c_conjTranspose_anticomm (s, σ) ν)
   · intro r
@@ -510,9 +510,9 @@ theorem isSectorPreservingS_iff_commute (A : Op S) :
     · rw [h i j hA]; ring
   · intro h i j hA
     have := h (secOfS j) i j
-    simp only [if_true] at this
+    simp only [ite_true] at this
     by_contra hne
-    rw [if_neg hne, mul_one, zero_mul] at this
+    rw [ite_eq_right hne, mul_one, zero_mul] at this
     exact hA this
 
 /-- Block A's `isSectorPreserving_iff_sum`, for any `S`: `A = Σ_𝐧 P̂_𝐧 A P̂_𝐧`. -/
@@ -541,12 +541,12 @@ theorem isSectorPreservingS_iff_sum (A : Op S) :
     rw [hsum]
     by_cases hA : A i j = 0
     · simp [hA]
-    · rw [if_pos (h i j hA)]
+    · rw [ite_eq_left (h i j hA)]
   · intro h i j hA
     have := congrFun (congrFun h i) j
     rw [hsum] at this
     by_contra hne
-    rw [if_neg hne] at this
+    rw [ite_eq_right hne] at this
     exact hA this
 
 /-- Block A's `IsSectorPreserving.isEven`, for any `S`. -/

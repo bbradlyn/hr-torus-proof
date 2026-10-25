@@ -267,7 +267,8 @@ theorem zero_modes_dev (T : Torus) (nn : SectorLabel T) (z : ℕ)
 
 /-- **Theorem 2.10(iii)** with (2.8): "`If $N$ is even, $\mathcal K_N\subset\sect{(N/2,N/2)}$, $\dim\mathcal K_N=10$, and $\mathcal K_N$ consists of spin singlets.`"
 — if the kernel of `H_N` in the sector `(N/2, N/2)` has dimension ten, then `HasTenZeroModes` ("`Since $H_N\ge0$`", and
-"`(The sector $(N/2,N/2)$ has dimension $\binom{2N}{N/2}^2\ge16$ for even $N\ge2$.)`"). -/
+"`(The sector $(N/2,N/2)$ has dimension $\binom{2N}{N/2}^2\ge16$ for even $N\ge2$`"; the paper's parenthetical
+continues with the two odd sectors' dimension, 2 at `N = 1` and at least 3 for odd `N ≥ 3`). -/
 theorem hasTenZeroModes_of_kernel (T : Torus) (heven : Even T.N)
     (hker : Module.finrank ℂ ↥(LinearMap.ker (Matrix.toEuclideanLin (𝕜 := ℂ) (m := Conf (ZMod T.Nφ))
       (n := Conf (ZMod T.Nφ)) (HN T)) ⊓ sector T (halfSector T)) = 10) :
@@ -333,11 +334,11 @@ theorem rect_threshold_dev (lam : ℝ) (hlam : 0 < lam) :
 
 theorem inf_inter_ge_dev {A : Set ℕ} (hA : A.Infinite) (Nb : ℕ) : (A ∩ {N | Nb ≤ N}).Infinite := by
   have hfin : ({N | ¬ Nb ≤ N} : Set ℕ).Finite := (Set.finite_lt_nat Nb).subset fun N hN => by
-    simp only [Set.mem_setOf_eq, not_le] at hN ⊢
+    simp only [Set.mem_ofPred_eq, not_le] at hN ⊢
     exact hN
-  refine (hA.diff hfin).mono fun N hN => ⟨hN.1, ?_⟩
+  refine (hA.sdiff hfin).mono fun N hN => ⟨hN.1, ?_⟩
   have h := hN.2
-  simp only [Set.mem_setOf_eq, not_not] at h
+  simp only [Set.mem_ofPred_eq, not_not] at h
   exact h
 
 def rectSeq_dev (lam : ℝ) (hlam : 0 < lam) (M : Set ℕ) (hMi : M.Infinite)
@@ -391,7 +392,7 @@ theorem odd_E3_dev (lam : ℝ) (hlam : 0 < lam) (I : Set ℕ) (Nb : ℕ) (hI : �
     refine ⟨?_, ?_⟩
     · rw [h2, h1, sub_self]
     · rw [h2, sub_zero]
-      push_neg at hge
+      push Not at hge
       exact hge
 
 /-- Corollary 8.2(ii) in one sector `sec`: Corollary 7.4(ii)'s finite exceptional set (along `I`) and `E_1 = 0`. -/
@@ -455,13 +456,13 @@ theorem hollow_core_index (lam : ℝ) (hlam : 0 < lam)
   refine ⟨h4, ?_⟩
   obtain ⟨N, hN, hNpos⟩ := hinf.exists_gt 0
   obtain ⟨heven, -, hgap⟩ := hN
-  have hp1 : 1 ≤ p := (one_le_p_lt_finrank (Δ := Δ) (by linarith) hgap).1
+  have hp1 : 1 ≤ p := (one_le_p_lt_finrank (by linarith) hgap).1
   have hz : ∀ k : ℕ, 1 ≤ k → k ≤ 10 → evenEig lam hlam N k = 0 := (hzero N hNpos heven).1
   by_contra hlt
-  push_neg at hlt
+  push Not at hlt
   have hp10 : 10 ≤ p := by
     by_contra h
-    push_neg at h
+    push Not at h
     rw [hz (p + 1) (by omega) (by omega), hz p hp1 (by omega)] at hgap
     linarith
   omega
@@ -478,7 +479,7 @@ theorem hollow_core_E11_tendsto (lam : ℝ) (hlam : 0 < lam)
     linarith
   · by_contra h
     rw [Filter.not_eventually, Filter.frequently_inf_principal, Nat.frequently_atTop_iff_infinite] at h
-    have h' := h.diff (Set.finite_singleton 0)
+    have h' := h.sdiff (Set.finite_singleton 0)
     have h4 := hollow_core_index_four_dvd lam hlam 10 0 a le_rfl (by linarith) (h'.mono fun N hN => ?_)
     · omega
     · obtain ⟨⟨heven, hge⟩, hne⟩ := hN
@@ -487,7 +488,7 @@ theorem hollow_core_E11_tendsto (lam : ℝ) (hlam : 0 < lam)
       refine ⟨heven, ?_, ?_⟩
       · rw [hz 10 (by norm_num) le_rfl, hz 1 le_rfl (by norm_num), sub_self]
       · rw [hz 10 (by norm_num) le_rfl, sub_zero]
-        push_neg at hge
+        push Not at hge
         exact hge
 
 /-! ### Corollary 8.2 (odd `N`) -/
@@ -580,9 +581,9 @@ theorem countLE_conj_dev {T : Torus} {H U : FockOp T} (hU1 : Uᴴ * U = 1) (hU2 
     (hUs : IsSectorPreserving T U) (nn : SectorLabel T) (E : ℝ) :
     countLE T (U * H * Uᴴ) nn E = countLE T H nn E := by
   have e1 : ∀ w : FockSpace T, toCLM T U (toCLM T Uᴴ w) = w := fun w => by
-    rw [← ContinuousLinearMap.mul_apply, ← map_mul, hU2, map_one, ContinuousLinearMap.one_apply]
+    rw [← mul_apply_eq_comp, ← map_mul, hU2, map_one, one_apply_eq_self]
   have e2 : ∀ w : FockSpace T, toCLM T Uᴴ (toCLM T U w) = w := fun w => by
-    rw [← ContinuousLinearMap.mul_apply, ← map_mul, hU1, map_one, ContinuousLinearMap.one_apply]
+    rw [← mul_apply_eq_comp, ← map_mul, hU1, map_one, one_apply_eq_self]
   let e : FockSpace T ≃ₗ[ℂ] FockSpace T :=
     { toFun := fun w => toCLM T U w
       map_add' := fun a b => map_add _ a b
@@ -594,7 +595,7 @@ theorem countLE_conj_dev {T : Torus} {H U : FockOp T} (hU1 : Uᴴ * U = 1) (hU2 
       toCLM T A (toCLM T Uᴴ v) = c • toCLM T Uᴴ v ↔ toCLM T (U * A * Uᴴ) v = c • v := by
     intro A c v
     have e3 : toCLM T (U * A * Uᴴ) v = toCLM T U (toCLM T A (toCLM T Uᴴ v)) := by
-      simp only [toCLM, map_mul, ContinuousLinearMap.mul_apply]
+      simp only [toCLM, map_mul, mul_apply_eq_comp]
     rw [e3]
     constructor
     · intro h
@@ -1138,55 +1139,15 @@ theorem tauSet_nonempty {N : ℕ} (hN0 : 0 < N) (hN : L0std ^ 2 / (4 * π) ≤ N
 
 Block C's `norm_hR_le` (`‖h_R‖ ≤ C_h = 7/π`) is stated for admissible tori, and a torus of `𝒯_N` need not be admissible
 for any `δ₀` (both sides near `L₀`); its proof uses admissibility only through `4 ≤ min{L_x, L_y}` (block A's
-`norm_ev_sq_bound`, `norm_evD_sq_bound`), which `𝒯_N` has (`L₀ = 3√π ≥ 4`). The device below is that proof under
-`4 ≤ min{L_x, L_y}`; then `‖H_N‖ ≤ C_h L_xL_y = 28N` and every `E_k ≤ ‖H_N‖`. -/
+`norm_ev_sq_bound`, `norm_evD_sq_bound`), which `𝒯_N` has (`L₀ = 3√π ≥ 4`). That proof under `4 ≤ min{L_x, L_y}`
+is the device `norm_hR_le_of_four_le` of `Hamiltonian.SlotLocal`; with it, `‖H_N‖ ≤ C_h L_xL_y = 28N` and every
+`E_k ≤ ‖H_N‖`. -/
 
 section E11Devices
 
-theorem norm_hR_le_dev (T : Torus) (hL : 4 ≤ min T.Lx T.Ly) (R : ℝ × ℝ) : ‖toCLM T (hR T R)‖ ≤ ChHC := by
-  have hb : ∀ ν : Triplet, ‖toCLM T ((Bν T ν R)ᴴ * Bν T ν R)‖ ≤
-      (if ν = .zero then 2 else 1) * (‖ev T R‖ ^ 2 * ‖evD T R‖ ^ 2) := by
-    intro ν
-    rw [toCLM_eq_opCLM, norm_opCLM_conjTranspose_mul_self, Bν, cpair_eq_cpairHat]
-    have h1 := norm_cpairHat_le' ν (ev T R) (evD T R)
-    have h0 := norm_nonneg (opCLM (cpairHat ν (ev T R) (evD T R)))
-    split_ifs at h1 ⊢ with hν
-    · calc _ ≤ (Real.sqrt 2 * ‖ev T R‖ * ‖evD T R‖) * (Real.sqrt 2 * ‖ev T R‖ * ‖evD T R‖) :=
-            mul_le_mul h1 h1 h0 (by positivity)
-        _ = (Real.sqrt 2 * Real.sqrt 2) * (‖ev T R‖ ^ 2 * ‖evD T R‖ ^ 2) := by ring
-        _ = 2 * (‖ev T R‖ ^ 2 * ‖evD T R‖ ^ 2) := by rw [Real.mul_self_sqrt (by norm_num)]
-    · calc _ ≤ (1 * ‖ev T R‖ * ‖evD T R‖) * (1 * ‖ev T R‖ * ‖evD T R‖) :=
-            mul_le_mul h1 h1 h0 (by positivity)
-        _ = 1 * (‖ev T R‖ ^ 2 * ‖evD T R‖ ^ 2) := by ring
-  have hpi : (0 : ℝ) ≤ 8 * π := by positivity
-  have hfirst : ‖toCLM T (hR T R)‖ ≤ 32 * π * ‖ev T R‖ ^ 2 * ‖evD T R‖ ^ 2 := by
-    rw [hR, toCLM_eq_opCLM, opCLM_smul, norm_smul, Complex.norm_real, Real.norm_eq_abs, abs_of_nonneg hpi,
-      opCLM_sum]
-    calc 8 * π * ‖∑ ν : Triplet, opCLM ((Bν T ν R)ᴴ * Bν T ν R)‖
-        ≤ 8 * π * ∑ ν : Triplet, ‖opCLM ((Bν T ν R)ᴴ * Bν T ν R)‖ :=
-          mul_le_mul_of_nonneg_left (norm_sum_le _ _) hpi
-      _ ≤ 8 * π * ∑ ν : Triplet, (if ν = .zero then (2 : ℝ) else 1) * (‖ev T R‖ ^ 2 * ‖evD T R‖ ^ 2) :=
-          mul_le_mul_of_nonneg_left (Finset.sum_le_sum fun ν _ => hb ν) hpi
-      _ = 32 * π * ‖ev T R‖ ^ 2 * ‖evD T R‖ ^ 2 := by
-          rw [sum_triplet]; simp only [reduceCtorEq, if_false, if_true]; ring
-  have h1 : 2 * π * ‖ev T R‖ ^ 2 ≤ 1.08 := by
-    have h := norm_ev_sq_bound T hL R
-    have := (abs_le.mp (h.1.trans h.2)).2
-    linarith
-  have h2 : 4 * π * ‖evD T R‖ ^ 2 ≤ 1.62 := by
-    have h := norm_evD_sq_bound T hL R
-    have := (abs_le.mp (h.1.trans h.2)).2
-    linarith
-  have hπ : 0 < π := Real.pi_pos
-  have hb' : 0 ≤ 4 * π * ‖evD T R‖ ^ 2 := by positivity
-  have key : 32 * π * ‖ev T R‖ ^ 2 * ‖evD T R‖ ^ 2 =
-      4 * (2 * π * ‖ev T R‖ ^ 2) * (4 * π * ‖evD T R‖ ^ 2) / π := by
-    field_simp; ring
-  refine hfirst.trans ?_
-  rw [key, ChHC, div_le_div_iff_of_pos_right hπ]
-  nlinarith [mul_le_mul h1 h2 hb' (by norm_num)]
-
 theorem norm_HN_le_dev (T : Torus) (hL : 4 ≤ min T.Lx T.Ly) : ‖toCLM T (HN T)‖ ≤ ChHC * (4 * π * T.N) := by
+  have hhR : ∀ R : ℝ × ℝ, ‖toCLM T (hR T R)‖ ≤ ChHC := fun R =>
+    (norm_hR_le_of_four_le T hL R).1.trans (norm_hR_le_of_four_le T hL R).2
   have hfd : volume.real (fundDom T) = 4 * π * T.N := by
     rw [measureReal_def, fundDom, Measure.volume_eq_prod, Measure.prod_prod, Real.volume_Ico, Real.volume_Ico,
       sub_zero, sub_zero, ENNReal.toReal_mul, ENNReal.toReal_ofReal T.Lx_pos.le, ENNReal.toReal_ofReal T.Ly_pos.le]
@@ -1197,8 +1158,8 @@ theorem norm_HN_le_dev (T : Torus) (hL : 4 ≤ min T.Lx T.Ly) : ‖toCLM T (HN T
   exact norm_opIntegral_le_const _ (volume_fundDom_ne_top T).lt_top _
     (fun m m' => MeasureTheory.Measure.integrableOn_of_bounded (volume_fundDom_ne_top T)
       (hR_measurable T m m').aestronglyMeasurable (M := ChHC)
-      (Filter.Eventually.of_forall fun R => (norm_entry_le _ m m').trans (norm_hR_le_dev T hL R)))
-    fun R _ => norm_hR_le_dev T hL R
+      (Filter.Eventually.of_forall fun R => (norm_entry_le _ m m').trans (hhR R)))
+    fun R _ => hhR R
 
 theorem secEig_le_norm_dev {T : Torus} {H : FockOp T} (hH : IsSelfAdjoint H) (hHs : IsSectorPreserving T H)
     (nn : SectorLabel T) (k : ℕ) : secEig T H nn k ≤ ‖toCLM T H‖ := by
@@ -1263,7 +1224,7 @@ theorem uniform_eventually_dev
     intro N
     by_cases hN : N ∈ M
     · obtain ⟨⟨-, hnot⟩, -⟩ := hN
-      push_neg at hnot
+      push Not at hnot
       obtain ⟨T, hT, hTe⟩ := hnot
       by_cases hLL : T.Ly ≤ T.Lx
       · exact ⟨T, fun _ => ⟨hT, hLL, hTe⟩⟩

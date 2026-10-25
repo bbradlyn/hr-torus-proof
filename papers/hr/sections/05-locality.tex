@@ -337,15 +337,15 @@ from it below is purely asymptotic in $N$.
 \subsection{Almost-supported inputs and time filters}
 
 \begin{lemma}[propagation of almost-supported operators]\label{lem:almostinputs}
-For every $k\ge0$ there is $C_k$ such that for every even operator $A$ on $\FockS$, every $X\subset\Slots$ and
-every $t\in\R$,
+For every $k\ge0$ there is $C_k$ such that for every even operator $A$ on $\FockS$, every $X\subset\Slots$ with
+$\norm A_{X;\max\{k,3\}}<\infty$, and every $t\in\R$,
 \[
 \norm{\tau_t(A)}_{X;k}\le C_k(1+\abs t)^{4k}\abs X\bigl(\norm A+\norm A_{X;\max\{k,3\}}\bigr).
 \]
 \end{lemma}
 
 \begin{proof}
-Let $\bar k:=\max\{k,3\}$ and $n_A:=\norm A+\norm A_{X;\bar k}$. We may assume $n_A<\infty$, and also $X\ne\emptyset$: if
+Let $\bar k:=\max\{k,3\}$ and $n_A:=\norm A+\norm A_{X;\bar k}$, finite by hypothesis. We may assume $X\ne\emptyset$: if
 $X=\emptyset$, then $\fat Xr=\emptyset$ for every $r$ and $\Alg(\emptyset)=\C\one$, so $n_A<\infty$ forces $A\in\C\one$,
 and then $\tau_t(A)=A$ and both sides vanish. Let $C_{\rm lc}=\max\{1,(4C_1)^4\}$ and, for $k>0$, let $C^\tau_k$ be the constant
 of Theorem~\ref{thm:propagation}(c) for $\alpha=4$ and decay order $k$; for $k=0$ put $C^\tau_0:=1$, which is allowed by
@@ -388,7 +388,7 @@ only on $k$, $\Cvol$, $C_h$ and finitely many $C^H_{k'}$.
 
 \begin{lemma}[time filters]\label{lem:filters}
 Let $F\in L^1(\R)$ with $M_j(F):=\int(1+\abs t)^j\abs{F(t)}\,\dd t<\infty$ for every $j$. For every $k$ there is
-$C_k$ such that for every even operator $A$ on $\FockS$ and every $X\subset\Slots$,
+$C_k$ such that for every even operator $A$ on $\FockS$ and every $X\subset\Slots$ with $\norm A_{X;\max\{k,3\}}<\infty$,
 \[
 \Bigl\lVert\int F(t)\tau_t(A)\,\dd t\Bigr\rVert_{X;k}\le C_k\abs X\bigl(\norm A+\norm A_{X;\max\{k,3\}}\bigr)M_{4k}(F).
 \]
@@ -399,7 +399,7 @@ $\max\{m,m'\}+m''$.
 
 \begin{proof}
 Let $C^\sharp_k$ be the constant of Lemma~\ref{lem:almostinputs}, $\bar k:=\max\{k,3\}$ and
-$n_A:=\norm A+\norm A_{X;\bar k}$; as in the proof of Lemma~\ref{lem:almostinputs} we may assume $n_A<\infty$ and
+$n_A:=\norm A+\norm A_{X;\bar k}$, finite by hypothesis; as in the proof of Lemma~\ref{lem:almostinputs} we may assume
 $X\ne\emptyset$. The map $t\mapsto\tau_t(A)$ is continuous and bounded by $\norm A$, and $\tau_t(A)$ is even, because
 $\Hhat$ is even (Lemma~\ref{lem:sectors}(ii) and Lemma~\ref{lem:embedding}(i)); so $\int F(t)\tau_t(A)\,\dd t$ is
 defined. Fix $r\ge0$ and put $B_t:=\CE_{\fat Xr}(\tau_t(A))$. By Lemma~\ref{lem:condexp}, $t\mapsto B_t$ is continuous

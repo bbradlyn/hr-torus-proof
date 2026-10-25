@@ -421,11 +421,11 @@ theorem P_mul_comm_mul_P (D : ArgData η δ₀) (hD : D.Valid) :
   · have hΩ' : (coreSettingV_dev D hD hN).P Ω = Ω := by rw [hP]; exact hΩ
     have h := (coreSettingV_dev D hD hN).norm_clustering_inner hc (toCLM (D.T N) B) hΩ' h1
     rw [hlie, hP] at h
-    simpa [toCLM_mul', ContinuousLinearMap.mul_apply] using h
+    simpa [toCLM_mul', mul_apply_eq_comp] using h
   · have hΩ' : (coreSettingV_dev D hD hN).P Ω = Ω := by rw [hP]; exact hΩ
     have h := (coreSettingV_dev D hD hN).norm_clustering_vec hc (toCLM (D.T N) B) hΩ' h1
     rw [hlie, hP] at h
-    simpa [toCLM_mul', ContinuousLinearMap.mul_apply] using h
+    simpa [toCLM_mul', mul_apply_eq_comp] using h
 
 /-- **Proposition 6.10(iii)**: "`If moreover $A\in\AS_X$ and $B\in\AS_Y$ are even, with $\norm{A_N},\norm{B_N}\le CN^{m}$, $\abs{X_N}\le CN^{m}$ and $d(X_N,Y_N)\ge c\sqrt N-C$, then the right-hand sides in (ii) are $\Onf$.`"
 — for families depending on a parameter, with one prefactor exponent and one set of constants each (block B's
@@ -746,7 +746,7 @@ theorem KU_eq_dev (D : ArgData η δ₀) (hD : D.Valid) (hH2 : D.d.H2) {N : ℕ}
   rw [theta_conj_curr_dev D.toIxSetting hH2 hN h1, theta_conj_curr_dev D.toIxSetting hH2 hN h2, hv, hv, hb]
   exact ⟨rfl, rfl⟩
 
-theorem col_succ_fat_dev (hδ₀ : 0 < δ₀) {T : Torus} (hT : T.Admissible δ₀) (j : ℤ) {r : ℝ} (hr : 0 ≤ r) :
+theorem col_succ_fat_dev (hδ₀ : 0 < δ₀) {T : Torus} (hT : T.Admissible δ₀) (j : ℤ) {r : ℝ} :
     fat (col δ₀ T (j + 1)) r ⊆ fat (col δ₀ T j) (r + 4 * δ₀) := by
   have hδx := δx_pos hδ₀ hT
   have hδx2 : δx δ₀ T ≤ 2 * δ₀ := (consistency_ii hδ₀ hT).2.2.1
@@ -786,7 +786,7 @@ theorem asBound_enlarge_dev (hη : IsProfile η) (hδ₀ : 0 < δ₀) {Ts : Toru
       rwa [sub_add_cancel] at h
     refine ⟨A', Alg_mono hsub hA', hb.trans ?_⟩
     have hk := rpow_neg_le_dev (a := 1 + r) (b := 1 + (r - a)) (c := 1 + a) (by linarith) (by linarith)
-      (by linarith) (by nlinarith [mul_nonneg ha (sub_nonneg.mpr har)]) k
+      (by nlinarith [mul_nonneg ha (sub_nonneg.mpr har)]) k
     have h0 : 0 ≤ (1 + a) ^ k * |CA| * (N : ℝ) ^ m * (1 + r) ^ (-(k : ℝ)) := by positivity
     calc C k * (N : ℝ) ^ m * (1 + (r - a)) ^ (-(k : ℝ)) ≤
         |C k| * (N : ℝ) ^ m * ((1 + a) ^ k * (1 + r) ^ (-(k : ℝ))) :=
@@ -795,7 +795,7 @@ theorem asBound_enlarge_dev (hη : IsProfile η) (hδ₀ : 0 < δ₀) {Ts : Toru
       _ ≤ (1 + a) ^ k * (|C k| + |CA|) * (N : ℝ) ^ m * (1 + r) ^ (-(k : ℝ)) := by linarith
   · refine ⟨0, Alg_zero_mem _, ?_⟩
     rw [sub_zero, norm_iota hη hδ₀ hT]
-    have hk := rpow_neg_le_dev (a := 1 + r) (b := 1) (c := 1 + a) (by linarith) one_pos (by linarith)
+    have hk := rpow_neg_le_dev (a := 1 + r) (b := 1) (c := 1 + a) (by linarith) one_pos
       (by linarith) k
     rw [Real.one_rpow] at hk
     have h0 : 0 ≤ (1 + a) ^ k * |C k| * (N : ℝ) ^ m * (1 + r) ^ (-(k : ℝ)) := by positivity
@@ -856,15 +856,15 @@ theorem table_K (hη : IsProfile η) (hδ₀ : 0 < δ₀) (D : ArgData η δ₀)
   -- `K^U_∓` from the currents for `j₀ = 1`, moved to the cuts
   have hU1 : ASBound η δ₀ D.Ts D.cutMinus D.KUminus (5 / 2)
       (fun k => (1 + 4 * δ₀) ^ k * (|C k| + |moment (Wfilt D.ϑ D.γ) 0 * (4 * π * |D.d.Ch|)|)) := by
-    refine asBound_enlarge_dev hη hδ₀ (X := fun N => col δ₀ (D.T N) 1) (by positivity) (fun N hN r hr => ?_)
+    refine asBound_enlarge_dev hη hδ₀ (X := fun N => col δ₀ (D.T N) 1) (by positivity) (fun N hN r _ => ?_)
       (asBound_congr (hKs 1).1 fun N hN => (hKU N hN).1.symm) (hn52 _ fun N hN => (hnorm N hN).2.2.1)
-    have h := col_succ_fat_dev hδ₀ (D.Ts.admissible N hN) 0 hr
+    have h := col_succ_fat_dev hδ₀ (D.Ts.admissible N hN) 0 (r := r)
     rwa [zero_add] at h
   have hU2 : ASBound η δ₀ D.Ts D.cutPlus D.KUplus (5 / 2)
       (fun k => (1 + 4 * δ₀) ^ k * (|C k| + |moment (Wfilt D.ϑ D.γ) 0 * (4 * π * |D.d.Ch|)|)) := by
-    refine asBound_enlarge_dev hη hδ₀ (X := fun N => col δ₀ (D.T N) (1 + N)) (by positivity) (fun N hN r hr => ?_)
+    refine asBound_enlarge_dev hη hδ₀ (X := fun N => col δ₀ (D.T N) (1 + N)) (by positivity) (fun N hN r _ => ?_)
       (asBound_congr (hKs 1).2 fun N hN => (hKU N hN).2.symm) (hn52 _ fun N hN => (hnorm N hN).2.2.2)
-    have h := col_succ_fat_dev hδ₀ (D.Ts.admissible N hN) (N : ℤ) hr
+    have h := col_succ_fat_dev hδ₀ (D.Ts.admissible N hN) (N : ℤ) (r := r)
     rwa [add_comm (N : ℤ) 1] at h
   refine ⟨fun N hN => ?_, ⟨_, hnorm⟩, fun k => |C k| + (1 + 4 * δ₀) ^ k * (|C k| +
     |moment (Wfilt D.ϑ D.γ) 0 * (4 * π * |D.d.Ch|)|), asBound_mono_const hKm fun k => ?_,
@@ -1028,7 +1028,7 @@ theorem asBound_mul_unit_dev (hη : IsProfile η) (hδ₀ : 0 < δ₀) {Ts : Tor
       have e : A' = iota η δ₀ (Ts.T N) (A N) - (iota η δ₀ (Ts.T N) (A N) - A') := by abel
       rw [e, opCLM_sub']
       exact (norm_sub_le _ _).trans (by linarith)
-    · push_neg at h1
+    · push Not at h1
       refine ⟨0, Alg_zero_mem _, ?_, ?_⟩
       · rw [sub_zero]
         linarith

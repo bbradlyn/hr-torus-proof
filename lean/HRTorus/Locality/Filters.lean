@@ -79,9 +79,9 @@ theorem opCLM_opIntegralOn (D : Set ℝ) (g : ℝ → Op S) (hint : ∀ m m' : C
     simp only [opCLM_sum, opCLM_smul]
   have e : (fun t => opCLM (g t)) = fun t => ∑ m, ∑ m', g t m m' • opCLM (Matrix.single m m' (1 : ℂ)) :=
     funext fun t => hΦ (g t)
-  rw [hΦ, e, integral_finset_sum _ (fun m _ => integrable_finset_sum _ (fun m' _ => (hint m m').smul_const _))]
+  rw [hΦ, e, integral_finsetSum _ (fun m _ => integrable_finsetSum _ (fun m' _ => (hint m m').smul_const _))]
   refine Finset.sum_congr rfl fun m _ => ?_
-  rw [integral_finset_sum _ (fun m' _ => (hint m m').smul_const _)]
+  rw [integral_finsetSum _ (fun m' _ => (hint m m').smul_const _)]
   refine Finset.sum_congr rfl fun m' _ => ?_
   rw [integral_smul_const]
   rfl
@@ -119,16 +119,16 @@ theorem opIntegralOn_map {S' : Type*} [Fintype S'] [DecidableEq S'] (Φ : Op S �
     funext t
     rw [hΦ (g t)]
     simp only [Matrix.sum_apply, Matrix.smul_apply, smul_eq_mul]
-  rw [e, integral_finset_sum _ (fun m _ => integrable_finset_sum _ (fun m' _ => (hint m m').mul_const _))]
+  rw [e, integral_finsetSum _ (fun m _ => integrable_finsetSum _ (fun m' _ => (hint m m').mul_const _))]
   refine Finset.sum_congr rfl fun m _ => ?_
-  rw [integral_finset_sum _ (fun m' _ => (hint m m').mul_const _)]
+  rw [integral_finsetSum _ (fun m' _ => (hint m m').mul_const _)]
   refine Finset.sum_congr rfl fun m' _ => ?_
   rw [integral_mul_const]
 
 theorem opCLM_apply_single_apply (A : Op S) (m m' : Conf S) :
     (opCLM A (EuclideanSpace.single m' 1)) m = A m m' := by
   rw [show (opCLM A (EuclideanSpace.single m' 1)) m = (A *ᵥ (EuclideanSpace.single m' (1 : ℂ)).ofLp) m from rfl]
-  simp [Matrix.mulVec, dotProduct, Pi.single_apply]
+  simp [Matrix.mulVec, dotProduct]
 
 theorem continuous_entry_of_continuous_opCLM {X : ℝ → Op S} (hX : Continuous fun t => opCLM (X t))
     (m m' : Conf S) : Continuous fun t => X t m m' := by
@@ -205,10 +205,10 @@ theorem integrable_moment_rpow {F : ℝ → ℂ} (hF : HasFiniteMoments F) {j : 
     rw [← Real.rpow_natCast]
     exact Real.rpow_le_rpow_of_exponent_le h1 (Nat.le_ceil j)
 
-/-- **Lemma 5.6**: "`For every $k$ there is $C_k$ such that for every even operator $A$ on $\FockS$ and every $X\subset\Slots$,`"
+/-- **Lemma 5.6**: "`For every $k$ there is $C_k$ such that for every even operator $A$ on $\FockS$ and every $X\subset\Slots$ with $\norm A_{X;\max\{k,3\}}<\infty$,`"
 "`\Bigl\lVert\int F(t)\tau_t(A)\,\dd t\Bigr\rVert_{X;k}\le C_k\abs X\bigl(\norm A+\norm A_{X;\max\{k,3\}}\bigr)M_{4k}(F).`"
 — in block B's set norm; `k` real, `k ≥ 0`; the constant after `F`, `δ₀`, `k`, `C_h`, `C^H` ("`in addition, those of Lemma~\ref{lem:filters} depend on $F$`").
-For `A` with `n_A < ∞`, as in Lemma 5.5 (`setNorm_dyn_le`; the proof: "`as in the proof of Lemma~\ref{lem:almostinputs} we may assume $n_A<\infty$`"). -/
+For `A` with `n_A < ∞`, the paper's hypothesis as in Lemma 5.5 (`setNorm_dyn_le`; the proof: "`$n_A:=\norm A+\norm A_{X;\bar k}$, finite by hypothesis`"). -/
 theorem setNorm_timeFilter_le {δ₀ : ℝ} (hδ₀ : 0 < δ₀) {F : ℝ → ℂ} (hF : HasFiniteMoments F) {k : ℝ} (hk : 0 ≤ k)
     (Ch : ℝ) (CH : ℕ → ℝ) :
     ∃ Ck : ℝ, ∀ (η : ℝ → ℝ), IsProfile η → ∀ (Ts : TorusSeq δ₀) (H : (N : ℕ) → FockOp (Ts.T N))
@@ -512,7 +512,7 @@ theorem opIntegral_split (D E : Set (ℝ × ℝ)) (hE : MeasurableSet E) (f : �
     opIntegral D f = opIntegral (D ∩ E) f + opIntegral (D \ E) f := by
   ext m m'
   simp only [opIntegral, Matrix.of_apply, Matrix.add_apply]
-  exact (integral_inter_add_diff hE (hf m m')).symm
+  exact (integral_inter_add_sdiff hE (hf m m')).symm
 
 theorem opIntegral_comm (D : Set (ℝ × ℝ)) (f : ℝ × ℝ → Op S) (X : Op S)
     (hf : ∀ m m' : Conf S, IntegrableOn (fun R => f R m m') D) :
@@ -693,7 +693,7 @@ theorem almostSupported_comm_HN {δ₀ : ℝ} (hδ₀ : 0 < δ₀) (C m m' : ℝ
   have hvfd1 : MeasureTheory.volume (fundDom (Ts.T N) ∩ Dle) ≠ ⊤ :=
     ne_top_of_le_ne_top hfd (MeasureTheory.measure_mono Set.inter_subset_left)
   have hvfd2 : MeasureTheory.volume (fundDom (Ts.T N) \ Dle) ≠ ⊤ :=
-    ne_top_of_le_ne_top hfd (MeasureTheory.measure_mono Set.diff_subset)
+    ne_top_of_le_ne_top hfd (MeasureTheory.measure_mono Set.sdiff_subset)
   -- the decomposition
   set B : Op (Slot δ₀ (Ts.T N)) := (I : ℂ) • opIntegral (fundDom (Ts.T N) ∩ Dle)
     (fun R => hTilde d N R (r / 3) * Aρ - Aρ * hTilde d N R (r / 3)) with hBdef
@@ -746,7 +746,7 @@ theorem almostSupported_comm_HN {δ₀ : ℝ} (hδ₀ : 0 < δ₀) (C m m' : ℝ
       have t2 := flatDist_triangle (T := Ts.T N) (centre δ₀ (Ts.T N) s) (centre δ₀ (Ts.T N) s')
         (centre δ₀ (Ts.T N) x)
       rw [flatDist_comm' (Ts.T N) R] at t1
-      simp only [Set.mem_setOf_eq] at hs'R
+      simp only [Set.mem_ofPred_eq] at hs'R
       show flatDist (Ts.T N) (centre δ₀ (Ts.T N) s) (centre δ₀ (Ts.T N) x) ≤ r
       have hdx' : flatDist (Ts.T N) (centre δ₀ (Ts.T N) s') (centre δ₀ (Ts.T N) x) ≤ r / 3 := hdx
       linarith
@@ -797,7 +797,7 @@ theorem almostSupported_comm_HN {δ₀ : ℝ} (hδ₀ : 0 < δ₀) (C m m' : ℝ
         intro s hs hsX
         apply hRn
         simp only [slotBall, Finset.mem_filter, Finset.mem_univ, true_and] at hs
-        exact Set.mem_iUnion₂.mpr ⟨s, hsX, by simp only [Set.mem_setOf_eq]; linarith⟩
+        exact Set.mem_iUnion₂.mpr ⟨s, hsX, by simp only [Set.mem_ofPred_eq]; linarith⟩
       have hc : h' * Aρ = Aρ * h' := (commute_of_mem_Alg_of_mem_Alg hdisj hh'm hAρ).eq
       have e : iota η δ₀ (Ts.T N) (d.h N R) * Aρ - Aρ * iota η δ₀ (Ts.T N) (d.h N R) =
           (iota η δ₀ (Ts.T N) (d.h N R) - h') * Aρ - Aρ * (iota η δ₀ (Ts.T N) (d.h N R) - h') := by
@@ -809,7 +809,7 @@ theorem almostSupported_comm_HN {δ₀ : ℝ} (hδ₀ : 0 < δ₀) (C m m' : ℝ
       have hhalf := one_add_half_rpow_le hρ0 k
       exact mul_le_mul (hCH' k) hhalf (Real.rpow_nonneg (by positivity) _) (abs_nonneg _)
     · rw [← harea]
-      exact mul_le_mul_of_nonneg_left (hvle _ Set.diff_subset) (by positivity)
+      exact mul_le_mul_of_nonneg_left (hvle _ Set.sdiff_subset) (by positivity)
   -- assembling
   have hNmax : (N : ℝ) ^ m ≤ (N : ℝ) ^ (max m m') := rpow_le_rpow_of_one_le hN1 (le_max_left _ _)
   have hNmax' : (N : ℝ) ^ m' ≤ (N : ℝ) ^ (max m m') := rpow_le_rpow_of_one_le hN1 (le_max_right _ _)
@@ -939,9 +939,9 @@ theorem gClust_eq_one_sub {Δ γ δ : ℝ} {ζ : ℝ → ℝ} (hζ : ClusterPara
         linarith
       have hset : Set.Ioc (-δ) (w + γ / 2) = Set.Iic (w + γ / 2) \ Set.Iic (-δ) := by
         ext v
-        simp only [Set.mem_Ioc, Set.mem_diff, Set.mem_Iic, not_le]
+        simp only [Set.mem_Ioc, Set.mem_sdiff, Set.mem_Iic, not_le]
         exact and_comm
-      rw [intervalIntegral.integral_of_le hle, hset, setIntegral_diff measurableSet_Iic
+      rw [intervalIntegral.integral_of_le hle, hset, setIntegral_sdiff measurableSet_Iic
         (hζi.integrableOn) (Set.Iic_subset_Iic.mpr hle), hzero, sub_zero]
     · have h1 : ∫ v in Set.Iic (w + γ / 2), ζ v = 0 := by
         refine setIntegral_eq_zero_of_forall_eq_zero fun v hv => hζ0 v ?_
@@ -1009,7 +1009,7 @@ theorem gClust_eq_one {Δ γ δ : ℝ} {ζ : ℝ → ℝ} (hζ : ClusterParams �
         have h := hζ.tsupport_subset hmem
         have := hζ.δ_lt
         rw [Set.mem_Ioo] at h
-        push_neg at hw'
+        push Not at hw'
         linarith [h.1]
       rw [hout, zero_mul]
   rw [h1, integral_sub_left_eq_self (fun v => ζ v) volume w, hζ.integral_eq_one]
@@ -3126,7 +3126,7 @@ theorem pv_rep (hζ : ClusterParams Δ γ δ ζ) (w : ℝ) {ε T : ℝ} (hε : 0
       (measurableSet_lt continuous_abs.measurable measurable_const)
   have hSsub : Sh ⊆ Set.Ioo (-T) T := fun t ht => abs_lt.mp ht.2
   have hfin : MeasureTheory.volume Sh ≠ ⊤ := ((measure_mono hSsub).trans_lt (by simp)).ne
-  haveI : IsFiniteMeasure (volume.restrict Sh) := isFiniteMeasure_restrict.mpr hfin
+  have : IsFiniteMeasure (volume.restrict Sh) := isFiniteMeasure_restrict.mpr hfin
   have hc : Continuous ζ := hζ.contDiff.continuous
   simp_rw [Fclust_mul_exp_div_eq hζ w]
   rw [integral_const_mul]
@@ -3161,7 +3161,7 @@ theorem pv_rep (hζ : ClusterParams Δ γ δ ζ) (w : ℝ) {ε T : ℝ} (hε : 0
   simp only [hf]
   rw [integral_const_mul, integral_shell_exp_div (w + γ / 2 - u) hε hεT]
 
-theorem gClust_eq_integral_Ioi (hζ : ClusterParams Δ γ δ ζ) (w : ℝ) :
+theorem gClust_eq_integral_Ioi (w : ℝ) :
     gClust γ ζ w = ∫ u in Set.Ioi (w + γ / 2), ζ u := by
   unfold gClust
   rw [← integral_sub_left_eq_self _ volume w]
@@ -3169,8 +3169,8 @@ theorem gClust_eq_integral_Ioi (hζ : ClusterParams Δ γ δ ζ) (w : ℝ) :
   congr 1; funext u
   simp only [Set.indicator_apply, Set.mem_Iio, Set.mem_Ioi, sub_sub_cancel]
   by_cases h : w - u < -γ / 2
-  · rw [if_pos h, if_pos (by linarith), mul_one]
-  · rw [if_neg h, if_neg (by linarith), mul_zero]
+  · rw [ite_eq_left h, ite_eq_left (by linarith), mul_one]
+  · rw [ite_eq_right h, ite_eq_right (by linarith), mul_zero]
 
 theorem integral_sign_cp (hζ : ClusterParams Δ γ δ ζ) (a : ℝ) :
     ∫ u, ζ u * Real.sign (a - u) = 1 - 2 * ∫ u in Set.Ioi a, ζ u := by
@@ -3248,7 +3248,7 @@ theorem hasPVIntegral_gClust (hζ : ClusterParams Δ γ δ ζ) (w : ℝ) :
       rw [hLim, ← integral_complex_ofReal, ← integral_const_mul]
       congr 1; funext u
       push_cast; ring
-    rw [e, integral_sign_cp hζ, gClust_eq_integral_Ioi hζ w]
+    rw [e, integral_sign_cp hζ, gClust_eq_integral_Ioi w]
     have hπ : (π : ℂ) ≠ 0 := by exact_mod_cast Real.pi_ne_zero
     push_cast
     field_simp

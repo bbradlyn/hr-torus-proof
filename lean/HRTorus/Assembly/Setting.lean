@@ -320,7 +320,7 @@ theorem clusterParams_std {Δ γ : ℝ} (hΔ : 0 ≤ Δ) (hγ : 2 * Δ < γ) :
   set g : ContDiffBump (0 : ℝ) := ⟨δClust Δ γ / 4, δClust Δ γ / 2, by positivity, by linarith⟩ with hg
   have hζ : ζClust Δ γ = g.normed volume := by
     unfold ζClust
-    rw [dif_pos hδ]
+    rw [dite_eq_left hδ]
   rw [hζ]
   refine ⟨hΔ, hγ, hδ, ?_, g.contDiff_normed, ?_, g.nonneg_normed, g.integral_normed⟩
   · unfold δClust
@@ -364,7 +364,7 @@ theorem toCLM_mem_sector_dev {T : Torus} {H : FockOp T} (hHs : IsSectorPreservin
     {v : FockSpace T} (hv : v ∈ sector T nn) : toCLM T H v ∈ sector T nn := by
   have hc : Commute H (Psec T nn) := (isSectorPreserving_iff_commute T H).mp hHs nn
   rw [mem_sector_iff_Psec_dev] at hv ⊢
-  rw [← ContinuousLinearMap.mul_apply, ← map_mul, ← hc.eq, map_mul, ContinuousLinearMap.mul_apply, hv]
+  rw [← mul_apply_eq_comp, ← map_mul, ← hc.eq, map_mul, mul_apply_eq_comp, hv]
 
 theorem secCompr_coe_dev {T : Torus} {H : FockOp T} (hHs : IsSectorPreserving T H) (nn : SectorLabel T)
     (v : sector T nn) : ((secCompr T H nn v : sector T nn) : FockSpace T) = toCLM T H v := by
@@ -386,7 +386,7 @@ theorem secEigDesc_eq_dev {T : Torus} {H : FockOp T} (hH : IsSelfAdjoint H) (hHs
     secEigDesc T H nn =
       LinearMap.IsSymmetric.eigenvalues (𝕜 := ℂ) (E := sector T nn) (secCompr_isSymmetric_dev hH hHs nn) rfl := by
   unfold secEigDesc
-  rw [dif_pos (secCompr_isSymmetric_dev hH hHs nn)]
+  rw [dite_eq_left (secCompr_isSymmetric_dev hH hHs nn)]
 
 theorem secEigDesc_antitone_dev (T : Torus) (H : FockOp T) (nn : SectorLabel T) : Antitone (secEigDesc T H nn) := by
   unfold secEigDesc
@@ -398,7 +398,7 @@ theorem secEig_eq_dev {T : Torus} {H : FockOp T} {nn : SectorLabel T} (hd : 0 < 
     {k : ℕ} (hk : 1 ≤ k) (hkd : k ≤ Module.finrank ℂ (sector T nn)) :
     secEig T H nn k = secEigDesc T H nn ⟨Module.finrank ℂ (sector T nn) - k, by omega⟩ := by
   unfold secEig
-  rw [dif_pos hd]
+  rw [dite_eq_left hd]
   congr 2
   omega
 
@@ -414,7 +414,7 @@ theorem secEig_congr_dev {T : Torus} {H : FockOp T} {nn : SectorLabel T} {a b : 
 theorem secEig_of_finrank_eq_zero_dev {T : Torus} {H : FockOp T} {nn : SectorLabel T}
     (hd : Module.finrank ℂ (sector T nn) = 0) (k : ℕ) : secEig T H nn k = 0 := by
   unfold secEig
-  rw [dif_neg (by omega)]
+  rw [dite_eq_right (by omega)]
 
 /-- `cfc f H` acts on an eigenvector of a self-adjoint `H` by `f` of its eigenvalue. -/
 theorem toCLM_cfc_eigen_dev {T : Torus} {H : FockOp T} (hH : IsSelfAdjoint H) (f : ℝ → ℝ) {μ : ℝ}
@@ -429,12 +429,12 @@ theorem toCLM_cfc_eigen_dev {T : Torus} {H : FockOp T} (hH : IsSelfAdjoint H) (f
     obtain ⟨M, hM⟩ := hu.exists_left_inv
     have h0 : toCLM T (algebraMap ℝ (FockOp T) μ - H) w = 0 := by
       show Matrix.toEuclideanCLM (n := Conf (ZMod T.Nφ)) (𝕜 := ℂ) (algebraMap ℝ (FockOp T) μ - H) w = 0
-      rw [map_sub, ContinuousLinearMap.sub_apply, hw, Algebra.algebraMap_eq_smul_one (A := FockOp T) μ,
-        ← Complex.coe_smul, map_smul, map_one, ContinuousLinearMap.smul_apply, ContinuousLinearMap.one_apply,
+      rw [map_sub, sub_apply, hw, Algebra.algebraMap_eq_smul_one (A := FockOp T) μ,
+        ← Complex.coe_smul, map_smul, map_one, smul_apply, one_apply_eq_self,
         sub_self]
     have e1 : toCLM T (1 : FockOp T) = 1 := map_one (Matrix.toEuclideanCLM (n := Conf (ZMod T.Nφ)) (𝕜 := ℂ))
     calc w = toCLM T (M * (algebraMap ℝ (FockOp T) μ - H)) w := by rw [hM, e1]; rfl
-      _ = 0 := by rw [toCLM_mul', ContinuousLinearMap.mul_apply, h0, map_zero]
+      _ = 0 := by rw [toCLM_mul', mul_apply_eq_comp, h0, map_zero]
   obtain ⟨q, hq⟩ := exists_poly_interp (Matrix.finite_real_spectrum (A := H)).toFinset f
   have hPq : cfc f H = Polynomial.aeval H q := by
     rw [cfc_congr (g := fun x => q.eval x) ?_, cfc_polynomial q H hH]
@@ -604,7 +604,7 @@ theorem card_secEig_mem {T : Torus} {H : FockOp T} (hH : IsSelfAdjoint H) (hHs :
         rw [toCLM_Psec_dev, Submodule.starProjection_apply]
         conv_lhs => rw [← b.sum_repr' ((sector T nn).orthogonalProjectionOnto w)]
         simp only [Submodule.coe_sum, Submodule.coe_smul]
-      simp only [ContinuousLinearMap.coe_coe, map_mul, ContinuousLinearMap.mul_apply, hPw, map_sum, map_smul]
+      simp only [ContinuousLinearMap.coe_coe, map_mul, mul_apply_eq_comp, hPw, map_sum, map_smul]
       refine Submodule.sum_mem _ fun i _ => ?_
       rw [hb, toCLM_cfc_eigen_dev hH _ (apply_eigenvector_dev hH hHs nn i)]
       by_cases hi : secEigDesc T H nn i ∈ B
@@ -615,7 +615,7 @@ theorem card_secEig_mem {T : Torus} {H : FockOp T} (hH : IsSelfAdjoint H) (hHs :
     · rw [Submodule.span_le]
       rintro _ ⟨⟨i, hi⟩, rfl⟩
       refine ⟨(b i : FockSpace T), ?_⟩
-      simp only [ContinuousLinearMap.coe_coe, map_mul, ContinuousLinearMap.mul_apply]
+      simp only [ContinuousLinearMap.coe_coe, map_mul, mul_apply_eq_comp]
       rw [(mem_sector_iff_Psec_dev nn _).mp (b i).2, hb,
         toCLM_cfc_eigen_dev hH _ (apply_eigenvector_dev hH hHs nn i), Set.indicator_of_mem hi]
       simp
@@ -670,8 +670,8 @@ theorem secEig_eq_sInf_countLE {T : Torus} {H : FockOp T} (hH : IsSelfAdjoint H)
           exact ⟨⟨hj.1, le_trans hj.2 hmd⟩, secEig_mono T H nn hj.2⟩
     · intro E hE
       by_contra hlt
-      push_neg at hlt
-      rw [Set.mem_setOf_eq, hcount] at hE
+      push Not at hlt
+      rw [Set.mem_ofPred_eq, hcount] at hE
       have hsub : ((Finset.Icc 1 (Module.finrank ℂ (sector T nn))).filter fun j => secEig T H nn j ≤ E) ⊆
           Finset.Icc 1 (min (max k 1) (Module.finrank ℂ (sector T nn)) - 1) := by
         intro j hj
@@ -679,7 +679,7 @@ theorem secEig_eq_sInf_countLE {T : Torus} {H : FockOp T} (hH : IsSelfAdjoint H)
         simp only [Finset.mem_Icc]
         refine ⟨hj.1.1, ?_⟩
         by_contra hj2
-        push_neg at hj2
+        push Not at hj2
         have := secEig_mono T H nn (show min (max k 1) (Module.finrank ℂ (sector T nn)) ≤ j by omega)
         linarith [hj.2]
       have := Finset.card_le_card hsub
@@ -765,15 +765,14 @@ theorem secEig_HN_nonneg (T : Torus) (nn : SectorLabel T) (k : ℕ) : 0 ≤ secE
     rw [hvv] at hP
     exact hP
   by_contra hneg
-  push_neg at hneg
+  push Not at hneg
   nlinarith [mul_neg_of_neg_of_pos hneg (pow_pos hv 2)]
 
 /-! ### Assumption 6.3, and its bridge to the core's gap form -/
 
 /-- Assumption 6.3's gap forces `1 ≤ p < dim 𝓗^𝐧` ("`E_{p+1}`" exists): for any `H`, `γ > 0` and
-`E_{p+1} − E_p ≥ γ` (the clamped indices make `E_{p+1} − E_p` zero at `p = 0` and at `p ≥ dim 𝓗^𝐧`; the implicit `Δ`
-is not used, and a caller names it). -/
-theorem one_le_p_lt_finrank {T : Torus} {H : FockOp T} {nn : SectorLabel T} {p : ℕ} {Δ γ : ℝ} (hγ : 0 < γ)
+`E_{p+1} − E_p ≥ γ` (the clamped indices make `E_{p+1} − E_p` zero at `p = 0` and at `p ≥ dim 𝓗^𝐧`). -/
+theorem one_le_p_lt_finrank {T : Torus} {H : FockOp T} {nn : SectorLabel T} {p : ℕ} {γ : ℝ} (hγ : 0 < γ)
     (hgap : γ ≤ secEig T H nn (p + 1) - secEig T H nn p) :
     1 ≤ p ∧ p < Module.finrank ℂ (sector T nn) := by
   constructor
@@ -812,13 +811,13 @@ theorem toCLM_cfc_indicator {T : Torus} {H : FockOp T} (hH : IsSelfAdjoint H) (h
   refine (IndexCore.eigBasis (toCLM T H) hH').toBasis.ext fun j => ?_
   simp only [ContinuousLinearMap.coe_coe, OrthonormalBasis.coe_toBasis]
   rw [toCLM_cfc_eigen_dev hH _ (IndexCore.apply_eigBasis (toCLM T H) hH' j), IndexCore.specProj_def,
-    ContinuousLinearMap.sum_apply]
+    sum_apply]
   simp only [IndexCore.eigProj_apply_eigBasis]
   rw [Finset.sum_ite_eq]
   by_cases hB : IndexCore.eigVal (toCLM T H) hH' j ∈ B
-  · rw [if_pos (Finset.mem_filter.mpr ⟨IndexCore.eigVal_mem_spec _ _ j, hB⟩), Set.indicator_of_mem hB]
+  · rw [ite_eq_left (Finset.mem_filter.mpr ⟨IndexCore.eigVal_mem_spec _ _ j, hB⟩), Set.indicator_of_mem hB]
     simp
-  · rw [if_neg (fun h => hB (Finset.mem_filter.mp h).2), Set.indicator_of_notMem hB]
+  · rw [ite_eq_right (fun h => hB (Finset.mem_filter.mp h).2), Set.indicator_of_notMem hB]
     simp
 
 /-! ### Proof devices: block D's spectral sums are the core's (phase (b), round one; not statements of the paper)
@@ -872,11 +871,11 @@ theorem mem_spectrum_of_eigen_dev {T : Torus} {H : FockOp T} {μ : ℝ} {w : Foc
   obtain ⟨M, hM⟩ := hu.exists_left_inv
   have h0 : toCLM T (algebraMap ℝ (FockOp T) μ - H) w = 0 := by
     show Matrix.toEuclideanCLM (n := Conf (ZMod T.Nφ)) (𝕜 := ℂ) (algebraMap ℝ (FockOp T) μ - H) w = 0
-    rw [map_sub, ContinuousLinearMap.sub_apply, hw, Algebra.algebraMap_eq_smul_one (A := FockOp T) μ,
-      ← Complex.coe_smul, map_smul, map_one, ContinuousLinearMap.smul_apply, ContinuousLinearMap.one_apply,
+    rw [map_sub, sub_apply, hw, Algebra.algebraMap_eq_smul_one (A := FockOp T) μ,
+      ← Complex.coe_smul, map_smul, map_one, smul_apply, one_apply_eq_self,
       sub_self]
   calc w = toCLM T (M * (algebraMap ℝ (FockOp T) μ - H)) w := by rw [hM, toCLM_one_dev]; rfl
-    _ = 0 := by rw [toCLM_mul', ContinuousLinearMap.mul_apply, h0, map_zero]
+    _ = 0 := by rw [toCLM_mul', mul_apply_eq_comp, h0, map_zero]
 
 theorem specFinset_eq_spec_dev {T : Torus} {H : FockOp T} (hH : IsSelfAdjoint H) (hH' : IsSelfAdjoint (toCLM T H)) :
     specFinset H = IndexCore.spec (toCLM T H) hH' := by
@@ -886,7 +885,7 @@ theorem specFinset_eq_spec_dev {T : Torus} {H : FockOp T} (hH : IsSelfAdjoint H)
   constructor
   · intro hμ
     by_contra hne
-    push_neg at hne
+    push Not at hne
     have h0 : toCLM T (cfc (({μ} : Set ℝ).indicator (1 : ℝ → ℝ)) H) = 0 := by
       rw [toCLM_cfc_indicator hH hH' {μ}, IndexCore.specProj_def]
       refine Finset.sum_eq_zero fun ν hν => ?_
@@ -1004,7 +1003,7 @@ theorem ArgData.rank_P (D : ArgData η δ₀) (hA : GapAssumption D.toIxSetting 
   have hHs := H_isSectorPreserving_dev D.toIxSetting hN
   have hγ : 0 < D.γ := by linarith [hA.Δ_nonneg, hA.two_mul_Δ_lt]
   have hg := hA.gap N hN
-  obtain ⟨hp1, hpd⟩ := one_le_p_lt_finrank (Δ := 0) hγ hg
+  obtain ⟨hp1, hpd⟩ := one_le_p_lt_finrank hγ hg
   unfold ArgData.P
   rw [← card_secEig_mem hH hHs (D.nn N)]
   have hfil : ((Finset.Icc 1 (Module.finrank ℂ (sector (D.T N) (D.nn N)))).filter fun k =>
@@ -1015,7 +1014,7 @@ theorem ArgData.rank_P (D : ArgData η δ₀) (hA : GapAssumption D.toIxSetting 
     · rintro ⟨⟨hk1, hkd⟩, -, hkp⟩
       refine ⟨hk1, ?_⟩
       by_contra hk
-      push_neg at hk
+      push Not at hk
       have := secEig_mono (D.T N) (D.H N) (D.nn N) (show D.p + 1 ≤ k by omega)
       simp only [ArgData.E] at hkp hg
       linarith
@@ -1044,7 +1043,7 @@ theorem ArgData.P_props (D : ArgData η δ₀) (hA : GapAssumption D.toIxSetting
 /-- Under (H1), `H_N` is sector-preserving (its local terms are, Definition 4.6). -/
 theorem IxSetting.H_isSectorPreserving (S : IxSetting η δ₀) :
     ∀ N ∈ S.Ts.idx, IsSectorPreserving (S.T N) (S.H N) :=
-  fun N hN => H_isSectorPreserving_dev S hN
+  fun _ hN => H_isSectorPreserving_dev S hN
 
 /-! ### Proof devices for Lemma 6.2 (phase (b), round one; not statements of the paper)
 
@@ -1080,7 +1079,7 @@ theorem col_sep_dev {T : Torus} {j j' : ℤ} {s s' : Slot δ₀ T} (hs : s ∈ c
 
 theorem le_pdist_dev {P v : ℝ} (hP : 0 < P) (hv0 : 0 ≤ v) (hvP : v ≤ P) : min v (P - v) ≤ pdist P v := by
   by_contra h
-  push_neg at h
+  push Not at h
   obtain ⟨m, hm⟩ := (pdist_lt_iff P v _).mp h
   obtain ⟨hm1, hm2⟩ := abs_lt.mp hm
   have hmin1 := min_le_left v (P - v)
@@ -1135,7 +1134,7 @@ theorem quarterMid_val_dev {T : Torus} {j : ZMod T.Nφ} (hj : j ∈ quarterMid T
   unfold quarterMid at hj
   rw [Finset.mem_sdiff, Finset.mem_union] at hj
   obtain ⟨hΓ, hnot⟩ := hj
-  push_neg at hnot
+  push Not at hnot
   have hk := val_mem_of_mem_image_dev (S := Finset.range T.N)
     (fun k hk => by rw [Finset.mem_range] at hk; unfold Torus.Nφ; omega) hΓ
   rw [Finset.mem_range] at hk
@@ -1146,7 +1145,7 @@ theorem quarterMid_val_dev {T : Torus} {j : ZMod T.Nφ} (hj : j ∈ quarterMid T
     rw [← hjk]
     exact Finset.mem_image.mpr ⟨j.val, Finset.mem_range.mpr (by omega), rfl⟩
   · by_contra h2
-    push_neg at h2
+    push Not at h2
     apply hnot.2
     rw [← hjk]
     refine Finset.mem_image.mpr ⟨j.val, Finset.mem_Ico.mpr ⟨?_, hk⟩, rfl⟩
@@ -1350,7 +1349,7 @@ theorem measurableSet_circImage_dev (L : ℝ) {J : Set ℝ} (hJ : MeasurableSet 
   exact MeasurableSet.iUnion fun m => measurable_add_const _ hJ
 
 theorem circImage_add_dev (L : ℝ) (J : Set ℝ) (x : ℝ) : x + L ∈ circImage L J ↔ x ∈ circImage L J := by
-  simp only [circImage, Set.mem_setOf_eq]
+  simp only [circImage, Set.mem_ofPred_eq]
   constructor
   · rintro ⟨m, hm⟩
     exact ⟨m + 1, by push_cast; convert hm using 1; ring⟩
@@ -1360,7 +1359,7 @@ theorem circImage_add_dev (L : ℝ) (J : Set ℝ) (x : ℝ) : x + L ∈ circImag
 theorem preimage_sub_circImage_dev (L c a b : ℝ) :
     (fun x : ℝ => x - c) ⁻¹' circImage L (Set.Ioc a b) = circImage L (Set.Ioc (a + c) (b + c)) := by
   ext x
-  simp only [circImage, Set.mem_preimage, Set.mem_setOf_eq, Set.mem_Ioc]
+  simp only [circImage, Set.mem_preimage, Set.mem_ofPred_eq, Set.mem_Ioc]
   constructor
   · rintro ⟨m, h1, h2⟩
     exact ⟨m, by linarith, by linarith⟩
@@ -1375,15 +1374,15 @@ theorem shiftX_fst_dev (T : Torus) (j₀ : ℤ) (A : Set ℝ) :
 theorem isTorusSet_fst_dev (T : Torus) {A : Set ℝ} (hA : MeasurableSet A) (hper : ∀ x, x + T.Lx ∈ A ↔ x ∈ A) :
     IsTorusSet T {R : ℝ × ℝ | R.1 ∈ A} := by
   refine ⟨measurable_fst hA, fun R => ?_, fun R => ?_⟩
-  · simp only [Set.mem_setOf_eq, Prod.fst_add]
+  · simp only [Set.mem_ofPred_eq, Prod.fst_add]
     exact hper R.1
-  · simp only [Set.mem_setOf_eq, Prod.fst_add, add_zero]
+  · simp only [Set.mem_ofPred_eq, Prod.fst_add, add_zero]
 
 theorem volume_fst_inter_fundDom_dev (T : Torus) (A : Set ℝ) :
     volume ({R : ℝ × ℝ | R.1 ∈ A} ∩ fundDom T) = volume (A ∩ Set.Ico 0 T.Lx) * ENNReal.ofReal T.Ly := by
   have e : {R : ℝ × ℝ | R.1 ∈ A} ∩ fundDom T = (A ∩ Set.Ico 0 T.Lx) ×ˢ Set.Ico 0 T.Ly := by
     ext R
-    simp only [fundDom, Set.mem_inter_iff, Set.mem_setOf_eq, Set.mem_prod]
+    simp only [fundDom, Set.mem_inter_iff, Set.mem_ofPred_eq, Set.mem_prod]
     tauto
   rw [e, Measure.volume_eq_prod, Measure.prod_prod, Real.volume_Ico, sub_zero]
 
@@ -1403,7 +1402,7 @@ theorem volume_circImage_Ioc_dev {L : ℝ} (hL : 0 < L) (a : ℝ) :
     rw [intervalIntegral.integral_of_le (by linarith), integral_indicator_one hAm, measureReal_restrict_apply hAm]
   have hseg : A ∩ Set.Ioc a (a + L) = Set.Ioc a (a + L / 2) := by
     ext x
-    simp only [hA, circImage, Set.mem_inter_iff, Set.mem_setOf_eq, Set.mem_Ioc]
+    simp only [hA, circImage, Set.mem_inter_iff, Set.mem_ofPred_eq, Set.mem_Ioc]
     constructor
     · rintro ⟨⟨m, hm1, hm2⟩, hx1, hx2⟩
       have h3 : (m : ℝ) < 1 := lt_of_mul_lt_mul_right (by linarith : (m : ℝ) * L < 1 * L) hL.le
@@ -1432,9 +1431,9 @@ theorem volume_compl_circImage_Ioc_dev {L : ℝ} (hL : 0 < L) (a : ℝ) :
   have hAm : MeasurableSet A := measurableSet_circImage_dev L measurableSet_Ioc
   have e : Aᶜ ∩ Set.Ico 0 L = Set.Ico 0 L \ (A ∩ Set.Ico 0 L) := by
     ext x
-    simp only [Set.mem_inter_iff, Set.mem_compl_iff, Set.mem_diff]
+    simp only [Set.mem_inter_iff, Set.mem_compl_iff, Set.mem_sdiff]
     tauto
-  rw [e, measure_diff Set.inter_subset_right (hAm.inter measurableSet_Ico).nullMeasurableSet
+  rw [e, measure_sdiff Set.inter_subset_right (hAm.inter measurableSet_Ico).nullMeasurableSet
     (ne_top_of_le_ne_top (measure_Ico_lt_top (μ := volume) (a := (0 : ℝ)) (b := L)).ne
       (measure_mono Set.inter_subset_right)), volume_circImage_Ioc_dev hL a, Real.volume_Ico, sub_zero,
     ← ENNReal.ofReal_sub L (show (0 : ℝ) ≤ L / 2 by positivity)]
@@ -1531,7 +1530,7 @@ theorem HDd_add_compl_dev (S : IxSetting η δ₀) {N : ℕ} (hN : N ∈ S.Ts.id
   unfold IxSetting.HDd
   congr 2
   · exact Set.inter_comm _ _
-  · rw [Set.diff_eq, Set.inter_comm]
+  · rw [Set.sdiff_eq, Set.inter_comm]
 
 theorem HDd_isSelfAdjoint_dev (S : IxSetting η δ₀) {N : ℕ} (hN : N ∈ S.Ts.idx) (D : Set (ℝ × ℝ)) :
     IsSelfAdjoint (S.HDd N D) :=
@@ -1673,7 +1672,7 @@ end CurrentDevices
 /-- **Lemma 6.6(i)**: "`$J_-+J_+=\iu[H_N,Q]$`". -/
 theorem Jminus_add_Jplus (S : IxSetting η δ₀) :
     ∀ N ∈ S.Ts.idx, S.Jminus N + S.Jplus N = (I : ℂ) • (S.H N * S.Q N - S.Q N * S.H N) :=
-  fun N hN => curr_add_compl_dev S hN (measurableSet_halfMinus_dev _) _
+  fun _ hN => curr_add_compl_dev S hN (measurableSet_halfMinus_dev _) _
 
 /-- **Lemma 6.6(i)**: "`hence $K=K_-+K_+$ and $\Qb=Q-K$`". -/
 theorem Kfull_eq_add {ϑ : ℝ → ℝ} (hϑ : IsCutoff ϑ) {γ : ℝ} (hγ : 0 < γ) (S : IxSetting η δ₀) :
@@ -1734,7 +1733,7 @@ def Jc_dev (δ₀ Ch : ℝ) (CH : ℕ → ℝ) (k : ℕ) : ℝ :=
   4 * π * |Ch| * (1 + 4 * δ₀) ^ k +
     2 * π * (4 * |CH k| + (4 * |CH k| + 2 * |Ch|) * (1 + 2 * δ₀) ^ k) * (2 + 4 * δ₀) ^ k
 
-theorem rpow_neg_le_dev {a b c : ℝ} (ha : 0 < a) (hb : 0 < b) (hc : 0 < c) (hab : a ≤ c * b) (k : ℕ) :
+theorem rpow_neg_le_dev {a b c : ℝ} (ha : 0 < a) (hb : 0 < b) (hab : a ≤ c * b) (k : ℕ) :
     b ^ (-(k : ℝ)) ≤ c ^ k * a ^ (-(k : ℝ)) := by
   rw [Real.rpow_neg hb.le, Real.rpow_neg ha.le, Real.rpow_natCast, Real.rpow_natCast, ← div_eq_mul_inv,
     inv_eq_one_div, div_le_div_iff₀ (by positivity) (by positivity), one_mul, ← mul_pow]
@@ -1802,8 +1801,8 @@ theorem far_comm_le_dev (hη : IsProfile η) (hδ₀ : 0 < δ₀) (S : IxSetting
         omega
       exact_mod_cast h1
     have hk1 := rpow_neg_le_dev (a := 1 + ξ) (b := 1 + (ξ - δx δ₀ (S.T N))) (c := 1 + δx δ₀ (S.T N))
-      (by linarith) (by linarith) (by linarith) (by nlinarith [mul_nonneg hδx.le (sub_nonneg.mpr hξ)]) k
-    have hk2 := rpow_neg_le_dev (a := 1 + ρ) (b := 1 + ξ) (c := 1) (by linarith) (by linarith) one_pos
+      (by linarith) (by linarith) (by nlinarith [mul_nonneg hδx.le (sub_nonneg.mpr hξ)]) k
+    have hk2 := rpow_neg_le_dev (a := 1 + ρ) (b := 1 + ξ) (c := 1) (by linarith) (by linarith)
       (by linarith) k
     rw [one_pow, one_mul] at hk2
     have hXA : ‖opCLM (iota η δ₀ (S.T N) (S.d.h N R) - A)‖ ≤
@@ -1829,7 +1828,7 @@ theorem far_comm_le_dev (hη : IsProfile η) (hδ₀ : 0 < δ₀) (S : IxSetting
       rw [norm_iota hη hδ₀ hT]
       exact (S.d.norm_h_le N hN R).trans (le_abs_self _)
     have hk3 := rpow_neg_le_dev (a := 1 + ρ) (b := 1) (c := 1 + δx δ₀ (S.T N)) (by linarith) one_pos
-      (by linarith) (by linarith) k
+      (by linarith) k
     rw [Real.one_rpow] at hk3
     calc _ ≤ 2 * ‖opCLM (iota η δ₀ (S.T N) (S.d.h N R))‖ * ‖opCLM (iota η δ₀ (S.T N) (Qband (S.T N) B))‖ :=
           norm_comm_le _ _
@@ -1930,7 +1929,7 @@ theorem floor_rep_dev {L : ℝ} (hL : 0 < L) (v : ℝ) :
 least `min{ξ_-(R), ξ_+(R)}` from `R`, where `ξ_∓` are the distances to the lines `x = κj₀` and `x = κj₀ + L_x/2`
 ("`\abs{\kappa j-R_x}_{L_x}\ge\min\{\xi_-(R),\xi_+(R)\}`"); so every slot of its columns is farther than
 `min{ξ_-, ξ_+} − δ_x` from `R`. -/
-theorem far_band_dev (hδ₀ : 0 < δ₀) (S : IxSetting η δ₀) {N : ℕ} (hN : N ∈ S.Ts.idx) (j₀ : ℤ) (R : ℝ × ℝ) :
+theorem far_band_dev (S : IxSetting η δ₀) {N : ℕ} (hN : N ∈ S.Ts.idx) (j₀ : ℤ) (R : ℝ × ℝ) :
     ∃ B' : Finset (ZMod (S.T N).Nφ), (B' = bandShift (S.T N).Nφ N j₀ ∨ B' = (bandShift (S.T N).Nφ N j₀)ᶜ) ∧
       ∀ s ∈ colBand δ₀ (S.T N) B',
         min (pdist (S.T N).Lx (R.1 - (S.T N).κ * j₀)) (pdist (S.T N).Lx (R.1 - (S.T N).κ * j₀ - (S.T N).Lx / 2)) -
@@ -1987,7 +1986,7 @@ theorem far_band_dev (hδ₀ : 0 < δ₀) (S : IxSetting η δ₀) {N : ℕ} (hN
       ring
     have htN : N ≤ t := by
       by_contra hlt
-      push_neg at hlt
+      push Not at hlt
       apply Finset.mem_compl.mp hj
       exact Finset.mem_image.mpr ⟨(t : ZMod (S.T N).Nφ),
         Finset.mem_image.mpr ⟨t, Finset.mem_range.mpr hlt, rfl⟩, hjt.symm⟩
@@ -2105,12 +2104,12 @@ theorem xi_half_dev (S : IxSetting η δ₀) {N : ℕ} (j₀ : ℤ) (R : ℝ × 
     rw [e3] at hm
     have hk1 : -2 < n + m := by
       by_contra h
-      push_neg at h
+      push Not at h
       have h' : ((n + m : ℤ) : ℝ) ≤ -2 := by exact_mod_cast h
       nlinarith [mul_le_mul_of_nonneg_right h' hLpos.le]
     have hk2 : n + m < 1 := by
       by_contra h
-      push_neg at h
+      push Not at h
       have h' : (1 : ℝ) ≤ ((n + m : ℤ) : ℝ) := by exact_mod_cast h
       nlinarith [mul_le_mul_of_nonneg_right h' hLpos.le]
     rcases (by omega : n + m = -1 ∨ n + m = 0) with h | h
@@ -2130,7 +2129,7 @@ theorem xi_half_dev (S : IxSetting η δ₀) {N : ℕ} (j₀ : ℤ) (R : ℝ × 
   · intro hR
     have hR' : ¬ R ∈ shiftX (S.T N) j₀ (halfMinus (S.T N)) := hR
     rw [hmem] at hR'
-    push_neg at hR'
+    push Not at hR'
     have h1 := hR' (-n)
     have h2 := hR' (-n - 1)
     rw [ev, Set.mem_Ioc] at h1 h2
@@ -2140,11 +2139,11 @@ theorem xi_half_dev (S : IxSetting η δ₀) {N : ℕ} (j₀ : ℤ) (R : ℝ × 
     rw [e5] at h2
     have hu1 : (S.T N).Lx / 4 < u := by
       by_contra h
-      push_neg at h
+      push Not at h
       exact h1 ⟨by linarith, h⟩
     have hu2 : u ≤ 3 * (S.T N).Lx / 4 := by
       by_contra h
-      push_neg at h
+      push Not at h
       exact h2 ⟨by linarith, by linarith⟩
     calc pdist (S.T N).Lx (u - (S.T N).Lx / 2) ≤ |u - (S.T N).Lx / 2| := hdp
       _ ≤ min u ((S.T N).Lx - u) := by
@@ -2181,7 +2180,7 @@ theorem curr_approx_dev (hη : IsProfile η) (hδ₀ : 0 < δ₀) (S : IxSetting
   · refine ⟨0, Alg_zero_mem _, ?_⟩
     rw [sub_zero, norm_iota hη hδ₀ hT]
     have h1 := norm_curr_le_dev S hN D hvol B hB
-    have hk := rpow_neg_le_dev (a := 1 + r) (b := 1) (c := 1 + 4 * δ₀) (by linarith) one_pos (by linarith)
+    have hk := rpow_neg_le_dev (a := 1 + r) (b := 1) (c := 1 + 4 * δ₀) (by linarith) one_pos
       (by linarith) k
     rw [Real.one_rpow] at hk
     calc ‖toCLM (S.T N) (S.curr N D B)‖ ≤ 4 * π * S.d.Ch * (N : ℝ) ^ 2 := h1
@@ -2207,9 +2206,9 @@ theorem curr_approx_dev (hη : IsProfile η) (hδ₀ : 0 < δ₀) (S : IxSetting
     have hDlem : MeasurableSet Dle := by rw [hDle]; exact measurableSet_le hξ measurable_const
     have hEm : MeasurableSet E := by rw [hE]; exact hDm.inter hfdm
     have hv1 : volume (E ∩ Dle) ≠ ⊤ := ne_top_of_le_ne_top hEv (measure_mono Set.inter_subset_left)
-    have hv2 : volume (E \ Dle) ≠ ⊤ := ne_top_of_le_ne_top hEv (measure_mono Set.diff_subset)
+    have hv2 : volume (E \ Dle) ≠ ⊤ := ne_top_of_le_ne_top hEv (measure_mono Set.sdiff_subset)
     have hvr1 : volume.real (E ∩ Dle) ≤ 2 * π * N := (measureReal_mono Set.inter_subset_left hEv).trans hEvr.le
-    have hvr2 : volume.real (E \ Dle) ≤ 2 * π * N := (measureReal_mono Set.diff_subset hEv).trans hEvr.le
+    have hvr2 : volume.real (E \ Dle) ≤ 2 * π * N := (measureReal_mono Set.sdiff_subset hEv).trans hEvr.le
     obtain ⟨Q', hQ'⟩ : ∃ Q' : Op (Slot δ₀ (S.T N)), Q' = iota η δ₀ (S.T N) (Qband (S.T N) B) := ⟨_, rfl⟩
     have hQn : ‖opCLM Q'‖ ≤ N := by
       rw [hQ', norm_iota hη hδ₀ hT]
@@ -2316,14 +2315,14 @@ theorem curr_approx_dev (hη : IsProfile η) (hδ₀ : 0 < δ₀) (S : IxSetting
       have hRρ : ρ < ξ R := by
         have h := hR.2
         rw [hDle] at h
-        simp only [Set.mem_setOf_eq, not_le] at h
+        simp only [Set.mem_ofPred_eq, not_le] at h
         exact h
       obtain ⟨B', hB', hfarR⟩ := hfar R hRD
       rw [hQ']
       exact far_comm_le_dev hη hδ₀ S hN hB hB' R hρ0 hRρ hfarR k
     -- `(1 + ρ)^{−k} ≤ (2 + 4δ₀)^k (1 + r)^{−k}`
     have hk := rpow_neg_le_dev (a := 1 + r) (b := 1 + ρ) (c := 2 * (1 + δx δ₀ (S.T N))) (by linarith)
-      (by linarith) (by positivity) (by nlinarith [mul_nonneg hδx.le hρ0]) k
+      (by linarith) (by nlinarith [mul_nonneg hδx.le hρ0]) k
     have hpow : (2 * (1 + δx δ₀ (S.T N))) ^ k ≤ (2 + 4 * δ₀) ^ k :=
       pow_le_pow_left₀ (by positivity) (by linarith) k
     have hk' : (1 + ρ) ^ (-(k : ℝ)) ≤ (2 + 4 * δ₀) ^ k * (1 + r) ^ (-(k : ℝ)) :=
@@ -2365,7 +2364,7 @@ theorem J_almostSupported {δ₀ : ℝ} (hδ₀ : 0 < δ₀) (Ch : ℝ) (CH : �
         (volume_half_N_dev S hN j₀).2.2.1 (card_bandShift_le_dev _ N j₀) (Z := col δ₀ (S.T N) j₀)
         (ξ := fun R => pdist (S.T N).Lx (R.1 - (S.T N).κ * j₀)) (hcont _ _)
         (fun R hR => by
-          obtain ⟨B', hB', h⟩ := far_band_dev hδ₀ S hN j₀ R
+          obtain ⟨B', hB', h⟩ := far_band_dev S hN j₀ R
           refine ⟨B', hB', fun s hs => ?_⟩
           have h2 := h s hs
           rwa [min_eq_left ((xi_half_dev S j₀ R).1 hR)] at h2)
@@ -2380,7 +2379,7 @@ theorem J_almostSupported {δ₀ : ℝ} (hδ₀ : 0 < δ₀) (Ch : ℝ) (CH : �
         (ξ := fun R => pdist (S.T N).Lx (R.1 - (S.T N).κ * j₀ - (S.T N).Lx / 2))
         (((Metric.continuous_infDist_pt _).comp ((continuous_fst.sub continuous_const).sub continuous_const)).measurable)
         (fun R hR => by
-          obtain ⟨B', hB', h⟩ := far_band_dev hδ₀ S hN j₀ R
+          obtain ⟨B', hB', h⟩ := far_band_dev S hN j₀ R
           refine ⟨B', hB', fun s hs => ?_⟩
           have h2 := h s hs
           rwa [min_eq_right ((xi_half_dev S j₀ R).2 hR)] at h2)
@@ -2527,8 +2526,8 @@ def coreSetting_dev (D : ArgData η δ₀) (hA : GapAssumption D.toIxSetting D.n
   W_eq := fun ω hω => What_eq_dev hϑ (by linarith [hA.Δ_nonneg, hA.two_mul_Δ_lt]) ω hω
   W_conj := fun ω => What_conj_dev hϑ D.γ ω
   g := fun ω => if ω ≤ -D.γ then 1 else 0
-  g_zero := fun ω hω => if_neg (by linarith [hA.Δ_nonneg, hA.two_mul_Δ_lt])
-  g_one := fun ω hω => if_pos hω
+  g_zero := fun ω hω => ite_eq_right (by linarith [hA.Δ_nonneg, hA.two_mul_Δ_lt])
+  g_one := fun ω hω => ite_eq_left hω
 
 end CoreDevices
 

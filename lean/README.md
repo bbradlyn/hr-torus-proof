@@ -2,7 +2,7 @@
 
 Lean 4.34.1 (`lean-toolchain`) against Mathlib at commit `d13f23b723b8a846827a245b89c10fc7d3f11612`
 (`lakefile.toml`, `lake-manifest.json`); every module is compiled with `autoImplicit = false`. Thirty-nine modules,
-42,619 lines, about 2,470 theorems (`theorem` and `lemma` declarations) and 475 definitions, no `sorry` anywhere. The
+42,591 lines, about 2,470 theorems (`theorem` and `lemma` declarations) and 475 definitions, no `sorry` anywhere. The
 papers are in `../papers/`; each module's docstring names the paper, the section and the statements it formalizes. For
 every part, the Lean statements were written and compared with the paper before any of their proofs was written; the
 statement of Theorem 8.1 was in addition derived blind from the paper by a second instance and compared with this one.
@@ -56,7 +56,7 @@ Lemma 5.1 — linear, unital, positive, contractive, idempotent, *-preserving, c
 operators into the even local algebra, and the bound ‖A − 𝔼_Y A‖ ≤ 2 inf_{A' ∈ Alg(Y)} ‖A − A'‖ — except its measurability
 sentence (proved with Section 5, below). The two modules were a measurement pilot for the choice of representation in which
 Sections 3.2–8 are formalized: the concrete Jordan–Wigner space (`JW`) was chosen once the pilot and the first blocks of
-Section 3 had measured it, and everything below is built on it; the module keeps its `Pilot` name until a planned rename.
+Section 3 had measured it, and everything below is built on it; the module keeps its `Pilot` name, which records that history.
 
 **The physical side, Sections 2.1–2.5 and 3.1–3.2** — `HRTorus.LLL.Space`, `HRTorus.LLL.Frame`, `HRTorus.Fock.Physical`,
 `HRTorus.Fock.Hamiltonian` (262 theorems, of which 98 are the paper's statements and 164 proof devices): the lowest Landau
@@ -165,8 +165,10 @@ this directory:
 <!-- PLACEHOLDER (to confirm): not yet run from a clean checkout. In preparing this tree, `lake build` ran against an
 existing local copy of the same pinned packages: 3,207 jobs, 67 s with one worker, peak 3.7 GiB. -->
 
-The build prints the output of the `#check` and `#print` commands at the ends of some modules, and linter warnings
-(unused variables and Mathlib deprecations; none is an error).
+The build prints the output of the `#check` and `#print` commands at the ends of some modules, and 77 linter warnings of two
+kinds, none an error: 54 hypotheses in declaration headers that the proofs do not use (42 of them on the paper's statements,
+kept so that the Lean statements carry the paper's hypotheses; 12 in the first commit's statements and in proof devices), and 23
+notices of automatically included section variables. No deprecated name is used.
 
 ## The axiom check
 
@@ -183,12 +185,12 @@ The physical side has its own check, `lake env lean HRTorus/AxiomsBlockA.lean`: 
 Block B's check, `lake env lean HRTorus/AxiomsBlockB.lean`: 326 declarations, every one on the three standard axioms or
 fewer, none on `sorryAx`.
 Block C's check, `lake env lean HRTorus/AxiomsBlockC.lean` (Section 4's four modules, `LLL.Theta`, and the two block-A modules
-block C completed): 712 declarations (`Theta` 84, `LLL.Space` 147, `Fock.Hamiltonian` 50, `Pairs` 161, `LocalForm` 150,
-`SlotLocal` 79, `BandCharges` 41), every one on the three standard axioms or fewer, none on `sorryAx`.
+block C completed): 713 declarations (`Theta` 84, `LLL.Space` 147, `Fock.Hamiltonian` 50, `Pairs` 161, `LocalForm` 150,
+`SlotLocal` 80, `BandCharges` 41), every one on the three standard axioms or fewer, none on `sorryAx`.
 Block D's check, `lake env lean HRTorus/AxiomsBlockD.lean` (Section 5's four modules): 640 declarations (`LiebRobinson` 169,
 `Calculus` 68, `Propagation` 170, `Filters` 233), every one on the three standard axioms or fewer, none on `sorryAx`.
 Block E's check, `lake env lean HRTorus/AxiomsBlockE.lean` (the four `Assembly` modules and `LLL.Space`, whose last statement
-block E proved): 613 declarations (`LLL.Space` 147, `Setting` 224, `Inputs` 129, `Translation` 36, `Main` 77), every one on the
+block E proved): 612 declarations (`LLL.Space` 147, `Setting` 224, `Inputs` 129, `Translation` 36, `Main` 76), every one on the
 three standard axioms or fewer, none on `sorryAx`. **No declaration of the project depends on `sorryAx`.**
 
 ## The kernel replay

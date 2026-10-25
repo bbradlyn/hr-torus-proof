@@ -250,11 +250,11 @@ theorem vj_support (η : ℝ → ℝ) {δ₀ : ℝ} (hδ₀ : 0 < δ₀) {T : To
   rcases μ with ⟨s, τ⟩
   simp only [vj, spinTensor, WithLp.ofLp_toLp] at hμ
   by_cases hτ : τ = Spin.up
-  · rw [if_pos hτ] at hμ
+  · rw [ite_eq_left hτ] at hμ
     refine ⟨?_, hτ⟩
     have hj : (((j.val : ℕ) : ℤ) : ZMod T.Nφ) = j := by rw [Int.cast_natCast, ZMod.natCast_zmod_val]
     exact analysis_orb_mem_col hδ₀ hT (j.val : ℤ) s (by rwa [hj])
-  · rw [if_neg hτ] at hμ; exact absurd rfl hμ
+  · rw [ite_eq_right hτ] at hμ; exact absurd rfl hμ
 
 /-- **Lemma 4.11(i)**: "`The operators $\iota(n_{j\up})$ are mutually commuting orthogonal projections on $\FockS$, $\iota(n_{j\up})\in\Alg(\Col(j))$, and $\iota(Q_{\mathcal B})\in\Alg(\Col(\mathcal B))$ for every band $\mathcal B$.`"
 — orthogonal projections. -/
@@ -433,7 +433,7 @@ theorem exists_almostSupported_exp_Qband_conj {δ₀ : ℝ} (hδ₀ : 0 < δ₀)
   have hC0 : 0 ≤ C := by
     have h0 : 0 ≤ C * (N : ℝ) ^ m := le_trans (norm_nonneg _) (hAn N hN)
     by_contra h
-    push_neg at h
+    push Not at h
     have := mul_neg_of_neg_of_pos h hNm
     linarith
   have hY : 0 < (1 + r') ^ (-(k : ℝ)) := Real.rpow_pos_of_pos (by linarith) _
@@ -473,7 +473,7 @@ theorem exists_almostSupported_exp_Qband_conj {δ₀ : ℝ} (hδ₀ : 0 < δ₀)
         have h0 : 0 ≤ Ck k * (N : ℝ) ^ m * (1 + (r' - 3 * δx δ₀ (Ts.T N))) ^ (-(k : ℝ)) :=
           le_trans (norm_nonneg _) hA'bd
         by_contra h
-        push_neg at h
+        push Not at h
         have := mul_neg_of_neg_of_pos (mul_neg_of_neg_of_pos h hNm) hX
         linarith
       have hgeom := rpow_neg_le_mul_rpow_neg (c := 6 * δ₀) hr0 hr'
@@ -484,7 +484,7 @@ theorem exists_almostSupported_exp_Qband_conj {δ₀ : ℝ} (hδ₀ : 0 < δ₀)
           gcongr
           exact le_max_left _ _
         _ = (1 + 6 * δ₀) ^ k * max (Ck k) C * (N : ℝ) ^ m * (1 + r') ^ (-(k : ℝ)) := by ring
-  · push_neg at hr
+  · push Not at hr
     refine ⟨0, Alg_zero_mem _, ?_⟩
     have hQU := exp_smul_mem_unitary hQsa u
     have hQH := exp_smul_conjTranspose hQsa u

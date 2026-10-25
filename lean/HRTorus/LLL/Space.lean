@@ -485,7 +485,7 @@ theorem integral_star_phi_mul_phi' (T : Torus) (n n' : ℤ) :
   rw [integral_star_phi_mul_phi]
   by_cases h : n = n'
   · subst h
-    rw [if_pos (sub_self n), if_pos rfl, integral_complex_ofReal]
+    rw [ite_eq_left (sub_self n), ite_eq_left rfl, integral_complex_ofReal]
     have e : (fun x : ℝ => ((T.Ly * Real.sqrt π) ^ (-(1 / 2 : ℝ))) ^ 2 * Real.exp (-((x - T.κ * n) ^ 2) / 2) *
         Real.exp (-((x - T.κ * n) ^ 2) / 2)) = fun x => ((T.Ly * Real.sqrt π) ^ (-(1 / 2 : ℝ))) ^ 2 *
         Real.exp (-((x - T.κ * n) ^ 2)) := by
@@ -496,7 +496,7 @@ theorem integral_star_phi_mul_phi' (T : Torus) (n n' : ℤ) :
     rw [e, integral_const_mul]
     push_cast
     ring
-  · rw [if_neg (sub_ne_zero.mpr (Ne.symm h)), if_neg h, mul_zero]
+  · rw [ite_eq_right (sub_ne_zero.mpr (Ne.symm h)), ite_eq_right h, mul_zero]
 
 theorem idx_eq_iff (T : Torus) (i j : ZMod T.Nφ) (m m' : ℤ) :
     (i.val : ℤ) + m * (T.Nφ : ℤ) = (j.val : ℤ) + m' * (T.Nφ : ℤ) ↔ i = j ∧ m = m' := by
@@ -571,7 +571,7 @@ theorem l2inner_psi (T : Torus) (i j : ZMod T.Nφ) :
   simp_rw [integral_star_phi_mul_phi']
   by_cases hij : i = j
   · subst hij
-    rw [if_pos rfl]
+    rw [ite_eq_left rfl]
     have hc : ∀ p : ℤ × ℤ, ((i.val : ℤ) + p.1 * (T.Nφ : ℤ) = (i.val : ℤ) + p.2 * (T.Nφ : ℤ)) ↔ p.1 = p.2 := by
       intro p
       rw [idx_eq_iff]
@@ -594,10 +594,10 @@ theorem l2inner_psi (T : Torus) (i j : ZMod T.Nφ) :
     have h1 : T.Ly * ((T.Ly * Real.sqrt π) ^ (-(1 / 2 : ℝ))) ^ 2 * Real.sqrt π = 1 := by
       linarith [c0_sq_mul T]
     rw [h1, Complex.ofReal_one]
-  · rw [if_neg hij]
+  · rw [ite_eq_right hij]
     have h0 : ∀ p : ℤ × ℤ, ¬ ((i.val : ℤ) + p.1 * (T.Nφ : ℤ) = (j.val : ℤ) + p.2 * (T.Nφ : ℤ)) :=
       fun p h => hij ((idx_eq_iff T i j p.1 p.2).mp h).1
-    simp only [h0, if_false, tsum_zero]
+    simp only [h0, ite_false, tsum_zero]
 
 /-! ### Proof devices for Lemma 2.2(ii) in the model (phase (b); not statements of the paper) -/
 
@@ -837,7 +837,7 @@ theorem lll_fourier_hasSum_dev {T : Torus} {g : ℝ × ℝ → ℂ} (hg : IsLLL 
     (hs : Summable fun n : ℤ => fcoef_dev T g n x) :
     HasSum (fun n : ℤ => ((1 / T.Ly : ℝ) : ℂ) * fcoef_dev T g n x *
       Complex.exp (I * ((T.κ * n : ℝ) : ℂ) * y)) (g (x, y)) := by
-  haveI : Fact (0 < T.Ly) := ⟨T.Ly_pos⟩
+  have : Fact (0 < T.Ly) := ⟨T.Ly_pos⟩
   have hper : Function.Periodic (fun y => g (x, y)) T.Ly := fun y => hg.2.1 x y
   have hcont : Continuous fun y => g (x, y) := hg.1.continuous.comp (by fun_prop)
   let F : C(AddCircle T.Ly, ℂ) := ⟨hper.lift, continuous_coinduced_dom.mpr hcont⟩
@@ -878,7 +878,7 @@ def idxEquiv_dev (T : Torus) : ZMod T.Nφ × ℤ ≃ ℤ where
     have hj : (j.val : ℤ) < T.Nφ := by exact_mod_cast j.val_lt
     have hN : (T.Nφ : ℤ) ≠ 0 := by exact_mod_cast T.Nφ_pos.ne'
     ext
-    · simp [ZMod.natCast_self, ZMod.natCast_zmod_val]
+    · simp
     · show ((j.val : ℤ) + m * T.Nφ) / T.Nφ = m
       rw [Int.add_mul_ediv_right _ _ hN, Int.ediv_eq_zero_of_lt (by positivity) hj, zero_add]
   right_inv n := by
@@ -1201,7 +1201,7 @@ theorem evD_add_Lx (T : Torus) (R : ℝ × ℝ) :
 theorem rankOne_ev_expand (T : Torus) (R : ℝ × ℝ) :
     InnerProductSpace.rankOne ℂ (ev T R) (ev T R) =
       ∑ i, ∑ j, (star (psi T i R) * psi T j R) • InnerProductSpace.rankOne ℂ (orb T i) (orb T j) := by
-  simp only [ev, map_sum, ContinuousLinearMap.sum_apply, map_smul, map_smulₛₗ, ContinuousLinearMap.smul_apply,
+  simp only [ev, map_sum, sum_apply, map_smul, map_smulₛₗ, smul_apply,
     smul_smul, Finset.smul_sum, starRingEnd_apply, star_star]
   rw [Finset.sum_comm]
   refine Finset.sum_congr rfl fun i _ => Finset.sum_congr rfl fun j _ => ?_
@@ -1230,8 +1230,8 @@ theorem integral_rankOne_ev (T : Torus) :
     simp
   simp_rw [e3]
   ext v : 1
-  rw [ContinuousLinearMap.sum_apply]
-  simp only [InnerProductSpace.rankOne_apply, ContinuousLinearMap.one_apply]
+  rw [sum_apply]
+  simp only [InnerProductSpace.rankOne_apply, one_apply_eq_self]
   have := (orbBasis T).sum_repr' v
   simp only [orbBasis_apply] at this
   exact this
@@ -1379,7 +1379,7 @@ theorem phase_val (T : Torus) (x : ℤ) :
   rw [hv, Int.emod_def]
   rw [show 2 * π * I * (((x - (T.Nφ : ℤ) * (x / (T.Nφ : ℤ)) : ℤ)) : ℂ) / (T.Nφ : ℂ) =
       2 * π * I * (x : ℂ) / (T.Nφ : ℂ) + ((-(x / (T.Nφ : ℤ)) : ℤ) : ℂ) * (2 * π * I) by
-    push_cast; field_simp <;> ring]
+    push_cast; field_simp; ring]
   rw [Complex.exp_add, Complex.exp_int_mul_two_pi_mul_I, mul_one]
 
 theorem phase_succ (T : Torus) (k : ZMod T.Nφ) :
@@ -1499,7 +1499,7 @@ theorem thyFun_psi (T : Torus) (j : ZMod T.Nφ) :
   have hN : (T.Nφ : ℂ) ≠ 0 := by exact_mod_cast T.Nφ_pos.ne'
   rw [show 2 * π * I * ((((j.val : ℤ) + m * (T.Nφ : ℤ) : ℤ)) : ℂ) / (T.Nφ : ℂ) =
       2 * π * I * ((j.val : ℕ) : ℂ) / (T.Nφ : ℂ) + (m : ℂ) * (2 * π * I) by
-    push_cast; field_simp <;> ring]
+    push_cast; field_simp]
   rw [Complex.exp_add, Complex.exp_int_mul_two_pi_mul_I, mul_one]
 
 /-- **Lemma 2.4(i)**, the bridge: on the represented functions, `thx` acts as the paper's `θ_x` ("`$\thx$ and $\thy$
@@ -1531,8 +1531,8 @@ theorem thx_orb (T : Torus) (j : ZMod T.Nφ) : thx T (orb T j) = orb T (j + 1) :
   rw [thx_apply]
   simp only [orb, PiLp.single_apply]
   by_cases h : i = j + 1
-  · rw [if_pos h, if_pos (by rw [h]; ring)]
-  · rw [if_neg h, if_neg (by intro h'; exact h (by rw [← h']; ring))]
+  · rw [ite_eq_left h, ite_eq_left (by rw [h]; ring)]
+  · rw [ite_eq_right h, ite_eq_right (by intro h'; exact h (by rw [← h']; ring))]
 
 /-- **Lemma 2.4(i)** on `𝔥_N`: "`$\thy\psi_j=e^{2\pi\iu j/\Nphi}\psi_j$`". -/
 theorem thy_orb (T : Torus) (j : ZMod T.Nφ) :
@@ -1585,7 +1585,7 @@ theorem thy_pow (T : Torus) : thy T ^ T.Nφ = 1 := by
     rw [Pi.pow_apply, ← Complex.exp_nat_mul]
     have hN : (T.Nφ : ℂ) ≠ 0 := by exact_mod_cast T.Nφ_pos.ne'
     rw [show (T.Nφ : ℂ) * (2 * π * I * ((j.val : ℕ) : ℂ) / (T.Nφ : ℂ)) = ((j.val : ℕ) : ℂ) * (2 * π * I) by
-      field_simp <;> ring]
+      field_simp]
     exact Complex.exp_nat_mul_two_pi_mul_I _
   show (Matrix.toEuclideanCLM (n := ZMod T.Nφ) (𝕜 := ℂ) (thyMat T)) ^ T.Nφ = 1
   rw [← map_pow, hm, map_one]
@@ -1636,7 +1636,7 @@ theorem thx_ev (T : Torus) (R : ℝ × ℝ) :
   rw [show ((x, y) + (T.κ, 0) : ℝ × ℝ) = (x + T.κ, y) by simp, ← h, star_mul', ← mul_assoc]
   rw [Complex.star_def, ← Complex.exp_conj, ← Complex.exp_add]
   rw [show I * (T.κ : ℂ) * (((x, y) : ℝ × ℝ).2 : ℂ) + (starRingEnd ℂ) (I * (T.κ : ℂ) * (y : ℂ)) = 0 by
-    simp [map_mul, Complex.conj_ofReal, Complex.conj_I] <;> ring]
+    simp [map_mul, Complex.conj_ofReal, Complex.conj_I]]
   rw [Complex.exp_zero, one_mul]
 
 /-- **Lemma 2.4(iv)**, the second: "`$\thx\evD R=e^{\iu\kappa R_y}\evD{R+\kappa\ex}$`". -/
@@ -1654,7 +1654,7 @@ theorem thx_evD (T : Torus) (R : ℝ × ℝ) :
   rw [show ((x, y) + (T.κ, 0) : ℝ × ℝ) = (x + T.κ, y) by simp, h, star_mul', ← mul_assoc]
   rw [Complex.star_def, ← Complex.exp_conj, ← Complex.exp_add]
   rw [show I * (T.κ : ℂ) * (((x, y) : ℝ × ℝ).2 : ℂ) + (starRingEnd ℂ) (I * (T.κ : ℂ) * (y : ℂ)) = 0 by
-    simp [map_mul, Complex.conj_ofReal, Complex.conj_I] <;> ring]
+    simp [map_mul, Complex.conj_ofReal, Complex.conj_I]]
   rw [Complex.exp_zero, one_mul]
 
 /-! ## The one-body space `𝔨_N = 𝔥_N ⊗ ℂ²` (Definition 2.5) -/

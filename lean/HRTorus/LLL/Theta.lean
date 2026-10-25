@@ -932,7 +932,7 @@ theorem lattice_bound_ev {Lx Ly : ℝ} (hx : 4 ≤ Lx) (hy : 4 ≤ Ly) (θ : ℤ
       · have h1 := ev_term_le Lx Ly pk.1 pk.2
         have h2 := Real.neg_one_le_cos (θ pk)
         have h3 := Real.exp_pos (-((pk.1 : ℝ) ^ 2 * Lx ^ 2 + (pk.2 : ℝ) ^ 2 * Ly ^ 2) / 4)
-        simp only [if_neg h0]
+        simp only [ite_eq_right h0]
         nlinarith) (hS2.sub hδ).neg (hM.sub hδ)
   obtain ⟨hMx1, hMxle⟩ := thetaSum_le hεx0 hεxε hεs
   obtain ⟨hMy1, hMyle⟩ := thetaSum_le hεy0 hεyε hεs
@@ -980,7 +980,7 @@ theorem lattice_bound_evD {Lx Ly : ℝ} (hx : 4 ≤ Lx) (hy : 4 ≤ Ly) (θ : �
     by_cases h0 : pk = 0
     · subst h0
       simp [thetaMaj, chiMaj, hθ]
-    · rw [if_neg h0, sub_zero]
+    · rw [ite_eq_right h0, sub_zero]
       exact evD_term_le hx hy pk.1 pk.2 (by rwa [Prod.mk.eta]) _ (Real.abs_cos_le_one _)
   have hA := hasSum_le (fun pk => (abs_le.mp (hterm pk)).2) (hS2.sub hδ) hW
   have hB := hasSum_le (fun pk => by
@@ -1093,7 +1093,7 @@ theorem integral_cube {G : ℝ × ℝ → ℂ} (hG : Continuous G) :
       {x : Fin 2 → ℝ | ∀ i, x i ∈ Set.Ioc ((0 : Fin 2 → ℝ) i) ((0 : Fin 2 → ℝ) i + 1)} =
       Set.Ioc (0 : ℝ) 1 ×ˢ Set.Ioc (0 : ℝ) 1 := by
     ext p
-    simp only [Set.mem_image, Set.mem_setOf_eq, Set.mem_prod, Pi.zero_apply, zero_add]
+    simp only [Set.mem_image, Set.mem_ofPred_eq, Set.mem_prod, Pi.zero_apply, zero_add]
     constructor
     · rintro ⟨x, hx, rfl⟩
       exact ⟨hx 0, hx 1⟩
@@ -1180,7 +1180,6 @@ theorem mFourierCoeff_torusLift {Lx Ly : ℝ} (hLx : 0 < Lx) (hLy : 0 < Ly) {f :
     push_cast
     ring
   rw [hrect]
-  push_cast
   ring
 
 theorem rectFT_zero (Lx Ly : ℝ) (f : ℝ × ℝ → ℂ) :
@@ -1314,7 +1313,6 @@ theorem integral_deriv2_mul_exp {L : ℝ} (hL : 0 < L) {h : ℝ → ℂ} (hh : C
       c * ∫ x in (0 : ℝ)..L, h x * Complex.exp ((x : ℂ) * c) := by
     rw [← intervalIntegral.integral_const_mul]; congr 1; funext x; ring
   rw [e1, ibp1, e2, ibp2, e3, hc]
-  push_cast
   ring_nf
   rw [Complex.I_sq]
   ring
@@ -1429,7 +1427,7 @@ theorem rectFT_lap {Lx Ly : ℝ} (hLx : 0 < Lx) (hLy : 0 < Ly) {f : ℝ × ℝ �
 
 theorem contDiff_star2 {f : ℝ × ℝ → ℂ} (hf : ContDiff ℝ ∞ f) : ContDiff ℝ ∞ fun r => star (f r) := by
   have h : (fun r => star (f r)) = fun r => Complex.conjCLE (f r) := by
-    funext r; simp [Complex.conjCLE_apply]
+    funext r; simp
   rw [h]
   exact Complex.conjCLE.contDiff.comp hf
 

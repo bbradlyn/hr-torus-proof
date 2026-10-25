@@ -138,7 +138,7 @@ theorem spinTensor_zero' {ι : Type*} [Fintype ι] (σ : Spin) : spinTensor (0 :
 theorem norm_spinTensor {ι : Type*} [Fintype ι] (g : EuclideanSpace ℂ ι) (σ : Spin) :
     ‖spinTensor g σ‖ = ‖g‖ := by
   have h := inner_spinTensor g g σ σ
-  rw [if_pos rfl, inner_self_eq_norm_sq_to_K, inner_self_eq_norm_sq_to_K] at h
+  rw [ite_eq_left rfl, inner_self_eq_norm_sq_to_K, inner_self_eq_norm_sq_to_K] at h
   have h2 : ‖spinTensor g σ‖ ^ 2 = ‖g‖ ^ 2 := by exact_mod_cast h
   exact (pow_left_inj₀ (norm_nonneg _) (norm_nonneg _) two_ne_zero).mp h2
 
@@ -204,7 +204,7 @@ theorem norm_chatVec' (g : EuclideanSpace ℂ (Mode S)) : ‖opCLM (chatVec g)�
     calc (xᴴ * x) * (xᴴ * x) = xᴴ * (x * xᴴ) * x := by simp only [Matrix.mul_assoc]
       _ = xᴴ * (((‖g‖ ^ 2 : ℝ) : ℂ) • (1 : Op S) - xᴴ * x) * x := by rw [h1]
       _ = ((‖g‖ ^ 2 : ℝ) : ℂ) • (xᴴ * x) - (xᴴ * xᴴ) * (x * x) := by
-        simp only [Matrix.mul_sub, Matrix.sub_mul, smul_one_mul, Matrix.mul_smul, Matrix.smul_mul, Matrix.mul_one,
+        simp only [Matrix.mul_sub, Matrix.sub_mul, Matrix.mul_smul, Matrix.smul_mul, Matrix.mul_one,
           Matrix.mul_assoc]
       _ = ((‖g‖ ^ 2 : ℝ) : ℂ) • (xᴴ * x) := by rw [h2, Matrix.zero_mul, sub_zero]
   have hP1 := norm_opCLM_conjTranspose_mul_self x
@@ -219,7 +219,7 @@ theorem norm_chatVec' (g : EuclideanSpace ℂ (Mode S)) : ‖opCLM (chatVec g)�
       simp only [opCLM_zero]
       exact norm_eq_zero.mp hx0
     rw [ha0] at hcar
-    simp only [Matrix.conjTranspose_zero, Matrix.mul_zero, Matrix.zero_mul, add_zero] at hcar
+    simp only [Matrix.conjTranspose_zero, Matrix.mul_zero, add_zero] at hcar
     have hg : ((‖g‖ ^ 2 : ℝ) : ℂ) = 0 := by
       have h1ne : (1 : Op S) ≠ 0 := one_ne_zero
       exact (smul_eq_zero.mp hcar.symm).resolve_right h1ne
@@ -269,7 +269,7 @@ theorem norm_cpairHat_le' (ν : Triplet) (h h' : EuclideanSpace ℂ S) :
     simpa [norm_spinTensor] using norm_chatVec_mul_le (spinTensor h .dn) (spinTensor h' .dn)
   | zero =>
     rw [cpairHat_zero, opCLM_smul, norm_smul, Complex.norm_real, Real.norm_eq_abs,
-      abs_of_nonneg (Real.rpow_nonneg (by norm_num) _), if_pos rfl]
+      abs_of_nonneg (Real.rpow_nonneg (by norm_num) _), ite_eq_left rfl]
     have h1 := norm_chatVec_mul_le (spinTensor h .dn) (spinTensor h' .up)
     have h2 := norm_chatVec_mul_le (spinTensor h .up) (spinTensor h' .dn)
     simp only [norm_spinTensor] at h1 h2
@@ -437,7 +437,7 @@ theorem contDiff_Dcov {f : ℝ × ℝ → ℂ} (hf : ContDiff ℝ ∞ f) : ContD
 
 theorem contDiff_star' {f : ℝ × ℝ → ℂ} (hf : ContDiff ℝ ∞ f) : ContDiff ℝ ∞ fun r => star (f r) := by
   have h : (fun r => star (f r)) = fun r => Complex.conjCLE (f r) := by
-    funext r; simp [Complex.conjCLE_apply]
+    funext r; simp
   rw [h]
   exact Complex.conjCLE.contDiff.comp hf
 
@@ -538,7 +538,7 @@ theorem norm_cpair_le_of_ne_zero (T : Torus) {ν : Triplet} (hν : ν ≠ .zero)
     ‖toCLM T (cpair T ν f g)‖ ≤ ‖f‖ * ‖g‖ := by
   rw [toCLM_eq_opCLM, cpair_eq_cpairHat]
   have := norm_cpairHat_le' ν f g
-  rwa [if_neg hν, one_mul] at this
+  rwa [ite_eq_right hν, one_mul] at this
 
 /-- The proof of **Proposition 4.4(i)**: `‖c_0(f, g)‖ ≤ √2 ‖f‖ ‖g‖`. -/
 theorem norm_cpair_zero_le (T : Torus) (f g : Space T) :
@@ -563,7 +563,7 @@ theorem norm_cpair_le (T : Torus) (ν : Triplet) (f g : Space T) :
 theorem norm_cpairHat_le_of_ne_zero {S : Type*} [Fintype S] [DecidableEq S] {ν : Triplet} (hν : ν ≠ .zero)
     (h h' : EuclideanSpace ℂ S) : ‖opCLM (cpairHat ν h h')‖ ≤ ‖h‖ * ‖h'‖ := by
   have := norm_cpairHat_le' ν h h'
-  rwa [if_neg hν, one_mul] at this
+  rwa [ite_eq_right hν, one_mul] at this
 
 /-- The proof of **Proposition 4.4(i)**, "`and likewise for $\cpairhat\nu$.`" — `ν = 0`. -/
 theorem norm_cpairHat_zero_le {S : Type*} [Fintype S] [DecidableEq S] (h h' : EuclideanSpace ℂ S) :
@@ -584,7 +584,7 @@ theorem summable_bcenTerm (T : Torus) (ν : Triplet) (n : ℤ) :
       have h1 := norm_cpair_le T ν (orb T (((n - (d : ℤ)) / 2 : ℤ) : ZMod T.Nφ))
         (orb T (((n + (d : ℤ)) / 2 : ℤ) : ZMod T.Nφ))
       rw [toCLM_eq_opCLM] at h1
-      simp only [orb, EuclideanSpace.norm_single, norm_one, mul_one] at h1
+      simp only [orb, PiLp.norm_single, norm_one, mul_one] at h1
       have hexp : Real.exp (-(T.κ ^ 2 * (d : ℝ) ^ 2) / 4) ≤ Real.exp (-(T.κ ^ 2 / 4) * d) := by
         apply Real.exp_le_exp.mpr
         have hd : (d : ℝ) ≤ (d : ℝ) ^ 2 := by
@@ -715,7 +715,7 @@ theorem hR_isSelfAdjoint (T : Torus) (R : ℝ × ℝ) : IsSelfAdjoint (hR T R) :
   simp only [hR, Matrix.conjTranspose_smul, Matrix.conjTranspose_sum, Matrix.conjTranspose_mul,
     Matrix.conjTranspose_conjTranspose]
   congr 1
-  simp [Complex.star_def, Complex.conj_ofReal]
+  simp [Complex.conj_ofReal]
 
 /-- The proof of **Corollary 4.8**: "`and $h_R$ commutes with $\Nup$ and $\Ndn$, that is, it is sector-preserving.`" -/
 theorem hR_isSectorPreserving (T : Torus) (R : ℝ × ℝ) : IsSectorPreserving T (hR T R) := by
@@ -763,9 +763,9 @@ theorem opIntegral_map {S S' : Type*} [Fintype S] [DecidableEq S] [Fintype S'] [
     funext R
     rw [hΦ (h R)]
     simp only [Matrix.sum_apply, Matrix.smul_apply, smul_eq_mul]
-  rw [e, integral_finset_sum _ (fun m _ => integrable_finset_sum _ (fun m' _ => (hint m m').mul_const _))]
+  rw [e, integral_finsetSum _ (fun m _ => integrable_finsetSum _ (fun m' _ => (hint m m').mul_const _))]
   refine Finset.sum_congr rfl fun m _ => ?_
-  rw [integral_finset_sum _ (fun m' _ => (hint m m').mul_const _)]
+  rw [integral_finsetSum _ (fun m' _ => (hint m m').mul_const _)]
   refine Finset.sum_congr rfl fun m' _ => ?_
   rw [integral_mul_const]
 
@@ -796,14 +796,14 @@ theorem setIntegral_inter_fundDom_shift (T : Torus) {D : Set (ℝ × ℝ)} (hD :
       rw [hvadd, hvadd]
       have := hD.2.1 ((x, y) - ((T.κ, 0) : ℝ × ℝ))
       rw [show ((x, y) - ((T.κ, 0) : ℝ × ℝ)) + (T.Lx, 0) = ((x + T.Lx, y) : ℝ × ℝ) - (T.κ, 0) by
-        ext <;> simp <;> ring] at this
+        ext <;> simp; ring] at this
       exact this
     have h2 : g (x + T.Lx, y) = g (x, y) := by
       have := hg (x, y)
       rwa [show ((x, y) : ℝ × ℝ) + (T.Lx, 0) = (x + T.Lx, y) by ext <;> simp] at this
     by_cases hm : ((x, y) : ℝ × ℝ) ∈ ((T.κ, 0) : ℝ × ℝ) +ᵥ D
-    · rw [if_pos (h1.mpr hm), if_pos hm, h2]
-    · rw [if_neg (fun h => hm (h1.mp h)), if_neg hm]
+    · rw [ite_eq_left (h1.mpr hm), ite_eq_left hm, h2]
+    · rw [ite_eq_right (fun h => hm (h1.mp h)), ite_eq_right hm]
   have hL : ∫ R in D ∩ fundDom T, g (R + (T.κ, 0)) = torusIntegral T (fun r => G (r.1 - -T.κ, r.2)) := by
     rw [Set.inter_comm, ← setIntegral_indicator hD.1, torusIntegral]
     refine setIntegral_congr_fun (measurableSet_Ico.prod measurableSet_Ico) fun r _ => ?_
@@ -812,8 +812,8 @@ theorem setIntegral_inter_fundDom_shift (T : Torus) {D : Set (ℝ × ℝ)} (hD :
     rw [e]
     have hm : r + (T.κ, 0) ∈ ((T.κ, 0) : ℝ × ℝ) +ᵥ D ↔ r ∈ D := by rw [hvadd, add_sub_cancel_right]
     by_cases h : r ∈ D
-    · rw [if_pos h, if_pos (hm.mpr h)]
-    · rw [if_neg h, if_neg (fun h' => h (hm.mp h'))]
+    · rw [ite_eq_left h, ite_eq_left (hm.mpr h)]
+    · rw [ite_eq_right h, ite_eq_right (fun h' => h (hm.mp h'))]
   have hR : ∫ R in (((T.κ, 0) : ℝ × ℝ) +ᵥ D) ∩ fundDom T, g R = torusIntegral T G := by
     rw [Set.inter_comm, ← setIntegral_indicator hD'm, torusIntegral]
   rw [hL, hR, torusIntegral_shift T G hGper (-T.κ)]
@@ -829,9 +829,9 @@ theorem opCLM_opIntegral {S : Type*} [Fintype S] [DecidableEq S] (D : Set (ℝ �
     simp only [opCLM_sum, opCLM_smul]
   have e : (fun R => opCLM (h R)) = fun R => ∑ m, ∑ m', h R m m' • opCLM (Matrix.single m m' (1 : ℂ)) :=
     funext fun R => hΦ (h R)
-  rw [hΦ, e, integral_finset_sum _ (fun m _ => integrable_finset_sum _ (fun m' _ => (hint m m').smul_const _))]
+  rw [hΦ, e, integral_finsetSum _ (fun m _ => integrable_finsetSum _ (fun m' _ => (hint m m').smul_const _))]
   refine Finset.sum_congr rfl fun m _ => ?_
-  rw [integral_finset_sum _ (fun m' _ => (hint m m').smul_const _)]
+  rw [integral_finsetSum _ (fun m' _ => (hint m m').smul_const _)]
   refine Finset.sum_congr rfl fun m' _ => ?_
   rw [integral_smul_const]
   rfl
@@ -996,7 +996,7 @@ theorem jets_lll_deriv {U : Set ((ℝ × ℝ) × (ℝ × ℝ))} (hU : IsOpen U) 
     filter_upwards [jets_line_mem hU hp w] with s hs
     exact hzero _ hs
   have h := jets_deriv_eq_zero hg h0
-  simp only [zero_smul, add_zero, hc, zero_mul] at h
+  simp only [zero_smul, add_zero] at h
   linear_combination h
 
 theorem jets_D1x {Φ : (ℝ × ℝ) × (ℝ × ℝ) → ℂ} {p : (ℝ × ℝ) × (ℝ × ℝ)} (h : DifferentiableAt ℝ Φ p) :
@@ -1095,7 +1095,7 @@ theorem jets_core {U : Set ((ℝ × ℝ) × (ℝ × ℝ))} (hU : IsOpen U) (hdia
     ring
   have hS : fderiv ℝ (fderiv ℝ Φ) p vx vx + fderiv ℝ (fderiv ℝ Φ) p vy vy = -(1 / 2 : ℂ) * Φ p := by
     rw [hvx', hvy']
-    simp only [map_sub, map_smul, ContinuousLinearMap.sub_apply, ContinuousLinearMap.smul_apply,
+    simp only [map_sub, map_smul, sub_apply, smul_apply,
       Complex.real_smul]
     have k1 : ex1.1.1 = 1 := rfl
     have k2 : ey1.1.1 = 0 := rfl

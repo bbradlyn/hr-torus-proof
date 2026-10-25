@@ -252,8 +252,8 @@ theorem occList_nodup (m : Conf S) : (occList m).Nodup :=
 theorem occList_update_true {m : Conf S} {ν : Mode S} (hm : m ν = false) :
     occList (Function.update m ν true) =
       (occList m).orderedInsert (fun a b => (num a : ℕ) ≤ (num b : ℕ)) ν := by
-  haveI : Std.Total (fun a b : Mode S => (num a : ℕ) ≤ (num b : ℕ)) := ⟨fun a b => le_total _ _⟩
-  haveI : IsTrans (Mode S) (fun a b : Mode S => (num a : ℕ) ≤ (num b : ℕ)) := ⟨fun a b c => le_trans⟩
+  have : Std.Total (fun a b : Mode S => (num a : ℕ) ≤ (num b : ℕ)) := ⟨fun a b => le_total _ _⟩
+  have : IsTrans (Mode S) (fun a b : Mode S => (num a : ℕ) ≤ (num b : ℕ)) := ⟨fun a b c => le_trans⟩
   have hnd : (ν :: occList m).Nodup :=
     List.nodup_cons.mpr ⟨by rw [mem_occList, hm]; simp, occList_nodup m⟩
   refine List.Perm.eq_of_pairwise (le := fun a b : Mode S => (num a : ℕ) ≤ (num b : ℕ)) ?_ ?_ ?_ ?_
@@ -266,11 +266,11 @@ theorem occList_update_true {m : Conf S} {ν : Mode S} (hm : m ν = false) :
     rw [List.mem_cons, mem_occList, mem_occList]
     by_cases h : a = ν
     · subst h; simp
-    · simp [Function.update_of_ne h, h]
+    · simp [h]
 
 theorem occList_update_false {m : Conf S} {ν : Mode S} (hm : m ν = true) :
     occList (Function.update m ν false) = @List.erase (Mode S) instBEqOfDecidableEq (occList m) ν := by
-  letI : BEq (Mode S) := instBEqOfDecidableEq
+  let : BEq (Mode S) := instBEqOfDecidableEq
   refine List.Perm.eq_of_pairwise (le := fun a b : Mode S => (num a : ℕ) ≤ (num b : ℕ)) ?_ ?_ ?_ ?_
   · intro a b _ _ h1 h2; exact num.injective (Fin.ext (le_antisymm h1 h2))
   · exact (occList_pairwise _).imp le_of_lt
@@ -280,7 +280,7 @@ theorem occList_update_false {m : Conf S} {ν : Mode S} (hm : m ν = true) :
     rw [(occList_nodup m).mem_erase_iff, mem_occList, mem_occList]
     by_cases h : a = ν
     · subst h; simp
-    · simp [Function.update_of_ne h, h]
+    · simp [h]
 
 theorem length_filter_occList (m : Conf S) (ν : Mode S) :
     ((occList m).filter fun μ => (num μ : ℕ) < (num ν : ℕ)).length = cnt ν m := by
@@ -386,7 +386,6 @@ theorem secondQuant_mul_c {U : Matrix (Mode S') (Mode S) ℂ} (hU : Uᴴ * U = 1
   by_cases hm : m ν = true
   · rw [ite_eq_left hm, ite_eq_left ((mem_occList m ν).mpr hm),
       secondQuant_apply U m' (Function.update m ν false), occList_update_false hm]
-    beta_reduce
     rw [length_filter_occList, smul_mul_assoc, Matrix.smul_apply, smul_eq_mul, hP0, mul_single_vac_apply,
       jwSign_eq, mul_comm]
   · rw [ite_eq_right hm, ite_eq_right (by rw [mem_occList]; exact hm), Matrix.zero_apply]
@@ -617,8 +616,8 @@ theorem thx2_spinTensor (f : Space T) (σ : Spin) :
   show (Matrix.toEuclideanCLM (n := Modes T) (𝕜 := ℂ) (thx2 T) (spinTensor f σ)).ofLp (i, τ) =
     (spinTensor (thx T f) σ).ofLp (i, τ)
   rw [Matrix.ofLp_toEuclideanCLM]
-  simp only [spinTensor, thx, Matrix.mulVec, dotProduct, Fintype.sum_prod_type, thx2, Matrix.kronecker_apply,
-    Matrix.one_apply, WithLp.ofLp_toLp, Matrix.ofLp_toEuclideanCLM]
+  simp only [spinTensor, thx, Matrix.mulVec, dotProduct, Fintype.sum_prod_type, thx2,
+    WithLp.ofLp_toLp, Matrix.ofLp_toEuclideanCLM]
   by_cases h : τ = σ
   · subst h; simp
   · simp [h]
@@ -867,7 +866,7 @@ theorem isInternal_sector : DirectSum.IsInternal fun nn : SectorLabel T => secto
     intro m' hm'
     by_cases h : m' = m
     · rw [h]
-    · exact absurd (by simp [PiLp.single_apply, h]) hm'
+    · exact absurd (by simp [h]) hm'
   have := (Submodule.mem_orthogonal _ _).mp hv _ hmem
   rw [EuclideanSpace.inner_single_left] at this
   simpa using this
@@ -982,12 +981,12 @@ theorem isSectorPreserving_iff_sum (A : FockOp T) :
     rw [hsum]
     by_cases hA : A i j = 0
     · simp [hA]
-    · rw [if_pos (h i j hA)]
+    · rw [ite_eq_left (h i j hA)]
   · intro h i j hA
     have := congrFun (congrFun h i) j
     rw [hsum] at this
     by_contra hne
-    rw [if_neg hne] at this
+    rw [ite_eq_right hne] at this
     exact hA this
 
 /-- **Lemma 2.6(ii)**: the second equivalence, "`if and only if $[A,\Psec\nn]=0$ for every $\nn$`". -/
@@ -1002,9 +1001,9 @@ theorem isSectorPreserving_iff_commute (A : FockOp T) :
     · rw [h i j hA]; ring
   · intro h i j hA
     have := h (secOf T j) i j
-    simp only [if_true] at this
+    simp only [ite_true] at this
     by_contra hne
-    rw [if_neg hne, mul_one, zero_mul] at this
+    rw [ite_eq_right hne, mul_one, zero_mul] at this
     exact hA this
 
 /-- **Lemma 2.6(ii)**: "`Sector-preserving operators form a unital $*$-subalgebra of the operators on $\Fock$,
@@ -1057,9 +1056,9 @@ theorem toCLM_aeval_eigen (H : FockOp T) (μ : ℂ) (w : FockSpace T)
   induction p using Polynomial.induction_on with
   | C a =>
     rw [Polynomial.aeval_C, Polynomial.aeval_C, Algebra.algebraMap_eq_smul_one (A := FockOp T) a,
-      ← Complex.coe_smul, map_smul, map_one, ContinuousLinearMap.smul_apply, ContinuousLinearMap.one_apply,
+      ← Complex.coe_smul, map_smul, map_one, smul_apply, one_apply_eq_self,
       Complex.coe_algebraMap]
-  | add p p' hp hp' => simp only [map_add, ContinuousLinearMap.add_apply, hp, hp', add_smul]
+  | add p p' hp hp' => simp only [map_add, add_apply, hp, hp', add_smul]
   | monomial n a h =>
     have e1 : Polynomial.aeval H (Polynomial.C a * Polynomial.X ^ (n + 1)) =
         Polynomial.aeval H (Polynomial.C a * Polynomial.X ^ n) * H := by
@@ -1067,7 +1066,7 @@ theorem toCLM_aeval_eigen (H : FockOp T) (μ : ℂ) (w : FockSpace T)
     have e2 : Polynomial.aeval μ (Polynomial.C a * Polynomial.X ^ (n + 1)) =
         Polynomial.aeval μ (Polynomial.C a * Polynomial.X ^ n) * μ := by
       rw [pow_succ, ← mul_assoc, map_mul, Polynomial.aeval_X]
-    rw [e1, e2, map_mul, ContinuousLinearMap.mul_apply, hw, map_smul, h, smul_smul, mul_comm μ]
+    rw [e1, e2, map_mul, mul_apply_eq_comp, hw, map_smul, h, smul_smul, mul_comm μ]
 
 
 /-- **Lemma 2.6(ii)**: "`for every $\nn$ and every Borel set $B\subset\R$ the spectral projection of $H|_{\sect\nn}$
@@ -1082,7 +1081,7 @@ theorem specProj_sector {H : FockOp T} (hH : IsSelfAdjoint H) (hHs : IsSectorPre
   show Matrix.toEuclideanCLM (n := Conf (ZMod T.Nφ)) (𝕜 := ℂ) (cfc (B.indicator (1 : ℝ → ℝ)) H * Psec T nn) = _
   have hHerm : H.IsHermitian := hH
   have hsym : (Matrix.toEuclideanLin (𝕜 := ℂ) (m := Conf (ZMod T.Nφ)) (n := Conf (ZMod T.Nφ)) H).IsSymmetric :=
-    Matrix.isHermitian_iff_isSymmetric.mp hHerm
+    Matrix.isSymmetric_toEuclideanLin_iff.symm.mp hHerm
   have hlin : ∀ (M : FockOp T) (w : FockSpace T),
       Matrix.toEuclideanLin (𝕜 := ℂ) (m := Conf (ZMod T.Nφ)) (n := Conf (ZMod T.Nφ)) M w = Matrix.toEuclideanCLM (n := Conf (ZMod T.Nφ)) (𝕜 := ℂ) M w := by
     intro M w
@@ -1102,11 +1101,11 @@ theorem specProj_sector {H : FockOp T} (hH : IsSelfAdjoint H) (hHs : IsSectorPre
     apply hw0
     obtain ⟨M, hM⟩ := hu.exists_left_inv
     have h0 : Matrix.toEuclideanCLM (n := Conf (ZMod T.Nφ)) (𝕜 := ℂ) (algebraMap ℝ (FockOp T) r - H) w = 0 := by
-      rw [map_sub, ContinuousLinearMap.sub_apply, hw, Algebra.algebraMap_eq_smul_one (A := FockOp T) r,
-        ← Complex.coe_smul, map_smul, map_one, ContinuousLinearMap.smul_apply, ContinuousLinearMap.one_apply,
+      rw [map_sub, sub_apply, hw, Algebra.algebraMap_eq_smul_one (A := FockOp T) r,
+        ← Complex.coe_smul, map_smul, map_one, smul_apply, one_apply_eq_self,
         sub_self]
     calc w = Matrix.toEuclideanCLM (n := Conf (ZMod T.Nφ)) (𝕜 := ℂ) (M * (algebraMap ℝ (FockOp T) r - H)) w := by rw [hM, map_one]; rfl
-      _ = 0 := by rw [map_mul, ContinuousLinearMap.mul_apply, h0, map_zero]
+      _ = 0 := by rw [map_mul, mul_apply_eq_comp, h0, map_zero]
   -- `1_B(H)` is a polynomial of `H`
   obtain ⟨q, hq⟩ := exists_poly_interp (Matrix.finite_real_spectrum (A := H)).toFinset (B.indicator (1 : ℝ → ℝ))
   have hPq : cfc (B.indicator (1 : ℝ → ℝ)) H = Polynomial.aeval H q := by
@@ -1163,7 +1162,7 @@ theorem specProj_sector {H : FockOp T} (hH : IsSelfAdjoint H) (hHs : IsSectorPre
         rw [hQproj]
         exact Submodule.starProjection_eq_self_iff.mpr hvS
       rw [LinearMap.mem_ker, LinearMap.sub_apply, ContinuousLinearMap.coe_coe, LinearMap.id_apply, sub_eq_zero,
-        map_mul, ContinuousLinearMap.mul_apply, hQv, heig _ v hvE, Complex.ofReal_re, Set.indicator_of_mem hμB,
+        map_mul, mul_apply_eq_comp, hQv, heig _ v hvE, Complex.ofReal_re, Set.indicator_of_mem hμB,
         Pi.one_apply, Complex.ofReal_one, one_smul]
     have := hle hw
     rwa [LinearMap.mem_ker, LinearMap.sub_apply, ContinuousLinearMap.coe_coe, LinearMap.id_apply, sub_eq_zero]
@@ -1187,8 +1186,8 @@ theorem specProj_sector {H : FockOp T} (hH : IsSelfAdjoint H) (hHs : IsSectorPre
       have hQvS : Matrix.toEuclideanCLM (n := Conf (ZMod T.Nφ)) (𝕜 := ℂ) (Psec T nn) v ∈ sector T nn := by
         rw [hQproj]; exact Submodule.coe_mem _
       have hQvE : Matrix.toEuclideanCLM (n := Conf (ZMod T.Nφ)) (𝕜 := ℂ) H (Matrix.toEuclideanCLM (n := Conf (ZMod T.Nφ)) (𝕜 := ℂ) (Psec T nn) v) = μ • Matrix.toEuclideanCLM (n := Conf (ZMod T.Nφ)) (𝕜 := ℂ) (Psec T nn) v := by
-        rw [← ContinuousLinearMap.mul_apply, ← map_mul, hHQ.eq, map_mul, ContinuousLinearMap.mul_apply, hv, map_smul]
-      rw [map_mul, ContinuousLinearMap.mul_apply, heig μ _ hQvE]
+        rw [← mul_apply_eq_comp, ← map_mul, hHQ.eq, map_mul, mul_apply_eq_comp, hv, map_smul]
+      rw [map_mul, mul_apply_eq_comp, heig μ _ hQvE]
       by_cases hQ0 : Matrix.toEuclideanCLM (n := Conf (ZMod T.Nφ)) (𝕜 := ℂ) (Psec T nn) v = 0
       · rw [hQ0, smul_zero]; exact Submodule.zero_mem _
       by_cases hB : μ.re ∈ B

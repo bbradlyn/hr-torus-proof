@@ -5,15 +5,17 @@ import Mathlib.Analysis.InnerProductSpace.Adjoint
 import Mathlib.Analysis.CStarAlgebra.Matrix
 import Mathlib.MeasureTheory.Integral.Bochner.Set
 import Mathlib.Analysis.SpecialFunctions.Gaussian.GaussianIntegral
+import HRTorus.LLL.Theta
 
 /-!
 # The lowest Landau level of the HR paper as a Hilbert space (T-0056 block A, `LLL.Space`)
 
 Written by Claude Opus 5.5 (an AI model), 2026-10-24. **The definitions and statements were written
 first and reviewed against the paper (phase (a)) and are unchanged; phase (b) added the proofs and the proof
-devices, each section of which is marked as such. Five theorems are still `sorry`, all carried by the
-review: `isLLL_iff` (the completeness of Lemma 2.2(ii), to block E's preparation) and Lemma 2.3(iii)–(iv)
-(`norm_ev_sq`, `norm_evD_sq`, `norm_ev_sq_bound`, `norm_evD_sq_bound`, to block C). Phase (b) added the import
+devices, each section of which is marked as such. One theorem is still `sorry`, carried by the
+review: `isLLL_iff` (the completeness of Lemma 2.2(ii), to block E's preparation); Lemma 2.3(iii)–(iv)
+(`norm_ev_sq`, `norm_evD_sq`, `norm_ev_sq_bound`, `norm_evD_sq_bound`) were proved in block C (2026-10-24) through the
+devices of `HRTorus.LLL.Theta`, whose import block C added. Phase (b) added the import
 of `Mathlib.Analysis.SpecialFunctions.Gaussian.GaussianIntegral` (the Gaussian integral, for the orthonormality
 of Lemma 2.2(ii)).**
 The paper: the HR paper, `papers/hr/sections/02-setting.tex` — Definition 2.1 `def:torus`, Lemma 2.2
@@ -897,28 +899,69 @@ def qsq (T : Torus) (pk : ℤ × ℤ) : ℝ :=
 theorem norm_ev_sq (T : Torus) (R : ℝ × ℝ) :
     HasSum (fun pk : ℤ × ℤ => 1 / (2 * π) * Real.exp (-qsq T pk / 4) *
         Real.cos (pk.2 * T.Ly * R.1 + pk.1 * T.Lx * R.2)) (‖ev T R‖ ^ 2) := by
-  sorry
+  -- block C's proof (L9), through the devices of `HRTorus.LLL.Theta`
+  have hz : ∀ z : ℂ, (star z * z).re = ‖z‖ ^ 2 := fun z => by
+    rw [Complex.star_def, Complex.conj_mul', ← Complex.ofReal_pow, Complex.ofReal_re]
+  have e1 : (∑ j : ZMod T.Nφ, star (psi T j R) * psi T j R).re = ‖ev T R‖ ^ 2 := by
+    rw [EuclideanSpace.norm_sq_eq, Complex.re_sum]
+    refine Finset.sum_congr rfl fun j _ => ?_
+    rw [hz, ev_apply, norm_star]
+  have h := Complex.hasSum_re (hasSum_Gev T R)
+  rw [e1] at h
+  convert h using 1
+  funext pk
+  simp only [Gev, qsq]
+  rw [Complex.re_ofReal_mul, Complex.exp_ofReal_mul_I_re]
 
 /-- **Lemma 2.3(iii)**, the second formula:
 "`\norm{\evD R}^2&=\frac1{4\pi}\sum_{(p,k)\in\Z^2}\Bigl(1-\frac{q_{pk}^2}2\Bigr)e^{-q_{pk}^2/4}\cos(kL_yR_x+pL_xR_y)`". -/
 theorem norm_evD_sq (T : Torus) (R : ℝ × ℝ) :
     HasSum (fun pk : ℤ × ℤ => 1 / (4 * π) * (1 - qsq T pk / 2) * Real.exp (-qsq T pk / 4) *
         Real.cos (pk.2 * T.Ly * R.1 + pk.1 * T.Lx * R.2)) (‖evD T R‖ ^ 2) := by
-  sorry
+  -- block C's proof (L9), through the devices of `HRTorus.LLL.Theta`
+  have hz : ∀ z : ℂ, (star z * z).re = ‖z‖ ^ 2 := fun z => by
+    rw [Complex.star_def, Complex.conj_mul', ← Complex.ofReal_pow, Complex.ofReal_re]
+  have e1 : (∑ j : ZMod T.Nφ, star (Dcov (psi T j) R) * Dcov (psi T j) R).re = ‖evD T R‖ ^ 2 := by
+    rw [EuclideanSpace.norm_sq_eq, Complex.re_sum]
+    refine Finset.sum_congr rfl fun j _ => ?_
+    rw [hz, evD_apply, norm_star]
+  have h := Complex.hasSum_re (hasSum_GevD T R)
+  rw [e1] at h
+  convert h using 1
+  funext pk
+  simp only [GevD, qsq]
+  rw [Complex.re_ofReal_mul, Complex.exp_ofReal_mul_I_re]
 
 /-- **Lemma 2.3(iv)**, the first bound: "`Let $L_{\min}:=\min\{L_x,L_y\}\ge4$`", then for every `R`,
 "`\bigl\lvert2\pi\norm{\ev R}^2-1\bigr\rvert\le4.2\,e^{-L_{\min}^2/4}\le0.08`". -/
 theorem norm_ev_sq_bound (T : Torus) (hL : 4 ≤ min T.Lx T.Ly) (R : ℝ × ℝ) :
     |2 * π * ‖ev T R‖ ^ 2 - 1| ≤ 4.2 * Real.exp (-(min T.Lx T.Ly) ^ 2 / 4) ∧
       4.2 * Real.exp (-(min T.Lx T.Ly) ^ 2 / 4) ≤ 0.08 := by
-  sorry
+  -- block C's proof (L9), through the devices of `HRTorus.LLL.Theta`
+  have hx : 4 ≤ T.Lx := le_trans hL (min_le_left _ _)
+  have hy : 4 ≤ T.Ly := le_trans hL (min_le_right _ _)
+  have h := lattice_bound_ev hx hy (fun pk : ℤ × ℤ => pk.2 * T.Ly * R.1 + pk.1 * T.Lx * R.2) (by simp)
+    (norm_ev_sq T R)
+  have h2 := (eps_facts hL le_rfl).2.2.1
+  rw [neg_div]
+  exact ⟨h, by linarith⟩
 
 /-- **Lemma 2.3(iv)**, the second bound:
 "`\bigl\lvert4\pi\norm{\evD R}^2-1\bigr\rvert\le2.1\,L_{\min}^2e^{-L_{\min}^2/4}\le0.62`". -/
 theorem norm_evD_sq_bound (T : Torus) (hL : 4 ≤ min T.Lx T.Ly) (R : ℝ × ℝ) :
     |4 * π * ‖evD T R‖ ^ 2 - 1| ≤ 2.1 * (min T.Lx T.Ly) ^ 2 * Real.exp (-(min T.Lx T.Ly) ^ 2 / 4) ∧
       2.1 * (min T.Lx T.Ly) ^ 2 * Real.exp (-(min T.Lx T.Ly) ^ 2 / 4) ≤ 0.62 := by
-  sorry
+  -- block C's proof (L9), through the devices of `HRTorus.LLL.Theta`
+  have hx : 4 ≤ T.Lx := le_trans hL (min_le_left _ _)
+  have hy : 4 ≤ T.Ly := le_trans hL (min_le_right _ _)
+  have h := lattice_bound_evD hx hy (fun pk : ℤ × ℤ => pk.2 * T.Ly * R.1 + pk.1 * T.Lx * R.2) (by simp)
+    (norm_evD_sq T R)
+  have h1 := mul_exp_anti (s := 16) (t := (min T.Lx T.Ly) ^ 2) (by norm_num) (by nlinarith)
+  have h2 : Real.exp (-((16 : ℝ) / 4)) < 0.01832 := by
+    rw [show -((16 : ℝ) / 4) = -4 by norm_num]
+    exact exp_neg_four_lt
+  rw [neg_div]
+  exact ⟨h, by nlinarith⟩
 
 /-! ## §2.2: the magnetic translations -/
 

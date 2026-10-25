@@ -9,8 +9,10 @@ import Mathlib.Analysis.Calculus.Deriv.Star
 
 Written by Claude Opus 5.5 (an AI model), 2026-10-24. **The definitions and statements were written
 first and reviewed against the paper (phase (a)) and are unchanged; phase (b) added the proofs and the proof
-devices, each section of which is marked as such. Two theorems are still `sorry`: `Vcoef_latticeSum` (the
-lattice-sum form) and `HN_posSemidef` (carried to block C).** The paper: the HR paper, `papers/hr/sections/02-setting.tex`, §2.4 —
+devices, each section of which is marked as such. No theorem is `sorry`: `Vcoef_latticeSum` (the lattice-sum
+form) was proved in block C (2026-10-24) through the Parseval devices of `HRTorus.LLL.Theta`, and `HN_posSemidef` moved to
+`HRTorus.Hamiltonian.LocalForm` with its name, docstring and statement unchanged, where the paper's proof from Theorem 4.2(a)
+lives.** The paper: the HR paper, `papers/hr/sections/02-setting.tex`, §2.4 —
 Definition 2.7 `def:hamiltonian` with (2.6) `eq:Vabcd` and (2.7) `eq:HN`, its equivalent lattice-sum form, and the
 paragraph after it (self-adjoint, sector-preserving, even, invariant under global spin rotations, commuting with
 `Θ`, `H_N ≥ 0`). Nothing of §4 is stated.
@@ -194,7 +196,50 @@ theorem Vcoef_latticeSum (a b c d : ZMod T.Nφ) :
           ((4 * π * (1 - ((dualPt T pk).1 ^ 2 + (dualPt T pk).2 ^ 2)) : ℝ) : ℂ) *
           torusFourier T (pairDensity T a c) (-dualPt T pk) * torusFourier T (pairDensity T b d) (dualPt T pk))
       (Vcoef T a b c d) := by
-  sorry
+  -- block C's proof (L9), through the devices of `HRTorus.LLL.Theta` (Parseval on the rectangle)
+  have hLx := T.Lx_pos
+  have hLy := T.Ly_pos
+  -- smoothness and periodicity of the pair densities
+  have hsm : ∀ i j : ZMod T.Nφ, ContDiff ℝ ((⊤ : ℕ∞) : WithTop ℕ∞) (pairDensity T i j) := fun i j =>
+    (contDiff_star2 (psi_contDiff T i)).mul (psi_contDiff T j)
+  have hpx : ∀ (i j : ZMod T.Nφ) (x y : ℝ), pairDensity T i j (x + T.Lx, y) = pairDensity T i j (x, y) := by
+    intro i j x y
+    simp only [pairDensity, psi_add_Lx, star_mul']
+    have h := phase_star_mul_self2 (z := I * (T.Lx : ℂ) * (y : ℂ)) (by simp)
+    linear_combination (star (psi T i (x, y)) * psi T j (x, y)) * h
+  have hpy : ∀ (i j : ZMod T.Nφ) (x y : ℝ), pairDensity T i j (x, y + T.Ly) = pairDensity T i j (x, y) := by
+    intro i j x y
+    simp only [pairDensity, psi_add_Ly]
+  have hlap := lap_periodic (hpx a c) (hpy a c)
+  have hlc : Continuous (lap (pairDensity T a c)) :=
+    ((contDiff_px (contDiff_px (hsm a c))).add (contDiff_py (contDiff_py (hsm a c)))).continuous
+  have hP1 := parseval_rect hLx hLy (hpx a c) (hpy a c) (hsm a c).continuous (hpx b d) (hpy b d)
+    (hsm b d).continuous
+  have hP2 := parseval_rect (f := lap (pairDensity T a c)) hLx hLy hlap.1 hlap.2 hlc (hpx b d) (hpy b d)
+    (hsm b d).continuous
+  have hsum := (hP1.mul_left (4 * π : ℂ)).add (hP2.mul_left (4 * π : ℂ))
+  convert hsum using 1
+  · funext pk
+    have htf : ∀ (g : ℝ × ℝ → ℂ) (q : ℝ × ℝ), torusFourier T g q = rectFT T.Lx T.Ly g q := fun g q => rfl
+    have hdp : dualPt T pk = (2 * π * (pk.1 : ℝ) / T.Lx, 2 * π * (pk.2 : ℝ) / T.Ly) := rfl
+    rw [htf, htf, hdp]
+    have hq : (-(2 * π * (pk.1 : ℝ) / T.Lx, 2 * π * (pk.2 : ℝ) / T.Ly) : ℝ × ℝ) =
+        (2 * π * (((-pk.1, -pk.2) : ℤ × ℤ).1 : ℝ) / T.Lx, 2 * π * (((-pk.1, -pk.2) : ℤ × ℤ).2 : ℝ) / T.Ly) := by
+      ext <;> simp <;> ring
+    have hL := rectFT_lap hLx hLy (hsm a c) (hpx a c) (hpy a c) (-pk.1, -pk.2)
+    rw [← hq] at hL
+    rw [show rectFT T.Lx T.Ly (lap (pairDensity T a c)) = rectFT T.Lx T.Ly (fun r =>
+        deriv (fun x => deriv (fun x' => pairDensity T a c (x', r.2)) x) r.1 +
+        deriv (fun y => deriv (fun y' => pairDensity T a c (r.1, y')) y) r.2) from rfl, hL]
+    dsimp only
+    push_cast
+    ring
+  · unfold Vcoef torusIntegral
+    have e : (∫ r in fundDom T, pairDensity T b d r * lap (pairDensity T a c) r) =
+        ∫ r in Set.Ico 0 T.Lx ×ˢ Set.Ico 0 T.Ly, lap (pairDensity T a c) r * pairDensity T b d r := by
+      congr 1; funext r; ring
+    rw [e]
+    rfl
 
 /-! ## The statements of §2.4 about `H_N` -/
 
@@ -605,9 +650,6 @@ theorem HN_commute_Θ : Commute (Θ T) (HN T) := by
   calc Θ T * HN T = Θ T * ((Θ T)ᴴ * HN T * Θ T) := by rw [key]
     _ = HN T * Θ T := by rw [← mul_assoc, ← mul_assoc, h2, one_mul]
 
-/-- **§2.4**: "`in particular $H_N\ge0$`" (the paper derives it from Theorem 4.2(a), §4). -/
-theorem HN_posSemidef : (HN T).PosSemidef := by
-  sorry
 
 /-- The fields of `HRTorus.IndexCore.Orbital` that concern `H` (`H_sa`, `Psec_H`, `Θ_H`), for `H = H_N`, the sector
 projection `Π^𝐧` and `Θ`, on `𝓗_N`; with `orbitalFit_spin`, `orbitalFit_total` (`Fock.Physical`) these are the

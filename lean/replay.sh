@@ -32,6 +32,11 @@ HRTorus.Fock.Hamiltonian
 HRTorus.Fock.Slot
 HRTorus.Fock.Embedding
 HRTorus.Locality.Basic
+HRTorus.LLL.Theta
+HRTorus.Hamiltonian.Pairs
+HRTorus.Hamiltonian.LocalForm
+HRTorus.Hamiltonian.SlotLocal
+HRTorus.Hamiltonian.BandCharges
 "
 fail=0
 for m in $MODULES; do

@@ -73,12 +73,14 @@ Proposition 3.3 (Parseval) with the bridges to Lemma 3.5; the physical Fock spac
 anticommutation relations, the sectors and their projections, the second quantization 𝔉(u) with its characterization, and the
 many-body translation Θ with Lemma 2.6 in full; the hollow-core Hamiltonian H_N with its coefficients V_abcd defined by the
 integrals of Definition 2.7, self-adjoint, sector-preserving, even, invariant under spin rotations and commuting with Θ.
-**Seven of the 98 statements are stated but not yet proved — they are `sorry` in the sources and the axiom check below shows
-exactly which:** `HRTorus.LLL.isLLL_iff` (every function with the LLL properties is a combination of the ψ_j — the
-completeness half of the bridge), `HRTorus.LLL.norm_ev_sq`, `norm_evD_sq`, `norm_ev_sq_bound`, `norm_evD_sq_bound` (Lemma
-2.3(iii)–(iv), the lattice sums and numerical bounds for the evaluation vectors' norms), `HRTorus.Fock.HN_posSemidef` (H_N ≥ 0,
-whose proof in the paper is Theorem 4.2(a)) and `HRTorus.Fock.Vcoef_latticeSum` (the lattice-sum form (2.7′) of the
-coefficients). Nothing proved depends on them.
+**One of the 98 statements is stated but not yet proved — it is `sorry` in the sources and the axiom checks below show
+exactly what rests on it (nothing proved does):** `HRTorus.LLL.isLLL_iff`, that every function with the LLL properties is a
+combination of the ψ_j — the completeness half of the bridge to the paper's function space, needed only to identify the Lean
+space with the paper's. The six statements that were open at this block's first commit — Lemma 2.3(iii)–(iv) (`norm_ev_sq`,
+`norm_evD_sq`, `norm_ev_sq_bound`, `norm_evD_sq_bound`), the lattice-sum form (2.7′) of the coefficients (`Vcoef_latticeSum`)
+and H_N ≥ 0 (`HRTorus.Fock.HN_posSemidef`, now stated and proved in `HRTorus.Hamiltonian.LocalForm`, where the paper's proof from
+Theorem 4.2(a) lives) — were proved with Section 4 (below), the first five through `HRTorus.LLL.Theta` (Poisson summation and
+Parseval on the rectangle; proof devices).
 
 **The slot Fock space, the embedding and the locality vocabulary, Sections 3.2–3.3 with Proposition 3.4 and Lemma 3.6** —
 `HRTorus.Fock.Slot`, `HRTorus.Fock.Embedding`, `HRTorus.Locality.Basic` (210 theorems, of which 99 are the paper's statements
@@ -93,6 +95,19 @@ sector-preserving and self-adjoint approximants (proved by a finite average over
 paper's integral); and the geometry: Lemma 3.2(iii), Proposition 3.4 with the paper's constants, strips, columns and bands,
 Lemma 3.6 (exact column support), Lemma 3.10, and Definition 3.11 (almost-supported sequences with explicit prefactor
 exponents and constants, the uniform version, the set norm) with its consequence that such sequences are even.
+
+**The Hamiltonian in the slot frame, Section 4** — `HRTorus.Hamiltonian.Pairs`, `HRTorus.Hamiltonian.LocalForm`,
+`HRTorus.Hamiltonian.SlotLocal`, `HRTorus.Hamiltonian.BandCharges` (295 theorems, of which 77 are the paper's statements and the
+rest proof devices, plus `HRTorus.LLL.Theta`, 68 proof devices for the theta-function estimates; **all proved, no `sorry`**): Definition
+4.1 (the triplet pair operators on both Fock spaces, the local terms h_R, the centre pair operators as a convergent series);
+**Theorem 4.2, the exact local form** — H_N = ∫_{𝕋_N} h_R dR as an entrywise operator integral, the expansion of B_ν(R) in the
+centre pair operators, and H_N = κ³/√(2π) Σ_n Σ_ν b_ν(n)*b_ν(n) — proved by the paper's route (the jet lemma 4.3 by a
+real-variable argument, the pair-amplitude identity of its Steps 1–5, and a polarization device in place of its Step 6); H_N ≥ 0
+from it; Proposition 4.4 (the local terms bounded by C_h = 7/π and approximated in Alg(Ball(R, r)) to every order, with a
+constant depending only on k, η and δ₀); Lemma 4.5 (covariance under Θ, for the local terms and for the integrals over Borel
+sets of the torus); Definition 4.6 (the class of slot-local covariant Hamiltonians, a structure with explicit data) with
+Corollary 4.8 (the hollow-core Hamiltonians are in it); Definition 4.9 and Lemmas 4.10–4.11 (the band charges, their algebra,
+and their almost-support in the slot lattice, uniformly in the gauge angle and the band).
 
 ## Building
 
@@ -117,11 +132,14 @@ exactly `[propext, Classical.choice, Quot.sound]`, the three standard axioms of 
 (`HRTorus.IndexCore.OrbitalRing.neZero_two_mul`) on `[propext, Quot.sound]`; none depends on `sorryAx`.
 The pilot modules have their own check, `lake env lean HRTorus/Fermion/Pilot/Axioms.lean`: 455 declarations, 408 on the
 three standard axioms, 3 on `[Quot.sound]`, 44 on none, none on `sorryAx`.
-The physical side has its own check, `lake env lean HRTorus/AxiomsBlockA.lean`: 373 declarations, 361 on the three standard
-axioms, 5 on none, and **7 on the three plus `sorryAx` — exactly the seven unproved statements named above, and nothing else
-depends on them.**
+The physical side has its own check, `lake env lean HRTorus/AxiomsBlockA.lean`: 373 declarations, 367 on the three standard
+axioms, 5 on none, and **1 on the three plus `sorryAx` — exactly `HRTorus.LLL.isLLL_iff`, the one unproved statement named above, and
+nothing else depends on it.**
 Block B's check, `lake env lean HRTorus/AxiomsBlockB.lean`: 326 declarations, every one on the three standard axioms or
-fewer, none on `sorryAx` — nothing in these three modules rests on the seven open statements.
+fewer, none on `sorryAx` — nothing in these three modules rests on the open statement.
+Block C's check, `lake env lean HRTorus/AxiomsBlockC.lean` (Section 4's four modules, `LLL.Theta`, and the two block-A modules
+block C completed): 698 declarations (`Theta` 84, `LLL.Space` 133, `Fock.Hamiltonian` 50, `Pairs` 161, `LocalForm` 150, `SlotLocal` 79, `BandCharges` 41), every one on the three standard axioms or fewer except
+`HRTorus.LLL.isLLL_iff` itself — nothing in Section 4, and nothing in Lemma 2.3(iii)–(iv), the lattice-sum form or H_N ≥ 0, rests on it.
 
 ## The kernel replay
 

@@ -4,7 +4,9 @@ import HRTorus
 # The axiom check
 
 `#print axioms` for every named declaration (theorem, definition, structure, instance) of the
-seventeen modules of `HRTorus`, module by module. Run it after `lake build` with
+seventeen modules of `HRTorus` that formed its first commit — the index core, Lemma 3.5 and the Laughlin
+pilot — module by module; the pilot of Lemma 5.1 and the blocks of Sections 2–8 have their own files
+(`HRTorus/Fermion/Pilot/Axioms.lean`, `HRTorus/AxiomsBlockA.lean`–`AxiomsBlockE.lean`). Run it after `lake build` with
 
     lake env lean HRTorus/Axioms.lean
 

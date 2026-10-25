@@ -4,7 +4,7 @@ import HRTorus.Locality.Basic
 import Lean.Util.CollectAxioms
 
 /-! T-0056 recruit L8, proof phase (2026-10-24): the axiom check of block B's three modules, run with
-`lake env lean` from the public tree's Lake project (not part of the tree; copied from L7's `work/l7/L7bAxioms.lean`,
+`lake env lean` from the public tree's Lake project (copied into the tree from L7's `work/l7/L7bAxioms.lean`,
 the method unchanged, the module names block B's). For every non-internal constant defined in the named module
 (theorems, definitions and their auxiliary constants, instances), the axioms it depends on; a summary
 line with the count of constants with an axiom outside `[propext, Classical.choice, Quot.sound]`, the

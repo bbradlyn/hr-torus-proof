@@ -41,6 +41,10 @@ HRTorus.Locality.LiebRobinson
 HRTorus.Locality.Calculus
 HRTorus.Locality.Propagation
 HRTorus.Locality.Filters
+HRTorus.Assembly.Setting
+HRTorus.Assembly.Inputs
+HRTorus.Assembly.Translation
+HRTorus.Assembly.Main
 "
 fail=0
 for m in $MODULES; do

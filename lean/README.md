@@ -1,11 +1,11 @@
 # HRTorus: the Lean 4 formalization
 
 Lean 4.34.1 (`lean-toolchain`) against Mathlib at commit `d13f23b723b8a846827a245b89c10fc7d3f11612`
-(`lakefile.toml`, `lake-manifest.json`); every module is compiled with `autoImplicit = false`. Seventeen modules,
-8,676 lines, 651 named declarations (547 theorems), no `sorry`. The papers are in `../papers/`; each module's
-docstring names the paper, the section and the statements it formalizes. For the index core, the corollary of
-Section 7, Lemma 3.5 and the Laughlin pilot, the Lean statements were written and compared with the paper before any
-of their proofs was written.
+(`lakefile.toml`, `lake-manifest.json`); every module is compiled with `autoImplicit = false`. Thirty-nine modules,
+42,619 lines, about 2,470 theorems (`theorem` and `lemma` declarations) and 475 definitions, no `sorry` anywhere. The
+papers are in `../papers/`; each module's docstring names the paper, the section and the statements it formalizes. For
+every part, the Lean statements were written and compared with the paper before any of their proofs was written; the
+statement of Theorem 8.1 was in addition derived blind from the paper by a second instance and compared with this one.
 
 ## What is proved
 
@@ -47,13 +47,6 @@ of `s ↦ z_s(R)` over the slots outside the ball (the module docstring lists th
 (`coset_poisson`), and the closed form of the paper's `S_j` (`S_closed_form`). The rest of the Laughlin paper is not
 formalized here.
 
-### What is not formalized
-
-The analytic part of the HR paper (Sections 3–5 apart from Lemma 3.5, and Appendix B), which supplies the inputs
-that `index_core` takes as hypotheses; the orbital properties of the actual model, which `Orbital` takes as fields;
-the kernel of Appendix C, the spin-twist bound of Appendix D, and the assembly of the main theorems of Section 8; and
-the Laughlin paper apart from the pilot.
-
 **Lemma 5.1, the conditional expectations onto the local algebras, under two representations of the fermion
 algebra** — `HRTorus.Fermion.Pilot.JW` (96 theorems: the slot Fock space as a Jordan–Wigner matrix algebra on occupation
 configurations, the expectation as the Hilbert–Schmidt projection — the paper's definition) and `HRTorus.Fermion.Pilot.CAR`
@@ -61,11 +54,12 @@ configurations, the expectation as the Hilbert–Schmidt projection — the pape
 modes outside the region, with the paper's defining properties and its uniqueness as theorems). Both prove every clause of
 Lemma 5.1 — linear, unital, positive, contractive, idempotent, *-preserving, commuting with parity and gauge, mapping even
 operators into the even local algebra, and the bound ‖A − 𝔼_Y A‖ ≤ 2 inf_{A' ∈ Alg(Y)} ‖A − A'‖ — except its measurability
-sentence. The two modules are a measurement pilot for the choice of representation in which Sections 3.2–5 will be
-formalized; that choice is pending, and the chosen module will be renamed out of `Pilot` when it is made.
+sentence (proved with Section 5, below). The two modules were a measurement pilot for the choice of representation in which
+Sections 3.2–8 are formalized: the concrete Jordan–Wigner space (`JW`) was chosen once the pilot and the first blocks of
+Section 3 had measured it, and everything below is built on it; the module keeps its `Pilot` name until a planned rename.
 
 **The physical side, Sections 2.1–2.5 and 3.1–3.2** — `HRTorus.LLL.Space`, `HRTorus.LLL.Frame`, `HRTorus.Fock.Physical`,
-`HRTorus.Fock.Hamiltonian` (250 theorems, of which 98 are the paper's statements and 152 proof devices): the lowest Landau
+`HRTorus.Fock.Hamiltonian` (262 theorems, of which 98 are the paper's statements and 164 proof devices): the lowest Landau
 level 𝔥_N as an N_φ-dimensional inner product space with the orbitals ψ_j as its orthonormal basis, bridged to the paper's
 function space (smoothness, the boundary conditions and the LLL equation of the ψ_j; their orthonormality in L²); the evaluation
 vectors of Lemma 2.3 with (i)–(ii); the magnetic translations of Lemma 2.4; the frame vectors (3.1), the analysis map and
@@ -73,10 +67,12 @@ Proposition 3.3 (Parseval) with the bridges to Lemma 3.5; the physical Fock spac
 anticommutation relations, the sectors and their projections, the second quantization 𝔉(u) with its characterization, and the
 many-body translation Θ with Lemma 2.6 in full; the hollow-core Hamiltonian H_N with its coefficients V_abcd defined by the
 integrals of Definition 2.7, self-adjoint, sector-preserving, even, invariant under spin rotations and commuting with Θ.
-**One of the 98 statements is stated but not yet proved — it is `sorry` in the sources and the axiom checks below show
-exactly what rests on it (nothing proved does):** `HRTorus.LLL.isLLL_iff`, that every function with the LLL properties is a
-combination of the ψ_j — the completeness half of the bridge to the paper's function space, needed only to identify the Lean
-space with the paper's. The six statements that were open at this block's first commit — Lemma 2.3(iii)–(iv) (`norm_ev_sq`,
+**All 98 statements are proved.** The last, `HRTorus.LLL.isLLL_iff` — that every function with the LLL properties is a
+combination of the ψ_j, the completeness half of the bridge to the paper's function space — was proved with the assembly
+(Section 8, below): the y-Fourier coefficients defined as integrals, their first-order equation by differentiation under the
+integral sign and an integration by parts, hence their Gaussian form and the summability that gives the pointwise Fourier
+series (a recorded change of order from the paper's proof, which differentiates the series term-wise). The six statements that
+were open at this block's first commit — Lemma 2.3(iii)–(iv) (`norm_ev_sq`,
 `norm_evD_sq`, `norm_ev_sq_bound`, `norm_evD_sq_bound`), the lattice-sum form (2.7′) of the coefficients (`Vcoef_latticeSum`)
 and H_N ≥ 0 (`HRTorus.Fock.HN_posSemidef`, now stated and proved in `HRTorus.Hamiltonian.LocalForm`, where the paper's proof from
 Theorem 4.2(a) lives) — were proved with Section 4 (below), the first five through `HRTorus.LLL.Theta` (Poisson summation and
@@ -127,47 +123,82 @@ order k + 2 instead of the dyadic decomposition, and Theorem 5.3(a)'s Step 4 by 
 integral. Two statements (Lemma 5.5 and Lemma 5.6's first claim) carry the hypothesis n_A < ∞ that the paper's proofs assume in
 their first line: without it their literal transcription into ℝ≥0∞ would be false (0 · ∞ = 0 there).
 
+**The assembly, Sections 6–8** — `HRTorus.Assembly.Setting`, `HRTorus.Assembly.Inputs`, `HRTorus.Assembly.Translation`,
+`HRTorus.Assembly.Main` (272 theorems, of which 97 are the paper's statements and 175 proof devices; **all proved, no `sorry`**):
+Setting 6.1 on the physical Fock space — the half-tori and the cuts, the currents J and K, the ordered eigenvalues E_k(N) of
+H_N in a sector (Mathlib's spectral theorem on the compression, the index clamped to 1..d, with the counting-function form as
+a theorem), Assumption 6.3 as a property of given data with the spectral projection in the functional calculus, Lemma 6.2
+(the separations) and Lemmas 6.6–6.8 (the splitting of the dressing, [K, P] = 0, the locality of K); the inputs of the index
+core from the hollow-core model — Proposition 6.10, Definition 6.11 for U = Θ, Lemma 6.12 row by row, Lemma 6.13, the
+clustering inputs, with ε(N) the largest of the twenty input quantities, O(N^{−∞}), and M(N) = (1 + 4πC_h‖W_γ‖₁)N² — the
+limit step and Theorem 6.18 for Θ; Lemma 7.1 and Corollaries 7.2–7.4 for the class of Definition 4.6 with the hollow-core
+model as the instance; **Theorem 8.1** (`hollow_core_index`: along the rectangular tori of a fixed aspect ratio, if at
+infinitely many even N the lowest p eigenvalues of H_N in the sector lie within Δ of each other and are separated from the
+next by γ > 2Δ, then 4 ∣ p and 12 ≤ p; `hollow_core_E11_tendsto`: E_11(N) → 0 along even N), Corollary 8.2 (odd N), Lemma 8.3
+(the exchange of L_x and L_y by a unitary between the two Fock spaces, with the eigenvalues of H_N in each sector preserved)
+and Corollary 8.4 (E_11 → 0 uniformly over the tori 𝒯_N, in a supremum and a supremum-free form). The ten zero modes of
+Appendix C (and the odd case's two) are the named hypotheses `HasTenZeroModes` and `HasTwoZeroModes` of Theorem 8.1(ii),
+Corollary 8.2 and Corollary 8.4; 4 ∣ p holds without them (`hollow_core_index_four_dvd`). Recorded departures from the
+paper's proofs: Lemma 6.6(ii)–(iii)'s far region bounded by its supremum times the half-torus volume in place of the paper's
+one-dimensional integral; Corollary 7.4(ii) by a finite pigeonhole over the scales γ/4^i in place of compactness along a
+subsequence, with the dimension bound (N+1)/2 where the paper uses 2N; Corollary 7.4(i) through Corollary 7.2 on a restricted
+setting; Lemma 8.3's conjugation of H_N through Theorem 4.2(a)'s local form in place of the paper's change of basis in
+V_abcd; Lemmas 6.7 and 7.1(d) by applying the core's lemmas to instances with trivial data in the fields they do not use. The
+sentences at odd N are stated for N ≥ 3, where the paper's "E_1 = E_2 = 0 < E_3" has an E_3 (at N = 1 the sectors are
+two-dimensional).
+
+### What is not formalized
+
+The kernel of Appendix C — the ten zero modes of the hollow-core Hamiltonian at even N and the two at odd N, which enter
+Theorem 8.1(ii), Corollary 8.2 and Corollary 8.4 as the named hypotheses above, so that those statements are proved as
+implications; the spin-twist bound of Appendix D, which no Lean statement or proof refers to; and the Laughlin paper apart
+from the pilot.
+
 ## Building
 
 Install [elan](https://github.com/leanprover/elan), which reads `lean-toolchain` and installs Lean 4.34.1. Then, in
 this directory:
 
     lake exe cache get    # downloads Mathlib's compiled files for the pinned commit
-    lake build            # builds the seventeen modules (the default target, HRTorus)
+    lake build            # builds the thirty-nine modules (the default target, HRTorus)
 
 <!-- PLACEHOLDER (to confirm): not yet run from a clean checkout. In preparing this tree, `lake build` ran against an
 existing local copy of the same pinned packages: 3,207 jobs, 67 s with one worker, peak 3.7 GiB. -->
 
-The build prints the output of the `#check` and `#print` commands at the ends of some modules, and seven
-unused-variable warnings from the linter.
+The build prints the output of the `#check` and `#print` commands at the ends of some modules, and linter warnings
+(unused variables and Mathlib deprecations; none is an error).
 
 ## The axiom check
 
     lake env lean HRTorus/Axioms.lean
 
-prints, for each of the 651 named declarations, the axioms it depends on. In the build of this tree: 650 depend on
+prints, for each of the 651 named declarations of the index core, Lemma 3.5 and the Laughlin pilot (the seventeen modules of
+the first commit), the axioms it depends on. In the build of this tree: 650 depend on
 exactly `[propext, Classical.choice, Quot.sound]`, the three standard axioms of Lean's logic, and one
 (`HRTorus.IndexCore.OrbitalRing.neZero_two_mul`) on `[propext, Quot.sound]`; none depends on `sorryAx`.
 The pilot modules have their own check, `lake env lean HRTorus/Fermion/Pilot/Axioms.lean`: 455 declarations, 408 on the
 three standard axioms, 3 on `[Quot.sound]`, 44 on none, none on `sorryAx`.
-The physical side has its own check, `lake env lean HRTorus/AxiomsBlockA.lean`: 373 declarations, 367 on the three standard
-axioms, 5 on none, and **1 on the three plus `sorryAx` — exactly `HRTorus.LLL.isLLL_iff`, the one unproved statement named above, and
-nothing else depends on it.**
+The physical side has its own check, `lake env lean HRTorus/AxiomsBlockA.lean`: 387 declarations (`LLL.Space` 147, `LLL.Frame`
+41, `Fock.Physical` 149, `Fock.Hamiltonian` 50), 382 on the three standard axioms, 5 on none, none on `sorryAx`.
 Block B's check, `lake env lean HRTorus/AxiomsBlockB.lean`: 326 declarations, every one on the three standard axioms or
-fewer, none on `sorryAx` — nothing in these three modules rests on the open statement.
+fewer, none on `sorryAx`.
 Block C's check, `lake env lean HRTorus/AxiomsBlockC.lean` (Section 4's four modules, `LLL.Theta`, and the two block-A modules
-block C completed): 698 declarations (`Theta` 84, `LLL.Space` 133, `Fock.Hamiltonian` 50, `Pairs` 161, `LocalForm` 150, `SlotLocal` 79, `BandCharges` 41), every one on the three standard axioms or fewer except
-`HRTorus.LLL.isLLL_iff` itself — nothing in Section 4, and nothing in Lemma 2.3(iii)–(iv), the lattice-sum form or H_N ≥ 0, rests on it.
-Block D's check, `lake env lean HRTorus/AxiomsBlockD.lean` (Section 5's four modules): 640 declarations (`LiebRobinson` 169, `Calculus` 68, `Propagation` 170, `Filters` 233), every one on the three standard axioms or fewer, none on `sorryAx`.
+block C completed): 712 declarations (`Theta` 84, `LLL.Space` 147, `Fock.Hamiltonian` 50, `Pairs` 161, `LocalForm` 150,
+`SlotLocal` 79, `BandCharges` 41), every one on the three standard axioms or fewer, none on `sorryAx`.
+Block D's check, `lake env lean HRTorus/AxiomsBlockD.lean` (Section 5's four modules): 640 declarations (`LiebRobinson` 169,
+`Calculus` 68, `Propagation` 170, `Filters` 233), every one on the three standard axioms or fewer, none on `sorryAx`.
+Block E's check, `lake env lean HRTorus/AxiomsBlockE.lean` (the four `Assembly` modules and `LLL.Space`, whose last statement
+block E proved): 613 declarations (`LLL.Space` 147, `Setting` 224, `Inputs` 129, `Translation` 36, `Main` 77), every one on the
+three standard axioms or fewer, none on `sorryAx`. **No declaration of the project depends on `sorryAx`.**
 
 ## The kernel replay
 
     ./replay.sh
 
-runs `lake env leanchecker M` for each of the seventeen modules `M`, one at a time. `leanchecker M` re-checks in
+runs `lake env leanchecker M` for each of the thirty-nine modules `M`, one at a time. `leanchecker M` re-checks in
 Lean's kernel every declaration defined in `M`, loading `M`'s imports from their compiled files; one run per module
 therefore covers every declaration of the formalization, while Mathlib's own declarations are loaded, not replayed.
-In the build of this tree every module passed (exit status 0, about 4–5 s each).
+In the build of this tree every module passed (exit status 0; 185 s for the thirty-nine, about 5 s each).
 
 ## License
 

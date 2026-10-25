@@ -5,7 +5,7 @@ import HRTorus.Locality.Filters
 import Lean.Util.CollectAxioms
 
 /-! T-0056 recruit L10, block D proof phase round one (2026-10-24): the axiom check of block D's four modules, run with
-`lake env lean` from the public tree's Lake project (not part of the tree; copied from L9's `work/l9/L9bAxioms.lean`
+`lake env lean` from the public tree's Lake project (copied into the tree from L9's `work/l9/L9bAxioms.lean`
 (itself from L8's and L7's), the method unchanged, the module names block D's and the macro renamed). For every
 non-internal constant defined in the named module (theorems, definitions and their auxiliary constants, instances), the
 axioms it depends on; a summary line with the count of constants with an axiom outside

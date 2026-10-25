@@ -5,7 +5,7 @@ import HRTorus.Fock.Hamiltonian
 import Lean.Util.CollectAxioms
 
 /-! T-0056 recruit L7, proof phase (2026-10-24): the axiom check of block A's four modules, run with
-`lake env lean` from the public tree's Lake project (not part of the tree; adapted from L6's
+`lake env lean` from the public tree's Lake project (copied into the tree; adapted from L6's
 `HRTorus/Fermion/Pilot/Axioms.lean`). For every non-internal constant defined in the named module
 (theorems, definitions and their auxiliary constants, instances), the axioms it depends on; a summary
 line with the count of constants with an axiom outside `[propext, Classical.choice, Quot.sound]`, the

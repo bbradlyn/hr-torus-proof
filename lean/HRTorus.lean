@@ -33,6 +33,10 @@ import HRTorus.Locality.LiebRobinson
 import HRTorus.Locality.Propagation
 import HRTorus.Locality.Calculus
 import HRTorus.Locality.Filters
+import HRTorus.Assembly.Setting
+import HRTorus.Assembly.Inputs
+import HRTorus.Assembly.Translation
+import HRTorus.Assembly.Main
 
 /-!
 # HRTorus
@@ -51,9 +55,9 @@ The Lean 4 formalization accompanying the papers in `papers/` of this repository
 * `HRTorus.LLL` and `HRTorus.Fock` — the physical side of the HR paper (Sections 2.1–2.5, 3.1–3.2): the lowest Landau level
   as a space with the orbitals as its basis, the evaluation and frame vectors, the analysis map with Proposition 3.3, the
   physical Fock space with its sectors and the magnetic translation Θ (Lemma 2.6), and the hollow-core Hamiltonian H_N with
-  its coefficients as the integrals of Definition 2.7. **One of its 98 statements remains `sorry`**, the completeness of the
-  Landau-level bridge `isLLL_iff` (`lean/README.md`); the six once open were proved with Section 4, through the theta-function
-  devices of `HRTorus.LLL.Theta`.
+  its coefficients as the integrals of Definition 2.7: 98 statements, all proved — the six once open were proved with Section 4,
+  through the theta-function devices of `HRTorus.LLL.Theta`, and the completeness of the Landau-level bridge `isLLL_iff` with
+  the assembly (`lean/README.md`);
 * `HRTorus.Fock.Slot`, `HRTorus.Fock.Embedding`, `HRTorus.Locality.Basic` — the slot Fock space with its local algebras and
   fattenings (Definition 3.7), **the embedding ι of the physical Fock space into it as a definition, with Lemma 3.8 in full**,
   and the slot lattice's geometry and locality vocabulary (Proposition 3.4, Lemma 3.6, Definitions 3.9 and 3.11, Lemma
@@ -68,7 +72,16 @@ The Lean 4 formalization accompanying the papers in `papers/` of this repository
   propagation bound (Theorem 5.3)** with the propagation of almost-supported operators (Lemma 5.5), the time filters and the
   commutator with the Hamiltonian (Lemmas 5.6–5.7), the generator and clustering filters (Definition 5.8, Lemmas 5.9–5.10,
   Proposition 5.11), the locality calculus (Lemma 5.12) and the bookkeeping (Lemma 5.13), and Lemma 5.1's measurability
-  sentence: 85 statements, all proved.
+  sentence: 85 statements, all proved;
+* `HRTorus.Assembly.Setting`, `Inputs`, `Translation`, `Main` — Sections 6–8 of the HR paper: Setting 6.1 on the physical Fock
+  space with the half-tori, the currents and the ordered sector eigenvalues E_k(N), Assumption 6.3, Lemmas 6.2 and 6.6–6.8; the
+  inputs of the index core from the hollow-core model (Proposition 6.10, Definition 6.11 for U = Θ, Lemmas 6.12–6.13, the
+  clustering inputs, ε(N) = O(N^{−∞}) and M(N) = O(N²)) and Theorem 6.18 for Θ; Lemma 7.1 and Corollaries 7.2–7.4; **Theorem
+  8.1** (`hollow_core_index`, `hollow_core_E11_tendsto` in `Main`), Corollary 8.2, Lemma 8.3 and Corollary 8.4, with the ten zero
+  modes of Appendix C as named hypotheses (`HasTenZeroModes`, `HasTwoZeroModes`) where the paper uses them: 97 statements, all
+  proved.
 
-`HRTorus/Axioms.lean` (not imported here) prints the axioms of every declaration.
+`HRTorus/Axioms.lean` (not imported here) prints the axioms of every declaration of the index core, Lemma 3.5 and the Laughlin
+pilot; the pilot and the blocks of Sections 2–8 have their own files, `HRTorus/Fermion/Pilot/Axioms.lean` and
+`HRTorus/AxiomsBlockA.lean`–`AxiomsBlockE.lean` (`lean/README.md`). No declaration of the project depends on `sorryAx`.
 -/

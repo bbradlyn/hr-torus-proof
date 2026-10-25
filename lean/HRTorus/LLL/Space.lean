@@ -12,10 +12,10 @@ import HRTorus.LLL.Theta
 
 Written by Claude Opus 5.5 (an AI model), 2026-10-24. **The definitions and statements were written
 first and reviewed against the paper (phase (a)) and are unchanged; phase (b) added the proofs and the proof
-devices, each section of which is marked as such. One theorem is still `sorry`, carried by the
-review: `isLLL_iff` (the completeness of Lemma 2.2(ii), to block E's preparation); Lemma 2.3(iii)–(iv)
+devices, each section of which is marked as such. No theorem is `sorry`: Lemma 2.3(iii)–(iv)
 (`norm_ev_sq`, `norm_evD_sq`, `norm_ev_sq_bound`, `norm_evD_sq_bound`) were proved in block C (2026-10-24) through the
-devices of `HRTorus.LLL.Theta`, whose import block C added. Phase (b) added the import
+devices of `HRTorus.LLL.Theta`, whose import block C added, and `isLLL_iff` (the completeness of Lemma 2.2(ii)) in block E
+(2026-10-25) through the devices of the section `LLLDevices` below. Phase (b) added the import
 of `Mathlib.Analysis.SpecialFunctions.Gaussian.GaussianIntegral` (the Gaussian integral, for the orthonormality
 of Lemma 2.2(ii)).**
 The paper: the HR paper, `papers/hr/sections/02-setting.tex` — Definition 2.1 `def:torus`, Lemma 2.2
@@ -29,7 +29,7 @@ Definition 2.5 `def:fock` the one-body space `𝔨_N = 𝔥_N ⊗ ℂ²`.
   is thereby the definition. A vector `f` stands for the function `toFun T f = Σ_j f_j ψ_j` on `ℝ²`, with
   `ψ_j = SlotFrame.psi T j`; the paper's definition of `𝔥_N` as a space of functions is `IsLLL`, and the
   bridge between the two — orthonormality of the `ψ_j` in `L²` of the fundamental domain, and
-  completeness — is stated (`l2inner_psi`, `l2inner_toFun`, `isLLL_iff`).
+  completeness — is proved (`l2inner_psi`, `l2inner_toFun`, `isLLL_iff`).
 * The evaluation vectors `e_R`, `e^D_R` are the finite sums of Lemma 2.3, with `D = SlotFrame.Dcov`.
 * The magnetic translations act on functions (`thxFun`, `thyFun`, (2.5)) and on `𝔥_N` as the matrices
   `thxMat`, `thyMat` in the orbital basis (the cyclic shift and the diagonal phase), carried to operators by
@@ -644,10 +644,356 @@ theorem l2inner_toFun (T : Torus) (f g : Space T) :
   rw [RCLike.inner_apply']
   rfl
 
+/-! ### Proof devices for Lemma 2.2(ii), the completeness (T-0056 block E, recruit L11, round one; not statements of
+the paper)
+
+The paper's route: for `g ∈ 𝔥_N` the `y`-Fourier coefficients `c_n(x) = ∫_0^{L_y} e^{−iκny} g(x, y) dy` (`fcoef_dev`)
+satisfy `c_n' = (κn − x) c_n` (differentiation under the integral sign, (2.3) and an integration by parts with (2.2)),
+hence `c_n(x) = A_n e^{−(x−κn)²/2}`; the quasi-periodicity in `x` gives `A_{n+N_φ} = A_n`; the coefficients are then
+summable (a Gaussian), so the Fourier series converges to `g` pointwise (Mathlib's
+`has_pointwise_sum_fourier_series_of_summable`), and regrouping `n = j̃ + mN_φ` gives
+`g = Σ_j (L_y√π)^{1/2} L_y^{−1} A_j ψ_j`. -/
+
+section LLLDevices
+
+open Filter
+
+/-- The (unnormalized) `y`-Fourier coefficient `∫_0^{L_y} e^{−iκny} g(x, y) dy`. -/
+noncomputable def fcoef_dev (T : Torus) (g : ℝ × ℝ → ℂ) (n : ℤ) (x : ℝ) : ℂ :=
+  ∫ y in (0 : ℝ)..T.Ly, Complex.exp (-(I * ((T.κ * n : ℝ) : ℂ)) * y) * g (x, y)
+
+theorem lll_hasDerivAt_x_dev {T : Torus} {g : ℝ × ℝ → ℂ} (hg : IsLLL T g) (x y : ℝ) :
+    HasDerivAt (fun x' : ℝ => g (x', y)) (fderiv ℝ g (x, y) (1, 0)) x :=
+  ((hg.1.differentiable (by simp)) (x, y)).hasFDerivAt.comp_hasDerivAt x
+    ((hasDerivAt_id x).prodMk (hasDerivAt_const x y))
+
+theorem lll_hasDerivAt_y_dev {T : Torus} {g : ℝ × ℝ → ℂ} (hg : IsLLL T g) (x y : ℝ) :
+    HasDerivAt (fun y' : ℝ => g (x, y')) (fderiv ℝ g (x, y) (0, 1)) y :=
+  ((hg.1.differentiable (by simp)) (x, y)).hasFDerivAt.comp_hasDerivAt y
+    ((hasDerivAt_const y x).prodMk (hasDerivAt_id y))
+
+theorem lll_dx_eq_dev {T : Torus} {g : ℝ × ℝ → ℂ} (hg : IsLLL T g) (x y : ℝ) :
+    fderiv ℝ g (x, y) (1, 0) = -I * fderiv ℝ g (x, y) (0, 1) - (x : ℂ) * g (x, y) := by
+  have h := hg.2.2.2 (x, y)
+  simp only [Dx, Dy] at h
+  rw [(lll_hasDerivAt_x_dev hg x y).deriv, (lll_hasDerivAt_y_dev hg x y).deriv] at h
+  linear_combination h + ((x : ℂ) * g (x, y)) * Complex.I_sq
+
+theorem hasDerivAt_cexp_mul_dev (c : ℂ) (y : ℝ) :
+    HasDerivAt (fun y : ℝ => Complex.exp (c * y)) (c * Complex.exp (c * y)) y := by
+  have := (((hasDerivAt_id (y : ℂ)).const_mul c).cexp).comp_ofReal
+  simpa [mul_comm] using this
+
+theorem norm_cexp_I_mul_dev (r y : ℝ) : ‖Complex.exp (-(I * (r : ℂ)) * y)‖ = 1 := by
+  rw [Complex.norm_exp]
+  simp
+
+theorem fcoef_hasDerivAt_dev {T : Torus} {g : ℝ × ℝ → ℂ} (hg : IsLLL T g) (n : ℤ) (x : ℝ) :
+    HasDerivAt (fcoef_dev T g n) (((T.κ * n - x : ℝ) : ℂ) * fcoef_dev T g n x) x := by
+  set c : ℂ := -(I * ((T.κ * n : ℝ) : ℂ)) with hc
+  have hG1 : Continuous fun p : ℝ × ℝ => fderiv ℝ g p (1, 0) :=
+    (hg.1.continuous_fderiv (by simp)).clm_apply continuous_const
+  have hG2 : Continuous fun p : ℝ × ℝ => fderiv ℝ g p (0, 1) :=
+    (hg.1.continuous_fderiv (by simp)).clm_apply continuous_const
+  have hgc : Continuous g := hg.1.continuous
+  have he : Continuous fun y : ℝ => Complex.exp (c * y) := by fun_prop
+  obtain ⟨M, hM⟩ := (isCompact_closedBall x 1 |>.prod
+    (isCompact_Icc (a := (0 : ℝ)) (b := T.Ly))).exists_bound_of_continuousOn hG1.continuousOn
+  have key := intervalIntegral.hasDerivAt_integral_of_dominated_loc_of_deriv_le (μ := volume) (a := 0)
+    (b := T.Ly) (F := fun x' y => Complex.exp (c * y) * g (x', y))
+    (F' := fun x' y => Complex.exp (c * y) * fderiv ℝ g (x', y) (1, 0)) (x₀ := x) (bound := fun _ => M)
+    (Metric.ball_mem_nhds x one_pos)
+    (Eventually.of_forall fun x' => (he.mul (hgc.comp (by fun_prop))).aestronglyMeasurable)
+    ((he.mul (hgc.comp (by fun_prop))).intervalIntegrable _ _)
+    ((he.mul (hG1.comp (by fun_prop))).aestronglyMeasurable)
+    (Eventually.of_forall fun y hy x' hx' => by
+      rw [norm_mul, norm_cexp_I_mul_dev, one_mul]
+      refine hM (x', y) ⟨Metric.ball_subset_closedBall hx', ?_⟩
+      have hL := T.Ly_pos
+      rw [Set.uIoc_of_le hL.le] at hy
+      exact ⟨hy.1.le, hy.2⟩)
+    intervalIntegrable_const
+    (Eventually.of_forall fun y _ x' _ => (lll_hasDerivAt_x_dev hg x' y).const_mul _)
+  have hF : fcoef_dev T g n = fun x' => ∫ y in (0 : ℝ)..T.Ly, Complex.exp (c * y) * g (x', y) := rfl
+  rw [hF]
+  convert key.2 using 1
+  -- the derivative: `∫ e G1 = −i ∫ e G2 − x ∫ e g` and `∫ e G2 = −c ∫ e g` (integration by parts, periodicity)
+  have hibp := intervalIntegral.integral_mul_deriv_eq_deriv_mul (a := 0) (b := T.Ly)
+    (u := fun y : ℝ => Complex.exp (c * y)) (u' := fun y => c * Complex.exp (c * y))
+    (v := fun y : ℝ => g (x, y)) (v' := fun y => fderiv ℝ g (x, y) (0, 1))
+    (fun y _ => hasDerivAt_cexp_mul_dev c y) (fun y _ => lll_hasDerivAt_y_dev hg x y)
+    ((continuous_const.mul he).intervalIntegrable _ _) ((hG2.comp (by fun_prop)).intervalIntegrable _ _)
+  have hL1 : Complex.exp (c * T.Ly) = 1 := by
+    have hκL : T.κ * T.Ly = 2 * π := by
+      unfold Torus.κ
+      field_simp [T.Ly_pos.ne']
+    have e : c * (T.Ly : ℂ) = ((-n : ℤ) : ℂ) * (2 * π * I) := by
+      rw [hc]
+      have h2 : T.κ * n * T.Ly = 2 * π * n := by
+        rw [mul_right_comm, hκL]
+      have : ((T.κ * n : ℝ) : ℂ) * (T.Ly : ℂ) = ((2 * π * n : ℝ) : ℂ) := by
+        rw [← Complex.ofReal_mul, h2]
+      push_cast at this ⊢
+      linear_combination (-I) * this
+    rw [e, Complex.exp_int_mul_two_pi_mul_I]
+  have hper : g (x, T.Ly) = g (x, 0) := by simpa using hg.2.1 x 0
+  simp only [Complex.exp_zero, mul_zero, Complex.ofReal_zero, one_mul, hL1, hper, sub_self, zero_sub] at hibp
+  have hsplit : (∫ y in (0 : ℝ)..T.Ly, Complex.exp (c * y) * fderiv ℝ g (x, y) (1, 0)) =
+      -I * (∫ y in (0 : ℝ)..T.Ly, Complex.exp (c * y) * fderiv ℝ g (x, y) (0, 1)) -
+        (x : ℂ) * ∫ y in (0 : ℝ)..T.Ly, Complex.exp (c * y) * g (x, y) := by
+    simp_rw [lll_dx_eq_dev hg x]
+    rw [← intervalIntegral.integral_const_mul, ← intervalIntegral.integral_const_mul,
+      ← intervalIntegral.integral_sub]
+    · congr 1
+      funext y
+      ring
+    · exact (continuous_const.mul (he.mul (hG2.comp (by fun_prop)))).intervalIntegrable _ _
+    · exact (continuous_const.mul (he.mul (hgc.comp (by fun_prop)))).intervalIntegrable _ _
+  rw [hsplit, hibp]
+  have hmul : (∫ y in (0 : ℝ)..T.Ly, c * Complex.exp (c * y) * g (x, y)) =
+      c * ∫ y in (0 : ℝ)..T.Ly, Complex.exp (c * y) * g (x, y) := by
+    rw [← intervalIntegral.integral_const_mul]
+    congr 1
+    funext y
+    ring
+  rw [hmul, hc]
+  push_cast
+  ring_nf
+  rw [Complex.I_sq]
+  ring
+
+theorem fcoef_eq_dev {T : Torus} {g : ℝ × ℝ → ℂ} (hg : IsLLL T g) (n : ℤ) (x : ℝ) :
+    fcoef_dev T g n x = fcoef_dev T g n 0 * ((Real.exp ((T.κ * n) ^ 2 / 2) : ℝ) : ℂ) *
+      ((Real.exp (-((x - T.κ * n) ^ 2) / 2) : ℝ) : ℂ) := by
+  have hE : ∀ x : ℝ, HasDerivAt (fun x : ℝ => ((Real.exp ((x - T.κ * n) ^ 2 / 2) : ℝ) : ℂ))
+      ((((x - T.κ * n) * Real.exp ((x - T.κ * n) ^ 2 / 2) : ℝ)) : ℂ) x := by
+    intro x
+    have h1 : HasDerivAt (fun x : ℝ => Real.exp ((x - T.κ * n) ^ 2 / 2))
+        (Real.exp ((x - T.κ * n) ^ 2 / 2) * ((2 : ℕ) * (x - T.κ * n) ^ (2 - 1) * 1 / 2)) x :=
+      ((((hasDerivAt_id x).sub_const (T.κ * n)).pow 2).div_const 2).exp
+    have h2 := h1.ofReal_comp
+    convert h2 using 1
+    push_cast
+    ring
+  have hu' : ∀ x : ℝ, HasDerivAt
+      (fun x : ℝ => fcoef_dev T g n x * ((Real.exp ((x - T.κ * n) ^ 2 / 2) : ℝ) : ℂ)) 0 x := by
+    intro x
+    have := (fcoef_hasDerivAt_dev hg n x).mul (hE x)
+    convert this using 1
+    push_cast
+    ring
+  have hconst := is_const_of_deriv_eq_zero (fun x => (hu' x).differentiableAt) (fun x => (hu' x).deriv) x 0
+  have hab : ((Real.exp ((x - T.κ * n) ^ 2 / 2) : ℝ) : ℂ) *
+      ((Real.exp (-((x - T.κ * n) ^ 2) / 2) : ℝ) : ℂ) = 1 := by
+    rw [← Complex.ofReal_mul, ← Real.exp_add]
+    simp [neg_div]
+  have h0 : (0 - T.κ * n) ^ 2 / 2 = (T.κ * n) ^ 2 / 2 := by ring
+  rw [h0] at hconst
+  calc fcoef_dev T g n x = fcoef_dev T g n x * (((Real.exp ((x - T.κ * n) ^ 2 / 2) : ℝ) : ℂ) *
+        ((Real.exp (-((x - T.κ * n) ^ 2) / 2) : ℝ) : ℂ)) := by rw [hab, mul_one]
+    _ = (fcoef_dev T g n x * ((Real.exp ((x - T.κ * n) ^ 2 / 2) : ℝ) : ℂ)) *
+        ((Real.exp (-((x - T.κ * n) ^ 2) / 2) : ℝ) : ℂ) := by ring
+    _ = _ := by rw [hconst]
+
+theorem fcoef_add_Lx_dev {T : Torus} {g : ℝ × ℝ → ℂ} (hg : IsLLL T g) (n : ℤ) (x : ℝ) :
+    fcoef_dev T g n (x + T.Lx) = fcoef_dev T g (n - T.Nφ) x := by
+  unfold fcoef_dev
+  congr 1
+  funext y
+  rw [hg.2.2.1 x y, ← mul_assoc, ← Complex.exp_add]
+  congr 2
+  rw [T.Lx_eq]
+  push_cast
+  ring
+
+/-- The constants `A_n := c_n(0) e^{(κn)²/2}` of the Gaussian profiles are `N_φ`-periodic in `n`. -/
+theorem fcoefA_periodic_dev {T : Torus} {g : ℝ × ℝ → ℂ} (hg : IsLLL T g) (n : ℤ) :
+    fcoef_dev T g n 0 * ((Real.exp ((T.κ * n) ^ 2 / 2) : ℝ) : ℂ) =
+      fcoef_dev T g (n - T.Nφ) 0 * ((Real.exp ((T.κ * ((n - T.Nφ : ℤ) : ℝ)) ^ 2 / 2) : ℝ) : ℂ) := by
+  have h1 := fcoef_eq_dev hg n T.Lx
+  have h2 := fcoef_add_Lx_dev hg n 0
+  rw [zero_add] at h2
+  rw [h2] at h1
+  -- `L_x − κn = −κ(n − N_φ)`
+  have e : (T.Lx - T.κ * n) ^ 2 = (T.κ * ((n - T.Nφ : ℤ) : ℝ)) ^ 2 := by
+    rw [T.Lx_eq]
+    push_cast
+    ring
+  rw [e] at h1
+  have hab : ((Real.exp ((T.κ * ((n - T.Nφ : ℤ) : ℝ)) ^ 2 / 2) : ℝ) : ℂ) *
+      ((Real.exp (-((T.κ * ((n - T.Nφ : ℤ) : ℝ)) ^ 2) / 2) : ℝ) : ℂ) = 1 := by
+    rw [← Complex.ofReal_mul, ← Real.exp_add]
+    simp [neg_div]
+  rw [h1]
+  calc fcoef_dev T g n 0 * ((Real.exp ((T.κ * n) ^ 2 / 2) : ℝ) : ℂ)
+      = fcoef_dev T g n 0 * ((Real.exp ((T.κ * n) ^ 2 / 2) : ℝ) : ℂ) *
+        (((Real.exp (-((T.κ * ((n - T.Nφ : ℤ) : ℝ)) ^ 2) / 2) : ℝ) : ℂ) *
+          ((Real.exp ((T.κ * ((n - T.Nφ : ℤ) : ℝ)) ^ 2 / 2) : ℝ) : ℂ)) := by
+        rw [mul_comm (((Real.exp (-((T.κ * ((n - T.Nφ : ℤ) : ℝ)) ^ 2) / 2) : ℝ) : ℂ)), hab, mul_one]
+    _ = _ := by ring
+
+/-- The Fourier series in `y` converges pointwise to `g` once the coefficients are summable. -/
+theorem lll_fourier_hasSum_dev {T : Torus} {g : ℝ × ℝ → ℂ} (hg : IsLLL T g) (x y : ℝ)
+    (hs : Summable fun n : ℤ => fcoef_dev T g n x) :
+    HasSum (fun n : ℤ => ((1 / T.Ly : ℝ) : ℂ) * fcoef_dev T g n x *
+      Complex.exp (I * ((T.κ * n : ℝ) : ℂ) * y)) (g (x, y)) := by
+  haveI : Fact (0 < T.Ly) := ⟨T.Ly_pos⟩
+  have hper : Function.Periodic (fun y => g (x, y)) T.Ly := fun y => hg.2.1 x y
+  have hcont : Continuous fun y => g (x, y) := hg.1.continuous.comp (by fun_prop)
+  let F : C(AddCircle T.Ly, ℂ) := ⟨hper.lift, continuous_coinduced_dom.mpr hcont⟩
+  have hF : ∀ y : ℝ, F (y : AddCircle T.Ly) = g (x, y) := fun y => rfl
+  have hcoef : ∀ n : ℤ, fourierCoeff F n = ((1 / T.Ly : ℝ) : ℂ) * fcoef_dev T g n x := by
+    intro n
+    rw [fourierCoeff_eq_intervalIntegral F n 0, zero_add, Complex.real_smul]
+    unfold fcoef_dev
+    congr 1
+    apply intervalIntegral.integral_congr
+    intro y _
+    dsimp only
+    rw [hF, fourier_coe_apply, smul_eq_mul]
+    congr 2
+    unfold Torus.κ
+    push_cast
+    field_simp
+  have hsum : Summable (fourierCoeff F) := by
+    have e : fourierCoeff F = fun n => ((1 / T.Ly : ℝ) : ℂ) * fcoef_dev T g n x := funext hcoef
+    rw [e]
+    exact hs.mul_left _
+  have h := has_pointwise_sum_fourier_series_of_summable hsum (y : AddCircle T.Ly)
+  rw [hF] at h
+  convert h using 1
+  funext n
+  rw [hcoef, fourier_coe_apply, smul_eq_mul]
+  congr 2
+  unfold Torus.κ
+  push_cast
+  field_simp
+
+/-- The reindexing `ℤ_{N_φ} × ℤ ≃ ℤ`, `(j, m) ↦ j̃ + m N_φ`. -/
+def idxEquiv_dev (T : Torus) : ZMod T.Nφ × ℤ ≃ ℤ where
+  toFun p := (p.1.val : ℤ) + p.2 * T.Nφ
+  invFun n := ((n : ZMod T.Nφ), n / T.Nφ)
+  left_inv p := by
+    rcases p with ⟨j, m⟩
+    have hj : (j.val : ℤ) < T.Nφ := by exact_mod_cast j.val_lt
+    have hN : (T.Nφ : ℤ) ≠ 0 := by exact_mod_cast T.Nφ_pos.ne'
+    ext
+    · simp [ZMod.natCast_self, ZMod.natCast_zmod_val]
+    · show ((j.val : ℤ) + m * T.Nφ) / T.Nφ = m
+      rw [Int.add_mul_ediv_right _ _ hN, Int.ediv_eq_zero_of_lt (by positivity) hj, zero_add]
+  right_inv n := by
+    show (((n : ZMod T.Nφ).val : ℕ) : ℤ) + n / T.Nφ * T.Nφ = n
+    rw [ZMod.val_intCast]
+    exact Int.emod_add_ediv_mul n _
+
+theorem hasSum_regroup_dev {T : Torus} {F : ℤ → ℂ} {s : ℂ} (hF : HasSum F s) :
+    s = ∑ j : ZMod T.Nφ, ∑' m : ℤ, F ((j.val : ℤ) + m * T.Nφ) := by
+  have h1 : HasSum (F ∘ idxEquiv_dev T) s := (Equiv.hasSum_iff (idxEquiv_dev T)).mpr hF
+  have h2 : ∀ j : ZMod T.Nφ, HasSum (fun m : ℤ => (F ∘ idxEquiv_dev T) (j, m))
+      (∑' m : ℤ, F ((j.val : ℤ) + m * T.Nφ)) := fun j =>
+    (h1.summable.comp_injective (Prod.mk_right_injective j)).hasSum
+  exact (h1.prod_fiberwise h2).unique (hasSum_fintype _)
+
+theorem isLLL_exists_dev {T : Torus} {g : ℝ × ℝ → ℂ} (hg : IsLLL T g) :
+    ∃ f : Space T, toFun T f = g := by
+  set A : ℤ → ℂ := fun n => fcoef_dev T g n 0 * ((Real.exp ((T.κ * n) ^ 2 / 2) : ℝ) : ℂ) with hA
+  have hAper : ∀ n : ℤ, A n = A (n - T.Nφ) := fcoefA_periodic_dev hg
+  have hAper' : ∀ (n k : ℤ), A (n + k * T.Nφ) = A n := by
+    intro n k
+    induction k using Int.induction_on with
+    | zero => simp
+    | succ i ih =>
+      rw [hAper, show n + ((i : ℤ) + 1) * T.Nφ - T.Nφ = n + (i : ℤ) * T.Nφ by ring, ih]
+    | pred i ih =>
+      rw [show n + (-(i : ℤ) - 1) * T.Nφ = n + -(i : ℤ) * T.Nφ - T.Nφ by ring, ← hAper, ih]
+  have hAres : ∀ n : ℤ, A n = A (((n : ZMod T.Nφ).val : ℕ) : ℤ) := by
+    intro n
+    have e := (idxEquiv_dev T).right_inv n
+    change (((n : ZMod T.Nφ).val : ℕ) : ℤ) + n / T.Nφ * T.Nφ = n at e
+    conv_lhs => rw [← e]
+    exact hAper' _ _
+  set M : ℝ := ∑ j : ZMod T.Nφ, ‖A ((j.val : ℕ) : ℤ)‖ with hM
+  have hAbd : ∀ n : ℤ, ‖A n‖ ≤ M := by
+    intro n
+    rw [hAres n]
+    exact Finset.single_le_sum (f := fun j : ZMod T.Nφ => ‖A ((j.val : ℕ) : ℤ)‖) (fun j _ => norm_nonneg _)
+      (Finset.mem_univ (n : ZMod T.Nφ))
+  have hLy := T.Ly_pos
+  have hc : 0 < T.Ly * Real.sqrt π := by positivity
+  set c0 : ℂ := ((1 / T.Ly : ℝ) : ℂ) * (((T.Ly * Real.sqrt π) ^ (1 / 2 : ℝ) : ℝ) : ℂ) with hc0
+  refine ⟨WithLp.toLp 2 (fun j : ZMod T.Nφ => c0 * A ((j.val : ℕ) : ℤ)), ?_⟩
+  funext r
+  rcases r with ⟨x, y⟩
+  have hfc : ∀ n : ℤ, fcoef_dev T g n x = A n * ((Real.exp (-((x - T.κ * n) ^ 2) / 2) : ℝ) : ℂ) :=
+    fun n => fcoef_eq_dev hg n x
+  have hs : Summable fun n : ℤ => fcoef_dev T g n x := by
+    refine Summable.of_norm_bounded ((Analysis.summable_gauss_int T.κ_pos x).mul_left M) fun n => ?_
+    rw [hfc, norm_mul, Complex.norm_real, Real.norm_eq_abs, abs_of_pos (Real.exp_pos _), mul_comm T.κ]
+    exact mul_le_mul_of_nonneg_right (hAbd n) (Real.exp_pos _).le
+  have h := lll_fourier_hasSum_dev hg x y hs
+  have hterm : ∀ n : ℤ, ((1 / T.Ly : ℝ) : ℂ) * fcoef_dev T g n x *
+      Complex.exp (I * ((T.κ * n : ℝ) : ℂ) * y) = c0 * A n * phi T n (x, y) := by
+    intro n
+    rw [hfc, hc0]
+    unfold phi
+    have hp : ((T.Ly * Real.sqrt π) ^ (1 / 2 : ℝ)) * ((T.Ly * Real.sqrt π) ^ (-(1 / 2 : ℝ))) = 1 := by
+      rw [← Real.rpow_add hc]
+      norm_num
+    have hp' : (((T.Ly * Real.sqrt π) ^ (1 / 2 : ℝ) : ℝ) : ℂ) *
+        (((T.Ly * Real.sqrt π) ^ (-(1 / 2 : ℝ)) : ℝ) : ℂ) = 1 := by
+      rw [← Complex.ofReal_mul, hp, Complex.ofReal_one]
+    have he : Complex.exp (I * ((T.κ * n : ℝ) : ℂ) * y) =
+        Complex.exp (I * (T.κ : ℂ) * (n : ℂ) * (y : ℂ)) := by
+      congr 1
+      push_cast
+      ring
+    rw [he]
+    linear_combination (((1 / T.Ly : ℝ) : ℂ) * A n * ((Real.exp (-((x - T.κ * n) ^ 2) / 2) : ℝ) : ℂ) *
+      Complex.exp (I * (T.κ : ℂ) * (n : ℂ) * (y : ℂ))) * hp'.symm
+  simp_rw [hterm] at h
+  rw [hasSum_regroup_dev (T := T) h]
+  show ∑ j : ZMod T.Nφ, (c0 * A ((j.val : ℕ) : ℤ)) * psi T j (x, y) = _
+  refine Finset.sum_congr rfl fun j _ => ?_
+  unfold psi
+  rw [← tsum_mul_left]
+  refine tsum_congr fun m => ?_
+  rw [hAper']
+
+end LLLDevices
+
 /-- **Lemma 2.2(ii)**, completeness, in the model: a function is in the paper's `𝔥_N` if and only if it is
 represented by a vector of `Space T` ("`Hence $f=(L_y\sqrt\pi)^{1/2}\sum_{j=0}^{\Nphi-1}a_j\psi_j$`"). -/
 theorem isLLL_iff (T : Torus) (g : ℝ × ℝ → ℂ) : IsLLL T g ↔ ∃ f : Space T, toFun T f = g := by
-  sorry
+  constructor
+  · -- (phase (b), recruit L11, round one) the completeness: the devices above (the `y`-Fourier coefficients)
+    exact isLLL_exists_dev
+  · rintro ⟨f, rfl⟩
+    -- (phase (b), recruit L11, round one) the vectors of `Space T` represent functions of the paper's `𝔥_N`:
+    -- smoothness, (2.2) and (2.3) are linear in `f`, from `psi_contDiff`, `psi_add_Ly`, `psi_add_Lx`, `psi_lll_eq`.
+    have hdx : ∀ (j : ZMod T.Nφ) (y : ℝ), Differentiable ℝ (fun x : ℝ => psi T j (x, y)) := fun j y =>
+      ((psi_contDiff T j).differentiable (by simp)).comp (differentiable_id.prodMk (differentiable_const y))
+    have hdy : ∀ (j : ZMod T.Nφ) (x : ℝ), Differentiable ℝ (fun y : ℝ => psi T j (x, y)) := fun j x =>
+      ((psi_contDiff T j).differentiable (by simp)).comp ((differentiable_const x).prodMk differentiable_id)
+    refine ⟨?_, fun x y => ?_, fun x y => ?_, fun r => ?_⟩
+    · exact ContDiff.sum fun j _ => contDiff_const.mul (psi_contDiff T j)
+    · simp only [toFun, psi_add_Ly]
+    · simp only [toFun, psi_add_Lx, Finset.mul_sum]
+      exact Finset.sum_congr rfl fun j _ => by ring
+    · have ex : Dx (toFun T f) r = ∑ j, f j * Dx (psi T j) r := by
+        simp only [Dx, toFun]
+        rw [deriv_fun_sum fun j _ => ((hdx j r.2).differentiableAt).const_mul (f j)]
+        exact Finset.sum_congr rfl fun j _ => deriv_const_mul _ (hdx j r.2).differentiableAt
+      have ey : Dy (toFun T f) r = ∑ j, f j * Dy (psi T j) r := by
+        simp only [Dy, toFun]
+        rw [deriv_fun_sum fun j _ => ((hdy j r.1).differentiableAt).const_mul (f j), Finset.mul_sum,
+          ← Finset.sum_sub_distrib]
+        refine Finset.sum_congr rfl fun j _ => ?_
+        rw [deriv_const_mul _ (hdy j r.1).differentiableAt]
+        ring
+      rw [ex, ey, Finset.mul_sum, ← Finset.sum_add_distrib]
+      refine Finset.sum_eq_zero fun j _ => ?_
+      have := psi_lll_eq T j r
+      linear_combination f j * this
 
 /-- The representation `f ↦ toFun T f` is injective (with `l2inner_toFun` and `isLLL_iff`: a unitary
 identification of `Space T` with the paper's `𝔥_N`). -/

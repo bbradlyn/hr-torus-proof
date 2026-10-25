@@ -8,7 +8,7 @@ import HRTorus.Hamiltonian.BandCharges
 import Lean.Util.CollectAxioms
 
 /-! T-0056 recruit L9, block C proof phase (2026-10-24): the axiom check of block C's four modules, the new upstream module `HRTorus.LLL.Theta` and the two edited block-A modules, run with
-`lake env lean` from the public tree's Lake project (not part of the tree; copied from L8's `work/l8/L8bAxioms.lean` (itself from L7's),
+`lake env lean` from the public tree's Lake project (copied into the tree from L8's `work/l8/L8bAxioms.lean` (itself from L7's),
 the method unchanged, the module names block C's and the macro renamed). For every non-internal constant defined in the named module
 (theorems, definitions and their auxiliary constants, instances), the axioms it depends on; a summary
 line with the count of constants with an axiom outside `[propext, Classical.choice, Quot.sound]`, the

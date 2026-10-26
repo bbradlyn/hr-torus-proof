@@ -45,7 +45,7 @@ convention, and for them the map lists the statements their docstrings cite and 
 
 ### Lemma 2.8 — $V_1$ units (p. 12)
 
-*not formalized — left out at block A's statement review: the planar `V_1` units statement, which the torus proof does not use.*
+*not formalized — left out at block A's statement review: the planar `V_1` units statement; no result of the paper and no Lean declaration depends on it.*
 
 
 ### Theorem 2.10 — the zero modes (p. 13)

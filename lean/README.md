@@ -154,8 +154,9 @@ two-dimensional).
 
 The kernel of Appendix C — the ten zero modes of the hollow-core Hamiltonian at even N and the two at odd N, which enter
 Theorem 8.1(ii), Corollary 8.2 and Corollary 8.4 as the named hypotheses above, so that those statements are proved as
-implications; the spin-twist bound of Appendix D, which no Lean statement or proof refers to; and the Laughlin paper apart
-from the pilot.
+implications; the spin-twist bound of Appendix D, which no Lean statement or proof refers to; Lemma 2.8, the planar statement
+on the units of V_1, on which no result of the paper and no Lean declaration depends; and the Laughlin paper apart from the
+pilot.
 
 ## Building
 

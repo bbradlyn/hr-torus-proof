@@ -1,0 +1,106 @@
+\section{The formalization in Lean}\label{app:lean}
+
+The numbered statements of Sections~\ref{sec:setting}--\ref{sec:hollowcore} and Appendix~\ref{app:LR} --- the definitions,
+lemmas, propositions, theorems and corollaries listed in the table below --- have been formalized and proved in the Lean~4
+proof assistant against the Mathlib library, with two exceptions, Theorem~\ref{thm:kernel}, which enters as a hypothesis, and
+Lemma~\ref{lem:units}, and, in Section~\ref{sec:index}, the restriction to $U=\Theta$ described in (a).\footnote{Lean 4.34.1 and Mathlib
+at commit d13f23b7. The formalization is the Lean project \texttt{HRTorus} in the directory \texttt{lean/} of
+\url{https://github.com/bbradlyn/hr-torus-proof}; its \texttt{README.md} gives the build, the axiom checks and the kernel
+replay, and \texttt{lean/MAP.md} the complete correspondence: declaration by declaration for the modules written in the
+formalization's stage 1, by statement for the first commit's.} The project has thirty-nine
+modules and about 42{,}600 lines. No proof is left open: every declaration depends only on the three standard axioms of
+Lean's logic (propositional extensionality, choice and quotient soundness), and every module has been replayed through Lean's
+kernel by \texttt{leanchecker}, independently of the elaborator. What the kernel certifies is the Lean text. Whether that text says what this paper says is
+a matter of reading, and the table is the dictionary for it.
+
+\paragraph{What is proved.} Three kinds of statement should be distinguished.
+\begin{enumerate}[(a)]
+\item \emph{Unconditional.} Everything in Sections~\ref{sec:setting}--\ref{sec:translation} and Appendix~\ref{app:LR}
+except Theorem~\ref{thm:kernel}, Lemma~\ref{lem:units} (below) and the general-$U$ clauses of Section~\ref{sec:index} named
+next; Lemma~\ref{lem:exchange}; and the divisibility half of
+Theorem~\ref{thm:main}(i), $4\mid p$, which needs no information about the zero modes
+(\texttt{hollow\_core\_index\_four\_dvd}); and Lemmas~\ref{lem:bbdf41}, \ref{lem:expbounds} and~\ref{lem:det} of
+Appendix~\ref{app:bbdf}. Theorem~\ref{thm:index} is formalized for $U=\Theta$, the case this paper's numbered results use, for every
+Hamiltonian of Definition~\ref{def:class} with (H1)--(H2) (\texttt{index\_theorem\_\ensuremath{\Theta}}), the inputs supplied with an
+explicit $\varepsilon(N)=O(N^{-\infty})$ and $M(N)=(1+4\pi C_h\norm{W_\gamma}_1)N^2$; for a general $U$ only its finite-dimensional
+core is formalized, in the following quantitative form: for every finite-dimensional complex inner product space and every
+choice of the data of Setting~\ref{set:index}, Assumptions~\ref{ass:gap}--\ref{ass:U} (with $\gamma>\Delta$) and
+Definitions~\ref{def:dressing} and~\ref{def:bbdfobjects} satisfying the exact relations stated there, those of
+Lemma~\ref{lem:split}(i) and of the filters (Definition~\ref{def:filters}, Lemma~\ref{lem:Wexists}) included, if each of the
+twenty-seven quantities --- the twenty-one separated commutators of Lemma~\ref{lem:commutation}(ii), (U2), the $+$ half of
+(U4) and the four clustering commutators of Corollary~\ref{cor:Zcommute} --- is at most $\varepsilon$ and
+$\norm{T_-},\norm{K_-}\le M$, then there is an integer $n$ with $\abs{\Tr(PT_-)-n}\le400\,p\,(M+1)\sqrt{\varepsilon}$
+(\texttt{index\_core\_400}). The general-$U$ clauses of Lemma~\ref{lem:objects} and Lemma~\ref{lem:commutation}(ii) are not formalized.
+\item \emph{Under the zero-mode hypothesis.} The second half of Theorem~\ref{thm:main}(i), $12\le p$, Theorem~\ref{thm:main}(ii),
+Corollary~\ref{cor:oddN} and Corollary~\ref{cor:uniform} are proved as implications: their Lean statements carry the
+hypothesis that $H_N$ has exactly ten zero modes in the sector $(N/2,N/2)$ at every even $N$ (for Corollary~\ref{cor:uniform},
+on every torus of the family), respectively exactly two in each
+of the sectors $((N\pm1)/2,(N\mp1)/2)$ at every odd $N\ge3$ --- the content of Theorem~\ref{thm:kernel} together with
+$H_N\ge0$, as the named hypotheses \texttt{HasTenZeroModes} and \texttt{HasTwoZeroModes}. Appendix~\ref{app:kernel}, which
+proves Theorem~\ref{thm:kernel}, is not formalized.
+\item \emph{Not formalized.} Theorem~\ref{thm:kernel} and Appendix~\ref{app:kernel}; Appendix~\ref{app:twist} (Theorem~\ref{thm:twist}
+and Corollary~\ref{cor:alltori}), which no Lean statement uses; and Lemma~\ref{lem:units}, the planar statement about the units
+of $V_1$, which the proof on the torus does not use.
+\end{enumerate}
+
+\paragraph{The correspondence.} The table lists every numbered statement of Sections~\ref{sec:setting}--\ref{sec:hollowcore} and
+Appendix~\ref{app:LR} with the Lean module and the declarations that formalize it; a statement with several parts is
+usually several declarations. The lemmas of Section~\ref{sec:index} that the finite-dimensional index core proves
+(Lemmas~\ref{lem:bbdf42}--\ref{lem:determinant} and Theorem~\ref{thm:index} itself) are formalized in the twelve modules
+\texttt{IndexCore.Statement} to \texttt{IndexCore.Sanity}, with \texttt{IndexCore.Translation} and \texttt{IndexCore.Ring} for
+Section~\ref{sec:translation}; their declarations cite the statements, and the table names the modules and the main
+declarations. Lemma~\ref{lem:frame-consistency}(i)--(ii)
+and Lemma~\ref{lem:localization} are formalized in \texttt{SlotFrame.SlotFrame}, also of the first commit, and the table names its
+declarations. Where more than four declarations formalize one statement the table
+names four and counts the rest; \texttt{lean/MAP.md} names them all. The Lean statements follow this paper's text under the
+conventions listed after the table.
+
+\input{appendices/E-table}
+
+\paragraph{Where the Lean proof takes another route.} The Lean proofs follow this paper's proofs, except in the following
+places, where they use a different argument; the statements are unaffected. Where this paper names a constant the Lean's is
+inside it, with one exception: the constant $C^H_k$ of Proposition~\ref{prop:slotH}(ii), which the paper's proof gives as
+$55\,C_k$ and the Lean obtains as $192\pi\,C_k$ (the statement is existential).
+\begin{itemize}[leftmargin=*]
+\item The commutation $[\Theta,H_N]=0$ is proved twice: as Lemma~\ref{lem:covariance}, by the paper's route, and, for the
+statement of Section~\ref{sec:setting}, from the covariance of the orbitals through the coefficient identity
+$V_{a+1,b+1,c+1,d+1}=V_{abcd}$.
+\item The sector-preserving approximant of Lemma~\ref{lem:embedding} by a finite average over gauge phases, in place of the
+integral.
+\item Lemma~\ref{lem:jets} by a real-variable argument rather than a holomorphic one; Theorem~\ref{thm:localform}(a) by reducing
+the matrix entries on the whole Fock space to a form on pair amplitudes, in place of Step~6's coefficient matrix on the
+two-particle space; Lemma~\ref{lem:evaluation}(iv) by geometric majorants.
+\item The Lieb--Robinson iteration of Appendix~\ref{app:LR} as an induction on a per-slot bound, without the chain sums;
+Lemma~\ref{lem:almostinputs} by propagating one best approximant at order $k+2$ instead of the dyadic decomposition;
+Step~4 of Theorem~\ref{thm:propagation}(a) by shells of width $\lambda$ with weights $e^{-n}$ in place of the planar integral,
+which gives $\sum_{n\ge0}e^{-n}(n+3)^2\le26$, that is $6.5\pi r_j^2(1+C_1\abs{t'})^2$ where the paper has
+$8\pi r_j^2(1+C_1\abs{t'})^2$; the master inequality is then stated with the paper's constant; Lemma~\ref{lem:calculus}(c) by an
+energy method.
+\item The completeness half of Lemma~\ref{lem:orbitals}(ii) with the $y$-Fourier coefficients defined as integrals and their
+first-order equation obtained by differentiation under the integral sign and an integration by parts, where the paper
+differentiates the series term by term.
+\item Lemma~\ref{lem:KP} and Lemma~\ref{lem:theta}(d) by applying the index core's lemmas to instances whose unused fields
+carry trivial data, so that neither statement acquires a hypothesis this paper's lacks.
+\item Lemma~\ref{lem:split}(ii)--(iii): the far region bounded by its supremum times the volume of the half-torus, in place of
+the one-dimensional integral.
+\item Corollary~\ref{cor:classwide-odd}(ii) by a finite pigeonhole over the scales $\gamma/4^i$, in place of compactness along a
+subsequence, with the dimension bound $\binom{2N}{(N-1)/2}\ge(N+1)/2$ where the paper uses $\ge2N$; in
+Corollary~\ref{cor:classwide-odd}(i) the paper's two cases are folded into one, $p-4k\ne0$ or $p-4k=0$.
+\item Lemma~\ref{lem:exchange}: the conjugation of $H_N$ by the exchange unitary through the local form of
+Theorem~\ref{thm:localform}(a), $H_N=\int h_R\,\dd R$, in place of the change of basis in $V_{abcd}$; the equality of the
+sector eigenvalues through the counting function $E\mapsto\#\{k:E_k\le E\}$.
+\end{itemize}
+
+\paragraph{Conventions.} The eigenvalues $E_k(N)$ of $H_N$ in a sector are those of Mathlib's spectral theorem for the
+compression, the index clamped to $1\le k\le\dim$; Definition~\ref{def:bbdfobjects} and Lemmas~\ref{lem:objects}
+and~\ref{lem:commutation} on the Fock space, and Theorem~\ref{thm:index}, are formalized for $U=\Theta$ only, the case this
+paper's numbered results use (the index core's Lemma~\ref{lem:commutation}(i) and (iii) are for a general $U$);
+$\varepsilon(N)$ is the largest of the twenty input quantities (for $U=\Theta$, (U2) and (U4) hold exactly and the twenty-one
+separated commutators reduce to sixteen pairs, which with the four clustering commutators make twenty) and $M(N)=(1+4\pi C_h\norm{W_\gamma}_1)N^2$; the set norm
+of Definition~\ref{def:almostsupported} and the distances
+to sets take values in $[0,\infty]$. Two sentences of this paper were made precise by the formalization and read accordingly
+in this version: Lemma~\ref{lem:almostinputs} and Lemma~\ref{lem:filters} state the hypothesis $\norm A_{X;\max\{k,3\}}<\infty$
+that their proofs assumed (without it, with $X=\emptyset$ and the convention $0\cdot\infty=0$, their literal transcription is
+false), and the sentences on odd $N$ in Section~\ref{sec:setting} and Corollary~\ref{cor:oddN} say $N\ge3$, since at $N=1$ the
+sectors in question are two-dimensional and have no $E_3$. Some Lean statements carry hypotheses that this paper's statements
+carry and their proofs do not use; they are kept, and \texttt{lean/README.md} lists them.

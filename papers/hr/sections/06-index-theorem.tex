@@ -899,25 +899,13 @@ unchanged (the proof of Proposition~\ref{prop:clustering} recalls of $g$ only th
 width is less than their gap.
 \end{remark}
 
-\begin{remark}[the finite-dimensional part of the proof, machine-checked]\label{rem:lean}
-The proof of Theorem~\ref{thm:index} splits into an analytic part --- the locality estimates of
-Sections~\ref{sec:frame}--\ref{sec:locality}, which supply the inputs (U2), (U4), Lemma~\ref{lem:commutation}(ii) and
-the clustering commutators of Corollary~\ref{cor:Zcommute} as $\Onf$ quantities and the polynomial bounds on
-$\norm{T_-}$ and $\norm{K_-}$ --- and a finite-dimensional part, Lemma~\ref{lem:KP}, Proposition~\ref{prop:clustering}(i)--(ii),
-Lemmas~\ref{lem:commutation}--\ref{lem:determinant} and Lemmas~\ref{lem:bbdf41}, \ref{lem:expbounds} and~\ref{lem:det},
-which turns those inputs into the conclusion. The finite-dimensional part has been formalized and verified in the
-Lean~4 proof assistant against the Mathlib library,\footnote{Lean 4.34.1 and Mathlib at commit d13f23b7; the
-formalization is a separate artifact, not part of this paper.} in the following quantitative form: for every
-finite-dimensional complex inner product space and every choice of the data of Setting~\ref{set:index},
-Assumptions~\ref{ass:gap}--\ref{ass:U} (with $\gamma>\Delta$, Remark~\ref{rem:weaker-gap}) and
-Definitions~\ref{def:dressing} and~\ref{def:bbdfobjects} satisfying the exact relations stated there, if each of the
-twenty-seven quantities above is at most $\varepsilon$ and $\norm{T_-},\norm{K_-}\le M$, then there is an integer $n$
-with $\abs{\Tr(PT_-)-n}\le 400\,p\,(M+1)\sqrt{\varepsilon}$. Theorem~\ref{thm:index} follows from this statement and
-the analytic part. The formalization (366 theorems in twelve modules) depends only on the three standard axioms of
-Lean's logic (propositional extensionality, choice and quotient soundness), and every module has been replayed through
-Lean's independent kernel checker. The Lean statement was compared with this section by two readers, one of them
-reading blind; the proofs themselves were written by AI agents and checked by the kernel, not read by a human. The code
-is available at \url{https://github.com/bbradlyn/hr-torus-proof}.
+\begin{remark}[the formalization]\label{rem:lean}
+The proof of Theorem~\ref{thm:index} for $U=\Theta$, the case the numbered results use, the proofs of Theorem~\ref{thm:main},
+Corollary~\ref{cor:oddN} and Corollary~\ref{cor:uniform} assuming the zero-mode count of Theorem~\ref{thm:kernel}, and the
+proof of Lemma~\ref{lem:exchange} have been formalized and verified in the Lean~4 proof assistant against the Mathlib
+library. Appendix~\ref{app:lean} states what is machine-checked,
+in which form and under which conventions, and gives the correspondence between the statements of this paper and the Lean
+declarations.
 \end{remark}
 
 

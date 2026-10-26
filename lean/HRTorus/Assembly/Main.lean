@@ -364,10 +364,12 @@ theorem odd_ge_three_infinite_dev : ({N : ℕ | Odd N ∧ 3 ≤ N}).Infinite := 
   omega
 
 /-- Corollary 8.2(i) in one sector `sec`: Corollary 7.4(i)'s negation (along `I`, which contains every odd `N ≥ 3`
-beyond `N_b`) at `p = 2`, `Δ = 0`, `γ = a` against "`E_3(N) ≥ a` for infinitely many odd `N`". -/
+beyond `N_b`) at `p = 2`, `Δ = 0`, `γ = a` against "`E_3(N) ≥ a` for infinitely many odd `N`". It takes the
+equalities `E_1 = E_2 = 0` only (no `0 < E_3`): it serves `odd_E3_tendsto` and `ZeroModes.Lower`'s `odd_E3_tendsto'`. -/
 theorem odd_E3_dev (lam : ℝ) (hlam : 0 < lam) (I : Set ℕ) (Nb : ℕ) (hI : ∀ N, Odd N → 3 ≤ N → Nb ≤ N → N ∈ I)
     (sec : (T : Torus) → SectorLabel T)
-    (hzero : ∀ N : ℕ, Odd N → 3 ≤ N → HasTwoZeroModes (rectTorus lam hlam N) (sec (rectTorus lam hlam N)))
+    (hzero : ∀ N : ℕ, Odd N → 3 ≤ N → hcEig (rectTorus lam hlam N) (sec (rectTorus lam hlam N)) 1 = 0 ∧
+      hcEig (rectTorus lam hlam N) (sec (rectTorus lam hlam N)) 2 = 0)
     (hng : ¬ ∃ (p : ℕ) (Δ γ : ℝ), 0 ≤ Δ ∧ 2 * Δ < γ ∧ ∃ M ⊆ I, M.Infinite ∧ ∀ N ∈ M,
       hcEig (rectTorus lam hlam N) (sec (rectTorus lam hlam N)) p -
           hcEig (rectTorus lam hlam N) (sec (rectTorus lam hlam N)) 1 ≤ Δ ∧
@@ -388,17 +390,20 @@ theorem odd_E3_dev (lam : ℝ) (hlam : 0 < lam) (I : Set ℕ) (Nb : ℕ) (hI : �
   · intro N hN
     obtain ⟨⟨hodd, hge⟩, hle⟩ := hN
     have hle' : max Nb 3 ≤ N := hle
-    obtain ⟨h1, h2, -⟩ := hzero N hodd (max_le_iff.mp hle').2
+    obtain ⟨h1, h2⟩ := hzero N hodd (max_le_iff.mp hle').2
     refine ⟨?_, ?_⟩
     · rw [h2, h1, sub_self]
     · rw [h2, sub_zero]
       push Not at hge
       exact hge
 
-/-- Corollary 8.2(ii) in one sector `sec`: Corollary 7.4(ii)'s finite exceptional set (along `I`) and `E_1 = 0`. -/
+/-- Corollary 8.2(ii) in one sector `sec`: Corollary 7.4(ii)'s finite exceptional set (along `I`) and `E_1 = 0`. It
+takes the equalities `E_1 = E_2 = 0` only (no `0 < E_3`): it serves `odd_many_small` and `ZeroModes.Lower`'s
+`odd_many_small'`. -/
 theorem odd_many_dev (lam : ℝ) (hlam : 0 < lam) (I : Set ℕ) (Nb : ℕ) (hI : ∀ N, Odd N → 3 ≤ N → Nb ≤ N → N ∈ I)
     (sec : (T : Torus) → SectorLabel T)
-    (hzero : ∀ N : ℕ, Odd N → 3 ≤ N → HasTwoZeroModes (rectTorus lam hlam N) (sec (rectTorus lam hlam N)))
+    (hzero : ∀ N : ℕ, Odd N → 3 ≤ N → hcEig (rectTorus lam hlam N) (sec (rectTorus lam hlam N)) 1 = 0 ∧
+      hcEig (rectTorus lam hlam N) (sec (rectTorus lam hlam N)) 2 = 0)
     (Dc : ℕ) {γ : ℝ}
     (hfin : {N ∈ I | ¬ Dc < ((Finset.Icc 1 (Module.finrank ℂ (sector (rectTorus lam hlam N)
         (sec (rectTorus lam hlam N))))).filter
@@ -510,9 +515,11 @@ theorem odd_E3_tendsto (lam : ℝ) (hlam : 0 < lam)
   obtain ⟨hng1, hng2⟩ := no_gap_odd isProfile_etaStd (Real.sqrt_pos.2 Real.pi_pos)
     (hcSetting (rectSeq_dev lam hlam _ hMi hM) _ hc hLx) hH2 (fun N hN => hN.1.1)
   exact ⟨odd_E3_dev lam hlam (hcSetting (rectSeq_dev lam hlam _ hMi hM) _ hc hLx).Ts.idx Nb
-      (fun N h1 h2 h3 => ⟨⟨h1, h2⟩, h3⟩) oddSectorPlus (fun N h1 h2 => (hzero N h1 h2).1) hng1,
+      (fun N h1 h2 h3 => ⟨⟨h1, h2⟩, h3⟩) oddSectorPlus
+      (fun N h1 h2 => ⟨(hzero N h1 h2).1.1, (hzero N h1 h2).1.2.1⟩) hng1,
     odd_E3_dev lam hlam (hcSetting (rectSeq_dev lam hlam _ hMi hM) _ hc hLx).Ts.idx Nb
-      (fun N h1 h2 h3 => ⟨⟨h1, h2⟩, h3⟩) oddSectorMinus (fun N h1 h2 => (hzero N h1 h2).2) hng2⟩
+      (fun N h1 h2 h3 => ⟨⟨h1, h2⟩, h3⟩) oddSectorMinus
+      (fun N h1 h2 => ⟨(hzero N h1 h2).2.1, (hzero N h1 h2).2.2.1⟩) hng2⟩
 
 /-- **Corollary 8.2(ii)**: "`For every $D\in\N$ and $\gamma>0$, for all sufficiently large odd $N$ there are more than $D$ eigenvalues in $[0,\gamma)$.`"
 — in each sector, counted with multiplicity among `E_1, …, E_d`, `d` the sector's dimension (the paper's `D` is `Dc`). -/
@@ -535,9 +542,11 @@ theorem odd_many_small (lam : ℝ) (hlam : 0 < lam)
   obtain ⟨hf1, hf2⟩ := many_low_odd isProfile_etaStd (Real.sqrt_pos.2 Real.pi_pos)
     (hcSetting (rectSeq_dev lam hlam _ hMi hM) _ hc hLx) hH2 (fun N hN => hN.1.1) Dc hγ
   exact (odd_many_dev lam hlam (hcSetting (rectSeq_dev lam hlam _ hMi hM) _ hc hLx).Ts.idx Nb
-      (fun N h1 h2 h3 => ⟨⟨h1, h2⟩, h3⟩) oddSectorPlus (fun N h1 h2 => (hzero N h1 h2).1) Dc hf1).and
+      (fun N h1 h2 h3 => ⟨⟨h1, h2⟩, h3⟩) oddSectorPlus
+      (fun N h1 h2 => ⟨(hzero N h1 h2).1.1, (hzero N h1 h2).1.2.1⟩) Dc hf1).and
     (odd_many_dev lam hlam (hcSetting (rectSeq_dev lam hlam _ hMi hM) _ hc hLx).Ts.idx Nb
-      (fun N h1 h2 h3 => ⟨⟨h1, h2⟩, h3⟩) oddSectorMinus (fun N h1 h2 => (hzero N h1 h2).2) Dc hf2)
+      (fun N h1 h2 h3 => ⟨⟨h1, h2⟩, h3⟩) oddSectorMinus
+      (fun N h1 h2 => ⟨(hzero N h1 h2).2.1, (hzero N h1 h2).2.2.1⟩) Dc hf2)
 
 /-! ### Proof devices for Lemma 8.3 (phase (b), round three; not statements of the paper)
 
@@ -1194,8 +1203,10 @@ theorem E11_bddAbove (N : ℕ) : BddAbove (E11 '' tauSet N) := by
 The proof of `uniform_E11_eventually`, placed before `uniform_E11_tendsto`, which uses it (the paper: tori with
 `L_x ≥ L_y` by Lemma 8.3, admissible with `L_x ≥ c_*√N`, `c_* = (4π)^{1/2}`, then Corollary 7.3 at `p = 10`). -/
 
+/-- Corollary 8.4 without the supremum, from the equalities `E_1 = ⋯ = E_{10} = 0` only (no `0 < E_{11}`): it serves
+`uniform_E11_tendsto`, `uniform_E11_eventually` and `ZeroModes.Lower`'s `uniform_E11_tendsto'`, `uniform_E11_eventually'`. -/
 theorem uniform_eventually_dev
-    (hzero : ∀ T : Torus, Even T.N → L0std ≤ min T.Lx T.Ly → HasTenZeroModes T) :
+    (hzero : ∀ T : Torus, Even T.N → L0std ≤ min T.Lx T.Ly → ∀ k : ℕ, 1 ≤ k → k ≤ 10 → hcEig T (halfSector T) k = 0) :
     ∀ ε : ℝ, 0 < ε → ∀ᶠ N in atTop ⊓ 𝓟 {N : ℕ | Even N}, ∀ T ∈ tauSet N, E11 T < ε := by
   intro ε hε
   by_contra h
@@ -1260,7 +1271,7 @@ theorem uniform_eventually_dev
     have heven : Even (Tf N).N := by
       rw [hN' N hN]
       exact hN.1.1
-    exact (hzero (Tf N) heven (hTf N hN).1.2).1
+    exact hzero (Tf N) heven (hTf N hN).1.2
   have h4 : 4 ∣ 10 := four_dvd_hollowCore (p := 10) (Δ := 0) (γ := ε) Ts (Real.sqrt (4 * π)) hc hLx' (fun N hN => hN.1.1)
     ⟨le_rfl, by linarith, fun N hN => ?_, fun N hN => ?_⟩
   · omega
@@ -1280,7 +1291,7 @@ theorem uniform_E11_tendsto
   · refine Real.sSup_nonneg fun x hx => ?_
     obtain ⟨T, -, rfl⟩ := hx
     exact secEig_HN_nonneg T (halfSector T) 11
-  · filter_upwards [uniform_eventually_dev hzero (a / 2) (by linarith)] with N hN
+  · filter_upwards [uniform_eventually_dev (fun T h1 h2 => (hzero T h1 h2).1) (a / 2) (by linarith)] with N hN
     have h : sSup (E11 '' tauSet N) ≤ a / 2 := by
       refine Real.sSup_le (fun x hx => ?_) (by linarith)
       obtain ⟨T, hT, rfl⟩ := hx
@@ -1292,7 +1303,7 @@ theorem uniform_E11_tendsto
 theorem uniform_E11_eventually
     (hzero : ∀ T : Torus, Even T.N → L0std ≤ min T.Lx T.Ly → HasTenZeroModes T) :
     ∀ ε : ℝ, 0 < ε → ∀ᶠ N in atTop ⊓ 𝓟 {N : ℕ | Even N}, ∀ T ∈ tauSet N, E11 T < ε := by
-  exact uniform_eventually_dev hzero
+  exact uniform_eventually_dev fun T h1 h2 => (hzero T h1 h2).1
 
 end HRTorus.Assembly
 

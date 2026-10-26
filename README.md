@@ -2,9 +2,9 @@
 
 Two papers and a Lean 4 formalization, by a multi-agent AI team in collaboration with Barry Bradlyn.
 
-- `papers/hr/` — *The Haldane–Rezayi zero modes are not a gapped ground-state manifold on the torus* (104 pages; `main.pdf` included).
+- `papers/hr/` — *The Haldane–Rezayi zero modes are not a gapped ground-state manifold on the torus* (105 pages; `main.pdf` included).
 - `papers/laughlin/` — *An explicit uniform spectral gap for the Laughlin state parent Hamiltonian on rectangular tori* (44 pages; `main.pdf` included).
-- `lean/` — the Lean 4 project `HRTorus`: the finite-dimensional core of the HR paper's index theorem, §7's divisibility corollary with an instance for every N, Lemma 3.5 (the slot frame's uniform localization), one pilot lemma of the Laughlin paper, the physical side of the HR paper (Sections 2.1–2.5 and 3.1–3.2: the Landau level, the Fock space, the magnetic translation, the Hamiltonian), the slot Fock space with the embedding of the physical Fock space into it and the locality vocabulary of the slot lattice (Sections 3.2–3.3, Lemma 3.8 in full), the Hamiltonian in the slot frame (Section 4: the exact local form of Theorem 4.2, the slot-local class, the band charges), the locality estimates (Section 5 with Appendix B: the Lieb–Robinson bound, the propagation bound, the filters, the locality calculus), and the assembly (Sections 6–8: the inputs of the index theorem from the hollow-core model, Theorem 8.1, Corollaries 8.2 and 8.4, Lemma 8.3) — every statement proved, all on Lean's three standard axioms and replayed through the kernel checker; the ten zero modes of Appendix C enter the main theorems as a named hypothesis (`lean/README.md`).
+- `lean/` — the Lean 4 project `HRTorus`: the finite-dimensional core of the HR paper's index theorem, §7's divisibility corollary with an instance for every N, Lemma 3.5 (the slot frame's uniform localization), one pilot lemma of the Laughlin paper, the physical side of the HR paper (Sections 2.1–2.5 and 3.1–3.2: the Landau level, the Fock space, the magnetic translation, the Hamiltonian), the slot Fock space with the embedding of the physical Fock space into it and the locality vocabulary of the slot lattice (Sections 3.2–3.3, Lemma 3.8 in full), the Hamiltonian in the slot frame (Section 4: the exact local form of Theorem 4.2, the slot-local class, the band charges), the locality estimates (Section 5 with Appendix B: the Lieb–Robinson bound, the propagation bound, the filters, the locality calculus), the assembly (Sections 6–8: the inputs of the index theorem from the hollow-core model, Theorem 8.1, Corollaries 8.2 and 8.4, Lemma 8.3), and the zero modes of Appendix C (the lower bound of Theorem 2.10: the theta-function layer, the canonical components with Lemma C.6's direction from the pair conditions to the kernel, the explicit states), from which Theorem 8.1 and Corollaries 8.2 and 8.4 follow unconditionally — every statement proved, all on Lean's three standard axioms and replayed through the kernel checker; the exact count of Theorem 2.10 is not formalized (`lean/README.md`).
 
 ## About this work
 
@@ -35,7 +35,7 @@ A candidate proof of a uniform Laughlin gap on tori of every lattice shape, with
 ## Building and checking
 
 - Papers: `cd papers/hr && ./build.sh` (three `pdflatex` passes); likewise in `papers/laughlin`.
-- Lean: `cd lean && lake exe cache get && lake build` (Lean 4.34.1, Mathlib at the pinned commit), then the axiom checks (`lake env lean HRTorus/Axioms.lean` for the first seventeen modules and `HRTorus/AxiomsBlockA.lean`–`AxiomsBlockE.lean`, `HRTorus/Fermion/Pilot/Axioms.lean` for the rest; no declaration depends on `sorryAx`) and `./replay.sh` for the kernel replays of every module.
+- Lean: `cd lean && lake exe cache get && lake build` (Lean 4.34.1, Mathlib at the pinned commit), then the axiom checks (`lake env lean HRTorus/Axioms.lean` for the first seventeen modules and `HRTorus/AxiomsBlockA.lean`–`AxiomsBlockF.lean`, `HRTorus/Fermion/Pilot/Axioms.lean` for the rest; no declaration depends on `sorryAx`) and `./replay.sh` for the kernel replays of every module.
 
 ## License
 

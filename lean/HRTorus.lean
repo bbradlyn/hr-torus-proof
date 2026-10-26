@@ -37,6 +37,10 @@ import HRTorus.Assembly.Setting
 import HRTorus.Assembly.Inputs
 import HRTorus.Assembly.Translation
 import HRTorus.Assembly.Main
+import HRTorus.ZeroModes.Theta
+import HRTorus.ZeroModes.Canonical
+import HRTorus.ZeroModes.Explicit
+import HRTorus.ZeroModes.Lower
 
 /-!
 # HRTorus
@@ -79,9 +83,20 @@ The Lean 4 formalization accompanying the papers in `papers/` of this repository
   clustering inputs, ε(N) = O(N^{−∞}) and M(N) = O(N²)) and Theorem 6.18 for Θ; Lemma 7.1 and Corollaries 7.2–7.4; **Theorem
   8.1** (`hollow_core_index`, `hollow_core_E11_tendsto` in `Main`), Corollary 8.2, Lemma 8.3 and Corollary 8.4, with the ten zero
   modes of Appendix C as named hypotheses (`HasTenZeroModes`, `HasTwoZeroModes`) where the paper uses them: 97 statements, all
-  proved.
+  proved;
+* `HRTorus.ZeroModes.Theta`, `Canonical`, `Explicit`, `Lower` — Appendix C of the HR paper, the lower bound of Theorem 2.10
+  (the formalization's stage F): the theta functions `ϑ[a,b]` and `ϑ₁` with its zero set, the spaces `Θ_ℓ[a,b]` and `Θ_2[ε]`,
+  Mathlib's `℘` and the `℘_ε`, the class of continuous separately entire functions and `J` (Lemma C.8); the canonical components
+  of a Fock vector, the orbital pair operators identified with Definition 4.1, Lemma C.4 and Lemma C.6 in the direction
+  (2) ⇒ (3) ⇒ (1); the explicit states of Proposition C.18 with their numerators, merges and independence (Lemma C.10,
+  Theorem C.19(ii)–(iii)); and in `Lower` at least ten zero modes of H_N in the sector (N/2, N/2) at every even N
+  (`ten_le_finrank_ker`) and at least two in each of the sectors ((N ± 1)/2, (N ∓ 1)/2) at every odd N ≥ 3
+  (`two_le_finrank_ker_odd`), from which **Theorem 8.1, Corollary 8.2 and Corollary 8.4 follow unconditionally**
+  (`hollow_core_index_unconditional`, `hollow_core_E11_tendsto_unconditional`, `odd_E3_tendsto_unconditional`,
+  `odd_many_small_unconditional`, `uniform_E11_tendsto_unconditional`, `uniform_E11_eventually_unconditional`): 118
+  statements, all proved. The exact count of Theorem 2.10 is not formalized.
 
 `HRTorus/Axioms.lean` (not imported here) prints the axioms of every declaration of the index core, Lemma 3.5 and the Laughlin
 pilot; the pilot and the blocks of Sections 2–8 have their own files, `HRTorus/Fermion/Pilot/Axioms.lean` and
-`HRTorus/AxiomsBlockA.lean`–`AxiomsBlockE.lean` (`lean/README.md`). No declaration of the project depends on `sorryAx`.
+`HRTorus/AxiomsBlockA.lean`–`AxiomsBlockF.lean` (`lean/README.md`). No declaration of the project depends on `sorryAx`.
 -/

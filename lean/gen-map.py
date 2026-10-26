@@ -25,9 +25,10 @@ def groups(text, i, n):
             j += 1
         out.append(text[i + 1:j]); i = j + 1
     return out
-for m in re.finditer(r"\\newlabel\{((thm|lem|prop|cor|def|ass|set|rem):[^}]*)\}\{", aux):
+labnum = {}  # label -> number, for Appendix C's label-named references (`Lemma C.theta` is `kz:lem:theta`)
+for m in re.finditer(r"\\newlabel\{((?:kz:)?(thm|lem|prop|cor|def|ass|set|rem):[^}]*)\}\{", aux):
     num, page, title = groups(aux, m.end() - 1 + 1, 3)
-    stmts[num] = (m.group(2), m.group(1), title, int(page))
+    stmts[num] = (m.group(2), m.group(1), title, int(page)); labnum[m.group(1)] = num
 KIND = {"thm": "Theorem", "lem": "Lemma", "prop": "Proposition", "cor": "Corollary", "def": "Definition", "ass": "Assumption", "set": "Setting", "rem": "Remark"}
 LEAN = os.path.join(root, "lean/HRTorus")
 def modname(path): return "HRTorus." + os.path.relpath(path, LEAN)[:-5].replace("/", ".")
@@ -39,13 +40,20 @@ blockmods = [p for p in allmods if not any(short(modname(p)).startswith(x) for x
 firstmods = [p for p in allmods if any(short(modname(p)).startswith(x) for x in FIRST)]
 decl = re.compile(r"/--\s*\*\*([^*]+)\*\*(.*?)-/\s*\n(?:@\[[^\]]*\]\s*)?(?:private |protected |noncomputable |nonrec )*(theorem|lemma|def|abbrev|structure|class|instance|inductive)\s+(\S+)", re.S)
 numre = re.compile(r"(Theorem|Lemma|Proposition|Corollary|Definition|Assumption|Setting|Remark)\s+([A-Z]\.\d+|\d+\.\d+)(.*)")
+labre = re.compile(r"(Theorem|Lemma|Proposition|Corollary|Definition)\s+C\.([A-Za-z][A-Za-z0-9]*)(.*)")  # stage F: Appendix C by label name
+KZ = {"Theorem": "thm", "Lemma": "lem", "Proposition": "prop", "Corollary": "cor", "Definition": "def"}
+def part(p): return p.strip().lstrip(",").strip()
 bynum = defaultdict(list); unmatched = []; total = 0
+DEVNS = re.compile(r"^namespace (\w*Dev)\b.*?^end \1\b", re.S | re.M)  # proof devices: `…Dev` namespaces and `_dev`/`Dev` names are not statements of the paper
 for path in blockmods:
-    mod = modname(path); s = open(path).read()
+    mod = modname(path); s = DEVNS.sub("", open(path).read())
     for m in decl.finditer(s):
-        label, kind, name = m.group(1).strip(), m.group(3), m.group(4).split('.{')[0]; total += 1
-        nm = numre.match(label)
-        if nm: bynum[nm.group(2)].append((mod, name, kind, nm.group(3).strip()))
+        label, kind, name = m.group(1).strip(), m.group(3), m.group(4).split('.{')[0]
+        if name.endswith(("_dev", "Dev")): continue
+        total += 1
+        nm = numre.match(label); nl = labre.match(label.replace("`", ""))
+        if nm: bynum[nm.group(2)].append((mod, name, kind, part(nm.group(3))))
+        elif nl and "kz:" + KZ[nl.group(1)] + ":" + nl.group(2) in labnum: bynum[labnum["kz:" + KZ[nl.group(1)] + ":" + nl.group(2)]].append((mod, name, kind, part(nl.group(3))))
         else: unmatched.append((mod, name, kind, label))
 cite = re.compile(r"(Theorem|Lemma|Proposition|Corollary|Assumption|Definition|Setting)[~ ]+((?:A\.)?\d+\.\d+)")
 corecites = defaultdict(Counter)   # num -> Counter(module)
@@ -74,16 +82,30 @@ for mod, names in list(MAIN.items()) + [(m, ns) for rows in FIRST_STMTS.values()
         assert re.search(r"^\s*(?:@\[[^\]]*\]\s*)?(?:private |protected |noncomputable |nonrec )*(theorem|lemma|def|abbrev|structure)\s+(?:[^\s.{(:]+\.)*" + re.escape(last) + r"\b", srcs[mod], flags=re.M), (mod, n)
 def numkey(n):
     a, b = n.split("."); return (0 if a.isdigit() else 1, int(a) if a.isdigit() else a, int(b))
-SPECIAL = {"2.10": "assumed — Appendix C is not formalized; the two declarations are the bridges from the kernel dimensions to the named hypotheses `HasTenZeroModes`, `HasTwoZeroModes`",
+SPECIAL = {"2.10": "the lower bounds of (ii)–(iii) — at least ten zero modes at even `N`, at least two in each odd sector at odd `N ≥ 3` — are proved from Appendix C's explicit states (`ZeroModes.Lower`), which is all Theorem 8.1, Corollary 8.2 and Corollary 8.4 use; the exact counts and (i) are not formalized; the two `Assembly.Main` declarations are the bridges from the exact kernel dimensions to the named hypotheses `HasTenZeroModes`, `HasTwoZeroModes` of the reviewed statements",
            "2.8": "not formalized — left out at block A's statement review: the planar `V_1` units statement; no result of the paper and no Lean declaration depends on it"}
+CNOTE = {  # Appendix C by label: what the stage-F modules (the lower bound of Theorem 2.10) leave out
+    "kz:lem:A1": r"\emph{not formalized: not needed for the lower bound}", "kz:lem:A2": r"\emph{not formalized: not needed for the lower bound}",
+    "kz:lem:A4": r"\emph{not formalized: not needed for the lower bound}",
+    "kz:lem:A3": r" \emph{(the first identity; the norm identity not formalized)}",
+    "kz:lem:A": r" \emph{((2) $\Rightarrow$ (3) and (3) $\Rightarrow$ (1); (1) $\Leftrightarrow$ (2) not formalized)}",
+    "kz:lem:theta": r" \emph{((a), (c)--(f); (b) not formalized)}",
+    "kz:def:G": r"\emph{not formalized as a definition; its conditions (i)--(iii) are proved for the explicit functions of Proposition~\ref{kz:prop:explicit} in \texttt{ZeroModes.Explicit}}",
+    "kz:lem:B": r" \emph{((b), the numerators; (a), (c) and the surjectivity not formalized)}",
+    "kz:lem:C": r"\emph{not formalized: the exact count}", "kz:lem:D": r"\emph{not formalized: the exact count}",
+    "kz:prop:induct": r"\emph{not formalized: the exact count}", "kz:prop:base": r"\emph{not formalized: the exact count}",
+    "kz:cor:bounds": r"\emph{not formalized: the exact count}",
+    "kz:thm:T2": r" \emph{((ii)--(iii), the lower bounds: the existence of the two, resp.\ ten, independent zero modes; (i) and the exact counts not formalized)}",
+}
 # ---------- MAP.md
 L = ["# The map from the HR paper's statements to the Lean declarations", "",
      "Generated by `lean/gen-map.py` from `papers/hr/main.aux` (after `papers/hr/build.sh`) and the Lean sources; do not edit by hand.",
-     "A declaration appears under a statement when its docstring opens with that statement's number (the convention of the modules",
-     "written in the formalization's stage 1); the first commit's modules (the index core, Lemma 3.5, the Laughlin pilot) predate the",
+     "A declaration appears under a statement when its docstring opens with that statement's number, or, for Appendix C, its label name",
+     "(the convention of the modules written in the formalization's stages 1 and F); the first commit's modules (the index core, Lemma 3.5, the Laughlin pilot) predate the",
      "convention, and for them the map lists the statements their docstrings cite and their main theorems. Module names omit the",
-     "`HRTorus.` prefix. The paper's statement numbers are those of the version in `papers/hr/`.", "",
-     "## By statement of the paper (Sections 2–8, Appendix B; Appendices A, C, D and the remarks only where cited)", ""]
+     "`HRTorus.` prefix. Proof devices (declarations named with the suffix `_dev` or inside a `…Dev` namespace) are not listed. The paper's",
+     "statement numbers are those of the version in `papers/hr/`.", "",
+     "## By statement of the paper (Sections 2–8, Appendices B and C; Appendices A, D and the remarks only where cited)", ""]
 rows_tex = []; covered = 0; counted = 0
 def texname(n):
     rep = {"ν": r"\ensuremath{\nu}", "Θ": r"\ensuremath{\Theta}", "φ": r"\ensuremath{\varphi}", "δ": r"\ensuremath{\delta}"}
@@ -98,7 +120,7 @@ for num in sorted(set(stmts) | set(bynum), key=numkey):
     kind, key, title, page = stmts.get(num, ("?", "?", "(no aux label)", 0)); sec = num.split(".")[0]
     ds = bynum.get(num, []); cc = corecites.get(num, Counter())
     if kind == "rem" and not ds: continue
-    if sec in ("A", "C", "D") and not ds and not cc: continue
+    if sec in ("A", "D") and not ds and not cc: continue
     if kind != "rem": counted += 1
     if (ds or (cc and sec in ("6", "7", "A"))) and kind != "rem": covered += 1
     L.append(f"### {KIND.get(kind, kind)} {num} — {mdtitle(title)} (p. {page})"); L.append("")
@@ -128,7 +150,8 @@ for num in sorted(set(stmts) | set(bynum), key=numkey):
     elif cc and sec in ("6", "7", "A") and num not in FIRST_STMTS:
         cell.append("index core: " + ", ".join(texmod(m) for m, c in cc.most_common(2)))
     note = ""
-    if num == "2.10": note = r" \emph{(assumed; the two bridges from the kernel dimensions to the named hypotheses)}"
+    if num == "2.10": note = r" \emph{(the lower bounds of (ii)--(iii), all the main theorems use; the exact counts and (i) not formalized)}"
+    if sec == "C": note = CNOTE.get(stmts[num][1], "") if num in stmts else ""
     if num == "2.8": note = r"\emph{not formalized: the planar units statement; nothing in the formalization depends on it}"
     rows_tex.append(f"{KIND.get(kind, kind)}~{num} & {textitle(title)} & " + ("; ".join(cell) + note if cell else note) + r" \\")
 L += ["## Labelled declarations that match no statement number", ""]
@@ -143,8 +166,8 @@ for path in firstmods:
     if mod in MAIN: line += ": " + ", ".join(f"`{n}`" for n in MAIN[mod])
     if cited and not short(mod).startswith("Laughlin"): line += " — cites " + ", ".join(f"{k} ({v})" for k, v in sorted(cited.items(), key=lambda kv: numkey(kv[0].split()[-1].replace('A.', '0.') if False else kv[0].split()[-1])))
     L.append(line)
-L += ["", f"## Counts", "", f"- Numbered statements of Sections 2–8 and Appendix B: {counted}; with a Lean declaration labelled by their number or proved in the index core: {covered}.",
-      f"- Labelled declarations in the stage-1 modules: {total} ({sum(len(v) for v in bynum.values())} under a statement number, {len(unmatched)} named after what they are).", ""]
+L += ["", f"## Counts", "", f"- Numbered statements of Sections 2–8 and Appendices B–C: {counted}; with a Lean declaration labelled by their number or name or proved in the index core: {covered}.",
+      f"- Labelled declarations in the stage-1 and stage-F modules: {total} ({sum(len(v) for v in bynum.values())} under a statement number, {len(unmatched)} named after what they are).", ""]
 open(out_map, "w").write("\n".join(L))
 # ---------- LaTeX table
 T = [r"% generated by lean/gen-map.py from papers/hr/main.aux and the Lean sources; do not edit by hand",

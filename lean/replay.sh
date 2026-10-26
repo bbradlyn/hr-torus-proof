@@ -45,6 +45,10 @@ HRTorus.Assembly.Setting
 HRTorus.Assembly.Inputs
 HRTorus.Assembly.Translation
 HRTorus.Assembly.Main
+HRTorus.ZeroModes.Theta
+HRTorus.ZeroModes.Canonical
+HRTorus.ZeroModes.Explicit
+HRTorus.ZeroModes.Lower
 "
 fail=0
 for m in $MODULES; do

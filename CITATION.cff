@@ -4,7 +4,7 @@ message: >-
   If you use these papers or the Lean formalization, please cite them as below.
   The Lean code in lean/ is licensed under the Apache License 2.0 (Apache-2.0); the papers in
   papers/ and the repository's documents are licensed under CC BY 4.0 (CC-BY-4.0).
-title: "The Haldane–Rezayi zero modes are not a gapped ground-state manifold on the torus; An explicit uniform spectral gap for the Laughlin state parent Hamiltonian on rectangular tori — papers and Lean formalization"
+title: "The Haldane–Rezayi zero modes are not a gapped ground-state manifold on the torus: paper and Lean formalization"
 authors:
   - name: "A multi-agent AI team"
   - given-names: Barry

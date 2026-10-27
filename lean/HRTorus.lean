@@ -108,14 +108,13 @@ The Lean 4 formalization accompanying the papers in `papers/` of this repository
   C.14, Propositions C.15–C.16, Corollary C.17 — over a toolkit for continuous separately entire functions (Cauchy's formula
   for the slice derivatives, division by ϑ₁(u_s − u_t)^k, Liouville one variable at a time, Baire for the generic points);
   Theorem C.19(i)–(iii) at the level of V_{n,m} for every τ (`T2_i`, `T2_ii`, `T2_iii`: V_{n,m} = 0 for |n − m| ≥ 2,
-  dim V_{m+1,m} = dim V_{m,m+1} = 2, dim V_{p,p} = 10); and for the rectangular tori **Theorem 2.10(i)–(iii)**, the singlet
-  clause excepted (`kernel_sector_eq_bot`, `finrank_kernel_odd`, `finrank_kernel_half`, `KN_le_halfSector`, `finrank_KN_odd`,
+  dim V_{m+1,m} = dim V_{m,m+1} = 2, dim V_{p,p} = 10); and for the rectangular tori **Theorem 2.10(i)–(iii)**
+  (`kernel_sector_eq_bot`, `finrank_kernel_odd`, `finrank_kernel_half`, `KN_le_halfSector`, `finrank_KN_odd`,
   `finrank_KN_even`), with the spanning statements (`kernel_half_eq_span`, `kernel_oddPlus_eq_span`,
   `kernel_oddMinus_eq_span`), from which the named hypotheses `HasTenZeroModes` and `HasTwoZeroModes` of the reviewed main
   theorems are discharged (`hasTenZeroModes`, `hasTwoZeroModes`): **every reviewed statement of `Assembly.Main` holds for the
   rectangular tori as stated**: 100 statements and 17 definitions, all proved. Not formalized: Lemmas C.2, C.3 and C.5 (the
-  Lean reaches Lemma C.6 through Theorem 4.2's local form and Lemma C.4), Lemma C.8(b), Lemma C.13(e), Theorem C.19(iv) and
-  the singlet clause of Theorem 2.10(iii).
+  Lean reaches Lemma C.6 through Theorem 4.2's local form and Lemma C.4), Lemma C.8(b), Lemma C.13(e) and Theorem C.19(iv).
 
 `HRTorus/Axioms.lean` (not imported here) prints the axioms of every declaration of the index core, Lemma 3.5 and the Laughlin
 pilot; the pilot and the blocks of Sections 2–8 and Appendix C have their own files, `HRTorus/Fermion/Pilot/Axioms.lean` and

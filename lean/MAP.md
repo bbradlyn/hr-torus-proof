@@ -51,7 +51,7 @@ statement numbers are those of the version in `papers/hr/`.
 
 ### Theorem 2.10 — the zero modes (p. 13)
 
-*(i)–(iii) are proved for the rectangular tori in `ZeroModes.Upper` (`kernel_sector_eq_bot`, `finrank_kernel_odd`, `finrank_kernel_half`, `KN_le_halfSector`, `finrank_KN_odd`, `finrank_KN_even`, with the spanning statements), the singlet clause of (iii) excepted; the lower bounds of (ii)–(iii) are also proved directly from Appendix C's explicit states (`ZeroModes.Lower`), which is all Theorem 8.1, Corollary 8.2 and Corollary 8.4 use; the two `Assembly.Main` declarations are the bridges from the kernel dimensions to the named hypotheses `HasTenZeroModes`, `HasTwoZeroModes` of the reviewed statements, which `ZeroModes.Upper` discharges (`hasTenZeroModes`, `hasTwoZeroModes`).*
+*(i)–(iii) are proved for the rectangular tori in `ZeroModes.Upper` (`kernel_sector_eq_bot`, `finrank_kernel_odd`, `finrank_kernel_half`, `KN_le_halfSector`, `finrank_KN_odd`, `finrank_KN_even`, with the spanning statements); the lower bounds of (ii)–(iii) are also proved directly from Appendix C's explicit states (`ZeroModes.Lower`), which is all Theorem 8.1, Corollary 8.2 and Corollary 8.4 use; the two `Assembly.Main` declarations are the bridges from the kernel dimensions to the named hypotheses `HasTenZeroModes`, `HasTwoZeroModes` of the reviewed statements, which `ZeroModes.Upper` discharges (`hasTenZeroModes`, `hasTwoZeroModes`).*
 
 - `Assembly.Main`: `hasTenZeroModes_of_kernel` ((iii)), `hasTwoZeroModes_of_kernel` ((ii))
 - `ZeroModes.Lower`: `exists_ten_zero_modes` ((iii)), `exists_two_zero_modes_plus` ((ii)), `exists_two_zero_modes_minus` ((ii)), `ten_le_finrank_ker` ((iii)), `two_le_finrank_ker_odd` ((ii)), `hasAtLeastTenZeroModes` ((iii)), `hasAtLeastTwoZeroModes` ((ii))
@@ -385,7 +385,7 @@ statement numbers are those of the version in `papers/hr/`.
 
 - `ZeroModes.Merge`: `mu` ((d)), `lemC_a` ((a)), `lemC_b` ((b)), `lemC_c_indep` ((c)), `lemC_c_zero` ((c)), `lemC_d` ((d))
 
-### Lemma C.14 —  (p. 85)
+### Lemma C.14 —  (p. 86)
 
 - `ZeroModes.Merge`: `Gnum_polarized` ((a)), `Gnum_one_zero_pp` ((a)), `Gnum_one_zero_ne` ((a)), `lemD_b` ((b)), `lemD_b_zero` ((b))
 
@@ -401,7 +401,7 @@ statement numbers are those of the version in `papers/hr/`.
 
 - `ZeroModes.Merge`: `Gnum_eq_bot_of_imbalanced` ((a)), `finrank_Gnum_odd_pp` ((b)), `Gnum_odd_eq_bot` ((b)), `finrank_Gnum_even_le` ((c)), `finrank_Gnum_even_eps` ((c)), `Gnum_eq_bot_of_sq_ne_one`
 
-### Proposition C.18 — the explicit states (p. 86)
+### Proposition C.18 — the explicit states (p. 87)
 
 - `ZeroModes.Explicit`: `gOdd` ((a)), `dEps` ((b)), `f5` ((c)), `dEps_G` ((b)), `gOdd_G` ((a)), `f5_G` ((c)), `gOdd_numerator_exists` ((a)), `gOdd_numerator_props` ((a)), `dEps_numerator_exists` ((b)), `dEps_numerator_props` ((b)), `f5_numerator_exists` ((c)), `f5_numerator_props` ((c)), `merge_gOdd` ((a)), `gOdd_zero` ((a)), `merge_dEps` ((b)), `dEps_one` ((b)), `merge_f5` ((c)), `f5_zero` ((c)), `dEps_pp_f5_linearIndependent` ((c))
 - `ZeroModes.Spaces`: `gOdd_numerator_one_exists` ((a)), `gOdd_numerator_one_mem` ((a)), `dEps_numerator_one_exists` ((b)), `dEps_numerator_one_mem` ((b)), `f5_numerator_one_exists` ((c)), `f5_numerator_one_mem` ((c))

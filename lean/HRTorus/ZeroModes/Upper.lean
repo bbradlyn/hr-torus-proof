@@ -14,7 +14,7 @@ The paper: the HR paper — Theorem 2.10 `thm:kernel` (`sections/02-setting.tex`
 odd-sector sentence), proved by Theorem C.`T2` (`appendices/C-kernel.tex`, `kz:thm:T2`) (i)–(iii). Not here (not
 formalized): Theorem C.T2(iv) ("`None of these statements depends on $\tau$.`" — the Lean's torus is rectangular; the
 statements at the level of `V_{n,m}` below hold for every `τ`, but `V_{n,m}` is identified with the kernel only at
-`τ = tauT T`), the singlet clause of Theorem 2.10(iii) and Theorem C.T2(ii)–(iii), and the remarks after Theorem C.T2.
+`τ = tauT T`), the spin remarks after Theorem 2.10 and after Theorem C.T2 (every zero mode a spin singlet at even `N`, a spin-½ doublet at odd `N`; nothing in the paper uses them), and the other remarks after Theorem C.T2.
 
 ## What the block delivers
 
@@ -178,8 +178,8 @@ theorem T2_ii (τ : ℍ) (m : ℕ) :
   rw [Fintype.card_fin] at h1 h2
   exact ⟨le_antisymm hle1 h1, le_antisymm hle2 h2⟩
 
-/-- **Theorem C.T2(iii)**: "`For even $N=2p$, $\ker H$ lies in $S_z=0$, consists of spin singlets, and has dimension $10$.`"
-— `dim V_{p,p} = 10` (`p = q + 1`; the singlet clause is not formalized): "`Corollary~\ref{kz:cor:bounds}(c) and $\{\pm1\}^2\subset\mu_N^2$ give $\dim V_{p,p}\le2(2+1+1+1)=10$.`" -/
+/-- **Theorem C.T2(iii)**: "`For even $N=2p$, $\ker H$ lies in $S_z=0$ and has dimension $10$.`"
+— `dim V_{p,p} = 10` (`p = q + 1`): "`Corollary~\ref{kz:cor:bounds}(c) and $\{\pm1\}^2\subset\mu_N^2$ give $\dim V_{p,p}\le2(2+1+1+1)=10$.`" -/
 theorem T2_iii (τ : ℍ) (q : ℕ) : Module.finrank ℂ (V τ (2 * ((q + 1) + (q + 1))) (q + 1) (q + 1)) = 10 := by
   obtain ⟨hfd, hle⟩ := finrank_V_even_le_dev τ q
   choose F hF hFi using fun e : Option Eps => exists_Θ2_pair_dev τ (epsOf e)
@@ -335,7 +335,7 @@ theorem finrank_kernel_odd (T : Torus) (hodd : Odd T.N) :
   · rw [hL2]
     exact (T2_ii (tauT T) m).2
 
-/-- **Theorem C.T2(ii)**: "`So the kernel is a spin-$\tfrac12$ doublet times the two centre-of-mass states: $\dim\ker H=4$.`"
+/-- **Theorem C.T2(ii)**: "`So $\dim\ker H=4$.`"
 — at odd `N`, `dim 𝒦_N = 4`. -/
 theorem finrank_KN_odd (T : Torus) (hodd : Odd T.N) : Module.finrank ℂ (KN T) = 4 := by
   obtain ⟨m, hm⟩ := hodd
@@ -408,7 +408,7 @@ theorem finrank_KN_odd (T : Torus) (hodd : Odd T.N) : Module.finrank ℂ (KN T) 
   rw [hinf, finrank_bot, add_zero, (finrank_kernel_odd T ⟨m, hm⟩).1, (finrank_kernel_odd T ⟨m, hm⟩).2] at hfr
   rw [le_antisymm hle hge, hfr]
 
-/-- **Theorem 2.10(iii)** (Theorem C.T2(iii)): "`If $N$ is even, $\mathcal K_N\subset\sect{(N/2,N/2)}$, $\dim\mathcal K_N=10$`"
+/-- **Theorem 2.10(iii)** (Theorem C.T2(iii)): "`If $N$ is even, $\mathcal K_N\subset\sect{(N/2,N/2)}$ and $\dim\mathcal K_N=10$.`"
 — the dimension of the kernel in the sector `(N/2, N/2)`, in the expression of `ten_le_finrank_ker` and
 `hasTenZeroModes_of_kernel`. -/
 theorem finrank_kernel_half (T : Torus) (heven : Even T.N) :
@@ -424,7 +424,7 @@ theorem finrank_kernel_half (T : Torus) (heven : Even T.N) :
   rw [hL]
   exact T2_iii (tauT T) q
 
-/-- **Theorem 2.10(iii)** (Theorem C.T2(iii)): "`If $N$ is even, $\mathcal K_N\subset\sect{(N/2,N/2)}$, $\dim\mathcal K_N=10$`"
+/-- **Theorem 2.10(iii)** (Theorem C.T2(iii)): "`If $N$ is even, $\mathcal K_N\subset\sect{(N/2,N/2)}$ and $\dim\mathcal K_N=10$.`"
 — the inclusion (from (i): every other `N`-electron sector has `|n_↑ − n_↓| ≥ 2` at even `N`). -/
 theorem KN_le_halfSector (T : Torus) (heven : Even T.N) : KN T ≤ sector T (halfSector T) := by
   intro v hv
@@ -439,7 +439,7 @@ theorem KN_le_halfSector (T : Torus) (heven : Even T.N) : KN T ≤ sector T (hal
   · show ((secOf T c).2 : ℕ) = T.N / 2
     omega
 
-/-- **Theorem 2.10(iii)** (Theorem C.T2(iii)): "`If $N$ is even, $\mathcal K_N\subset\sect{(N/2,N/2)}$, $\dim\mathcal K_N=10$`"
+/-- **Theorem 2.10(iii)** (Theorem C.T2(iii)): "`If $N$ is even, $\mathcal K_N\subset\sect{(N/2,N/2)}$ and $\dim\mathcal K_N=10$.`"
 — `dim 𝒦_N = 10`. -/
 theorem finrank_KN_even (T : Torus) (heven : Even T.N) : Module.finrank ℂ (KN T) = 10 := by
   have hN : ((halfSector T).1 : ℕ) + ((halfSector T).2 : ℕ) = T.N := by

@@ -325,8 +325,7 @@ the states with $N$ electrons, $\bigoplus_{n_\up+n_\dn=N}\sect{(n_\up,n_\dn)}$.
 \item $\mathcal K_N\cap\sect{(n_\up,n_\dn)}=\{0\}$ whenever $\abs{n_\up-n_\dn}\ge2$.
 \item If $N$ is odd, $\mathcal K_N\cap\sect{((N+1)/2,(N-1)/2)}$ and $\mathcal K_N\cap\sect{((N-1)/2,(N+1)/2)}$ are
 two-dimensional.
-\item If $N$ is even, $\mathcal K_N\subset\sect{(N/2,N/2)}$, $\dim\mathcal K_N=10$, and $\mathcal K_N$ consists of
-spin singlets.
+\item If $N$ is even, $\mathcal K_N\subset\sect{(N/2,N/2)}$ and $\dim\mathcal K_N=10$.
 \end{enumerate}
 \end{theorem}
 
@@ -350,4 +349,11 @@ quarter turn. The beginning of Appendix~\ref{app:kernel} shows, using Theorem~\r
 corresponding unitary identification of the two lowest Landau levels, which takes the orbital $\psi_j$ to the $j$-th
 Landau-gauge orbital of Appendix~\ref{app:kernel}, carries $H_N$, with the spin unchanged, to that operator. The
 identification preserves $\Nup$ and $\Ndn$, so Theorem~\ref{thm:kernel} holds for $H_N$ as stated.
+\end{remark}
+
+\begin{remark}[spin]\label{rem:spin}
+Since $H_N$ commutes with the total spin and, by Theorem~\ref{thm:kernel}(i), no zero mode has $S_z=\pm1$, every zero mode at
+even $N$ is a spin singlet, and at odd $N$ the kernel is a spin-$\tfrac12$ doublet times the two centre-of-mass states
+(Remark~\ref{kz:rem:spin}). Nothing in this paper uses this: the main theorems use only the dimensions in
+Theorem~\ref{thm:kernel}. The theorem as stated is formalized (Appendix~\ref{app:lean}); this remark is not.
 \end{remark}

@@ -426,7 +426,8 @@ after rewriting $(n+a)\mapsto-(n+a)$.)
 \item[(a)] For $\ell\ge1$ and $a,b\in\R$, the space $\kzTh_\ell[a,b]$ of entire $F$ with $F(U+1)=e^{2\pi ia}F(U)$
 and $F(U+\tau)=e^{-2\pi ib}e^{-i\pi\ell(2U+\tau)}F(U)$ has dimension $\ell$.
 \item[(b)] A nonzero $F\in\kzTh_\ell[a,b]$ has exactly $\ell$ zeros, counted with multiplicity, in every
-period parallelogram whose boundary avoids its zeros.
+period parallelogram whose boundary avoids its zeros. (This part is used only in the budget, Lemma~\ref{kz:lem:C}(e), and
+is not formalized; Appendix~\ref{app:lean}.)
 \item[(c)] $\kzvth_1:=\kzvth[\frac12,\frac12](\cdot|\tau)$ is odd and satisfies $\kzvth_1(u+1)=-\kzvth_1(u)$,
 $\kzvth_1(u+\tau)=-e^{-i\pi\tau-2\pi iu}\kzvth_1(u)$. Its zero set is exactly $\Lambda_u$, all zeros are simple,
 and $\kzvth_1'(0)\neq0$.
@@ -611,7 +612,8 @@ f|_M=\kzvth_1'(0)^2\,F(2w+Z')\,\prod_{z\in\mathrm{rest}}\kzvth_1(w-z)^4\;J'^2\;\
 \]
 As a function of $w$, $f|_M$ satisfies the level-$4N$ relations, so it has $4N$ zeros per cell if it is
 nonzero. Of these, $4(N-2)$ lie at $w\in\mathrm{rest}+\Lambda_u$ (order $4$ each), and the remaining
-$8=4\cdot2$ are the zeros of $F(2w+Z')$. The relative part has no $w$-dependence at all: the budget is $0$.
+$8=4\cdot2$ are the zeros of $F(2w+Z')$. The relative part has no $w$-dependence at all: the budget is $0$. Nothing in
+the sequel uses (e); it is a check on the count, and it is not formalized (Appendix~\ref{app:lean}).
 \end{enumerate}
 \end{lemma}
 
@@ -806,12 +808,12 @@ f^{(K)}:=\kzvth\!\begin{bmatrix}K/L\\0\end{bmatrix}\!(2U|2\tau)\;\prod_{i<j}\kzv
 \]
 (canonical components, $u$-units). These are the two centre-of-mass partners ($T_1$ maps one to the
 other) of the relative state in the sector $(T_K^2,T_1^2)=(1,1)$. $S_z=-\tfrac12$ is the same with the
-species exchanged. So the kernel is a spin-$\tfrac12$ doublet times the two centre-of-mass states:
-$\dim\ker H=4$.
-\item[(iii)] For even $N=2p$, $\ker H$ lies in $S_z=0$, consists of spin singlets, and has dimension $10$.
+species exchanged. So $\dim\ker H=4$.
+\item[(iii)] For even $N=2p$, $\ker H$ lies in $S_z=0$ and has dimension $10$.
 It is spanned by $F(U)J^2g$ with $g\in\{d^{(p)}_\varepsilon:\varepsilon\in\{\pm1\}^2\}\cup\{f_5^{(p)}\}$ and
 $F\in\kzTh_2[\varepsilon]$, two for each $g$.
-\item[(iv)] None of these statements depends on $\tau$.
+\item[(iv)] None of these statements depends on $\tau$. (The main theorems use rectangular tori only, and the
+formalization of Appendix~\ref{app:lean} is confined to them.)
 \end{enumerate}
 \end{theorem}
 
@@ -828,11 +830,15 @@ $e^{2\pi ia}$, so $a=K/L$ with $K\in\{0,N\}$; $T_1$ exchanges the two (Lemma~\re
 $T_KT_1=-T_1T_K$).
 (iii) For $N=2p$, Corollary~\ref{kz:cor:bounds}(c) and $\{\pm1\}^2\subset\mu_N^2$ give
 $\dim V_{p,p}\le2(2+1+1+1)=10$. Proposition~\ref{kz:prop:explicit}(b),(c) gives five independent relative states
-(independent across $\varepsilon$ by Lemma~\ref{kz:lem:B}(b)), so equality holds. $H$ commutes with total spin, and
-by (i) the $S_z=\pm1$ sectors are empty, so every zero mode has $S=0$. For odd $N$ the same argument gives
-$S=\tfrac12$.
+(independent across $\varepsilon$ by Lemma~\ref{kz:lem:B}(b)), so equality holds.
 (iv) Nothing above depends on $\tau$.
 \end{proof}
+
+\begin{remark}[spin]\label{kz:rem:spin}
+$H$ commutes with the total spin, and by (i) the $S_z=\pm1$ sectors contain no zero mode. So every zero mode at even $N$
+has $S=0$, and at odd $N$ the kernel is a spin-$\tfrac12$ doublet times the two centre-of-mass states of (ii). Nothing in
+the sequel uses this, and it is not formalized (Appendix~\ref{app:lean}).
+\end{remark}
 
 \begin{remark}[Read--Rezayi's states]
 Read and Rezayi's states \cite[eq.~(52)]{RR96}, $\det\wp_a((z_i^\uparrow-z_j^\downarrow)/L_1|\tau)$, are $d^{(p)}_\varepsilon$; their $\wp_a$ is a multiple of

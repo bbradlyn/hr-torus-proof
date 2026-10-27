@@ -265,7 +265,7 @@ theorem zero_modes_dev (T : Torus) (nn : SectorLabel T) (z : ℕ)
   rw [Nat.card_Icc, hcard] at this
   omega
 
-/-- **Theorem 2.10(iii)** with (2.8): "`If $N$ is even, $\mathcal K_N\subset\sect{(N/2,N/2)}$, $\dim\mathcal K_N=10$, and $\mathcal K_N$ consists of spin singlets.`"
+/-- **Theorem 2.10(iii)** with (2.8): "`If $N$ is even, $\mathcal K_N\subset\sect{(N/2,N/2)}$ and $\dim\mathcal K_N=10$.`"
 — if the kernel of `H_N` in the sector `(N/2, N/2)` has dimension ten, then `HasTenZeroModes` ("`Since $H_N\ge0$`", and
 "`(The sector $(N/2,N/2)$ has dimension $\binom{2N}{N/2}^2\ge16$ for even $N\ge2$`"; the paper's parenthetical
 continues with the two odd sectors' dimension, 2 at `N = 1` and at least 3 for odd `N ≥ 3`). -/

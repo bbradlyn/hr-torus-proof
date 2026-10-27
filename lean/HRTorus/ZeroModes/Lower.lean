@@ -173,7 +173,7 @@ theorem exists_two_zero_modes_minus (T : Torus) (m : ℕ) (hm : T.N = 2 * m + 1)
 
 /-! ## The lower bounds, in the form of the bridges of `Assembly.Main` -/
 
-/-- **Theorem 2.10(iii)**, lower half: "`If $N$ is even, $\mathcal K_N\subset\sect{(N/2,N/2)}$, $\dim\mathcal K_N=10$, and $\mathcal K_N$ consists of spin singlets.`"
+/-- **Theorem 2.10(iii)**, lower half: "`If $N$ is even, $\mathcal K_N\subset\sect{(N/2,N/2)}$ and $\dim\mathcal K_N=10$.`"
 — `dim(ker H_N ∩ 𝓗^{(N/2,N/2)}) ≥ 10` for every even `N` (`N > 0` is a field of `Torus`); the expression is the one of
 `hasTenZeroModes_of_kernel`. -/
 theorem ten_le_finrank_ker (T : Torus) (heven : Even T.N) :

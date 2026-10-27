@@ -199,8 +199,7 @@ singularities (continuity by a mean value on a circle, holomorphy in the other v
 one variable at a time, and Baire's theorem for the density of the generic points; Theorem C.19(i)–(iii) at the level of V_{n,m}
 for every τ ∈ ℍ (`T2_i`, `T2_ii`, `T2_iii`: V_{n,m} = 0 for |n − m| ≥ 2, dim V_{m+1,m} = dim V_{m,m+1} = 2, dim V_{p,p} = 10 — the
 upper halves from Corollary C.17 at the N² root pairs, the count 2(2+1+1+1) through the four sign pairs among them, the lower
-halves from the explicit states of `Explicit`); and, in `Upper`, **Theorem 2.10(i)–(iii) for the rectangular tori**, the singlet
-clause of (iii) excepted — the kernel in every N-electron sector with |n_↑ − n_↓| ≥ 2 is zero (`kernel_sector_eq_bot`),
+halves from the explicit states of `Explicit`); and, in `Upper`, **Theorem 2.10(i)–(iii) for the rectangular tori** — the kernel in every N-electron sector with |n_↑ − n_↓| ≥ 2 is zero (`kernel_sector_eq_bot`),
 two-dimensional in each odd sector at odd N (`finrank_kernel_odd`), ten-dimensional in the sector (N/2, N/2) at even N
 (`finrank_kernel_half`), and 𝒦_N, the kernel on the N-electron states, lies in that sector (`KN_le_halfSector`) with
 dim 𝒦_N = 10, resp. 4 at odd N (`finrank_KN_even`, `finrank_KN_odd`; the grading of the kernel by the sectors componentwise in
@@ -220,8 +219,8 @@ where the Lean identity holds at every centre, both sides vanishing at a non-adm
 Of Appendix C: Lemmas C.2, C.3 and C.5 (the unfolding to the plane and the spin identification, which the Lean's route to
 Lemma C.6 — Theorem 4.2's local form and Lemma C.4's identity — does not need), Lemma C.8(b) (the general zero count of
 Θ_ℓ[a,b]), Lemma C.13(e) (the budget), Theorem C.19(iv) (the Lean's torus is rectangular: the statements at the level of
-V_{n,m} hold for every τ, and the kernel is identified with V_{n,m} at the torus's own τ), the singlet clause of Theorem
-2.10(iii) and Theorem C.19(iii), and the remarks. The spin-twist bound of Appendix D, which no Lean statement or proof refers
+V_{n,m} hold for every τ, and the kernel is identified with V_{n,m} at the torus's own τ), and the remarks (the spin
+remarks after Theorem 2.10 and Theorem C.19 among them). The spin-twist bound of Appendix D, which no Lean statement or proof refers
 to; Lemma 2.8, the planar statement on the units of V_1, on which no result of the paper and no Lean declaration depends; and
 the Laughlin paper apart from the pilot.
 

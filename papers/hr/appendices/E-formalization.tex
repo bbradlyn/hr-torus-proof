@@ -2,8 +2,7 @@
 
 The numbered statements of Sections~\ref{sec:setting}--\ref{sec:hollowcore} and Appendix~\ref{app:LR} --- the definitions,
 lemmas, propositions, theorems and corollaries listed in the table below --- have been formalized and proved in the Lean~4
-proof assistant against the Mathlib library, with the exceptions of Lemma~\ref{lem:units}, the singlet clause of
-Theorem~\ref{thm:kernel}(iii), and, in Section~\ref{sec:index}, the restriction to $U=\Theta$ described in (a); Appendix~\ref{app:kernel},
+proof assistant against the Mathlib library, with the exceptions of Lemma~\ref{lem:units} and, in Section~\ref{sec:index}, the restriction to $U=\Theta$ described in (a); Appendix~\ref{app:kernel},
 which proves Theorem~\ref{thm:kernel}, is formalized with the exceptions listed in (c).\footnote{Lean 4.34.1 and Mathlib
 at commit d13f23b7. The formalization is the Lean project \texttt{HRTorus} in the directory \texttt{lean/} of
 \url{https://github.com/bbradlyn/hr-torus-proof}; its \texttt{README.md} gives the build, the axiom checks and the kernel
@@ -17,7 +16,7 @@ a matter of reading, and the table is the dictionary for it.
 \paragraph{What is proved.} Three kinds of statement should be distinguished.
 \begin{enumerate}[(a)]
 \item \emph{Unconditional.} Everything in Sections~\ref{sec:setting}--\ref{sec:hollowcore} and Appendix~\ref{app:LR}
-except Lemma~\ref{lem:units} (below), the singlet clause of Theorem~\ref{thm:kernel}(iii) and the general-$U$ clauses of
+except Lemma~\ref{lem:units} (below) and the general-$U$ clauses of
 Section~\ref{sec:index} named next; and, of Appendix~\ref{app:bbdf}, Lemmas~\ref{lem:bbdf41}, \ref{lem:expbounds}
 and~\ref{lem:det}. In particular Theorem~\ref{thm:main}, Corollary~\ref{cor:oddN} and Corollary~\ref{cor:uniform} are
 proved with no hypothesis on the zero modes (\texttt{hollow\_core\_index\_unconditional},
@@ -28,8 +27,7 @@ information about the zero modes at all (\texttt{hollow\_core\_index\_four\_dvd}
 Theorem~\ref{thm:kernel} --- at least ten zero modes of $H_N$ in the sector $(N/2,N/2)$ at every even $N$, on every rectangular
 torus, and at least two in each of the sectors $((N\pm1)/2,(N\mp1)/2)$ at every odd $N\ge3$ --- which is proved from the explicit
 states of Proposition~\ref{kz:prop:explicit} through Lemma~\ref{kz:lem:A} in the direction (2)~$\Rightarrow$~(3)
-(\texttt{ten\_le\_finrank\_ker}, \texttt{two\_le\_finrank\_ker\_odd}). Theorem~\ref{thm:kernel} itself, (i)--(iii) with the singlet clause of (iii)
-excepted, is proved for the rectangular tori from the merging induction of Appendix~\ref{app:kernel}
+(\texttt{ten\_le\_finrank\_ker}, \texttt{two\_le\_finrank\_ker\_odd}). Theorem~\ref{thm:kernel} itself, (i)--(iii), is proved for the rectangular tori from the merging induction of Appendix~\ref{app:kernel}
 (\texttt{kernel\_sector\_eq\_bot}, \texttt{finrank\_kernel\_odd}, \texttt{finrank\_kernel\_half}, \texttt{KN\_le\_halfSector},
 \texttt{finrank\_KN\_odd}, \texttt{finrank\_KN\_even}, with the spanning statements \texttt{kernel\_half\_eq\_span},
 \texttt{kernel\_oddPlus\_eq\_span}, \texttt{kernel\_oddMinus\_eq\_span}), through Theorem~\ref{kz:thm:T2}(i)--(iii) at the level of
@@ -59,8 +57,8 @@ too, hold for the rectangular tori with no hypothesis on the zero modes.
 unfolding to the plane and the spin identification; the Lean reaches Lemma~\ref{kz:lem:A} through the local form of
 Theorem~\ref{thm:localform} and Lemma~\ref{kz:lem:A3} instead), Lemma~\ref{kz:lem:theta}(b) (the general zero count),
 Lemma~\ref{kz:lem:C}(e) (the budget), Theorem~\ref{kz:thm:T2}(iv) (the Lean's torus is rectangular; the statements at the level
-of $V_{n,m}$ hold for every $\tau$), the singlet clause of Theorem~\ref{thm:kernel}(iii) and Theorem~\ref{kz:thm:T2}(iii), and the
-remarks; Appendix~\ref{app:twist} (Theorem~\ref{thm:twist}
+of $V_{n,m}$ hold for every $\tau$), and the remarks, Remarks~\ref{rem:spin} and~\ref{kz:rem:spin} on the spin of the zero
+modes among them; Appendix~\ref{app:twist} (Theorem~\ref{thm:twist}
 and Corollary~\ref{cor:alltori}), which no Lean statement uses; and Lemma~\ref{lem:units}, the planar statement about the units of $V_1$, on which nothing depends: no result of
 this paper uses it and no Lean declaration does; it fixes the units in which the gaps are measured.
 \end{enumerate}

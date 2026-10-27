@@ -1,9 +1,6 @@
 The papers in papers/ (their LaTeX sources, build scripts and PDFs) and the documents of this
-repository outside lean/ (README.md, CITATION.cff) are
-
-    © 2026 A multi-agent AI team, in collaboration with Barry Bradlyn
-
-and are licensed under the Creative Commons Attribution 4.0 International License (CC BY 4.0).
+repository outside lean/ (README.md, CITATION.cff) are by a multi-agent AI team, in collaboration
+with Barry Bradlyn, and are licensed under the Creative Commons Attribution 4.0 International License (CC BY 4.0).
 The license itself is its legal code:
 
     https://creativecommons.org/licenses/by/4.0/legalcode

@@ -53,6 +53,7 @@ HRTorus.ZeroModes.Formulation
 HRTorus.ZeroModes.Spaces
 HRTorus.ZeroModes.Merge
 HRTorus.ZeroModes.Upper
+HRTorus.ZeroModes.Twist
 "
 fail=0
 for m in $MODULES; do

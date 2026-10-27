@@ -7,7 +7,7 @@ convention, and for them the map lists the statements their docstrings cite and 
 `HRTorus.` prefix. Proof devices (declarations named with the suffix `_dev` or inside a `…Dev` namespace) are not listed. The paper's
 statement numbers are those of the version in `papers/hr/`.
 
-## By statement of the paper (Sections 2–8, Appendices B and C; Appendices A, D and the remarks only where cited)
+## By statement of the paper (Sections 2–8, Appendices B–D; Appendix A and the remarks only where cited)
 
 ### Definition 2.1 — the torus and its lowest Landau level (p. 7)
 
@@ -412,6 +412,30 @@ statement numbers are those of the version in `papers/hr/`.
 - `ZeroModes.Spaces`: `gOddSwap_numerator_one_exists` ((ii)), `gOddSwap_numerator_one_mem` ((ii))
 - `ZeroModes.Upper`: `T2_i` ((i)), `T2_ii` ((ii)), `T2_iii` ((iii)), `finrank_KN_odd` ((ii))
 
+### Theorem D.1 — a variational bound at fixed circumference (p. 88)
+
+- `ZeroModes.Twist`: `twistBoundNum`, `twist_bound_explicit`, `twist_bound`, `twistBound_le_twistBoundLy`, `E11_le_twistBoundLy`, `E3_le_twistBoundLy`, `twistBoundLy_le_twistBoundNum`, `E11_le_twistBoundNum`, `E3_le_twistBoundNum`
+
+### Corollary D.2 — all rectangular tori (p. 89)
+
+- `ZeroModes.Twist`: `allTori`, `alltori_E11_eventually`, `E11_bddAbove_allTori`, `alltori_E11_tendsto`
+
+### Lemma D.3 — the twists (p. 89)
+
+- `ZeroModes.Twist`: `twist`, `twistOneBody` ((iv)), `secN` ((iii)), `twist_eq_exp`, `twist_mem_unitary` ((i)), `twist_isDiag` ((i)), `twist_commute_Nsig` ((i)), `twist_commute_twist` ((i)), `twist_isSectorPreserving` ((i)), `twist_mem_sector` ((i)), `twist_eq_exp_lift` ((i)), `twist_conj_cjs` ((ii)), `twist_conj_cjs_of_ne` ((ii)), `twist_conj_Θ` ((iii)), `twist_conj_Θ_sector` ((iii)), `Θ_twist_eigen` ((iii)), `Θ_twistTwo_eigen` ((iii)), `twistOneBody_mem_unitary` ((iv)), `twistOneBody_spinTensor` ((iv)), `twist_eq_Ff` ((iv))
+
+### Lemma D.4 — the energy of a twisted zero mode (p. 91)
+
+- `ZeroModes.Twist`: `twistTerm`, `twistSum`, `twistSum_add_two_Nφ`, `twist_energy_identity`, `twist_energy_le`, `twistTwo_energy_identity`, `twistTwo_energy_le`
+
+### Lemma D.5 — a zero mode twisted off the kernel (p. 93)
+
+- `ZeroModes.Twist`: `twistTwo`, `orderOf_exp_pos`, `twist_off_kernel`
+
+### Lemma D.6 — the Gaussian sums (p. 93)
+
+- `ZeroModes.Twist`: `gaussSum_two_le`, `gaussSum_three_le`
+
 ## Labelled declarations that match no statement number
 
 - `Assembly.Inputs` · `eps`: **The explicit `ε(N)`**
@@ -453,6 +477,19 @@ statement numbers are those of the version in `papers/hr/`.
 - `ZeroModes.Theta` · `thetaChar_add_a`: **(C.eq:theta-basic)**
 - `ZeroModes.Theta` · `thetaChar_add_b`: **(C.eq:theta-basic)**
 - `ZeroModes.Theta` · `IsOsgood`: **The Osgood class**
+- `ZeroModes.Twist` · `gaussSum`: **(D.1)**
+- `ZeroModes.Twist` · `summable_gaussSum`: **(D.1)**
+- `ZeroModes.Twist` · `gaussSum_eq_tsum_succ`: **(D.1)**
+- `ZeroModes.Twist` · `cpairD`: **The text before Lemma D.4**
+- `ZeroModes.Twist` · `chiSing`: **The text before Lemma D.4**
+- `ZeroModes.Twist` · `cSing`: **The text before Lemma D.4**
+- `ZeroModes.Twist` · `cpairSing`: **The text before Lemma D.4**
+- `ZeroModes.Twist` · `bcenTerm_eq_cpairD`: **The text before Lemma D.4**
+- `ZeroModes.Twist` · `bcen_eq_tsum_cpairD`: **The text before Lemma D.4**
+- `ZeroModes.Twist` · `cpairD_eq`: **The text before Lemma D.4**
+- `ZeroModes.Twist` · `summable_twistTerm`: **The text before Lemma D.4**
+- `ZeroModes.Twist` · `twistBound`: **(D.2)**
+- `ZeroModes.Twist` · `twistBoundLy`: **(D.2)**
 
 ## The first commit's modules: main theorems and the statements their docstrings cite
 
@@ -478,5 +515,5 @@ statement numbers are those of the version in `papers/hr/`.
 
 ## Counts
 
-- Numbered statements of Sections 2–8 and Appendices B–C: 86; with a Lean declaration labelled by their number or name or proved in the index core: 82.
-- Labelled declarations in the stage-1 and stage-F modules: 590 (551 under a statement number, 39 named after what they are).
+- Numbered statements of Sections 2–8 and Appendices B–D: 92; with a Lean declaration labelled by their number or name or proved in the index core: 88.
+- Labelled declarations in the stage-1 and stage-F modules: 648 (596 under a statement number, 52 named after what they are).

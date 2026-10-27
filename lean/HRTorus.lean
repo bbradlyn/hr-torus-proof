@@ -45,6 +45,7 @@ import HRTorus.ZeroModes.Formulation
 import HRTorus.ZeroModes.Spaces
 import HRTorus.ZeroModes.Merge
 import HRTorus.ZeroModes.Upper
+import HRTorus.ZeroModes.Twist
 
 /-!
 # HRTorus
@@ -114,9 +115,22 @@ The Lean 4 formalization accompanying the papers in `papers/` of this repository
   `kernel_oddMinus_eq_span`), from which the named hypotheses `HasTenZeroModes` and `HasTwoZeroModes` of the reviewed main
   theorems are discharged (`hasTenZeroModes`, `hasTwoZeroModes`): **every reviewed statement of `Assembly.Main` holds for the
   rectangular tori as stated**: 100 statements and 17 definitions, all proved. Not formalized: Lemmas C.2, C.3 and C.5 (the
-  Lean reaches Lemma C.6 through Theorem 4.2's local form and Lemma C.4), Lemma C.8(b), Lemma C.13(e) and Theorem C.19(iv).
+  Lean reaches Lemma C.6 through Theorem 4.2's local form and Lemma C.4), Lemma C.8(b), Lemma C.13(e) and Theorem C.19(iv);
+* `HRTorus.ZeroModes.Twist` — Appendix D of the HR paper, **the variational bound at fixed circumference** (stage F, block F2):
+  the spin twists 𝒲_σ as diagonal unitaries in the occupation-number basis with Lemma D.3 (the paper's exponential, the
+  conjugation of the annihilators, the commutation with Θ on the sectors, the second-quantized form through block A's `Ff`),
+  the pair annihilators at distance d with the singlet pair, Lemma D.4 (the energy identity (D.3) and the bound (D.4) for the
+  twist 𝒲_↑ and for the two-species twist 𝒲_↑𝒲_↓^*), Lemma D.5 (a zero mode twisted off the kernel, the order of the root
+  of unity as Mathlib's `orderOf`), Lemma D.6 (the Gaussian sums, by the sum–integral comparison), and **Theorem D.1 for the
+  rectangular tori** — a unit vector of the sector orthogonal to 𝒦_N with expectation at most the left-hand side of (D.2)
+  (`twist_bound`), (D.2)'s inequality on every torus (`twistBound_le_twistBoundLy`), E_11(N) at even N and E_3(N) in both odd
+  sectors below the right-hand side (`E11_le_twistBoundLy`, `E3_le_twistBoundLy`) and below the numerical form
+  (`E11_le_twistBoundNum`, `E3_le_twistBoundNum`) — with **Corollary D.2 over all rectangular tori** with L_xL_y = 4πN
+  (`alltori_E11_eventually`, `alltori_E11_tendsto`, the supremum bounded above at every even N by `E11_bddAbove_allTori`):
+  46 statements and 15 definitions, all proved. Not formalized: the remarks of Appendix D (D.7–D.10) and the unnumbered
+  commentary after Theorem D.1.
 
 `HRTorus/Axioms.lean` (not imported here) prints the axioms of every declaration of the index core, Lemma 3.5 and the Laughlin
-pilot; the pilot and the blocks of Sections 2–8 and Appendix C have their own files, `HRTorus/Fermion/Pilot/Axioms.lean` and
+pilot; the pilot and the blocks of Sections 2–8 and Appendices C and D have their own files, `HRTorus/Fermion/Pilot/Axioms.lean` and
 `HRTorus/AxiomsBlockA.lean`–`AxiomsBlockF.lean` (`lean/README.md`). No declaration of the project depends on `sorryAx`.
 -/

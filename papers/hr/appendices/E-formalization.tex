@@ -3,35 +3,40 @@
 The numbered statements of Sections~\ref{sec:setting}--\ref{sec:hollowcore} and Appendix~\ref{app:LR} --- the definitions,
 lemmas, propositions, theorems and corollaries listed in the table below --- have been formalized and proved in the Lean~4
 proof assistant against the Mathlib library, with the exceptions of Lemma~\ref{lem:units} and, in Section~\ref{sec:index}, the restriction to $U=\Theta$ described in (a); Appendix~\ref{app:kernel},
-which proves Theorem~\ref{thm:kernel}, is formalized with the exceptions listed in (c).\footnote{Lean 4.34.1 and Mathlib
+which proves Theorem~\ref{thm:kernel}, is formalized with the exceptions listed in (c), and Appendix~\ref{app:twist}, which proves
+Theorem~\ref{thm:twist} and Corollary~\ref{cor:alltori}, in full but for its remarks.\footnote{Lean 4.34.1 and Mathlib
 at commit d13f23b7. The formalization is the Lean project \texttt{HRTorus} in the directory \texttt{lean/} of
 \url{https://github.com/bbradlyn/hr-torus-proof}; its \texttt{README.md} gives the build, the axiom checks and the kernel
 replay, and \texttt{lean/MAP.md} the complete correspondence: declaration by declaration for the modules written in the
-formalization's stages 1 and F, by statement for the first commit's.} The project has forty-seven
-modules and about 56{,}400 lines. No proof is left open: every declaration depends only on the three standard axioms of
+formalization's stages 1 and F, by statement for the first commit's.} The project has forty-eight
+modules and about 59{,}100 lines. No proof is left open: every declaration depends only on the three standard axioms of
 Lean's logic (propositional extensionality, choice and quotient soundness), and every module has been replayed through Lean's
 kernel by \texttt{leanchecker}, independently of the elaborator. What the kernel certifies is the Lean text. Whether that text says what this paper says is
 a matter of reading, and the table is the dictionary for it.
 
 \paragraph{What is proved.} Three kinds of statement should be distinguished.
 \begin{enumerate}[(a)]
-\item \emph{Unconditional.} Everything in Sections~\ref{sec:setting}--\ref{sec:hollowcore} and Appendix~\ref{app:LR}
-except Lemma~\ref{lem:units} (below) and the general-$U$ clauses of
+\item \begingroup\sloppy \emph{Unconditional.} Everything in Sections~\ref{sec:setting}--\ref{sec:hollowcore} and Appendices~\ref{app:LR}
+and~\ref{app:twist} except Lemma~\ref{lem:units} (below), the remarks of Appendix~\ref{app:twist} and the general-$U$ clauses of
 Section~\ref{sec:index} named next; and, of Appendix~\ref{app:bbdf}, Lemmas~\ref{lem:bbdf41}, \ref{lem:expbounds}
 and~\ref{lem:det}. In particular Theorem~\ref{thm:main}, Corollary~\ref{cor:oddN} and Corollary~\ref{cor:uniform} are
-proved with no hypothesis on the zero modes (\texttt{hollow\_core\_index\_unconditional},
-\texttt{hollow\_core\_E11\_tendsto\_unconditional}, \texttt{odd\_E3\_tendsto\_unconditional},
-\texttt{odd\_many\_small\_unconditional}, \texttt{uniform\_E11\_tendsto\_unconditional},
-\texttt{uniform\_E11\_eventually\_unconditional}); the divisibility half of Theorem~\ref{thm:main}(i), $4\mid p$, needs no
-information about the zero modes at all (\texttt{hollow\_core\_index\_four\_dvd}), and the rest uses only the lower bound of
+proved with no hypothesis on the zero modes (\texttt{hollow\_\allowbreak{}core\_\allowbreak{}index\_\allowbreak{}unconditional},
+\texttt{hollow\_\allowbreak{}core\_\allowbreak{}E11\_\allowbreak{}tendsto\_\allowbreak{}unconditional}, \texttt{odd\_\allowbreak{}E3\_\allowbreak{}tendsto\_\allowbreak{}unconditional},
+\texttt{odd\_\allowbreak{}many\_\allowbreak{}small\_\allowbreak{}unconditional}, \texttt{uniform\_\allowbreak{}E11\_\allowbreak{}tendsto\_\allowbreak{}unconditional},
+\texttt{uniform\_\allowbreak{}E11\_\allowbreak{}eventually\_\allowbreak{}unconditional}); the divisibility half of Theorem~\ref{thm:main}(i), $4\mid p$, needs no
+information about the zero modes at all (\texttt{hollow\_\allowbreak{}core\_\allowbreak{}index\_\allowbreak{}four\_\allowbreak{}dvd}), and the rest uses only the lower bound of
 Theorem~\ref{thm:kernel} --- at least ten zero modes of $H_N$ in the sector $(N/2,N/2)$ at every even $N$, on every rectangular
 torus, and at least two in each of the sectors $((N\pm1)/2,(N\mp1)/2)$ at every odd $N\ge3$ --- which is proved from the explicit
 states of Proposition~\ref{kz:prop:explicit} through Lemma~\ref{kz:lem:A} in the direction (2)~$\Rightarrow$~(3)
-(\texttt{ten\_le\_finrank\_ker}, \texttt{two\_le\_finrank\_ker\_odd}). Theorem~\ref{thm:kernel} itself, (i)--(iii), is proved for the rectangular tori from the merging induction of Appendix~\ref{app:kernel}
-(\texttt{kernel\_sector\_eq\_bot}, \texttt{finrank\_kernel\_odd}, \texttt{finrank\_kernel\_half}, \texttt{KN\_le\_halfSector},
-\texttt{finrank\_KN\_odd}, \texttt{finrank\_KN\_even}, with the spanning statements \texttt{kernel\_half\_eq\_span},
-\texttt{kernel\_oddPlus\_eq\_span}, \texttt{kernel\_oddMinus\_eq\_span}), through Theorem~\ref{kz:thm:T2}(i)--(iii) at the level of
-the spaces $V_{n,m}$ for every $\tau$ (\texttt{T2\_i}, \texttt{T2\_ii}, \texttt{T2\_iii}). Theorem~\ref{thm:index} is formalized for $U=\Theta$, the case this paper's numbered results use, for every
+(\texttt{ten\_\allowbreak{}le\_\allowbreak{}finrank\_\allowbreak{}ker}, \texttt{two\_\allowbreak{}le\_\allowbreak{}finrank\_\allowbreak{}ker\_\allowbreak{}odd}). Theorem~\ref{thm:kernel} itself, (i)--(iii), is proved for the rectangular tori from the merging induction of Appendix~\ref{app:kernel}
+(\texttt{kernel\_\allowbreak{}sector\_\allowbreak{}eq\_\allowbreak{}bot}, \texttt{finrank\_\allowbreak{}kernel\_\allowbreak{}odd}, \texttt{finrank\_\allowbreak{}kernel\_\allowbreak{}half}, \texttt{KN\_\allowbreak{}le\_\allowbreak{}halfSector},
+\texttt{finrank\_\allowbreak{}KN\_\allowbreak{}odd}, \texttt{finrank\_\allowbreak{}KN\_\allowbreak{}even}, with the spanning statements \texttt{kernel\_\allowbreak{}half\_\allowbreak{}eq\_\allowbreak{}span},
+\texttt{kernel\_\allowbreak{}oddPlus\_\allowbreak{}eq\_\allowbreak{}span}, \texttt{kernel\_\allowbreak{}oddMinus\_\allowbreak{}eq\_\allowbreak{}span}), through Theorem~\ref{kz:thm:T2}(i)--(iii) at the level of
+the spaces $V_{n,m}$ for every $\tau$ (\texttt{T2\_\allowbreak{}i}, \texttt{T2\_\allowbreak{}ii}, \texttt{T2\_\allowbreak{}iii}). Theorem~\ref{thm:twist} is proved for the
+rectangular tori (\texttt{twist\_\allowbreak{}bound}; \texttt{E11\_\allowbreak{}le\_\allowbreak{}twistBoundLy}, \texttt{E3\_\allowbreak{}le\_\allowbreak{}twistBoundLy}, and the numerical form
+\texttt{E11\_\allowbreak{}le\_\allowbreak{}twistBoundNum}, \texttt{E3\_\allowbreak{}le\_\allowbreak{}twistBoundNum}), the inequality of \eqref{eq:twist-bound} on every torus
+(\texttt{twistBound\_\allowbreak{}le\_\allowbreak{}twistBoundLy}), and Corollary~\ref{cor:alltori} over all rectangular tori with $L_xL_y=4\pi N$
+(\texttt{alltori\_\allowbreak{}E11\_\allowbreak{}eventually}, \texttt{alltori\_\allowbreak{}E11\_\allowbreak{}tendsto}). Theorem~\ref{thm:index} is formalized for $U=\Theta$, the case this paper's numbered results use, for every
 Hamiltonian of Definition~\ref{def:class} with (H1)--(H2) (\texttt{index\_theorem\_\ensuremath{\Theta}}), the inputs supplied with an
 explicit $\varepsilon(N)=O(N^{-\infty})$ and $M(N)=(1+4\pi C_h\norm{W_\gamma}_1)N^2$; for a general $U$ only its finite-dimensional
 core is formalized, in the following quantitative form: for every finite-dimensional complex inner product space and every
@@ -41,7 +46,7 @@ Lemma~\ref{lem:split}(i) and of the filters (Definition~\ref{def:filters}, Lemma
 twenty-seven quantities --- the twenty-one separated commutators of Lemma~\ref{lem:commutation}(ii), (U2), the $+$ half of
 (U4) and the four clustering commutators of Corollary~\ref{cor:Zcommute} --- is at most $\varepsilon$ and
 $\norm{T_-},\norm{K_-}\le M$, then there is an integer $n$ with $\abs{\Tr(PT_-)-n}\le400\,p\,(M+1)\sqrt{\varepsilon}$
-(\texttt{index\_core\_400}). The general-$U$ clauses of Lemma~\ref{lem:objects} and Lemma~\ref{lem:commutation}(ii) are not formalized.
+(\texttt{index\_\allowbreak{}core\_\allowbreak{}400}). The general-$U$ clauses of Lemma~\ref{lem:objects} and Lemma~\ref{lem:commutation}(ii) are not formalized.\par\endgroup
 \item \emph{In two forms.} The second half of Theorem~\ref{thm:main}(i), $12\le p$, Theorem~\ref{thm:main}(ii),
 Corollary~\ref{cor:oddN} and Corollary~\ref{cor:uniform} are also in the tree in the form in which their statements were first
 reviewed, as implications from the named hypotheses \texttt{HasTenZeroModes} and \texttt{HasTwoZeroModes} --- exactly ten zero
@@ -58,13 +63,13 @@ unfolding to the plane and the spin identification; the Lean reaches Lemma~\ref{
 Theorem~\ref{thm:localform} and Lemma~\ref{kz:lem:A3} instead), Lemma~\ref{kz:lem:theta}(b) (the general zero count),
 Lemma~\ref{kz:lem:C}(e) (the budget), Theorem~\ref{kz:thm:T2}(iv) (the Lean's torus is rectangular; the statements at the level
 of $V_{n,m}$ hold for every $\tau$), and the remarks, Remarks~\ref{rem:spin} and~\ref{kz:rem:spin} on the spin of the zero
-modes among them; Appendix~\ref{app:twist} (Theorem~\ref{thm:twist}
-and Corollary~\ref{cor:alltori}), which no Lean statement uses; and Lemma~\ref{lem:units}, the planar statement about the units of $V_1$, on which nothing depends: no result of
+modes among them; the remarks of Appendix~\ref{app:twist} (Remarks~\ref{rem:twist-two}--\ref{rem:twist-scope}) and the
+unnumbered commentary after Theorem~\ref{thm:twist}; and Lemma~\ref{lem:units}, the planar statement about the units of $V_1$, on which nothing depends: no result of
 this paper uses it and no Lean declaration does; it fixes the units in which the gaps are measured.
 \end{enumerate}
 
 \paragraph{The correspondence.} The table lists every numbered statement of Sections~\ref{sec:setting}--\ref{sec:hollowcore} and
-Appendices~\ref{app:LR} and~\ref{app:kernel} with the Lean module and the declarations that formalize it; a statement with several parts is
+Appendices~\ref{app:LR}, \ref{app:kernel} and~\ref{app:twist} with the Lean module and the declarations that formalize it; a statement with several parts is
 usually several declarations. The lemmas of Section~\ref{sec:index} that the finite-dimensional index core proves
 (Lemmas~\ref{lem:bbdf42}--\ref{lem:determinant} and Theorem~\ref{thm:index} itself) are formalized in the twelve modules
 \texttt{IndexCore.Statement} to \texttt{IndexCore.Sanity}, with \texttt{IndexCore.Translation} and \texttt{IndexCore.Ring} for
@@ -137,10 +142,22 @@ holomorphy in the other variables by locally uniform limits, Liouville one varia
 density of the generic points; in Theorem~\ref{kz:thm:T2}(iii) the count $2(2+1+1+1)$ through the four sign pairs among the $N$-th
 roots of unity; and, for Theorem~\ref{thm:kernel} on $\mathcal K_N$, the grading of the kernel by the sectors componentwise in
 the occupation basis.
+\item Appendix~\ref{app:twist}. The twists defined as the diagonal unitaries they are in the occupation-number basis, with the
+exponential of Lemma~\ref{lem:twists} and its second-quantized form (iv) as theorems; in Step~3 of Lemma~\ref{lem:twist-energy}
+the occupation bound through $\norm{c_{j\sigma}c_{k\tau}\Upsilon}\le\norm{c_{k\tau}\Upsilon}$ and
+$\sum_j\ip\Upsilon{(n_{j\up}+n_{j\dn})\Upsilon}=N$ in place of $u^*u=n_{j\dn}n_{j'\up}$ and $p_1p_2\le\frac12(p_1+p_2)$, with the
+re-indexing $n\mapsto[(n+d)/2]$ as an injection, the constant $N$ unchanged; in the proof of Theorem~\ref{thm:twist},
+$\omega^{10}\ne1$ at even $N$ and $\omega^2\ne1$ at odd $N$ in place of the orders of the roots of unity;
+Lemma~\ref{lem:twist-off} by a determinant argument on the compression $C$ of $\mathcal W$ to $\mathcal K_N\cap\sect\nn$ --- the
+relation $\Theta C=\omega C\Theta$ forces $\omega^{\dim(\mathcal K_N\cap\sect\nn)}=1$ if $C$ is injective, and otherwise $\ker C$
+carries an eigenvector of $\Theta$ --- in place of the count along the $\omega$-orbits; and Corollary~\ref{cor:alltori} without
+the threshold $N\ge L_0^2/(4\pi)$.
 \end{itemize}
 
 \paragraph{Conventions.} The eigenvalues $E_k(N)$ of $H_N$ in a sector are those of Mathlib's spectral theorem for the
-compression, the index clamped to $1\le k\le\dim$; Definition~\ref{def:bbdfobjects} and Lemmas~\ref{lem:objects}
+compression, the index clamped to $1\le k\le\dim$; the order of a root of unity in Lemma~\ref{lem:twist-off} is the order of
+an element of the multiplicative monoid $\C$ in Mathlib's sense (positive for these roots), and the supremum of Corollary~\ref{cor:alltori} is the real supremum of a set bounded above at every even $N$
+(\texttt{E11\_bddAbove\_allTori}); Definition~\ref{def:bbdfobjects} and Lemmas~\ref{lem:objects}
 and~\ref{lem:commutation} on the Fock space, and Theorem~\ref{thm:index}, are formalized for $U=\Theta$ only, the case this
 paper's numbered results use (the index core's Lemma~\ref{lem:commutation}(i) and (iii) are for a general $U$);
 $\varepsilon(N)$ is the largest of the twenty input quantities (for $U=\Theta$, (U2) and (U4) hold exactly and the twenty-one

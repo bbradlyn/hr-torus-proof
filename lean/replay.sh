@@ -49,6 +49,10 @@ HRTorus.ZeroModes.Theta
 HRTorus.ZeroModes.Canonical
 HRTorus.ZeroModes.Explicit
 HRTorus.ZeroModes.Lower
+HRTorus.ZeroModes.Formulation
+HRTorus.ZeroModes.Spaces
+HRTorus.ZeroModes.Merge
+HRTorus.ZeroModes.Upper
 "
 fail=0
 for m in $MODULES; do

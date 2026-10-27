@@ -2,10 +2,14 @@ import HRTorus.ZeroModes.Theta
 import HRTorus.ZeroModes.Canonical
 import HRTorus.ZeroModes.Explicit
 import HRTorus.ZeroModes.Lower
+import HRTorus.ZeroModes.Formulation
+import HRTorus.ZeroModes.Spaces
+import HRTorus.ZeroModes.Merge
+import HRTorus.ZeroModes.Upper
 import Lean.Util.CollectAxioms
 
-/-! T-0056 stage F, block F1-lower (2026-10-26): the axiom check of the four `HRTorus.ZeroModes.*` modules (Appendix C of the HR
-paper — the lower bound of Theorem 2.10 — and the unconditional forms of Theorem 8.1, Corollaries 8.2 and 8.4). Run with
+/-! T-0056 stage F, blocks F1-lower and F1-upper (2026-10-26): the axiom check of the eight `HRTorus.ZeroModes.*` modules
+(Appendix C of the HR paper — Theorem 2.10 — and the unconditional forms of Theorem 8.1, Corollaries 8.2 and 8.4). Run with
 `lake env lean HRTorus/AxiomsBlockF.lean` from this directory after `lake build` (the method of `AxiomsBlockE.lean`, unchanged:
 L11's, from L10's, L9's, L8's and L7's). For every non-internal constant defined in the named module (theorems, definitions and
 their auxiliary constants, instances), the axioms it depends on; a summary line with the count of constants with an axiom
@@ -37,3 +41,7 @@ elab "#l16_axioms " mod:ident : command => do
 #l16_axioms HRTorus.ZeroModes.Canonical
 #l16_axioms HRTorus.ZeroModes.Explicit
 #l16_axioms HRTorus.ZeroModes.Lower
+#l16_axioms HRTorus.ZeroModes.Formulation
+#l16_axioms HRTorus.ZeroModes.Spaces
+#l16_axioms HRTorus.ZeroModes.Merge
+#l16_axioms HRTorus.ZeroModes.Upper

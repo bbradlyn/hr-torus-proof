@@ -2,14 +2,14 @@
 
 The numbered statements of Sections~\ref{sec:setting}--\ref{sec:hollowcore} and Appendix~\ref{app:LR} --- the definitions,
 lemmas, propositions, theorems and corollaries listed in the table below --- have been formalized and proved in the Lean~4
-proof assistant against the Mathlib library, with the exceptions of the exact count of Theorem~\ref{thm:kernel} --- its lower
-bound, the existence of the zero modes constructed in Appendix~\ref{app:kernel}, is proved, and it is all the main theorems use
---- and Lemma~\ref{lem:units}, and, in Section~\ref{sec:index}, the restriction to $U=\Theta$ described in (a).\footnote{Lean 4.34.1 and Mathlib
+proof assistant against the Mathlib library, with the exceptions of Lemma~\ref{lem:units}, the singlet clause of
+Theorem~\ref{thm:kernel}(iii), and, in Section~\ref{sec:index}, the restriction to $U=\Theta$ described in (a); Appendix~\ref{app:kernel},
+which proves Theorem~\ref{thm:kernel}, is formalized with the exceptions listed in (c).\footnote{Lean 4.34.1 and Mathlib
 at commit d13f23b7. The formalization is the Lean project \texttt{HRTorus} in the directory \texttt{lean/} of
 \url{https://github.com/bbradlyn/hr-torus-proof}; its \texttt{README.md} gives the build, the axiom checks and the kernel
 replay, and \texttt{lean/MAP.md} the complete correspondence: declaration by declaration for the modules written in the
-formalization's stages 1 and F, by statement for the first commit's.} The project has forty-three
-modules and about 50{,}100 lines. No proof is left open: every declaration depends only on the three standard axioms of
+formalization's stages 1 and F, by statement for the first commit's.} The project has forty-seven
+modules and about 56{,}400 lines. No proof is left open: every declaration depends only on the three standard axioms of
 Lean's logic (propositional extensionality, choice and quotient soundness), and every module has been replayed through Lean's
 kernel by \texttt{leanchecker}, independently of the elaborator. What the kernel certifies is the Lean text. Whether that text says what this paper says is
 a matter of reading, and the table is the dictionary for it.
@@ -17,7 +17,7 @@ a matter of reading, and the table is the dictionary for it.
 \paragraph{What is proved.} Three kinds of statement should be distinguished.
 \begin{enumerate}[(a)]
 \item \emph{Unconditional.} Everything in Sections~\ref{sec:setting}--\ref{sec:hollowcore} and Appendix~\ref{app:LR}
-except the exact count of Theorem~\ref{thm:kernel}, Lemma~\ref{lem:units} (below) and the general-$U$ clauses of
+except Lemma~\ref{lem:units} (below), the singlet clause of Theorem~\ref{thm:kernel}(iii) and the general-$U$ clauses of
 Section~\ref{sec:index} named next; and, of Appendix~\ref{app:bbdf}, Lemmas~\ref{lem:bbdf41}, \ref{lem:expbounds}
 and~\ref{lem:det}. In particular Theorem~\ref{thm:main}, Corollary~\ref{cor:oddN} and Corollary~\ref{cor:uniform} are
 proved with no hypothesis on the zero modes (\texttt{hollow\_core\_index\_unconditional},
@@ -28,7 +28,12 @@ information about the zero modes at all (\texttt{hollow\_core\_index\_four\_dvd}
 Theorem~\ref{thm:kernel} --- at least ten zero modes of $H_N$ in the sector $(N/2,N/2)$ at every even $N$, on every rectangular
 torus, and at least two in each of the sectors $((N\pm1)/2,(N\mp1)/2)$ at every odd $N\ge3$ --- which is proved from the explicit
 states of Proposition~\ref{kz:prop:explicit} through Lemma~\ref{kz:lem:A} in the direction (2)~$\Rightarrow$~(3)
-(\texttt{ten\_le\_finrank\_ker}, \texttt{two\_le\_finrank\_ker\_odd}). Theorem~\ref{thm:index} is formalized for $U=\Theta$, the case this paper's numbered results use, for every
+(\texttt{ten\_le\_finrank\_ker}, \texttt{two\_le\_finrank\_ker\_odd}). Theorem~\ref{thm:kernel} itself, (i)--(iii) with the singlet clause of (iii)
+excepted, is proved for the rectangular tori from the merging induction of Appendix~\ref{app:kernel}
+(\texttt{kernel\_sector\_eq\_bot}, \texttt{finrank\_kernel\_odd}, \texttt{finrank\_kernel\_half}, \texttt{KN\_le\_halfSector},
+\texttt{finrank\_KN\_odd}, \texttt{finrank\_KN\_even}, with the spanning statements \texttt{kernel\_half\_eq\_span},
+\texttt{kernel\_oddPlus\_eq\_span}, \texttt{kernel\_oddMinus\_eq\_span}), through Theorem~\ref{kz:thm:T2}(i)--(iii) at the level of
+the spaces $V_{n,m}$ for every $\tau$ (\texttt{T2\_i}, \texttt{T2\_ii}, \texttt{T2\_iii}). Theorem~\ref{thm:index} is formalized for $U=\Theta$, the case this paper's numbered results use, for every
 Hamiltonian of Definition~\ref{def:class} with (H1)--(H2) (\texttt{index\_theorem\_\ensuremath{\Theta}}), the inputs supplied with an
 explicit $\varepsilon(N)=O(N^{-\infty})$ and $M(N)=(1+4\pi C_h\norm{W_\gamma}_1)N^2$; for a general $U$ only its finite-dimensional
 core is formalized, in the following quantitative form: for every finite-dimensional complex inner product space and every
@@ -47,12 +52,15 @@ exactly two in each of the sectors $((N\pm1)/2,(N\mp1)/2)$ at every odd $N\ge3$,
 together with $H_N\ge0$ (\texttt{hollow\_core\_index}, \texttt{hollow\_core\_E11\_tendsto}, \texttt{odd\_E3\_tendsto},
 \texttt{odd\_many\_small}, \texttt{uniform\_E11\_tendsto}, \texttt{uniform\_E11\_eventually}). The unconditional forms are
 derived from the same statements under the weaker hypotheses \texttt{HasAtLeastTenZeroModes} and
-\texttt{HasAtLeastTwoZeroModes} (at least ten, at least two), which the lower bound discharges.
-\item \emph{Not formalized.} The exact count of Theorem~\ref{thm:kernel}: in Appendix~\ref{app:kernel}, Lemmas~\ref{kz:lem:A1},
-\ref{kz:lem:A2} and~\ref{kz:lem:A4}, the directions (1)~$\Leftrightarrow$~(2) of Lemma~\ref{kz:lem:A}, Lemma~\ref{kz:lem:theta}(b),
-Lemma~\ref{kz:lem:B}(a), (c) and its surjectivity, Lemmas~\ref{kz:lem:C} and~\ref{kz:lem:D}, Propositions~\ref{kz:prop:induct}
-and~\ref{kz:prop:base} and Corollary~\ref{kz:cor:bounds}, whose arguments rest on the argument principle and on the analysis of
-several complex variables, neither of which the Mathlib version used provides; Appendix~\ref{app:twist} (Theorem~\ref{thm:twist}
+\texttt{HasAtLeastTwoZeroModes} (at least ten, at least two), which the lower bound discharges. The named hypotheses
+themselves are theorems (\texttt{hasTenZeroModes}, \texttt{hasTwoZeroModes}, from the exact counts), so the reviewed statements,
+too, hold for the rectangular tori with no hypothesis on the zero modes.
+\item \emph{Not formalized.} In Appendix~\ref{app:kernel}: Lemmas~\ref{kz:lem:A1}, \ref{kz:lem:A2} and~\ref{kz:lem:A4} (the
+unfolding to the plane and the spin identification; the Lean reaches Lemma~\ref{kz:lem:A} through the local form of
+Theorem~\ref{thm:localform} and Lemma~\ref{kz:lem:A3} instead), Lemma~\ref{kz:lem:theta}(b) (the general zero count),
+Lemma~\ref{kz:lem:C}(e) (the budget), Theorem~\ref{kz:thm:T2}(iv) (the Lean's torus is rectangular; the statements at the level
+of $V_{n,m}$ hold for every $\tau$), the singlet clause of Theorem~\ref{thm:kernel}(iii) and Theorem~\ref{kz:thm:T2}(iii), and the
+remarks; Appendix~\ref{app:twist} (Theorem~\ref{thm:twist}
 and Corollary~\ref{cor:alltori}), which no Lean statement uses; and Lemma~\ref{lem:units}, the planar statement about the units of $V_1$, on which nothing depends: no result of
 this paper uses it and no Lean declaration does; it fixes the units in which the gaps are measured.
 \end{enumerate}
@@ -115,6 +123,22 @@ entire in each variable separately; (C1) through the vanishing of the holomorphi
 Lemma~\ref{kz:lem:A} (2)~$\Rightarrow$~(3) using (C1) only at order two on the diagonal; (C2) by this appendix's route at the
 generic points of a divisor $x_a=y_k$ and extended to every point of it along a complex line inside the divisor, on which only
 countably many points are non-generic, by the continuity of $\partial_vf$.
+\item Appendix~\ref{app:kernel}, the count. Lemma~\ref{kz:lem:A} (1)~$\Rightarrow$~(3) from the sum of squares of
+Theorem~\ref{thm:localform}(c) and (3)~$\Rightarrow$~(2) from Lemma~\ref{kz:lem:A3}, without the unfolding to the plane; everything
+from Definition~\ref{kz:def:G} on in numerator form, $\mathcal{G}(n,m;\varepsilon)$ being the space of the numerators $J^2g$ (continuous,
+entire in each variable) with the conditions (iv)--(v) transported to vanishing orders, so that no meromorphic function of
+several variables appears, and the multipliers $\varepsilon$ as pairs of complex numbers with $\mu_N^2$ parametrized by $(j,k)$;
+Lemma~\ref{kz:lem:B}(b) through the projectors $P_{jk}=N^{-2}\sum_{r,s<N}\omega^{-jr-ks}(T_K^2)^r(T_1^2)^s$ at the function
+level, without eigenspace theory; the merge $\mu$ as the merged numerator at an admissible centre $w\notin\mathrm{rest}+\Lambda_u$,
+chosen by Hilbert's $\varepsilon$-operator, Lemma~\ref{kz:lem:C}(c) making the choice immaterial; in Lemma~\ref{kz:lem:C}(a) the
+polar-set argument of Step~4 replaced by an explicit division by $E$ in $w$, and the identity theorem of Step~5 by continuity;
+Lemma~\ref{kz:lem:even} replaced by the direct computation in Lemma~\ref{kz:lem:C}(d); the analysis of several variables
+replaced by a toolkit for the class --- Cauchy's formula for the slice derivatives as a parametric integral, division by
+$\vartheta_1(u_s-u_t)^k$ through one-variable removable singularities, with continuity by a mean value on a circle and
+holomorphy in the other variables by locally uniform limits, Liouville one variable at a time, and Baire's theorem for the
+density of the generic points; in Theorem~\ref{kz:thm:T2}(iii) the count $2(2+1+1+1)$ through the four sign pairs among the $N$-th
+roots of unity; and, for Theorem~\ref{thm:kernel} on $\mathcal K_N$, the grading of the kernel by the sectors componentwise in
+the occupation basis.
 \end{itemize}
 
 \paragraph{Conventions.} The eigenvalues $E_k(N)$ of $H_N$ in a sector are those of Mathlib's spectral theorem for the

@@ -51,10 +51,11 @@ statement numbers are those of the version in `papers/hr/`.
 
 ### Theorem 2.10 — the zero modes (p. 13)
 
-*the lower bounds of (ii)–(iii) — at least ten zero modes at even `N`, at least two in each odd sector at odd `N ≥ 3` — are proved from Appendix C's explicit states (`ZeroModes.Lower`), which is all Theorem 8.1, Corollary 8.2 and Corollary 8.4 use; the exact counts and (i) are not formalized; the two `Assembly.Main` declarations are the bridges from the exact kernel dimensions to the named hypotheses `HasTenZeroModes`, `HasTwoZeroModes` of the reviewed statements.*
+*(i)–(iii) are proved for the rectangular tori in `ZeroModes.Upper` (`kernel_sector_eq_bot`, `finrank_kernel_odd`, `finrank_kernel_half`, `KN_le_halfSector`, `finrank_KN_odd`, `finrank_KN_even`, with the spanning statements), the singlet clause of (iii) excepted; the lower bounds of (ii)–(iii) are also proved directly from Appendix C's explicit states (`ZeroModes.Lower`), which is all Theorem 8.1, Corollary 8.2 and Corollary 8.4 use; the two `Assembly.Main` declarations are the bridges from the kernel dimensions to the named hypotheses `HasTenZeroModes`, `HasTwoZeroModes` of the reviewed statements, which `ZeroModes.Upper` discharges (`hasTenZeroModes`, `hasTwoZeroModes`).*
 
 - `Assembly.Main`: `hasTenZeroModes_of_kernel` ((iii)), `hasTwoZeroModes_of_kernel` ((ii))
 - `ZeroModes.Lower`: `exists_ten_zero_modes` ((iii)), `exists_two_zero_modes_plus` ((ii)), `exists_two_zero_modes_minus` ((ii)), `ten_le_finrank_ker` ((iii)), `two_le_finrank_ker_odd` ((ii)), `hasAtLeastTenZeroModes` ((iii)), `hasAtLeastTwoZeroModes` ((ii))
+- `ZeroModes.Upper`: `KN`, `kernel_sector_eq_bot` ((i)), `KN_inf_sector_eq_bot` ((i)), `finrank_kernel_odd` ((ii)), `finrank_kernel_half` ((iii)), `KN_le_halfSector` ((iii)), `finrank_KN_even` ((iii)), `kernel_half_eq_span` ((iii)), `kernel_oddPlus_eq_span` ((ii)), `kernel_oddMinus_eq_span` ((ii)), `hasTenZeroModes` ((iii)), `hasTwoZeroModes` ((ii))
 
 ### Definition 3.1 — admissible tori and the slot frame (p. 13)
 
@@ -359,6 +360,7 @@ statement numbers are those of the version in `papers/hr/`.
 ### Lemma C.6 — formulation lemma on the torus (p. 80)
 
 - `ZeroModes.Canonical`: `C1` ((2), (C1)), `C2` ((2), (C2)), `lemA_bcen` ((2) ⇒ (3)), `lemA_HN` ((3) ⇒ (1))
+- `ZeroModes.Formulation`: `lemA_HN_conv` ((1) ⇒ (3)), `lemA_bcen_conv` ((3) ⇒ (2)), `lemA_iff` ((1) ⇔ (2)), `lemA_iff_bcen` ((1) ⇔ (3))
 
 ### Lemma C.8 —  (p. 81)
 
@@ -370,34 +372,45 @@ statement numbers are those of the version in `papers/hr/`.
 
 ### Definition C.11 —  (p. 82)
 
+- `ZeroModes.Spaces`: `Gnum`, `Gnum_zero_zero`, `finrank_Gnum_zero_zero`
 
 ### Lemma C.12 — centre-of-mass factorization (p. 83)
 
 - `ZeroModes.Explicit`: `stateFun` ((b))
+- `ZeroModes.Formulation`: `V`, `kerSector_equiv_V`, `finrank_ker_eq_finrank_V`
+- `ZeroModes.Spaces`: `Θ2g` ((b)), `Θ2g_rootPair` ((b)), `finrank_Θ2g_rootPair` ((b)), `Gnum_eq_bot_of_not_root` ((a)), `imageTensor_le_V` ((b)), `lemB_c` ((c)), `V_le_iSup_imageTensor` ((b)), `lemB_injective` ((b)), `finrank_V_le` ((b)), `finrank_V_eq` ((b))
 - `ZeroModes.Theta`: `Θ2` ((b)), `finrank_Θ2` ((b))
 
 ### Lemma C.13 — torus merging lemma (p. 84)
 
+- `ZeroModes.Merge`: `mu` ((d)), `lemC_a` ((a)), `lemC_b` ((b)), `lemC_c_indep` ((c)), `lemC_c_zero` ((c)), `lemC_d` ((d))
 
 ### Lemma C.14 —  (p. 85)
 
+- `ZeroModes.Merge`: `Gnum_polarized` ((a)), `Gnum_one_zero_pp` ((a)), `Gnum_one_zero_ne` ((a)), `lemD_b` ((b)), `lemD_b_zero` ((b))
 
 ### Proposition C.15 — the inductive inequality (p. 86)
 
+- `ZeroModes.Merge`: `muL`, `muL_injective`, `finrank_Gnum_le_merge`, `Gnum_eq_bot_of_merge`
 
 ### Proposition C.16 — base cases (p. 86)
 
+- `ZeroModes.Merge`: `base_a` ((a)), `Gnum_one_one_pp` ((b)), `finrank_Gnum_one_one_pp` ((b)), `Gnum_one_one_eps` ((c)), `finrank_Gnum_one_one_eps` ((c)), `Gnum_one_one_eq_bot` ((d))
 
 ### Corollary C.17 — upper bounds (p. 86)
 
+- `ZeroModes.Merge`: `Gnum_eq_bot_of_imbalanced` ((a)), `finrank_Gnum_odd_pp` ((b)), `Gnum_odd_eq_bot` ((b)), `finrank_Gnum_even_le` ((c)), `finrank_Gnum_even_eps` ((c)), `Gnum_eq_bot_of_sq_ne_one`
 
 ### Proposition C.18 — the explicit states (p. 86)
 
 - `ZeroModes.Explicit`: `gOdd` ((a)), `dEps` ((b)), `f5` ((c)), `dEps_G` ((b)), `gOdd_G` ((a)), `f5_G` ((c)), `gOdd_numerator_exists` ((a)), `gOdd_numerator_props` ((a)), `dEps_numerator_exists` ((b)), `dEps_numerator_props` ((b)), `f5_numerator_exists` ((c)), `f5_numerator_props` ((c)), `merge_gOdd` ((a)), `gOdd_zero` ((a)), `merge_dEps` ((b)), `dEps_one` ((b)), `merge_f5` ((c)), `f5_zero` ((c)), `dEps_pp_f5_linearIndependent` ((c))
+- `ZeroModes.Spaces`: `gOdd_numerator_one_exists` ((a)), `gOdd_numerator_one_mem` ((a)), `dEps_numerator_one_exists` ((b)), `dEps_numerator_one_mem` ((b)), `f5_numerator_one_exists` ((c)), `f5_numerator_one_mem` ((c))
 
 ### Theorem C.19 — the zero modes on the torus at $N_\phi =2N$ (p. 87)
 
 - `ZeroModes.Explicit`: `gOddSwap` ((ii)), `gOddSwap_numerator_exists` ((ii)), `gOddSwap_numerator_props` ((ii)), `thetaK_mem` ((ii)), `thetaK_linearIndependent` ((ii)), `explicit_even_linearIndependent` ((iii)), `explicit_odd_linearIndependent` ((ii)), `explicit_oddSwap_linearIndependent` ((ii))
+- `ZeroModes.Spaces`: `gOddSwap_numerator_one_exists` ((ii)), `gOddSwap_numerator_one_mem` ((ii))
+- `ZeroModes.Upper`: `T2_i` ((i)), `T2_ii` ((ii)), `T2_iii` ((iii)), `finrank_KN_odd` ((ii))
 
 ## Labelled declarations that match no statement number
 
@@ -465,5 +478,5 @@ statement numbers are those of the version in `papers/hr/`.
 
 ## Counts
 
-- Numbered statements of Sections 2–8 and Appendices B–C: 86; with a Lean declaration labelled by their number or name or proved in the index core: 76.
-- Labelled declarations in the stage-1 and stage-F modules: 519 (480 under a statement number, 39 named after what they are).
+- Numbered statements of Sections 2–8 and Appendices B–C: 86; with a Lean declaration labelled by their number or name or proved in the index core: 82.
+- Labelled declarations in the stage-1 and stage-F modules: 590 (551 under a statement number, 39 named after what they are).

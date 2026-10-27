@@ -82,20 +82,22 @@ for mod, names in list(MAIN.items()) + [(m, ns) for rows in FIRST_STMTS.values()
         assert re.search(r"^\s*(?:@\[[^\]]*\]\s*)?(?:private |protected |noncomputable |nonrec )*(theorem|lemma|def|abbrev|structure)\s+(?:[^\s.{(:]+\.)*" + re.escape(last) + r"\b", srcs[mod], flags=re.M), (mod, n)
 def numkey(n):
     a, b = n.split("."); return (0 if a.isdigit() else 1, int(a) if a.isdigit() else a, int(b))
-SPECIAL = {"2.10": "the lower bounds of (ii)–(iii) — at least ten zero modes at even `N`, at least two in each odd sector at odd `N ≥ 3` — are proved from Appendix C's explicit states (`ZeroModes.Lower`), which is all Theorem 8.1, Corollary 8.2 and Corollary 8.4 use; the exact counts and (i) are not formalized; the two `Assembly.Main` declarations are the bridges from the exact kernel dimensions to the named hypotheses `HasTenZeroModes`, `HasTwoZeroModes` of the reviewed statements",
+SPECIAL = {"2.10": "(i)–(iii) are proved for the rectangular tori in `ZeroModes.Upper` (`kernel_sector_eq_bot`, `finrank_kernel_odd`, `finrank_kernel_half`, `KN_le_halfSector`, `finrank_KN_odd`, `finrank_KN_even`, with the spanning statements), the singlet clause of (iii) excepted; the lower bounds of (ii)–(iii) are also proved directly from Appendix C's explicit states (`ZeroModes.Lower`), which is all Theorem 8.1, Corollary 8.2 and Corollary 8.4 use; the two `Assembly.Main` declarations are the bridges from the kernel dimensions to the named hypotheses `HasTenZeroModes`, `HasTwoZeroModes` of the reviewed statements, which `ZeroModes.Upper` discharges (`hasTenZeroModes`, `hasTwoZeroModes`)",
+
            "2.8": "not formalized — left out at block A's statement review: the planar `V_1` units statement; no result of the paper and no Lean declaration depends on it"}
-CNOTE = {  # Appendix C by label: what the stage-F modules (the lower bound of Theorem 2.10) leave out
-    "kz:lem:A1": r"\emph{not formalized: not needed for the lower bound}", "kz:lem:A2": r"\emph{not formalized: not needed for the lower bound}",
-    "kz:lem:A4": r"\emph{not formalized: not needed for the lower bound}",
+CNOTE = {  # Appendix C by label: what the stage-F modules leave out, and the form in which they state the rest
+    "kz:lem:A1": r"\emph{not formalized: the unfolding to the plane; the Lean reaches Lemma~\ref{kz:lem:A} through the local form of Theorem~\ref{thm:localform} and Lemma~\ref{kz:lem:A3}}",
+    "kz:lem:A2": r"\emph{not formalized: the unfolding to the plane; the Lean reaches Lemma~\ref{kz:lem:A} through the local form of Theorem~\ref{thm:localform} and Lemma~\ref{kz:lem:A3}}",
+    "kz:lem:A4": r"\emph{not formalized: the spin identification, not needed on the Lean's route to Lemma~\ref{kz:lem:A}}",
     "kz:lem:A3": r" \emph{(the first identity; the norm identity not formalized)}",
-    "kz:lem:A": r" \emph{((2) $\Rightarrow$ (3) and (3) $\Rightarrow$ (1); (1) $\Leftrightarrow$ (2) not formalized)}",
+    "kz:lem:A": r" \emph{(in full: (2) $\Rightarrow$ (3) $\Rightarrow$ (1) in the first module, (1) $\Rightarrow$ (3) $\Rightarrow$ (2) in the second)}",
     "kz:lem:theta": r" \emph{((a), (c)--(f); (b) not formalized)}",
-    "kz:def:G": r"\emph{not formalized as a definition; its conditions (i)--(iii) are proved for the explicit functions of Proposition~\ref{kz:prop:explicit} in \texttt{ZeroModes.Explicit}}",
-    "kz:lem:B": r" \emph{((b), the numerators; (a), (c) and the surjectivity not formalized)}",
-    "kz:lem:C": r"\emph{not formalized: the exact count}", "kz:lem:D": r"\emph{not formalized: the exact count}",
-    "kz:prop:induct": r"\emph{not formalized: the exact count}", "kz:prop:base": r"\emph{not formalized: the exact count}",
-    "kz:cor:bounds": r"\emph{not formalized: the exact count}",
-    "kz:thm:T2": r" \emph{((ii)--(iii), the lower bounds: the existence of the two, resp.\ ten, independent zero modes; (i) and the exact counts not formalized)}",
+    "kz:def:G": r" \emph{(in numerator form, as the space of the numerators $J^2g$; the conditions (i)--(iii) of the explicit functions are under Proposition~\ref{kz:prop:explicit})}",
+    "kz:lem:B": r" \emph{((a)--(c) in numerator form, with the count $\dim V_{n,m}=2\sum_{\varepsilon\in\mu_N^2}\dim \mathcal{G}(n,m;\varepsilon)$)}",
+    "kz:lem:C": r" \emph{((a)--(d) in numerator form; (e), the budget, not formalized)}", "kz:lem:D": r" \emph{(in numerator form)}",
+    "kz:prop:induct": r" \emph{(in numerator form)}", "kz:prop:base": r" \emph{(in numerator form)}",
+    "kz:cor:bounds": r" \emph{(in numerator form)}",
+    "kz:thm:T2": r" \emph{((i)--(iii) at the level of $V_{n,m}$ for every $\tau$, the lower halves from the explicit states; (iv) and the singlet clause of (iii) not formalized)}",
 }
 # ---------- MAP.md
 L = ["# The map from the HR paper's statements to the Lean declarations", "",
@@ -150,7 +152,7 @@ for num in sorted(set(stmts) | set(bynum), key=numkey):
     elif cc and sec in ("6", "7", "A") and num not in FIRST_STMTS:
         cell.append("index core: " + ", ".join(texmod(m) for m, c in cc.most_common(2)))
     note = ""
-    if num == "2.10": note = r" \emph{(the lower bounds of (ii)--(iii), all the main theorems use; the exact counts and (i) not formalized)}"
+    if num == "2.10": note = r" \emph{((i)--(iii) for the rectangular tori, the singlet clause of (iii) excepted; the lower bounds also directly from the explicit states)}"
     if sec == "C": note = CNOTE.get(stmts[num][1], "") if num in stmts else ""
     if num == "2.8": note = r"\emph{not formalized: the planar units statement; nothing in the formalization depends on it}"
     rows_tex.append(f"{KIND.get(kind, kind)}~{num} & {textitle(title)} & " + ("; ".join(cell) + note if cell else note) + r" \\")

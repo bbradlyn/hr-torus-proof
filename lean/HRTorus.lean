@@ -41,6 +41,10 @@ import HRTorus.ZeroModes.Theta
 import HRTorus.ZeroModes.Canonical
 import HRTorus.ZeroModes.Explicit
 import HRTorus.ZeroModes.Lower
+import HRTorus.ZeroModes.Formulation
+import HRTorus.ZeroModes.Spaces
+import HRTorus.ZeroModes.Merge
+import HRTorus.ZeroModes.Upper
 
 /-!
 # HRTorus
@@ -94,9 +98,26 @@ The Lean 4 formalization accompanying the papers in `papers/` of this repository
   (`two_le_finrank_ker_odd`), from which **Theorem 8.1, Corollary 8.2 and Corollary 8.4 follow unconditionally**
   (`hollow_core_index_unconditional`, `hollow_core_E11_tendsto_unconditional`, `odd_E3_tendsto_unconditional`,
   `odd_many_small_unconditional`, `uniform_E11_tendsto_unconditional`, `uniform_E11_eventually_unconditional`): 118
-  statements, all proved. The exact count of Theorem 2.10 is not formalized.
+  statements, all proved;
+* `HRTorus.ZeroModes.Formulation`, `Spaces`, `Merge`, `Upper` — Appendix C's exact count, **Theorem 2.10(i)–(iii)** (stage F,
+  block F1-upper): Lemma C.6 completed, (1) ⇒ (3) from Theorem 4.2(c)'s sum of squares and (3) ⇒ (2) from Lemma C.4's
+  identity, so that the kernel of H_N in the sector (n, m) is linearly equivalent to the space V_{n,m} of the functions of the
+  canonical shape with (C1) and (C2) (`kerSector_equiv_V`); Definition C.11 through numerators (`Gnum`, the space of the
+  J²g), Θ_2[ε] for ε ∈ μ_N², and Lemma C.12 with the count dim V_{n,m} = 2 Σ_ε dim 𝒢(n,m;ε) by the projectors
+  P_jk = N⁻² Σ ω^{−jr−ks} (T_K²)^r (T_1²)^s (`finrank_V_eq`); the merging induction in numerator form — Lemmas C.13(a)–(d) and
+  C.14, Propositions C.15–C.16, Corollary C.17 — over a toolkit for continuous separately entire functions (Cauchy's formula
+  for the slice derivatives, division by ϑ₁(u_s − u_t)^k, Liouville one variable at a time, Baire for the generic points);
+  Theorem C.19(i)–(iii) at the level of V_{n,m} for every τ (`T2_i`, `T2_ii`, `T2_iii`: V_{n,m} = 0 for |n − m| ≥ 2,
+  dim V_{m+1,m} = dim V_{m,m+1} = 2, dim V_{p,p} = 10); and for the rectangular tori **Theorem 2.10(i)–(iii)**, the singlet
+  clause excepted (`kernel_sector_eq_bot`, `finrank_kernel_odd`, `finrank_kernel_half`, `KN_le_halfSector`, `finrank_KN_odd`,
+  `finrank_KN_even`), with the spanning statements (`kernel_half_eq_span`, `kernel_oddPlus_eq_span`,
+  `kernel_oddMinus_eq_span`), from which the named hypotheses `HasTenZeroModes` and `HasTwoZeroModes` of the reviewed main
+  theorems are discharged (`hasTenZeroModes`, `hasTwoZeroModes`): **every reviewed statement of `Assembly.Main` holds for the
+  rectangular tori as stated**: 100 statements and 17 definitions, all proved. Not formalized: Lemmas C.2, C.3 and C.5 (the
+  Lean reaches Lemma C.6 through Theorem 4.2's local form and Lemma C.4), Lemma C.8(b), Lemma C.13(e), Theorem C.19(iv) and
+  the singlet clause of Theorem 2.10(iii).
 
 `HRTorus/Axioms.lean` (not imported here) prints the axioms of every declaration of the index core, Lemma 3.5 and the Laughlin
-pilot; the pilot and the blocks of Sections 2–8 have their own files, `HRTorus/Fermion/Pilot/Axioms.lean` and
+pilot; the pilot and the blocks of Sections 2–8 and Appendix C have their own files, `HRTorus/Fermion/Pilot/Axioms.lean` and
 `HRTorus/AxiomsBlockA.lean`–`AxiomsBlockF.lean` (`lean/README.md`). No declaration of the project depends on `sorryAx`.
 -/

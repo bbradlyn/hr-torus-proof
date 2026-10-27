@@ -1,8 +1,8 @@
 # HRTorus: the Lean 4 formalization
 
 Lean 4.34.1 (`lean-toolchain`) against Mathlib at commit `d13f23b723b8a846827a245b89c10fc7d3f11612`
-(`lakefile.toml`, `lake-manifest.json`); every module is compiled with `autoImplicit = false`. Forty-three modules,
-50,137 lines, about 2,870 theorems (`theorem` and `lemma` declarations) and 558 definitions, no `sorry` anywhere. The
+(`lakefile.toml`, `lake-manifest.json`); every module is compiled with `autoImplicit = false`. Forty-seven modules,
+56,383 lines, about 3,130 theorems (`theorem` and `lemma` declarations) and 584 definitions, no `sorry` anywhere. The
 papers are in `../papers/`; each module's docstring names the paper, the section and the statements it formalizes. For
 every part, the Lean statements were written and compared with the paper before any of their proofs was written; the
 statements of Theorem 8.1, and of the lower bound of Theorem 2.10 with the unconditional forms of the main theorems, were in
@@ -181,12 +181,47 @@ route and extended to every point of the divisor along a complex line inside it,
 non-generic, by the continuity of ∂_v f. The odd lower bound is stated for N ≥ 3, the range Corollary 8.2 uses; the existence
 statements behind it hold at N = 1 as well.
 
+**The exact count of Theorem 2.10 (stage F, block F1-upper)** — `HRTorus.ZeroModes.Formulation`, `HRTorus.ZeroModes.Spaces`,
+`HRTorus.ZeroModes.Merge`, `HRTorus.ZeroModes.Upper` (100 statements of the paper and 17 definitions, **all proved, no `sorry`**;
+the proof devices in marked sections, named with the suffix `_dev`): Lemma C.6 completed — (1) ⇒ (3) from the sum of squares of
+Theorem 4.2(c) and (3) ⇒ (2) from Lemma C.4's identity, so that with `Canonical`'s (2) ⇒ (3) ⇒ (1) the three conditions are
+equivalent, and the kernel of H_N in the sector (n, m) is linearly equivalent, through the canonical component, to the space
+V_{n,m} of the functions of the canonical shape with (C1) and (C2) (`kerSector_equiv_V`, `finrank_ker_eq_finrank_V`); Definition
+C.11 in numerator form — 𝒢(n,m;ε) as the space `Gnum` of the numerators J²g, continuous and entire in each variable, with the
+multipliers ε as pairs of complex numbers and the conditions (iv)–(v) transported to vanishing orders, so that no meromorphic
+function of several variables appears; Θ_2[ε] for ε ∈ μ_N² (two-dimensional by Lemma C.8(a)); Lemma C.12(a)–(c) with the count
+dim V_{n,m} = 2 Σ_{ε ∈ μ_N²} dim 𝒢(n,m;ε) (`finrank_V_eq`), the decomposition by the projectors
+P_jk = N⁻² Σ_{r,s} ω^{−jr−ks} (T_K²)^r (T_1²)^s at the function level; the merging induction — Lemmas C.13(a)–(d) and C.14,
+Propositions C.15–C.16, Corollary C.17 — in numerator form, the merge μ as the merged numerator at an admissible centre
+w ∉ rest + Λ_u (chosen by Hilbert's ε-operator; Lemma C.13(c) makes the choice immaterial), over a toolkit for the class:
+Cauchy's formula for the slice derivatives as a parametric integral, division by ϑ₁(u_s − u_t)^k through one-variable removable
+singularities (continuity by a mean value on a circle, holomorphy in the other variables by locally uniform limits), Liouville
+one variable at a time, and Baire's theorem for the density of the generic points; Theorem C.19(i)–(iii) at the level of V_{n,m}
+for every τ ∈ ℍ (`T2_i`, `T2_ii`, `T2_iii`: V_{n,m} = 0 for |n − m| ≥ 2, dim V_{m+1,m} = dim V_{m,m+1} = 2, dim V_{p,p} = 10 — the
+upper halves from Corollary C.17 at the N² root pairs, the count 2(2+1+1+1) through the four sign pairs among them, the lower
+halves from the explicit states of `Explicit`); and, in `Upper`, **Theorem 2.10(i)–(iii) for the rectangular tori**, the singlet
+clause of (iii) excepted — the kernel in every N-electron sector with |n_↑ − n_↓| ≥ 2 is zero (`kernel_sector_eq_bot`),
+two-dimensional in each odd sector at odd N (`finrank_kernel_odd`), ten-dimensional in the sector (N/2, N/2) at even N
+(`finrank_kernel_half`), and 𝒦_N, the kernel on the N-electron states, lies in that sector (`KN_le_halfSector`) with
+dim 𝒦_N = 10, resp. 4 at odd N (`finrank_KN_even`, `finrank_KN_odd`; the grading of the kernel by the sectors componentwise in
+the occupation basis) — with the spanning statements (`kernel_half_eq_span`, `kernel_oddPlus_eq_span`,
+`kernel_oddMinus_eq_span`: the explicit states, for any independent choice of the centre-of-mass factors, span the kernel in
+the sector), **from which the named hypotheses `HasTenZeroModes` and `HasTwoZeroModes` are discharged** (`hasTenZeroModes`,
+`hasTwoZeroModes`): every reviewed main theorem of `Assembly.Main` holds for the rectangular tori as stated. Recorded
+departures from the paper's route: Lemma C.6's (1) ⇒ (3) and (3) ⇒ (2) without the unfolding to the plane (Lemmas C.2, C.3,
+C.5); in Lemma C.13(a) the polar-set argument of its Step 4 replaced by an explicit division by E in the centre, and the
+identity theorem of Step 5 by continuity; Lemma C.10 replaced by the direct computation in C.13(d); every dimension statement
+carrying its finite-dimensionality explicitly (`Module.finrank` is 0 on an infinite-dimensional space). One hypothesis of the
+paper's statements is kept though the Lean proof does not use it: the admissibility of the centre in Lemma C.13(b) (`lemC_b`),
+where the Lean identity holds at every centre, both sides vanishing at a non-admissible one.
+
 ### What is not formalized
 
-The exact count of Theorem 2.10 — in Appendix C, Lemmas C.2, C.3 and C.5, the directions (1) ⇔ (2) of Lemma C.6, Lemma C.8(b),
-Lemma C.12(a), (c) and its surjectivity, Lemmas C.13–C.14, Propositions C.15–C.16 and Corollary C.17 — whose arguments rest on
-the argument principle and on the analysis of several complex variables, neither of which the pinned Mathlib provides; the main
-theorems use only the lower bound, which is proved. The spin-twist bound of Appendix D, which no Lean statement or proof refers
+Of Appendix C: Lemmas C.2, C.3 and C.5 (the unfolding to the plane and the spin identification, which the Lean's route to
+Lemma C.6 — Theorem 4.2's local form and Lemma C.4's identity — does not need), Lemma C.8(b) (the general zero count of
+Θ_ℓ[a,b]), Lemma C.13(e) (the budget), Theorem C.19(iv) (the Lean's torus is rectangular: the statements at the level of
+V_{n,m} hold for every τ, and the kernel is identified with V_{n,m} at the torus's own τ), the singlet clause of Theorem
+2.10(iii) and Theorem C.19(iii), and the remarks. The spin-twist bound of Appendix D, which no Lean statement or proof refers
 to; Lemma 2.8, the planar statement on the units of V_1, on which no result of the paper and no Lean declaration depends; and
 the Laughlin paper apart from the pilot.
 
@@ -196,13 +231,13 @@ Install [elan](https://github.com/leanprover/elan), which reads `lean-toolchain`
 this directory:
 
     lake exe cache get    # downloads Mathlib's compiled files for the pinned commit
-    lake build            # builds the forty-three modules (the default target, HRTorus)
+    lake build            # builds the forty-seven modules (the default target, HRTorus)
 
 <!-- PLACEHOLDER (to confirm): not yet run from a clean checkout. In preparing this tree, `lake build` ran against an
 existing local copy of the same pinned packages: 3,207 jobs, 67 s with one worker, peak 3.7 GiB. -->
 
 The build prints the output of the `#check` and `#print` commands at the ends of some modules, and 77 linter warnings of two
-kinds, none an error and none in the four stage-F modules: 54 hypotheses in declaration headers that the proofs do not use (42 of them on the paper's statements,
+kinds, none an error and none in the eight stage-F modules: 54 hypotheses in declaration headers that the proofs do not use (42 of them on the paper's statements,
 kept so that the Lean statements carry the paper's hypotheses; 12 in the first commit's statements and in proof devices), and 23
 notices of automatically included section variables. No deprecated name is used. The 42 on the paper's statements, by module:
 `Assembly.Main` `hasTwoZeroModes_of_kernel` (hodd); `Assembly.Setting` `ArgData.P_props` (hA), `gap_of_secEig` (hγ), `sep_cuts`,
@@ -235,18 +270,18 @@ Block D's check, `lake env lean HRTorus/AxiomsBlockD.lean` (Section 5's four mod
 Block E's check, `lake env lean HRTorus/AxiomsBlockE.lean` (the four `Assembly` modules and `LLL.Space`, whose last statement
 block E proved): 612 declarations (`LLL.Space` 147, `Setting` 224, `Inputs` 129, `Translation` 36, `Main` 76), every one on the
 three standard axioms or fewer, none on `sorryAx`.
-Block F's check, `lake env lean HRTorus/AxiomsBlockF.lean` (the four `ZeroModes` modules): 553 declarations (`Theta` 197,
-`Canonical` 149, `Explicit` 174, `Lower` 33), every one on the three standard axioms or fewer, none on `sorryAx`. **No declaration
-of the project depends on `sorryAx`.**
+Block F's check, `lake env lean HRTorus/AxiomsBlockF.lean` (the eight `ZeroModes` modules): 860 declarations (`Theta` 197,
+`Canonical` 149, `Explicit` 174, `Lower` 33, `Formulation` 47, `Spaces` 108, `Merge` 125, `Upper` 27), every one on the three
+standard axioms or fewer, none on `sorryAx`. **No declaration of the project depends on `sorryAx`.**
 
 ## The kernel replay
 
     ./replay.sh
 
-runs `lake env leanchecker M` for each of the forty-three modules `M`, one at a time. `leanchecker M` re-checks in
+runs `lake env leanchecker M` for each of the forty-seven modules `M`, one at a time. `leanchecker M` re-checks in
 Lean's kernel every declaration defined in `M`, loading `M`'s imports from their compiled files; one run per module
 therefore covers every declaration of the formalization, while Mathlib's own declarations are loaded, not replayed.
-In the build of this tree every module passed (exit status 0; 200 s for the forty-three, about 5 s each).
+In the build of this tree every module passed (exit status 0; 226 s for the forty-seven, about 5 s each).
 
 ## License
 

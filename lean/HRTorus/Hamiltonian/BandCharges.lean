@@ -1,7 +1,7 @@
 import HRTorus.Locality.Basic
 
 /-!
-# Band charges (T-0056 block C, `Hamiltonian.BandCharges`)
+# Band charges (`Hamiltonian.BandCharges`)
 
 Written by Claude Opus 5.5 (an AI model), 2026-10-24. **The definitions and statements were written first and
 reviewed against the paper before any proof (review L9a, accepted with no change); the proof phase proved every

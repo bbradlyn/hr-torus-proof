@@ -2,9 +2,9 @@ import HRTorus.ZeroModes.Merge
 import HRTorus.ZeroModes.Lower
 
 /-!
-# Theorem 2.10 as stated, and the discharge of the zero-mode hypotheses (T-0056 stage F, block F1-upper, `ZeroModes.Upper`)
+# Theorem 2.10 as stated, and the discharge of the zero-mode hypotheses (`ZeroModes.Upper`)
 
-Written by Claude Opus 5.5 (an AI model; recruit L18), 2026-10-26. **Statement phase and proof phase (2026-10-26): the
+Written by Claude Opus 5.5 (an AI model), 2026-10-26. **Statement phase and proof phase (2026-10-26): the
 definitions and statements were written first, every theorem that carries content `sorry`, and reviewed against the
 paper before any proof; the proof phase (round three) then proved every statement, the reviewed text unchanged. The
 proof devices — the declarations named `_dev`, in marked sections — are not statements of the paper. The two
@@ -61,8 +61,8 @@ one `jk` (`exists_rootPair_eps`, `exists_eps_pair_dev`, `rootPair_injective`, `E
 "`$\{\pm1\}^2\subset\mu_N^2$`". Lower halves: block F1-lower's explicit numerators, stated there for every `τ`
 (`gOdd_numerator_props`, `gOddSwap_numerator_props`, `dEps_numerator_props`, `f5_numerator_props` for the membership in
 `V`; `explicit_odd_linearIndependent`, `explicit_oddSwap_linearIndependent`, `explicit_even_linearIndependent` for the
-independence), with two independent `F ∈ Θ_2[ε]` from L16's `exists_Θ2_pair_dev`, counted in `V` by
-`card_le_finrank_fd_dev` (a copy of L16's `card_le_finrank_of_mem_dev` with the finite dimension asked of the subspace
+independence), with two independent `F ∈ Θ_2[ε]` from block F1-lower's `exists_Θ2_pair_dev`, counted in `V` by
+`card_le_finrank_fd_dev` (a copy of block F1-lower's `card_le_finrank_of_mem_dev` with the finite dimension asked of the subspace
 instead of the ambient space). -/
 
 theorem card_le_finrank_fd_dev {ι : Type*} [Fintype ι] {E : Type*} [AddCommGroup E] [Module ℂ E]

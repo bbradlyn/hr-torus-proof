@@ -5,9 +5,9 @@ import Mathlib.Analysis.Calculus.BumpFunction.InnerProduct
 import Mathlib.Analysis.Calculus.BumpFunction.Normed
 
 /-!
-# The setting of the index theorem (T-0056 block E, `Assembly.Setting`)
+# The setting of the index theorem (`Assembly.Setting`)
 
-Written by Claude Opus 5.5 (an AI model; recruit L11), 2026-10-25. **The definitions and statements were written first
+Written by Claude Opus 5.5 (an AI model), 2026-10-25. **The definitions and statements were written first
 and reviewed against the paper (the statement phase, with the review's three additions: `countLE` and
 `secEig_eq_sInf_countLE`, and the corrected docstring of `one_le_p_lt_finrank`); proof phase rounds one and two added
 the proofs and the proof devices, each section of which is marked as such. No theorem of this module is `sorry`.**
@@ -206,8 +206,8 @@ def secEig (T : Torus) (H : FockOp T) (nn : SectorLabel T) (k : ℕ) : ℝ :=
       by omega⟩
   else 0
 
-/-- The counting function of the eigenvalues (added at the statement review, round one; the fresh reader's `countLE`, in
-recruit L12's `Blind.lean`, the blind derivation of Theorem 8.1's statement): the dimension of the span of the eigenvectors
+/-- The counting function of the eigenvalues (added at the statement review, round one; the fresh reader's `countLE`, from
+its blind derivation of Theorem 8.1's statement): the dimension of the span of the eigenvectors
 of `H` lying in the sector `𝓗^𝐧` with eigenvalue `≤ E` — the range of the spectral projection of `H|_{𝓗^𝐧}` onto `(−∞, E]`,
 extended by zero, in the form of block A's `specProj_sector`. -/
 def countLE (T : Torus) (H : FockOp T) (nn : SectorLabel T) (E : ℝ) : ℕ :=
@@ -626,7 +626,7 @@ theorem card_secEig_mem {T : Torus} {H : FockOp T} (hH : IsSelfAdjoint H) (hHs :
   rw [hrank, hrange, finrank_span_eq_card hli, card_filter_secEig_dev H nn (· ∈ B), Fintype.card_subtype]
 
 /-- **The counting form of the ordered eigenvalues** (added at the statement review, round one: the fresh reader's
-`eigAsc`, in recruit L12's `Blind.lean`): for self-adjoint sector-preserving `H`, `E_k` is the least `E` at which at least
+`eigAsc`, from its blind derivation): for self-adjoint sector-preserving `H`, `E_k` is the least `E` at which at least
 `k` eigenvalues of `H|_{𝓗^𝐧}` are `≤ E` (`countLE`), the index clamped to `1, …, d` as in `secEig`. -/
 theorem secEig_eq_sInf_countLE {T : Torus} {H : FockOp T} (hH : IsSelfAdjoint H) (hHs : IsSectorPreserving T H)
     (nn : SectorLabel T) (k : ℕ) :

@@ -3,7 +3,7 @@ import HRTorus.Fock.Hamiltonian
 import Mathlib.Analysis.Calculus.FDeriv.Symmetric
 
 /-!
-# Triplet pairs, the local terms, the operator integral and the jets (T-0056 block C, `Hamiltonian.Pairs`)
+# Triplet pairs, the local terms, the operator integral and the jets (`Hamiltonian.Pairs`)
 
 Written by Claude Opus 5.5 (an AI model), 2026-10-24. **The definitions and statements were written first and
 reviewed against the paper before any proof (review L9a, accepted with no change); the proof phase proved every
@@ -1142,7 +1142,7 @@ theorem jets_symm {U : Set ((ℝ × ℝ) × (ℝ × ℝ))} (hU : IsOpen U) (hdia
     (hlll₁ : ∀ p ∈ U, D1x Φ p + I * D1y Φ p = 0) (hlll₂ : ∀ p ∈ U, D2x Φ p + I * D2y Φ p = 0)
     (hsymm : ∀ r₁ r₂ : ℝ × ℝ, (r₁, r₂) ∈ U → (r₂, r₁) ∈ U → Φ (r₁, r₂) = Φ (r₂, r₁)) (R : ℝ × ℝ) :
     jetF Φ R 0 + lapR (jetF Φ R) 0 = 0 := by
-  -- block C's proof (L9): `jets_core`, and `∂_{x₁}Φ = ∂_{x₂}Φ` on the diagonal by the symmetry
+  -- `jets_core`, and `∂_{x₁}Φ = ∂_{x₂}Φ` on the diagonal by the symmetry
   have hp := hdiag R
   obtain ⟨-, hcore⟩ := jets_core hU hdiag hΦ hlll₁ hlll₂ R
   rw [hcore]
@@ -1168,7 +1168,7 @@ theorem jets_antisymm {U : Set ((ℝ × ℝ) × (ℝ × ℝ))} (hU : IsOpen U) (
     (hlll₁ : ∀ p ∈ U, D1x Φ p + I * D1y Φ p = 0) (hlll₂ : ∀ p ∈ U, D2x Φ p + I * D2y Φ p = 0)
     (hanti : ∀ r₁ r₂ : ℝ × ℝ, (r₁, r₂) ∈ U → (r₂, r₁) ∈ U → Φ (r₁, r₂) = -Φ (r₂, r₁)) (R : ℝ × ℝ) :
     jetF Φ R 0 = 0 ∧ lapR (jetF Φ R) 0 = 4 * ‖D1 Φ (R, R)‖ ^ 2 := by
-  -- block C's proof (L9): `jets_core`, `Φ(R, R) = 0` and `∂_{x₂}Φ = −∂_{x₁}Φ` on the diagonal by the antisymmetry
+  -- `jets_core`, `Φ(R, R) = 0` and `∂_{x₂}Φ = −∂_{x₁}Φ` on the diagonal by the antisymmetry
   have hp := hdiag R
   obtain ⟨hF0, hcore⟩ := jets_core hU hdiag hΦ hlll₁ hlll₂ R
   have hΦ0 : Φ (R, R) = 0 := by

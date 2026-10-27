@@ -2,7 +2,7 @@ import HRTorus.Hamiltonian.Pairs
 import HRTorus.Fock.Hamiltonian
 
 /-!
-# The exact local form of the hollow-core Hamiltonian (T-0056 block C, `Hamiltonian.LocalForm`)
+# The exact local form of the hollow-core Hamiltonian (`Hamiltonian.LocalForm`)
 
 Written by Claude Opus 5.5 (an AI model), 2026-10-24. **The definitions and statements were written first and
 reviewed against the paper before any proof (review L9a, accepted with no change); the proof phase proved every
@@ -1591,7 +1591,7 @@ end PairForm
 theorem localForm_a (T : Torus) :
     HN T = ((8 * π : ℝ) : ℂ) • opIntegral (fundDom T) (fun R => ∑ ν : Triplet, (Bν T ν R)ᴴ * Bν T ν R) ∧
       HN T = opIntegral (fundDom T) (hR T) := by
-  -- block C's proof (L9): the reduction `localForm_a_of_pairFormIdentity` (in place of the paper's Step 6) and the
+  -- the reduction `localForm_a_of_pairFormIdentity` (in place of the paper's Step 6) and the
   -- scalar identity `PairForm.pairFormIdentity` (Steps 1–5)
   exact localForm_a_of_pairFormIdentity T (PairForm.pairFormIdentity T)
 
@@ -1770,7 +1770,7 @@ variable (T : Torus)
 
 /-- **§2.4**: "`in particular $H_N\ge0$`" (the paper derives it from Theorem 4.2(a), §4). -/
 theorem HN_posSemidef : (HN T).PosSemidef := by
-  -- block C's proof (L9): from Theorem 4.2(a) (`localForm_a`), `h_R ≥ 0` and the positivity of the integral
+  -- from Theorem 4.2(a) (`localForm_a`), `h_R ≥ 0` and the positivity of the integral
   rw [(HRTorus.Hamiltonian.localForm_a T).2]
   refine HRTorus.Hamiltonian.opIntegral_posSemidef _ _ (fun m m' => ?_) (HRTorus.Hamiltonian.hR_posSemidef T)
   have := HRTorus.Hamiltonian.integrableOn_inter_fundDom (HRTorus.Hamiltonian.hR_contDiff T m m').continuous T

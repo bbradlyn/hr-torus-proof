@@ -3,7 +3,7 @@ import HRTorus.LLL.Frame
 import Mathlib.Analysis.CStarAlgebra.Hom
 
 /-!
-# The embedding `ι` of the physical Fock space into the slot Fock space (T-0056 block B, `Fock.Embedding`)
+# The embedding `ι` of the physical Fock space into the slot Fock space (`Fock.Embedding`)
 
 Written by Claude Opus 5.5 (an AI model), 2026-10-24. **The definitions and statements were written
 first and reviewed against the paper (phase (a)) and are unchanged; phase (b) added the proofs and the proof
@@ -13,7 +13,7 @@ average of the gauge conjugations over a finite grid of phases (the pinching), n
 torus of phases (`ApproxDevices`).** The paper: the HR paper, `papers/hr/sections/03-slot-frame.tex` — the
 second half of Definition 3.7 `def:slotfock` (the embedding `ι`) and Lemma 3.8 `lem:embedding` with its proof.
 
-## The model (R-0021: the concrete Jordan–Wigner Fock spaces on both sides)
+## The model (the concrete Jordan–Wigner Fock spaces on both sides)
 
 * `𝔉(𝒮) : 𝓗_N → 𝔉_𝒮` (`FfA`) is block A's `secondQuant` of the matrix of `𝒮 ⊗ 1` (`anaMat`, the matrix of
   `LLL.analysis2` in the bases `ψ_j ⊗ σ` and `δ_s ⊗ σ`): the formula of the proof of Lemma 3.8(i) on the occupation

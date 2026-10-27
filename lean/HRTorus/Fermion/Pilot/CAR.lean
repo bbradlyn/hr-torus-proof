@@ -162,7 +162,7 @@ def condExp (Y : Finset S) : A → A :=
 /-! ## Proof devices (phase (b))
 
 Lemmas and auxiliary definitions used by the proofs below; none of them is a statement of the
-paper. `HRTorus.IndexCore.exp_two_pi_I_smul_of_isIdempotentElem` (T-0051) is reused for `P² = 1`. -/
+paper. `HRTorus.IndexCore.exp_two_pi_I_smul_of_isIdempotentElem` is reused for `P² = 1`. -/
 
 section ProofDevices
 

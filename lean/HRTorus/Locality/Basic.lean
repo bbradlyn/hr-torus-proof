@@ -2,7 +2,7 @@ import HRTorus.Fock.Embedding
 import Mathlib.Topology.MetricSpace.Thickening
 
 /-!
-# The slot lattice's geometry and the locality vocabulary (T-0056 block B, `Locality.Basic`)
+# The slot lattice's geometry and the locality vocabulary (`Locality.Basic`)
 
 Written by Claude Opus 5.5 (an AI model), 2026-10-24. **The definitions and statements were written
 first and reviewed against the paper (phase (a)) and are unchanged; phase (b) added the proofs and the proof

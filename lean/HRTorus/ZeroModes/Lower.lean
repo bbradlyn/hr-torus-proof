@@ -2,9 +2,9 @@ import HRTorus.ZeroModes.Explicit
 import HRTorus.Assembly.Main
 
 /-!
-# The lower bound on the zero modes and the unconditional main theorems (T-0056 stage F, block F1-lower, `ZeroModes.Lower`)
+# The lower bound on the zero modes and the unconditional main theorems (`ZeroModes.Lower`)
 
-Written by Claude Opus 5.5 (an AI model; recruit L16), 2026-10-26. **The definitions and statements were written first
+Written by Claude Opus 5.5 (an AI model), 2026-10-26. **The definitions and statements were written first
 and reviewed against the paper (the statement phase, with the one-line derivations at the end of the module: the
 reviewed statements of `Assembly.Main` from the strengthened ones, the unconditional theorems from the strengthened
 ones and the lower bounds). The proof phase is complete: every reviewed statement of this module is proved (proof

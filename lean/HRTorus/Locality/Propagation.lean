@@ -3,9 +3,9 @@ import HRTorus.Hamiltonian.SlotLocal
 import Mathlib.MeasureTheory.Measure.Lebesgue.VolumeOfBalls
 
 /-!
-# Propagation from a set and of almost-supported operators (T-0056 block D, `Locality.Propagation`)
+# Propagation from a set and of almost-supported operators (`Locality.Propagation`)
 
-Written by Claude Opus 5.5 (an AI model), 2026-10-24. **Proof phase, rounds one and two (recruit L10, 2026-10-24/25):
+Written by Claude Opus 5.5 (an AI model), 2026-10-24. **Proof phase, rounds one and two (2026-10-24/25):
 every theorem is proved on the standard axioms; there is no `sorry` in this module. Theorem 5.3(a) `propagation_master`
 in round two, by the paper's Steps 0–4 with one change in Step 4 (the paper's exact integral over the plane is replaced
 by a bound through shells of width `λ`, inside the paper's constant), the disc measure of the torus through Mathlib's

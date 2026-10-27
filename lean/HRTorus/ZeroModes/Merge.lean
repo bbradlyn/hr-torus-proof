@@ -1,9 +1,9 @@
 import HRTorus.ZeroModes.Spaces
 
 /-!
-# The merge and the induction: Lemmas C.C and C.D, Propositions C.induct and C.base, Corollary C.bounds (T-0056 stage F, block F1-upper, `ZeroModes.Merge`)
+# The merge and the induction: Lemmas C.C and C.D, Propositions C.induct and C.base, Corollary C.bounds (`ZeroModes.Merge`)
 
-Written by Claude Opus 5.5 (an AI model; recruit L18), 2026-10-26. **Statement phase and proof phase (2026-10-26): the
+Written by Claude Opus 5.5 (an AI model), 2026-10-26. **Statement phase and proof phase (2026-10-26): the
 definitions and statements were written first, every theorem that carries content `sorry`, and reviewed against the
 paper before any proof; the proof phase (round two) then proved every statement, the reviewed text unchanged. The
 proof devices — the declarations named `_dev`, in marked sections — are not statements of the paper. The linearity
@@ -103,8 +103,8 @@ function, is composition — `differentiable_mergePt_dev` through F1-lower's two
 Cauchy's formula for the `j`-th derivative on the unit circle about `u_s`
 (`DifferentiableOn.circleIntegral_one_div_sub_center_pow_smul`) writes the slice derivative as a parametric interval
 integral of a jointly continuous integrand — the pattern of F1-lower's `D1int_dev`, `D1int_continuous_dev`,
-`D1_eq_integral_dev`, `D1_continuous_dev` (`ZeroModes.Explicit`, copied there from F0's `work/l15/lean/Osgood.lean`,
-recruit L15), generalized from `j = 1` on `ℂ × ℂ` to every `j` on `Fin N → ℂ`. -/
+`D1_eq_integral_dev`, `D1_continuous_dev` (`ZeroModes.Explicit`, copied there from the scouting pilot's `Osgood.lean`),
+generalized from `j = 1` on `ℂ × ℂ` to every `j` on `Fin N → ℂ`. -/
 
 /-- The integrand of Cauchy's formula for the `j`-th slice derivative along `u_s`, on the unit circle about `u_s`. -/
 def sliceInt_dev {N : ℕ} (f : (Fin N → ℂ) → ℂ) (s : Fin N) (j : ℕ) (u : Fin N → ℂ) (θ : ℝ) : ℂ :=

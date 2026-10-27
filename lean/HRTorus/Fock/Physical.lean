@@ -8,7 +8,7 @@ import HRTorus.IndexCore.Sanity
 import HRTorus.IndexCore.Translation
 
 /-!
-# The physical Fock space, its sectors and the many-body magnetic translation (T-0056 block A, `Fock.Physical`)
+# The physical Fock space, its sectors and the many-body magnetic translation (`Fock.Physical`)
 
 Written by Claude Opus 5.5 (an AI model), 2026-10-24. **The definitions and statements were written
 first and reviewed against the paper (phase (a)) and are unchanged; phase (b) added the proofs and the proof
@@ -16,7 +16,7 @@ devices, each section of which is marked as such. Every theorem is proved; there
 Definition 2.5 `def:fock` and Lemma 2.6 `lem:sectors`; for the fit to `HRTorus.IndexCore.Orbital`, the property
 list of Remark 8.7 `rem:loophole` (`sections/08-hollow-core.tex`).
 
-## The model (the representation of R-0021: the concrete Jordan–Wigner Fock space)
+## The model (the concrete Jordan–Wigner Fock space)
 
 * `𝓗_N = 𝔉(𝔨_N)` is the Jordan–Wigner space of `HRTorus.Fermion.Pilot.JW` at the slot type `S := ZMod N_φ`:
   modes `(j, σ) ∈ ℤ_{N_φ} × {↑,↓}`, configurations `Conf = (modes → Bool)`, operators the matrices

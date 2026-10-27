@@ -8,7 +8,7 @@ depends on, and a count of those with any axiom outside `[propext, Classical.cho
 
 open Lean Elab Command
 
-elab "#l6_axioms " mod:ident : command => do
+elab "#module_axioms " mod:ident : command => do
   let env ← getEnv
   let some idx := env.getModuleIdx? mod.getId | throwError "module {mod.getId} not found"
   let std : List Name := [``propext, ``Classical.choice, ``Quot.sound]
@@ -26,5 +26,5 @@ elab "#l6_axioms " mod:ident : command => do
     logInfo m!"{c} : {axs.toList}"
   logInfo m!"SUMMARY {mod.getId}: {names.size} declarations; {nonstd} with an axiom outside [propext, Classical.choice, Quot.sound]; {sorried} depending on sorryAx"
 
-#l6_axioms HRTorus.Fermion.Pilot.CAR
-#l6_axioms HRTorus.Fermion.Pilot.JW
+#module_axioms HRTorus.Fermion.Pilot.CAR
+#module_axioms HRTorus.Fermion.Pilot.JW

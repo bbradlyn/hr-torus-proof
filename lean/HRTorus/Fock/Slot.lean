@@ -1,7 +1,7 @@
 import HRTorus.Fock.Physical
 
 /-!
-# The slot Fock space, its local algebras and the fattenings (T-0056 block B, `Fock.Slot`)
+# The slot Fock space, its local algebras and the fattenings (`Fock.Slot`)
 
 Written by Claude Opus 5.5 (an AI model), 2026-10-24. **The definitions and statements were written
 first and reviewed against the paper (phase (a)) and are unchanged; phase (b) added the proofs and the proof
@@ -11,7 +11,7 @@ Definition 3.1 `def:frame` (the slot distances), the first half of Definition 3.
 space, `ĉ(g)`, `ĉ_{sσ}`, `N̂_σ`, `CAR(X)`, `Alg(X)`, the `r`-fattening) and the paragraph after it, and the middle
 sentence of Lemma 3.8(iii) `lem:embedding` (the gauge transformations map `CAR(X)` and `Alg(X)` onto themselves).
 
-## The model (R-0021: the concrete Jordan–Wigner Fock space)
+## The model (the concrete Jordan–Wigner Fock space)
 
 * `𝔉_𝒮` is the pilot's Jordan–Wigner space (`HRTorus.Fermion.Pilot.JW`) at the slot type `S := Slot δ₀ T`:
   modes `(s, σ)`, configurations `Conf = (modes → Bool)`, operators `Op` = matrices on configurations

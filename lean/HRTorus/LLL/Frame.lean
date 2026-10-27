@@ -3,7 +3,7 @@ import Mathlib.Analysis.SpecialFunctions.Complex.Log
 import Mathlib.Algebra.Field.GeomSum
 
 /-!
-# The slot frame in `𝔥_N`, the analysis map and Parseval (T-0056 block A, `LLL.Frame`)
+# The slot frame in `𝔥_N`, the analysis map and Parseval (`LLL.Frame`)
 
 Written by Claude Opus 5.5 (an AI model), 2026-10-24. **The definitions and statements were written
 first and reviewed against the paper (phase (a)) and are unchanged; phase (b) added the proofs and the proof

@@ -5,7 +5,7 @@ import Mathlib.MeasureTheory.Integral.Bochner.Set
 import Mathlib.Analysis.Calculus.Deriv.Star
 
 /-!
-# The hollow-core Hamiltonian as an operator on the physical Fock space (T-0056 block A, `Fock.Hamiltonian`)
+# The hollow-core Hamiltonian as an operator on the physical Fock space (`Fock.Hamiltonian`)
 
 Written by Claude Opus 5.5 (an AI model), 2026-10-24. **The definitions and statements were written
 first and reviewed against the paper (phase (a)) and are unchanged; phase (b) added the proofs and the proof
@@ -196,7 +196,7 @@ theorem Vcoef_latticeSum (a b c d : ZMod T.Nφ) :
           ((4 * π * (1 - ((dualPt T pk).1 ^ 2 + (dualPt T pk).2 ^ 2)) : ℝ) : ℂ) *
           torusFourier T (pairDensity T a c) (-dualPt T pk) * torusFourier T (pairDensity T b d) (dualPt T pk))
       (Vcoef T a b c d) := by
-  -- block C's proof (L9), through the devices of `HRTorus.LLL.Theta` (Parseval on the rectangle)
+  -- through the devices of `HRTorus.LLL.Theta` (Parseval on the rectangle)
   have hLx := T.Lx_pos
   have hLy := T.Ly_pos
   -- smoothness and periodicity of the pair densities

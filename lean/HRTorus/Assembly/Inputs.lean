@@ -1,9 +1,9 @@
 import HRTorus.Assembly.Setting
 
 /-!
-# The inputs of the index core for `U = Θ` (T-0056 block E, `Assembly.Inputs`)
+# The inputs of the index core for `U = Θ` (`Assembly.Inputs`)
 
-Written by Claude Opus 5.5 (an AI model; recruit L11), 2026-10-25. **The definitions and statements were written first
+Written by Claude Opus 5.5 (an AI model), 2026-10-25. **The definitions and statements were written first
 and reviewed against the paper (the statement phase); proof phase rounds one and two added the proofs and the proof
 devices, each section of which is marked as such. No theorem of this module is `sorry`. Round two moved
 `factorization_isONegInf` (Lemma 6.13(iii), its text unchanged) after `eps_isONegInf`, because its proof is the core's

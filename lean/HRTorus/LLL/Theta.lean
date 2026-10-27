@@ -6,7 +6,7 @@ import Mathlib.Analysis.SpecialFunctions.Gaussian.PoissonSummation
 import Mathlib.Analysis.Fourier.AddCircleMulti
 
 /-!
-# Gaussian theta sums with a period, and Parseval on the rectangle (T-0056 block C, proof devices for block A)
+# Gaussian theta sums with a period, and Parseval on the rectangle (`LLL.Theta`: proof devices for `LLL.Space` and `Fock.Hamiltonian`)
 
 Written by Claude Opus 5.5 (an AI model), 2026-10-24, in block C's proof phase (review L9a, rulings 2 and 10: a new
 upstream module imported by `HRTorus.LLL.Space`, reusing `HRTorus.Laughlin.GramPoisson`). **Every declaration here is a

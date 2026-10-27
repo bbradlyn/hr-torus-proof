@@ -6,9 +6,9 @@ import Mathlib.Topology.Algebra.Module.Cardinality
 import Mathlib.Analysis.Analytic.IsolatedZeros
 
 /-!
-# The explicit zero modes: Proposition C.explicit, the "well defined" half of Lemma C.B(b) (T-0056 stage F, block F1-lower, `ZeroModes.Explicit`)
+# The explicit zero modes: Proposition C.explicit, the "well defined" half of Lemma C.B(b) (`ZeroModes.Explicit`)
 
-Written by Claude Opus 5.5 (an AI model; recruit L16), 2026-10-26. **The definitions and statements were written first
+Written by Claude Opus 5.5 (an AI model), 2026-10-26. **The definitions and statements were written first
 and reviewed against the paper (the statement phase). The proof phase is complete: every reviewed statement of this
 module is proved (proof phase round two), no theorem of this module is `sorry`, and the proof devices are
 marked as such, in their own sections.**
@@ -360,8 +360,8 @@ theorem f5_G (τ : ℍ) (q : ℕ) :
 /-! ### Proof devices for Lemma C.even and for `D_{st} = 2∂_v` (proof phase, round two; not statements of the paper)
 
 The derivative at `0` of an even function vanishes (`deriv_even_zero_dev`, from `deriv_comp_neg`). The Osgood class on
-`ℂ × ℂ` and its Fréchet differentiability are the stage-F scouting pilot F0's (recruit L15,
-`work/l15/lean/Osgood.lean`: `IsOsgood2`, `D1`, `D1int`, `D1int_continuous`, `D1_eq_integral`, `D1_continuous`,
+`ℂ × ℂ` and its Fréchet differentiability are the stage-F scouting pilot's (its `Osgood.lean`,
+outside this repository: `IsOsgood2`, `D1`, `D1int`, `D1int_continuous`, `D1_eq_integral`, `D1_continuous`,
 `isOsgood2_swap`, `isOsgood2_differentiable`), copied verbatim but for the suffix `_dev` on every name: both partial
 derivatives are continuous by Cauchy's formula, and Mathlib's `hasStrictFDerivAt_uncurry_coprod` gives the
 differentiability, hence the chain rule along `(u_s, u_t) = (R + v/2, R − v/2)`. -/

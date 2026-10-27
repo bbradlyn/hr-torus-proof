@@ -5,9 +5,9 @@ import Mathlib.Basic.Real.Sign
 import Mathlib.Analysis.Fourier.Inversion
 
 /-!
-# Time filters, the commutator with the Hamiltonian, and the clustering filter (T-0056 block D, `Locality.Filters`)
+# Time filters, the commutator with the Hamiltonian, and the clustering filter (`Locality.Filters`)
 
-Written by Claude Opus 5.5 (an AI model), 2026-10-24. **Proof phase, round two (recruit L10, 2026-10-24/25): every
+Written by Claude Opus 5.5 (an AI model), 2026-10-24. **Proof phase, round two (2026-10-24/25): every
 theorem is proved on the standard axioms; there is no `sorry` in this module. Lemma 5.6 (`setNorm_timeFilter_le`,
 `almostSupported_timeFilter`) uses Lemma 5.5 `setNorm_dyn_le` of `Locality.Propagation`, and Proposition 5.11
 `almostSupported_clusterFilter` uses Lemma 5.6. The proofs add devices, each marked as a device; the Fourier identity of

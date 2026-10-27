@@ -3,9 +3,9 @@ import HRTorus.Hamiltonian.LocalForm
 import Mathlib.LinearAlgebra.ExteriorAlgebra.Basic
 
 /-!
-# The dictionary: canonical components, the pair operators, Lemma C.A3 and Lemma C.A (2) ⇒ (3) (T-0056 stage F, block F1-lower, `ZeroModes.Canonical`)
+# The dictionary: canonical components, the pair operators, Lemma C.A3 and Lemma C.A (2) ⇒ (3) (`ZeroModes.Canonical`)
 
-Written by Claude Opus 5.5 (an AI model; recruit L16), 2026-10-26. **The definitions and statements were written first
+Written by Claude Opus 5.5 (an AI model), 2026-10-26. **The definitions and statements were written first
 and reviewed against the paper (the statement phase). The proof phase is complete: every reviewed statement of this
 module is proved (proof phase round one), no theorem of this module is `sorry`, and the proof devices are
 marked as such, in their own sections.**

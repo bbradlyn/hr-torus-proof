@@ -7,9 +7,9 @@ import Mathlib.Analysis.Real.Pi.Bounds
 import Mathlib.LinearAlgebra.Matrix.IsDiag
 
 /-!
-# Appendix D: the variational bound at fixed circumference (T-0056 stage F, block F2, `ZeroModes.Twist`)
+# Appendix D: the variational bound at fixed circumference (`ZeroModes.Twist`)
 
-Written by Claude Opus 5.5 (an AI model; recruit L19), 2026-10-27. **Statement phase and proof phase (2026-10-27): the
+Written by Claude Opus 5.5 (an AI model), 2026-10-27. **Statement phase and proof phase (2026-10-27): the
 definitions and statements were written first, every theorem that carries content `sorry`, and reviewed against the
 paper before any proof; the proof phase (round one) then proved every statement, the reviewed text unchanged. The
 proof devices — the declarations named `_dev`, in marked sections — are not statements of the paper. Written out as a
@@ -2483,8 +2483,8 @@ theorem E3_le_twistBoundLy (T : Torus) (hN : 2 ≤ T.N) (hodd : Odd T.N) :
 
 /-! ### Proof devices for the numbers of Theorem D.1 (proof phase, round one; not statements of the paper)
 
-The four constants, from Mathlib's `Real.pi_gt_d2` (`3.14 < π`) and `Real.exp_one_gt_d9` (`2.7182818283 < e`) — recruit
-L19's statement-phase check `work/l19/tmp/Probe3.lean`, copied. -/
+The four constants, from Mathlib's `Real.pi_gt_d2` (`3.14 < π`) and `Real.exp_one_gt_d9` (`2.7182818283 < e`) — the
+statement phase's scratch check, copied. -/
 
 theorem const_one_dev : 1 / Real.sqrt (2 * π) ≤ 0.40 := by
   have hπ := Real.pi_gt_d2

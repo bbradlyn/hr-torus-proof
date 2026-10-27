@@ -1,9 +1,9 @@
 import HRTorus.ZeroModes.Formulation
 
 /-!
-# Definition C.G through numerators, `Θ_2[ε]` for `ε ∈ μ_N²`, and Lemma C.B (T-0056 stage F, block F1-upper, `ZeroModes.Spaces`)
+# Definition C.G through numerators, `Θ_2[ε]` for `ε ∈ μ_N²`, and Lemma C.B (`ZeroModes.Spaces`)
 
-Written by Claude Opus 5.5 (an AI model; recruit L18), 2026-10-26. **Statement phase and proof phase (2026-10-26): the
+Written by Claude Opus 5.5 (an AI model), 2026-10-26. **Statement phase and proof phase (2026-10-26): the
 definitions and statements were written first, every theorem that carries content `sorry`, and reviewed against the
 paper before any proof; the proof phase (round one) then proved every statement, the reviewed text unchanged, four
 of Lemma C.B's statements moved after the projector devices their proofs use. The proof devices — the declarations
@@ -440,7 +440,7 @@ theorem Gnum_eq_bot_of_not_root (τ : ℍ) (n m : ℕ) {ε : ℂ × ℂ}
 /-! ### Proof devices for the explicit numerators at `F = 1` (proof phase, round one; not statements of the paper)
 
 F1-lower's `gOdd_numerator_factor_dev`, `gOddSwap_numerator_factor_dev`, `dEps_numerator_factor_dev`,
-`f5_numerator_factor_dev` (`ZeroModes.Explicit`, recruit L16), copied with the hypothesis `F ∈ Θ_2[ε]` weakened to
+`f5_numerator_factor_dev` (`ZeroModes.Explicit`), copied with the hypothesis `F ∈ Θ_2[ε]` weakened to
 `Differentiable ℂ F` (their proofs use only the differentiability), so that they apply at `F = 1`. -/
 
 theorem gOdd_numerator_factor_diff_dev (τ : ℍ) (m : ℕ) {F : ℂ → ℂ} (hF : Differentiable ℂ F) :
@@ -550,7 +550,7 @@ theorem f5_numerator_factor_diff_dev (τ : ℍ) (q : ℕ) {F : ℂ → ℂ} (hF 
 /-! ### Proof devices for the explicit numerators at `F = 1`, continued (proof phase, round one; not statements of the
 paper)
 
-F1-lower's `vanishes3_core_dev` and `C1_of_factor_dev` (`ZeroModes.Explicit`, recruit L16), copied with the multipliers of
+F1-lower's `vanishes3_core_dev` and `C1_of_factor_dev` (`ZeroModes.Explicit`), copied with the multipliers of
 `Θ_L[0,0]` in a variable replaced by general nonvanishing ones (`vanishes3_core_gen_dev`, `C1_of_factor_gen_dev`), and
 the analog of F1-lower's `shape_of_numerator_dev` for the numerator of `J²g` itself, which has the multipliers of `Gnum`
 (`numerator_one_gnum_dev`). -/

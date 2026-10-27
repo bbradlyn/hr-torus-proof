@@ -5,17 +5,14 @@ import HRTorus.Assembly.Translation
 import HRTorus.Assembly.Main
 import Lean.Util.CollectAxioms
 
-/-! T-0056 recruit L11, block E (2026-10-25): the axiom check of block E's four modules (`HRTorus.Assembly.*`, Sections 6–8
-of the HR paper) and of block A's `LLL.Space`, whose `isLLL_iff` body block E wrote. Run with `lake env lean
-HRTorus/AxiomsBlockE.lean` from this directory after `lake build` (copied into the tree from the recruit's working file
-`L11bAxioms.lean`, itself from L10's, L9's, L8's and L7's, the method unchanged). For every non-internal constant defined in
-the named module (theorems, definitions and their auxiliary constants, instances), the axioms it depends on; a summary line
-with the count of constants with an axiom outside `[propext, Classical.choice, Quot.sound]`, the count depending on
-`sorryAx`, and the names of the latter. -/
+/-! The axiom check of block E's five modules (`HRTorus.LLL.Space`, `HRTorus.Assembly.Setting`, `HRTorus.Assembly.Inputs`, `HRTorus.Assembly.Translation`, `HRTorus.Assembly.Main`; Sections 6–8 of the HR paper, with `HRTorus.LLL.Space`, whose last statement block E proved). Run with
+`lake env lean HRTorus/AxiomsBlockE.lean` from this directory after `lake build`. For every non-internal constant defined in the named module (theorems, definitions and their auxiliary constants,
+instances), the axioms it depends on; a summary line with the count of constants with an axiom outside
+`[propext, Classical.choice, Quot.sound]`, the count depending on `sorryAx`, and the names of the latter. -/
 
 open Lean Elab Command
 
-elab "#l11_axioms " mod:ident : command => do
+elab "#module_axioms " mod:ident : command => do
   let env ← getEnv
   let some idx := env.getModuleIdx? mod.getId | throwError "module {mod.getId} not found"
   let std : List Name := [``propext, ``Classical.choice, ``Quot.sound]
@@ -35,8 +32,8 @@ elab "#l11_axioms " mod:ident : command => do
     logInfo m!"{c} : {axs.toList}"
   logInfo m!"SUMMARY {mod.getId}: {names.size} declarations; {nonstd} with an axiom outside [propext, Classical.choice, Quot.sound]; {other.size} with an axiom other than those and sorryAx {other.toList}; {sorried.size} depending on sorryAx: {sorried.toList}"
 
-#l11_axioms HRTorus.LLL.Space
-#l11_axioms HRTorus.Assembly.Setting
-#l11_axioms HRTorus.Assembly.Inputs
-#l11_axioms HRTorus.Assembly.Translation
-#l11_axioms HRTorus.Assembly.Main
+#module_axioms HRTorus.LLL.Space
+#module_axioms HRTorus.Assembly.Setting
+#module_axioms HRTorus.Assembly.Inputs
+#module_axioms HRTorus.Assembly.Translation
+#module_axioms HRTorus.Assembly.Main

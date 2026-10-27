@@ -1,16 +1,16 @@
 import HRTorus.Assembly.Inputs
 
 /-!
-# The magnetic translation and the divisibility corollaries (T-0056 block E, `Assembly.Translation`)
+# The magnetic translation and the divisibility corollaries (`Assembly.Translation`)
 
-Written by Claude Opus 5.5 (an AI model; recruit L11), 2026-10-25. **The definitions and statements were written first
+Written by Claude Opus 5.5 (an AI model), 2026-10-25. **The definitions and statements were written first
 and reviewed against the paper (the statement phase); proof phase rounds one and two added the proofs and the proof
 devices, each section of which is marked as such. No theorem of this module is `sorry`. Round two moved six of the
 devices of Lemma 7.1 to `Assembly.Inputs`, where the table of Lemma 6.12 first uses them.**
 The paper: the HR paper, `papers/hr/sections/06-index-theorem.tex` — Assumption 6.4 `ass:U`; and
 `papers/hr/sections/07-translation.tex` — Lemma 7.1 `lem:theta`, Corollary 7.2 `cor:translation`, Corollary 7.3
 `cor:classwide`, Corollary 7.4 `cor:classwide-odd`. The core's `Orbital.translation_corollary`, `four_dvd_p`,
-`odd_plus`, `odd_minus` (T-0052) are the finite-dimensional content of Corollaries 7.2–7.4.
+`odd_plus`, `odd_minus` are the finite-dimensional content of Corollaries 7.2–7.4.
 
 ## The model
 

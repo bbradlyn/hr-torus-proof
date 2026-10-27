@@ -14,14 +14,14 @@ import Mathlib.Analysis.Complex.LocallyUniformLimit
 import Mathlib.LinearAlgebra.FiniteDimensional.Basic
 
 /-!
-# Theta functions and the elliptic functions of Appendix C (T-0056 stage F, block F1-lower, `ZeroModes.Theta`)
+# Theta functions and the elliptic functions of Appendix C (`ZeroModes.Theta`)
 
-Written by Claude Opus 5.5 (an AI model; recruit L16), 2026-10-26. **The definitions and statements were written first
+Written by Claude Opus 5.5 (an AI model), 2026-10-26. **The definitions and statements were written first
 and reviewed against the paper (the statement phase). The proof phase is complete: every reviewed statement of this
 module is proved (proof phase round one), no theorem of this module is `sorry`, and the proof devices are
 marked as such, in their own sections.** The definitions
-`thetaChar`, `theta1`, `thetaSpace`, `periodPairReal` and the Osgood class are those of the stage-F scouting pilot F0
-(recruit L15, `T-0056/work/l15/lean/`), whose proofs of the corresponding statements were reused in the proof
+`thetaChar`, `theta1`, `thetaSpace`, `periodPairReal` and the Osgood class are those of the stage-F scouting pilot
+(a scratch project outside this repository), whose proofs of the corresponding statements were reused in the proof
 phase as devices, with attribution.
 The paper: the HR paper, `papers/hr/appendices/C-kernel.tex` — the theta functions of `kz:eq:orbital`, the relations
 `kz:eq:theta-basic`, Lemma C.`theta` (a), (c)–(f) (`kz:lem:theta`), and from Lemma C.`B`(b) the spaces `Θ_2[ε]`.
@@ -61,7 +61,7 @@ namespace HRTorus.ZeroModes
 
 /-! ### Proof devices for Lemma C.theta(a) (proof phase, round one; not statements of the paper)
 
-The theta-space machinery of the stage-F scouting pilot F0 (recruit L15, `work/l15/lean/ThetaSpace.lean`), copied
+The theta-space machinery of the stage-F scouting pilot (its `ThetaSpace.lean`, outside this repository), copied
 verbatim but for one name: its copy of `thetaSpace` is `thetaSpaceDev` here (the reviewed `thetaSpace` below is defined
 after `ϑ₁`, whose zero set these devices serve). The coefficients `c_n` are integrals over `[0, 1]`, independent of the
 height by Cauchy's theorem on a rectangle; all coefficients zero gives `F = 0` by Fourier series on each horizontal line;
@@ -444,7 +444,7 @@ def thetaChar (a b : ℝ) (u τ : ℂ) : ℂ :=
 theorem hasSum_thetaChar (a b : ℝ) (u : ℂ) (τ : ℍ) :
     HasSum (fun n : ℤ => cexp (π * I * (τ : ℂ) * (n + a) ^ 2 + 2 * π * I * (n + a) * (u + b)))
       (thetaChar a b u τ) := by
-  -- F0's proof (recruit L15, `hasSum_thetaChar`), at `τ : ℍ`
+  -- the scouting pilot's proof (`hasSum_thetaChar`), at `τ : ℍ`
   have hτ : 0 < (τ : ℂ).im := τ.coe_im_pos
   have h := (hasSum_jacobiTheta₂_term (u + b + a * τ) hτ).mul_left
     (cexp (π * I * a ^ 2 * τ + 2 * π * I * a * (u + b)))
@@ -566,8 +566,8 @@ theorem theta1_add_tau (u τ : ℂ) : theta1 (u + τ) τ = -cexp (-π * I * τ -
 
 /-! ### Proof devices for Lemma C.theta(c) (proof phase, round one; not statements of the paper)
 
-F0's route to the zero set of `ϑ₁` and to `ϑ₁'(0) ≠ 0` (recruit L15, `work/l15/lean/Theta1.lean` from `theta1_zero` on,
-and `work/l15/lean/ThetaZerosPart.lean`), copied verbatim but for the names `thetaSpaceDev` (above) and
+The scouting pilot's route to the zero set of `ϑ₁` and to `ϑ₁'(0) ≠ 0` (its `Theta1.lean` from `theta1_zero` on and its
+`ThetaZerosPart.lean`, outside this repository), copied verbatim but for the names `thetaSpaceDev` (above) and
 `exp_two_pi_I_half_dev`: `ϑ₁'(0) ≠ 0` by the dominance of one term of `jacobiTheta₂'` for `Im τ ≥ 1` and Mathlib's
 functional equation otherwise; Jacobi's product `P` lies in `Θ_1[0,0]`, which is one-dimensional (Lemma C.theta(a)), so
 `jacobiTheta₂ · τ = c P` with `c ≠ 0`, and the zeros of `P` are those of its factors — no argument principle. -/

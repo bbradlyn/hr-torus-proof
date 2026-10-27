@@ -4,16 +4,14 @@ import HRTorus.Locality.Propagation
 import HRTorus.Locality.Filters
 import Lean.Util.CollectAxioms
 
-/-! T-0056 recruit L10, block D proof phase round one (2026-10-24): the axiom check of block D's four modules, run with
-`lake env lean` from the public tree's Lake project (copied into the tree from L9's `work/l9/L9bAxioms.lean`
-(itself from L8's and L7's), the method unchanged, the module names block D's and the macro renamed). For every
-non-internal constant defined in the named module (theorems, definitions and their auxiliary constants, instances), the
-axioms it depends on; a summary line with the count of constants with an axiom outside
+/-! The axiom check of block D's four modules (`HRTorus.Locality.LiebRobinson`, `HRTorus.Locality.Calculus`, `HRTorus.Locality.Propagation`, `HRTorus.Locality.Filters`; Section 5 and Appendix B of the HR paper). Run with
+`lake env lean HRTorus/AxiomsBlockD.lean` from this directory after `lake build`. For every non-internal constant defined in the named module (theorems, definitions and their auxiliary constants,
+instances), the axioms it depends on; a summary line with the count of constants with an axiom outside
 `[propext, Classical.choice, Quot.sound]`, the count depending on `sorryAx`, and the names of the latter. -/
 
 open Lean Elab Command
 
-elab "#l10_axioms " mod:ident : command => do
+elab "#module_axioms " mod:ident : command => do
   let env ← getEnv
   let some idx := env.getModuleIdx? mod.getId | throwError "module {mod.getId} not found"
   let std : List Name := [``propext, ``Classical.choice, ``Quot.sound]
@@ -33,7 +31,7 @@ elab "#l10_axioms " mod:ident : command => do
     logInfo m!"{c} : {axs.toList}"
   logInfo m!"SUMMARY {mod.getId}: {names.size} declarations; {nonstd} with an axiom outside [propext, Classical.choice, Quot.sound]; {other.size} with an axiom other than those and sorryAx {other.toList}; {sorried.size} depending on sorryAx: {sorried.toList}"
 
-#l10_axioms HRTorus.Locality.LiebRobinson
-#l10_axioms HRTorus.Locality.Calculus
-#l10_axioms HRTorus.Locality.Propagation
-#l10_axioms HRTorus.Locality.Filters
+#module_axioms HRTorus.Locality.LiebRobinson
+#module_axioms HRTorus.Locality.Calculus
+#module_axioms HRTorus.Locality.Propagation
+#module_axioms HRTorus.Locality.Filters

@@ -2,9 +2,9 @@ import HRTorus.Locality.LiebRobinson
 import HRTorus.Hamiltonian.BandCharges
 
 /-!
-# The locality calculus and the bookkeeping (T-0056 block D, `Locality.Calculus`)
+# The locality calculus and the bookkeeping (`Locality.Calculus`)
 
-Written by Claude Opus 5.5 (an AI model), 2026-10-24. **Proof phase, rounds one and two (recruit L10, 2026-10-24/25):
+Written by Claude Opus 5.5 (an AI model), 2026-10-24. **Proof phase, rounds one and two (2026-10-24/25):
 every theorem is proved on the standard axioms; there is no `sorry` in this module. Lemma 5.12(a)
 `norm_comm_le_of_disjoint`, Lemma 5.12(b) `almostSupported_add_star_mul` and both conclusions of Lemma 5.13
 (`bookkeeping_comm`, `IsONegInf.sum_mul_mul`) in round one; Lemma 5.12(c) `ordExp_almostSupported` in round two by an

@@ -3,7 +3,7 @@ import HRTorus.Locality.Basic
 import HRTorus.Hamiltonian.BandCharges
 
 /-!
-# The Hamiltonian in the slot lattice and the class of slot-local covariant Hamiltonians (T-0056 block C, `Hamiltonian.SlotLocal`)
+# The Hamiltonian in the slot lattice and the class of slot-local covariant Hamiltonians (`Hamiltonian.SlotLocal`)
 
 Written by Claude Opus 5.5 (an AI model), 2026-10-24. **The definitions and statements were written first and
 reviewed against the paper before any proof (review L9a, accepted with no change); the proof phase proved every

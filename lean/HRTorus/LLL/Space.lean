@@ -8,7 +8,7 @@ import Mathlib.Analysis.SpecialFunctions.Gaussian.GaussianIntegral
 import HRTorus.LLL.Theta
 
 /-!
-# The lowest Landau level of the HR paper as a Hilbert space (T-0056 block A, `LLL.Space`)
+# The lowest Landau level of the HR paper as a Hilbert space (`LLL.Space`)
 
 Written by Claude Opus 5.5 (an AI model), 2026-10-24. **The definitions and statements were written
 first and reviewed against the paper (phase (a)) and are unchanged; phase (b) added the proofs and the proof
@@ -644,7 +644,7 @@ theorem l2inner_toFun (T : Torus) (f g : Space T) :
   rw [RCLike.inner_apply']
   rfl
 
-/-! ### Proof devices for Lemma 2.2(ii), the completeness (T-0056 block E, recruit L11, round one; not statements of
+/-! ### Proof devices for Lemma 2.2(ii), the completeness (proof phase, round one; not statements of
 the paper)
 
 The paper's route: for `g ∈ 𝔥_N` the `y`-Fourier coefficients `c_n(x) = ∫_0^{L_y} e^{−iκny} g(x, y) dy` (`fcoef_dev`)
@@ -965,10 +965,10 @@ end LLLDevices
 represented by a vector of `Space T` ("`Hence $f=(L_y\sqrt\pi)^{1/2}\sum_{j=0}^{\Nphi-1}a_j\psi_j$`"). -/
 theorem isLLL_iff (T : Torus) (g : ℝ × ℝ → ℂ) : IsLLL T g ↔ ∃ f : Space T, toFun T f = g := by
   constructor
-  · -- (phase (b), recruit L11, round one) the completeness: the devices above (the `y`-Fourier coefficients)
+  · -- the completeness: the devices above (the `y`-Fourier coefficients)
     exact isLLL_exists_dev
   · rintro ⟨f, rfl⟩
-    -- (phase (b), recruit L11, round one) the vectors of `Space T` represent functions of the paper's `𝔥_N`:
+    -- the vectors of `Space T` represent functions of the paper's `𝔥_N`:
     -- smoothness, (2.2) and (2.3) are linear in `f`, from `psi_contDiff`, `psi_add_Ly`, `psi_add_Lx`, `psi_lll_eq`.
     have hdx : ∀ (j : ZMod T.Nφ) (y : ℝ), Differentiable ℝ (fun x : ℝ => psi T j (x, y)) := fun j y =>
       ((psi_contDiff T j).differentiable (by simp)).comp (differentiable_id.prodMk (differentiable_const y))
@@ -1245,7 +1245,7 @@ def qsq (T : Torus) (pk : ℤ × ℤ) : ℝ :=
 theorem norm_ev_sq (T : Torus) (R : ℝ × ℝ) :
     HasSum (fun pk : ℤ × ℤ => 1 / (2 * π) * Real.exp (-qsq T pk / 4) *
         Real.cos (pk.2 * T.Ly * R.1 + pk.1 * T.Lx * R.2)) (‖ev T R‖ ^ 2) := by
-  -- block C's proof (L9), through the devices of `HRTorus.LLL.Theta`
+  -- through the devices of `HRTorus.LLL.Theta`
   have hz : ∀ z : ℂ, (star z * z).re = ‖z‖ ^ 2 := fun z => by
     rw [Complex.star_def, Complex.conj_mul', ← Complex.ofReal_pow, Complex.ofReal_re]
   have e1 : (∑ j : ZMod T.Nφ, star (psi T j R) * psi T j R).re = ‖ev T R‖ ^ 2 := by
@@ -1264,7 +1264,7 @@ theorem norm_ev_sq (T : Torus) (R : ℝ × ℝ) :
 theorem norm_evD_sq (T : Torus) (R : ℝ × ℝ) :
     HasSum (fun pk : ℤ × ℤ => 1 / (4 * π) * (1 - qsq T pk / 2) * Real.exp (-qsq T pk / 4) *
         Real.cos (pk.2 * T.Ly * R.1 + pk.1 * T.Lx * R.2)) (‖evD T R‖ ^ 2) := by
-  -- block C's proof (L9), through the devices of `HRTorus.LLL.Theta`
+  -- through the devices of `HRTorus.LLL.Theta`
   have hz : ∀ z : ℂ, (star z * z).re = ‖z‖ ^ 2 := fun z => by
     rw [Complex.star_def, Complex.conj_mul', ← Complex.ofReal_pow, Complex.ofReal_re]
   have e1 : (∑ j : ZMod T.Nφ, star (Dcov (psi T j) R) * Dcov (psi T j) R).re = ‖evD T R‖ ^ 2 := by
@@ -1283,7 +1283,7 @@ theorem norm_evD_sq (T : Torus) (R : ℝ × ℝ) :
 theorem norm_ev_sq_bound (T : Torus) (hL : 4 ≤ min T.Lx T.Ly) (R : ℝ × ℝ) :
     |2 * π * ‖ev T R‖ ^ 2 - 1| ≤ 4.2 * Real.exp (-(min T.Lx T.Ly) ^ 2 / 4) ∧
       4.2 * Real.exp (-(min T.Lx T.Ly) ^ 2 / 4) ≤ 0.08 := by
-  -- block C's proof (L9), through the devices of `HRTorus.LLL.Theta`
+  -- through the devices of `HRTorus.LLL.Theta`
   have hx : 4 ≤ T.Lx := le_trans hL (min_le_left _ _)
   have hy : 4 ≤ T.Ly := le_trans hL (min_le_right _ _)
   have h := lattice_bound_ev hx hy (fun pk : ℤ × ℤ => pk.2 * T.Ly * R.1 + pk.1 * T.Lx * R.2) (by simp)
@@ -1297,7 +1297,7 @@ theorem norm_ev_sq_bound (T : Torus) (hL : 4 ≤ min T.Lx T.Ly) (R : ℝ × ℝ)
 theorem norm_evD_sq_bound (T : Torus) (hL : 4 ≤ min T.Lx T.Ly) (R : ℝ × ℝ) :
     |4 * π * ‖evD T R‖ ^ 2 - 1| ≤ 2.1 * (min T.Lx T.Ly) ^ 2 * Real.exp (-(min T.Lx T.Ly) ^ 2 / 4) ∧
       2.1 * (min T.Lx T.Ly) ^ 2 * Real.exp (-(min T.Lx T.Ly) ^ 2 / 4) ≤ 0.62 := by
-  -- block C's proof (L9), through the devices of `HRTorus.LLL.Theta`
+  -- through the devices of `HRTorus.LLL.Theta`
   have hx : 4 ≤ T.Lx := le_trans hL (min_le_left _ _)
   have hy : 4 ≤ T.Ly := le_trans hL (min_le_right _ _)
   have h := lattice_bound_evD hx hy (fun pk : ℤ × ℤ => pk.2 * T.Ly * R.1 + pk.1 * T.Lx * R.2) (by simp)

@@ -1,9 +1,9 @@
 import HRTorus.Locality.Basic
 
 /-!
-# The Lieb–Robinson bound for even interactions on the slot lattice (T-0056 block D, `Locality.LiebRobinson`)
+# The Lieb–Robinson bound for even interactions on the slot lattice (`Locality.LiebRobinson`)
 
-Written by Claude Opus 5.5 (an AI model), 2026-10-24. **Proof phase, round one (recruit L10, 2026-10-24): every theorem is
+Written by Claude Opus 5.5 (an AI model), 2026-10-24. **Proof phase, round one (2026-10-24): every theorem is
 proved; no `sorry`. The proofs add devices, each marked as a device in its section header or docstring.** The paper: the HR paper,
 `papers/hr/sections/05-locality.tex` — the measurability sentence of Lemma 5.1 `lem:condexp` (the rest of the lemma is
 the pilot's `HRTorus.Fermion.Pilot.JW`), the paragraph between Lemma 5.1 and Theorem 5.2 (even interactions on `𝒮`,
@@ -13,7 +13,7 @@ Proposition B.1 `prop:nsy-disjoint`, Lemma B.2 `lem:nsy-ode`, Lemma B.3 `lem:nsy
 the bridge between slots and modes, the one-step estimate in terms of slots (B.1), the first-term bound (B.2), the
 iteration (B.3) with the chain sums bounded by powers of the chain matrix, the row sums (B.4) and the deletion of terms.
 
-## The model (R-0021, R-0022: the concrete Jordan–Wigner Fock space; this block: no abstract `CARSystem` interface)
+## The model (the concrete Jordan–Wigner Fock space; no abstract `CARSystem` interface)
 
 * Operators are the pilot's matrices `Op S` on `ℂ^{Conf S}` for a finite slot type `S`; norms are `‖opCLM ·‖` (block
   B's convention). The **dynamics** `τ^H_t(A) := e^{itH} A e^{−itH}` is `dyn H t A`, with `NormedSpace.exp` as in block

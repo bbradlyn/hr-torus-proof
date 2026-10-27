@@ -1,9 +1,9 @@
 import HRTorus.ZeroModes.Explicit
 
 /-!
-# Lemma C.A completed: the kernel of `H_N` in a sector is the space `V_{n,m}` (T-0056 stage F, block F1-upper, `ZeroModes.Formulation`)
+# Lemma C.A completed: the kernel of `H_N` in a sector is the space `V_{n,m}` (`ZeroModes.Formulation`)
 
-Written by Claude Opus 5.5 (an AI model; recruit L18), 2026-10-26. **Statement phase and proof phase (2026-10-26): the
+Written by Claude Opus 5.5 (an AI model), 2026-10-26. **Statement phase and proof phase (2026-10-26): the
 definitions and statements were written first, every theorem that carries content `sorry`, and reviewed against the
 paper before any proof; the proof phase (round one) then proved every statement, the reviewed text unchanged. The
 proof devices — the declarations named `_dev`, in marked sections — are not statements of the paper. The one-line
@@ -48,7 +48,7 @@ open HRTorus.Fermion.Pilot.JW (Spin Mode Conf Op)
 
 /-! ### Proof devices for the expansion of a function of the shape (proof phase, round one; not statements of the paper)
 
-F1-lower's `interp1_dev`, `interpN_dev`, `expand_dev` (`ZeroModes.Canonical`, recruit L16) are stated for the orbitals
+F1-lower's `interp1_dev`, `interpN_dev`, `expand_dev` (`ZeroModes.Canonical`) are stated for the orbitals
 of a torus; copied here with the orbitals replaced by any finite family `b` whose span holds every slice
 (`interp1_gen_dev`, `interpN_gen_dev`, `expand_gen_dev`); a basis of `Θ_L[0,0]` as functions for `L ≥ 1`
 (`thetaSpace_basis_dev`, the pattern of F1-lower's `exists_Θ2_pair_dev`); for `L = 0` the space is the constants
@@ -493,8 +493,8 @@ theorem canon_differentiable_core_dev (T : Torus) (n m : ℕ) (Ψ : FockSpace T)
 
 /-! ### Proof devices for Lemma C.A, (3) ⇒ (2) (proof phase, round one; not statements of the paper)
 
-The converse of F1-lower's `Bpair_eq_zero_core_dev` and `Bpair_eq_zero_of_relDeriv_dev` (`ZeroModes.Canonical`, recruit
-L16), whose text they copy with the implication reversed: if `B_k^{σ₀σ₁}Ψ = 0` for every `k`, the diagonal relative
+The converse of F1-lower's `Bpair_eq_zero_core_dev` and `Bpair_eq_zero_of_relDeriv_dev` (`ZeroModes.Canonical`),
+whose text they copy with the implication reversed: if `B_k^{σ₀σ₁}Ψ = 0` for every `k`, the diagonal relative
 derivative of the component in the first two variables vanishes (the pair coefficients' `β_k` are the components of
 `B_k Ψ`, `comp_Bpair`, and Lemma C.A3's series, `lemA3`, is zero); any pair `s ≠ t` is brought to the first two places by
 the same permutation (`comp_perm`). -/

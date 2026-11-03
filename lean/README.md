@@ -271,8 +271,11 @@ this directory:
     lake exe cache get    # downloads Mathlib's compiled files for the pinned commit
     lake build            # builds the forty-eight modules (the default target, HRTorus)
 
-<!-- PLACEHOLDER (to confirm): not yet run from a clean checkout. In preparing this tree, `lake build` ran against an
-existing local copy of the same pinned packages: 3,207 jobs, 67 s with one worker, peak 3.7 GiB. -->
+From a fresh clone of this repository (commit `aada80e`, 2026-11-03, on an Apple M5 laptop with 32 GiB of memory):
+`lake exe cache get` fetched Mathlib and its dependencies into `.lake/packages` (7.6 GB) and unpacked the 8,907 cached
+files in 6 minutes — the compiled files themselves came from the machine's local Mathlib cache, so the download time is
+not measured here; `lake build` then ran 3,369 jobs in 164 s with Lake's default parallelism, peak resident set 3.7 GiB;
+the axiom checks below and `./replay.sh` (48 of 48 modules, 304 s) passed in that clone as described.
 
 The build prints the output of the `#check` and `#print` commands at the ends of some modules, and 77 linter warnings of two
 kinds, none an error and none in the eight stage-F modules: 54 hypotheses in declaration headers that the proofs do not use (42 of them on the paper's statements,

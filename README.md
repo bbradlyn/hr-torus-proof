@@ -28,7 +28,8 @@ Beyond understanding the intuitive core, I have not dived deep into the function
 
 ## Relation to other work
 
-A candidate proof of a uniform Laughlin gap on tori of every lattice shape, with an existential threshold, was posted by Hou and Wu on 16 October 2026 (github.com/certainpineapple/Laughlin-torus-gap). Our argument was obtained independently, is restricted to rectangular tori, and makes the threshold and the rate of convergence explicit; where the two overlap, the statements agree. No priority is claimed.
+A candidate proof of a uniform Laughlin gap on tori of every lattice shape, with an existential threshold, was posted by Hou and Wu on 16 October 2026 (https://github.com/certainpineapple/Laughlin-torus-gap) by extending the OpenAI approach. Our argument was obtained independently, is restricted to rectangular tori, and makes the threshold and the rate of convergence explicit; where the two overlap, the statements agree. No priority is claimed. 
+Additionally, in https://arxiv.org/abs/2610.18854 the authors derived (independent from OpenAI) a bound on the Laughlin spectral gap on the sphere using semidefinite programming through a route different from the OpenAI proofs. The authors also discussed how to extend their approach to the torus. 
 
 ## Building and checking
 
